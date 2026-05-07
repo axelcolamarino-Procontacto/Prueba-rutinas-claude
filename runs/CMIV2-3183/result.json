@@ -1,0 +1,66 @@
+{
+  "issue_key": "CMIV2-3183",
+  "issue_type": "FeedbackTracker",
+  "project_key": "CMIV2",
+  "trigger_state": "Listo para pruebas",
+  "decision": "REVIEW",
+  "instance_url": null,
+  "context": {
+    "sf_objects_consulted": [],
+    "sow_chunks_retrieved": 8,
+    "sow_found": true,
+    "sow_project_used": "CMI",
+    "similar_test_cases_found": 0,
+    "related_bugs_found": 0,
+    "confluence_pages_read": 1
+  },
+  "test_cases_generated": [
+    {
+      "tc_id": "TC-CMIV2-3183-01",
+      "title": "Sincronización del campo Comentarios Internos al crear caso en App Offline",
+      "test_type": "regression",
+      "bigquery_id": "inserted",
+      "status": "REVIEW",
+      "steps_executed": [],
+      "screenshots": [],
+      "evidence_screenshot": null,
+      "reason": "SF_AUTH_URL_CMIV2 no encontrado. No fue posible autenticar al org de Salesforce para ejecutar via Playwright CLI."
+    },
+    {
+      "tc_id": "TC-CMIV2-3183-02",
+      "title": "Visibilidad y editabilidad del campo Comentarios Internos en formulario de creación de caso",
+      "test_type": "regression",
+      "bigquery_id": "inserted",
+      "status": "REVIEW",
+      "steps_executed": [],
+      "screenshots": [],
+      "evidence_screenshot": null,
+      "reason": "SF_AUTH_URL_CMIV2 no encontrado. No fue posible autenticar al org de Salesforce."
+    },
+    {
+      "tc_id": "TC-CMIV2-3183-03",
+      "title": "Sincronización de caso con campo Comentarios Internos vacío no genera error",
+      "test_type": "borde",
+      "bigquery_id": "inserted",
+      "status": "REVIEW",
+      "steps_executed": [],
+      "screenshots": [],
+      "evidence_screenshot": null,
+      "reason": "SF_AUTH_URL_CMIV2 no encontrado. No fue posible autenticar al org de Salesforce."
+    }
+  ],
+  "jira_actions": {
+    "issue_transitioned_to": null,
+    "story_bugs_created": [],
+    "story_bugs_duplicated": [],
+    "comments_added": 1,
+    "comment_id": "44293"
+  },
+  "bugs_found": [],
+  "sow_deviations": [],
+  "notifications": {
+    "slack_sent": false,
+    "slack_error": "SLACK_BOT_TOKEN not found in environment"
+  },
+  "final_summary": "REVIEW — El agente completó Fase 1 (contexto) y Fase 2 (generación de 3 test cases documentados en BigQuery) pero no pudo ejecutar la Fase 3 por ausencia del secret SF_AUTH_URL_CMIV2. Los casos de prueba están listos en BigQuery para re-ejecución automática en cuanto el secret sea configurado. Comentario agregado en CMIV2-3183 con instrucciones de remediación."
+}
