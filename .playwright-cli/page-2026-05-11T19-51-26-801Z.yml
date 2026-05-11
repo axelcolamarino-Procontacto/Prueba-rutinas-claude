@@ -1,0 +1,58 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - heading "BUG CONFIRMADO â€” CMIV2-3276" [level=2] [ref=e3]
+    - paragraph [ref=e4]: "Ticket 36: Valores de Asunto y Tipo en evento â€” CMI Staging â€” 2026-05-11"
+  - generic [ref=e5]:
+    - 'heading "Campo: Asunto (Subject) â€” 5 valores activos â€” TODOS EN INGLES" [level=3] [ref=e6]'
+    - generic [ref=e7]:
+      - generic [ref=e8]: EN INGLES
+      - generic [ref=e9]: Call
+    - generic [ref=e10]:
+      - generic [ref=e11]: EN INGLES
+      - generic [ref=e12]: Email
+    - generic [ref=e13]:
+      - generic [ref=e14]: EN INGLES
+      - generic [ref=e15]: Meeting
+    - generic [ref=e16]:
+      - generic [ref=e17]: EN INGLES
+      - generic [ref=e18]: Send Letter/Quote
+    - generic [ref=e19]:
+      - generic [ref=e20]: EN INGLES
+      - generic [ref=e21]: Other
+    - paragraph [ref=e22]: "Esperado: valores en espanol diferenciados por rol de usuario"
+  - generic [ref=e23]:
+    - 'heading "Campo: Tipo (Type) â€” 9 valores activos â€” TODOS EN INGLES, sin Coordinador" [level=3] [ref=e24]'
+    - generic [ref=e25]:
+      - generic [ref=e26]: EN INGLES
+      - generic [ref=e27]: Call
+    - generic [ref=e28]:
+      - generic [ref=e29]: EN INGLES
+      - generic [ref=e30]: Email
+    - generic [ref=e31]:
+      - generic [ref=e32]: EN INGLES
+      - generic [ref=e33]: Meeting
+    - generic [ref=e34]:
+      - generic [ref=e35]: EN INGLES
+      - generic [ref=e36]: WorkEvent
+    - generic [ref=e37]:
+      - generic [ref=e38]: EN INGLES
+      - generic [ref=e39]: VideoCall
+    - generic [ref=e40]:
+      - generic [ref=e41]: EN INGLES
+      - generic [ref=e42]: Dinner
+    - generic [ref=e43]:
+      - generic [ref=e44]: EN INGLES
+      - generic [ref=e45]: Talk
+    - generic [ref=e46]:
+      - generic [ref=e47]: EN INGLES
+      - generic [ref=e48]: TrainingSession
+    - generic [ref=e49]:
+      - generic [ref=e50]: EN INGLES
+      - generic [ref=e51]: Other
+    - paragraph [ref=e52]: No existe valor Coordinador â€” debe renombrarse desde Gerente Maiz
+  - generic [ref=e53]:
+    - strong [ref=e54]: "Resultado: FAILED (4 TCs)"
+    - text: "TC-01: Asunto en ingles â€” FAIL"
+    - text: "TC-02: Tipo en ingles â€” FAIL"
+    - text: "TC-03: Sin diferenciacion por perfil en picklist global â€” FAIL"
+    - text: "TC-04: Valor Coordinador no existe en campo Tipo â€” FAIL"
