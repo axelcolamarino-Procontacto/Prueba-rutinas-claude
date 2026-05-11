@@ -1,0 +1,514 @@
+- generic:
+  - generic:
+    - generic [ref=e2]:
+      - generic [ref=e3]:
+        - link "Saltar a navegación" [ref=e4] [cursor=pointer]:
+          - /url: javascript:void(0);
+        - link "Saltar a contenido principal" [ref=e5] [cursor=pointer]:
+          - /url: javascript:void(0);
+        - generic [ref=e25]:
+          - img [ref=e29]
+          - generic [ref=e32]: Salesforce enforces new security requirements in June 2026.
+          - link "See What's Changing" [ref=e33] [cursor=pointer]:
+            - /url: https://help.salesforce.com/s/articleView?id=005317465&type=1
+        - generic [ref=e37]:
+          - generic [ref=e41]:
+            - button "Toggle Panel" [ref=e45] [cursor=pointer]:
+              - img [ref=e49]
+              - generic [ref=e52]: Menu
+            - generic [ref=e57]:
+              - img [ref=e61]
+              - generic [ref=e65]: Sandbox (Staging)
+          - button "Show menu" [ref=e74] [cursor=pointer]:
+            - img [ref=e76]
+            - generic [ref=e79]: Show menu
+        - generic [ref=e6]:
+          - button "Buscar" [ref=e83]:
+            - img [ref=e85]
+            - text: Buscar...
+          - navigation "Encabezado global" [ref=e9]:
+            - list [ref=e89]:
+              - listitem [ref=e90]:
+                - group [ref=e91]:
+                  - button "Agregar favorito" [ref=e93] [cursor=pointer]:
+                    - generic [ref=e94]:
+                      - img [ref=e98]
+                      - tooltip "Agregar favorito"
+                  - button "Lista de favoritos" [ref=e102] [cursor=pointer]:
+                    - generic [ref=e103]:
+                      - img [ref=e107]
+                      - tooltip "Lista de favoritos"
+              - listitem [ref=e110]:
+                - button "Acciones globales" [ref=e325] [cursor=pointer]:
+                  - generic [ref=e326]:
+                    - img [ref=e330]
+                    - tooltip "Acciones globales"
+              - listitem [ref=e333]:
+                - button "Centro de orientación" [ref=e335] [cursor=pointer]:
+                  - generic [ref=e336]:
+                    - img [ref=e340]
+                    - tooltip "Centro de orientación"
+              - listitem [ref=e119]:
+                - button "Ayuda de Salesforce" [ref=e122] [cursor=pointer]:
+                  - generic [ref=e123]:
+                    - img [ref=e127]
+                    - tooltip "Ayuda de Salesforce"
+              - listitem [ref=e130]:
+                - button "Configuración" [ref=e136] [cursor=pointer]:
+                  - generic [ref=e137]:
+                    - img [ref=e141]
+                    - tooltip "Configuración"
+              - listitem [ref=e144]:
+                - button "2 Notificaciones" [ref=e343] [cursor=pointer]:
+                  - generic [ref=e148]:
+                    - generic [ref=e149]:
+                      - img [ref=e153]
+                      - generic [ref=e345]: "2"
+                    - tooltip "Notificaciones"
+                - generic [ref=e156]: 2 nuevas notificaciones
+              - listitem [ref=e157]:
+                - button "Ver perfil" [ref=e160] [cursor=pointer]:
+                  - generic [ref=e161]:
+                    - tooltip "Ver perfil"
+      - generic [ref=e15]:
+        - generic [ref=e167]:
+          - generic [ref=e169]:
+            - navigation "Aplicación" [ref=e170]:
+              - button "Iniciador de aplicación" [expanded] [ref=e172] [cursor=pointer]:
+                - generic [ref=e183]: Iniciador de aplicación
+            - heading "Ventas" [level=1] [ref=e184]:
+              - generic "Ventas" [ref=e185]
+          - navigation "Global" [ref=e188]:
+            - list [ref=e189]:
+              - listitem [ref=e190]:
+                - link "Inicio" [ref=e191] [cursor=pointer]:
+                  - /url: /lightning/page/home
+                  - generic [ref=e192]: Inicio
+              - listitem [ref=e193]:
+                - link "Candidatos" [ref=e194] [cursor=pointer]:
+                  - /url: /lightning/o/Lead/home
+                  - generic [ref=e195]: Candidatos
+                - button "Lista de Candidatos" [ref=e199] [cursor=pointer]:
+                  - img [ref=e203]
+                  - generic [ref=e206]: Lista de Candidatos
+              - listitem [ref=e207]:
+                - link "Cuentas" [ref=e208] [cursor=pointer]:
+                  - /url: /lightning/o/Account/home
+                  - generic [ref=e209]: Cuentas
+                - button "Lista de Cuentas" [ref=e213] [cursor=pointer]:
+                  - img [ref=e217]
+                  - generic [ref=e220]: Lista de Cuentas
+              - listitem [ref=e221]:
+                - link "Contactos" [ref=e222] [cursor=pointer]:
+                  - /url: /lightning/o/Contact/home
+                  - generic [ref=e223]: Contactos
+                - button "Lista de Contactos" [ref=e227] [cursor=pointer]:
+                  - img [ref=e231]
+                  - generic [ref=e234]: Lista de Contactos
+              - listitem [ref=e235]:
+                - link "Tareas" [ref=e236] [cursor=pointer]:
+                  - /url: /lightning/o/Task/home
+                  - generic [ref=e237]: Tareas
+                - button "Lista de Tareas" [ref=e241] [cursor=pointer]:
+                  - img [ref=e245]
+                  - generic [ref=e248]: Lista de Tareas
+              - listitem [ref=e249]:
+                - link "Actividades" [ref=e250] [cursor=pointer]:
+                  - /url: /lightning/o/cgcloud__Job_Definition_List__c/home
+                  - generic [ref=e251]: Actividades
+                - button "Lista de Actividades" [ref=e255] [cursor=pointer]:
+                  - img [ref=e259]
+                  - generic [ref=e262]: Lista de Actividades
+              - listitem [ref=e263] [cursor=pointer]:
+                - link "* 00000011 | Visita" [ref=e346]:
+                  - /url: /lightning/r/Visit/0Z5gP000000galRSAQ/view
+                  - generic "No agregado a barra de navegación" [ref=e265]: "*"
+                  - generic [ref=e266]: 00000011 | Visita
+                - button "Lista de 00000011 | Visita" [ref=e347]:
+                  - img [ref=e274]
+                  - generic [ref=e277]: Lista de 00000011 | Visita
+                - button "Cerrar ficha" [ref=e278]:
+                  - img [ref=e282]
+                  - generic [ref=e285]: Cerrar ficha
+              - listitem [ref=e286]:
+                - button "* Mostrar más elementos de navegación" [ref=e288] [cursor=pointer]:
+                  - generic "No agregado a barra de navegación" [ref=e289]: "*"
+                  - generic [ref=e290]: Más
+                  - img [ref=e294]
+                  - generic [ref=e297]: Mostrar más elementos de navegación
+              - listitem [ref=e298]:
+                - button "Modificar elementos de navegación" [ref=e300] [cursor=pointer]:
+                  - img [ref=e302]
+                  - generic [ref=e305]: Modificar elementos de navegación
+        - main [ref=e17]:
+          - generic [ref=e358]:
+            - generic [ref=e367]:
+              - generic [ref=e368]:
+                - heading "Visita 00000011" [level=1] [ref=e375]:
+                  - generic [ref=e377]: Visita
+                  - generic [ref=e378]: "00000011"
+                - generic [ref=e382]:
+                  - generic "Modificar" [ref=e383]:
+                    - button "Modificar" [ref=e388] [cursor=pointer]
+                  - generic "Eliminar" [ref=e389]:
+                    - button "Eliminar" [ref=e394] [cursor=pointer]
+              - generic [ref=e395]:
+                - generic [ref=e397]:
+                  - paragraph [ref=e398]: Cuenta
+                  - paragraph [ref=e399]:
+                    - generic [ref=e404]:
+                      - link "3-102-838977 SOCIEDAD DE RESPONSABI LIMITADA" [ref=e405] [cursor=pointer]:
+                        - /url: /lightning/r/Account/001Ps00001BjYl4IAF/view
+                        - generic [ref=e409]: 3-102-838977 SOCIEDAD DE RESPONSABI LIMITADA
+                      - button "Vista previa" [ref=e411] [cursor=pointer]:
+                        - img [ref=e413]
+                        - generic [ref=e416]: Vista previa
+                - generic [ref=e418]:
+                  - paragraph [ref=e419]: Hora de inicio planificada
+                  - paragraph [ref=e420]:
+                    - generic [ref=e421]: 4/14/2026, 4:49 p. m.
+                - generic [ref=e423]:
+                  - paragraph [ref=e424]: Estado
+                  - paragraph
+                - generic [ref=e426]:
+                  - paragraph [ref=e427]: Responsable
+                  - paragraph
+            - generic [ref=e429]:
+              - generic [ref=e435]:
+                - heading "Tabs" [level=2] [ref=e436]
+                - generic "Tabs" [ref=e437]:
+                  - generic [ref=e438]:
+                    - heading "Tabs" [level=2] [ref=e439]
+                    - tablist "Tabs" [ref=e441]:
+                      - tab "Detalles" [selected] [ref=e442] [cursor=pointer]
+                    - tabpanel "Detalles" [ref=e445]:
+                      - generic [ref=e446]:
+                        - generic [ref=e452]:
+                          - heading "Información General" [level=3] [ref=e453]:
+                            - button "Información General" [expanded] [ref=e454] [cursor=pointer]:
+                              - img [ref=e458]
+                              - generic "Información General" [ref=e461]
+                          - list [ref=e464]:
+                            - generic [ref=e465]:
+                              - generic [ref=e468]:
+                                - listitem [ref=e471]:
+                                  - generic [ref=e473]:
+                                    - generic [ref=e474]: Nombre
+                                    - generic [ref=e477]: "00000011"
+                                - listitem [ref=e480]:
+                                  - generic [ref=e482]:
+                                    - generic [ref=e483]: Estado
+                                    - button "Modificar Estado" [ref=e485] [cursor=pointer]:
+                                      - generic [ref=e487]: Modificar Estado
+                                - listitem [ref=e490]:
+                                  - generic [ref=e493]: Contacto
+                                - listitem [ref=e498]:
+                                  - generic [ref=e500]:
+                                    - generic [ref=e501]: Hora de inicio planificada
+                                    - generic [ref=e502]:
+                                      - generic [ref=e504]: 4/14/2026, 4:49 p. m.
+                                      - button "Modificar Hora de inicio planificada" [ref=e505] [cursor=pointer]:
+                                        - generic [ref=e507]: Modificar Hora de inicio planificada
+                                - listitem [ref=e510]:
+                                  - generic [ref=e513]: Hora de inicio real
+                                - listitem [ref=e517]:
+                                  - generic [ref=e519]:
+                                    - generic [ref=e520]: Evento de todo el día
+                                    - generic [ref=e521]:
+                                      - generic [ref=e526]:
+                                        - generic "Falso" [ref=e527]:
+                                          - generic [ref=e528]:
+                                            - img [ref=e530]
+                                            - generic [ref=e533]: Falso
+                                        - generic [ref=e534]: Evento de todo el día
+                                      - button "Modificar Evento de todo el día" [ref=e535] [cursor=pointer]:
+                                        - generic [ref=e537]: Modificar Evento de todo el día
+                                - listitem [ref=e540]:
+                                  - generic [ref=e542]:
+                                    - generic [ref=e543]: Prioridad de visita
+                                    - button "Modificar Prioridad de visita" [ref=e545] [cursor=pointer]:
+                                      - generic [ref=e547]: Modificar Prioridad de visita
+                                - listitem [ref=e550]:
+                                  - generic [ref=e552]:
+                                    - generic [ref=e553]: Duración efectiva
+                                    - button "Modificar Duración efectiva" [ref=e555] [cursor=pointer]:
+                                      - generic [ref=e557]: Modificar Duración efectiva
+                                - listitem [ref=e560]:
+                                  - generic [ref=e562]:
+                                    - generic [ref=e563]: Intencionalidad de la visita
+                                    - button "Modificar Intencionalidad de la visita" [ref=e565] [cursor=pointer]:
+                                      - generic [ref=e567]: Modificar Intencionalidad de la visita
+                                - listitem [ref=e570]:
+                                  - generic [ref=e572]:
+                                    - generic [ref=e573]: Instrucción especial
+                                    - button "Modificar Instrucción especial" [ref=e575] [cursor=pointer]:
+                                      - generic [ref=e577]: Modificar Instrucción especial
+                                - listitem [ref=e580]:
+                                  - generic [ref=e582]:
+                                    - generic [ref=e583]: Motivo de reapertura
+                                    - button "Modificar Motivo de reapertura" [ref=e585] [cursor=pointer]:
+                                      - generic [ref=e587]: Modificar Motivo de reapertura
+                              - generic [ref=e590]:
+                                - listitem [ref=e593]:
+                                  - generic [ref=e595]:
+                                    - generic [ref=e596]: Cuenta
+                                    - generic [ref=e597]:
+                                      - generic [ref=e603]:
+                                        - link "3-102-838977 SOCIEDAD DE RESPONSABI LIMITADA" [ref=e604] [cursor=pointer]:
+                                          - /url: /lightning/r/Account/001Ps00001BjYl4IAF/view
+                                          - generic [ref=e608]: 3-102-838977 SOCIEDAD DE RESPONSABI LIMITADA
+                                        - button "Vista previa" [ref=e610] [cursor=pointer]:
+                                          - img [ref=e612]
+                                          - generic [ref=e615]: Vista previa
+                                      - button "Modificar Cuenta" [ref=e616] [cursor=pointer]:
+                                        - generic [ref=e618]: Modificar Cuenta
+                                - listitem [ref=e621]:
+                                  - generic [ref=e623]:
+                                    - generic [ref=e624]: Sucursal del cliente
+                                    - button "Modificar Sucursal del cliente" [ref=e627] [cursor=pointer]:
+                                      - generic [ref=e629]: Modificar Sucursal del cliente
+                                - listitem [ref=e632]:
+                                  - generic [ref=e634]:
+                                    - generic [ref=e635]: Plantilla de visitas
+                                    - generic [ref=e636]:
+                                      - generic [ref=e642]:
+                                        - link "Grocery / Sales" [ref=e643] [cursor=pointer]:
+                                          - /url: /lightning/r/cgcloud__Visit_Template__c/a49Ps000005x5KEIAY/view
+                                          - generic [ref=e647]: Grocery / Sales
+                                        - button "Vista previa" [ref=e649] [cursor=pointer]:
+                                          - img [ref=e651]
+                                          - generic [ref=e654]: Vista previa
+                                      - button "Modificar Plantilla de visitas" [ref=e655] [cursor=pointer]:
+                                        - generic [ref=e657]: Modificar Plantilla de visitas
+                                - listitem [ref=e660]:
+                                  - generic [ref=e662]:
+                                    - generic [ref=e663]: Hora de finalización planificada
+                                    - generic [ref=e664]:
+                                      - generic [ref=e666]: 4/14/2026, 7:00 p. m.
+                                      - button "Modificar Hora de finalización planificada" [ref=e667] [cursor=pointer]:
+                                        - generic [ref=e669]: Modificar Hora de finalización planificada
+                                - listitem [ref=e672]:
+                                  - generic [ref=e675]: Hora de finalización real
+                                - listitem [ref=e679]:
+                                  - generic [ref=e681]:
+                                    - generic [ref=e682]: Id. del propietario
+                                    - generic [ref=e687]:
+                                      - generic [ref=e694]:
+                                        - link "Soporte Aplicaciones" [ref=e695] [cursor=pointer]:
+                                          - /url: /lightning/r/Name/005Ps000002n8jFIAQ/view
+                                          - generic [ref=e699]: Soporte Aplicaciones
+                                        - button "Vista previa" [ref=e701] [cursor=pointer]:
+                                          - img [ref=e703]
+                                          - generic [ref=e706]: Vista previa
+                                      - button "Cambiar propietario" [ref=e708] [cursor=pointer]:
+                                        - img [ref=e710]
+                                        - generic [ref=e713]: Cambiar propietario
+                                - listitem [ref=e716]:
+                                  - generic [ref=e718]:
+                                    - generic [ref=e719]: Destinatario de entrega
+                                    - button "Modificar Destinatario de entrega" [ref=e722] [cursor=pointer]:
+                                      - generic [ref=e724]: Modificar Destinatario de entrega
+                                - listitem [ref=e727]:
+                                  - generic [ref=e729]:
+                                    - generic [ref=e730]: Observación de estado
+                                    - button "Modificar Observación de estado" [ref=e732] [cursor=pointer]:
+                                      - generic [ref=e734]: Modificar Observación de estado
+                                - listitem [ref=e737]:
+                                  - generic [ref=e739]:
+                                    - generic [ref=e740]: Motivo de no visita
+                                    - button "Modificar Motivo de no visita" [ref=e742] [cursor=pointer]:
+                                      - generic [ref=e744]: Modificar Motivo de no visita
+                                - listitem [ref=e747]:
+                                  - generic [ref=e749]:
+                                    - generic [ref=e750]: Reaperturada
+                                    - generic [ref=e751]:
+                                      - generic [ref=e756]:
+                                        - generic "Falso" [ref=e757]:
+                                          - generic [ref=e758]:
+                                            - img [ref=e760]
+                                            - generic [ref=e763]: Falso
+                                        - generic [ref=e764]: Reaperturada
+                                      - button "Modificar Reaperturada" [ref=e765] [cursor=pointer]:
+                                        - generic [ref=e767]: Modificar Reaperturada
+                                - listitem [ref=e770]:
+                                  - generic [ref=e772]:
+                                    - generic [ref=e773]: Modificada después de Cerrada
+                                    - generic [ref=e781]:
+                                      - generic "Falso" [ref=e782]:
+                                        - generic [ref=e783]:
+                                          - img [ref=e785]
+                                          - generic [ref=e788]: Falso
+                                      - generic [ref=e789]: Modificada después de Cerrada
+                                - listitem [ref=e792]:
+                                  - generic [ref=e794]:
+                                    - generic [ref=e795]: Estado de Planificación
+                                    - button "Modificar Estado de Planificación" [ref=e797] [cursor=pointer]:
+                                      - generic [ref=e799]: Modificar Estado de Planificación
+                        - heading "Información General y del Cliente" [level=3] [ref=e806]:
+                          - button "Información General y del Cliente" [expanded] [ref=e807] [cursor=pointer]:
+                            - img [ref=e811]
+                            - generic "Información General y del Cliente" [ref=e814]
+                        - heading "Gerencia Comercial" [level=3] [ref=e824]:
+                          - button "Gerencia Comercial" [expanded] [ref=e825] [cursor=pointer]:
+                            - img [ref=e829]
+                            - generic "Gerencia Comercial" [ref=e832]
+                        - heading "Informe del Área" [level=3] [ref=e842]:
+                          - button "Informe del Área" [expanded] [ref=e843] [cursor=pointer]:
+                            - img [ref=e847]
+                            - generic "Informe del Área" [ref=e850]
+                        - heading "Información del Taller" [level=3] [ref=e860]:
+                          - button "Información del Taller" [expanded] [ref=e861] [cursor=pointer]:
+                            - img [ref=e865]
+                            - generic "Información del Taller" [ref=e868]
+                        - heading "Resultados Finales del Producto" [level=3] [ref=e878]:
+                          - button "Resultados Finales del Producto" [expanded] [ref=e879] [cursor=pointer]:
+                            - img [ref=e883]
+                            - generic "Resultados Finales del Producto" [ref=e886]
+                        - heading "Información del Sistema" [level=3] [ref=e896]:
+                          - button "Información del Sistema" [expanded] [ref=e897] [cursor=pointer]:
+                            - img [ref=e901]
+                            - generic "Información del Sistema" [ref=e904]
+              - generic [ref=e909]:
+                - generic [ref=e913]:
+                  - heading "Tabs" [level=2] [ref=e914]
+                  - generic "Tabs" [ref=e915]:
+                    - generic [ref=e916]:
+                      - heading "Tabs" [level=2] [ref=e917]
+                      - tablist "Tabs" [ref=e919]:
+                        - tab "Relacionado" [selected] [ref=e920] [cursor=pointer]
+                        - tab "Tareas" [ref=e921] [cursor=pointer]
+                      - tabpanel "Relacionado" [ref=e924]:
+                        - generic [ref=e925]:
+                          - article "Cases" [ref=e929]:
+                            - generic [ref=e940]:
+                              - img [ref=e944]
+                              - heading "Cases (0)" [level=2] [ref=e946]:
+                                - link "Cases (0)" [ref=e947] [cursor=pointer]:
+                                  - /url: /lightning/cmp/force__dynamicRelatedListViewAll?force__flexipageId=Visit_Record_Page_Editable_CMI&force__cmpId=lst_dynamicRelatedList2&force__recordId=0Z5gP000000galRSAQ
+                                  - generic "Cases" [ref=e948]
+                                  - generic "(0)" [ref=e949]
+                          - generic [ref=e953]:
+                            - article "Opportunities" [ref=e959]:
+                              - generic [ref=e964]:
+                                - generic [ref=e966]:
+                                  - img [ref=e970]
+                                  - heading "Opportunities (0)" [level=2] [ref=e972]:
+                                    - link "Opportunities (0)" [ref=e973] [cursor=pointer]:
+                                      - /url: /lightning/r/Visit/0Z5gP000000galRSAQ/related/Opportunities__r/view
+                                      - generic "Opportunities" [ref=e974]
+                                      - generic "(0)" [ref=e975]
+                                - button "Mostrar acciones para Opportunities" [ref=e980] [cursor=pointer]:
+                                  - img [ref=e982]
+                                  - generic [ref=e985]: Mostrar acciones para Opportunities
+                            - article "Pedidos" [ref=e991]:
+                              - generic [ref=e996]:
+                                - generic [ref=e998]:
+                                  - img [ref=e1002]
+                                  - heading "Pedidos (0)" [level=2] [ref=e1004]:
+                                    - link "Pedidos (0)" [ref=e1005] [cursor=pointer]:
+                                      - /url: /lightning/r/Visit/0Z5gP000000galRSAQ/related/cgcloud__Orders__r/view
+                                      - generic "Pedidos" [ref=e1006]
+                                      - generic "(0)" [ref=e1007]
+                                - button "Mostrar acciones para Pedidos" [ref=e1012] [cursor=pointer]:
+                                  - img [ref=e1014]
+                                  - generic [ref=e1017]: Mostrar acciones para Pedidos
+                            - article "Historial de Visita" [ref=e1023]:
+                              - generic [ref=e1024]:
+                                - generic [ref=e1025]:
+                                  - generic [ref=e1028]:
+                                    - generic [ref=e1030]:
+                                      - img [ref=e1034]
+                                      - heading "Historial de Visita (1)" [level=2] [ref=e1036]:
+                                        - link "Historial de Visita (1)" [ref=e1037] [cursor=pointer]:
+                                          - /url: /lightning/r/Visit/0Z5gP000000galRSAQ/related/Histories/view
+                                          - generic "Historial de Visita" [ref=e1038]
+                                          - generic "(1)" [ref=e1039]
+                                    - button "Mostrar acciones para Historial de Visita" [ref=e1043] [cursor=pointer]:
+                                      - generic [ref=e1045]:
+                                        - img [ref=e1047]
+                                        - generic [ref=e1050]: Mostrar acciones para Historial de Visita
+                                  - article [ref=e1061]:
+                                    - generic [ref=e1064]:
+                                      - term [ref=e1065]: "Fecha:"
+                                      - definition [ref=e1066]:
+                                        - generic [ref=e1068]: 4/13/2026, 4:51 p. m.
+                                      - term [ref=e1069]: "Campo:"
+                                      - definition [ref=e1070]:
+                                        - generic [ref=e1072]: Creado.
+                                      - term [ref=e1073]: "Usuario:"
+                                      - definition [ref=e1074]:
+                                        - link "Soporte Aplicaciones" [ref=e1078] [cursor=pointer]:
+                                          - /url: /lightning/r/005Ps000002n8jFIAQ/view
+                                          - generic [ref=e1079]: Soporte Aplicaciones
+                                      - term [ref=e1080]: "Valor original:"
+                                      - definition
+                                      - term [ref=e1081]: "Valor nuevo:"
+                                      - definition
+                                - link "Ver todos Historial de Visita" [ref=e1082] [cursor=pointer]:
+                                  - /url: /lightning/r/Visit/0Z5gP000000galRSAQ/related/Histories/view
+                                  - generic [ref=e1083]:
+                                    - text: Ver todos
+                                    - generic [ref=e1084]: Historial de Visita
+                            - article [ref=e1090]:
+                              - generic [ref=e1091]:
+                                - img [ref=e1093]
+                                - heading "Trabajos de visita" [level=2] [ref=e1094]
+                            - article [ref=e1101]:
+                              - generic [ref=e1102]:
+                                - img [ref=e1104]
+                                - heading "Archivos" [level=2] [ref=e1105]
+                          - article "Activities for Parent Visit Template" [ref=e1110]:
+                            - article [ref=e1114]:
+                              - generic [ref=e1115]:
+                                - img [ref=e1117]
+                                - heading "Activities for Parent Visit Template" [level=2] [ref=e1118]
+                - article [ref=e1124]:
+                  - generic [ref=e1126]:
+                    - heading "Account Tasks" [level=2] [ref=e1128]:
+                      - heading "Account Tasks" [level=2] [ref=e1131]:
+                        - img [ref=e1135]
+                        - text: Account Tasks
+                    - button "Task options" [ref=e1142] [cursor=pointer]:
+                      - img [ref=e1144]
+                      - generic [ref=e1147]: Task options
+                  - status [ref=e1151]:
+                    - paragraph [ref=e1152]: No tasks found for this account.
+      - generic:
+        - contentinfo "Barra de utilidades":
+          - list [ref=e309]:
+            - listitem [ref=e310]:
+              - button "To Do List" [ref=e313] [cursor=pointer]:
+                - img [ref=e317]
+                - generic [ref=e320]: To Do List
+    - dialog "Iniciador de aplicación" [ref=e1154]:
+      - generic [ref=e1155]:
+        - generic [ref=e1156]:
+          - heading "Iniciador de aplicación" [level=2] [ref=e1157]
+          - button "Cerrar" [ref=e1158] [cursor=pointer]:
+            - img [ref=e1160]
+            - generic [ref=e1163]: Cerrar
+        - generic [ref=e1166]:
+          - generic [ref=e1170]:
+            - generic [ref=e1171]: Buscar aplicaciones y elementos...
+            - generic [ref=e1172]:
+              - combobox "Buscar aplicaciones y elementos..." [expanded] [active] [ref=e1173]
+              - img [ref=e1174]
+          - heading "Aplicaciones" [level=3] [ref=e1178]
+          - listbox "Aplicaciones" [ref=e1179]:
+            - option "Ventas" [ref=e1181] [cursor=pointer]:
+              - paragraph [ref=e1187]: Ventas
+            - option "Sales Operations" [ref=e1189] [cursor=pointer]:
+              - paragraph [ref=e1195]: Sales Operations
+            - option "Success Manager" [ref=e1197] [cursor=pointer]:
+              - paragraph [ref=e1203]: Success Manager
+            - option "Consola de ventas" [ref=e1205] [cursor=pointer]:
+              - paragraph [ref=e1211]: Consola de ventas
+            - option "Your Account" [ref=e1213] [cursor=pointer]:
+              - paragraph [ref=e1219]: Your Account
+            - option "Consola de servicio" [ref=e1221] [cursor=pointer]:
+              - paragraph [ref=e1227]: Consola de servicio
+            - option "Comercio" [ref=e1229] [cursor=pointer]:
+              - paragraph [ref=e1235]: Comercio
+          - button "Ver todas las aplicaciones" [ref=e1237] [cursor=pointer]: Ver todo
+  - generic:
+    - status
