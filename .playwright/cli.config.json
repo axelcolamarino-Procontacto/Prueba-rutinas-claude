@@ -2,7 +2,10 @@
   "browser": {
     "browserName": "chromium",
     "launchOptions": {
-      "channel": "chromium"
+      "args": ["--no-sandbox", "--ignore-certificate-errors", "--disable-dev-shm-usage"]
+    },
+    "contextOptions": {
+      "ignoreHTTPSErrors": true
     }
   }
 }
