@@ -2,7 +2,12 @@
   "browser": {
     "browserName": "chromium",
     "launchOptions": {
-      "channel": "chromium"
+      "chromiumSandbox": false,
+      "args": ["--no-sandbox", "--disable-setuid-sandbox"]
+    },
+    "contextOptions": {
+      "ignoreHTTPSErrors": true,
+      "viewport": {"width": 1440, "height": 900}
     }
   }
 }
