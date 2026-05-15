@@ -1,0 +1,128 @@
+- generic:
+  - generic:
+    - generic [ref=e2]:
+      - generic [ref=e3]:
+        - link "Saltar a navegación" [ref=e2404] [cursor=pointer]:
+          - /url: javascript:void(0);
+        - link "Saltar a contenido principal" [ref=e2405] [cursor=pointer]:
+          - /url: javascript:void(0);
+        - generic [ref=e193]:
+          - generic [ref=e197]:
+            - button "Toggle Panel" [ref=e2406] [cursor=pointer]:
+              - img [ref=e205]
+              - generic [ref=e208]: Menu
+            - generic [ref=e213]:
+              - img [ref=e217]
+              - generic [ref=e221]: Sandbox (Staging)
+          - button "Show menu" [ref=e2407] [cursor=pointer]:
+            - img [ref=e232]
+            - generic [ref=e235]: Show menu
+        - generic [ref=e6]:
+          - button "Buscar" [ref=e2408]:
+            - img [ref=e238]
+            - text: Buscar...
+          - navigation "Encabezado global" [ref=e2409]:
+            - list [ref=e14]:
+              - listitem [ref=e15]:
+                - group [ref=e16]:
+                  - button "Este elemento no admite favoritos" [ref=e2755] [cursor=pointer]:
+                    - generic [ref=e19]:
+                      - img [ref=e23]
+                      - tooltip "Este elemento no admite favoritos"
+                  - button "Lista de favoritos" [ref=e2411] [cursor=pointer]:
+                    - generic [ref=e28]:
+                      - img [ref=e32]
+                      - tooltip "Lista de favoritos"
+              - listitem [ref=e35]:
+                - button "Acciones globales" [ref=e2412] [cursor=pointer]:
+                  - generic [ref=e247]:
+                    - img [ref=e251]
+                    - tooltip "Acciones globales"
+              - listitem [ref=e254]:
+                - button "Centro de orientación" [ref=e2413] [cursor=pointer]:
+                  - generic [ref=e257]:
+                    - img [ref=e261]
+                    - tooltip "Centro de orientación"
+              - listitem [ref=e44]:
+                - button "Ayuda de Salesforce" [ref=e2414] [cursor=pointer]:
+                  - generic [ref=e48]:
+                    - img [ref=e52]
+                    - tooltip "Ayuda de Salesforce"
+              - listitem [ref=e55]:
+                - button "Configuración" [ref=e2415] [cursor=pointer]:
+                  - generic [ref=e62]:
+                    - img [ref=e66]
+                    - tooltip "Configuración"
+              - listitem [ref=e69]:
+                - button "20+ Notificaciones" [ref=e2416] [cursor=pointer]:
+                  - generic [ref=e73]:
+                    - generic [ref=e74]:
+                      - img [ref=e78]
+                      - generic [ref=e266]: 20+
+                    - tooltip "Notificaciones"
+                - generic [ref=e81]: 26 nuevas notificaciones
+              - listitem [ref=e82]:
+                - button "Ver perfil" [ref=e2417] [cursor=pointer]:
+                  - generic [ref=e268]:
+                    - tooltip "Ver perfil"
+      - generic [ref=e85]:
+        - generic [ref=e88]:
+          - generic [ref=e90]:
+            - navigation "Aplicación" [ref=e2418]:
+              - button "Iniciador de aplicación" [ref=e2419] [cursor=pointer]:
+                - generic [ref=e104]: Iniciador de aplicación
+            - heading "CG Offline Admin" [level=1] [ref=e2420]:
+              - generic "CG Offline Admin" [ref=e2421]
+          - navigation "Global" [ref=e2422]:
+            - list [ref=e110]:
+              - listitem [ref=e111]:
+                - link "Inicio" [ref=e2423] [cursor=pointer]:
+                  - /url: /lightning/page/home
+                  - generic [ref=e113]: Inicio
+              - listitem [ref=e114]:
+                - link "Sincronizar materiales del combo" [ref=e2424] [cursor=pointer]:
+                  - /url: /lightning/n/Sincronizar_materiales_del_combo
+                  - generic [ref=e116]: Sincronizar materiales del combo
+              - listitem [ref=e117]:
+                - link "Sincronizar surtido de productos" [ref=e2425] [cursor=pointer]:
+                  - /url: /lightning/n/SyncProductAssortment
+                  - generic [ref=e119]: Sincronizar surtido de productos
+              - listitem [ref=e120]:
+                - link "Casos" [ref=e2426] [cursor=pointer]:
+                  - /url: /lightning/o/Case/home
+                  - generic [ref=e122]: Casos
+                - button "Lista de Casos" [ref=e2427] [cursor=pointer]:
+                  - img [ref=e130]
+                  - generic [ref=e133]: Lista de Casos
+              - listitem [ref=e272] [cursor=pointer]:
+                - link "* 00000476 | Visita" [ref=e2756]:
+                  - /url: /lightning/r/Visit/0Z5gP000000jHJFSA2/view
+                  - generic "No agregado a barra de navegación" [ref=e2757]: "*"
+                  - generic [ref=e275]: 00000476 | Visita
+                - button "Lista de 00000476 | Visita" [ref=e2758]:
+                  - img [ref=e283]
+                  - generic [ref=e286]: Lista de 00000476 | Visita
+                - button "Cerrar ficha" [ref=e2759]:
+                  - img [ref=e291]
+                  - generic [ref=e294]: Cerrar ficha
+              - listitem [ref=e162]:
+                - button "Mostrar más elementos de navegación" [ref=e2760] [cursor=pointer]:
+                  - generic [ref=e165]: Más
+                  - img [ref=e169]
+                  - generic [ref=e172]: Mostrar más elementos de navegación
+              - listitem [ref=e173]:
+                - button "Modificar elementos de navegación" [ref=e2434] [cursor=pointer]:
+                  - img [ref=e177]
+                  - generic [ref=e180]: Modificar elementos de navegación
+        - main [ref=e182]
+    - dialog [ref=e2762]:
+      - generic [ref=e2763]:
+        - button "Cancelar y cerrar" [ref=e2764] [cursor=pointer]:
+          - img [ref=e2766]
+          - generic [ref=e2769]: Cancelar y cerrar
+        - generic [ref=e2770]:
+          - article [ref=e2775]:
+            - generic [ref=e2818]: "*= Información obligatoria"
+            - heading "Detalles" [level=2] [ref=e2819]
+          - status [ref=e2822]
+  - status [ref=e2754]: Operación correcta notificación,Se creó Tarea "Tarea QA desde Backoffice - Test CMIV2-3221". Pulse Control + F6 para navegar a la siguiente notificación emergente o región enfocable.

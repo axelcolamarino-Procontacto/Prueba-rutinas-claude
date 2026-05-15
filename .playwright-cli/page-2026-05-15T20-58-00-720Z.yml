@@ -1,0 +1,258 @@
+- generic:
+  - generic:
+    - generic [ref=e2]:
+      - generic [ref=e3]:
+        - link [ref=e1836] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a navegación
+        - link [ref=e1837] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a contenido principal
+        - generic [ref=e193]:
+          - generic [ref=e197]:
+            - button [ref=e1838] [cursor=pointer]:
+              - img [ref=e205]
+              - generic [ref=e208]: Menu
+            - generic [ref=e213]:
+              - img [ref=e217]
+              - generic [ref=e221]: Sandbox (Staging)
+          - button [ref=e1839] [cursor=pointer]:
+            - img [ref=e232]
+            - generic [ref=e235]: Show menu
+        - generic [ref=e6]:
+          - button [ref=e1840]:
+            - img [ref=e238]
+            - text: Buscar...
+          - navigation [ref=e1841]:
+            - list [ref=e14]:
+              - listitem [ref=e15]:
+                - group [ref=e16]:
+                  - button [ref=e1842] [cursor=pointer]:
+                    - img [ref=e23]
+                  - button [ref=e1843] [cursor=pointer]:
+                    - img [ref=e32]
+              - listitem [ref=e35]:
+                - button [ref=e1844] [cursor=pointer]:
+                  - img [ref=e251]
+              - listitem [ref=e254]:
+                - button [ref=e1845] [cursor=pointer]:
+                  - img [ref=e261]
+              - listitem [ref=e44]:
+                - button [ref=e1846] [cursor=pointer]:
+                  - img [ref=e52]
+              - listitem [ref=e55]:
+                - button [ref=e1847] [cursor=pointer]:
+                  - img [ref=e66]
+              - listitem [ref=e69]:
+                - button [ref=e1848] [cursor=pointer]:
+                  - generic [ref=e74]:
+                    - img [ref=e78]
+                    - generic [ref=e266]: 20+
+                - generic [ref=e81]: 26 nuevas notificaciones
+              - listitem [ref=e82]:
+                - button [ref=e1849] [cursor=pointer]
+      - generic [ref=e85]:
+        - generic [ref=e88]:
+          - generic [ref=e90]:
+            - navigation [ref=e1850]:
+              - button [ref=e1851] [cursor=pointer]:
+                - generic [ref=e104]: Iniciador de aplicación
+            - heading [level=1] [ref=e1852]:
+              - generic [ref=e1853]: CG Offline Admin
+          - navigation [ref=e1854]:
+            - list [ref=e110]:
+              - listitem [ref=e111]:
+                - link [ref=e1855] [cursor=pointer]:
+                  - /url: /lightning/page/home
+                  - generic [ref=e113]: Inicio
+              - listitem [ref=e114]:
+                - link [ref=e1856] [cursor=pointer]:
+                  - /url: /lightning/n/Sincronizar_materiales_del_combo
+                  - generic [ref=e116]: Sincronizar materiales del combo
+              - listitem [ref=e117]:
+                - link [ref=e1857] [cursor=pointer]:
+                  - /url: /lightning/n/SyncProductAssortment
+                  - generic [ref=e119]: Sincronizar surtido de productos
+              - listitem [ref=e120]:
+                - link [ref=e1858] [cursor=pointer]:
+                  - /url: /lightning/o/Case/home
+                  - generic [ref=e122]: Casos
+                - button [ref=e1859] [cursor=pointer]:
+                  - img [ref=e130]
+                  - generic [ref=e133]: Lista de Casos
+              - listitem [ref=e134]:
+                - link [ref=e2362] [cursor=pointer]:
+                  - /url: /lightning/o/Lead/home
+                  - generic [ref=e136]: Candidatos
+                - button [ref=e2363] [cursor=pointer]:
+                  - img [ref=e144]
+                  - generic [ref=e147]: Lista de Candidatos
+              - listitem [ref=e2364] [cursor=pointer]:
+                - link [ref=e2365]:
+                  - /url: /lightning/o/Task/home
+                  - generic [ref=e2366]: Tareas
+                - button [ref=e2370]:
+                  - img [ref=e2374]
+                  - generic [ref=e2377]: Lista de Tareas
+              - listitem [ref=e162]:
+                - button [ref=e1864] [cursor=pointer]:
+                  - generic [ref=e2378]: "*"
+                  - generic [ref=e165]: Más
+                  - img [ref=e169]
+                  - generic [ref=e172]: Mostrar más elementos de navegación
+              - listitem [ref=e173]:
+                - button [ref=e1865] [cursor=pointer]:
+                  - img [ref=e177]
+                  - generic [ref=e180]: Modificar elementos de navegación
+        - main [ref=e182]
+    - 'dialog "Nueva tarea: Tarea de usuario" [ref=e2093]':
+      - generic [ref=e2025]:
+        - button "Cancelar y cerrar" [ref=e2026] [cursor=pointer]:
+          - img [ref=e2028]
+          - generic [ref=e2031]: Cancelar y cerrar
+        - generic [ref=e2032]:
+          - generic [ref=e2034]:
+            - article [ref=e2037]:
+              - 'heading "Nueva tarea: Tarea de usuario" [level=2] [ref=e2094]'
+              - generic [ref=e2080]: "*= Información obligatoria"
+              - group "Información de tareas" [ref=e2097]:
+                - heading "Información de tareas" [level=3] [ref=e2099]:
+                  - generic [ref=e2100]: Información de tareas
+                - list [ref=e2102]:
+                  - listitem [ref=e2104]:
+                    - generic [ref=e2107]:
+                      - generic [ref=e2108]: "*Asunto"
+                      - generic [ref=e2113]:
+                        - combobox "Asunto" [ref=e2116]: Tarea QA desde Backoffice - Test CMIV2-3221
+                        - img [ref=e2120]
+                      - status
+                  - listitem [ref=e2128]:
+                    - generic [ref=e2131]:
+                      - generic [ref=e2132]:
+                        - text: Estado
+                        - generic [ref=e2133]: "*"
+                      - button "Estado Pendiente" [ref=e2138] [cursor=pointer]: Pendiente
+                  - listitem [ref=e2144]:
+                    - generic [ref=e2147]:
+                      - generic [ref=e2148]: Fecha de inicio
+                      - generic [ref=e2149]:
+                        - generic [ref=e2150]:
+                          - textbox "Fecha de inicio" [ref=e2151]
+                          - button "Selector de fecha" [ref=e2152] [cursor=pointer]:
+                            - generic [ref=e2153]: Selector de fecha
+                        - generic [ref=e2154]: "Formato de fecha: M/d/yyyy"
+                  - listitem [ref=e2160]:
+                    - generic [ref=e2163]:
+                      - generic [ref=e2164]: Relacionado con
+                      - generic [ref=e2166]:
+                        - generic [ref=e2167]: "Relacionado con - Selección actual: ACEITERA EL REAL, S.A GT (Cuenta)"
+                        - application [ref=e2169]:
+                          - generic [ref=e2170]: "Relacionado con - Selección actual: ACEITERA EL REAL, S.A GT (Cuenta)"
+                          - 'list "Relacionado con - Selección actual: ACEITERA EL REAL, S.A GT (Cuenta)" [ref=e2171]':
+                            - listitem [ref=e2172]:
+                              - generic [ref=e2173]:
+                                - generic [ref=e2176]: ACEITERA EL REAL, S.A GT
+                                - button "Para eliminar el registro seleccionado, pulse Retroceso o Supr." [ref=e2177]:
+                                  - generic [ref=e2178]: ✕
+                                  - generic [ref=e2179]: Para eliminar el registro seleccionado, pulse Retroceso o Supr.
+                            - listitem
+                  - listitem [ref=e2185]:
+                    - generic [ref=e2188]:
+                      - generic [ref=e2189]: Comentarios
+                      - generic [ref=e2190]:
+                        - text: "Sugerencia: Pulse Control + punto para insertar texto rápido."
+                        - textbox "Comentarios" [ref=e2191]:
+                          - /placeholder: ""
+                  - listitem [ref=e2197]:
+                    - generic [ref=e2200]:
+                      - generic [ref=e2201]:
+                        - text: Prioridad
+                        - generic [ref=e2202]: "*"
+                      - button "Prioridad Medio" [ref=e2207] [cursor=pointer]: Medio
+                  - listitem [ref=e2213]:
+                    - generic [ref=e2216]:
+                      - generic [ref=e2217]: Requerido
+                      - checkbox "Requerido" [ref=e2218]
+                  - listitem [ref=e2224]:
+                    - generic [ref=e2227]:
+                      - generic [ref=e2228]: Fecha de vencimiento
+                      - generic [ref=e2230]:
+                        - group [ref=e2231]:
+                          - generic [ref=e2232]: Fecha de vencimiento
+                          - generic [ref=e2233]:
+                            - textbox "Fecha de vencimiento" [ref=e2234]
+                            - button "Seleccionar una fecha para Fecha de vencimiento" [ref=e2236] [cursor=pointer]:
+                              - img [ref=e2238]
+                              - generic [ref=e2241]: Seleccionar una fecha para Fecha de vencimiento
+                        - generic [ref=e2242]: "Formato: 12/31/2024"
+                  - listitem [ref=e2248]:
+                    - generic [ref=e2251]:
+                      - generic [ref=e2252]:
+                        - text: Asignado a
+                        - generic [ref=e2253]: "*"
+                      - generic [ref=e2254]:
+                        - generic [ref=e2256]:
+                          - generic [ref=e2257]: "Asignado a - Selección actual: Axel Colamarino (Usuario)"
+                          - generic [ref=e2258]:
+                            - application [ref=e2259]:
+                              - generic [ref=e2260]: "Asignado a - Selección actual: Axel Colamarino (Usuario)"
+                              - 'list "Asignado a - Selección actual: Axel Colamarino (Usuario)" [ref=e2261]':
+                                - listitem [ref=e2262]:
+                                  - generic [ref=e2263]:
+                                    - generic [ref=e2266]: Axel Colamarino
+                                    - button "Para eliminar el registro seleccionado, pulse Retroceso o Supr." [ref=e2267]:
+                                      - generic [ref=e2268]: ✕
+                                      - generic [ref=e2269]: Para eliminar el registro seleccionado, pulse Retroceso o Supr.
+                                - listitem
+                            - link:
+                              - /url: javascript:void(0)
+                        - generic [ref=e2270]: Asignado a
+                      - generic [ref=e2271]: Total 1 Tarea
+                  - listitem [ref=e2277]:
+                    - generic [ref=e2280]:
+                      - generic [ref=e2281]: Progreso %
+                      - textbox "Progreso %" [ref=e2282]:
+                        - /placeholder: ""
+                  - listitem [ref=e2288]:
+                    - generic [ref=e2290]: Fecha/Hora de finalización
+                  - listitem [ref=e2298]:
+                    - generic [ref=e2301]:
+                      - generic [ref=e2302]: Monto de Inversión
+                      - textbox "Monto de Inversión" [ref=e2303]:
+                        - /placeholder: ""
+                  - listitem [ref=e2309]:
+                    - generic [ref=e2312]:
+                      - generic [ref=e2313]: Nombre
+                      - generic [ref=e2316]:
+                        - 'button "—Selección actual: Candidatos, Seleccione un objeto" [ref=e2321] [cursor=pointer]':
+                          - img "Candidatos" [ref=e2324]
+                          - generic [ref=e2326]:
+                            - img [ref=e2328]
+                            - generic [ref=e2331]: Seleccione un objeto
+                        - combobox "Nombre" [ref=e2333]
+                        - img [ref=e2337]
+                  - listitem [ref=e2346]:
+                    - generic [ref=e2349]:
+                      - generic [ref=e2350]: Descripción
+                      - textbox "Descripción" [ref=e2351]:
+                        - /placeholder: ""
+            - generic [ref=e2085]:
+              - button "Guardar y nuevo" [ref=e2356] [cursor=pointer]:
+                - generic [ref=e2357]: Guardar y nuevo
+              - button "Cancelar" [ref=e2358] [cursor=pointer]:
+                - generic [ref=e2359]: Cancelar
+              - button "Guardar" [active] [ref=e2360] [cursor=pointer]:
+                - generic [ref=e2361]: Guardar
+          - status [ref=e2092]
+  - generic:
+    - generic [ref=e2382]:
+      - generic [ref=e2384]:
+        - img [ref=e2386]
+        - generic [ref=e2389]: Operación correcta notificación,
+      - generic [ref=e2390]:
+        - generic [ref=e2393]: Se creó Tarea "Tarea QA desde Backoffice - Test CMIV2-3221".
+        - generic [ref=e2394]: Pulse Control + F6 para navegar a la siguiente notificación emergente o región enfocable.
+      - button "Cerrar" [ref=e2396] [cursor=pointer]:
+        - img [ref=e2400]
+        - generic [ref=e2403]: Cerrar
+    - status
