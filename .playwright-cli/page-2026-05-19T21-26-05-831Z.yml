@@ -1,0 +1,980 @@
+- generic:
+  - generic:
+    - generic [ref=e2]:
+      - generic [ref=e3]:
+        - link [ref=e1187] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a navegación
+        - link [ref=e1188] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a contenido principal
+        - generic [ref=e9]:
+          - generic [ref=e13]:
+            - button [ref=e1189] [cursor=pointer]:
+              - img [ref=e21]
+              - generic [ref=e24]: Menu
+            - generic [ref=e29]:
+              - img [ref=e33]
+              - generic [ref=e37]: Sandbox (Staging)
+          - button [ref=e1190] [cursor=pointer]:
+            - img [ref=e48]
+            - generic [ref=e51]: Show menu
+        - generic [ref=e52]:
+          - button [ref=e1191]:
+            - img [ref=e60]
+            - text: Buscar...
+          - navigation [ref=e1192]:
+            - list [ref=e65]:
+              - listitem [ref=e66]:
+                - group [ref=e67]:
+                  - button [ref=e1193] [cursor=pointer]:
+                    - img [ref=e74]
+                  - button [ref=e1194] [cursor=pointer]:
+                    - img [ref=e83]
+              - listitem [ref=e86]:
+                - button [ref=e1195] [cursor=pointer]:
+                  - img [ref=e1140]
+              - listitem [ref=e1143]:
+                - button [ref=e1196] [cursor=pointer]:
+                  - img [ref=e1150]
+              - listitem [ref=e95]:
+                - button [ref=e1197] [cursor=pointer]:
+                  - img [ref=e103]
+              - listitem [ref=e106]:
+                - button [ref=e1198] [cursor=pointer]:
+                  - img [ref=e117]
+              - listitem [ref=e120]:
+                - button [ref=e1199] [cursor=pointer]:
+                  - generic [ref=e125]:
+                    - img [ref=e129]
+                    - generic [ref=e1155]: 20+
+                - generic [ref=e132]: 26 nuevas notificaciones
+              - listitem [ref=e133]:
+                - button [ref=e1200] [cursor=pointer]
+      - generic [ref=e141]:
+        - generic [ref=e144]:
+          - generic [ref=e146]:
+            - navigation [ref=e1201]:
+              - button [ref=e1202] [cursor=pointer]:
+                - generic [ref=e160]: Iniciador de aplicación
+            - heading [level=1] [ref=e1203]:
+              - generic [ref=e1204]: CG Offline Admin
+          - navigation [ref=e1205]:
+            - list [ref=e166]:
+              - listitem [ref=e167]:
+                - link [ref=e1206] [cursor=pointer]:
+                  - /url: /lightning/page/home
+                  - generic [ref=e169]: Inicio
+              - listitem [ref=e170]:
+                - link [ref=e1207] [cursor=pointer]:
+                  - /url: /lightning/n/Sincronizar_materiales_del_combo
+                  - generic [ref=e172]: Sincronizar materiales del combo
+              - listitem [ref=e173]:
+                - link [ref=e1208] [cursor=pointer]:
+                  - /url: /lightning/n/SyncProductAssortment
+                  - generic [ref=e175]: Sincronizar surtido de productos
+              - listitem [ref=e176]:
+                - link [ref=e1209] [cursor=pointer]:
+                  - /url: /lightning/o/Case/home
+                  - generic [ref=e178]: Casos
+                - button [ref=e1210] [cursor=pointer]:
+                  - img [ref=e186]
+                  - generic [ref=e189]: Lista de Casos
+              - listitem [ref=e190] [cursor=pointer]:
+                - link [ref=e1211]:
+                  - /url: /lightning/r/Visit/0Z5gP000000iCYXSA2/view
+                  - generic [ref=e1212]: "*"
+                  - generic [ref=e193]: 00000363 | Visita
+                - button [ref=e1213]:
+                  - img [ref=e201]
+                  - generic [ref=e204]: Lista de 00000363 | Visita
+                - button [ref=e1214]:
+                  - img [ref=e209]
+                  - generic [ref=e212]: Cerrar ficha
+              - listitem [ref=e213]:
+                - button [ref=e1215] [cursor=pointer]:
+                  - generic [ref=e1216]: "*"
+                  - generic [ref=e217]: Más
+                  - img [ref=e221]
+                  - generic [ref=e224]: Mostrar más elementos de navegación
+              - listitem [ref=e225]:
+                - button [ref=e1217] [cursor=pointer]:
+                  - img [ref=e229]
+                  - generic [ref=e232]: Modificar elementos de navegación
+        - main [ref=e234]:
+          - generic [ref=e255]:
+            - generic [ref=e264]:
+              - generic [ref=e265]:
+                - heading [level=1] [ref=e1218]:
+                  - generic [ref=e274]: Visita
+                  - generic [ref=e275]: "00000363"
+                - generic [ref=e279]:
+                  - button [ref=e1220] [cursor=pointer]: Modificar
+                  - button [ref=e1222] [cursor=pointer]: Eliminar
+              - generic [ref=e292]:
+                - generic [ref=e294]:
+                  - paragraph [ref=e295]: Cuenta
+                  - paragraph [ref=e296]:
+                    - generic [ref=e301]:
+                      - link [ref=e1223] [cursor=pointer]:
+                        - /url: /lightning/r/Account/001gP00000Gt1LnQAJ/view
+                        - generic [ref=e306]: LA PANERIA, S.A. REP.LEGAL JOSÉ ANDRES CASTILLOs
+                      - button [ref=e1224] [cursor=pointer]:
+                        - img [ref=e310]
+                        - generic [ref=e313]: Vista previa
+                - generic [ref=e315]:
+                  - paragraph [ref=e316]: Hora de inicio planificada
+                  - paragraph [ref=e317]:
+                    - generic [ref=e318]: 5/4/2026, 4:27 p. m.
+                - generic [ref=e320]:
+                  - paragraph [ref=e321]: Estado
+                  - paragraph [ref=e322]:
+                    - generic [ref=e323]: No Iniciada
+                - generic [ref=e325]:
+                  - paragraph [ref=e326]: Responsable
+                  - paragraph [ref=e327]:
+                    - generic [ref=e332]:
+                      - link [ref=e1225] [cursor=pointer]:
+                        - /url: /lightning/r/User/005gP00000GS2iyQAD/view
+                        - generic [ref=e337]: "[CMI] Asesor Tecnico Harinas"
+                      - button [ref=e1226] [cursor=pointer]:
+                        - img [ref=e341]
+                        - generic [ref=e344]: Vista previa
+            - generic [ref=e346]:
+              - generic [ref=e352]:
+                - heading [level=2] [ref=e1227]: Tabs
+                - generic [ref=e355]:
+                  - heading [level=2] [ref=e1229]: Tabs
+                  - tablist [ref=e1230]:
+                    - tab [selected] [ref=e1231] [cursor=pointer]: Detalles
+                  - tabpanel [ref=e1232]:
+                    - generic [ref=e363]:
+                      - generic [ref=e369]:
+                        - heading [level=3] [ref=e1233]:
+                          - button [expanded] [ref=e1234] [cursor=pointer]:
+                            - img [ref=e375]
+                            - generic [ref=e1235]: Información General
+                        - list [ref=e381]:
+                          - generic [ref=e382]:
+                            - generic [ref=e385]:
+                              - listitem [ref=e388]:
+                                - generic [ref=e390]:
+                                  - generic [ref=e391]: Nombre
+                                  - generic [ref=e394]: "00000363"
+                              - listitem [ref=e397]:
+                                - generic [ref=e399]:
+                                  - generic [ref=e400]: Estado
+                                  - generic [ref=e401]:
+                                    - generic [ref=e403]: No Iniciada
+                                    - button [ref=e1236] [cursor=pointer]:
+                                      - generic [ref=e406]: Modificar Estado
+                              - listitem [ref=e409]:
+                                - generic [ref=e412]: Contacto
+                              - listitem [ref=e417]:
+                                - generic [ref=e419]:
+                                  - generic [ref=e420]: Hora de inicio planificada
+                                  - generic [ref=e421]:
+                                    - generic [ref=e423]: 5/4/2026, 4:27 p. m.
+                                    - button [ref=e1237] [cursor=pointer]:
+                                      - generic [ref=e426]: Modificar Hora de inicio planificada
+                              - listitem [ref=e429]:
+                                - generic [ref=e432]: Hora de inicio real
+                              - listitem [ref=e436]:
+                                - generic [ref=e438]:
+                                  - generic [ref=e439]: Evento de todo el día
+                                  - generic [ref=e440]:
+                                    - generic [ref=e445]:
+                                      - generic [ref=e447]:
+                                        - img [ref=e449]
+                                        - generic [ref=e452]: Falso
+                                      - generic [ref=e453]: Evento de todo el día
+                                    - button [ref=e1239] [cursor=pointer]:
+                                      - generic [ref=e456]: Modificar Evento de todo el día
+                              - listitem [ref=e459]:
+                                - generic [ref=e461]:
+                                  - generic [ref=e462]: Prioridad de visita
+                                  - button [ref=e1240] [cursor=pointer]:
+                                    - generic [ref=e466]: Modificar Prioridad de visita
+                              - listitem [ref=e469]:
+                                - generic [ref=e471]:
+                                  - generic [ref=e472]: Duración efectiva
+                                  - button [ref=e1241] [cursor=pointer]:
+                                    - generic [ref=e476]: Modificar Duración efectiva
+                              - listitem [ref=e479]:
+                                - generic [ref=e481]:
+                                  - generic [ref=e482]: Intencionalidad de la visita
+                                  - button [ref=e1242] [cursor=pointer]:
+                                    - generic [ref=e486]: Modificar Intencionalidad de la visita
+                              - listitem [ref=e489]:
+                                - generic [ref=e491]:
+                                  - generic [ref=e492]: Instrucción especial
+                                  - button [ref=e1243] [cursor=pointer]:
+                                    - generic [ref=e496]: Modificar Instrucción especial
+                              - listitem [ref=e499]:
+                                - generic [ref=e501]:
+                                  - generic [ref=e502]: Motivo de reapertura
+                                  - button [ref=e1244] [cursor=pointer]:
+                                    - generic [ref=e506]: Modificar Motivo de reapertura
+                            - generic [ref=e509]:
+                              - listitem [ref=e512]:
+                                - generic [ref=e514]:
+                                  - generic [ref=e515]: Cuenta
+                                  - generic [ref=e516]:
+                                    - generic [ref=e522]:
+                                      - link [ref=e1245] [cursor=pointer]:
+                                        - /url: /lightning/r/Account/001gP00000Gt1LnQAJ/view
+                                        - generic [ref=e527]: LA PANERIA, S.A. REP.LEGAL JOSÉ ANDRES CASTILLOs
+                                      - button [ref=e1246] [cursor=pointer]:
+                                        - img [ref=e531]
+                                        - generic [ref=e534]: Vista previa
+                                    - button [ref=e1247] [cursor=pointer]:
+                                      - generic [ref=e537]: Modificar Cuenta
+                              - listitem [ref=e540]:
+                                - generic [ref=e542]:
+                                  - generic [ref=e543]: Casa matriz
+                                  - generic [ref=e544]:
+                                    - generic [ref=e550]:
+                                      - link [ref=e1248] [cursor=pointer]:
+                                        - /url: /lightning/r/Account/001Ps000017dWUwIAM/view
+                                        - generic [ref=e555]: BELCA GUATEMALA,S.A.
+                                      - button [ref=e1249] [cursor=pointer]:
+                                        - img [ref=e559]
+                                        - generic [ref=e562]: Vista previa
+                                    - button [ref=e1250] [cursor=pointer]:
+                                      - generic [ref=e565]: Modificar Casa matriz
+                              - listitem [ref=e568]:
+                                - generic [ref=e570]:
+                                  - generic [ref=e571]: Plantilla de visitas
+                                  - generic [ref=e572]:
+                                    - generic [ref=e578]:
+                                      - link [ref=e1251] [cursor=pointer]:
+                                        - /url: /lightning/r/cgcloud__Visit_Template__c/a49gP000005mATdQAM/view
+                                        - generic [ref=e583]: Ejecución Servicio Técnico
+                                      - button [ref=e1252] [cursor=pointer]:
+                                        - img [ref=e587]
+                                        - generic [ref=e590]: Vista previa
+                                    - button [ref=e1253] [cursor=pointer]:
+                                      - generic [ref=e593]: Modificar Plantilla de visitas
+                              - listitem [ref=e596]:
+                                - generic [ref=e598]:
+                                  - generic [ref=e599]: Hora de finalización planificada
+                                  - generic [ref=e600]:
+                                    - generic [ref=e602]: 5/4/2026, 5:00 p. m.
+                                    - button [ref=e1254] [cursor=pointer]:
+                                      - generic [ref=e605]: Modificar Hora de finalización planificada
+                              - listitem [ref=e608]:
+                                - generic [ref=e611]: Hora de finalización real
+                              - listitem [ref=e615]:
+                                - generic [ref=e617]:
+                                  - generic [ref=e618]: Id. del propietario
+                                  - generic [ref=e623]:
+                                    - generic [ref=e630]:
+                                      - link [ref=e1255] [cursor=pointer]:
+                                        - /url: /lightning/r/Name/005gP00000GS2ixQAD/view
+                                        - generic [ref=e635]: "[CMI] Asesor Servicio al Cliente"
+                                      - button [ref=e1256] [cursor=pointer]:
+                                        - img [ref=e639]
+                                        - generic [ref=e642]: Vista previa
+                                    - button [ref=e1257] [cursor=pointer]:
+                                      - img [ref=e646]
+                                      - generic [ref=e649]: Cambiar propietario
+                              - listitem [ref=e652]:
+                                - generic [ref=e654]:
+                                  - generic [ref=e655]: Destinatario de entrega
+                                  - button [ref=e1258] [cursor=pointer]:
+                                    - generic [ref=e660]: Modificar Destinatario de entrega
+                              - listitem [ref=e663]:
+                                - generic [ref=e665]:
+                                  - generic [ref=e666]: Observación de estado
+                                  - button [ref=e1259] [cursor=pointer]:
+                                    - generic [ref=e670]: Modificar Observación de estado
+                              - listitem [ref=e673]:
+                                - generic [ref=e675]:
+                                  - generic [ref=e676]: Motivo de no visita
+                                  - button [ref=e1260] [cursor=pointer]:
+                                    - generic [ref=e680]: Modificar Motivo de no visita
+                              - listitem [ref=e683]:
+                                - generic [ref=e685]:
+                                  - generic [ref=e686]: Reaperturada
+                                  - generic [ref=e687]:
+                                    - generic [ref=e692]:
+                                      - generic [ref=e694]:
+                                        - img [ref=e696]
+                                        - generic [ref=e699]: Falso
+                                      - generic [ref=e700]: Reaperturada
+                                    - button [ref=e1262] [cursor=pointer]:
+                                      - generic [ref=e703]: Modificar Reaperturada
+                              - listitem [ref=e706]:
+                                - generic [ref=e708]:
+                                  - generic [ref=e709]: Modificada después de Cerrada
+                                  - generic [ref=e717]:
+                                    - generic [ref=e719]:
+                                      - img [ref=e721]
+                                      - generic [ref=e724]: Falso
+                                    - generic [ref=e725]: Modificada después de Cerrada
+                              - listitem [ref=e728]:
+                                - generic [ref=e730]:
+                                  - generic [ref=e731]: Estado de Planificación
+                                  - button [ref=e1264] [cursor=pointer]:
+                                    - generic [ref=e735]: Modificar Estado de Planificación
+                      - heading [level=3] [ref=e1265]:
+                        - button [expanded] [ref=e1266] [cursor=pointer]:
+                          - img [ref=e747]
+                          - generic [ref=e1267]: Información General y del Cliente
+                      - heading [level=3] [ref=e1268]:
+                        - button [expanded] [ref=e1269] [cursor=pointer]:
+                          - img [ref=e765]
+                          - generic [ref=e1270]: Información del Caso / Solicitud
+                      - heading [level=3] [ref=e1271]:
+                        - button [expanded] [ref=e1272] [cursor=pointer]:
+                          - img [ref=e783]
+                          - generic [ref=e1273]: Gerencia Comercial
+                      - heading [level=3] [ref=e1274]:
+                        - button [expanded] [ref=e1275] [cursor=pointer]:
+                          - img [ref=e801]
+                          - generic [ref=e1276]: Informe del Área
+                      - heading [level=3] [ref=e1277]:
+                        - button [expanded] [ref=e1278] [cursor=pointer]:
+                          - img [ref=e819]
+                          - generic [ref=e1279]: Información del Taller
+                      - heading [level=3] [ref=e1280]:
+                        - button [expanded] [ref=e1281] [cursor=pointer]:
+                          - img [ref=e837]
+                          - generic [ref=e1282]: Resultados Finales del Producto
+                      - heading [level=3] [ref=e1283]:
+                        - button [expanded] [ref=e1284] [cursor=pointer]:
+                          - img [ref=e855]
+                          - generic [ref=e1285]: Información del Sistema
+              - generic [ref=e863]:
+                - generic [ref=e867]:
+                  - heading [level=2] [ref=e1286]: Tabs
+                  - generic [ref=e870]:
+                    - heading [level=2] [ref=e1288]: Tabs
+                    - tablist [ref=e1289]:
+                      - tab [selected] [ref=e1290] [cursor=pointer]: Relacionado
+                      - tab [ref=e1291] [cursor=pointer]: Tareas
+                    - tabpanel [ref=e1292]:
+                      - generic [ref=e879]:
+                        - article [ref=e1293]:
+                          - generic [ref=e894]:
+                            - img [ref=e898]
+                            - heading [level=2] [ref=e1294]:
+                              - link [ref=e1295] [cursor=pointer]:
+                                - /url: /lightning/cmp/force__dynamicRelatedListViewAll?force__flexipageId=Visit_Record_Page_Editable_CMI&force__cmpId=lst_dynamicRelatedList2&force__recordId=0Z5gP000000iCYXSA2
+                                - generic [ref=e1296]: Cases
+                                - generic [ref=e1297]: (0)
+                        - generic [ref=e907]:
+                          - article [ref=e1298]:
+                            - generic [ref=e918]:
+                              - generic [ref=e920]:
+                                - img [ref=e924]
+                                - heading [level=2] [ref=e1299]:
+                                  - link [ref=e1300] [cursor=pointer]:
+                                    - /url: /lightning/r/Visit/0Z5gP000000iCYXSA2/related/Opportunities__r/view
+                                    - generic [ref=e1301]: Opportunities
+                                    - generic [ref=e1302]: (0)
+                              - button [ref=e1303] [cursor=pointer]:
+                                - img [ref=e936]
+                                - generic [ref=e939]: Mostrar acciones para Opportunities
+                          - article [ref=e1304]:
+                            - generic [ref=e950]:
+                              - generic [ref=e952]:
+                                - img [ref=e956]
+                                - heading [level=2] [ref=e1305]:
+                                  - link [ref=e1306] [cursor=pointer]:
+                                    - /url: /lightning/r/Visit/0Z5gP000000iCYXSA2/related/cgcloud__Orders__r/view
+                                    - generic [ref=e1307]: Pedidos
+                                    - generic [ref=e1308]: (0)
+                              - button [ref=e1309] [cursor=pointer]:
+                                - img [ref=e968]
+                                - generic [ref=e971]: Mostrar acciones para Pedidos
+                          - article [ref=e1310]:
+                            - generic [ref=e978]:
+                              - generic [ref=e979]:
+                                - generic [ref=e982]:
+                                  - generic [ref=e984]:
+                                    - img [ref=e988]
+                                    - heading [level=2] [ref=e1311]:
+                                      - link [ref=e1312] [cursor=pointer]:
+                                        - /url: /lightning/r/Visit/0Z5gP000000iCYXSA2/related/Histories/view
+                                        - generic [ref=e1313]: Historial de Visita
+                                        - generic [ref=e1314]: (1)
+                                  - button [ref=e1315] [cursor=pointer]:
+                                    - generic [ref=e998]:
+                                      - img [ref=e1000]
+                                      - generic [ref=e1003]: Mostrar acciones para Historial de Visita
+                                - article [ref=e1163]:
+                                  - generic [ref=e1166]:
+                                    - term [ref=e1167]: "Fecha:"
+                                    - definition [ref=e1168]:
+                                      - generic [ref=e1170]: 5/4/2026, 4:27 p. m.
+                                    - term [ref=e1171]: "Campo:"
+                                    - definition [ref=e1172]:
+                                      - generic [ref=e1174]: Creado.
+                                    - term [ref=e1175]: "Usuario:"
+                                    - definition [ref=e1176]:
+                                      - link [ref=e1316] [cursor=pointer]:
+                                        - /url: /lightning/r/005gP00000GS2ixQAD/view
+                                        - generic [ref=e1181]: "[CMI] Asesor Servicio al Cliente"
+                                    - term [ref=e1182]: "Valor original:"
+                                    - term [ref=e1183]: "Valor nuevo:"
+                              - link [ref=e1317] [cursor=pointer]:
+                                - /url: /lightning/r/Visit/0Z5gP000000iCYXSA2/related/Histories/view
+                                - generic [ref=e1185]:
+                                  - text: Ver todos
+                                  - generic [ref=e1186]: Historial de Visita
+                          - article [ref=e1021]:
+                            - generic [ref=e1022]:
+                              - img [ref=e1024]
+                              - heading [level=2] [ref=e1318]: Trabajos de visita
+                          - article [ref=e1032]:
+                            - generic [ref=e1033]:
+                              - img [ref=e1035]
+                              - heading [level=2] [ref=e1319]: Archivos
+                        - article [ref=e1320]:
+                          - article [ref=e1045]:
+                            - generic [ref=e1046]:
+                              - img [ref=e1048]
+                              - heading [level=2] [ref=e1321]: Activities for Parent Visit Template
+                - article [ref=e1055]:
+                  - generic [ref=e1057]:
+                    - heading [level=2] [ref=e1322]:
+                      - heading [level=2] [ref=e1323]:
+                        - img [ref=e1066]
+                        - text: Account Tasks
+                        - generic [ref=e1069]: (2)
+                    - button [ref=e1324] [cursor=pointer]:
+                      - img [ref=e1076]
+                      - generic [ref=e1079]: Task options
+                  - list [ref=e1083]:
+                    - listitem [ref=e1084]:
+                      - generic [ref=e1085]:
+                        - link [ref=e1325] [cursor=pointer]:
+                          - /url: /lightning/r/Task/00TgP000008TIPxUAO/view
+                          - text: Nueva tarea Cliente Maxi 18/05
+                        - button [ref=e1326] [cursor=pointer]:
+                          - img [ref=e1090]
+                          - generic [ref=e1093]: Task actions
+                      - generic [ref=e1094]:
+                        - generic [ref=e1095]:
+                          - term [ref=e1096]: "Status:"
+                          - definition [ref=e1097]: Open
+                        - generic [ref=e1098]:
+                          - term [ref=e1099]: "Priority:"
+                          - definition [ref=e1100]: High
+                        - generic [ref=e1101]:
+                          - term [ref=e1102]: "Due Date:"
+                          - definition [ref=e1103]: 05/18/2026
+                        - generic [ref=e1104]:
+                          - term [ref=e1105]: "Owner:"
+                          - definition [ref=e1106]: Maximiliano Miño AO
+                    - listitem [ref=e1107]:
+                      - generic [ref=e1108]:
+                        - link [ref=e1327] [cursor=pointer]:
+                          - /url: /lightning/r/Task/00TgP000008DfLhUAK/view
+                          - text: Otro
+                        - button [ref=e1328] [cursor=pointer]:
+                          - img [ref=e1113]
+                          - generic [ref=e1116]: Task actions
+                      - generic [ref=e1117]:
+                        - generic [ref=e1118]:
+                          - term [ref=e1119]: "Status:"
+                          - definition [ref=e1120]: Open
+                        - generic [ref=e1121]:
+                          - term [ref=e1122]: "Priority:"
+                          - definition [ref=e1123]: Normal
+                        - generic [ref=e1124]:
+                          - term [ref=e1125]: "Due Date:"
+                          - definition [ref=e1126]: —
+                        - generic [ref=e1127]:
+                          - term [ref=e1128]: "Owner:"
+                          - definition [ref=e1129]: Axel Colamarino
+    - dialog "Modificar 00000363" [ref=e1330]:
+      - generic [ref=e1331]:
+        - button "Cancelar y cerrar" [ref=e1332] [cursor=pointer]:
+          - img [ref=e1334]
+          - generic [ref=e1337]: Cancelar y cerrar
+        - generic [ref=e1338]:
+          - generic [ref=e1345]:
+            - heading "Modificar 00000363" [level=2] [ref=e1347]
+            - generic [ref=e1349]:
+              - generic [ref=e1350]: "* = Información obligatoria"
+              - generic [ref=e1356]:
+                - generic [ref=e1362]:
+                  - heading "Información General" [level=3] [ref=e1363]:
+                    - generic "Información General" [ref=e1364]
+                  - list [ref=e1367]:
+                    - generic [ref=e1368]:
+                      - generic [ref=e1371]:
+                        - listitem [ref=e1374]:
+                          - generic [ref=e1376]:
+                            - generic [ref=e1377]: Nombre
+                            - generic [ref=e1380]: "00000363"
+                        - listitem [ref=e1383]:
+                          - generic [ref=e1384]:
+                            - button "Deshacer Estado" [ref=e2666] [cursor=pointer]:
+                              - img [ref=e2668]
+                            - generic [ref=e1388]:
+                              - generic [ref=e1391]:
+                                - generic [ref=e1393]: Estado
+                                - generic [ref=e1397]:
+                                  - combobox "Estado" [active] [ref=e1398] [cursor=pointer]:
+                                    - generic [ref=e1399]: En progreso
+                                  - img [ref=e1403]
+                                - status
+                              - link "Ver todas las dependencias para Estado" [ref=e1408] [cursor=pointer]:
+                                - /url: javascript:void(0)
+                                - text: Ver todas las dependencias
+                        - listitem [ref=e1411]:
+                          - generic [ref=e1414]: Contacto
+                        - listitem [ref=e1419]:
+                          - group "Hora de inicio planificada" [ref=e1427]:
+                            - generic [ref=e1428]: Hora de inicio planificada
+                            - generic [ref=e1431]:
+                              - generic [ref=e1432]:
+                                - group [ref=e1433]:
+                                  - generic [ref=e1434]: "*Fecha"
+                                  - generic [ref=e1435]:
+                                    - textbox "Fecha" [ref=e1436]: 5/4/2026
+                                    - button "Seleccionar una fecha para Fecha" [ref=e1438] [cursor=pointer]:
+                                      - img [ref=e1440]
+                                      - generic [ref=e1443]: Seleccionar una fecha para Fecha
+                                - generic [ref=e1444]: "Formato: 12/31/2024"
+                              - generic [ref=e1445]:
+                                - generic [ref=e1446]: "*Hora"
+                                - generic [ref=e1450]:
+                                  - combobox "Hora" [ref=e1453]: 4:27 p. m.
+                                  - img [ref=e1457]
+                        - listitem [ref=e1462]:
+                          - generic [ref=e1465]: Hora de inicio real
+                        - listitem [ref=e1469]:
+                          - generic [ref=e1475]:
+                            - generic [ref=e1477]: Evento de todo el día
+                            - checkbox "Evento de todo el día" [ref=e1479]
+                        - listitem [ref=e1482]:
+                          - generic [ref=e1490]:
+                            - generic [ref=e1492]: Prioridad de visita
+                            - generic [ref=e1496]:
+                              - combobox "Prioridad de visita" [ref=e1497] [cursor=pointer]:
+                                - generic [ref=e1498]: "--Ninguno--"
+                              - img [ref=e1502]
+                            - status
+                        - listitem [ref=e1507]:
+                          - generic [ref=e1513]:
+                            - generic [ref=e1514]: Duración efectiva
+                            - spinbutton "Duración efectiva" [ref=e1516]
+                        - listitem [ref=e1519]:
+                          - generic [ref=e1527]:
+                            - generic [ref=e1529]: Intencionalidad de la visita
+                            - generic [ref=e1533]:
+                              - combobox "Intencionalidad de la visita" [ref=e1534] [cursor=pointer]:
+                                - generic [ref=e1535]: "--Ninguno--"
+                              - img [ref=e1539]
+                            - status
+                        - listitem [ref=e1544]:
+                          - generic [ref=e1549]:
+                            - generic [ref=e1550]: Instrucción especial
+                            - textbox "Instrucción especial" [ref=e1552]
+                            - status
+                        - listitem [ref=e1555]:
+                          - generic [ref=e1563]:
+                            - generic [ref=e1565]: Motivo de reapertura
+                            - generic [ref=e1569]:
+                              - combobox "Motivo de reapertura" [ref=e1570] [cursor=pointer]:
+                                - generic [ref=e1571]: "--Ninguno--"
+                              - img [ref=e1575]
+                            - status
+                      - generic [ref=e1580]:
+                        - listitem [ref=e1583]:
+                          - generic [ref=e1590]:
+                            - generic [ref=e1591]: Cuenta
+                            - generic [ref=e1596]:
+                              - generic [ref=e1598]:
+                                - img [ref=e1600]
+                                - generic [ref=e1603]: Cuenta
+                              - combobox "Cuenta" [ref=e1606]: LA PANERIA, S.A. REP.LEGAL JOSÉ ANDRES CASTILLOs
+                              - button "Borrar Cuenta selección" [ref=e1607] [cursor=pointer]:
+                                - img [ref=e1609]
+                                - generic [ref=e1612]: Borrar Cuenta selección
+                            - status
+                        - listitem [ref=e1615]:
+                          - generic [ref=e1622]:
+                            - generic [ref=e1623]: Casa matriz
+                            - generic [ref=e1628]:
+                              - generic [ref=e1630]:
+                                - img [ref=e1632]
+                                - generic [ref=e1635]: Cuenta
+                              - combobox "Casa matriz" [ref=e1638]: BELCA GUATEMALA,S.A.
+                              - button "Borrar Casa matriz selección" [ref=e1639] [cursor=pointer]:
+                                - img [ref=e1641]
+                                - generic [ref=e1644]: Borrar Casa matriz selección
+                            - status
+                        - listitem [ref=e1647]:
+                          - generic [ref=e1654]:
+                            - generic [ref=e1655]: Plantilla de visitas
+                            - generic [ref=e1660]:
+                              - generic [ref=e1662]:
+                                - img [ref=e1664]
+                                - generic [ref=e1665]: Plantilla de visita
+                              - combobox "Plantilla de visitas" [ref=e1668]: Ejecución Servicio Técnico
+                              - button "Borrar Plantilla de visitas selección" [ref=e1669] [cursor=pointer]:
+                                - img [ref=e1671]
+                                - generic [ref=e1674]: Borrar Plantilla de visitas selección
+                            - status
+                        - listitem [ref=e1677]:
+                          - group "Hora de finalización planificada" [ref=e1685]:
+                            - generic [ref=e1686]: Hora de finalización planificada
+                            - generic [ref=e1689]:
+                              - generic [ref=e1690]:
+                                - group [ref=e1691]:
+                                  - generic [ref=e1692]: Fecha
+                                  - generic [ref=e1693]:
+                                    - textbox "Fecha" [ref=e1694]: 5/4/2026
+                                    - button "Seleccionar una fecha para Fecha" [ref=e1696] [cursor=pointer]:
+                                      - img [ref=e1698]
+                                      - generic [ref=e1701]: Seleccionar una fecha para Fecha
+                                - generic [ref=e1702]: "Formato: 12/31/2024"
+                              - generic [ref=e1703]:
+                                - generic [ref=e1704]: Hora
+                                - generic [ref=e1708]:
+                                  - combobox "Hora" [ref=e1711]: 5:00 p. m.
+                                  - img [ref=e1715]
+                        - listitem [ref=e1720]:
+                          - generic [ref=e1723]: Hora de finalización real
+                        - listitem [ref=e1727]:
+                          - generic [ref=e1729]:
+                            - generic [ref=e1730]: Id. del propietario
+                            - generic [ref=e1742]: "[CMI] Asesor Servicio al Cliente"
+                        - listitem [ref=e1745]:
+                          - generic [ref=e1752]:
+                            - generic [ref=e1753]: Destinatario de entrega
+                            - generic [ref=e1758]:
+                              - combobox "Destinatario de entrega" [ref=e1761]
+                              - img [ref=e1765]
+                            - status
+                        - listitem [ref=e1770]:
+                          - generic [ref=e1775]:
+                            - generic [ref=e1776]: Observación de estado
+                            - textbox "Observación de estado" [ref=e1778]
+                            - status
+                        - listitem [ref=e1781]:
+                          - generic [ref=e1786]:
+                            - generic [ref=e1789]:
+                              - generic [ref=e1791]: Motivo de no visita
+                              - generic [ref=e1795]:
+                                - combobox "Motivo de no visita" [ref=e1796] [cursor=pointer]:
+                                  - generic [ref=e1797]: "--Ninguno--"
+                                - img [ref=e1801]
+                              - status
+                            - link "Ver todas las dependencias para Motivo de no visita" [ref=e1806] [cursor=pointer]:
+                              - /url: javascript:void(0)
+                              - text: Ver todas las dependencias
+                        - listitem [ref=e1809]:
+                          - generic [ref=e1815]:
+                            - generic [ref=e1817]: Reaperturada
+                            - checkbox "Reaperturada" [ref=e1819]
+                        - listitem [ref=e1822]:
+                          - generic [ref=e1824]:
+                            - generic [ref=e1825]: Modificada después de Cerrada
+                            - generic [ref=e1829]:
+                              - generic [ref=e1833]:
+                                - generic "Falso" [ref=e1834]:
+                                  - generic [ref=e1835]:
+                                    - img [ref=e1837]
+                                    - generic [ref=e1840]: Falso
+                                - generic [ref=e1841]: Modificada después de Cerrada
+                              - generic [ref=e1842]: Este campo se calcula al guardar
+                        - listitem [ref=e1845]:
+                          - generic [ref=e1853]:
+                            - generic [ref=e1855]: Estado de Planificación
+                            - generic [ref=e1859]:
+                              - combobox "Estado de Planificación" [ref=e1860] [cursor=pointer]:
+                                - generic [ref=e1861]: "--Ninguno--"
+                              - img [ref=e1865]
+                            - status
+                - generic [ref=e1873]:
+                  - heading "Información General y del Cliente" [level=3] [ref=e1874]:
+                    - generic "Información General y del Cliente" [ref=e1875]
+                  - list [ref=e1878]:
+                    - generic [ref=e1879]:
+                      - generic [ref=e1882]:
+                        - listitem [ref=e1885]:
+                          - generic [ref=e1887]:
+                            - generic [ref=e1888]: Teléfono y Correo del cliente
+                            - generic [ref=e1892]:
+                              - generic [ref=e1893]: 24209999 -
+                              - generic [ref=e1894]: Este campo se calcula al guardar
+                        - listitem [ref=e1897]:
+                          - generic [ref=e1899]:
+                            - generic [ref=e1900]: Canal
+                            - generic [ref=e1905]: Este campo se calcula al guardar
+                        - listitem [ref=e1908]:
+                          - generic [ref=e1910]:
+                            - generic [ref=e1911]: Empresa (LEN)
+                            - generic [ref=e1915]:
+                              - generic [ref=e1916]: Bakery
+                              - generic [ref=e1917]: Este campo se calcula al guardar
+                        - listitem [ref=e1920]:
+                          - generic [ref=e1922]:
+                            - generic [ref=e1923]: Segmentación
+                            - generic [ref=e1928]: Este campo se calcula al guardar
+                      - generic [ref=e1931]:
+                        - listitem [ref=e1934]:
+                          - generic [ref=e1940]:
+                            - generic [ref=e1941]: Teléfono del Contacto
+                            - textbox "Teléfono del Contacto" [ref=e1943]
+                        - listitem [ref=e1946]:
+                          - generic [ref=e1948]:
+                            - generic [ref=e1949]: Tipo de Cliente
+                            - generic [ref=e1954]: Este campo se calcula al guardar
+                        - listitem [ref=e1957]:
+                          - generic [ref=e1959]:
+                            - generic [ref=e1960]: Grupo de Clientes
+                            - generic [ref=e1965]: Este campo se calcula al guardar
+                - generic [ref=e1971]:
+                  - heading "Información del Caso / Solicitud" [level=3] [ref=e1972]:
+                    - generic "Información del Caso / Solicitud" [ref=e1973]
+                  - list [ref=e1976]:
+                    - generic [ref=e1977]:
+                      - generic [ref=e1980]:
+                        - listitem [ref=e1983]:
+                          - generic [ref=e1990]:
+                            - generic [ref=e1991]: Caso
+                            - generic [ref=e1996]:
+                              - generic [ref=e1998]:
+                                - img [ref=e2000]
+                                - generic [ref=e2003]: Caso
+                              - combobox "Caso" [ref=e2006]: "00001392"
+                              - button "Borrar Caso selección" [ref=e2007] [cursor=pointer]:
+                                - img [ref=e2009]
+                                - generic [ref=e2012]: Borrar Caso selección
+                            - status
+                        - listitem [ref=e2015]:
+                          - generic [ref=e2017]:
+                            - generic [ref=e2018]: Vendedor / Desarrollador Comercial
+                            - generic [ref=e2023]: Este campo se calcula al guardar
+                        - listitem [ref=e2026]:
+                          - generic [ref=e2028]:
+                            - generic [ref=e2029]: Título del caso
+                            - generic [ref=e2033]:
+                              - generic [ref=e2034]: prueba asignacion de responsable
+                              - generic [ref=e2035]: Este campo se calcula al guardar
+                        - listitem [ref=e2038]:
+                          - generic [ref=e2040]:
+                            - generic [ref=e2041]: Tema primario del caso
+                            - generic [ref=e2045]:
+                              - generic [ref=e2046]: Servicio Técnico Harinas
+                              - generic [ref=e2047]: Este campo se calcula al guardar
+                        - listitem [ref=e2050]:
+                          - generic [ref=e2052]:
+                            - generic [ref=e2053]: Subtemas del caso
+                            - generic [ref=e2057]:
+                              - generic [ref=e2058]: Desarrollo de nuevas formulaciones /
+                              - generic [ref=e2059]: Este campo se calcula al guardar
+                      - generic [ref=e2062]:
+                        - listitem [ref=e2065]:
+                          - generic [ref=e2067]:
+                            - generic [ref=e2068]: Gerente asociado
+                            - generic [ref=e2073]: Este campo se calcula al guardar
+                        - listitem [ref=e2076]:
+                          - generic [ref=e2078]:
+                            - generic [ref=e2079]: Tipo de asesoría
+                            - generic [ref=e2083]:
+                              - generic [ref=e2084]: Solicitud
+                              - generic [ref=e2085]: Este campo se calcula al guardar
+                        - listitem [ref=e2088]:
+                          - generic [ref=e2090]:
+                            - generic [ref=e2091]: Tema del caso
+                            - generic [ref=e2095]:
+                              - generic [ref=e2096]: Solicitud de asesoría (local e interior del país)
+                              - generic [ref=e2097]: Este campo se calcula al guardar
+                        - listitem [ref=e2100]:
+                          - generic [ref=e2105]:
+                            - generic [ref=e2106]: Descripción de requerimiento
+                            - textbox "Descripción de requerimiento" [ref=e2108]
+                            - status
+                - generic [ref=e2114]:
+                  - heading "Gerencia Comercial" [level=3] [ref=e2115]:
+                    - generic "Gerencia Comercial" [ref=e2116]
+                  - list [ref=e2119]:
+                    - generic [ref=e2120]:
+                      - listitem [ref=e2126]:
+                        - generic [ref=e2128]:
+                          - generic [ref=e2129]: ID único (Ruta-Fecha)
+                          - generic [ref=e2133]:
+                            - generic [ref=e2134]: "-2026-05-04"
+                            - generic [ref=e2135]: Este campo se calcula al guardar
+                      - listitem [ref=e2141]:
+                        - generic [ref=e2148]:
+                          - generic [ref=e2149]: Usuario evaluado
+                          - generic [ref=e2154]:
+                            - combobox "Usuario evaluado" [ref=e2157]
+                            - img [ref=e2161]
+                          - status
+                - generic [ref=e2169]:
+                  - heading "Informe del Área" [level=3] [ref=e2170]:
+                    - generic "Informe del Área" [ref=e2171]
+                  - list [ref=e2174]:
+                    - generic [ref=e2175]:
+                      - generic [ref=e2178]:
+                        - listitem [ref=e2181]:
+                          - generic [ref=e2189]:
+                            - generic [ref=e2191]: Datos específicos por producto
+                            - generic [ref=e2195]:
+                              - combobox "Datos específicos por producto" [ref=e2196] [cursor=pointer]:
+                                - generic [ref=e2197]: "--Ninguno--"
+                              - img [ref=e2201]
+                            - status
+                        - listitem [ref=e2206]:
+                          - generic [ref=e2213]:
+                            - generic [ref=e2214]: Producto elaborado
+                            - textbox "Producto elaborado" [ref=e2216]
+                        - listitem [ref=e2219]:
+                          - generic [ref=e2227]:
+                            - generic [ref=e2229]: Se atendió el caso
+                            - generic [ref=e2233]:
+                              - combobox "Se atendió el caso" [ref=e2234] [cursor=pointer]:
+                                - generic [ref=e2235]: "--Ninguno--"
+                              - img [ref=e2239]
+                            - status
+                        - listitem [ref=e2244]:
+                          - generic [ref=e2251]:
+                            - generic [ref=e2252]: Nro. de clientes presentes
+                            - textbox "Nro. de clientes presentes" [ref=e2254]
+                        - listitem [ref=e2257]:
+                          - generic [ref=e2264]:
+                            - generic [ref=e2265]: Motivo de no atención
+                            - textbox "Motivo de no atención" [ref=e2267]
+                        - listitem [ref=e2270]:
+                          - generic [ref=e2278]:
+                            - generic [ref=e2280]: Prospección negocio brindada
+                            - generic [ref=e2284]:
+                              - combobox "Prospección negocio brindada" [ref=e2285] [cursor=pointer]:
+                                - generic [ref=e2286]: "--Ninguno--"
+                              - img [ref=e2290]
+                            - status
+                      - generic [ref=e2295]:
+                        - listitem [ref=e2298]:
+                          - generic [ref=e2306]:
+                            - generic [ref=e2308]: Satisfacción del cliente
+                            - generic [ref=e2312]:
+                              - combobox "Satisfacción del cliente" [ref=e2313] [cursor=pointer]:
+                                - generic [ref=e2314]: "--Ninguno--"
+                              - img [ref=e2318]
+                            - status
+                        - listitem [ref=e2323]:
+                          - generic [ref=e2330]:
+                            - generic [ref=e2331]: Oportunidades Detectadas
+                            - textbox "Oportunidades Detectadas" [ref=e2333]
+                        - listitem [ref=e2336]:
+                          - generic [ref=e2343]:
+                            - generic [ref=e2344]: Comentarios/Observ. del AT
+                            - textbox "Comentarios/Observ. del AT" [ref=e2346]
+                        - listitem [ref=e2349]:
+                          - generic [ref=e2354]:
+                            - generic [ref=e2355]: Justificación oportunidades
+                            - textbox "Justificación oportunidades" [ref=e2357]
+                            - status
+                - generic [ref=e2363]:
+                  - heading "Información del Taller" [level=3] [ref=e2364]:
+                    - generic "Información del Taller" [ref=e2365]
+                  - list [ref=e2368]:
+                    - generic [ref=e2369]:
+                      - generic [ref=e2372]:
+                        - listitem [ref=e2375]:
+                          - generic [ref=e2382]:
+                            - generic [ref=e2383]: Nombre del taller
+                            - textbox "Nombre del taller" [ref=e2385]
+                        - listitem [ref=e2388]:
+                          - generic [ref=e2396]:
+                            - generic [ref=e2398]: Origen del taller
+                            - generic [ref=e2402]:
+                              - combobox "Origen del taller" [ref=e2403] [cursor=pointer]:
+                                - generic [ref=e2404]: "--Ninguno--"
+                              - img [ref=e2408]
+                            - status
+                      - listitem [ref=e2416]:
+                        - generic [ref=e2423]:
+                          - generic [ref=e2424]: Temática / Módulo
+                          - textbox "Temática / Módulo" [ref=e2426]
+                - generic [ref=e2432]:
+                  - heading "Resultados Finales del Producto" [level=3] [ref=e2433]:
+                    - generic "Resultados Finales del Producto" [ref=e2434]
+                  - list [ref=e2437]:
+                    - generic [ref=e2438]:
+                      - generic [ref=e2441]:
+                        - listitem [ref=e2444]:
+                          - generic [ref=e2452]:
+                            - generic [ref=e2454]: Sabor
+                            - generic [ref=e2458]:
+                              - combobox "Sabor" [ref=e2459] [cursor=pointer]:
+                                - generic [ref=e2460]: "--Ninguno--"
+                              - img [ref=e2464]
+                            - status
+                        - listitem [ref=e2469]:
+                          - generic [ref=e2477]:
+                            - generic [ref=e2479]: Presentación
+                            - generic [ref=e2483]:
+                              - combobox "Presentación" [ref=e2484] [cursor=pointer]:
+                                - generic [ref=e2485]: "--Ninguno--"
+                              - img [ref=e2489]
+                            - status
+                        - listitem [ref=e2494]:
+                          - generic [ref=e2502]:
+                            - generic [ref=e2504]: Textura
+                            - generic [ref=e2508]:
+                              - combobox "Textura" [ref=e2509] [cursor=pointer]:
+                                - generic [ref=e2510]: "--Ninguno--"
+                              - img [ref=e2514]
+                            - status
+                      - generic [ref=e2519]:
+                        - listitem [ref=e2522]:
+                          - generic [ref=e2530]:
+                            - generic [ref=e2532]: Calif. satisfacción asesoría
+                            - generic [ref=e2536]:
+                              - combobox "Calif. satisfacción asesoría" [ref=e2537] [cursor=pointer]:
+                                - generic [ref=e2538]: "--Ninguno--"
+                              - img [ref=e2542]
+                            - status
+                        - listitem [ref=e2547]:
+                          - generic [ref=e2552]:
+                            - generic [ref=e2553]: Comentarios del cliente
+                            - textbox "Comentarios del cliente" [ref=e2555]
+                            - status
+                - generic [ref=e2561]:
+                  - heading "Información del Sistema" [level=3] [ref=e2562]:
+                    - generic "Información del Sistema" [ref=e2563]
+                  - list [ref=e2566]:
+                    - generic [ref=e2567]:
+                      - generic [ref=e2570]:
+                        - listitem [ref=e2573]:
+                          - generic [ref=e2575]:
+                            - generic [ref=e2576]: Creado por
+                            - generic [ref=e2580]:
+                              - generic [ref=e2586]: "[CMI] Asesor Servicio al Cliente"
+                              - text: ", 5/4/2026, 4:27 p. m."
+                        - listitem [ref=e2589]:
+                          - generic [ref=e2591]:
+                            - generic [ref=e2592]: Última modificación por
+                            - generic [ref=e2596]:
+                              - generic [ref=e2602]: Ulises Varela
+                              - text: ", 5/14/2026, 3:06 p. m."
+                      - generic [ref=e2605]:
+                        - listitem [ref=e2608]:
+                          - generic [ref=e2610]:
+                            - generic [ref=e2611]: Fecha de creación
+                            - generic [ref=e2614]: 5/4/2026, 4:27 p. m.
+                        - listitem [ref=e2617]:
+                          - generic [ref=e2619]:
+                            - generic [ref=e2620]: Fecha de la última modificación
+                            - generic [ref=e2623]: 5/14/2026, 3:06 p. m.
+            - generic [ref=e2628]:
+              - generic "Cancelar" [ref=e2629]:
+                - button "Cancelar" [ref=e2634] [cursor=pointer]
+              - generic "Guardar y nuevo" [ref=e2635]:
+                - button "Guardar y nuevo" [ref=e2640] [cursor=pointer]
+              - generic "Guardar" [ref=e2641]:
+                - button "Guardar" [ref=e2646] [cursor=pointer]
+          - status [ref=e2648]
+  - generic:
+    - status

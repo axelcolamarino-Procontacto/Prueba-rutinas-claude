@@ -1,0 +1,536 @@
+- generic:
+  - generic:
+    - generic [ref=e2]:
+      - generic [ref=e3]:
+        - link [ref=e129] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a navegación
+        - link [ref=e130] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a contenido principal
+        - generic [ref=e134]:
+          - generic [ref=e138]:
+            - button [ref=e142] [cursor=pointer]:
+              - img [ref=e146]
+              - generic [ref=e149]: Menu
+            - generic [ref=e154]:
+              - img [ref=e158]
+              - generic [ref=e162]: Sandbox (Staging)
+          - button [ref=e171] [cursor=pointer]:
+            - img [ref=e173]
+            - generic [ref=e176]: Show menu
+        - generic [ref=e6]:
+          - button [ref=e177]:
+            - img [ref=e14]
+            - text: Buscar...
+          - navigation [ref=e178]:
+            - list [ref=e180]:
+              - listitem [ref=e181]:
+                - group [ref=e182]:
+                  - button [ref=e184] [cursor=pointer]:
+                    - img [ref=e189]
+                  - button [ref=e193] [cursor=pointer]:
+                    - img [ref=e198]
+              - listitem [ref=e201]:
+                - button [ref=e1410] [cursor=pointer]:
+                  - img [ref=e1415]
+              - listitem [ref=e1418]:
+                - button [ref=e1420] [cursor=pointer]:
+                  - img [ref=e1425]
+              - listitem [ref=e210]:
+                - button [ref=e213] [cursor=pointer]:
+                  - img [ref=e218]
+              - listitem [ref=e221]:
+                - button [ref=e227] [cursor=pointer]:
+                  - img [ref=e232]
+              - listitem [ref=e235]:
+                - button [ref=e238] [cursor=pointer]:
+                  - generic [ref=e240]:
+                    - img [ref=e244]
+                    - generic [ref=e1429]: 20+
+                - generic [ref=e247]: 26 nuevas notificaciones
+              - listitem [ref=e248]:
+                - button [ref=e251] [cursor=pointer]
+      - generic [ref=e23]:
+        - generic [ref=e26]:
+          - generic [ref=e28]:
+            - navigation [ref=e256]:
+              - button [ref=e257] [cursor=pointer]:
+                - generic [ref=e42]: Iniciador de aplicación
+            - heading [level=1] [ref=e258]:
+              - generic [ref=e259]: CG Offline Admin
+          - navigation [ref=e260]:
+            - list [ref=e48]:
+              - listitem [ref=e49]:
+                - link [ref=e261] [cursor=pointer]:
+                  - /url: /lightning/page/home
+                  - generic [ref=e51]: Inicio
+              - listitem [ref=e52]:
+                - link [ref=e262] [cursor=pointer]:
+                  - /url: /lightning/n/Sincronizar_materiales_del_combo
+                  - generic [ref=e54]: Sincronizar materiales del combo
+              - listitem [ref=e55]:
+                - link [ref=e263] [cursor=pointer]:
+                  - /url: /lightning/n/SyncProductAssortment
+                  - generic [ref=e57]: Sincronizar surtido de productos
+              - listitem [ref=e58]:
+                - link [ref=e264] [cursor=pointer]:
+                  - /url: /lightning/o/Case/home
+                  - generic [ref=e60]: Casos
+                - button [ref=e265] [cursor=pointer]:
+                  - img [ref=e68]
+                  - generic [ref=e71]: Lista de Casos
+              - listitem [ref=e72]:
+                - link [ref=e266] [cursor=pointer]:
+                  - /url: /lightning/o/Lead/home
+                  - generic [ref=e74]: Candidatos
+                - button [ref=e267] [cursor=pointer]:
+                  - img [ref=e82]
+                  - generic [ref=e85]: Lista de Candidatos
+              - listitem [ref=e86]:
+                - link [ref=e268] [cursor=pointer]:
+                  - /url: /lightning/o/Account/home
+                  - generic [ref=e88]: Cuentas
+                - button [ref=e269] [cursor=pointer]:
+                  - img [ref=e96]
+                  - generic [ref=e99]: Lista de Cuentas
+              - listitem [ref=e100]:
+                - button [ref=e270] [cursor=pointer]:
+                  - generic [ref=e271]: "*"
+                  - generic [ref=e104]: Más
+                  - img [ref=e108]
+                  - generic [ref=e111]: Mostrar más elementos de navegación
+              - listitem [ref=e112]:
+                - button [ref=e272] [cursor=pointer]:
+                  - img [ref=e116]
+                  - generic [ref=e119]: Modificar elementos de navegación
+        - main [ref=e121]
+    - 'dialog "Crear Visita: Visita predeterminada" [ref=e274]':
+      - generic [ref=e275]:
+        - button "Cancelar y cerrar" [ref=e276] [cursor=pointer]:
+          - img [ref=e278]
+          - generic [ref=e281]: Cancelar y cerrar
+        - generic [ref=e282]:
+          - generic [ref=e289]:
+            - 'heading "Crear Visita: Visita predeterminada" [level=2] [ref=e291]'
+            - generic [ref=e293]:
+              - generic [ref=e294]: "* = Información obligatoria"
+              - generic [ref=e300]:
+                - generic [ref=e306]:
+                  - heading "Información General" [level=3] [ref=e307]:
+                    - generic "Información General" [ref=e308]
+                  - list [ref=e311]:
+                    - generic [ref=e312]:
+                      - generic [ref=e315]:
+                        - listitem [ref=e318]:
+                          - generic [ref=e321]: Nombre
+                        - listitem [ref=e325]:
+                          - generic [ref=e330]:
+                            - generic [ref=e333]:
+                              - generic [ref=e335]: Estado
+                              - generic [ref=e339]:
+                                - combobox "Estado" [ref=e340] [cursor=pointer]:
+                                  - generic [ref=e341]: "--Ninguno--"
+                                - img [ref=e345]
+                              - status
+                            - link "Ver todas las dependencias para Estado" [ref=e350] [cursor=pointer]:
+                              - /url: javascript:void(0)
+                              - text: Ver todas las dependencias
+                        - listitem [ref=e353]:
+                          - generic [ref=e356]: Contacto
+                        - listitem [ref=e361]:
+                          - group "Hora de inicio planificada" [ref=e369]:
+                            - generic [ref=e370]: Hora de inicio planificada
+                            - generic [ref=e373]:
+                              - generic [ref=e374]:
+                                - group [ref=e375]:
+                                  - generic [ref=e376]: "*Fecha"
+                                  - generic [ref=e377]:
+                                    - textbox "Fecha" [ref=e378]
+                                    - button "Seleccionar una fecha para Fecha" [ref=e380] [cursor=pointer]:
+                                      - img [ref=e382]
+                                      - generic [ref=e385]: Seleccionar una fecha para Fecha
+                                - generic [ref=e386]: "Formato: 12/31/2024"
+                              - generic [ref=e387]:
+                                - generic [ref=e388]: "*Hora"
+                                - generic [ref=e392]:
+                                  - combobox "Hora" [ref=e395]
+                                  - img [ref=e399]
+                        - listitem [ref=e404]:
+                          - generic [ref=e407]: Hora de inicio real
+                        - listitem [ref=e411]:
+                          - generic [ref=e417]:
+                            - generic [ref=e419]: Evento de todo el día
+                            - checkbox "Evento de todo el día" [ref=e421]
+                        - listitem [ref=e424]:
+                          - generic [ref=e432]:
+                            - generic [ref=e434]: Prioridad de visita
+                            - generic [ref=e438]:
+                              - combobox "Prioridad de visita" [ref=e439] [cursor=pointer]:
+                                - generic [ref=e440]: "--Ninguno--"
+                              - img [ref=e444]
+                            - status
+                        - listitem [ref=e449]:
+                          - generic [ref=e455]:
+                            - generic [ref=e456]: Duración efectiva
+                            - spinbutton "Duración efectiva" [ref=e458]
+                        - listitem [ref=e461]:
+                          - generic [ref=e469]:
+                            - generic [ref=e471]: Intencionalidad de la visita
+                            - generic [ref=e475]:
+                              - combobox "Intencionalidad de la visita" [ref=e476] [cursor=pointer]:
+                                - generic [ref=e477]: "--Ninguno--"
+                              - img [ref=e481]
+                            - status
+                        - listitem [ref=e486]:
+                          - generic [ref=e491]:
+                            - generic [ref=e492]: Instrucción especial
+                            - textbox "Instrucción especial" [ref=e494]
+                            - status
+                        - listitem [ref=e497]:
+                          - generic [ref=e505]:
+                            - generic [ref=e507]: Motivo de reapertura
+                            - generic [ref=e511]:
+                              - combobox "Motivo de reapertura" [ref=e512] [cursor=pointer]:
+                                - generic [ref=e513]: "--Ninguno--"
+                              - img [ref=e517]
+                            - status
+                      - generic [ref=e522]:
+                        - listitem [ref=e525]:
+                          - generic [ref=e532]:
+                            - generic [ref=e533]: Cuenta
+                            - generic [ref=e538]:
+                              - combobox "Cuenta" [expanded] [active] [ref=e541]: ASOCODESADO
+                              - img [ref=e545]
+                              - listbox "Cuenta" [ref=e1433]:
+                                - option "Buscar Mostrar más resultados para \"ASOCODESADO\"" [ref=e1434]:
+                                  - generic [ref=e1437]:
+                                    - img [ref=e1439]
+                                    - generic [ref=e1442]: Buscar
+                                  - generic [ref=e1444]: Mostrar más resultados para "ASOCODESADO"
+                                - group "Resultados de búsqueda" [ref=e1445]:
+                                  - text: Resultados de búsqueda
+                                  - option "(ASOCODESADO) ASOCIACION DE COMERCI DETALLSITAS 26101054267" [ref=e1446]:
+                                    - img [ref=e1451]
+                                    - generic [ref=e1454]:
+                                      - generic "(ASOCODESADO) ASOCIACION DE COMERCI DETALLSITAS" [ref=e1456]:
+                                        - text: (
+                                        - strong [ref=e1457]: ASOCODESADO
+                                        - text: ) ASOCIACION DE COMERCI DETALLSITAS
+                                      - generic [ref=e1458]: "26101054267"
+                                  - option "Virtual (ASOCODESADO) ASOCIACION DE COMERCI DETALLSITAS" [ref=e1459]:
+                                    - img [ref=e1464]
+                                    - generic "Virtual (ASOCODESADO) ASOCIACION DE COMERCI DETALLSITAS" [ref=e1469]:
+                                      - text: Virtual (
+                                      - strong [ref=e1470]: ASOCODESADO
+                                      - text: ) ASOCIACION DE COMERCI DETALLSITAS
+                                  - option "ASOCIACION DE COMERCIANTES DETALLIS TAS SANTO DOMINGO ORIENTAL / ASOCODESADO 26104001684" [ref=e1471]:
+                                    - img [ref=e1476]
+                                    - generic [ref=e1479]:
+                                      - generic "ASOCIACION DE COMERCIANTES DETALLIS TAS SANTO DOMINGO ORIENTAL / ASOCODESADO" [ref=e1481]:
+                                        - text: ASOCIACION DE COMERCIANTES DETALLIS TAS SANTO DOMINGO ORIENTAL /
+                                        - strong [ref=e1482]: ASOCODESADO
+                                      - generic [ref=e1483]: "26104001684"
+                                - option "Agregar Crear Cuenta" [ref=e1484]:
+                                  - generic [ref=e1487]:
+                                    - img [ref=e1489]
+                                    - generic [ref=e1492]: Agregar
+                                  - generic [ref=e1494]: Crear Cuenta
+                            - status [ref=e1495]:
+                              - generic [ref=e1496]: Cuenta
+                              - text: Seleccione una opción desde la lista de selección o elimine el término de búsqueda.
+                        - listitem [ref=e550]:
+                          - generic [ref=e557]:
+                            - generic [ref=e558]: Casa matriz
+                            - generic [ref=e563]:
+                              - combobox "Casa matriz" [ref=e566]
+                              - img [ref=e570]
+                            - status
+                        - listitem [ref=e575]:
+                          - generic [ref=e582]:
+                            - generic [ref=e583]: Plantilla de visitas
+                            - generic [ref=e588]:
+                              - combobox "Plantilla de visitas" [ref=e591]
+                              - img [ref=e595]
+                            - status
+                        - listitem [ref=e600]:
+                          - group "Hora de finalización planificada" [ref=e608]:
+                            - generic [ref=e609]: Hora de finalización planificada
+                            - generic [ref=e612]:
+                              - generic [ref=e613]:
+                                - group [ref=e614]:
+                                  - generic [ref=e615]: Fecha
+                                  - generic [ref=e616]:
+                                    - textbox "Fecha" [ref=e617]
+                                    - button "Seleccionar una fecha para Fecha" [ref=e619] [cursor=pointer]:
+                                      - img [ref=e621]
+                                      - generic [ref=e624]: Seleccionar una fecha para Fecha
+                                - generic [ref=e625]: "Formato: 12/31/2024"
+                              - generic [ref=e626]:
+                                - generic [ref=e627]: Hora
+                                - generic [ref=e631]:
+                                  - combobox "Hora" [ref=e634]
+                                  - img [ref=e638]
+                        - listitem [ref=e643]:
+                          - generic [ref=e646]: Hora de finalización real
+                        - listitem [ref=e650]:
+                          - generic [ref=e652]:
+                            - generic [ref=e653]: Id. del propietario
+                            - generic [ref=e665]: Axel Colamarino
+                        - listitem [ref=e668]:
+                          - generic [ref=e675]:
+                            - generic [ref=e676]: Destinatario de entrega
+                            - generic [ref=e681]:
+                              - combobox "Destinatario de entrega" [ref=e684]
+                              - img [ref=e688]
+                            - status
+                        - listitem [ref=e693]:
+                          - generic [ref=e698]:
+                            - generic [ref=e699]: Observación de estado
+                            - textbox "Observación de estado" [ref=e701]
+                            - status
+                        - listitem [ref=e704]:
+                          - generic [ref=e709]:
+                            - generic [ref=e712]:
+                              - generic [ref=e714]: Motivo de no visita
+                              - generic [ref=e718]:
+                                - combobox "Motivo de no visita" [disabled] [ref=e719]:
+                                  - generic [ref=e720]: "--Ninguno--"
+                                - img [ref=e724]
+                              - status
+                            - link "Ver todas las dependencias para Motivo de no visita" [ref=e729] [cursor=pointer]:
+                              - /url: javascript:void(0)
+                              - text: Ver todas las dependencias
+                        - listitem [ref=e732]:
+                          - generic [ref=e738]:
+                            - generic [ref=e740]: Reaperturada
+                            - checkbox "Reaperturada" [ref=e742]
+                        - listitem [ref=e745]:
+                          - generic [ref=e747]:
+                            - generic [ref=e748]: Modificada después de Cerrada
+                            - generic [ref=e752]:
+                              - generic [ref=e756]:
+                                - generic "Falso" [ref=e757]:
+                                  - generic [ref=e758]:
+                                    - img [ref=e760]
+                                    - generic [ref=e763]: Falso
+                                - generic [ref=e764]: Modificada después de Cerrada
+                              - generic [ref=e765]: Este campo se calcula al guardar
+                        - listitem [ref=e768]:
+                          - generic [ref=e776]:
+                            - generic [ref=e778]: Estado de Planificación
+                            - generic [ref=e782]:
+                              - combobox "Estado de Planificación" [ref=e783] [cursor=pointer]:
+                                - generic [ref=e784]: "--Ninguno--"
+                              - img [ref=e788]
+                            - status
+                - generic [ref=e796]:
+                  - heading "Información General y del Cliente" [level=3] [ref=e797]:
+                    - generic "Información General y del Cliente" [ref=e798]
+                  - list [ref=e801]:
+                    - generic [ref=e802]:
+                      - generic [ref=e805]:
+                        - listitem [ref=e808]:
+                          - generic [ref=e810]:
+                            - generic [ref=e811]: Teléfono y Correo del cliente
+                            - generic [ref=e815]:
+                              - generic [ref=e816]: "-"
+                              - generic [ref=e817]: Este campo se calcula al guardar
+                        - listitem [ref=e820]:
+                          - generic [ref=e822]:
+                            - generic [ref=e823]: Canal
+                            - generic [ref=e828]: Este campo se calcula al guardar
+                        - listitem [ref=e831]:
+                          - generic [ref=e833]:
+                            - generic [ref=e834]: Empresa (LEN)
+                            - generic [ref=e839]: Este campo se calcula al guardar
+                        - listitem [ref=e842]:
+                          - generic [ref=e844]:
+                            - generic [ref=e845]: Segmentación
+                            - generic [ref=e850]: Este campo se calcula al guardar
+                      - generic [ref=e853]:
+                        - listitem [ref=e856]:
+                          - generic [ref=e862]:
+                            - generic [ref=e863]: Teléfono del Contacto
+                            - textbox "Teléfono del Contacto" [ref=e865]
+                        - listitem [ref=e868]:
+                          - generic [ref=e870]:
+                            - generic [ref=e871]: Tipo de Cliente
+                            - generic [ref=e876]: Este campo se calcula al guardar
+                        - listitem [ref=e879]:
+                          - generic [ref=e881]:
+                            - generic [ref=e882]: Grupo de Clientes
+                            - generic [ref=e887]: Este campo se calcula al guardar
+                - generic [ref=e893]:
+                  - heading "Gerencia Comercial" [level=3] [ref=e894]:
+                    - generic "Gerencia Comercial" [ref=e895]
+                  - list [ref=e898]:
+                    - generic [ref=e899]:
+                      - listitem [ref=e905]:
+                        - generic [ref=e907]:
+                          - generic [ref=e908]: ID único (Ruta-Fecha)
+                          - generic [ref=e912]:
+                            - generic [ref=e913]: "-"
+                            - generic [ref=e914]: Este campo se calcula al guardar
+                      - listitem [ref=e920]:
+                        - generic [ref=e927]:
+                          - generic [ref=e928]: Usuario evaluado
+                          - generic [ref=e933]:
+                            - combobox "Usuario evaluado" [ref=e936]
+                            - img [ref=e940]
+                          - status
+                - generic [ref=e948]:
+                  - heading "Informe del Área" [level=3] [ref=e949]:
+                    - generic "Informe del Área" [ref=e950]
+                  - list [ref=e953]:
+                    - generic [ref=e954]:
+                      - generic [ref=e957]:
+                        - listitem [ref=e960]:
+                          - generic [ref=e968]:
+                            - generic [ref=e970]: Datos específicos por producto
+                            - generic [ref=e974]:
+                              - combobox "Datos específicos por producto" [ref=e975] [cursor=pointer]:
+                                - generic [ref=e976]: "--Ninguno--"
+                              - img [ref=e980]
+                            - status
+                        - listitem [ref=e985]:
+                          - generic [ref=e992]:
+                            - generic [ref=e993]: Producto elaborado
+                            - textbox "Producto elaborado" [ref=e995]
+                        - listitem [ref=e998]:
+                          - generic [ref=e1006]:
+                            - generic [ref=e1008]: Se atendió el caso
+                            - generic [ref=e1012]:
+                              - combobox "Se atendió el caso" [ref=e1013] [cursor=pointer]:
+                                - generic [ref=e1014]: "--Ninguno--"
+                              - img [ref=e1018]
+                            - status
+                        - listitem [ref=e1023]:
+                          - generic [ref=e1030]:
+                            - generic [ref=e1031]: Nro. de clientes presentes
+                            - textbox "Nro. de clientes presentes" [ref=e1033]
+                        - listitem [ref=e1036]:
+                          - generic [ref=e1043]:
+                            - generic [ref=e1044]: Motivo de no atención
+                            - textbox "Motivo de no atención" [ref=e1046]
+                        - listitem [ref=e1049]:
+                          - generic [ref=e1057]:
+                            - generic [ref=e1059]: Prospección negocio brindada
+                            - generic [ref=e1063]:
+                              - combobox "Prospección negocio brindada" [ref=e1064] [cursor=pointer]:
+                                - generic [ref=e1065]: "--Ninguno--"
+                              - img [ref=e1069]
+                            - status
+                      - generic [ref=e1074]:
+                        - listitem [ref=e1077]:
+                          - generic [ref=e1085]:
+                            - generic [ref=e1087]: Satisfacción del cliente
+                            - generic [ref=e1091]:
+                              - combobox "Satisfacción del cliente" [ref=e1092] [cursor=pointer]:
+                                - generic [ref=e1093]: "--Ninguno--"
+                              - img [ref=e1097]
+                            - status
+                        - listitem [ref=e1102]:
+                          - generic [ref=e1109]:
+                            - generic [ref=e1110]: Oportunidades Detectadas
+                            - textbox "Oportunidades Detectadas" [ref=e1112]
+                        - listitem [ref=e1115]:
+                          - generic [ref=e1122]:
+                            - generic [ref=e1123]: Comentarios/Observ. del AT
+                            - textbox "Comentarios/Observ. del AT" [ref=e1125]
+                        - listitem [ref=e1128]:
+                          - generic [ref=e1133]:
+                            - generic [ref=e1134]: Justificación oportunidades
+                            - textbox "Justificación oportunidades" [ref=e1136]
+                            - status
+                - generic [ref=e1142]:
+                  - heading "Información del Taller" [level=3] [ref=e1143]:
+                    - generic "Información del Taller" [ref=e1144]
+                  - list [ref=e1147]:
+                    - generic [ref=e1148]:
+                      - generic [ref=e1151]:
+                        - listitem [ref=e1154]:
+                          - generic [ref=e1161]:
+                            - generic [ref=e1162]: Nombre del taller
+                            - textbox "Nombre del taller" [ref=e1164]
+                        - listitem [ref=e1167]:
+                          - generic [ref=e1175]:
+                            - generic [ref=e1177]: Origen del taller
+                            - generic [ref=e1181]:
+                              - combobox "Origen del taller" [ref=e1182] [cursor=pointer]:
+                                - generic [ref=e1183]: "--Ninguno--"
+                              - img [ref=e1187]
+                            - status
+                      - listitem [ref=e1195]:
+                        - generic [ref=e1202]:
+                          - generic [ref=e1203]: Temática / Módulo
+                          - textbox "Temática / Módulo" [ref=e1205]
+                - generic [ref=e1211]:
+                  - heading "Resultados Finales del Producto" [level=3] [ref=e1212]:
+                    - generic "Resultados Finales del Producto" [ref=e1213]
+                  - list [ref=e1216]:
+                    - generic [ref=e1217]:
+                      - generic [ref=e1220]:
+                        - listitem [ref=e1223]:
+                          - generic [ref=e1231]:
+                            - generic [ref=e1233]: Sabor
+                            - generic [ref=e1237]:
+                              - combobox "Sabor" [ref=e1238] [cursor=pointer]:
+                                - generic [ref=e1239]: "--Ninguno--"
+                              - img [ref=e1243]
+                            - status
+                        - listitem [ref=e1248]:
+                          - generic [ref=e1256]:
+                            - generic [ref=e1258]: Presentación
+                            - generic [ref=e1262]:
+                              - combobox "Presentación" [ref=e1263] [cursor=pointer]:
+                                - generic [ref=e1264]: "--Ninguno--"
+                              - img [ref=e1268]
+                            - status
+                        - listitem [ref=e1273]:
+                          - generic [ref=e1281]:
+                            - generic [ref=e1283]: Textura
+                            - generic [ref=e1287]:
+                              - combobox "Textura" [ref=e1288] [cursor=pointer]:
+                                - generic [ref=e1289]: "--Ninguno--"
+                              - img [ref=e1293]
+                            - status
+                      - generic [ref=e1298]:
+                        - listitem [ref=e1301]:
+                          - generic [ref=e1309]:
+                            - generic [ref=e1311]: Calif. satisfacción asesoría
+                            - generic [ref=e1315]:
+                              - combobox "Calif. satisfacción asesoría" [ref=e1316] [cursor=pointer]:
+                                - generic [ref=e1317]: "--Ninguno--"
+                              - img [ref=e1321]
+                            - status
+                        - listitem [ref=e1326]:
+                          - generic [ref=e1331]:
+                            - generic [ref=e1332]: Comentarios del cliente
+                            - textbox "Comentarios del cliente" [ref=e1334]
+                            - status
+                - generic [ref=e1340]:
+                  - heading "Información del Sistema" [level=3] [ref=e1341]:
+                    - generic "Información del Sistema" [ref=e1342]
+                  - list [ref=e1345]:
+                    - generic [ref=e1346]:
+                      - generic [ref=e1349]:
+                        - listitem [ref=e1352]:
+                          - generic [ref=e1355]: Creado por
+                        - listitem [ref=e1359]:
+                          - generic [ref=e1362]: Última modificación por
+                      - generic [ref=e1366]:
+                        - listitem [ref=e1369]:
+                          - generic [ref=e1372]: Fecha de creación
+                        - listitem [ref=e1376]:
+                          - generic [ref=e1379]: Fecha de la última modificación
+            - generic [ref=e1385]:
+              - generic "Cancelar" [ref=e1386]:
+                - button "Cancelar" [ref=e1391] [cursor=pointer]
+              - generic "Guardar y nuevo" [ref=e1392]:
+                - button "Guardar y nuevo" [ref=e1397] [cursor=pointer]
+              - generic "Guardar" [ref=e1398]:
+                - button "Guardar" [ref=e1403] [cursor=pointer]
+          - status [ref=e1405]
+  - generic:
+    - status

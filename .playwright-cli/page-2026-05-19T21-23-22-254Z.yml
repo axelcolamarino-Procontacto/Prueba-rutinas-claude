@@ -1,0 +1,305 @@
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e1832] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e1833] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e134]:
+        - generic [ref=e138]:
+          - button "Toggle Panel" [ref=e1834] [cursor=pointer]:
+            - img [ref=e146]
+            - generic [ref=e149]: Menu
+          - generic [ref=e154]:
+            - img [ref=e158]
+            - generic [ref=e162]: Sandbox (Staging)
+        - button "Show menu" [ref=e1835] [cursor=pointer]:
+          - img [ref=e173]
+          - generic [ref=e176]: Show menu
+      - generic [ref=e6]:
+        - button "Buscar" [ref=e1836]:
+          - img [ref=e14]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e1837]:
+          - list [ref=e180]:
+            - listitem [ref=e181]:
+              - group [ref=e182]:
+                - button "Este elemento no admite favoritos" [ref=e1838] [cursor=pointer]:
+                  - generic [ref=e185]:
+                    - img [ref=e189]
+                    - tooltip "Este elemento no admite favoritos"
+                - button "Lista de favoritos" [ref=e1839] [cursor=pointer]:
+                  - generic [ref=e194]:
+                    - img [ref=e198]
+                    - tooltip "Lista de favoritos"
+            - listitem [ref=e201]:
+              - button "Acciones globales" [ref=e1840] [cursor=pointer]:
+                - generic [ref=e1411]:
+                  - img [ref=e1415]
+                  - tooltip "Acciones globales"
+            - listitem [ref=e1418]:
+              - button "Centro de orientación" [ref=e1841] [cursor=pointer]:
+                - generic [ref=e1421]:
+                  - img [ref=e1425]
+                  - tooltip "Centro de orientación"
+            - listitem [ref=e210]:
+              - button "Ayuda de Salesforce" [ref=e1842] [cursor=pointer]:
+                - generic [ref=e214]:
+                  - img [ref=e218]
+                  - tooltip "Ayuda de Salesforce"
+            - listitem [ref=e221]:
+              - button "Configuración" [ref=e1843] [cursor=pointer]:
+                - generic [ref=e228]:
+                  - img [ref=e232]
+                  - tooltip "Configuración"
+            - listitem [ref=e235]:
+              - button "20+ Notificaciones" [ref=e1844] [cursor=pointer]:
+                - generic [ref=e239]:
+                  - generic [ref=e240]:
+                    - img [ref=e244]
+                    - generic [ref=e1429]: 20+
+                  - tooltip "Notificaciones"
+              - generic [ref=e247]: 26 nuevas notificaciones
+            - listitem [ref=e248]:
+              - button "Ver perfil" [ref=e1845] [cursor=pointer]:
+                - generic [ref=e252]:
+                  - tooltip "Ver perfil"
+    - generic [ref=e23]:
+      - generic [ref=e26]:
+        - generic [ref=e28]:
+          - navigation "Aplicación" [ref=e1846]:
+            - button "Iniciador de aplicación" [ref=e1847] [cursor=pointer]:
+              - generic [ref=e42]: Iniciador de aplicación
+          - heading "CG Offline Admin" [level=1] [ref=e1848]:
+            - generic "CG Offline Admin" [ref=e1849]
+        - navigation "Global" [ref=e1850]:
+          - list [ref=e48]:
+            - listitem [ref=e49] [cursor=pointer]:
+              - link "Inicio" [ref=e1851]:
+                - /url: /lightning/page/home
+                - generic [ref=e51]: Inicio
+            - listitem [ref=e52]:
+              - link "Sincronizar materiales del combo" [ref=e1852] [cursor=pointer]:
+                - /url: /lightning/n/Sincronizar_materiales_del_combo
+                - generic [ref=e54]: Sincronizar materiales del combo
+            - listitem [ref=e55]:
+              - link "Sincronizar surtido de productos" [ref=e1853] [cursor=pointer]:
+                - /url: /lightning/n/SyncProductAssortment
+                - generic [ref=e57]: Sincronizar surtido de productos
+            - listitem [ref=e58]:
+              - link "Casos" [ref=e1854] [cursor=pointer]:
+                - /url: /lightning/o/Case/home
+                - generic [ref=e60]: Casos
+              - button "Lista de Casos" [ref=e1855] [cursor=pointer]:
+                - img [ref=e68]
+                - generic [ref=e71]: Lista de Casos
+            - listitem [ref=e72]:
+              - link "Candidatos" [ref=e1856] [cursor=pointer]:
+                - /url: /lightning/o/Lead/home
+                - generic [ref=e74]: Candidatos
+              - button "Lista de Candidatos" [ref=e1857] [cursor=pointer]:
+                - img [ref=e82]
+                - generic [ref=e85]: Lista de Candidatos
+            - listitem [ref=e86]:
+              - link "Cuentas" [ref=e1858] [cursor=pointer]:
+                - /url: /lightning/o/Account/home
+                - generic [ref=e88]: Cuentas
+              - button "Lista de Cuentas" [ref=e1859] [cursor=pointer]:
+                - img [ref=e96]
+                - generic [ref=e99]: Lista de Cuentas
+            - listitem [ref=e100]:
+              - button "* Mostrar más elementos de navegación" [ref=e1860] [cursor=pointer]:
+                - generic "No agregado a barra de navegación" [ref=e1861]: "*"
+                - generic [ref=e104]: Más
+                - img [ref=e108]
+                - generic [ref=e111]: Mostrar más elementos de navegación
+            - listitem [ref=e112]:
+              - button "Modificar elementos de navegación" [ref=e1862] [cursor=pointer]:
+                - img [ref=e116]
+                - generic [ref=e119]: Modificar elementos de navegación
+      - main [ref=e121]:
+        - generic [ref=e1868]:
+          - generic [ref=e1869]:
+            - paragraph [ref=e1873]:
+              - strong [ref=e1874]: Connect with Your Customers
+            - article [ref=e1876]:
+              - heading "Sales Person Activity" [level=2] [ref=e1880]:
+                - generic "Sales Person Activity" [ref=e1881]
+              - generic [ref=e1883]:
+                - generic [ref=e1887]:
+                  - status:
+                    - generic [ref=e1888]: Cargando gráfico de informe...
+                  - text: Cargando gráfico de informe...
+                - generic [ref=e1893]:
+                  - link "Ver informe" [ref=e1894] [cursor=pointer]:
+                    - /url: javascript:void(0);
+                  - generic [ref=e1896]: A fecha de Hoy a las 10:13 a. m.
+            - article [ref=e1898]:
+              - article [ref=e1900]:
+                - generic [ref=e1901]:
+                  - heading "Mis Oportunidades" [level=2] [ref=e1904]:
+                    - link "Mis Oportunidades" [ref=e1905] [cursor=pointer]:
+                      - /url: javascript:void(0);
+                      - generic "Mis Oportunidades" [ref=e1906]
+                  - link "Mostrar más registros Mis Oportunidades" [ref=e1908] [cursor=pointer]:
+                    - /url: javascript:void(0);
+                    - text: Más
+                - generic [ref=e1955]:
+                  - link "Vistas de listas" [ref=e1958] [cursor=pointer]:
+                    - /url: javascript:void(0);
+                    - generic [ref=e1959]: Vistas de listas
+                    - heading [level=2] [ref=e1960]
+                    - img [ref=e1966]
+                  - generic [ref=e1969]:
+                    - list
+                    - paragraph [ref=e1971]: Cuando se añadan registros a esta vista de lista, los verá aquí.
+            - article [ref=e1973]:
+              - article [ref=e1975]:
+                - generic [ref=e1976]:
+                  - heading "My Leads" [level=2] [ref=e1979]:
+                    - link "My Leads" [ref=e1980] [cursor=pointer]:
+                      - /url: javascript:void(0);
+                      - generic "My Leads" [ref=e1981]
+                  - link "Mostrar más registros My Leads" [ref=e1983] [cursor=pointer]:
+                    - /url: javascript:void(0);
+                    - text: Más
+                - generic [ref=e2030]:
+                  - link "Vistas de listas" [ref=e2033] [cursor=pointer]:
+                    - /url: javascript:void(0);
+                    - generic [ref=e2034]: Vistas de listas
+                    - heading [level=2] [ref=e2035]
+                    - img [ref=e2041]
+                  - generic [ref=e2044]:
+                    - list
+                    - paragraph [ref=e2046]: Cuando se añadan registros a esta vista de lista, los verá aquí.
+            - paragraph [ref=e2050]:
+              - strong [ref=e2051]: Manage Your Business & Data
+            - list [ref=e2054]:
+              - listitem "Sales Operations" [ref=e2055]:
+                - generic [ref=e2056]:
+                  - heading "Sales Operations" [level=2] [ref=e2058]:
+                    - button "Sales Operations" [expanded] [ref=e2059] [cursor=pointer]:
+                      - img [ref=e2061]
+                      - generic "Sales Operations" [ref=e2064]
+                  - article [ref=e2069]:
+                    - heading "ㅤ" [level=2] [ref=e2073]:
+                      - generic:
+                        - generic:
+                          - generic: ㅤ
+                    - generic [ref=e2078]:
+                      - link "Productos" [ref=e2082] [cursor=pointer]:
+                        - link "Productos" [ref=e2089]:
+                          - /url: "#"
+                      - link "Listas de precios" [ref=e2093] [cursor=pointer]:
+                        - link "Listas de precios" [ref=e2100]:
+                          - /url: "#"
+                      - link "Presupuestos" [ref=e2104] [cursor=pointer]:
+                        - link "Presupuestos" [ref=e2111]:
+                          - /url: "#"
+                      - link "Contratos" [ref=e2115] [cursor=pointer]:
+                        - link "Contratos" [ref=e2122]:
+                          - /url: "#"
+                      - link "Pedidos" [ref=e2126] [cursor=pointer]:
+                        - link "Pedidos" [ref=e2133]:
+                          - /url: "#"
+                      - link "Previsiones" [ref=e2137] [cursor=pointer]:
+                        - link "Previsiones" [ref=e2144]:
+                          - /url: "#"
+              - listitem "Email" [ref=e2145]:
+                - heading "Email" [level=2] [ref=e2148]:
+                  - button "Email" [ref=e2149] [cursor=pointer]:
+                    - img [ref=e2151]
+                    - generic "Email" [ref=e2154]
+              - listitem "Data" [ref=e2155]:
+                - heading "Data" [level=2] [ref=e2158]:
+                  - button "Data" [ref=e2159] [cursor=pointer]:
+                    - img [ref=e2161]
+                    - generic "Data" [ref=e2164]
+          - generic [ref=e2165]:
+            - paragraph [ref=e2169]:
+              - strong [ref=e2170]: Manage & Close Deals
+            - article [ref=e2173]:
+              - generic [ref=e2174]:
+                - heading "Tareas de hoy" [level=2] [ref=e2177]:
+                  - generic "Tareas de hoy" [ref=e2178]
+                - button "Seleccione una vista de sus tareas" [ref=e2181] [cursor=pointer]:
+                  - img [ref=e2183]
+                  - generic [ref=e2186]: Seleccione una vista de sus tareas
+              - generic [ref=e2190]:
+                - img [ref=e2191]
+                - generic [ref=e2192]: No hay nada pendiente para hoy. Tome la iniciativa y vuelva pronto.
+              - button "Ver todas las tareas" [ref=e2194] [cursor=pointer]: Ver todos
+            - article [ref=e2197]:
+              - heading "Eventos del día" [level=2] [ref=e2201]:
+                - generic "Eventos del día" [ref=e2202]
+              - generic [ref=e2206]:
+                - img [ref=e2207]
+                - generic [ref=e2208]: Parece que no tiene nada pendiente para el resto del día.
+              - button "Ver calendario" [ref=e2210] [cursor=pointer]
+            - article [ref=e2213]:
+              - heading "Recently-Viewed Opportunities (3)" [level=2] [ref=e2217]:
+                - generic "Recently-Viewed Opportunities (3)" [ref=e2218]
+              - generic:
+                - list
+          - generic [ref=e2219]:
+            - paragraph [ref=e2223]:
+              - strong [ref=e2224]: Build Your Pipeline
+            - article [ref=e2226]:
+              - heading "Leads by Source" [level=2] [ref=e2230]:
+                - generic "Leads by Source" [ref=e2231]
+              - generic [ref=e2233]:
+                - generic [ref=e2237]:
+                  - status:
+                    - generic [ref=e2238]: Cargando gráfico de informe...
+                  - text: Cargando gráfico de informe...
+                - generic [ref=e2243]:
+                  - link "Ver informe" [ref=e2244] [cursor=pointer]:
+                    - /url: javascript:void(0);
+                  - generic [ref=e2245]:
+                    - generic [ref=e2246]: A fecha de Hoy a las 10:13 a. m.
+                    - button "Actualizar" [ref=e2247] [cursor=pointer]:
+                      - generic [ref=e2248]: Actualizar
+                      - img [ref=e2252]
+            - article [ref=e2256]:
+              - heading "Team Pipeline" [level=2] [ref=e2260]:
+                - generic "Team Pipeline" [ref=e2261]
+              - generic [ref=e2263]:
+                - generic [ref=e2267]:
+                  - status:
+                    - generic [ref=e2268]: Cargando gráfico de informe...
+                  - text: Cargando gráfico de informe...
+                - generic [ref=e2273]:
+                  - link "Ver informe" [ref=e2274] [cursor=pointer]:
+                    - /url: javascript:void(0);
+                  - generic [ref=e2275]:
+                    - generic [ref=e2276]: A fecha de Hoy a las 10:13 a. m.
+                    - button "Actualizar" [ref=e2277] [cursor=pointer]:
+                      - generic [ref=e2278]: Actualizar
+                      - img [ref=e2282]
+            - article [ref=e2287]:
+              - heading "Recently-Viewed Leads (1)" [level=2] [ref=e2291]:
+                - generic "Recently-Viewed Leads (1)" [ref=e2292]
+              - list [ref=e2294]:
+                - listitem [ref=e2295]:
+                  - generic [ref=e2296]:
+                    - generic [ref=e2298]:
+                      - generic:
+                        - img "test"
+                    - link "Empresa test Cargo Compañía test Teléfono Móvil Correo electrónico" [ref=e2299] [cursor=pointer]:
+                      - /url: javascript:void(0);
+                      - heading "Empresa test" [level=3] [ref=e2300]
+                      - list [ref=e2301]:
+                        - listitem [ref=e2302]:
+                          - generic "Cargo" [ref=e2304]
+                        - listitem [ref=e2305]:
+                          - generic [ref=e2306]:
+                            - generic "Compañía" [ref=e2307]
+                            - generic [ref=e2308]: test
+                        - listitem [ref=e2309]:
+                          - generic "Teléfono" [ref=e2311]
+                        - listitem [ref=e2312]:
+                          - generic "Móvil" [ref=e2314]
+                        - listitem [ref=e2315]:
+                          - generic "Correo electrónico" [ref=e2317]
+  - generic:
+    - status
