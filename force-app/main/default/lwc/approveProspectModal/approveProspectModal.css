@@ -1,0 +1,11 @@
+/* Ocultar los botones y sección de comentarios estándar de Salesforce */
+:host {
+    display: block;
+}
+
+/* Ocultar la sección de comentarios del aprobador estándar */
+lightning-record-edit-form,
+.slds-form-element,
+textarea[name="comments"] {
+    display: none !important;
+}

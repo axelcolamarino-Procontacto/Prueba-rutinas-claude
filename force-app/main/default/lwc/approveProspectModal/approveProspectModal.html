@@ -1,0 +1,130 @@
+<template>
+    <!-- Modal de Aprobación -->
+    <template if:true={isApproveModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open" aria-modal="true">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Cerrar" onclick={handleCloseApproveModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Cerrar</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium slds-hyphenate">Aprobar Prospecto</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <p class="slds-m-bottom_medium">
+                        Va a aprobar el Prospecto <b>{accountName}</b>. Seleccione el tipo de cliente.
+                    </p>
+                    <lightning-combobox
+                        name="clientType"
+                        label="Tipo de Cliente"
+                        value={clientType}
+                        placeholder="Seleccione una opción"
+                        options={clientTypeOptions}
+                        onchange={handleClientTypeChange}
+                        required>
+                    </lightning-combobox>
+
+                    <div class="slds-m-top_medium">
+                        <lightning-record-edit-form object-api-name="Account">
+                            <lightning-input-field
+                                field-name="ParentId"
+                                label="Cliente Intermediario"
+                                onchange={handleParentAccountChange}
+                                required>
+                            </lightning-input-field>
+                        </lightning-record-edit-form>
+                    </div>
+
+                    <div class="slds-m-top_medium slds-text-body_small">
+                        <p><lightning-icon icon-name="utility:info" size="x-small" class="slds-m-right_xx-small"></lightning-icon><b>Cliente Directo:</b> pasará a estado "En proceso de EBX"</p>
+                        <p class="slds-m-top_x-small"><lightning-icon icon-name="utility:info" size="x-small" class="slds-m-right_xx-small"></lightning-icon><b>Cliente Indirecto:</b> pasará a estado "Prospecto indirecto"</p>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancelar" variant="neutral" onclick={handleCloseApproveModal} class="slds-m-right_x-small" disabled={isProcessing}></lightning-button>
+                    <lightning-button label="Aprobar Prospecto" variant="brand" onclick={handleApprove} disabled={isProcessing}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Modal de Rechazo -->
+    <template if:true={isRejectModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open" aria-modal="true">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Cerrar" onclick={handleCloseRejectModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Cerrar</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium slds-hyphenate">Rechazar Prospecto</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <p class="slds-m-bottom_medium">
+                        Va a rechazar el Prospecto <b>{accountName}</b>.
+                    </p>
+                    <lightning-textarea
+                        name="comments"
+                        label="Comentarios del Aprobador"
+                        value={rejectComments}
+                        placeholder="Ingrese los comentarios sobre el rechazo (opcional)..."
+                        onchange={handleCommentsChange}>
+                    </lightning-textarea>
+                    <lightning-combobox
+                        name="rejectionReason"
+                        label="Motivo de Rechazo"
+                        value={rejectionReason}
+                        placeholder="Seleccione un motivo"
+                        options={rejectionReasonOptions}
+                        onchange={handleRejectionReasonChange}
+                        required>
+                    </lightning-combobox>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancelar" variant="neutral" onclick={handleCloseRejectModal} class="slds-m-right_x-small" disabled={isProcessing}></lightning-button>
+                    <lightning-button label="Rechazar" variant="destructive" onclick={handleReject} disabled={isProcessing}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    
+    <!-- Botones de Acción - Solo visibles si es un Prospecto pendiente -->
+    <template if:true={isProspectWorkItem}>
+        <div class="slds-box slds-m-top_medium">
+            <div class="slds-grid slds-grid_align-center slds-gutters">
+                <div class="slds-col">
+                    <lightning-button 
+                        label="Aprobar" 
+                        variant="brand" 
+                        onclick={handleOpenApproveModal}
+                        class="slds-m-right_small"
+                        disabled={isProcessing}
+                        icon-name="utility:check">
+                    </lightning-button>
+                    <lightning-button 
+                        label="Rechazar" 
+                        variant="destructive" 
+                        onclick={handleOpenRejectModal}
+                        disabled={isProcessing}
+                        icon-name="utility:close">
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Mensaje si no es un WorkItem de Prospecto -->
+    <template if:false={isProspectWorkItem}>
+        <div class="slds-text-align_center slds-p-around_medium">
+            <lightning-icon icon-name="utility:warning" size="small" variant="warning"></lightning-icon>
+            <p class="slds-text-color_weak slds-m-top_small">Este componente solo funciona con solicitudes de aprobación de Prospectos pendientes.</p>
+        </div>
+    </template>
+    
+    <!-- Spinner -->
+    <template if:true={isProcessing}>
+        <lightning-spinner alternative-text="Procesando" size="medium"></lightning-spinner>
+    </template>
+</template>
