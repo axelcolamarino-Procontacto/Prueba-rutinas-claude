@@ -1,0 +1,27 @@
+{
+  "TC-01": {
+    "status": "FAILED",
+    "detail_visible": false,
+    "edit_visible": false,
+    "reason": "Campo Medición no visible en el layout de la Visita (detalle ni edición)"
+  },
+  "TC-02": {
+    "status": "BLOCKED",
+    "reason": "No se pudo abrir modo edición — precondición TC-01 no cumplida"
+  },
+  "TC-03": {
+    "status": "FAILED",
+    "visita_section": false,
+    "visita_497": false,
+    "no_related_msg": true,
+    "reason": "Tab Relacionado muestra \"No hay listas relacionadas para mostrar\""
+  },
+  "TC-04": {
+    "status": "BLOCKED",
+    "reason": "No se pudo abrir modo edición"
+  },
+  "TC-05": {
+    "status": "BLOCKED",
+    "reason": "TC-01 no pasó — campo Medición no disponible para probar búsqueda"
+  }
+}
