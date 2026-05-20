@@ -1,0 +1,531 @@
+- generic:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e26]:
+        - generic [ref=e30]:
+          - button "Toggle Panel" [ref=e34] [cursor=pointer]:
+            - img [ref=e38]
+            - generic [ref=e41]: Menu
+          - generic [ref=e46]:
+            - img [ref=e50]
+            - generic [ref=e54]: Sandbox (Staging)
+        - button "Show menu" [ref=e63] [cursor=pointer]:
+          - img [ref=e65]
+          - generic [ref=e68]: Show menu
+      - generic [ref=e6]:
+        - button "Buscar" [ref=e72]:
+          - img [ref=e74]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e9]:
+          - list [ref=e78]:
+            - listitem [ref=e79]:
+              - group [ref=e80]:
+                - button "Agregar favorito" [ref=e82] [cursor=pointer]:
+                  - generic [ref=e83]:
+                    - img [ref=e87]
+                    - tooltip "Agregar favorito"
+                - button "Lista de favoritos" [ref=e91] [cursor=pointer]:
+                  - generic [ref=e92]:
+                    - img [ref=e96]
+                    - tooltip "Lista de favoritos"
+            - listitem [ref=e99]:
+              - button "Acciones globales" [ref=e105] [cursor=pointer]:
+                - generic [ref=e106]:
+                  - img [ref=e110]
+                  - tooltip "Acciones globales"
+            - listitem [ref=e113]:
+              - button "Centro de orientación" [ref=e115] [cursor=pointer]:
+                - generic [ref=e116]:
+                  - img [ref=e120]
+                  - tooltip "Centro de orientación"
+            - listitem [ref=e123]:
+              - button "Ayuda de Salesforce" [ref=e126] [cursor=pointer]:
+                - generic [ref=e127]:
+                  - img [ref=e131]
+                  - tooltip "Ayuda de Salesforce"
+            - listitem [ref=e134]:
+              - button "Configuración" [ref=e140] [cursor=pointer]:
+                - generic [ref=e141]:
+                  - img [ref=e145]
+                  - tooltip "Configuración"
+            - listitem [ref=e148]:
+              - button "20+ Notificaciones" [ref=e151] [cursor=pointer]:
+                - generic [ref=e152]:
+                  - generic [ref=e153]:
+                    - img [ref=e157]
+                    - generic [ref=e161]: 20+
+                  - tooltip "Notificaciones"
+              - generic [ref=e162]: 26 nuevas notificaciones
+            - listitem [ref=e163]:
+              - button "Ver perfil" [ref=e166] [cursor=pointer]:
+                - generic [ref=e167]:
+                  - tooltip "Ver perfil"
+    - generic [ref=e15]:
+      - generic [ref=e173]:
+        - generic [ref=e175]:
+          - navigation "Aplicación" [ref=e176]:
+            - button "Iniciador de aplicación" [ref=e178] [cursor=pointer]:
+              - generic [ref=e189]: Iniciador de aplicación
+          - heading "CG Offline Admin" [level=1] [ref=e190]:
+            - generic "CG Offline Admin" [ref=e191]
+        - navigation "Global" [ref=e194]:
+          - list [ref=e195]:
+            - listitem [ref=e196]:
+              - link "Inicio" [ref=e197] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e198]: Inicio
+            - listitem [ref=e199]:
+              - link "Sincronizar materiales del combo" [ref=e200] [cursor=pointer]:
+                - /url: /lightning/n/Sincronizar_materiales_del_combo
+                - generic [ref=e201]: Sincronizar materiales del combo
+            - listitem [ref=e202]:
+              - link "Sincronizar surtido de productos" [ref=e203] [cursor=pointer]:
+                - /url: /lightning/n/SyncProductAssortment
+                - generic [ref=e204]: Sincronizar surtido de productos
+            - listitem [ref=e517] [cursor=pointer]:
+              - link "* All | Definiciones de reglas de segmentación" [ref=e518]:
+                - /url: /lightning/o/cgcloud__Segmentation_Rule_Def__c/list?filterName=cgcloud__All
+                - generic "No agregado a barra de navegación" [ref=e519]: "*"
+                - generic [ref=e520]: All | Definiciones de reglas de segmentación
+              - button "Lista de All | Definiciones de reglas de segmentación" [ref=e524]:
+                - img [ref=e528]
+                - generic [ref=e531]: Lista de All | Definiciones de reglas de segmentación
+              - button "Cerrar ficha" [ref=e532]:
+                - img [ref=e536]
+                - generic [ref=e539]: Cerrar ficha
+            - listitem [ref=e247]:
+              - button "* Mostrar más elementos de navegación" [ref=e249] [cursor=pointer]:
+                - generic "No agregado a barra de navegación" [ref=e250]: "*"
+                - generic [ref=e251]: Más
+                - img [ref=e255]
+                - generic [ref=e258]: Mostrar más elementos de navegación
+            - listitem [ref=e259]:
+              - button "Modificar elementos de navegación" [ref=e261] [cursor=pointer]:
+                - img [ref=e263]
+                - generic [ref=e266]: Modificar elementos de navegación
+      - main [ref=e17]:
+        - generic [ref=e272]:
+          - generic [ref=e274]:
+            - generic [ref=e275]:
+              - generic [ref=e277]:
+                - img [ref=e281]
+                - generic [ref=e282]:
+                  - heading "Definiciones de reglas de segmentación" [level=1] [ref=e286]
+                  - generic [ref=e287]:
+                    - generic [ref=e289] [cursor=pointer]:
+                      - heading "Definiciones de reglas de segmentación All" [level=1] [ref=e540]:
+                        - generic [ref=e291]: Definiciones de reglas de segmentación
+                        - generic [ref=e292]: All
+                      - 'button "Seleccionar una vista de lista: Definiciones de reglas de segmentación" [active] [ref=e295]':
+                        - img [ref=e297]
+                        - generic [ref=e300]: "Seleccionar una vista de lista: Definiciones de reglas de segmentación"
+                    - button "Ancle esta vista de lista." [ref=e541] [cursor=pointer]:
+                      - img [ref=e542]
+                      - generic [ref=e309]: Ancle esta vista de lista.
+              - list [ref=e545]:
+                - listitem [ref=e546]:
+                  - button "Nuevo" [ref=e547] [cursor=pointer]:
+                    - generic "Nuevo" [ref=e548]
+                - listitem [ref=e549]:
+                  - button "Cambiar propietario" [ref=e550] [cursor=pointer]:
+                    - generic "Cambiar propietario" [ref=e551]
+                - listitem [ref=e552]:
+                  - button "Importar" [ref=e553] [cursor=pointer]:
+                    - generic "Importar" [ref=e554]
+                - listitem [ref=e555]:
+                  - button "Versión para imprimir" [ref=e556] [cursor=pointer]:
+                    - generic "Versión para imprimir" [ref=e557]
+                - listitem [ref=e558]:
+                  - button "Asignar etiqueta" [ref=e559] [cursor=pointer]:
+                    - generic "Asignar etiqueta" [ref=e560]
+            - generic [ref=e325]:
+              - paragraph [ref=e327]:
+                - generic [ref=e329]:
+                  - status "All" [ref=e561]: 6 elementos • Ordenado por Estado •
+                  - text: Se actualizó hace unos segundos
+              - generic [ref=e336]:
+                - generic [ref=e337]: Buscar en esta lista...
+                - generic [ref=e338]:
+                  - searchbox "Buscar en esta lista..." [ref=e339]
+                  - img [ref=e340]
+              - generic [ref=e343]:
+                - button "Controles de vista de lista" [ref=e347] [cursor=pointer]:
+                  - img [ref=e349]
+                  - img [ref=e353]
+                  - generic [ref=e356]: Controles de vista de lista
+                - button "Seleccionar visualización de lista" [ref=e359] [cursor=pointer]:
+                  - img [ref=e361]
+                  - img [ref=e365]
+                  - generic [ref=e368]: Seleccionar visualización de lista
+                - generic [ref=e370]:
+                  - button "Actualizar" [ref=e373] [cursor=pointer]:
+                    - img [ref=e375]
+                    - generic [ref=e378]: Actualizar
+                  - button "Ordenación por columnas" [ref=e562] [cursor=pointer]:
+                    - img [ref=e383]
+                    - generic [ref=e386]: Ordenación por columnas
+                  - button "Modificar lista" [ref=e389] [cursor=pointer]:
+                    - img [ref=e391]
+                    - generic [ref=e394]: Modificar lista
+                  - group [ref=e395]:
+                    - generic [ref=e397]:
+                      - button "Gráficos" [ref=e565] [cursor=pointer]:
+                        - img [ref=e567]
+                        - generic [ref=e570]: Gráficos
+                      - button "Filtros" [ref=e573] [cursor=pointer]:
+                        - img [ref=e575]
+                        - generic [ref=e578]: Filtros
+          - generic [ref=e581]:
+            - generic [ref=e582]: Modo de navegación
+            - grid [ref=e586]:
+              - rowgroup:
+                - row "Número de fila Seleccionar una fila Seleccionar 6 elementos Estado Nombre de Definición de regla de segment Utilizar jerarquía de cuentas Utilizar jerarquía unidades organización Consulta de segmentación Acción":
+                  - columnheader "Número de fila":
+                    - generic [ref=e589]:
+                      - generic "Número de fila"
+                  - gridcell "Seleccionar una fila Seleccionar 6 elementos":
+                    - generic [ref=e590]:
+                      - generic [ref=e591]: Seleccionar una fila
+                      - generic [ref=e593]:
+                        - checkbox "Seleccionar 6 elementos" [ref=e594]
+                        - generic [ref=e597]: Seleccionar 6 elementos
+                  - columnheader "Estado":
+                    - generic [ref=e599]:
+                      - 'button "Ordenar por: Estado" [ref=e600] [cursor=pointer]':
+                        - generic [ref=e601]: "Ordenar por:"
+                        - generic "Estado" [ref=e602]
+                        - img [ref=e604]
+                      - generic [ref=e607]: Clasificados en orden ascendente
+                      - button "Mostrar Estado acciones de columna" [ref=e609] [cursor=pointer]:
+                        - img [ref=e611]
+                        - generic [ref=e614]: Mostrar Estado acciones de columna
+                      - slider "Estado ancho de columna" [ref=e615]: "60"
+                  - columnheader "Nombre de Definición de regla de segment":
+                    - generic [ref=e619]:
+                      - 'button "Ordenar por: Nombre de Definición de regla de segment" [ref=e620] [cursor=pointer]':
+                        - generic [ref=e621]: "Ordenar por:"
+                        - generic "Nombre de Definición de regla de segment" [ref=e622]
+                      - generic [ref=e623]: "Ordenación: Ninguna"
+                      - button "Mostrar Nombre de Definición de regla de segment acciones de columna" [ref=e625] [cursor=pointer]:
+                        - img [ref=e627]
+                        - generic [ref=e630]: Mostrar Nombre de Definición de regla de segment acciones de columna
+                      - slider "Nombre de Definición de regla de segment ancho de columna" [ref=e631]: "60"
+                  - columnheader "Utilizar jerarquía de cuentas":
+                    - generic [ref=e635]:
+                      - 'button "Ordenar por: Utilizar jerarquía de cuentas" [ref=e636] [cursor=pointer]':
+                        - generic [ref=e637]: "Ordenar por:"
+                        - generic "Utilizar jerarquía de cuentas" [ref=e638]
+                      - generic [ref=e639]: "Ordenación: Ninguna"
+                      - button "Mostrar Utilizar jerarquía de cuentas acciones de columna" [ref=e641] [cursor=pointer]:
+                        - img [ref=e643]
+                        - generic [ref=e646]: Mostrar Utilizar jerarquía de cuentas acciones de columna
+                      - slider "Utilizar jerarquía de cuentas ancho de columna" [ref=e647]: "60"
+                  - columnheader "Utilizar jerarquía unidades organización":
+                    - generic [ref=e651]:
+                      - 'button "Ordenar por: Utilizar jerarquía unidades organización" [ref=e652] [cursor=pointer]':
+                        - generic [ref=e653]: "Ordenar por:"
+                        - generic "Utilizar jerarquía unidades organización" [ref=e654]
+                      - generic [ref=e655]: "Ordenación: Ninguna"
+                      - button "Mostrar Utilizar jerarquía unidades organización acciones de columna" [ref=e657] [cursor=pointer]:
+                        - img [ref=e659]
+                        - generic [ref=e662]: Mostrar Utilizar jerarquía unidades organización acciones de columna
+                      - slider "Utilizar jerarquía unidades organización ancho de columna" [ref=e663]: "60"
+                  - columnheader "Consulta de segmentación":
+                    - generic [ref=e668]:
+                      - generic "Consulta de segmentación" [ref=e669]
+                      - button "Mostrar Consulta de segmentación acciones de columna" [ref=e671] [cursor=pointer]:
+                        - img [ref=e673]
+                        - generic [ref=e676]: Mostrar Consulta de segmentación acciones de columna
+                      - slider "Consulta de segmentación ancho de columna" [ref=e677]: "877"
+                  - columnheader "Acción":
+                    - generic [ref=e682]:
+                      - generic "Acción"
+              - rowgroup [ref=e683]:
+                - row "Seleccionar elemento 1 Seleccionar una fila Initial Modificar Estado Has Class of Trade Modificar Nombre de Definición de regla de segment Verdadero Utilizar jerarquía de cuentas Modificar Utilizar jerarquía de cuentas Falso Utilizar jerarquía unidades organización Modificar Utilizar jerarquía unidades organización SELECT cgcloud__Account__C FROM cgcloud__Account_Extension__c WHERE cgcloud__Class_Of_Trade__c = $CLASSOFTRADE$ Modificar Consulta de segmentación Mostrar acciones" [ref=e684]:
+                  - gridcell [ref=e685]
+                  - gridcell "Seleccionar elemento 1 Seleccionar una fila" [ref=e689]:
+                    - generic [ref=e690]:
+                      - checkbox "Seleccionar elemento 1 Seleccionar una fila" [ref=e691]
+                      - generic [ref=e694]: Seleccionar elemento 1
+                  - rowheader "Initial Modificar Estado" [ref=e695]:
+                    - generic [ref=e696]:
+                      - generic [ref=e699]: Initial
+                      - button "Modificar Estado" [ref=e700] [cursor=pointer]:
+                        - img [ref=e701]
+                  - gridcell "Has Class of Trade Modificar Nombre de Definición de regla de segment" [ref=e704]:
+                    - generic [ref=e705]:
+                      - link "Has Class of Trade" [ref=e711] [cursor=pointer]:
+                        - /url: /lightning/r/a3JPs000001j9plMAA/view
+                        - generic [ref=e712]: Has Class of Trade
+                      - button "Modificar Nombre de Definición de regla de segment" [ref=e713] [cursor=pointer]:
+                        - img [ref=e714]
+                  - gridcell "Verdadero Utilizar jerarquía de cuentas Modificar Utilizar jerarquía de cuentas" [ref=e717]:
+                    - generic [ref=e718]:
+                      - generic [ref=e724]:
+                        - generic "Verdadero" [ref=e725]:
+                          - generic [ref=e726]:
+                            - img [ref=e728]
+                            - generic [ref=e731]: Verdadero
+                        - generic [ref=e732]: Utilizar jerarquía de cuentas
+                      - button "Modificar Utilizar jerarquía de cuentas" [ref=e733] [cursor=pointer]:
+                        - img [ref=e734]
+                  - gridcell "Falso Utilizar jerarquía unidades organización Modificar Utilizar jerarquía unidades organización" [ref=e737]:
+                    - generic [ref=e738]:
+                      - generic [ref=e744]:
+                        - generic "Falso" [ref=e745]:
+                          - generic [ref=e746]:
+                            - img [ref=e748]
+                            - generic [ref=e751]: Falso
+                        - generic [ref=e752]: Utilizar jerarquía unidades organización
+                      - button "Modificar Utilizar jerarquía unidades organización" [ref=e753] [cursor=pointer]:
+                        - img [ref=e754]
+                  - gridcell "SELECT cgcloud__Account__C FROM cgcloud__Account_Extension__c WHERE cgcloud__Class_Of_Trade__c = $CLASSOFTRADE$ Modificar Consulta de segmentación" [ref=e757]:
+                    - generic [ref=e758]:
+                      - generic [ref=e760]: SELECT cgcloud__Account__C FROM cgcloud__Account_Extension__c WHERE cgcloud__Class_Of_Trade__c = $CLASSOFTRADE$
+                      - button "Modificar Consulta de segmentación" [ref=e761] [cursor=pointer]:
+                        - img [ref=e762]
+                  - gridcell "Mostrar acciones" [ref=e765]:
+                    - button "Mostrar acciones" [ref=e771] [cursor=pointer]:
+                      - img [ref=e773]
+                      - generic [ref=e776]: Mostrar acciones
+                - row "Seleccionar elemento 2 Seleccionar una fila Initial Modificar Estado Like State AND In Priority Modificar Nombre de Definición de regla de segment Verdadero Utilizar jerarquía de cuentas Modificar Utilizar jerarquía de cuentas Falso Utilizar jerarquía unidades organización Modificar Utilizar jerarquía unidades organización SELECT cgcloud__Account__C FROM cgcloud__Account_Extension__c WHERE cgcloud__account__r.ShippingState LIKE $STATE$ AND cgcloud__Priority__c IN ($PRIORITY$) Modificar Consulta de segmentación Mostrar acciones" [ref=e777]:
+                  - gridcell [ref=e778]
+                  - gridcell "Seleccionar elemento 2 Seleccionar una fila" [ref=e782]:
+                    - generic [ref=e783]:
+                      - checkbox "Seleccionar elemento 2 Seleccionar una fila" [ref=e784]
+                      - generic [ref=e787]: Seleccionar elemento 2
+                  - rowheader "Initial Modificar Estado" [ref=e788]:
+                    - generic [ref=e789]:
+                      - generic [ref=e792]: Initial
+                      - button "Modificar Estado" [ref=e793] [cursor=pointer]:
+                        - img [ref=e794]
+                  - gridcell "Like State AND In Priority Modificar Nombre de Definición de regla de segment" [ref=e797]:
+                    - generic [ref=e798]:
+                      - link "Like State AND In Priority" [ref=e804] [cursor=pointer]:
+                        - /url: /lightning/r/a3JPs000001j9pmMAA/view
+                        - generic [ref=e805]: Like State AND In Priority
+                      - button "Modificar Nombre de Definición de regla de segment" [ref=e806] [cursor=pointer]:
+                        - img [ref=e807]
+                  - gridcell "Verdadero Utilizar jerarquía de cuentas Modificar Utilizar jerarquía de cuentas" [ref=e810]:
+                    - generic [ref=e811]:
+                      - generic [ref=e817]:
+                        - generic "Verdadero" [ref=e818]:
+                          - generic [ref=e819]:
+                            - img [ref=e821]
+                            - generic [ref=e824]: Verdadero
+                        - generic [ref=e825]: Utilizar jerarquía de cuentas
+                      - button "Modificar Utilizar jerarquía de cuentas" [ref=e826] [cursor=pointer]:
+                        - img [ref=e827]
+                  - gridcell "Falso Utilizar jerarquía unidades organización Modificar Utilizar jerarquía unidades organización" [ref=e830]:
+                    - generic [ref=e831]:
+                      - generic [ref=e837]:
+                        - generic "Falso" [ref=e838]:
+                          - generic [ref=e839]:
+                            - img [ref=e841]
+                            - generic [ref=e844]: Falso
+                        - generic [ref=e845]: Utilizar jerarquía unidades organización
+                      - button "Modificar Utilizar jerarquía unidades organización" [ref=e846] [cursor=pointer]:
+                        - img [ref=e847]
+                  - gridcell "SELECT cgcloud__Account__C FROM cgcloud__Account_Extension__c WHERE cgcloud__account__r.ShippingState LIKE $STATE$ AND cgcloud__Priority__c IN ($PRIORITY$) Modificar Consulta de segmentación" [ref=e850]:
+                    - generic [ref=e851]:
+                      - generic [ref=e853]: SELECT cgcloud__Account__C FROM cgcloud__Account_Extension__c WHERE cgcloud__account__r.ShippingState LIKE $STATE$ AND cgcloud__Priority__c IN ($PRIORITY$)
+                      - button "Modificar Consulta de segmentación" [ref=e854] [cursor=pointer]:
+                        - img [ref=e855]
+                  - gridcell "Mostrar acciones" [ref=e858]:
+                    - button "Mostrar acciones" [ref=e864] [cursor=pointer]:
+                      - img [ref=e866]
+                      - generic [ref=e869]: Mostrar acciones
+                - row "Seleccionar elemento 3 Seleccionar una fila Initial Modificar Estado Like State Modificar Nombre de Definición de regla de segment Verdadero Utilizar jerarquía de cuentas Modificar Utilizar jerarquía de cuentas Falso Utilizar jerarquía unidades organización Modificar Utilizar jerarquía unidades organización SELECT Id FROM Account WHERE ShippingState LIKE $STATE$ Modificar Consulta de segmentación Mostrar acciones" [ref=e870]:
+                  - gridcell [ref=e871]
+                  - gridcell "Seleccionar elemento 3 Seleccionar una fila" [ref=e875]:
+                    - generic [ref=e876]:
+                      - checkbox "Seleccionar elemento 3 Seleccionar una fila" [ref=e877]
+                      - generic [ref=e880]: Seleccionar elemento 3
+                  - rowheader "Initial Modificar Estado" [ref=e881]:
+                    - generic [ref=e882]:
+                      - generic [ref=e885]: Initial
+                      - button "Modificar Estado" [ref=e886] [cursor=pointer]:
+                        - img [ref=e887]
+                  - gridcell "Like State Modificar Nombre de Definición de regla de segment" [ref=e890]:
+                    - generic [ref=e891]:
+                      - link "Like State" [ref=e897] [cursor=pointer]:
+                        - /url: /lightning/r/a3JPs000001j9pnMAA/view
+                        - generic [ref=e898]: Like State
+                      - button "Modificar Nombre de Definición de regla de segment" [ref=e899] [cursor=pointer]:
+                        - img [ref=e900]
+                  - gridcell "Verdadero Utilizar jerarquía de cuentas Modificar Utilizar jerarquía de cuentas" [ref=e903]:
+                    - generic [ref=e904]:
+                      - generic [ref=e910]:
+                        - generic "Verdadero" [ref=e911]:
+                          - generic [ref=e912]:
+                            - img [ref=e914]
+                            - generic [ref=e917]: Verdadero
+                        - generic [ref=e918]: Utilizar jerarquía de cuentas
+                      - button "Modificar Utilizar jerarquía de cuentas" [ref=e919] [cursor=pointer]:
+                        - img [ref=e920]
+                  - gridcell "Falso Utilizar jerarquía unidades organización Modificar Utilizar jerarquía unidades organización" [ref=e923]:
+                    - generic [ref=e924]:
+                      - generic [ref=e930]:
+                        - generic "Falso" [ref=e931]:
+                          - generic [ref=e932]:
+                            - img [ref=e934]
+                            - generic [ref=e937]: Falso
+                        - generic [ref=e938]: Utilizar jerarquía unidades organización
+                      - button "Modificar Utilizar jerarquía unidades organización" [ref=e939] [cursor=pointer]:
+                        - img [ref=e940]
+                  - gridcell "SELECT Id FROM Account WHERE ShippingState LIKE $STATE$ Modificar Consulta de segmentación" [ref=e943]:
+                    - generic [ref=e944]:
+                      - generic [ref=e946]: SELECT Id FROM Account WHERE ShippingState LIKE $STATE$
+                      - button "Modificar Consulta de segmentación" [ref=e947] [cursor=pointer]:
+                        - img [ref=e948]
+                  - gridcell "Mostrar acciones" [ref=e951]:
+                    - button "Mostrar acciones" [ref=e957] [cursor=pointer]:
+                      - img [ref=e959]
+                      - generic [ref=e962]: Mostrar acciones
+                - row "Seleccionar elemento 4 Seleccionar una fila Initial Modificar Estado OrgUnit - Like State and Priority Modificar Nombre de Definición de regla de segment Falso Utilizar jerarquía de cuentas Modificar Utilizar jerarquía de cuentas Verdadero Utilizar jerarquía unidades organización Modificar Utilizar jerarquía unidades organización SELECT cgcloud__Account__C FROM cgcloud__Account_Extension__c WHERE cgcloud__account__r.ShippingState LIKE $STATE$ AND cgcloud__Priority__c IN ($PRIORITY$) Modificar Consulta de segmentación Mostrar acciones" [ref=e963]:
+                  - gridcell [ref=e964]
+                  - gridcell "Seleccionar elemento 4 Seleccionar una fila" [ref=e968]:
+                    - generic [ref=e969]:
+                      - checkbox "Seleccionar elemento 4 Seleccionar una fila" [ref=e970]
+                      - generic [ref=e973]: Seleccionar elemento 4
+                  - rowheader "Initial Modificar Estado" [ref=e974]:
+                    - generic [ref=e975]:
+                      - generic [ref=e978]: Initial
+                      - button "Modificar Estado" [ref=e979] [cursor=pointer]:
+                        - img [ref=e980]
+                  - gridcell "OrgUnit - Like State and Priority Modificar Nombre de Definición de regla de segment" [ref=e983]:
+                    - generic [ref=e984]:
+                      - link "OrgUnit - Like State and Priority" [ref=e990] [cursor=pointer]:
+                        - /url: /lightning/r/a3JPs000001j9poMAA/view
+                        - generic [ref=e991]: OrgUnit - Like State and Priority
+                      - button "Modificar Nombre de Definición de regla de segment" [ref=e992] [cursor=pointer]:
+                        - img [ref=e993]
+                  - gridcell "Falso Utilizar jerarquía de cuentas Modificar Utilizar jerarquía de cuentas" [ref=e996]:
+                    - generic [ref=e997]:
+                      - generic [ref=e1003]:
+                        - generic "Falso" [ref=e1004]:
+                          - generic [ref=e1005]:
+                            - img [ref=e1007]
+                            - generic [ref=e1010]: Falso
+                        - generic [ref=e1011]: Utilizar jerarquía de cuentas
+                      - button "Modificar Utilizar jerarquía de cuentas" [ref=e1012] [cursor=pointer]:
+                        - img [ref=e1013]
+                  - gridcell "Verdadero Utilizar jerarquía unidades organización Modificar Utilizar jerarquía unidades organización" [ref=e1016]:
+                    - generic [ref=e1017]:
+                      - generic [ref=e1023]:
+                        - generic "Verdadero" [ref=e1024]:
+                          - generic [ref=e1025]:
+                            - img [ref=e1027]
+                            - generic [ref=e1030]: Verdadero
+                        - generic [ref=e1031]: Utilizar jerarquía unidades organización
+                      - button "Modificar Utilizar jerarquía unidades organización" [ref=e1032] [cursor=pointer]:
+                        - img [ref=e1033]
+                  - gridcell "SELECT cgcloud__Account__C FROM cgcloud__Account_Extension__c WHERE cgcloud__account__r.ShippingState LIKE $STATE$ AND cgcloud__Priority__c IN ($PRIORITY$) Modificar Consulta de segmentación" [ref=e1036]:
+                    - generic [ref=e1037]:
+                      - generic [ref=e1039]: SELECT cgcloud__Account__C FROM cgcloud__Account_Extension__c WHERE cgcloud__account__r.ShippingState LIKE $STATE$ AND cgcloud__Priority__c IN ($PRIORITY$)
+                      - button "Modificar Consulta de segmentación" [ref=e1040] [cursor=pointer]:
+                        - img [ref=e1041]
+                  - gridcell "Mostrar acciones" [ref=e1044]:
+                    - button "Mostrar acciones" [ref=e1050] [cursor=pointer]:
+                      - img [ref=e1052]
+                      - generic [ref=e1055]: Mostrar acciones
+                - row "Seleccionar elemento 5 Seleccionar una fila Initial Modificar Estado OrgUnit - Store Segmentation (Priority | Company Type | Class of Trade) Modificar Nombre de Definición de regla de segment Falso Utilizar jerarquía de cuentas Modificar Utilizar jerarquía de cuentas Verdadero Utilizar jerarquía unidades organización Modificar Utilizar jerarquía unidades organización SELECT cgcloud__Account__C FROM cgcloud__Account_Extension__c WHERE cgcloud__Priority__c IN ($PRIORITY$) AND cgcloud__Company_Type__c IN ($COMPANYTYPE$) AND cgcloud__Class_Of_Trade__c IN ($CLASSOFTRADE$) Modificar Consulta de segmentación Mostrar acciones" [ref=e1056]:
+                  - gridcell [ref=e1057]
+                  - gridcell "Seleccionar elemento 5 Seleccionar una fila" [ref=e1061]:
+                    - generic [ref=e1062]:
+                      - checkbox "Seleccionar elemento 5 Seleccionar una fila" [ref=e1063]
+                      - generic [ref=e1066]: Seleccionar elemento 5
+                  - rowheader "Initial Modificar Estado" [ref=e1067]:
+                    - generic [ref=e1068]:
+                      - generic [ref=e1071]: Initial
+                      - button "Modificar Estado" [ref=e1072] [cursor=pointer]:
+                        - img [ref=e1073]
+                  - gridcell "OrgUnit - Store Segmentation (Priority | Company Type | Class of Trade) Modificar Nombre de Definición de regla de segment" [ref=e1076]:
+                    - generic [ref=e1077]:
+                      - link "OrgUnit - Store Segmentation (Priority | Company Type | Class of Trade)" [ref=e1083] [cursor=pointer]:
+                        - /url: /lightning/r/a3JPs000001j9ppMAA/view
+                        - generic [ref=e1084]: OrgUnit - Store Segmentation (Priority | Company Type | Class of Trade)
+                      - button "Modificar Nombre de Definición de regla de segment" [ref=e1085] [cursor=pointer]:
+                        - img [ref=e1086]
+                  - gridcell "Falso Utilizar jerarquía de cuentas Modificar Utilizar jerarquía de cuentas" [ref=e1089]:
+                    - generic [ref=e1090]:
+                      - generic [ref=e1096]:
+                        - generic "Falso" [ref=e1097]:
+                          - generic [ref=e1098]:
+                            - img [ref=e1100]
+                            - generic [ref=e1103]: Falso
+                        - generic [ref=e1104]: Utilizar jerarquía de cuentas
+                      - button "Modificar Utilizar jerarquía de cuentas" [ref=e1105] [cursor=pointer]:
+                        - img [ref=e1106]
+                  - gridcell "Verdadero Utilizar jerarquía unidades organización Modificar Utilizar jerarquía unidades organización" [ref=e1109]:
+                    - generic [ref=e1110]:
+                      - generic [ref=e1116]:
+                        - generic "Verdadero" [ref=e1117]:
+                          - generic [ref=e1118]:
+                            - img [ref=e1120]
+                            - generic [ref=e1123]: Verdadero
+                        - generic [ref=e1124]: Utilizar jerarquía unidades organización
+                      - button "Modificar Utilizar jerarquía unidades organización" [ref=e1125] [cursor=pointer]:
+                        - img [ref=e1126]
+                  - gridcell "SELECT cgcloud__Account__C FROM cgcloud__Account_Extension__c WHERE cgcloud__Priority__c IN ($PRIORITY$) AND cgcloud__Company_Type__c IN ($COMPANYTYPE$) AND cgcloud__Class_Of_Trade__c IN ($CLASSOFTRADE$) Modificar Consulta de segmentación" [ref=e1129]:
+                    - generic [ref=e1130]:
+                      - generic [ref=e1132]: SELECT cgcloud__Account__C FROM cgcloud__Account_Extension__c WHERE cgcloud__Priority__c IN ($PRIORITY$) AND cgcloud__Company_Type__c IN ($COMPANYTYPE$) AND cgcloud__Class_Of_Trade__c IN ($CLASSOFTRADE$)
+                      - button "Modificar Consulta de segmentación" [ref=e1133] [cursor=pointer]:
+                        - img [ref=e1134]
+                  - gridcell "Mostrar acciones" [ref=e1137]:
+                    - button "Mostrar acciones" [ref=e1143] [cursor=pointer]:
+                      - img [ref=e1145]
+                      - generic [ref=e1148]: Mostrar acciones
+                - row [ref=e1149]:
+                  - gridcell [ref=e1150]
+                  - gridcell "Seleccionar elemento 6 Seleccionar una fila" [ref=e1154]:
+                    - generic [ref=e1155]:
+                      - checkbox "Seleccionar elemento 6 Seleccionar una fila" [ref=e1156]
+                      - generic [ref=e1159]: Seleccionar elemento 6
+                  - rowheader "Initial Modificar Estado" [ref=e1160]:
+                    - generic [ref=e1161]:
+                      - generic [ref=e1164]: Initial
+                      - button "Modificar Estado" [ref=e1165] [cursor=pointer]:
+                        - img [ref=e1166]
+                  - gridcell "Comprehensive rule definition Modificar Nombre de Definición de regla de segment" [ref=e1169]:
+                    - generic [ref=e1170]:
+                      - link "Comprehensive rule definition" [ref=e1176] [cursor=pointer]:
+                        - /url: /lightning/r/a3JPs000001j9pqMAA/view
+                        - generic [ref=e1177]: Comprehensive rule definition
+                      - button "Modificar Nombre de Definición de regla de segment" [ref=e1178] [cursor=pointer]:
+                        - img [ref=e1179]
+                  - gridcell "Verdadero Utilizar jerarquía de cuentas Modificar Utilizar jerarquía de cuentas" [ref=e1182]:
+                    - generic [ref=e1183]:
+                      - generic [ref=e1189]:
+                        - generic "Verdadero" [ref=e1190]:
+                          - generic [ref=e1191]:
+                            - img [ref=e1193]
+                            - generic [ref=e1196]: Verdadero
+                        - generic [ref=e1197]: Utilizar jerarquía de cuentas
+                      - button "Modificar Utilizar jerarquía de cuentas" [ref=e1198] [cursor=pointer]:
+                        - img [ref=e1199]
+                  - gridcell "Falso Utilizar jerarquía unidades organización Modificar Utilizar jerarquía unidades organización" [ref=e1202]:
+                    - generic [ref=e1203]:
+                      - generic [ref=e1209]:
+                        - generic "Falso" [ref=e1210]:
+                          - generic [ref=e1211]:
+                            - img [ref=e1213]
+                            - generic [ref=e1216]: Falso
+                        - generic [ref=e1217]: Utilizar jerarquía unidades organización
+                      - button "Modificar Utilizar jerarquía unidades organización" [ref=e1218] [cursor=pointer]:
+                        - img [ref=e1219]
+                  - gridcell "SELECT cgcloud__Account__C FROM cgcloud__Account_Extension__c WHERE cgcloud__account__r.Name LIKE $NAME$ AND cgcloud__account__r.ShippingCity LIKE $CITY$ AND cgcloud__account__r.ShippingPostalCode LIKE $POSTALCODE$ AND cgcloud__account__r.ShippingState LIKE $STATE$ AND cgcloud__Priority__c IN ($PRIORITY$) AND cgcloud__Company_Type__c IN ($COMPANYTYPE$) AND cgcloud__Class_Of_Trade__c IN ($CLASSOFTRADE$) AND cgcloud__Payer_Role_Overall_Credit_Limit__c >= $PAYERROLEOVERALLCREDITLIMIT$ AND cgcloud__Order_Role_Valid_From__c >= $ORDERROLEVALIDFROM$ Modificar Consulta de segmentación" [ref=e1222]:
+                    - generic [ref=e1223]:
+                      - generic [ref=e1225]: SELECT cgcloud__Account__C FROM cgcloud__Account_Extension__c WHERE cgcloud__account__r.Name LIKE $NAME$ AND cgcloud__account__r.ShippingCity LIKE $CITY$ AND cgcloud__account__r.ShippingPostalCode LIKE $POSTALCODE$ AND cgcloud__account__r.ShippingState LIKE $STATE$ AND cgcloud__Priority__c IN ($PRIORITY$) AND cgcloud__Company_Type__c IN ($COMPANYTYPE$) AND cgcloud__Class_Of_Trade__c IN ($CLASSOFTRADE$) AND cgcloud__Payer_Role_Overall_Credit_Limit__c >= $PAYERROLEOVERALLCREDITLIMIT$ AND cgcloud__Order_Role_Valid_From__c >= $ORDERROLEVALIDFROM$
+                      - button "Modificar Consulta de segmentación" [ref=e1226] [cursor=pointer]:
+                        - img [ref=e1227]
+                  - gridcell "Mostrar acciones" [ref=e1230]:
+                    - button "Mostrar acciones" [ref=e1236] [cursor=pointer]:
+                      - img [ref=e1238]
+                      - generic [ref=e1241]: Mostrar acciones
+  - generic:
+    - status

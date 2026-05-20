@@ -1,0 +1,101 @@
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e6]:
+        - button "Buscar" [ref=e12]:
+          - img [ref=e14]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e17]:
+          - list [ref=e19]:
+            - listitem [ref=e20]:
+              - group [ref=e21]:
+                - button "Este elemento no admite favoritos" [ref=e23] [cursor=pointer]:
+                  - generic [ref=e24]:
+                    - img [ref=e28]
+                    - tooltip "Este elemento no admite favoritos"
+                - button "Lista de favoritos" [ref=e32] [cursor=pointer]:
+                  - generic [ref=e33]:
+                    - img [ref=e37]
+                    - tooltip "Lista de favoritos"
+            - listitem [ref=e40]:
+              - button "Acciones globales" [ref=e42]:
+                - img [ref=e46]
+            - listitem [ref=e49]:
+              - button "Ayuda de Salesforce" [ref=e52] [cursor=pointer]:
+                - generic [ref=e53]:
+                  - img [ref=e57]
+                  - tooltip "Ayuda de Salesforce"
+            - listitem [ref=e60]:
+              - button "Configuración" [ref=e66] [cursor=pointer]:
+                - generic [ref=e67]:
+                  - img [ref=e71]
+                  - tooltip "Configuración"
+            - listitem [ref=e74]:
+              - button "Notificaciones" [ref=e77] [cursor=pointer]:
+                - generic [ref=e78]:
+                  - img [ref=e83]
+                  - tooltip "Notificaciones"
+            - listitem [ref=e87]:
+              - generic [ref=e89]:
+                - button "Ver perfil":
+                  - generic:
+                    - tooltip "Ver perfil"
+    - generic [ref=e90]:
+      - generic [ref=e93]:
+        - generic [ref=e95]:
+          - navigation "Aplicación" [ref=e96]:
+            - button "Iniciador de aplicación" [ref=e98] [cursor=pointer]:
+              - generic [ref=e109]: Iniciador de aplicación
+          - heading "CG Offline Admin" [level=1] [ref=e110]:
+            - generic "CG Offline Admin" [ref=e111]
+        - navigation "Global" [ref=e114]:
+          - list [ref=e115]:
+            - listitem [ref=e116]:
+              - link "Inicio" [ref=e117] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e118]: Inicio
+            - listitem [ref=e119]:
+              - link "Sincronizar materiales del combo" [ref=e120] [cursor=pointer]:
+                - /url: /lightning/n/Sincronizar_materiales_del_combo
+                - generic [ref=e121]: Sincronizar materiales del combo
+            - listitem [ref=e122]:
+              - link "Sincronizar surtido de productos" [ref=e123] [cursor=pointer]:
+                - /url: /lightning/n/SyncProductAssortment
+                - generic [ref=e124]: Sincronizar surtido de productos
+            - listitem [ref=e125]:
+              - link "Casos" [ref=e126] [cursor=pointer]:
+                - /url: /lightning/o/Case/home
+                - generic [ref=e127]: Casos
+              - button "Lista de Casos" [ref=e131] [cursor=pointer]:
+                - img [ref=e135]
+                - generic [ref=e138]: Lista de Casos
+            - listitem [ref=e139]:
+              - link "Candidatos" [ref=e140] [cursor=pointer]:
+                - /url: /lightning/o/Lead/home
+                - generic [ref=e141]: Candidatos
+              - button "Lista de Candidatos" [ref=e145] [cursor=pointer]:
+                - img [ref=e149]
+                - generic [ref=e152]: Lista de Candidatos
+            - listitem [ref=e153]:
+              - link "Cuentas" [ref=e154] [cursor=pointer]:
+                - /url: /lightning/o/Account/home
+                - generic [ref=e155]: Cuentas
+              - button "Lista de Cuentas" [ref=e159] [cursor=pointer]:
+                - img [ref=e163]
+                - generic [ref=e166]: Lista de Cuentas
+            - listitem [ref=e167]:
+              - button "Mostrar más elementos de navegación" [ref=e169] [cursor=pointer]:
+                - generic [ref=e170]: Más
+                - img [ref=e174]
+                - generic [ref=e177]: Mostrar más elementos de navegación
+            - listitem [ref=e178]:
+              - button "Modificar elementos de navegación" [ref=e180] [cursor=pointer]:
+                - img [ref=e182]
+                - generic [ref=e185]: Modificar elementos de navegación
+      - main [ref=e187]
+  - generic:
+    - status

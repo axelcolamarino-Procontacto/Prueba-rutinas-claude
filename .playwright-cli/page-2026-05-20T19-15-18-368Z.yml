@@ -1,0 +1,13 @@
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - navigation "Encabezado global" [ref=e9]:
+        - list [ref=e10]:
+          - listitem [ref=e11]
+    - main [ref=e17]
+  - generic:
+    - status

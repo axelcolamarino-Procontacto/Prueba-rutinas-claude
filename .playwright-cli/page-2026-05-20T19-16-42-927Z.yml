@@ -1,0 +1,102 @@
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e9]:
+        - generic [ref=e13]:
+          - button "Toggle Panel" [ref=e17] [cursor=pointer]:
+            - img [ref=e21]
+            - generic [ref=e24]: Menu
+          - generic [ref=e29]:
+            - img [ref=e33]
+            - generic [ref=e37]: Sandbox (Staging)
+        - button "Show menu" [ref=e46] [cursor=pointer]:
+          - img [ref=e48]
+          - generic [ref=e51]: Show menu
+      - generic [ref=e52]:
+        - button "Buscar" [ref=e58]:
+          - img [ref=e60]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e63]:
+          - list [ref=e65]:
+            - listitem [ref=e66]:
+              - group [ref=e67]:
+                - button "Agregar favorito" [ref=e69] [cursor=pointer]:
+                  - generic [ref=e70]:
+                    - img [ref=e74]
+                    - tooltip "Agregar favorito"
+                - button "Lista de favoritos" [ref=e78] [cursor=pointer]:
+                  - generic [ref=e79]:
+                    - img [ref=e83]
+                    - tooltip "Lista de favoritos"
+            - listitem [ref=e86]:
+              - button "Acciones globales" [ref=e88]:
+                - img [ref=e92]
+            - listitem [ref=e95]:
+              - button "Ayuda de Salesforce" [ref=e98] [cursor=pointer]:
+                - generic [ref=e99]:
+                  - img [ref=e103]
+                  - tooltip "Ayuda de Salesforce"
+            - listitem [ref=e106]:
+              - button "Configuración" [ref=e112] [cursor=pointer]:
+                - generic [ref=e113]:
+                  - img [ref=e117]
+                  - tooltip "Configuración"
+            - listitem [ref=e120]:
+              - button "Notificaciones" [ref=e123] [cursor=pointer]:
+                - generic [ref=e124]:
+                  - img [ref=e129]
+                  - tooltip "Notificaciones"
+            - listitem [ref=e133]:
+              - button "Ver perfil" [ref=e136] [cursor=pointer]:
+                - generic [ref=e137]:
+                  - tooltip "Ver perfil"
+    - generic [ref=e141]:
+      - generic [ref=e144]:
+        - generic [ref=e146]:
+          - navigation "Aplicación" [ref=e147]:
+            - button "Iniciador de aplicación" [ref=e149] [cursor=pointer]:
+              - generic [ref=e160]: Iniciador de aplicación
+          - heading "CG Offline Admin" [level=1] [ref=e161]:
+            - generic "CG Offline Admin" [ref=e162]
+        - navigation "Global" [ref=e165]:
+          - list [ref=e166]:
+            - listitem [ref=e167]:
+              - link "Inicio" [ref=e168] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e169]: Inicio
+            - listitem [ref=e170]:
+              - link "Sincronizar materiales del combo" [ref=e171] [cursor=pointer]:
+                - /url: /lightning/n/Sincronizar_materiales_del_combo
+                - generic [ref=e172]: Sincronizar materiales del combo
+            - listitem [ref=e173]:
+              - link "Sincronizar surtido de productos" [ref=e174] [cursor=pointer]:
+                - /url: /lightning/n/SyncProductAssortment
+                - generic [ref=e175]: Sincronizar surtido de productos
+            - listitem [ref=e176] [cursor=pointer]:
+              - link "* Desarrollador de Negocios AO" [ref=e177]:
+                - /url: /lightning/r/User/005gP00000GUPKoQAP/view
+                - generic "No agregado a barra de navegación" [ref=e178]: "*"
+                - generic [ref=e179]: Desarrollador de Negocios AO
+              - button "Lista de Desarrollador de Negocios AO" [ref=e183]:
+                - img [ref=e187]
+                - generic [ref=e190]: Lista de Desarrollador de Negocios AO
+              - button "Cerrar ficha" [ref=e191]:
+                - img [ref=e195]
+                - generic [ref=e198]: Cerrar ficha
+            - listitem [ref=e199]:
+              - button "* Mostrar más elementos de navegación" [ref=e201] [cursor=pointer]:
+                - generic "No agregado a barra de navegación" [ref=e202]: "*"
+                - generic [ref=e203]: Más
+                - img [ref=e207]
+                - generic [ref=e210]: Mostrar más elementos de navegación
+            - listitem [ref=e211]:
+              - button "Modificar elementos de navegación" [ref=e213] [cursor=pointer]:
+                - img [ref=e215]
+                - generic [ref=e218]: Modificar elementos de navegación
+      - main [ref=e220]
+  - generic:
+    - status

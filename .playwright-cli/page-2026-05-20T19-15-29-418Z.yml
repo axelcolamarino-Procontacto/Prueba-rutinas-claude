@@ -1,0 +1,220 @@
+- generic:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e26]:
+        - generic [ref=e30]:
+          - button "Toggle Panel" [ref=e34] [cursor=pointer]:
+            - img [ref=e38]
+            - generic [ref=e41]: Menu
+          - generic [ref=e46]:
+            - img [ref=e50]
+            - generic [ref=e54]: Sandbox (Staging)
+        - button "Show menu" [ref=e63] [cursor=pointer]:
+          - img [ref=e65]
+          - generic [ref=e68]: Show menu
+      - generic [ref=e6]:
+        - button "Buscar" [ref=e72]:
+          - img [ref=e74]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e9]:
+          - list [ref=e78]:
+            - listitem [ref=e79]:
+              - group [ref=e80]:
+                - button "Agregar favorito" [ref=e82] [cursor=pointer]:
+                  - generic [ref=e83]:
+                    - img [ref=e87]
+                    - tooltip "Agregar favorito"
+                - button "Lista de favoritos" [ref=e91] [cursor=pointer]:
+                  - generic [ref=e92]:
+                    - img [ref=e96]
+                    - tooltip "Lista de favoritos"
+            - listitem [ref=e99]:
+              - button "Acciones globales" [ref=e105] [cursor=pointer]:
+                - generic [ref=e106]:
+                  - img [ref=e110]
+                  - tooltip "Acciones globales"
+            - listitem [ref=e113]:
+              - button "Centro de orientación" [ref=e115] [cursor=pointer]:
+                - generic [ref=e116]:
+                  - img [ref=e120]
+                  - tooltip "Centro de orientación"
+            - listitem [ref=e123]:
+              - button "Ayuda de Salesforce" [ref=e126] [cursor=pointer]:
+                - generic [ref=e127]:
+                  - img [ref=e131]
+                  - tooltip "Ayuda de Salesforce"
+            - listitem [ref=e134]:
+              - button "Configuración" [ref=e140] [cursor=pointer]:
+                - generic [ref=e141]:
+                  - img [ref=e145]
+                  - tooltip "Configuración"
+            - listitem [ref=e148]:
+              - button "20+ Notificaciones" [ref=e151] [cursor=pointer]:
+                - generic [ref=e152]:
+                  - generic [ref=e153]:
+                    - img [ref=e157]
+                    - generic [ref=e161]: 20+
+                  - tooltip "Notificaciones"
+              - generic [ref=e162]: 26 nuevas notificaciones
+            - listitem [ref=e163]:
+              - button "Ver perfil" [ref=e166] [cursor=pointer]:
+                - generic [ref=e167]:
+                  - tooltip "Ver perfil"
+    - generic [ref=e15]:
+      - generic [ref=e173]:
+        - generic [ref=e175]:
+          - navigation "Aplicación" [ref=e176]:
+            - button "Iniciador de aplicación" [ref=e178] [cursor=pointer]:
+              - generic [ref=e189]: Iniciador de aplicación
+          - heading "CG Offline Admin" [level=1] [ref=e190]:
+            - generic "CG Offline Admin" [ref=e191]
+        - navigation "Global" [ref=e194]:
+          - list [ref=e195]:
+            - listitem [ref=e196]:
+              - link "Inicio" [ref=e197] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e198]: Inicio
+            - listitem [ref=e199]:
+              - link "Sincronizar materiales del combo" [ref=e200] [cursor=pointer]:
+                - /url: /lightning/n/Sincronizar_materiales_del_combo
+                - generic [ref=e201]: Sincronizar materiales del combo
+            - listitem [ref=e202]:
+              - link "Sincronizar surtido de productos" [ref=e203] [cursor=pointer]:
+                - /url: /lightning/n/SyncProductAssortment
+                - generic [ref=e204]: Sincronizar surtido de productos
+            - listitem [ref=e205]:
+              - link "Casos" [ref=e206] [cursor=pointer]:
+                - /url: /lightning/o/Case/home
+                - generic [ref=e207]: Casos
+              - button "Lista de Casos" [ref=e211] [cursor=pointer]:
+                - img [ref=e215]
+                - generic [ref=e218]: Lista de Casos
+            - listitem [ref=e219]:
+              - link "Candidatos" [ref=e220] [cursor=pointer]:
+                - /url: /lightning/o/Lead/home
+                - generic [ref=e221]: Candidatos
+              - button "Lista de Candidatos" [ref=e225] [cursor=pointer]:
+                - img [ref=e229]
+                - generic [ref=e232]: Lista de Candidatos
+            - listitem [ref=e233]:
+              - link "Cuentas" [ref=e234] [cursor=pointer]:
+                - /url: /lightning/o/Account/home
+                - generic [ref=e235]: Cuentas
+              - button "Lista de Cuentas" [ref=e239] [cursor=pointer]:
+                - img [ref=e243]
+                - generic [ref=e246]: Lista de Cuentas
+            - listitem [ref=e247]:
+              - button "* Mostrar más elementos de navegación" [ref=e249] [cursor=pointer]:
+                - generic "No agregado a barra de navegación" [ref=e250]: "*"
+                - generic [ref=e251]: Más
+                - img [ref=e255]
+                - generic [ref=e258]: Mostrar más elementos de navegación
+            - listitem [ref=e259]:
+              - button "Modificar elementos de navegación" [ref=e261] [cursor=pointer]:
+                - img [ref=e263]
+                - generic [ref=e266]: Modificar elementos de navegación
+      - main [ref=e17]:
+        - generic [ref=e272]:
+          - generic [ref=e274]:
+            - generic [ref=e275]:
+              - generic [ref=e277]:
+                - img [ref=e281]
+                - generic [ref=e282]:
+                  - heading "Definiciones de reglas de segmentación" [level=1] [ref=e286]
+                  - generic [ref=e287]:
+                    - generic [ref=e288]:
+                      - generic [ref=e289] [cursor=pointer]:
+                        - heading "Definiciones de reglas de segmentación Vistos recientemente" [level=1] [ref=e290]:
+                          - generic [ref=e291]: Definiciones de reglas de segmentación
+                          - generic [ref=e292]: Vistos recientemente
+                        - 'button "Seleccionar una vista de lista: Definiciones de reglas de segmentación" [ref=e295]':
+                          - generic [ref=e296]:
+                            - img
+                          - generic [ref=e300]: "Seleccionar una vista de lista: Definiciones de reglas de segmentación"
+                      - dialog [ref=e479]:
+                        - generic [ref=e487]:
+                          - generic [ref=e488]: Buscar listas...
+                          - generic [ref=e493]:
+                            - combobox "Buscar listas..." [expanded] [active] [ref=e496]
+                            - img [ref=e500]
+                            - listbox "Buscar listas..." [ref=e503]:
+                              - group "Vistas de lista recientes" [ref=e504]:
+                                - text: Vistas de lista recientes
+                                - option "Vistos recientemente (Lista anclada)" [checked] [selected] [ref=e505]:
+                                  - img [ref=e510]
+                                  - generic [ref=e513]: Vistos recientemente (Lista anclada)
+                              - group "Todas las demás listas" [ref=e514]:
+                                - text: Todas las demás listas
+                                - option "All" [ref=e515]:
+                                  - generic [ref=e516]: All
+                          - status
+                    - button "Esta lista está anclada." [disabled] [ref=e304] [cursor=pointer]:
+                      - img [ref=e306]
+                      - generic [ref=e309]: Esta lista está anclada.
+              - list [ref=e312]:
+                - listitem [ref=e313]:
+                  - button "Nuevo" [ref=e314] [cursor=pointer]:
+                    - generic "Nuevo" [ref=e315]
+                - listitem [ref=e316]:
+                  - button "Cambiar propietario" [ref=e317] [cursor=pointer]:
+                    - generic "Cambiar propietario" [ref=e318]
+                - listitem [ref=e319]:
+                  - button "Importar" [ref=e320] [cursor=pointer]:
+                    - generic "Importar" [ref=e321]
+                - listitem [ref=e322]:
+                  - button "Asignar etiqueta" [ref=e323] [cursor=pointer]:
+                    - generic "Asignar etiqueta" [ref=e324]
+            - generic [ref=e325]:
+              - paragraph [ref=e327]:
+                - generic [ref=e329]:
+                  - status "Vistos recientemente" [ref=e330]: 0 elementos •
+                  - text: Se actualizó hace unos segundos
+              - generic [ref=e336]:
+                - generic [ref=e337]: Buscar en esta lista...
+                - generic [ref=e338]:
+                  - searchbox "Buscar en esta lista..." [ref=e339]
+                  - img [ref=e340]
+              - generic [ref=e343]:
+                - button "Controles de vista de lista" [ref=e347] [cursor=pointer]:
+                  - img [ref=e349]
+                  - img [ref=e353]
+                  - generic [ref=e356]: Controles de vista de lista
+                - button "Seleccionar visualización de lista" [ref=e359] [cursor=pointer]:
+                  - img [ref=e361]
+                  - img [ref=e365]
+                  - generic [ref=e368]: Seleccionar visualización de lista
+                - generic [ref=e370]:
+                  - button "Actualizar" [ref=e373] [cursor=pointer]:
+                    - img [ref=e375]
+                    - generic [ref=e378]: Actualizar
+                  - button "La ordenación por columnas está desactivada. Para ordenar columnas, una vista de lista necesita al menos una fila y dos columnas." [ref=e381] [cursor=pointer]:
+                    - img [ref=e383]
+                    - generic [ref=e386]: La ordenación por columnas está desactivada. Para ordenar columnas, una vista de lista necesita al menos una fila y dos columnas.
+                  - button "Modificar lista" [ref=e389] [cursor=pointer]:
+                    - img [ref=e391]
+                    - generic [ref=e394]: Modificar lista
+                  - group [ref=e395]:
+                    - generic [ref=e397]:
+                      - generic:
+                        - generic:
+                          - button "Gráficos" [disabled]:
+                            - generic:
+                              - img
+                            - generic: Gráficos
+                      - generic:
+                        - generic:
+                          - button "Filtros" [disabled]:
+                            - generic:
+                              - img
+                            - generic: Filtros
+          - generic [ref=e405]:
+            - img [ref=e406]
+            - generic [ref=e473]:
+              - paragraph [ref=e474]: Nada que ver aquí
+              - paragraph [ref=e475]: No hay nada aún en su lista. Pruebe a agregar un nuevo registro.
+  - generic:
+    - status

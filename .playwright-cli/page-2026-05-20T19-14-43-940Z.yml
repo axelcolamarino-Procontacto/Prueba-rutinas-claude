@@ -1,0 +1,451 @@
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e9]:
+        - generic [ref=e13]:
+          - button "Toggle Panel" [ref=e17] [cursor=pointer]:
+            - img [ref=e21]
+            - generic [ref=e24]: Menu
+          - generic [ref=e29]:
+            - img [ref=e33]
+            - generic [ref=e37]: Sandbox (Staging)
+        - button "Show menu" [ref=e46] [cursor=pointer]:
+          - img [ref=e48]
+          - generic [ref=e51]: Show menu
+      - generic [ref=e52]:
+        - button "Buscar" [ref=e58]:
+          - img [ref=e60]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e63]:
+          - list [ref=e65]:
+            - listitem [ref=e66]:
+              - group [ref=e67]:
+                - button "Agregar favorito" [ref=e69] [cursor=pointer]:
+                  - generic [ref=e70]:
+                    - img [ref=e74]
+                    - tooltip "Agregar favorito"
+                - button "Lista de favoritos" [ref=e78] [cursor=pointer]:
+                  - generic [ref=e79]:
+                    - img [ref=e83]
+                    - tooltip "Lista de favoritos"
+            - listitem [ref=e86]:
+              - button "Acciones globales" [ref=e277] [cursor=pointer]:
+                - generic [ref=e278]:
+                  - img [ref=e282]
+                  - tooltip "Acciones globales"
+            - listitem [ref=e285]:
+              - button "Centro de orientación" [ref=e287] [cursor=pointer]:
+                - generic [ref=e288]:
+                  - img [ref=e292]
+                  - tooltip "Centro de orientación"
+            - listitem [ref=e95]:
+              - button "Ayuda de Salesforce" [ref=e98] [cursor=pointer]:
+                - generic [ref=e99]:
+                  - img [ref=e103]
+                  - tooltip "Ayuda de Salesforce"
+            - listitem [ref=e106]:
+              - button "Configuración" [ref=e112] [cursor=pointer]:
+                - generic [ref=e113]:
+                  - img [ref=e117]
+                  - tooltip "Configuración"
+            - listitem [ref=e120]:
+              - button "20+ Notificaciones" [ref=e295] [cursor=pointer]:
+                - generic [ref=e124]:
+                  - generic [ref=e125]:
+                    - img [ref=e129]
+                    - generic [ref=e297]: 20+
+                  - tooltip "Notificaciones"
+              - generic [ref=e132]: 26 nuevas notificaciones
+            - listitem [ref=e133]:
+              - button "Ver perfil" [ref=e136] [cursor=pointer]:
+                - generic [ref=e137]:
+                  - tooltip "Ver perfil"
+    - generic [ref=e139]:
+      - generic [ref=e142]:
+        - generic [ref=e144]:
+          - navigation "Aplicación" [ref=e145]:
+            - button "Iniciador de aplicación" [ref=e147] [cursor=pointer]:
+              - generic [ref=e158]: Iniciador de aplicación
+          - heading "CG Offline Admin" [level=1] [ref=e159]:
+            - generic "CG Offline Admin" [ref=e160]
+        - navigation "Global" [ref=e163]:
+          - list [ref=e164]:
+            - listitem [ref=e165]:
+              - link "Inicio" [ref=e166] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e167]: Inicio
+            - listitem [ref=e168]:
+              - link "Sincronizar materiales del combo" [ref=e169] [cursor=pointer]:
+                - /url: /lightning/n/Sincronizar_materiales_del_combo
+                - generic [ref=e170]: Sincronizar materiales del combo
+            - listitem [ref=e171]:
+              - link "Sincronizar surtido de productos" [ref=e172] [cursor=pointer]:
+                - /url: /lightning/n/SyncProductAssortment
+                - generic [ref=e173]: Sincronizar surtido de productos
+            - listitem [ref=e768] [cursor=pointer]:
+              - link "* Bakery | Unidad de organización" [ref=e769]:
+                - /url: /lightning/r/cgcloud__Org_Unit__c/a2RPs000002fDJoMAM/view
+                - generic "No agregado a barra de navegación" [ref=e770]: "*"
+                - generic [ref=e771]: Bakery | Unidad de organización
+              - button "Lista de Bakery | Unidad de organización" [ref=e775]:
+                - img [ref=e779]
+                - generic [ref=e782]: Lista de Bakery | Unidad de organización
+              - button "Cerrar ficha" [ref=e783]:
+                - img [ref=e787]
+                - generic [ref=e790]: Cerrar ficha
+            - listitem [ref=e216]:
+              - button "Mostrar más elementos de navegación" [ref=e218] [cursor=pointer]:
+                - generic [ref=e219]: Más
+                - img [ref=e223]
+                - generic [ref=e226]: Mostrar más elementos de navegación
+            - listitem [ref=e227]:
+              - button "Modificar elementos de navegación" [ref=e229] [cursor=pointer]:
+                - img [ref=e231]
+                - generic [ref=e234]: Modificar elementos de navegación
+      - main [ref=e236]:
+        - generic [ref=e802]:
+          - generic [ref=e811]:
+            - generic [ref=e812]:
+              - heading "Unidad de organización Bakery" [level=1] [ref=e819]:
+                - generic [ref=e821]: Unidad de organización
+                - generic [ref=e824]: Bakery
+              - generic [ref=e828]:
+                - generic "Modificar" [ref=e829]:
+                  - button "Modificar" [ref=e834] [cursor=pointer]
+                - generic "Eliminar" [ref=e835]:
+                  - button "Eliminar" [ref=e840] [cursor=pointer]
+            - generic [ref=e841]:
+              - generic [ref=e843]:
+                - paragraph [ref=e844]: Nombre de unidad de organización
+                - paragraph [ref=e845]:
+                  - generic [ref=e846]: Bakery
+              - generic [ref=e848]:
+                - paragraph [ref=e849]: Tipo de organización
+                - paragraph [ref=e850]:
+                  - generic [ref=e851]: Sales
+              - generic [ref=e853]:
+                - paragraph [ref=e854]: Principal
+                - paragraph [ref=e855]:
+                  - generic [ref=e859]:
+                    - generic "Falso" [ref=e860]:
+                      - generic [ref=e861]:
+                        - img [ref=e863]
+                        - generic [ref=e866]: Falso
+                    - generic [ref=e867]: Principal
+              - generic [ref=e869]:
+                - paragraph [ref=e870]: Organización de ventas
+                - paragraph [ref=e871]:
+                  - generic [ref=e872]: "0001"
+          - generic [ref=e874]:
+            - generic [ref=e880]:
+              - heading "Tabs" [level=2] [ref=e881]
+              - generic "Tabs" [ref=e882]:
+                - generic [ref=e883]:
+                  - heading "Tabs" [level=2] [ref=e884]
+                  - tablist "Tabs" [ref=e886]:
+                    - tab "Detalles" [selected] [ref=e887] [cursor=pointer]
+                    - tab "Relacionado" [ref=e888] [cursor=pointer]
+                  - tabpanel "Detalles" [ref=e891]:
+                    - generic [ref=e904]:
+                      - generic [ref=e906]:
+                        - heading "Identification" [level=3] [ref=e907]:
+                          - button "Identification" [expanded] [ref=e908] [cursor=pointer]:
+                            - img [ref=e913]
+                            - generic [ref=e916]: Identification
+                        - list [ref=e918]:
+                          - generic [ref=e919]:
+                            - generic [ref=e921]:
+                              - listitem [ref=e923]:
+                                - generic [ref=e924]:
+                                  - generic [ref=e925]: Nombre de unidad de organización
+                                  - generic [ref=e926]:
+                                    - generic [ref=e928]: Bakery
+                                    - button "Modificar Nombre de unidad de organización" [ref=e929] [cursor=pointer]:
+                                      - generic [ref=e931]: Modificar Nombre de unidad de organización
+                              - listitem [ref=e933]:
+                                - generic [ref=e934]:
+                                  - generic [ref=e935]: Organización de ventas
+                                  - generic [ref=e936]:
+                                    - generic [ref=e938]: "0001"
+                                    - button "Modificar Organización de ventas" [ref=e939] [cursor=pointer]:
+                                      - generic [ref=e941]: Modificar Organización de ventas
+                            - generic [ref=e943]:
+                              - listitem [ref=e945]:
+                                - generic [ref=e946]:
+                                  - generic [ref=e947]: Descripción
+                                  - generic [ref=e952]: Bakery
+                              - listitem [ref=e954]:
+                                - generic [ref=e955]:
+                                  - generic [ref=e956]: Tipo de organización
+                                  - generic [ref=e957]:
+                                    - generic [ref=e959]: Sales
+                                    - button "Modificar Tipo de organización" [ref=e960] [cursor=pointer]:
+                                      - generic [ref=e962]: Modificar Tipo de organización
+                            - generic [ref=e964]:
+                              - listitem [ref=e966]:
+                                - generic [ref=e967]:
+                                  - generic [ref=e968]: Principal
+                                  - generic [ref=e969]:
+                                    - generic [ref=e974]:
+                                      - generic "Falso" [ref=e975]:
+                                        - generic [ref=e976]:
+                                          - img [ref=e978]
+                                          - generic [ref=e981]: Falso
+                                      - generic [ref=e982]: Principal
+                                    - button "Modificar Principal" [ref=e983] [cursor=pointer]:
+                                      - generic [ref=e985]: Modificar Principal
+                              - listitem [ref=e987]:
+                                - generic [ref=e988]:
+                                  - generic [ref=e989]: Nivel de organización
+                                  - generic [ref=e990]:
+                                    - generic [ref=e992]: Linea estratégica de negocio
+                                    - button "Modificar Nivel de organización" [ref=e993] [cursor=pointer]:
+                                      - generic [ref=e995]: Modificar Nivel de organización
+                            - listitem [ref=e999]:
+                              - generic [ref=e1000]:
+                                - generic [ref=e1001]: External Id
+                                - generic [ref=e1002]:
+                                  - generic [ref=e1004]: LEN-Bakery
+                                  - button "Modificar External Id" [ref=e1005] [cursor=pointer]:
+                                    - generic [ref=e1007]: Modificar External Id
+                      - generic [ref=e1010]:
+                        - heading "Información de SAP" [level=3] [ref=e1011]:
+                          - button "Información de SAP" [expanded] [ref=e1012] [cursor=pointer]:
+                            - img [ref=e1017]
+                            - generic [ref=e1020]: Información de SAP
+                        - list [ref=e1022]:
+                          - generic [ref=e1023]:
+                            - generic [ref=e1025]:
+                              - listitem [ref=e1027]:
+                                - generic [ref=e1028]:
+                                  - generic [ref=e1029]: País
+                                  - button "Modificar País" [ref=e1032] [cursor=pointer]:
+                                    - generic [ref=e1034]: Modificar País
+                              - listitem [ref=e1036]:
+                                - generic [ref=e1038]: Código País
+                            - generic [ref=e1041]:
+                              - listitem [ref=e1043]:
+                                - generic [ref=e1044]:
+                                  - generic [ref=e1045]: Mandante
+                                  - generic [ref=e1046]:
+                                    - generic [ref=e1048]: "401"
+                                    - button "Modificar Mandante" [ref=e1049] [cursor=pointer]:
+                                      - generic [ref=e1051]: Modificar Mandante
+                              - listitem [ref=e1053]:
+                                - generic [ref=e1055]: Código Mandante
+                            - generic [ref=e1058]:
+                              - listitem [ref=e1060]:
+                                - generic [ref=e1061]:
+                                  - generic [ref=e1062]: Código SAP
+                                  - button "Modificar Código SAP" [ref=e1064] [cursor=pointer]:
+                                    - generic [ref=e1066]: Modificar Código SAP
+                              - listitem [ref=e1068]:
+                                - generic [ref=e1069]:
+                                  - generic [ref=e1070]: Sociedad
+                                  - button "Modificar Sociedad" [ref=e1073] [cursor=pointer]:
+                                    - generic [ref=e1075]: Modificar Sociedad
+                            - generic [ref=e1077]:
+                              - listitem [ref=e1079]:
+                                - generic [ref=e1080]:
+                                  - generic [ref=e1081]: Línea estratégica de negocio
+                                  - button "Modificar Línea estratégica de negocio" [ref=e1084] [cursor=pointer]:
+                                    - generic [ref=e1086]: Modificar Línea estratégica de negocio
+                              - listitem [ref=e1088]:
+                                - generic [ref=e1089]:
+                                  - generic [ref=e1090]: Organización de ventas
+                                  - button "Modificar Organización de ventas" [ref=e1093] [cursor=pointer]:
+                                    - generic [ref=e1095]: Modificar Organización de ventas
+                            - generic [ref=e1097]:
+                              - listitem [ref=e1099]:
+                                - generic [ref=e1100]:
+                                  - generic [ref=e1101]: Unidad estratégica de negocio
+                                  - generic [ref=e1102]:
+                                    - generic [ref=e1108]:
+                                      - link "B4B" [ref=e1109] [cursor=pointer]:
+                                        - /url: /lightning/r/cgcloud__Org_Unit__c/a2RPs000002fDJaMAM/view
+                                        - generic [ref=e1113]: B4B
+                                      - button "Vista previa" [ref=e1115] [cursor=pointer]:
+                                        - img [ref=e1117]
+                                        - generic [ref=e1120]: Vista previa
+                                    - button "Modificar Unidad estratégica de negocio" [ref=e1121] [cursor=pointer]:
+                                      - generic [ref=e1123]: Modificar Unidad estratégica de negocio
+                              - listitem [ref=e1125]:
+                                - generic [ref=e1127]: Código Organización de Venta
+                            - listitem [ref=e1133]:
+                              - generic [ref=e1134]:
+                                - generic [ref=e1135]: Habilitado para proceso de combos
+                                - generic [ref=e1136]:
+                                  - generic [ref=e1141]:
+                                    - generic "Falso" [ref=e1142]:
+                                      - generic [ref=e1143]:
+                                        - img [ref=e1145]
+                                        - generic [ref=e1148]: Falso
+                                    - generic [ref=e1149]: Habilitado para proceso de combos
+                                  - button "Modificar Habilitado para proceso de combos" [ref=e1150] [cursor=pointer]:
+                                    - generic [ref=e1152]: Modificar Habilitado para proceso de combos
+                      - generic [ref=e1154]:
+                        - heading "Description" [level=3] [ref=e1155]:
+                          - button "Description" [expanded] [ref=e1156] [cursor=pointer]:
+                            - img [ref=e1161]
+                            - generic [ref=e1164]: Description
+                        - list [ref=e1166]:
+                          - generic [ref=e1167]:
+                            - generic [ref=e1169]:
+                              - listitem [ref=e1171]:
+                                - generic [ref=e1172]:
+                                  - generic [ref=e1173]: Idioma de descripción 1
+                                  - generic [ref=e1174]:
+                                    - generic [ref=e1176]: Bakery
+                                    - button "Modificar Idioma de descripción 1" [ref=e1177] [cursor=pointer]:
+                                      - generic [ref=e1179]: Modificar Idioma de descripción 1
+                              - listitem [ref=e1181]:
+                                - generic [ref=e1182]:
+                                  - generic [ref=e1183]: Idioma de descripción 2
+                                  - button "Modificar Idioma de descripción 2" [ref=e1185] [cursor=pointer]:
+                                    - generic [ref=e1187]: Modificar Idioma de descripción 2
+                            - generic [ref=e1189]:
+                              - listitem [ref=e1191]:
+                                - generic [ref=e1192]:
+                                  - generic [ref=e1193]: Idioma de descripción 3
+                                  - button "Modificar Idioma de descripción 3" [ref=e1195] [cursor=pointer]:
+                                    - generic [ref=e1197]: Modificar Idioma de descripción 3
+                              - listitem [ref=e1199]:
+                                - generic [ref=e1200]:
+                                  - generic [ref=e1201]: Idioma de descripción 4
+                                  - button "Modificar Idioma de descripción 4" [ref=e1203] [cursor=pointer]:
+                                    - generic [ref=e1205]: Modificar Idioma de descripción 4
+                      - generic [ref=e1207]:
+                        - heading "Información del sistema" [level=3] [ref=e1208]:
+                          - button "Información del sistema" [expanded] [ref=e1209] [cursor=pointer]:
+                            - img [ref=e1214]
+                            - generic [ref=e1217]: Información del sistema
+                        - list [ref=e1219]:
+                          - generic [ref=e1222]:
+                            - listitem [ref=e1224]:
+                              - generic [ref=e1225]:
+                                - generic [ref=e1226]: Creado por
+                                - generic [ref=e1230]:
+                                  - generic [ref=e1236]:
+                                    - link "Maximiliano Miño" [ref=e1237] [cursor=pointer]:
+                                      - /url: /lightning/r/User/005Ps000009sKqzIAE/view
+                                      - generic [ref=e1241]: Maximiliano Miño
+                                    - button "Vista previa" [ref=e1243] [cursor=pointer]:
+                                      - img [ref=e1245]
+                                      - generic [ref=e1248]: Vista previa
+                                  - text: ", 8/4/2025, 1:56 p. m."
+                            - listitem [ref=e1250]:
+                              - generic [ref=e1251]:
+                                - generic [ref=e1252]: Última modificación por
+                                - generic [ref=e1256]:
+                                  - generic [ref=e1262]:
+                                    - link "Maximiliano Miño" [ref=e1263] [cursor=pointer]:
+                                      - /url: /lightning/r/User/005Ps000009sKqzIAE/view
+                                      - generic [ref=e1267]: Maximiliano Miño
+                                    - button "Vista previa" [ref=e1269] [cursor=pointer]:
+                                      - img [ref=e1271]
+                                      - generic [ref=e1274]: Vista previa
+                                  - text: ", 8/4/2025, 1:58 p. m."
+            - generic [ref=e1276]:
+              - article "Archivos" [ref=e1285]:
+                - generic [ref=e1286]:
+                  - heading "Archivos (0)" [level=2] [ref=e1292]:
+                    - link "Archivos (0)" [ref=e1293] [cursor=pointer]:
+                      - /url: /lightning/r/cgcloud__Org_Unit__c/a2RPs000002fDJoMAM/related/AttachedContentDocuments/view
+                      - generic "Archivos" [ref=e1294]
+                      - generic "(0)" [ref=e1295]
+                  - button "Mostrar acciones para Archivos" [ref=e1299] [cursor=pointer]:
+                    - generic [ref=e1301]:
+                      - img [ref=e1303]
+                      - generic [ref=e1306]: Mostrar acciones para Archivos
+                - generic [ref=e1312]:
+                  - generic [ref=e1314]:
+                    - img [ref=e1318]
+                    - generic [ref=e1321]: Soltar archivos
+                  - generic [ref=e1322]:
+                    - generic [ref=e1324]:
+                      - generic [ref=e1328]:
+                        - button "Cargar archivos O suelte archivos" [ref=e1329]
+                        - generic [ref=e1330]:
+                          - generic [ref=e1331]:
+                            - img [ref=e1333]
+                            - text: Cargar archivos
+                          - generic [ref=e1336]: O suelte archivos
+                      - status
+                    - list
+              - article [ref=e1340]:
+                - generic [ref=e1341]:
+                  - heading "Vínculos rápidos de lista relacionada" [level=2] [ref=e1342]
+                  - button "Ayuda" [ref=e1346] [cursor=pointer]:
+                    - img [ref=e1348]
+                    - generic [ref=e1351]: Ayuda
+                - generic [ref=e1356]:
+                  - list [ref=e1357]:
+                    - listitem [ref=e1358]:
+                      - generic [ref=e1360]:
+                        - img "Archivos" [ref=e1364]
+                        - generic [ref=e1367]:
+                          - link "Archivos (0)" [ref=e1368] [cursor=pointer]:
+                            - /url: /lightning/r/cgcloud__Org_Unit__c/a2RPs000002fDJoMAM/related/AttachedContentDocuments/view
+                            - generic [ref=e1369]: Archivos (0)
+                          - button "Vista previa" [ref=e1371] [cursor=pointer]:
+                            - img [ref=e1373]
+                            - generic [ref=e1376]: Vista previa
+                    - listitem [ref=e1377]:
+                      - generic [ref=e1379]:
+                        - img "Jerarquías de unidades de organización principales" [ref=e1383]
+                        - generic [ref=e1386]:
+                          - link "Jerarquías de unidades de organización principales (1)" [ref=e1387] [cursor=pointer]:
+                            - /url: /lightning/r/cgcloud__Org_Unit__c/a2RPs000002fDJoMAM/related/cgcloud__Org_Unit_Hierarchies__r/view
+                            - generic [ref=e1388]: Jerarquías de unidades de organización principales (1)
+                          - button "Vista previa" [ref=e1390] [cursor=pointer]:
+                            - img [ref=e1392]
+                            - generic [ref=e1395]: Vista previa
+                    - listitem [ref=e1396]:
+                      - generic [ref=e1398]:
+                        - img "Jerarquías de unidades de organización secundarias" [ref=e1402]
+                        - generic [ref=e1405]:
+                          - link "Jerarquías de unidades de organización secundarias (7)" [ref=e1406] [cursor=pointer]:
+                            - /url: /lightning/r/cgcloud__Org_Unit__c/a2RPs000002fDJoMAM/related/cgcloud__Org_Unit_Hierarchies1__r/view
+                            - generic [ref=e1407]: Jerarquías de unidades de organización secundarias (7)
+                          - button "Vista previa" [ref=e1409] [cursor=pointer]:
+                            - img [ref=e1411]
+                            - generic [ref=e1414]: Vista previa
+                    - listitem [ref=e1415]:
+                      - generic [ref=e1417]:
+                        - img "Unidad de organización de cliente" [ref=e1421]
+                        - generic [ref=e1424]:
+                          - link "Unidad de organización de cliente (0)" [ref=e1425] [cursor=pointer]:
+                            - /url: /lightning/r/cgcloud__Org_Unit__c/a2RPs000002fDJoMAM/related/cgcloud__Account_Org_Units__r/view
+                            - generic [ref=e1426]: Unidad de organización de cliente (0)
+                          - button "Vista previa" [ref=e1428] [cursor=pointer]:
+                            - img [ref=e1430]
+                            - generic [ref=e1433]: Vista previa
+                    - listitem [ref=e1434]:
+                      - generic [ref=e1436]:
+                        - img "Usuarios de unidad de organización" [ref=e1440]
+                        - generic [ref=e1443]:
+                          - link "Usuarios de unidad de organización (0)" [ref=e1444] [cursor=pointer]:
+                            - /url: /lightning/r/cgcloud__Org_Unit__c/a2RPs000002fDJoMAM/related/cgcloud__Org_Unit_Users__r/view
+                            - generic [ref=e1445]: Usuarios de unidad de organización (0)
+                          - button "Vista previa" [ref=e1447] [cursor=pointer]:
+                            - img [ref=e1449]
+                            - generic [ref=e1452]: Vista previa
+                    - listitem [ref=e1453]:
+                      - generic [ref=e1455]:
+                        - img "Plantas productoras y Bodegas" [ref=e1459]
+                        - generic [ref=e1462]:
+                          - link "Plantas productoras y Bodegas (10+)" [ref=e1463] [cursor=pointer]:
+                            - /url: /lightning/r/cgcloud__Org_Unit__c/a2RPs000002fDJoMAM/related/Plantas_productoras_y_Bodegas__r/view
+                            - generic [ref=e1464]: Plantas productoras y Bodegas (10+)
+                          - button "Vista previa" [ref=e1466] [cursor=pointer]:
+                            - img [ref=e1468]
+                            - generic [ref=e1471]: Vista previa
+                  - link "Mostrar todo (8)" [ref=e1473] [cursor=pointer]:
+                    - /url: javascript:void(0)
+                    - text: Mostrar todo (8)
+  - generic:
+    - status
