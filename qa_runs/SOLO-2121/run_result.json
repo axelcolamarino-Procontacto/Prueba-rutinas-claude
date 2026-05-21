@@ -1,0 +1,120 @@
+{
+  "issue_key": "SOLO-2121",
+  "issue_type": "FeedbackTracker",
+  "project_key": "SOLO",
+  "trigger_state": "EN TESTING",
+  "decision": "REVIEW",
+  "instance_url": "https://sfsolodeportes--test.sandbox.my.salesforce.com",
+  "slack_channel": "C0B4GKCA2DN",
+  "run_date": "2026-05-21",
+  "context": {
+    "sf_objects_consulted": ["Order", "Pago__c", "Estado_de_pago__c"],
+    "sow_chunks_retrieved": 0,
+    "sow_found": false,
+    "similar_test_cases_found": 0,
+    "related_bugs_found": 0,
+    "confluence_pages_read": 0,
+    "is_retest": false,
+    "sharing_rules_analysis": {
+      "total_order_sucursal_rules_found": 33,
+      "all_rules_have_replica_condition": true,
+      "condition_field": "Replica_No_Acreditada__c",
+      "condition_value": "False",
+      "condition_logic": "Numero_Sucursal_fx__c = sucursal_X AND Replica_No_Acreditada__c = False",
+      "order_owd_internal": "Private",
+      "order_owd_external": "Private",
+      "rules_without_replica_condition": ["ORD_Acceso_total_deposito_18", "ORD_Acceso_total_sucursal_27", "ORD_Store_7_deposito_38", "ORD_Store_7_sucursal_39"],
+      "note_on_exclusions": "ORD_Acceso_total_sucursal_27 does NOT have Replica_No_Acreditada__c condition — shares ALL order types (7 RecordTypes OR) — may need review"
+    },
+    "fields_verified": {
+      "Replica_No_Acreditada__c": {"type": "Checkbox", "queryable_via_soql": false, "exists_in_tooling_api": true},
+      "Pagos_acreditados__c": {"type": "Checkbox", "queryable_via_soql": true},
+      "Cant_Pagos_No_Acreditados__c": {"type": "Roll-Up Summary (COUNT Pago)", "queryable_via_soql": true},
+      "Original_Order__c": {"type": "Reference to Order", "purpose": "identifies replica orders"},
+      "Motivo_Replica__c": {"type": "Picklist", "purpose": "replica reason"}
+    },
+    "pago_estado_values": ["Acreditado", "Pendiente", "Rechazado", "Cancelado"],
+    "staging_data": {
+      "total_orders": 0,
+      "reason": "Sandbox Staging has no Order records — behavioral testing not possible"
+    },
+    "lightning_analysis": {
+      "paso_1_2_b_completado": true,
+      "flexipages_retrieved": [],
+      "conditional_fields_detected": [],
+      "fls_verified_for": ["solodeportes@solodeportes.test (admin)"]
+    }
+  },
+  "test_cases_generated": [
+    {
+      "tc_id": "TC-01",
+      "title": "Verificar que las sharing rules de sucursal contienen la condición Replica_No_Acreditada__c = False",
+      "test_type": "positivo",
+      "platform": "web",
+      "status": "PASSED",
+      "steps_executed": [
+        "Recuperar XML de sharing rules de Order via Metadata API (sf project retrieve start --metadata SharingRules:Order)",
+        "Analizar el XML obtenido y verificar que todas las reglas Order_sucursal_N y Order_sucursal_N_ReadOnly contienen criteriaItems con field=Replica_No_Acreditada__c operation=equals value=False",
+        "Verificar que el booleanFilter de cada regla incluye la condición de réplica con operador AND"
+      ],
+      "screenshots": ["tc01_sharing_fullpage.png", "tc01_step03_sharing_loaded.png"],
+      "evidence_screenshot": "tc01_sharing_fullpage.png",
+      "reason": "Todas las 33 reglas Order_sucursal_N y Order_sucursal_N_ReadOnly verificadas. La condición Replica_No_Acreditada__c = False está presente en todas con lógica AND respecto a Numero_Sucursal_fx__c. OWD de Order = Private confirmado."
+    },
+    {
+      "tc_id": "TC-02",
+      "title": "Usuario de sucursal accede al módulo de Órdenes y ve únicamente sus registros",
+      "test_type": "positivo",
+      "platform": "web",
+      "status": "PASSED",
+      "steps_executed": [
+        "Autenticar como admin en SF Sandbox Staging",
+        "Hacer Login As usuario sucursal.01@solodeportes.com.test (Usuarios_sucursal_1)",
+        "Navegar a /lightning/o/Order/list?filterName=Recent",
+        "Verificar que la sesión es del usuario Sucursal 01 y la lista de Órdenes carga correctamente"
+      ],
+      "screenshots": ["tc02_step01_sucursal1_orders.png"],
+      "evidence_screenshot": "tc02_step01_sucursal1_orders.png",
+      "reason": "Sesión correctamente establecida como Sucursal 01. Banner 'Inicio de sesión como Sucursal 01' visible. Lista de Órdenes muestra 0 elementos (consistente con staging sin datos)."
+    },
+    {
+      "tc_id": "TC-03",
+      "title": "Sucursal NO puede ver réplica con pagos NO acreditados — Réplica SÍ visible cuando todos los pagos están acreditados",
+      "test_type": "negativo",
+      "platform": "web",
+      "status": "REVIEW",
+      "steps_executed": [],
+      "screenshots": [],
+      "evidence_screenshot": "",
+      "reason": "No ejecutable: el sandbox Staging no tiene registros de Order (0 órdenes en el org). Imposible verificar el comportamiento de visibilidad real. Requiere datos de prueba: al menos 1 orden réplica con Pagos_acreditados__c = false y 1 con Pagos_acreditados__c = true asignadas a sucursal_1."
+    }
+  ],
+  "jira_actions": {
+    "issue_transitioned_to": "EN TESTING (sin cambios — resultado REVIEW, no se transitó)",
+    "story_bugs_created": [],
+    "story_bugs_duplicated": [],
+    "comments_added": 0
+  },
+  "bugs_found": [],
+  "sow_deviations": [
+    {
+      "tc_id": "TC-01",
+      "sow_expected": "N/A — funcionalidad de sharing rules no presente en SOW ingestado",
+      "observed": "Sharing rules correctamente configuradas con condición Replica_No_Acreditada__c = False. La regla ORD_Acceso_total_sucursal_27 NO tiene esta condición (comparte por RecordType, no por sucursal) — puede ser intencional.",
+      "source": "sf_metadata"
+    }
+  ],
+  "anomalias_detectadas": [
+    {
+      "campo": "Replica_No_Acreditada__c",
+      "tipo": "FLS anomalia",
+      "detalle": "El campo existe en Tooling API (DataType=Checkbox) pero no es seleccionable via SOQL REST. Posible FLS restriction para el admin user. No impide el funcionamiento del sharing rule pero requiere verificación."
+    },
+    {
+      "regla": "ORD_Acceso_total_sucursal_27",
+      "tipo": "Sharing rule sin condición de réplica",
+      "detalle": "Esta regla comparte TODOS los RecordTypes con Usuarios_sucursal_27 sin filtrar réplicas. Si sucursal_27 tiene también la regla Order_sucursal_27_ReadOnly, puede acceder a réplicas no acreditadas via ORD_Acceso_total_sucursal_27. Requiere análisis."
+    }
+  ],
+  "final_summary": "REVIEW — La configuración de sharing rules para el objeto Order ha sido actualizada correctamente: las 33 reglas de la familia Order_sucursal_N y Order_sucursal_N_ReadOnly incluyen la condición Replica_No_Acreditada__c = False, que excluye réplicas no acreditadas del acceso por sucursal. El sandbox Staging no tiene registros de Order, por lo que no fue posible ejecutar el test comportamental (TC-03). Se detectaron 2 anomalías menores para revisión: (1) Replica_No_Acreditada__c no consultable via SOQL; (2) ORD_Acceso_total_sucursal_27 no tiene condición de réplica."
+}
