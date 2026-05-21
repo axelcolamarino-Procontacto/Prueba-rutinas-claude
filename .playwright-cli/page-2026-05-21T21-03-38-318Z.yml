@@ -1,0 +1,339 @@
+- generic:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - link "Saltar a navegación" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e6] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e10]:
+        - generic [ref=e14]:
+          - button "Toggle Panel" [ref=e18] [cursor=pointer]:
+            - img [ref=e22]
+            - generic [ref=e25]: Menu
+          - generic [ref=e30]:
+            - img [ref=e34]
+            - generic [ref=e38]: Sandbox (Staging)
+        - button "Show menu" [ref=e47] [cursor=pointer]:
+          - img [ref=e49]
+          - generic [ref=e52]: Show menu
+      - generic [ref=e53]:
+        - button "Buscar" [ref=e59]:
+          - img [ref=e61]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e64]:
+          - list [ref=e66]:
+            - listitem [ref=e67]:
+              - group [ref=e68]:
+                - button "Agregar favorito" [ref=e70] [cursor=pointer]:
+                  - generic [ref=e71]:
+                    - img [ref=e75]
+                    - tooltip "Agregar favorito"
+                - button "Lista de favoritos" [ref=e79] [cursor=pointer]:
+                  - generic [ref=e80]:
+                    - img [ref=e84]
+                    - tooltip "Lista de favoritos"
+            - listitem [ref=e87]:
+              - button "Acciones globales" [ref=e761] [cursor=pointer]:
+                - generic [ref=e762]:
+                  - img [ref=e766]
+                  - tooltip "Acciones globales"
+            - listitem [ref=e769]:
+              - button "Centro de orientación" [ref=e771] [cursor=pointer]:
+                - generic [ref=e772]:
+                  - img [ref=e776]
+                  - tooltip "Centro de orientación"
+            - listitem [ref=e96]:
+              - button "Ayuda de Salesforce" [ref=e99] [cursor=pointer]:
+                - generic [ref=e100]:
+                  - img [ref=e104]
+                  - tooltip "Ayuda de Salesforce"
+            - listitem [ref=e107]:
+              - button "Configuración" [ref=e113] [cursor=pointer]:
+                - generic [ref=e114]:
+                  - img [ref=e118]
+                  - tooltip "Configuración"
+            - listitem [ref=e121]:
+              - button "20+ Notificaciones" [ref=e779] [cursor=pointer]:
+                - generic [ref=e125]:
+                  - generic [ref=e126]:
+                    - img [ref=e130]
+                    - generic [ref=e781]: 20+
+                  - tooltip "Notificaciones"
+              - generic [ref=e133]: 26 nuevas notificaciones
+            - listitem [ref=e134]:
+              - button "Ver perfil" [ref=e137] [cursor=pointer]:
+                - generic [ref=e138]:
+                  - tooltip "Ver perfil"
+    - generic [ref=e142]:
+      - generic [ref=e145]:
+        - generic [ref=e147]:
+          - navigation "Aplicación" [ref=e148]:
+            - button "Iniciador de aplicación" [ref=e150] [cursor=pointer]:
+              - generic [ref=e161]: Iniciador de aplicación
+          - heading "CG Offline Admin" [level=1] [ref=e162]:
+            - generic "CG Offline Admin" [ref=e163]
+        - navigation "Global" [ref=e166]:
+          - list [ref=e167]:
+            - listitem [ref=e168]:
+              - link "Inicio" [ref=e169] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e170]: Inicio
+            - listitem [ref=e171]:
+              - link "Sincronizar materiales del combo" [ref=e172] [cursor=pointer]:
+                - /url: /lightning/n/Sincronizar_materiales_del_combo
+                - generic [ref=e173]: Sincronizar materiales del combo
+            - listitem [ref=e174]:
+              - link "Sincronizar surtido de productos" [ref=e175] [cursor=pointer]:
+                - /url: /lightning/n/SyncProductAssortment
+                - generic [ref=e176]: Sincronizar surtido de productos
+            - listitem [ref=e782] [cursor=pointer]:
+              - link "* Torta chilena para ruteo | Oportunidad" [ref=e783]:
+                - /url: /lightning/r/Opportunity/006gP00000AD75yQAD/view
+                - generic "No agregado a barra de navegación" [ref=e784]: "*"
+                - generic [ref=e785]: Torta chilena para ruteo | Oportunidad
+              - button "Lista de Torta chilena para ruteo | Oportunidad" [ref=e789]:
+                - img [ref=e793]
+                - generic [ref=e796]: Lista de Torta chilena para ruteo | Oportunidad
+              - button "Cerrar ficha" [ref=e797]:
+                - img [ref=e801]
+                - generic [ref=e804]: Cerrar ficha
+            - listitem [ref=e219]:
+              - button "Mostrar más elementos de navegación" [ref=e221] [cursor=pointer]:
+                - generic [ref=e222]: Más
+                - img [ref=e226]
+                - generic [ref=e229]: Mostrar más elementos de navegación
+            - listitem [ref=e230]:
+              - button "Modificar elementos de navegación" [ref=e232] [cursor=pointer]:
+                - img [ref=e234]
+                - generic [ref=e237]: Modificar elementos de navegación
+      - main [ref=e239]:
+        - generic [ref=e255]:
+          - generic [ref=e257]:
+            - generic [ref=e264]:
+              - generic [ref=e265]:
+                - heading "Oportunidad Torta chilena para ruteo" [level=1] [ref=e272]:
+                  - generic [ref=e274]: Oportunidad
+                  - generic [ref=e275]: Torta chilena para ruteo
+                - button "Seguir" [ref=e280] [cursor=pointer]:
+                  - generic [ref=e281]:
+                    - img [ref=e285]
+                    - text: Seguir
+                - generic [ref=e291]:
+                  - generic "Modificar" [ref=e292]:
+                    - button "Modificar" [ref=e297] [cursor=pointer]
+                  - generic "Eliminar" [ref=e298]:
+                    - button "Eliminar" [ref=e303] [cursor=pointer]
+                  - generic "Enviar para aprobación" [ref=e304]:
+                    - button "Enviar para aprobación" [ref=e309] [cursor=pointer]
+              - generic [ref=e310]:
+                - generic [ref=e312]:
+                  - paragraph [ref=e313]: ID
+                  - paragraph [ref=e314]:
+                    - generic [ref=e315]: OPP-202604-0060
+                - generic [ref=e317]:
+                  - paragraph [ref=e318]: Nombre de la cuenta
+                  - paragraph [ref=e319]:
+                    - generic [ref=e324]:
+                      - link "LA CASA DEL PANADERO DE LAS ORQUIDENAS LTDA." [ref=e325] [cursor=pointer]:
+                        - /url: /lightning/r/Account/001Ps00001C7JPtIAN/view
+                        - generic [ref=e329]: LA CASA DEL PANADERO DE LAS ORQUIDENAS LTDA.
+                      - button "Vista previa" [ref=e331] [cursor=pointer]:
+                        - img [ref=e333]
+                        - generic [ref=e336]: Vista previa
+                - generic [ref=e338]:
+                  - paragraph [ref=e339]: Tipo de oportunidad
+                  - paragraph [ref=e340]:
+                    - generic [ref=e341]: Incremental
+                - generic [ref=e806]:
+                  - paragraph [ref=e807]: Propietario de oportunidad
+                  - paragraph [ref=e808]:
+                    - generic [ref=e811]:
+                      - generic [ref=e818]:
+                        - link "[CMI] Desarrollador de Negocio Oportunidades" [ref=e819] [cursor=pointer]:
+                          - /url: /lightning/r/User/005gP00000IBF6UQAX/view
+                          - generic [ref=e823]: "[CMI] Desarrollador de Negocio Oportunidades"
+                        - button "Vista previa" [ref=e825] [cursor=pointer]:
+                          - img [ref=e827]
+                          - generic [ref=e830]: Vista previa
+                      - button "Cambiar propietario" [ref=e832] [cursor=pointer]:
+                        - img [ref=e834]
+                        - generic [ref=e837]: Cambiar propietario
+            - article [ref=e348]:
+              - generic [ref=e349]:
+                - heading "Ruta" [level=2] [ref=e350]
+                - generic [ref=e353]:
+                  - button "Mostrar Campos clave y/o los detalles para Orientación hacia el éxito" [ref=e354] [cursor=pointer]:
+                    - generic [ref=e355]: Mostrar Campos clave y/o los detalles para Orientación hacia el éxito
+                    - img [ref=e359]
+                  - listbox "Opciones de ruta" [ref=e366]:
+                    - option "Apertura" [selected] [ref=e367] [cursor=pointer]:
+                      - generic [ref=e368]: Apertura
+                    - option "Pendiente de Aprobación" [ref=e369] [cursor=pointer]:
+                      - generic [ref=e370]: Pendiente de Aprobación
+                    - option "Rechazado" [ref=e371] [cursor=pointer]:
+                      - generic [ref=e372]: Rechazado
+                    - option "Adaptación Producto" [ref=e373] [cursor=pointer]:
+                      - generic [ref=e374]: Adaptación Producto
+                    - option "Validación de resultado" [ref=e375] [cursor=pointer]:
+                      - generic [ref=e376]: Validación de resultado
+                    - option "Presentación de resultados" [ref=e377] [cursor=pointer]:
+                      - generic [ref=e378]: Presentación de resultados
+                    - option "Seguimiento" [ref=e379] [cursor=pointer]:
+                      - generic [ref=e380]: Seguimiento
+                    - option "Cerrada" [ref=e381] [cursor=pointer]:
+                      - generic [ref=e382]: Cerrada
+                  - button "Marcar Etapa como completado(a)" [ref=e385] [cursor=pointer]:
+                    - img [ref=e389]
+                    - generic [ref=e392]: Marcar Etapa como completado(a)
+          - generic [ref=e393]:
+            - generic [ref=e399]:
+              - heading "Tabs" [level=2] [ref=e400]
+              - generic "Tabs" [ref=e401]:
+                - generic [ref=e402]:
+                  - heading "Tabs" [level=2] [ref=e403]
+                  - tablist "Tabs" [ref=e405]:
+                    - tab "Detalles" [active] [selected] [ref=e406] [cursor=pointer]
+                    - tab "Histórico" [ref=e407] [cursor=pointer]
+                    - tab "Plan de Acción" [ref=e408] [cursor=pointer]
+                  - tabpanel "Detalles" [ref=e411]:
+                    - generic [ref=e412]:
+                      - generic [ref=e418]:
+                        - heading "Información de la Oportunidad" [level=3] [ref=e419]:
+                          - button "Información de la Oportunidad" [expanded] [ref=e420] [cursor=pointer]:
+                            - img [ref=e424]
+                            - generic "Información de la Oportunidad" [ref=e427]
+                        - list [ref=e430]:
+                          - generic [ref=e431]:
+                            - generic [ref=e434]:
+                              - listitem [ref=e437]:
+                                - generic [ref=e439]:
+                                  - generic [ref=e440]: Nombre de la cuenta
+                                  - generic [ref=e441]:
+                                    - generic [ref=e447]:
+                                      - link "LA CASA DEL PANADERO DE LAS ORQUIDENAS LTDA." [ref=e448] [cursor=pointer]:
+                                        - /url: /lightning/r/Account/001Ps00001C7JPtIAN/view
+                                        - generic [ref=e452]: LA CASA DEL PANADERO DE LAS ORQUIDENAS LTDA.
+                                      - button "Vista previa" [ref=e454] [cursor=pointer]:
+                                        - img [ref=e456]
+                                        - generic [ref=e459]: Vista previa
+                                    - button "Modificar Nombre de la cuenta" [ref=e460] [cursor=pointer]:
+                                      - generic [ref=e462]: Modificar Nombre de la cuenta
+                              - listitem [ref=e465]:
+                                - generic [ref=e467]:
+                                  - generic [ref=e468]: Nombre de la oportunidad
+                                  - generic [ref=e469]:
+                                    - generic [ref=e471]: Torta chilena para ruteo
+                                    - button "Modificar Nombre de la oportunidad" [ref=e472] [cursor=pointer]:
+                                      - generic [ref=e474]: Modificar Nombre de la oportunidad
+                              - listitem [ref=e477]:
+                                - generic [ref=e479]:
+                                  - generic [ref=e480]: Fecha finalización de sistema
+                                  - button "Modificar Fecha finalización de sistema" [ref=e482] [cursor=pointer]:
+                                    - generic [ref=e484]: Modificar Fecha finalización de sistema
+                              - listitem [ref=e487]:
+                                - generic [ref=e490]: Duración real sistema en días
+                              - listitem [ref=e494]:
+                                - generic [ref=e496]:
+                                  - generic [ref=e497]: Tipo de registro de la oportunidad
+                                  - generic [ref=e502]:
+                                    - generic [ref=e503]: Desarrollo de producto
+                                    - button "Cambiar tipo de registro" [ref=e505] [cursor=pointer]:
+                                      - img [ref=e507]
+                                      - generic [ref=e510]: Cambiar tipo de registro
+                            - generic [ref=e513]:
+                              - listitem [ref=e516]:
+                                - generic [ref=e518]:
+                                  - generic [ref=e519]: Tipo de oportunidad
+                                  - generic [ref=e520]:
+                                    - generic [ref=e522]: Incremental
+                                    - button "Modificar Tipo de oportunidad" [ref=e523] [cursor=pointer]:
+                                      - generic [ref=e525]: Modificar Tipo de oportunidad
+                              - listitem [ref=e528]:
+                                - generic [ref=e530]:
+                                  - generic [ref=e531]: Descripción
+                                  - generic [ref=e532]:
+                                    - generic [ref=e534]: Torta chilena para ruteo
+                                    - button "Modificar Descripción" [ref=e535] [cursor=pointer]:
+                                      - generic [ref=e537]: Modificar Descripción
+                              - listitem [ref=e540]:
+                                - generic [ref=e542]:
+                                  - generic [ref=e543]: Duración según plan en días
+                                  - generic [ref=e548]: "6"
+                              - listitem [ref=e551]:
+                                - generic [ref=e553]:
+                                  - generic [ref=e554]: Volumen de compra
+                                  - generic [ref=e559]: "0.00"
+                              - listitem [ref=e562]:
+                                - generic [ref=e564]:
+                                  - generic [ref=e565]: Observaciones
+                                  - generic [ref=e566]:
+                                    - generic [ref=e568]: Torta chilena para ruteo
+                                    - button "Modificar Observaciones" [ref=e569] [cursor=pointer]:
+                                      - generic [ref=e571]: Modificar Observaciones
+                              - listitem [ref=e574]:
+                                - generic [ref=e576]:
+                                  - generic [ref=e577]: Inversión total
+                                  - button "Modificar Inversión total" [ref=e579] [cursor=pointer]:
+                                    - generic [ref=e581]: Modificar Inversión total
+                              - listitem [ref=e584]:
+                                - generic [ref=e586]:
+                                  - generic [ref=e587]: Inversión total estimada
+                                  - button "Modificar Inversión total estimada" [ref=e589] [cursor=pointer]:
+                                    - generic [ref=e591]: Modificar Inversión total estimada
+                      - generic [ref=e595]:
+                        - generic [ref=e596]: Caso Relacionado
+                        - generic [ref=e598]:
+                          - textbox "Buscar Casos..." [ref=e599]
+                          - img [ref=e604]
+                      - heading "Información del cliente" [level=3] [ref=e613]:
+                        - button "Información del cliente" [expanded] [ref=e614] [cursor=pointer]:
+                          - img [ref=e618]
+                          - generic "Información del cliente" [ref=e621]
+                      - heading "Equipo de trabajo" [level=3] [ref=e631]:
+                        - button "Equipo de trabajo" [expanded] [ref=e632] [cursor=pointer]:
+                          - img [ref=e636]
+                          - generic "Equipo de trabajo" [ref=e639]
+                      - heading "Información del sistema" [level=3] [ref=e649]:
+                        - button "Información del sistema" [expanded] [ref=e650] [cursor=pointer]:
+                          - img [ref=e654]
+                          - generic "Información del sistema" [ref=e657]
+            - generic [ref=e662]:
+              - article "Archivos" [ref=e671]:
+                - generic [ref=e672]:
+                  - heading "Archivos (0)" [level=2] [ref=e678]:
+                    - link "Archivos (0)" [ref=e679] [cursor=pointer]:
+                      - /url: /lightning/r/Opportunity/006gP00000AD75yQAD/related/AttachedContentDocuments/view
+                      - generic "Archivos" [ref=e680]
+                      - generic "(0)" [ref=e681]
+                  - button "Mostrar acciones para Archivos" [ref=e685] [cursor=pointer]:
+                    - generic [ref=e687]:
+                      - img [ref=e689]
+                      - generic [ref=e692]: Mostrar acciones para Archivos
+                - generic [ref=e698]:
+                  - generic [ref=e700]:
+                    - img [ref=e704]
+                    - generic [ref=e707]: Soltar archivos
+                  - generic [ref=e708]:
+                    - generic [ref=e710]:
+                      - generic [ref=e714]:
+                        - button "Cargar archivos O suelte archivos" [ref=e715]
+                        - generic [ref=e716]:
+                          - generic [ref=e717]:
+                            - img [ref=e719]
+                            - text: Cargar archivos
+                          - generic [ref=e722]: O suelte archivos
+                      - status
+                    - list
+              - article "Notas" [ref=e731]:
+                - generic [ref=e732]:
+                  - heading "Notas (0)" [level=2] [ref=e738]:
+                    - link "Notas (0)" [ref=e739] [cursor=pointer]:
+                      - /url: /lightning/r/Opportunity/006gP00000AD75yQAD/related/AttachedContentNotes/view
+                      - generic "Notas" [ref=e740]
+                      - generic "(0)" [ref=e741]
+                  - button "Mostrar acciones para Notas" [ref=e745] [cursor=pointer]:
+                    - generic [ref=e747]:
+                      - img [ref=e749]
+                      - generic [ref=e752]: Mostrar acciones para Notas
+  - generic:
+    - status
