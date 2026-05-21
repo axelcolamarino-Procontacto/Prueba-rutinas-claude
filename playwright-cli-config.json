@@ -1,0 +1,8 @@
+{
+  "ignoreHTTPSErrors": true,
+  "viewport": { "width": 1280, "height": 900 },
+  "browserName": "chromium",
+  "launchOptions": {
+    "args": ["--ignore-certificate-errors", "--disable-web-security"]
+  }
+}

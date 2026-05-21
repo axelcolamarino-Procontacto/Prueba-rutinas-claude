@@ -1,0 +1,160 @@
+<template>
+    <lightning-card title="Crear Reserva">
+        <div class="slds-p-around_medium">
+            <lightning-record-edit-form object-api-name="Order">
+
+                <!-- Account search section -->
+                <template if:false={showCreateAccountSection}>
+                    <div class="slds-form-element slds-form-element_horizontal slds-m-bottom_small">
+                        <label class="slds-form-element__label">
+                            <template if:false={selectedAccountId}>
+                                <abbr class="slds-required" title="requerido">*</abbr>
+                            </template>
+                            Cuenta
+                        </label>
+                        <div class="slds-form-element__control">
+                            <template if:true={selectedAccountId}>
+                                <div class="slds-pill-container">
+                                    <span class="slds-pill">
+                                        <span class="slds-pill__label">{selectedAccountName}</span>
+                                        <button class="slds-button slds-button_icon slds-button_icon slds-pill__remove" onclick={handleClearAccount} title="Quitar cuenta">
+                                            <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                                            <span class="slds-assistive-text">Quitar cuenta</span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </template>
+                            <template if:false={selectedAccountId}>
+                                <div class="search-row">
+                                    <lightning-input
+                                        label="Buscar cuenta"
+                                        variant="label-hidden"
+                                        placeholder="Buscar por DNI, Nombre o Teléfono"
+                                        value={accountSearchTerm}
+                                        onchange={handleAccountSearchTermChange}
+                                        onkeyup={handleSearchOnEnter}
+                                        class="search-input"
+                                    ></lightning-input>
+                                    <lightning-button
+                                        label="Buscar"
+                                        onclick={handleSearchAccount}
+                                        disabled={isSearching}
+                                        class="slds-m-left_x-small"
+                                    ></lightning-button>
+                                </div>
+                                <template if:true={showAccountResults}>
+                                    <div class="slds-box slds-m-top_x-small account-results">
+                                        <template if:true={hasAccountResults}>
+                                            <template for:each={accountSearchResults} for:item="acc">
+                                                <div key={acc.Id} class="result-row slds-p-around_x-small" data-id={acc.Id} data-name={acc.Name} onclick={handleSelectAccount}>
+                                                    <strong>{acc.Name}</strong>
+                                                    <template if:true={acc.DNI__c}>
+                                                        <span class="slds-m-left_x-small slds-text-color_weak">DNI: {acc.DNI__c}</span>
+                                                    </template>
+                                                    <template if:true={acc.Phone}>
+                                                        <span class="slds-m-left_x-small slds-text-color_weak">Tel: {acc.Phone}</span>
+                                                    </template>
+                                                    <template if:true={acc.PersonEmail}>
+                                                        <span class="slds-m-left_x-small slds-text-color_weak">Email: {acc.PersonEmail}</span>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </template>
+                                        <template if:true={showNoAccountResults}>
+                                            <p class="slds-text-color_weak slds-p-around_x-small">No se encontraron cuentas.</p>
+                                        </template>
+                                        <div class="slds-p-top_x-small slds-p-left_x-small">
+                                            <lightning-button label="Crear Cuenta" onclick={handleShowCreateAccount} variant="neutral"></lightning-button>
+                                        </div>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
+                <template if:true={showCreateAccountSection}>
+                    <div class="slds-form-element slds-form-element_horizontal slds-m-bottom_small">
+                        <label class="slds-form-element__label">Nueva Cuenta</label>
+                        <div class="slds-form-element__control">
+                            <div class="slds-box">
+                                <div class="slds-grid slds-wrap slds-gutters_small">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-input label="Nombre" required value={newAccountFirstName} onchange={handleNewAccountFieldChange} data-field="firstName"></lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-input label="Apellido" required value={newAccountLastName} onchange={handleNewAccountFieldChange} data-field="lastName"></lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-input label="DNI" required value={newAccountDNI} onchange={handleNewAccountFieldChange} data-field="dni"></lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-input label="Teléfono" required value={newAccountPhone} onchange={handleNewAccountFieldChange} data-field="phone"></lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning-input label="Email" type="email" required value={newAccountEmail} onchange={handleNewAccountFieldChange} data-field="email"></lightning-input>
+                                    </div>
+                                </div>
+                                <div class="slds-m-top_small">
+                                    <lightning-button label="Guardar Cuenta" variant="brand" onclick={handleSaveAccount} disabled={isSavingAccount}></lightning-button>
+                                    <lightning-button label="Cancelar" onclick={handleCancelCreateAccount} class="slds-m-left_x-small"></lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <lightning-input-field field-name="EffectiveDate" value={initialDate} disabled></lightning-input-field>
+
+                <template if:true={showBranchSelection}>
+                    <div class="slds-form-element slds-form-element_horizontal slds-m-bottom_small">
+                        <label class="slds-form-element__label">Sucursal</label>
+                        <div class="slds-form-element__control">
+                            <lightning-combobox
+                                name="branch"
+                                label="Sucursal"
+                                variant="label-hidden"
+                                value={selectedBranch}
+                                placeholder="Seleccione una sucursal"
+                                options={branchOptions}
+                                onchange={handleBranchChange}
+                            ></lightning-combobox>
+                        </div>
+                    </div>
+                </template>
+                <template if:false={showBranchSelection}>
+                    <lightning-input-field field-name="Sucursal__c" value={selectedBranch} disabled></lightning-input-field>
+                </template>
+
+                <lightning-input-field field-name="Creaci_n_Manual__c" checked value={isManualCreation} disabled></lightning-input-field>
+                <lightning-input-field field-name="Metodo_de_envio__c" value={metodoEnvio} disabled></lightning-input-field>
+                <lightning-input-field field-name="Vendedor__c" value={vendedor} onchange={handleVendedorChange} placeholder="Buscar Vendedores"></lightning-input-field>
+
+                <div class="slds-form-element slds-form-element_horizontal slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        <abbr class="slds-required" title="requerido">*</abbr>
+                        Estado de Pago de Reserva
+                    </label>
+                    <div class="slds-form-element__control">
+                        <lightning-combobox
+                            name="paymentState"
+                            label="Estado de Pago de Reserva"
+                            variant="label-hidden"
+                            value={paymentState}
+                            placeholder="Seleccione un estado de pago"
+                            options={paymentStateOptions}
+                            onchange={handlePaymentStateChange}
+                        ></lightning-combobox>
+                    </div>
+                </div>
+
+                <lightning-input-field field-name="Direccion_de_Entrega__Street__s" value={deliveryAddress__Street__s} disabled></lightning-input-field>
+                <lightning-input-field field-name="Direccion_de_Entrega__PostalCode__s" value={deliveryAddress__PostalCode__s} disabled></lightning-input-field>
+                <lightning-input-field field-name="Direccion_de_Entrega__City__s" value={deliveryAddress__City__s} disabled></lightning-input-field>
+                <div class="slds-m-top_medium">
+                    <lightning-button label="Crear Reserva" onclick={handleCreateReserva} disabled={isProcessing} variant="brand"></lightning-button>
+                </div>
+            </lightning-record-edit-form>
+        </div>
+    </lightning-card>
+</template>
