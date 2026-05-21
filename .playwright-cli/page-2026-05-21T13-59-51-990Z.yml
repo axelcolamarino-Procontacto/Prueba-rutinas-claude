@@ -1,0 +1,1035 @@
+- generic:
+  - generic:
+    - generic [ref=e2]:
+      - generic [ref=e3]:
+        - link [ref=e1043] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a navegación
+        - link [ref=e1044] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a contenido principal
+        - generic [ref=e9]:
+          - generic [ref=e13]:
+            - button [ref=e1045] [cursor=pointer]:
+              - img [ref=e21]
+              - generic [ref=e24]: Menu
+            - generic [ref=e29]:
+              - img [ref=e33]
+              - generic [ref=e37]: Sandbox (Staging)
+          - button [ref=e1046] [cursor=pointer]:
+            - img [ref=e48]
+            - generic [ref=e51]: Show menu
+        - generic [ref=e52]:
+          - button [ref=e1047]:
+            - img [ref=e60]
+            - text: Buscar...
+          - navigation [ref=e1048]:
+            - list [ref=e65]:
+              - listitem [ref=e66]:
+                - group [ref=e67]:
+                  - button [ref=e1049] [cursor=pointer]:
+                    - img [ref=e74]
+                  - button [ref=e1050] [cursor=pointer]:
+                    - img [ref=e83]
+              - listitem [ref=e86]:
+                - button [ref=e1051] [cursor=pointer]:
+                  - img [ref=e97]
+              - listitem [ref=e100]:
+                - button [ref=e1052] [cursor=pointer]:
+                  - img [ref=e107]
+              - listitem [ref=e110]:
+                - button [ref=e1053] [cursor=pointer]:
+                  - img [ref=e118]
+              - listitem [ref=e121]:
+                - button [ref=e1054] [cursor=pointer]:
+                  - img [ref=e132]
+              - listitem [ref=e135]:
+                - button [ref=e1055] [cursor=pointer]:
+                  - generic [ref=e140]:
+                    - img [ref=e144]
+                    - generic [ref=e148]: 20+
+                - generic [ref=e149]: 26 nuevas notificaciones
+              - listitem [ref=e150]:
+                - button [ref=e1056] [cursor=pointer]
+      - generic [ref=e158]:
+        - generic [ref=e161]:
+          - generic [ref=e163]:
+            - navigation [ref=e1057]:
+              - button [ref=e1058] [cursor=pointer]:
+                - generic [ref=e177]: Iniciador de aplicación
+            - heading [level=1] [ref=e1059]:
+              - generic [ref=e1060]: CG Offline Admin
+          - navigation [ref=e1061]:
+            - list [ref=e183]:
+              - listitem [ref=e184]:
+                - link [ref=e1062] [cursor=pointer]:
+                  - /url: /lightning/page/home
+                  - generic [ref=e186]: Inicio
+              - listitem [ref=e187]:
+                - link [ref=e1063] [cursor=pointer]:
+                  - /url: /lightning/n/Sincronizar_materiales_del_combo
+                  - generic [ref=e189]: Sincronizar materiales del combo
+              - listitem [ref=e190]:
+                - link [ref=e1064] [cursor=pointer]:
+                  - /url: /lightning/n/SyncProductAssortment
+                  - generic [ref=e192]: Sincronizar surtido de productos
+              - listitem [ref=e193] [cursor=pointer]:
+                - link [ref=e1065]:
+                  - /url: /lightning/r/Product2/01tPs00000G8XYfIAN/view
+                  - generic [ref=e1066]: "*"
+                  - generic [ref=e196]: RUFO CACHORRO 20 kg (44 lb) | Producto
+                - button [ref=e1067]:
+                  - img [ref=e204]
+                  - generic [ref=e207]: Lista de RUFO CACHORRO 20 kg (44 lb) | Producto
+                - button [ref=e1068]:
+                  - img [ref=e212]
+                  - generic [ref=e215]: Cerrar ficha
+              - listitem [ref=e216]:
+                - button [ref=e1069] [cursor=pointer]:
+                  - generic [ref=e219]: Más
+                  - img [ref=e223]
+                  - generic [ref=e226]: Mostrar más elementos de navegación
+              - listitem [ref=e227]:
+                - button [ref=e1070] [cursor=pointer]:
+                  - img [ref=e231]
+                  - generic [ref=e234]: Modificar elementos de navegación
+        - main [ref=e236]:
+          - generic [ref=e252]:
+            - generic [ref=e261]:
+              - generic [ref=e262]:
+                - heading [level=1] [ref=e1071]:
+                  - generic [ref=e271]: Producto
+                  - generic [ref=e274]: RUFO CACHORRO 20 kg (44 lb)
+                - generic [ref=e278]:
+                  - button [ref=e1073] [cursor=pointer]: Modificar
+                  - button [ref=e1075] [cursor=pointer]: Eliminar
+              - generic [ref=e291]:
+                - generic [ref=e293]:
+                  - paragraph [ref=e294]: Nombre del producto
+                  - paragraph [ref=e295]:
+                    - generic [ref=e296]: RUFO CACHORRO 20 kg (44 lb)
+                - generic [ref=e298]:
+                  - paragraph [ref=e299]: Código de producto
+                  - paragraph [ref=e300]:
+                    - generic [ref=e301]: "25000968"
+                - generic [ref=e303]:
+                  - paragraph [ref=e304]: Activo
+                  - paragraph [ref=e305]:
+                    - generic [ref=e309]:
+                      - generic [ref=e311]:
+                        - img [ref=e313]
+                        - generic [ref=e316]: Verdadero
+                      - generic [ref=e317]: Activo
+                - generic [ref=e319]:
+                  - paragraph [ref=e320]: Mandante
+                  - paragraph [ref=e321]:
+                    - generic [ref=e322]: P01
+                - generic [ref=e324]:
+                  - paragraph [ref=e325]: Plantilla de producto
+                  - paragraph [ref=e326]:
+                    - generic [ref=e331]:
+                      - link [ref=e1077] [cursor=pointer]:
+                        - /url: /lightning/r/cgcloud__Product_Template__c/a2nPs0000017rv4IAA/view
+                        - generic [ref=e336]: Product
+                      - button [ref=e1078] [cursor=pointer]:
+                        - img [ref=e340]
+                        - generic [ref=e343]: Vista previa
+            - generic [ref=e345]:
+              - generic [ref=e351]:
+                - heading [level=2] [ref=e1079]: Tabs
+                - generic [ref=e354]:
+                  - heading [level=2] [ref=e1081]: Tabs
+                  - tablist [ref=e1082]:
+                    - tab [selected] [ref=e1083] [cursor=pointer]: Detalles
+                    - tab [ref=e1084] [cursor=pointer]: Consumer Goods
+                    - tab [ref=e1085] [cursor=pointer]: Comercio
+                    - tab [ref=e1086] [cursor=pointer]: Relacionado
+                    - tab [ref=e1087] [cursor=pointer]: Configuración
+                  - tabpanel [ref=e1088]:
+                    - generic [ref=e366]:
+                      - generic [ref=e372]:
+                        - heading [level=3] [ref=e1089]:
+                          - button [expanded] [ref=e1090] [cursor=pointer]:
+                            - img [ref=e378]
+                            - generic [ref=e1091]: Identification
+                        - list [ref=e384]:
+                          - generic [ref=e385]:
+                            - generic [ref=e388]:
+                              - listitem [ref=e391]:
+                                - generic [ref=e393]:
+                                  - generic [ref=e394]: Nombre del producto
+                                  - generic [ref=e397]: RUFO CACHORRO 20 kg (44 lb)
+                              - listitem [ref=e400]:
+                                - generic [ref=e402]:
+                                  - generic [ref=e403]: Código de producto
+                                  - generic [ref=e406]: "25000968"
+                              - listitem [ref=e409]:
+                                - generic [ref=e412]: Código corto de producto
+                              - listitem [ref=e416]:
+                                - generic [ref=e418]:
+                                  - generic [ref=e419]: Divisa del producto
+                                  - generic [ref=e422]: GTQ - Quetzal guatemalteco
+                              - listitem [ref=e425]:
+                                - generic [ref=e428]: Cantidad TM
+                            - generic [ref=e432]:
+                              - listitem [ref=e435]:
+                                - generic [ref=e437]:
+                                  - generic [ref=e438]: Mandante
+                                  - generic [ref=e441]: P01
+                              - listitem [ref=e444]:
+                                - generic [ref=e446]:
+                                  - generic [ref=e447]: Id. Externo
+                                  - generic [ref=e450]: "25000968"
+                              - listitem [ref=e453]:
+                                - generic [ref=e455]:
+                                  - generic [ref=e456]: SKU de producto
+                                  - generic [ref=e459]: "40025000968"
+                              - listitem [ref=e462]:
+                                - generic [ref=e464]:
+                                  - generic [ref=e465]: Producto de la competencia
+                                  - generic [ref=e471]:
+                                    - generic [ref=e473]:
+                                      - img [ref=e475]
+                                      - generic [ref=e478]: Falso
+                                    - generic [ref=e479]: Producto de la competencia
+                              - listitem [ref=e482]:
+                                - generic [ref=e484]:
+                                  - generic [ref=e485]: Descripción del producto
+                                  - generic [ref=e488]: Alimento para perros cachorros
+                      - generic [ref=e494]:
+                        - heading [level=3] [ref=e1093]:
+                          - button [expanded] [ref=e1094] [cursor=pointer]:
+                            - img [ref=e500]
+                            - generic [ref=e1095]: Clasificación
+                        - list [ref=e506]:
+                          - generic [ref=e507]:
+                            - generic [ref=e510]:
+                              - listitem [ref=e513]:
+                                - generic [ref=e515]:
+                                  - generic [ref=e516]: Nivel de producto
+                                  - generic [ref=e519]: Product
+                              - listitem [ref=e522]:
+                                - generic [ref=e524]:
+                                  - generic [ref=e525]: Classification
+                                  - generic [ref=e528]: "201200"
+                              - listitem [ref=e531]:
+                                - generic [ref=e534]: Tipo de producto
+                              - listitem [ref=e539]:
+                                - generic [ref=e542]: Familia
+                              - listitem [ref=e547]:
+                                - generic [ref=e550]: Marca
+                              - listitem [ref=e555]:
+                                - generic [ref=e558]: Submarca
+                            - generic [ref=e563]:
+                              - listitem [ref=e566]:
+                                - generic [ref=e568]:
+                                  - generic [ref=e569]: Tipo Posición
+                                  - generic [ref=e572]: NORM
+                              - listitem [ref=e575]:
+                                - generic [ref=e577]:
+                                  - generic [ref=e578]: Sector
+                                  - generic [ref=e585]:
+                                    - link [ref=e1096] [cursor=pointer]:
+                                      - /url: /lightning/r/Sector__c/a5xPs0000002Rw3IAE/view
+                                      - generic [ref=e590]: Mascotas
+                                    - button [ref=e1097] [cursor=pointer]:
+                                      - img [ref=e594]
+                                      - generic [ref=e597]: Vista previa
+                              - listitem [ref=e600]:
+                                - generic [ref=e602]:
+                                  - generic [ref=e603]: Product Type
+                                  - generic [ref=e606]: "40015"
+                              - listitem [ref=e609]:
+                                - generic [ref=e611]:
+                                  - generic [ref=e612]: Area de Ventas
+                                  - generic [ref=e617]: "15"
+                              - listitem [ref=e620]:
+                                - generic [ref=e622]:
+                                  - generic [ref=e623]: División
+                                  - generic [ref=e626]: "1002"
+                      - heading [level=3] [ref=e1098]:
+                        - button [expanded] [ref=e1099] [cursor=pointer]:
+                          - img [ref=e638]
+                          - generic [ref=e1100]: Status
+                      - heading [level=3] [ref=e1101]:
+                        - button [expanded] [ref=e1102] [cursor=pointer]:
+                          - img [ref=e656]
+                          - generic [ref=e1103]: Description
+                      - heading [level=3] [ref=e1104]:
+                        - button [expanded] [ref=e1105] [cursor=pointer]:
+                          - img [ref=e674]
+                          - generic [ref=e1106]: Criteria
+                      - heading [level=3] [ref=e1107]:
+                        - button [expanded] [ref=e1108] [cursor=pointer]:
+                          - img [ref=e692]
+                          - generic [ref=e1109]: Criterion Information
+                      - heading [level=3] [ref=e1110]:
+                        - button [expanded] [ref=e1111] [cursor=pointer]:
+                          - img [ref=e710]
+                          - generic [ref=e1112]: Asset Information
+                      - heading [level=3] [ref=e1113]:
+                        - button [expanded] [ref=e1114] [cursor=pointer]:
+                          - img [ref=e728]
+                          - generic [ref=e1115]: BOM Information
+                      - heading [level=3] [ref=e1116]:
+                        - button [expanded] [ref=e1117] [cursor=pointer]:
+                          - img [ref=e746]
+                          - generic [ref=e1118]: Fiscal
+                      - heading [level=3] [ref=e1119]:
+                        - button [expanded] [ref=e1120] [cursor=pointer]:
+                          - img [ref=e764]
+                          - generic [ref=e1121]: Información del sistema
+              - generic [ref=e772]:
+                - article [ref=e1122]:
+                  - generic [ref=e780]:
+                    - generic [ref=e781]:
+                      - generic [ref=e784]:
+                        - generic [ref=e786]:
+                          - img [ref=e790]
+                          - heading [level=2] [ref=e1123]:
+                            - link [ref=e1124] [cursor=pointer]:
+                              - /url: /lightning/r/Product2/01tPs00000G8XYfIAN/related/ProductSalesInformation__r/view
+                              - generic [ref=e1125]: Información de ventas del producto
+                              - generic [ref=e1126]: (3+)
+                        - button [ref=e1127] [cursor=pointer]:
+                          - img [ref=e802]
+                          - generic [ref=e805]: Mostrar acciones para Información de ventas del producto
+                      - generic [ref=e813]:
+                        - article [ref=e1128]:
+                          - generic [ref=e817]:
+                            - heading [level=3] [ref=e1129]:
+                              - generic [ref=e825]:
+                                - link [ref=e1130] [cursor=pointer]:
+                                  - /url: /lightning/r/a5rPs0000004p0kIAA/view
+                                  - generic [ref=e830]: a5rPs0000004p0k
+                                - button [ref=e1131] [cursor=pointer]:
+                                  - img [ref=e834]
+                                  - generic [ref=e837]: Vista previa
+                            - generic [ref=e839]:
+                              - term [ref=e840]: "Organización de ventas:"
+                              - definition [ref=e841]:
+                                - generic [ref=e843]: "1510"
+                              - term [ref=e844]: "Canal de distribución:"
+                              - definition [ref=e845]:
+                                - generic [ref=e847]: "08"
+                              - term [ref=e848]: "Activo:"
+                              - definition [ref=e849]:
+                                - generic [ref=e854]:
+                                  - generic [ref=e856]:
+                                    - img [ref=e858]
+                                    - generic [ref=e861]: Falso
+                                  - generic [ref=e862]: Activo
+                          - button [ref=e1133] [cursor=pointer]:
+                            - img [ref=e869]
+                            - generic [ref=e872]: Mostrar acciones
+                        - article [ref=e1134]:
+                          - generic [ref=e876]:
+                            - heading [level=3] [ref=e1135]:
+                              - generic [ref=e884]:
+                                - link [ref=e1136] [cursor=pointer]:
+                                  - /url: /lightning/r/a5rPs0000005JCVIA2/view
+                                  - generic [ref=e889]: a5rPs0000005JCV
+                                - button [ref=e1137] [cursor=pointer]:
+                                  - img [ref=e893]
+                                  - generic [ref=e896]: Vista previa
+                            - generic [ref=e898]:
+                              - term [ref=e899]: "Organización de ventas:"
+                              - definition [ref=e900]:
+                                - generic [ref=e902]: "1570"
+                              - term [ref=e903]: "Canal de distribución:"
+                              - definition [ref=e904]:
+                                - generic [ref=e906]: "07"
+                              - term [ref=e907]: "Activo:"
+                              - definition [ref=e908]:
+                                - generic [ref=e913]:
+                                  - generic [ref=e915]:
+                                    - img [ref=e917]
+                                    - generic [ref=e920]: Falso
+                                  - generic [ref=e921]: Activo
+                          - button [ref=e1139] [cursor=pointer]:
+                            - img [ref=e928]
+                            - generic [ref=e931]: Mostrar acciones
+                        - article [ref=e1140]:
+                          - generic [ref=e935]:
+                            - heading [level=3] [ref=e1141]:
+                              - generic [ref=e943]:
+                                - link [ref=e1142] [cursor=pointer]:
+                                  - /url: /lightning/r/a5rPs0000005UEDIA2/view
+                                  - generic [ref=e948]: a5rPs0000005UED
+                                - button [ref=e1143] [cursor=pointer]:
+                                  - img [ref=e952]
+                                  - generic [ref=e955]: Vista previa
+                            - generic [ref=e957]:
+                              - term [ref=e958]: "Organización de ventas:"
+                              - definition [ref=e959]:
+                                - generic [ref=e961]: "1510"
+                              - term [ref=e962]: "Canal de distribución:"
+                              - definition [ref=e963]:
+                                - generic [ref=e965]: "07"
+                              - term [ref=e966]: "Activo:"
+                              - definition [ref=e967]:
+                                - generic [ref=e972]:
+                                  - generic [ref=e974]:
+                                    - img [ref=e976]
+                                    - generic [ref=e979]: Falso
+                                  - generic [ref=e980]: Activo
+                          - button [ref=e1145] [cursor=pointer]:
+                            - img [ref=e987]
+                            - generic [ref=e990]: Mostrar acciones
+                    - link [ref=e1146] [cursor=pointer]:
+                      - /url: /lightning/r/Product2/01tPs00000G8XYfIAN/related/ProductSalesInformation__r/view
+                      - generic [ref=e992]:
+                        - text: Ver todos
+                        - generic [ref=e993]: Información de ventas del producto
+                - article [ref=e1147]:
+                  - generic [ref=e1005]:
+                    - generic [ref=e1007]:
+                      - img [ref=e1011]
+                      - heading [level=2] [ref=e1148]:
+                        - link [ref=e1149] [cursor=pointer]:
+                          - /url: /lightning/r/Product2/01tPs00000G8XYfIAN/related/ProductDistributionCenterRef__r/view
+                          - generic [ref=e1150]: Información del centro del producto
+                          - generic [ref=e1151]: (0)
+                    - button [ref=e1152] [cursor=pointer]:
+                      - img [ref=e1023]
+                      - generic [ref=e1026]: Mostrar acciones para Información del centro del producto
+                - article [ref=e1033]:
+                  - generic [ref=e1034]:
+                    - img [ref=e1036]
+                    - heading [level=2] [ref=e1153]: Archivos
+    - dialog "Modificar RUFO CACHORRO 20 kg (44 lb)" [ref=e1155]:
+      - generic [ref=e1156]:
+        - button "Cancelar y cerrar" [ref=e1157] [cursor=pointer]:
+          - img [ref=e1159]
+          - generic [ref=e1162]: Cancelar y cerrar
+        - generic [ref=e1163]:
+          - generic [ref=e1170]:
+            - heading "Modificar RUFO CACHORRO 20 kg (44 lb)" [level=2] [ref=e1172]
+            - generic [ref=e1174]:
+              - generic [ref=e1175]: "* = Información obligatoria"
+              - generic [ref=e1181]:
+                - generic [ref=e1187]:
+                  - heading "Identification" [level=3] [ref=e1188]:
+                    - generic "Identification" [ref=e1189]
+                  - list [ref=e1192]:
+                    - generic [ref=e1193]:
+                      - generic [ref=e1196]:
+                        - listitem [ref=e1199]:
+                          - generic [ref=e1206]:
+                            - generic [ref=e1207]: "*Nombre del producto"
+                            - textbox "Nombre del producto" [ref=e1209]: RUFO CACHORRO 20 kg (44 lb)
+                        - listitem [ref=e1212]:
+                          - generic [ref=e1219]:
+                            - generic [ref=e1220]: Código de producto
+                            - textbox "Código de producto" [ref=e1222]: "25000968"
+                        - listitem [ref=e1225]:
+                          - generic [ref=e1232]:
+                            - generic [ref=e1233]: Código corto de producto
+                            - textbox "Código corto de producto" [ref=e1235]
+                        - listitem [ref=e1238]:
+                          - generic [ref=e1246]:
+                            - generic [ref=e1248]: "*Divisa del producto"
+                            - generic [ref=e1252]:
+                              - combobox "Divisa del producto" [ref=e1253] [cursor=pointer]:
+                                - generic [ref=e1254]: GTQ - Quetzal guatemalteco
+                              - img [ref=e1258]
+                            - status
+                        - listitem [ref=e1263]:
+                          - generic [ref=e1269]:
+                            - generic [ref=e1270]: Cantidad TM
+                            - spinbutton "Cantidad TM" [ref=e1272]
+                      - generic [ref=e1275]:
+                        - listitem [ref=e1278]:
+                          - generic [ref=e1286]:
+                            - generic [ref=e1288]: Mandante
+                            - generic [ref=e1292]:
+                              - combobox "Mandante" [ref=e1293] [cursor=pointer]:
+                                - generic [ref=e1294]: P01
+                              - img [ref=e1298]
+                            - status
+                        - listitem [ref=e1303]:
+                          - generic [ref=e1310]:
+                            - generic [ref=e1311]: Id. Externo
+                            - textbox "Id. Externo" [ref=e1313]: "25000968"
+                        - listitem [ref=e1316]:
+                          - generic [ref=e1323]:
+                            - generic [ref=e1324]: SKU de producto
+                            - textbox "SKU de producto" [ref=e1326]: "40025000968"
+                        - listitem [ref=e1329]:
+                          - generic [ref=e1330]:
+                            - button "Deshacer Producto de la competencia" [ref=e2970] [cursor=pointer]:
+                              - img [ref=e2972]
+                            - generic [ref=e1335]:
+                              - generic [ref=e1337]: Producto de la competencia
+                              - checkbox "Producto de la competencia" [checked] [ref=e1339]
+                        - listitem [ref=e1342]:
+                          - generic [ref=e1347]:
+                            - generic [ref=e1348]: Descripción del producto
+                            - textbox "Descripción del producto" [ref=e1350]: Alimento para perros cachorros
+                            - status
+                - generic [ref=e1356]:
+                  - heading "Clasificación" [level=3] [ref=e1357]:
+                    - generic "Clasificación" [ref=e1358]
+                  - list [ref=e1361]:
+                    - generic [ref=e1362]:
+                      - generic [ref=e1365]:
+                        - listitem [ref=e1368]:
+                          - generic [ref=e1376]:
+                            - generic [ref=e1378]: Nivel de producto
+                            - generic [ref=e1382]:
+                              - combobox "Nivel de producto" [ref=e1383] [cursor=pointer]:
+                                - generic [ref=e1384]: Product
+                              - img [ref=e1388]
+                            - status
+                        - listitem [ref=e1393]:
+                          - generic [ref=e1401]:
+                            - generic [ref=e1403]: Classification
+                            - generic [ref=e1407]:
+                              - combobox "Classification" [ref=e1408] [cursor=pointer]:
+                                - generic [ref=e1409]: "201200"
+                              - img [ref=e1413]
+                            - status
+                        - listitem [ref=e1418]:
+                          - generic [ref=e1425]:
+                            - generic [ref=e1426]: Tipo de producto
+                            - generic [ref=e1431]:
+                              - combobox "Tipo de producto" [ref=e1434]
+                              - img [ref=e1438]
+                            - status
+                        - listitem [ref=e1443]:
+                          - generic [ref=e1450]:
+                            - generic [ref=e1451]: Familia
+                            - generic [ref=e1456]:
+                              - combobox "Familia" [ref=e1459]
+                              - img [ref=e1463]
+                            - status
+                        - listitem [ref=e1468]:
+                          - generic [ref=e1475]:
+                            - generic [ref=e1476]: Marca
+                            - generic [ref=e1481]:
+                              - combobox "Marca" [ref=e1484]
+                              - img [ref=e1488]
+                            - status
+                        - listitem [ref=e1493]:
+                          - generic [ref=e1500]:
+                            - generic [ref=e1501]: Submarca
+                            - generic [ref=e1506]:
+                              - combobox "Submarca" [ref=e1509]
+                              - img [ref=e1513]
+                            - status
+                      - generic [ref=e1518]:
+                        - listitem [ref=e1521]:
+                          - generic [ref=e1528]:
+                            - generic [ref=e1529]: Tipo Posición
+                            - textbox "Tipo Posición" [ref=e1531]: NORM
+                        - listitem [ref=e1534]:
+                          - generic [ref=e1541]:
+                            - generic [ref=e1542]: Sector
+                            - generic [ref=e1547]:
+                              - generic [ref=e1549]:
+                                - img [ref=e1551]
+                                - generic [ref=e1554]: Sector
+                              - combobox "Sector" [ref=e1557]: Mascotas
+                              - button "Borrar Sector selección" [ref=e1558] [cursor=pointer]:
+                                - img [ref=e1560]
+                                - generic [ref=e1563]: Borrar Sector selección
+                            - status
+                        - listitem [ref=e1566]:
+                          - generic [ref=e1574]:
+                            - generic [ref=e1576]: Product Type
+                            - generic [ref=e1580]:
+                              - combobox "Product Type" [ref=e1581] [cursor=pointer]:
+                                - generic [ref=e1582]: "40015"
+                              - img [ref=e1586]
+                            - status
+                        - listitem [ref=e1591]:
+                          - generic [ref=e1593]:
+                            - generic [ref=e1594]: Area de Ventas
+                            - generic [ref=e1598]:
+                              - generic [ref=e1599]: "15"
+                              - generic [ref=e1600]: Este campo se calcula al guardar
+                        - listitem [ref=e1603]:
+                          - generic [ref=e1610]:
+                            - generic [ref=e1611]: División
+                            - textbox "División" [ref=e1613]: "1002"
+                - generic [ref=e1619]:
+                  - heading "Status" [level=3] [ref=e1620]:
+                    - generic "Status" [ref=e1621]
+                  - list [ref=e1624]:
+                    - generic [ref=e1625]:
+                      - generic [ref=e1628]:
+                        - listitem [ref=e1631]:
+                          - generic [ref=e1637]:
+                            - generic [ref=e1639]: Activo
+                            - checkbox "Activo" [checked] [ref=e1641]
+                        - listitem [ref=e1644]:
+                          - generic [ref=e1649]:
+                            - group [ref=e1650]:
+                              - generic [ref=e1651]: Entrega válida desde
+                              - generic [ref=e1652]:
+                                - textbox "Entrega válida desde" [ref=e1653]
+                                - button "Seleccionar una fecha para Entrega válida desde" [ref=e1655] [cursor=pointer]:
+                                  - img [ref=e1657]
+                                  - generic [ref=e1660]: Seleccionar una fecha para Entrega válida desde
+                            - generic [ref=e1661]: "Formato: 12/31/2024"
+                        - listitem [ref=e1664]:
+                          - generic [ref=e1669]:
+                            - group [ref=e1670]:
+                              - generic [ref=e1671]: Campo válido desde
+                              - generic [ref=e1672]:
+                                - textbox "Campo válido desde" [ref=e1673]
+                                - button "Seleccionar una fecha para Campo válido desde" [ref=e1675] [cursor=pointer]:
+                                  - img [ref=e1677]
+                                  - generic [ref=e1680]: Seleccionar una fecha para Campo válido desde
+                            - generic [ref=e1681]: "Formato: 12/31/2024"
+                        - listitem [ref=e1684]:
+                          - generic [ref=e1689]:
+                            - group [ref=e1690]:
+                              - generic [ref=e1691]: Nuevo artículo válido desde
+                              - generic [ref=e1692]:
+                                - textbox "Nuevo artículo válido desde" [ref=e1693]
+                                - button "Seleccionar una fecha para Nuevo artículo válido desde" [ref=e1695] [cursor=pointer]:
+                                  - img [ref=e1697]
+                                  - generic [ref=e1700]: Seleccionar una fecha para Nuevo artículo válido desde
+                            - generic [ref=e1701]: "Formato: 12/31/2024"
+                        - listitem [ref=e1704]:
+                          - generic [ref=e1709]:
+                            - group [ref=e1710]:
+                              - generic [ref=e1711]: Fondo válido desde
+                              - generic [ref=e1712]:
+                                - textbox "Fondo válido desde" [ref=e1713]
+                                - button "Seleccionar una fecha para Fondo válido desde" [ref=e1715] [cursor=pointer]:
+                                  - img [ref=e1717]
+                                  - generic [ref=e1720]: Seleccionar una fecha para Fondo válido desde
+                            - generic [ref=e1721]: "Formato: 12/31/2024"
+                      - generic [ref=e1724]:
+                        - listitem [ref=e1727]:
+                          - generic [ref=e1735]:
+                            - generic [ref=e1737]: Estado/Provincia
+                            - generic [ref=e1741]:
+                              - combobox "Estado/Provincia" [ref=e1742] [cursor=pointer]:
+                                - generic [ref=e1743]: "--Ninguno--"
+                              - img [ref=e1747]
+                            - status
+                        - listitem [ref=e1752]:
+                          - generic [ref=e1757]:
+                            - group [ref=e1758]:
+                              - generic [ref=e1759]: Entrega válida hasta
+                              - generic [ref=e1760]:
+                                - textbox "Entrega válida hasta" [ref=e1761]
+                                - button "Seleccionar una fecha para Entrega válida hasta" [ref=e1763] [cursor=pointer]:
+                                  - img [ref=e1765]
+                                  - generic [ref=e1768]: Seleccionar una fecha para Entrega válida hasta
+                            - generic [ref=e1769]: "Formato: 12/31/2024"
+                        - listitem [ref=e1772]:
+                          - generic [ref=e1777]:
+                            - group [ref=e1778]:
+                              - generic [ref=e1779]: Campo válido hasta
+                              - generic [ref=e1780]:
+                                - textbox "Campo válido hasta" [ref=e1781]
+                                - button "Seleccionar una fecha para Campo válido hasta" [ref=e1783] [cursor=pointer]:
+                                  - img [ref=e1785]
+                                  - generic [ref=e1788]: Seleccionar una fecha para Campo válido hasta
+                            - generic [ref=e1789]: "Formato: 12/31/2024"
+                        - listitem [ref=e1792]:
+                          - generic [ref=e1797]:
+                            - group [ref=e1798]:
+                              - generic [ref=e1799]: Nuevo artículo válido hasta
+                              - generic [ref=e1800]:
+                                - textbox "Nuevo artículo válido hasta" [ref=e1801]
+                                - button "Seleccionar una fecha para Nuevo artículo válido hasta" [ref=e1803] [cursor=pointer]:
+                                  - img [ref=e1805]
+                                  - generic [ref=e1808]: Seleccionar una fecha para Nuevo artículo válido hasta
+                            - generic [ref=e1809]: "Formato: 12/31/2024"
+                        - listitem [ref=e1812]:
+                          - generic [ref=e1817]:
+                            - group [ref=e1818]:
+                              - generic [ref=e1819]: Fondo válido hasta
+                              - generic [ref=e1820]:
+                                - textbox "Fondo válido hasta" [ref=e1821]
+                                - button "Seleccionar una fecha para Fondo válido hasta" [ref=e1823] [cursor=pointer]:
+                                  - img [ref=e1825]
+                                  - generic [ref=e1828]: Seleccionar una fecha para Fondo válido hasta
+                            - generic [ref=e1829]: "Formato: 12/31/2024"
+                - generic [ref=e1835]:
+                  - heading "Description" [level=3] [ref=e1836]:
+                    - generic "Description" [ref=e1837]
+                  - list [ref=e1840]:
+                    - generic [ref=e1841]:
+                      - generic [ref=e1844]:
+                        - listitem [ref=e1847]:
+                          - generic [ref=e1854]:
+                            - generic [ref=e1855]: Idioma 1 de descripción 1
+                            - textbox "Idioma 1 de descripción 1" [ref=e1857]: RUFO CACHORRO 20 kg (44 lb)
+                        - listitem [ref=e1860]:
+                          - generic [ref=e1867]:
+                            - generic [ref=e1868]: Idioma 1 de descripción 2
+                            - textbox "Idioma 1 de descripción 2" [ref=e1870]
+                        - listitem [ref=e1873]:
+                          - generic [ref=e1880]:
+                            - generic [ref=e1881]: Idioma de descripción corta 1
+                            - textbox "Idioma de descripción corta 1" [ref=e1883]
+                      - generic [ref=e1886]:
+                        - listitem [ref=e1889]:
+                          - generic [ref=e1891]:
+                            - generic [ref=e1892]: Descripción
+                            - generic [ref=e1896]:
+                              - generic [ref=e1897]: RUFO CACHORRO 20 kg (44 lb)
+                              - generic [ref=e1898]: Este campo se calcula al guardar
+                        - listitem [ref=e1901]:
+                          - generic [ref=e1903]:
+                            - generic [ref=e1904]: Descripción 2
+                            - generic [ref=e1909]: Este campo se calcula al guardar
+                        - listitem [ref=e1912]:
+                          - generic [ref=e1914]:
+                            - generic [ref=e1915]: Descripción corta
+                            - generic [ref=e1920]: Este campo se calcula al guardar
+                - generic [ref=e1926]:
+                  - heading "Criteria" [level=3] [ref=e1927]:
+                    - generic "Criteria" [ref=e1928]
+                  - list [ref=e1931]:
+                    - generic [ref=e1932]:
+                      - generic [ref=e1935]:
+                        - listitem [ref=e1938]:
+                          - generic [ref=e1944]:
+                            - generic [ref=e1945]: Tamaño de paquete
+                            - spinbutton "Tamaño de paquete" [ref=e1947]
+                        - listitem [ref=e1950]:
+                          - generic [ref=e1958]:
+                            - generic [ref=e1960]: Unidad de tamaño de paquete
+                            - generic [ref=e1964]:
+                              - combobox "Unidad de tamaño de paquete" [ref=e1965] [cursor=pointer]:
+                                - generic [ref=e1966]: "--Ninguno--"
+                              - img [ref=e1970]
+                            - status
+                        - listitem [ref=e1975]:
+                          - generic [ref=e1983]:
+                            - generic [ref=e1985]: Forma de producto
+                            - generic [ref=e1989]:
+                              - combobox "Forma de producto" [ref=e1990] [cursor=pointer]:
+                                - generic [ref=e1991]: "--Ninguno--"
+                              - img [ref=e1995]
+                            - status
+                      - generic [ref=e2000]:
+                        - listitem [ref=e2003]:
+                          - generic [ref=e2009]:
+                            - generic [ref=e2010]: Tamaño de contenedor
+                            - spinbutton "Tamaño de contenedor" [ref=e2012]
+                        - listitem [ref=e2015]:
+                          - generic [ref=e2023]:
+                            - generic [ref=e2025]: Unidad de tamaño de contenedor
+                            - generic [ref=e2029]:
+                              - combobox "Unidad de tamaño de contenedor" [ref=e2030] [cursor=pointer]:
+                                - generic [ref=e2031]: "--Ninguno--"
+                              - img [ref=e2035]
+                            - status
+                        - listitem [ref=e2040]:
+                          - generic [ref=e2048]:
+                            - generic [ref=e2050]: Tipo de contenedor
+                            - generic [ref=e2054]:
+                              - combobox "Tipo de contenedor" [ref=e2055] [cursor=pointer]:
+                                - generic [ref=e2056]: "--Ninguno--"
+                              - img [ref=e2060]
+                            - status
+                - generic [ref=e2068]:
+                  - heading "Criterion Information" [level=3] [ref=e2069]:
+                    - generic "Criterion Information" [ref=e2070]
+                  - list [ref=e2073]:
+                    - generic [ref=e2074]:
+                      - generic [ref=e2077]:
+                        - listitem [ref=e2080]:
+                          - generic [ref=e2087]:
+                            - generic [ref=e2088]: Producto de Criterio 1
+                            - button "Información de ayuda de Producto de Criterio 1" [ref=e2092] [cursor=pointer]:
+                              - img [ref=e2094]
+                              - generic [ref=e2097]: Información de ayuda de Producto de Criterio 1
+                            - generic [ref=e2102]:
+                              - combobox "Producto de Criterio 1" [ref=e2105]
+                              - img [ref=e2109]
+                            - status
+                        - listitem [ref=e2114]:
+                          - generic [ref=e2121]:
+                            - generic [ref=e2122]: Producto de Criterio 3
+                            - button "Información de ayuda de Producto de Criterio 3" [ref=e2126] [cursor=pointer]:
+                              - img [ref=e2128]
+                              - generic [ref=e2131]: Información de ayuda de Producto de Criterio 3
+                            - generic [ref=e2136]:
+                              - combobox "Producto de Criterio 3" [ref=e2139]
+                              - img [ref=e2143]
+                            - status
+                        - listitem [ref=e2148]:
+                          - generic [ref=e2155]:
+                            - generic [ref=e2156]: Producto de Criterio 5
+                            - button "Información de ayuda de Producto de Criterio 5" [ref=e2160] [cursor=pointer]:
+                              - img [ref=e2162]
+                              - generic [ref=e2165]: Información de ayuda de Producto de Criterio 5
+                            - generic [ref=e2170]:
+                              - combobox "Producto de Criterio 5" [ref=e2173]
+                              - img [ref=e2177]
+                            - status
+                        - listitem [ref=e2182]:
+                          - generic [ref=e2184]:
+                            - generic [ref=e2185]: Código de producto de Criterio 1
+                            - generic [ref=e2190]: Este campo se calcula al guardar
+                        - listitem [ref=e2193]:
+                          - generic [ref=e2195]:
+                            - generic [ref=e2196]: Código de producto de Criterio 2
+                            - generic [ref=e2201]: Este campo se calcula al guardar
+                        - listitem [ref=e2204]:
+                          - generic [ref=e2206]:
+                            - generic [ref=e2207]: Código de producto de Criterio 3
+                            - generic [ref=e2212]: Este campo se calcula al guardar
+                        - listitem [ref=e2215]:
+                          - generic [ref=e2217]:
+                            - generic [ref=e2218]: Código de producto de Criterio 4
+                            - generic [ref=e2223]: Este campo se calcula al guardar
+                        - listitem [ref=e2226]:
+                          - generic [ref=e2228]:
+                            - generic [ref=e2229]: Código de producto de Criterio 5
+                            - generic [ref=e2234]: Este campo se calcula al guardar
+                        - listitem [ref=e2237]:
+                          - generic [ref=e2239]:
+                            - generic [ref=e2240]: Código de producto de Criterio 6
+                            - generic [ref=e2245]: Este campo se calcula al guardar
+                      - generic [ref=e2248]:
+                        - listitem [ref=e2251]:
+                          - generic [ref=e2258]:
+                            - generic [ref=e2259]: Producto de Criterio 2
+                            - button "Información de ayuda de Producto de Criterio 2" [ref=e2263] [cursor=pointer]:
+                              - img [ref=e2265]
+                              - generic [ref=e2268]: Información de ayuda de Producto de Criterio 2
+                            - generic [ref=e2273]:
+                              - combobox "Producto de Criterio 2" [ref=e2276]
+                              - img [ref=e2280]
+                            - status
+                        - listitem [ref=e2285]:
+                          - generic [ref=e2292]:
+                            - generic [ref=e2293]: Producto de Criterio 4
+                            - button "Información de ayuda de Producto de Criterio 4" [ref=e2297] [cursor=pointer]:
+                              - img [ref=e2299]
+                              - generic [ref=e2302]: Información de ayuda de Producto de Criterio 4
+                            - generic [ref=e2307]:
+                              - combobox "Producto de Criterio 4" [ref=e2310]
+                              - img [ref=e2314]
+                            - status
+                        - listitem [ref=e2319]:
+                          - generic [ref=e2326]:
+                            - generic [ref=e2327]: Producto de Criterio 6
+                            - button "Información de ayuda de Producto de Criterio 6" [ref=e2331] [cursor=pointer]:
+                              - img [ref=e2333]
+                              - generic [ref=e2336]: Información de ayuda de Producto de Criterio 6
+                            - generic [ref=e2341]:
+                              - combobox "Producto de Criterio 6" [ref=e2344]
+                              - img [ref=e2348]
+                            - status
+                        - listitem [ref=e2353]:
+                          - generic [ref=e2355]:
+                            - generic [ref=e2356]: Descripción de producto de Criterio 1
+                            - generic [ref=e2361]: Este campo se calcula al guardar
+                        - listitem [ref=e2364]:
+                          - generic [ref=e2366]:
+                            - generic [ref=e2367]: Descripción de producto de Criterio 2
+                            - generic [ref=e2372]: Este campo se calcula al guardar
+                        - listitem [ref=e2375]:
+                          - generic [ref=e2377]:
+                            - generic [ref=e2378]: Descripción de producto de Criterio 3
+                            - generic [ref=e2383]: Este campo se calcula al guardar
+                        - listitem [ref=e2386]:
+                          - generic [ref=e2388]:
+                            - generic [ref=e2389]: Descripción de producto de Criterio 4
+                            - generic [ref=e2394]: Este campo se calcula al guardar
+                        - listitem [ref=e2397]:
+                          - generic [ref=e2399]:
+                            - generic [ref=e2400]: Descripción de producto de Criterio 5
+                            - generic [ref=e2405]: Este campo se calcula al guardar
+                        - listitem [ref=e2408]:
+                          - generic [ref=e2410]:
+                            - generic [ref=e2411]: Descripción de producto de Criterio 6
+                            - generic [ref=e2416]: Este campo se calcula al guardar
+                - generic [ref=e2422]:
+                  - heading "Asset Information" [level=3] [ref=e2423]:
+                    - generic "Asset Information" [ref=e2424]
+                  - list [ref=e2427]:
+                    - generic [ref=e2428]:
+                      - generic [ref=e2431]:
+                        - listitem [ref=e2434]:
+                          - generic [ref=e2440]:
+                            - generic [ref=e2441]: Peso de envío
+                            - spinbutton "Peso de envío" [ref=e2443]
+                        - listitem [ref=e2446]:
+                          - generic [ref=e2454]:
+                            - generic [ref=e2456]: Unidad de medida de peso de envío
+                            - generic [ref=e2460]:
+                              - combobox "Unidad de medida de peso de envío" [ref=e2461] [cursor=pointer]:
+                                - generic [ref=e2462]: "--Ninguno--"
+                              - img [ref=e2466]
+                            - status
+                        - listitem [ref=e2471]:
+                          - generic [ref=e2478]:
+                            - generic [ref=e2479]: Fabricante
+                            - textbox "Fabricante" [ref=e2481]
+                        - listitem [ref=e2484]:
+                          - generic [ref=e2491]:
+                            - generic [ref=e2492]: Número de artículo del fabricante
+                            - textbox "Número de artículo del fabricante" [ref=e2494]
+                        - listitem [ref=e2497]:
+                          - generic [ref=e2504]:
+                            - generic [ref=e2505]: Valor estimado
+                            - textbox "Valor estimado" [ref=e2507]
+                        - listitem [ref=e2510]:
+                          - generic [ref=e2516]:
+                            - generic [ref=e2518]: Fuente de alimentación conectada
+                            - checkbox "Fuente de alimentación conectada" [ref=e2520]
+                      - generic [ref=e2523]:
+                        - listitem [ref=e2526]:
+                          - generic [ref=e2533]:
+                            - generic [ref=e2534]: Unidad FD
+                            - textbox "Unidad FD" [ref=e2536]
+                        - listitem [ref=e2539]:
+                          - generic [ref=e2546]:
+                            - generic [ref=e2547]: Unidad Medida Base
+                            - textbox "Unidad Medida Base" [ref=e2549]: KG
+                        - listitem [ref=e2552]:
+                          - generic [ref=e2558]:
+                            - generic [ref=e2560]: Maneja Catch Weight
+                            - checkbox "Maneja Catch Weight" [ref=e2562]
+                        - listitem [ref=e2565]:
+                          - generic [ref=e2572]:
+                            - generic [ref=e2573]: Tamaño
+                            - textbox "Tamaño" [ref=e2575]
+                        - listitem [ref=e2578]:
+                          - generic [ref=e2585]:
+                            - generic [ref=e2586]: Altura
+                            - textbox "Altura" [ref=e2588]
+                        - listitem [ref=e2591]:
+                          - generic [ref=e2598]:
+                            - generic [ref=e2599]: Peso
+                            - textbox "Peso" [ref=e2601]
+                - generic [ref=e2607]:
+                  - heading "BOM Information" [level=3] [ref=e2608]:
+                    - generic "BOM Information" [ref=e2609]
+                  - list [ref=e2612]:
+                    - generic [ref=e2613]:
+                      - listitem [ref=e2619]:
+                        - generic [ref=e2621]:
+                          - generic [ref=e2622]: BOM
+                          - generic [ref=e2626]:
+                            - generic [ref=e2630]:
+                              - generic "Falso" [ref=e2631]:
+                                - generic [ref=e2632]:
+                                  - img [ref=e2634]
+                                  - generic [ref=e2637]: Falso
+                              - generic [ref=e2638]: BOM
+                            - generic [ref=e2639]: Este campo se calcula al guardar
+                      - listitem [ref=e2645]:
+                        - generic [ref=e2652]:
+                          - generic [ref=e2653]: Id. de Material de BOM
+                          - textbox "Id. de Material de BOM" [ref=e2655]
+                - generic [ref=e2661]:
+                  - heading "Fiscal" [level=3] [ref=e2662]:
+                    - generic "Fiscal" [ref=e2663]
+                  - list [ref=e2666]:
+                    - generic [ref=e2667]:
+                      - generic [ref=e2670]:
+                        - listitem [ref=e2673]:
+                          - generic [ref=e2680]:
+                            - generic [ref=e2681]: Tipo de impuestos 1
+                            - textbox "Tipo de impuestos 1" [ref=e2683]
+                        - listitem [ref=e2686]:
+                          - generic [ref=e2693]:
+                            - generic [ref=e2694]: Tipo de impuestos 2
+                            - textbox "Tipo de impuestos 2" [ref=e2696]
+                        - listitem [ref=e2699]:
+                          - generic [ref=e2706]:
+                            - generic [ref=e2707]: Tipo de impuestos 3
+                            - textbox "Tipo de impuestos 3" [ref=e2709]
+                        - listitem [ref=e2712]:
+                          - generic [ref=e2720]:
+                            - generic [ref=e2722]: Clasificación de impuestos
+                            - generic [ref=e2726]:
+                              - combobox "Clasificación de impuestos" [ref=e2727] [cursor=pointer]:
+                                - generic [ref=e2728]: "--Ninguno--"
+                              - img [ref=e2732]
+                            - status
+                      - generic [ref=e2737]:
+                        - listitem [ref=e2740]:
+                          - generic [ref=e2747]:
+                            - generic [ref=e2748]: Clasificación fiscal 1
+                            - generic [ref=e2753]:
+                              - combobox "Clasificación fiscal 1" [ref=e2756]
+                              - img [ref=e2760]
+                            - status
+                        - listitem [ref=e2765]:
+                          - generic [ref=e2772]:
+                            - generic [ref=e2773]: Clasificación fiscal 2
+                            - generic [ref=e2778]:
+                              - combobox "Clasificación fiscal 2" [ref=e2781]
+                              - img [ref=e2785]
+                            - status
+                        - listitem [ref=e2790]:
+                          - generic [ref=e2797]:
+                            - generic [ref=e2798]: Clasificación fiscal 3
+                            - generic [ref=e2803]:
+                              - combobox "Clasificación fiscal 3" [ref=e2806]
+                              - img [ref=e2810]
+                            - status
+                - generic [ref=e2818]:
+                  - heading "Información del sistema" [level=3] [ref=e2819]:
+                    - generic "Información del sistema" [ref=e2820]
+                  - list [ref=e2823]:
+                    - generic [ref=e2824]:
+                      - generic [ref=e2827]:
+                        - listitem [ref=e2830]:
+                          - generic [ref=e2837]:
+                            - generic [ref=e2838]: Código de producto de Consumer Goods
+                            - textbox "Código de producto de Consumer Goods" [ref=e2840]: "40025000968"
+                        - listitem [ref=e2843]:
+                          - generic [ref=e2850]:
+                            - generic [ref=e2851]: Id. producto externo de Consumer Goods
+                            - textbox "Id. producto externo de Consumer Goods" [ref=e2853]: "40025000968"
+                        - listitem [ref=e2856]:
+                          - generic [ref=e2863]:
+                            - generic [ref=e2864]: Plantilla de producto
+                            - generic [ref=e2869]:
+                              - generic [ref=e2871]:
+                                - img [ref=e2873]
+                                - generic [ref=e2874]: Plantilla de producto
+                              - combobox "Plantilla de producto" [ref=e2877]: Product
+                              - button "Borrar Plantilla de producto selección" [ref=e2878] [cursor=pointer]:
+                                - img [ref=e2880]
+                                - generic [ref=e2883]: Borrar Plantilla de producto selección
+                            - status
+                      - generic [ref=e2886]:
+                        - listitem [ref=e2889]:
+                          - generic [ref=e2891]:
+                            - generic [ref=e2892]: Creado por
+                            - generic [ref=e2896]:
+                              - generic [ref=e2902]: Maximiliano Miño
+                              - text: ", 8/28/2025, 2:51 p. m."
+                        - listitem [ref=e2905]:
+                          - generic [ref=e2907]:
+                            - generic [ref=e2908]: Última modificación por
+                            - generic [ref=e2912]:
+                              - generic [ref=e2918]: Integraciones B4B
+                              - text: ", 12/16/2025, 9:56 a. m."
+                        - listitem [ref=e2921]:
+                          - generic [ref=e2928]:
+                            - generic [ref=e2929]: Plantilla de activo
+                            - generic [ref=e2934]:
+                              - combobox "Plantilla de activo" [ref=e2937]
+                              - img [ref=e2941]
+                            - status
+            - generic [ref=e2948]:
+              - generic "Cancelar" [ref=e2949]:
+                - button "Cancelar" [ref=e2954] [cursor=pointer]
+              - generic "Guardar y nuevo" [ref=e2955]:
+                - button "Guardar y nuevo" [ref=e2960] [cursor=pointer]
+              - generic "Guardar" [ref=e2961]:
+                - button "Guardar" [active] [ref=e2966] [cursor=pointer]
+          - status [ref=e2968]
+    - alert [ref=e2976]:
+      - generic:
+        - status:
+          - generic [ref=e2977]: Cargando...
+  - generic:
+    - status

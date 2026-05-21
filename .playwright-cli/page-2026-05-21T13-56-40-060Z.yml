@@ -1,0 +1,352 @@
+- generic:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e9]:
+        - generic [ref=e13]:
+          - button "Toggle Panel" [ref=e17] [cursor=pointer]:
+            - img [ref=e21]
+            - generic [ref=e24]: Menu
+          - generic [ref=e29]:
+            - img [ref=e33]
+            - generic [ref=e37]: Sandbox (Staging)
+        - button "Show menu" [ref=e46] [cursor=pointer]:
+          - img [ref=e48]
+          - generic [ref=e51]: Show menu
+      - generic [ref=e52]:
+        - button "Buscar" [ref=e58]:
+          - img [ref=e60]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e63]:
+          - list [ref=e65]:
+            - listitem [ref=e66]:
+              - group [ref=e67]:
+                - button "Agregar favorito" [ref=e69] [cursor=pointer]:
+                  - generic [ref=e70]:
+                    - img [ref=e74]
+                    - tooltip "Agregar favorito"
+                - button "Lista de favoritos" [ref=e78] [cursor=pointer]:
+                  - generic [ref=e79]:
+                    - img [ref=e83]
+                    - tooltip "Lista de favoritos"
+            - listitem [ref=e86]:
+              - button "Acciones globales" [ref=e1031] [cursor=pointer]:
+                - generic [ref=e1032]:
+                  - img [ref=e1036]
+                  - tooltip "Acciones globales"
+            - listitem [ref=e1039]:
+              - button "Centro de orientación" [ref=e1041] [cursor=pointer]:
+                - generic [ref=e1042]:
+                  - img [ref=e1046]
+                  - tooltip "Centro de orientación"
+            - listitem [ref=e95]:
+              - button "Ayuda de Salesforce" [ref=e98] [cursor=pointer]:
+                - generic [ref=e99]:
+                  - img [ref=e103]
+                  - tooltip "Ayuda de Salesforce"
+            - listitem [ref=e106]:
+              - button "Configuración" [ref=e112] [cursor=pointer]:
+                - generic [ref=e113]:
+                  - img [ref=e117]
+                  - tooltip "Configuración"
+            - listitem [ref=e120]:
+              - button "20+ Notificaciones" [ref=e1049] [cursor=pointer]:
+                - generic [ref=e124]:
+                  - generic [ref=e125]:
+                    - img [ref=e129]
+                    - generic [ref=e1051]: 20+
+                  - tooltip "Notificaciones"
+              - generic [ref=e132]: 26 nuevas notificaciones
+            - listitem [ref=e133]:
+              - button "Ver perfil" [ref=e136] [cursor=pointer]:
+                - generic [ref=e137]:
+                  - tooltip "Ver perfil"
+    - generic [ref=e141]:
+      - generic [ref=e144]:
+        - generic [ref=e146]:
+          - navigation "Aplicación" [ref=e147]:
+            - button "Iniciador de aplicación" [ref=e149] [cursor=pointer]:
+              - generic [ref=e160]: Iniciador de aplicación
+          - heading "CG Offline Admin" [level=1] [ref=e161]:
+            - generic "CG Offline Admin" [ref=e162]
+        - navigation "Global" [ref=e165]:
+          - list [ref=e166]:
+            - listitem [ref=e167]:
+              - link "Inicio" [ref=e168] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e169]: Inicio
+            - listitem [ref=e170]:
+              - link "Sincronizar materiales del combo" [ref=e171] [cursor=pointer]:
+                - /url: /lightning/n/Sincronizar_materiales_del_combo
+                - generic [ref=e172]: Sincronizar materiales del combo
+            - listitem [ref=e173]:
+              - link "Sincronizar surtido de productos" [ref=e174] [cursor=pointer]:
+                - /url: /lightning/n/SyncProductAssortment
+                - generic [ref=e175]: Sincronizar surtido de productos
+            - listitem [ref=e176]:
+              - link "Casos" [ref=e177] [cursor=pointer]:
+                - /url: /lightning/o/Case/home
+                - generic [ref=e178]: Casos
+              - button "Lista de Casos" [ref=e182] [cursor=pointer]:
+                - img [ref=e186]
+                - generic [ref=e189]: Lista de Casos
+            - listitem [ref=e190]:
+              - link "Candidatos" [ref=e191] [cursor=pointer]:
+                - /url: /lightning/o/Lead/home
+                - generic [ref=e192]: Candidatos
+              - button "Lista de Candidatos" [ref=e196] [cursor=pointer]:
+                - img [ref=e200]
+                - generic [ref=e203]: Lista de Candidatos
+            - listitem [ref=e204] [cursor=pointer]:
+              - link "Cuentas" [ref=e205]:
+                - /url: /lightning/o/Account/home
+                - generic [ref=e206]: Cuentas
+              - button "Lista de Cuentas" [ref=e210]:
+                - img [ref=e214]
+                - generic [ref=e217]: Lista de Cuentas
+            - listitem [ref=e218]:
+              - button "Mostrar más elementos de navegación" [ref=e220] [cursor=pointer]:
+                - generic [ref=e221]: Más
+                - img [ref=e225]
+                - generic [ref=e228]: Mostrar más elementos de navegación
+            - listitem [ref=e229]:
+              - button "Modificar elementos de navegación" [ref=e231] [cursor=pointer]:
+                - img [ref=e233]
+                - generic [ref=e236]: Modificar elementos de navegación
+      - main [ref=e238]:
+        - generic [ref=e254]:
+          - generic [ref=e263]:
+            - generic [ref=e264]:
+              - generic [ref=e265]:
+                - heading "Cuenta ALFARO SOLANO XINIA MAYELA" [level=1] [ref=e275]:
+                  - generic [ref=e277]: Cuenta
+                  - generic [ref=e278]: ALFARO SOLANO XINIA MAYELA
+                - button "Ver jerarquía de cuenta" [ref=e289] [cursor=pointer]:
+                  - img [ref=e291]
+                  - generic [ref=e294]: Ver jerarquía de cuenta
+              - generic [ref=e299]:
+                - generic "Activar como comprador" [ref=e300]:
+                  - button "Activar como comprador" [ref=e305] [cursor=pointer]
+                - generic "Modificar" [ref=e306]:
+                  - button "Modificar" [ref=e311] [cursor=pointer]
+                - generic "Eliminar" [ref=e312]:
+                  - button "Eliminar" [ref=e317] [cursor=pointer]
+                - button "Mostrar más acciones" [ref=e319] [cursor=pointer]:
+                  - img [ref=e321]
+                  - generic [ref=e324]: Mostrar más acciones
+            - generic [ref=e325]:
+              - generic [ref=e327]:
+                - paragraph [ref=e328]: Número de cliente
+                - paragraph [ref=e329]:
+                  - generic [ref=e330]: "16301270194"
+              - generic [ref=e332]:
+                - paragraph [ref=e333]: Tipo de cliente
+                - paragraph [ref=e334]:
+                  - generic [ref=e335]: Deudor Nacional
+              - generic [ref=e337]:
+                - paragraph [ref=e338]: Organización de ventas
+                - paragraph [ref=e339]:
+                  - generic [ref=e340]: "2350"
+              - generic [ref=e342]:
+                - paragraph [ref=e343]: Vendedor
+                - paragraph
+          - generic [ref=e345]:
+            - generic [ref=e347]:
+              - generic [ref=e351]:
+                - heading "Tabs" [level=2] [ref=e352]
+                - generic "Tabs" [ref=e353]:
+                  - generic [ref=e354]:
+                    - heading "Tabs" [level=2] [ref=e355]
+                    - tablist "Tabs" [ref=e357]:
+                      - tab "Detalles" [ref=e358] [cursor=pointer]
+                      - tab "Actividad" [ref=e359] [cursor=pointer]
+                      - tab "Consumer Goods" [ref=e360] [cursor=pointer]
+                      - tab "Productos" [active] [selected] [ref=e361] [cursor=pointer]
+                    - tabpanel "Productos" [ref=e1118]:
+                      - generic [ref=e1119]:
+                        - article "Product Assortment Customers" [ref=e1123]:
+                          - generic [ref=e1132]:
+                            - generic [ref=e1134]:
+                              - img [ref=e1138]
+                              - heading "Product Assortment Customers (0)" [level=2] [ref=e1140]:
+                                - link "Product Assortment Customers (0)" [ref=e1141] [cursor=pointer]:
+                                  - /url: /lightning/cmp/force__dynamicRelatedListViewAll?force__flexipageId=Customer_Lightning_Page&force__cmpId=lst_dynamicRelatedList5&force__recordId=001Ps000015MZnYIAW
+                                  - generic "Product Assortment Customers" [ref=e1142]
+                                  - generic "(0)" [ref=e1143]
+                            - list [ref=e1146]:
+                              - listitem [ref=e1147]:
+                                - button "Agregar" [ref=e1148] [cursor=pointer]:
+                                  - generic "Agregar" [ref=e1149]
+                        - article "Establecimiento de surtido de productos" [ref=e1156]:
+                          - generic [ref=e1161]:
+                            - generic [ref=e1163]:
+                              - img [ref=e1167]
+                              - heading "Establecimiento de surtido de productos (0)" [level=2] [ref=e1169]:
+                                - link "Establecimiento de surtido de productos (0)" [ref=e1170] [cursor=pointer]:
+                                  - /url: /lightning/r/Account/001Ps000015MZnYIAW/related/cgcloud__Product_Assortment_Store__r/view
+                                  - generic "Establecimiento de surtido de productos" [ref=e1171]
+                                  - generic "(0)" [ref=e1172]
+                            - generic "Nuevo" [ref=e1176]:
+                              - button "Nuevo" [ref=e1181] [cursor=pointer]
+                        - article [ref=e1185]:
+                          - article [ref=e1187]:
+                            - generic [ref=e1189]:
+                              - heading "Surtidos del Cliente" [level=2] [ref=e1191]:
+                                - generic [ref=e1192]: Surtidos del Cliente
+                              - button "Asignar surtido" [ref=e1196] [cursor=pointer]:
+                                - img [ref=e1198]
+                                - text: Asignar surtido
+                            - paragraph [ref=e1204]: No hay surtidos asignados a este cliente.
+              - article [ref=e739]:
+                - generic [ref=e741]:
+                  - img [ref=e746]
+                  - heading "Canales del cliente" [level=2] [ref=e750]:
+                    - generic [ref=e751]: Canales del cliente
+                - generic [ref=e755]:
+                  - generic [ref=e757]:
+                    - img [ref=e759]
+                    - generic [ref=e762]: Advertencia
+                  - heading "No hay un canal habilitado para el cliente." [level=2] [ref=e763]
+                  - paragraph [ref=e764]: Por favor, verifique que el cliente tenga asignado un canal activo.
+            - generic [ref=e766]:
+              - generic [ref=e770]:
+                - heading "Tabs" [level=2] [ref=e771]
+                - generic "Tabs" [ref=e772]:
+                  - generic [ref=e773]:
+                    - heading "Tabs" [level=2] [ref=e774]
+                    - tablist "Tabs" [ref=e776]:
+                      - tab "Relacionado" [selected] [ref=e777] [cursor=pointer]
+                      - tab "Tareas" [ref=e778] [cursor=pointer]
+                    - tabpanel "Relacionado" [ref=e781]:
+                      - generic [ref=e782]:
+                        - article "Unidad de organización de cliente" [ref=e789]:
+                          - generic [ref=e790]:
+                            - generic [ref=e791]:
+                              - generic [ref=e794]:
+                                - generic [ref=e796]:
+                                  - img [ref=e800]
+                                  - heading "Unidad de organización de cliente (1)" [level=2] [ref=e802]:
+                                    - link "Unidad de organización de cliente (1)" [ref=e803] [cursor=pointer]:
+                                      - /url: /lightning/r/Account/001Ps000015MZnYIAW/related/cgcloud__Account_Org_Units__r/view
+                                      - generic "Unidad de organización de cliente" [ref=e804]
+                                      - generic "(1)" [ref=e805]
+                                - button "Mostrar acciones para Unidad de organización de cliente" [ref=e810] [cursor=pointer]:
+                                  - img [ref=e812]
+                                  - generic [ref=e815]: Mostrar acciones para Unidad de organización de cliente
+                              - article "<a href=\"/a0YPs00000weprM\" target=\"_top\">Ver</a>" [ref=e826]:
+                                - generic [ref=e827]:
+                                  - heading "Ver" [level=3] [ref=e829]:
+                                    - link "Ver" [ref=e834] [cursor=pointer]:
+                                      - /url: /a0YPs00000weprM
+                                  - generic [ref=e836]:
+                                    - term [ref=e837]: "Unidad de organización:"
+                                    - definition [ref=e838]:
+                                      - link "ADN" [ref=e842] [cursor=pointer]:
+                                        - /url: /lightning/r/a2RPs000002fDK7MAM/view
+                                        - generic [ref=e843]: ADN
+                                    - term [ref=e844]: "Válido desde:"
+                                    - definition [ref=e845]:
+                                      - generic [ref=e846]: 1/1/2025
+                                    - term [ref=e847]: "Válido hasta:"
+                                    - definition [ref=e848]:
+                                      - generic [ref=e849]: 1/1/2099
+                                - button "Mostrar acciones" [ref=e854] [cursor=pointer]:
+                                  - img [ref=e856]
+                                  - generic [ref=e859]: Mostrar acciones
+                            - link "Ver todos Unidad de organización de cliente" [ref=e860] [cursor=pointer]:
+                              - /url: /lightning/r/Account/001Ps000015MZnYIAW/related/cgcloud__Account_Org_Units__r/view
+                              - generic [ref=e861]:
+                                - text: Ver todos
+                                - generic [ref=e862]: Unidad de organización de cliente
+                        - article "Contactos" [ref=e869]:
+                          - generic [ref=e874]:
+                            - generic [ref=e876]:
+                              - img [ref=e880]
+                              - heading "Contactos (0)" [level=2] [ref=e882]:
+                                - link "Contactos (0)" [ref=e883] [cursor=pointer]:
+                                  - /url: /lightning/r/Account/001Ps000015MZnYIAW/related/Contacts/view
+                                  - generic "Contactos" [ref=e884]
+                                  - generic "(0)" [ref=e885]
+                            - button "Mostrar acciones para Contactos" [ref=e890] [cursor=pointer]:
+                              - img [ref=e892]
+                              - generic [ref=e895]: Mostrar acciones para Contactos
+                        - article "Direcciones de puntos de contacto" [ref=e902]:
+                          - generic [ref=e903]:
+                            - generic [ref=e904]:
+                              - generic [ref=e907]:
+                                - generic [ref=e909]:
+                                  - img [ref=e913]
+                                  - heading "Direcciones de puntos de contacto (1)" [level=2] [ref=e1052]:
+                                    - link "Direcciones de puntos de contacto (1)" [ref=e1053] [cursor=pointer]:
+                                      - /url: /lightning/r/Account/001Ps000015MZnYIAW/related/ContactPointAddresses/view
+                                      - generic "Direcciones de puntos de contacto" [ref=e917]
+                                      - generic "(1)" [ref=e1054]
+                                - button "Mostrar acciones para Direcciones de puntos de contacto" [ref=e921] [cursor=pointer]:
+                                  - generic [ref=e923]:
+                                    - img [ref=e925]
+                                    - generic [ref=e928]: Mostrar acciones para Direcciones de puntos de contacto
+                              - article "16301270194" [ref=e1059]:
+                                - generic [ref=e1060]:
+                                  - heading "16301270194 Vista previa" [level=3] [ref=e1062]:
+                                    - generic [ref=e1068]:
+                                      - link "16301270194" [ref=e1069] [cursor=pointer]:
+                                        - /url: /lightning/r/8lWPs000001QzdyMAC/view
+                                        - generic [ref=e1073]: "16301270194"
+                                      - button "Vista previa" [ref=e1075] [cursor=pointer]:
+                                        - img [ref=e1077]
+                                        - generic [ref=e1080]: Vista previa
+                                  - generic [ref=e1082]:
+                                    - term [ref=e1083]: "Tipo de dirección:"
+                                    - definition [ref=e1084]:
+                                      - generic [ref=e1086]: Pickup
+                                    - term [ref=e1087]: "Es dirección predeterminada:"
+                                    - definition [ref=e1088]:
+                                      - generic [ref=e1093]:
+                                        - generic "Verdadero" [ref=e1094]:
+                                          - generic [ref=e1095]:
+                                            - img [ref=e1097]
+                                            - generic [ref=e1100]: Verdadero
+                                        - generic [ref=e1101]: Es dirección predeterminada
+                                    - term [ref=e1102]: "Dirección:"
+                                    - definition [ref=e1103]:
+                                      - generic [ref=e1104]: ALAJUELA, GRECIA, RÍO CUARTO, 3 KIL CATOLICA DE SANTA RITA
+                                - button "Mostrar acciones" [ref=e1109] [cursor=pointer]:
+                                  - img [ref=e1111]
+                                  - generic [ref=e1114]: Mostrar acciones
+                            - link "Ver todos Direcciones de puntos de contacto" [ref=e1115] [cursor=pointer]:
+                              - /url: /lightning/r/Account/001Ps000015MZnYIAW/related/ContactPointAddresses/view
+                              - generic [ref=e1116]:
+                                - text: Ver todos
+                                - generic [ref=e1117]: Direcciones de puntos de contacto
+                        - article "Customer Relationships" [ref=e944]:
+                          - article [ref=e948]:
+                            - generic [ref=e949]:
+                              - img [ref=e951]
+                              - heading "Customer Relationships" [level=2] [ref=e952]
+                        - article "Informaciones comerciales" [ref=e957]:
+                          - article [ref=e961]:
+                            - generic [ref=e962]:
+                              - img [ref=e964]
+                              - heading "Informaciones comerciales" [level=2] [ref=e965]
+                        - article [ref=e973]:
+                          - generic [ref=e974]:
+                            - img [ref=e976]
+                            - heading "Archivos" [level=2] [ref=e977]
+              - article [ref=e984]:
+                - generic [ref=e986]:
+                  - img [ref=e991]
+                  - heading "Estado de crédito" [level=2] [ref=e996]:
+                    - generic [ref=e997]: Estado de crédito
+                - generic [ref=e999]:
+                  - generic [ref=e1002]: Límite de crédito
+                  - generic [ref=e1006]: Committed Credit
+                  - generic [ref=e1010]: Comprometido especial
+                  - generic [ref=e1014]: Crédito
+                  - generic [ref=e1019]:
+                    - generic [ref=e1020]: Divisa de la cuenta
+                    - textbox "Divisa de la cuenta" [ref=e1022]: CRC
+  - generic:
+    - status

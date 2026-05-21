@@ -1,0 +1,442 @@
+- generic:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e5050] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e5051] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e9]:
+        - generic [ref=e13]:
+          - button "Toggle Panel" [ref=e5052] [cursor=pointer]:
+            - img [ref=e21]
+            - generic [ref=e24]: Menu
+          - generic [ref=e29]:
+            - img [ref=e33]
+            - generic [ref=e37]: Sandbox (Staging)
+        - button "Show menu" [ref=e5053] [cursor=pointer]:
+          - img [ref=e48]
+          - generic [ref=e51]: Show menu
+      - generic [ref=e52]:
+        - button "Buscar" [ref=e5054]:
+          - img [ref=e60]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e5055]:
+          - list [ref=e65]:
+            - listitem [ref=e66]:
+              - group [ref=e67]:
+                - button "Agregar favorito" [ref=e5056] [cursor=pointer]:
+                  - generic [ref=e70]:
+                    - img [ref=e74]
+                    - tooltip "Agregar favorito"
+                - button "Lista de favoritos" [ref=e5057] [cursor=pointer]:
+                  - generic [ref=e79]:
+                    - img [ref=e83]
+                    - tooltip "Lista de favoritos"
+            - listitem [ref=e86]:
+              - button "Acciones globales" [ref=e5058] [cursor=pointer]:
+                - generic [ref=e93]:
+                  - img [ref=e97]
+                  - tooltip "Acciones globales"
+            - listitem [ref=e100]:
+              - button "Centro de orientación" [ref=e5059] [cursor=pointer]:
+                - generic [ref=e103]:
+                  - img [ref=e107]
+                  - tooltip "Centro de orientación"
+            - listitem [ref=e110]:
+              - button "Ayuda de Salesforce" [ref=e5060] [cursor=pointer]:
+                - generic [ref=e114]:
+                  - img [ref=e118]
+                  - tooltip "Ayuda de Salesforce"
+            - listitem [ref=e121]:
+              - button "Configuración" [ref=e5061] [cursor=pointer]:
+                - generic [ref=e128]:
+                  - img [ref=e132]
+                  - tooltip "Configuración"
+            - listitem [ref=e135]:
+              - button "20+ Notificaciones" [ref=e5062] [cursor=pointer]:
+                - generic [ref=e139]:
+                  - generic [ref=e140]:
+                    - img [ref=e144]
+                    - generic [ref=e148]: 20+
+                  - tooltip "Notificaciones"
+              - generic [ref=e149]: 26 nuevas notificaciones
+            - listitem [ref=e150]:
+              - button "Ver perfil" [ref=e5063] [cursor=pointer]:
+                - generic [ref=e154]:
+                  - tooltip "Ver perfil"
+    - generic [ref=e158]:
+      - generic [ref=e161]:
+        - generic [ref=e163]:
+          - navigation "Aplicación" [ref=e5064]:
+            - button "Iniciador de aplicación" [ref=e5065] [cursor=pointer]:
+              - generic [ref=e177]: Iniciador de aplicación
+          - heading "CG Offline Admin" [level=1] [ref=e5066]:
+            - generic "CG Offline Admin" [ref=e5067]
+        - navigation "Global" [ref=e5068]:
+          - list [ref=e183]:
+            - listitem [ref=e184]:
+              - link "Inicio" [ref=e5069] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e186]: Inicio
+            - listitem [ref=e187]:
+              - link "Sincronizar materiales del combo" [ref=e5070] [cursor=pointer]:
+                - /url: /lightning/n/Sincronizar_materiales_del_combo
+                - generic [ref=e189]: Sincronizar materiales del combo
+            - listitem [ref=e190]:
+              - link "Sincronizar surtido de productos" [ref=e5071] [cursor=pointer]:
+                - /url: /lightning/n/SyncProductAssortment
+                - generic [ref=e192]: Sincronizar surtido de productos
+            - listitem [ref=e193] [cursor=pointer]:
+              - link "* RUFO CACHORRO 20 kg (44 lb) | Producto" [ref=e5072]:
+                - /url: /lightning/r/Product2/01tPs00000G8XYfIAN/view
+                - generic "No agregado a barra de navegación" [ref=e5073]: "*"
+                - generic [ref=e196]: RUFO CACHORRO 20 kg (44 lb) | Producto
+              - button "Lista de RUFO CACHORRO 20 kg (44 lb) | Producto" [ref=e5074]:
+                - img [ref=e204]
+                - generic [ref=e207]: Lista de RUFO CACHORRO 20 kg (44 lb) | Producto
+              - button "Cerrar ficha" [ref=e5075]:
+                - img [ref=e212]
+                - generic [ref=e215]: Cerrar ficha
+            - listitem [ref=e216]:
+              - button "Mostrar más elementos de navegación" [ref=e5076] [cursor=pointer]:
+                - generic [ref=e219]: Más
+                - img [ref=e223]
+                - generic [ref=e226]: Mostrar más elementos de navegación
+            - listitem [ref=e227]:
+              - button "Modificar elementos de navegación" [ref=e5077] [cursor=pointer]:
+                - img [ref=e231]
+                - generic [ref=e234]: Modificar elementos de navegación
+      - main [ref=e236]:
+        - generic [ref=e252]:
+          - generic [ref=e261]:
+            - generic [ref=e262]:
+              - heading "Producto RUFO CACHORRO 20 kg (44 lb)" [level=1] [ref=e5078]:
+                - generic [ref=e271]: Producto
+                - generic [ref=e274]: RUFO CACHORRO 20 kg (44 lb)
+              - generic [ref=e278]:
+                - generic "Modificar" [ref=e5079]:
+                  - button "Modificar" [active] [ref=e5080] [cursor=pointer]
+                - generic "Eliminar" [ref=e5081]:
+                  - button "Eliminar" [ref=e5082] [cursor=pointer]
+            - generic [ref=e291]:
+              - generic [ref=e293]:
+                - paragraph [ref=e294]: Nombre del producto
+                - paragraph [ref=e295]:
+                  - generic [ref=e296]: RUFO CACHORRO 20 kg (44 lb)
+              - generic [ref=e298]:
+                - paragraph [ref=e299]: Código de producto
+                - paragraph [ref=e300]:
+                  - generic [ref=e301]: "25000968"
+              - generic [ref=e303]:
+                - paragraph [ref=e304]: Activo
+                - paragraph [ref=e305]:
+                  - generic [ref=e309]:
+                    - generic "Verdadero" [ref=e5083]:
+                      - generic [ref=e311]:
+                        - img [ref=e313]
+                        - generic [ref=e316]: Verdadero
+                    - generic [ref=e317]: Activo
+              - generic [ref=e319]:
+                - paragraph [ref=e320]: Mandante
+                - paragraph [ref=e321]:
+                  - generic [ref=e322]: P01
+              - generic [ref=e324]:
+                - paragraph [ref=e325]: Plantilla de producto
+                - paragraph [ref=e326]:
+                  - generic [ref=e331]:
+                    - link "Product" [ref=e5084] [cursor=pointer]:
+                      - /url: /lightning/r/cgcloud__Product_Template__c/a2nPs0000017rv4IAA/view
+                      - generic [ref=e336]: Product
+                    - button "Vista previa" [ref=e5085] [cursor=pointer]:
+                      - img [ref=e340]
+                      - generic [ref=e343]: Vista previa
+          - generic [ref=e345]:
+            - generic [ref=e351]:
+              - heading "Tabs" [level=2] [ref=e5086]
+              - generic "Tabs" [ref=e5087]:
+                - generic [ref=e354]:
+                  - heading "Tabs" [level=2] [ref=e5088]
+                  - tablist "Tabs" [ref=e5089]:
+                    - tab "Detalles" [selected] [ref=e5090] [cursor=pointer]
+                    - tab "Consumer Goods" [ref=e5091] [cursor=pointer]
+                    - tab "Comercio" [ref=e5092] [cursor=pointer]
+                    - tab "Relacionado" [ref=e5093] [cursor=pointer]
+                    - tab "Configuración" [ref=e5094] [cursor=pointer]
+                  - tabpanel "Detalles" [ref=e5095]:
+                    - generic [ref=e366]:
+                      - generic [ref=e372]:
+                        - heading "Identification" [level=3] [ref=e5096]:
+                          - button "Identification" [expanded] [ref=e5097] [cursor=pointer]:
+                            - img [ref=e378]
+                            - generic "Identification" [ref=e5098]
+                        - list [ref=e384]:
+                          - generic [ref=e385]:
+                            - generic [ref=e388]:
+                              - listitem [ref=e391]:
+                                - generic [ref=e393]:
+                                  - generic [ref=e394]: Nombre del producto
+                                  - generic [ref=e397]: RUFO CACHORRO 20 kg (44 lb)
+                              - listitem [ref=e400]:
+                                - generic [ref=e402]:
+                                  - generic [ref=e403]: Código de producto
+                                  - generic [ref=e406]: "25000968"
+                              - listitem [ref=e409]:
+                                - generic [ref=e412]: Código corto de producto
+                              - listitem [ref=e416]:
+                                - generic [ref=e418]:
+                                  - generic [ref=e419]: Divisa del producto
+                                  - generic [ref=e422]: GTQ - Quetzal guatemalteco
+                              - listitem [ref=e425]:
+                                - generic [ref=e428]: Cantidad TM
+                            - generic [ref=e432]:
+                              - listitem [ref=e435]:
+                                - generic [ref=e437]:
+                                  - generic [ref=e438]: Mandante
+                                  - generic [ref=e441]: P01
+                              - listitem [ref=e444]:
+                                - generic [ref=e446]:
+                                  - generic [ref=e447]: Id. Externo
+                                  - generic [ref=e450]: "25000968"
+                              - listitem [ref=e453]:
+                                - generic [ref=e455]:
+                                  - generic [ref=e456]: SKU de producto
+                                  - generic [ref=e459]: "40025000968"
+                              - listitem [ref=e462]:
+                                - generic [ref=e464]:
+                                  - generic [ref=e465]: Producto de la competencia
+                                  - generic [ref=e471]:
+                                    - generic "Falso" [ref=e5099]:
+                                      - generic [ref=e473]:
+                                        - img [ref=e5100]
+                                        - generic [ref=e478]: Falso
+                                    - generic [ref=e479]: Producto de la competencia
+                              - listitem [ref=e482]:
+                                - generic [ref=e484]:
+                                  - generic [ref=e485]: Descripción del producto
+                                  - generic [ref=e488]: Alimento para perros cachorros
+                      - generic [ref=e494]:
+                        - heading "Clasificación" [level=3] [ref=e5103]:
+                          - button "Clasificación" [expanded] [ref=e5104] [cursor=pointer]:
+                            - img [ref=e500]
+                            - generic "Clasificación" [ref=e5105]
+                        - list [ref=e506]:
+                          - generic [ref=e507]:
+                            - generic [ref=e510]:
+                              - listitem [ref=e513]:
+                                - generic [ref=e515]:
+                                  - generic [ref=e516]: Nivel de producto
+                                  - generic [ref=e519]: Product
+                              - listitem [ref=e522]:
+                                - generic [ref=e524]:
+                                  - generic [ref=e525]: Classification
+                                  - generic [ref=e528]: "201200"
+                              - listitem [ref=e531]:
+                                - generic [ref=e534]: Tipo de producto
+                              - listitem [ref=e539]:
+                                - generic [ref=e542]: Familia
+                              - listitem [ref=e547]:
+                                - generic [ref=e550]: Marca
+                              - listitem [ref=e555]:
+                                - generic [ref=e558]: Submarca
+                            - generic [ref=e563]:
+                              - listitem [ref=e566]:
+                                - generic [ref=e568]:
+                                  - generic [ref=e569]: Tipo Posición
+                                  - generic [ref=e572]: NORM
+                              - listitem [ref=e575]:
+                                - generic [ref=e577]:
+                                  - generic [ref=e578]: Sector
+                                  - generic [ref=e585]:
+                                    - link "Mascotas" [ref=e5106] [cursor=pointer]:
+                                      - /url: /lightning/r/Sector__c/a5xPs0000002Rw3IAE/view
+                                      - generic [ref=e590]: Mascotas
+                                    - button "Vista previa" [ref=e5107] [cursor=pointer]:
+                                      - img [ref=e594]
+                                      - generic [ref=e597]: Vista previa
+                              - listitem [ref=e600]:
+                                - generic [ref=e602]:
+                                  - generic [ref=e603]: Product Type
+                                  - generic [ref=e606]: "40015"
+                              - listitem [ref=e609]:
+                                - generic [ref=e611]:
+                                  - generic [ref=e612]: Area de Ventas
+                                  - generic [ref=e617]: "15"
+                              - listitem [ref=e620]:
+                                - generic [ref=e622]:
+                                  - generic [ref=e623]: División
+                                  - generic [ref=e626]: "1002"
+                      - heading "Status" [level=3] [ref=e5108]:
+                        - button "Status" [expanded] [ref=e5109] [cursor=pointer]:
+                          - img [ref=e638]
+                          - generic "Status" [ref=e5110]
+                      - heading "Description" [level=3] [ref=e5111]:
+                        - button "Description" [expanded] [ref=e5112] [cursor=pointer]:
+                          - img [ref=e656]
+                          - generic "Description" [ref=e5113]
+                      - heading "Criteria" [level=3] [ref=e5114]:
+                        - button "Criteria" [expanded] [ref=e5115] [cursor=pointer]:
+                          - img [ref=e674]
+                          - generic "Criteria" [ref=e5116]
+                      - heading "Criterion Information" [level=3] [ref=e5117]:
+                        - button "Criterion Information" [expanded] [ref=e5118] [cursor=pointer]:
+                          - img [ref=e692]
+                          - generic "Criterion Information" [ref=e5119]
+                      - heading "Asset Information" [level=3] [ref=e5120]:
+                        - button "Asset Information" [expanded] [ref=e5121] [cursor=pointer]:
+                          - img [ref=e710]
+                          - generic "Asset Information" [ref=e5122]
+                      - heading "BOM Information" [level=3] [ref=e5123]:
+                        - button "BOM Information" [expanded] [ref=e5124] [cursor=pointer]:
+                          - img [ref=e728]
+                          - generic "BOM Information" [ref=e5125]
+                      - heading "Fiscal" [level=3] [ref=e5126]:
+                        - button "Fiscal" [expanded] [ref=e5127] [cursor=pointer]:
+                          - img [ref=e746]
+                          - generic "Fiscal" [ref=e5128]
+                      - heading "Información del sistema" [level=3] [ref=e5129]:
+                        - button "Información del sistema" [expanded] [ref=e5130] [cursor=pointer]:
+                          - img [ref=e764]
+                          - generic "Información del sistema" [ref=e5131]
+            - generic [ref=e772]:
+              - article "Información de ventas del producto" [ref=e5132]:
+                - generic [ref=e780]:
+                  - generic [ref=e781]:
+                    - generic [ref=e784]:
+                      - generic [ref=e786]:
+                        - img [ref=e790]
+                        - heading "Información de ventas del producto (3+)" [level=2] [ref=e5133]:
+                          - link "Información de ventas del producto (3+)" [ref=e5134] [cursor=pointer]:
+                            - /url: /lightning/r/Product2/01tPs00000G8XYfIAN/related/ProductSalesInformation__r/view
+                            - generic "Información de ventas del producto" [ref=e5135]
+                            - generic "(3+)" [ref=e5136]
+                      - button "Mostrar acciones para Información de ventas del producto" [ref=e5137] [cursor=pointer]:
+                        - img [ref=e802]
+                        - generic [ref=e805]: Mostrar acciones para Información de ventas del producto
+                    - generic [ref=e809]:
+                      - generic [ref=e813]:
+                        - article "a5rPs0000004p0k" [ref=e5138]:
+                          - generic [ref=e817]:
+                            - heading "a5rPs0000004p0k Vista previa" [level=3] [ref=e5139]:
+                              - generic [ref=e825]:
+                                - link "a5rPs0000004p0k" [ref=e5140] [cursor=pointer]:
+                                  - /url: /lightning/r/a5rPs0000004p0kIAA/view
+                                  - generic [ref=e830]: a5rPs0000004p0k
+                                - button "Vista previa" [ref=e5141] [cursor=pointer]:
+                                  - img [ref=e834]
+                                  - generic [ref=e837]: Vista previa
+                            - generic [ref=e839]:
+                              - term [ref=e840]: "Organización de ventas:"
+                              - definition [ref=e841]:
+                                - generic [ref=e843]: "1510"
+                              - term [ref=e844]: "Canal de distribución:"
+                              - definition [ref=e845]:
+                                - generic [ref=e847]: "08"
+                              - term [ref=e848]: "Activo:"
+                              - definition [ref=e849]:
+                                - generic [ref=e854]:
+                                  - generic "Falso" [ref=e5142]:
+                                    - generic [ref=e856]:
+                                      - img [ref=e858]
+                                      - generic [ref=e861]: Falso
+                                  - generic [ref=e862]: Activo
+                          - button "Mostrar acciones" [ref=e5143] [cursor=pointer]:
+                            - img [ref=e869]
+                            - generic [ref=e872]: Mostrar acciones
+                        - article "a5rPs0000005JCV" [ref=e5144]:
+                          - generic [ref=e876]:
+                            - heading "a5rPs0000005JCV Vista previa" [level=3] [ref=e5145]:
+                              - generic [ref=e884]:
+                                - link "a5rPs0000005JCV" [ref=e5146] [cursor=pointer]:
+                                  - /url: /lightning/r/a5rPs0000005JCVIA2/view
+                                  - generic [ref=e889]: a5rPs0000005JCV
+                                - button "Vista previa" [ref=e5147] [cursor=pointer]:
+                                  - img [ref=e893]
+                                  - generic [ref=e896]: Vista previa
+                            - generic [ref=e898]:
+                              - term [ref=e899]: "Organización de ventas:"
+                              - definition [ref=e900]:
+                                - generic [ref=e902]: "1570"
+                              - term [ref=e903]: "Canal de distribución:"
+                              - definition [ref=e904]:
+                                - generic [ref=e906]: "07"
+                              - term [ref=e907]: "Activo:"
+                              - definition [ref=e908]:
+                                - generic [ref=e913]:
+                                  - generic "Falso" [ref=e5148]:
+                                    - generic [ref=e915]:
+                                      - img [ref=e917]
+                                      - generic [ref=e920]: Falso
+                                  - generic [ref=e921]: Activo
+                          - button "Mostrar acciones" [ref=e5149] [cursor=pointer]:
+                            - img [ref=e928]
+                            - generic [ref=e931]: Mostrar acciones
+                        - article "a5rPs0000005UED" [ref=e5150]:
+                          - generic [ref=e935]:
+                            - heading "a5rPs0000005UED Vista previa" [level=3] [ref=e5151]:
+                              - generic [ref=e943]:
+                                - link "a5rPs0000005UED" [ref=e5152] [cursor=pointer]:
+                                  - /url: /lightning/r/a5rPs0000005UEDIA2/view
+                                  - generic [ref=e948]: a5rPs0000005UED
+                                - button "Vista previa" [ref=e5153] [cursor=pointer]:
+                                  - img [ref=e952]
+                                  - generic [ref=e955]: Vista previa
+                            - generic [ref=e957]:
+                              - term [ref=e958]: "Organización de ventas:"
+                              - definition [ref=e959]:
+                                - generic [ref=e961]: "1510"
+                              - term [ref=e962]: "Canal de distribución:"
+                              - definition [ref=e963]:
+                                - generic [ref=e965]: "07"
+                              - term [ref=e966]: "Activo:"
+                              - definition [ref=e967]:
+                                - generic [ref=e972]:
+                                  - generic "Falso" [ref=e5154]:
+                                    - generic [ref=e974]:
+                                      - img [ref=e976]
+                                      - generic [ref=e979]: Falso
+                                  - generic [ref=e980]: Activo
+                          - button "Mostrar acciones" [ref=e5155] [cursor=pointer]:
+                            - img [ref=e987]
+                            - generic [ref=e990]: Mostrar acciones
+                      - generic [ref=e5156]:
+                        - status
+                  - link "Ver todos Información de ventas del producto" [ref=e5159] [cursor=pointer]:
+                    - /url: /lightning/r/Product2/01tPs00000G8XYfIAN/related/ProductSalesInformation__r/view
+                    - generic [ref=e992]:
+                      - text: Ver todos
+                      - generic [ref=e993]: Información de ventas del producto
+              - article "Información del centro del producto" [ref=e5160]:
+                - generic [ref=e1002]:
+                  - generic [ref=e1005]:
+                    - generic [ref=e1007]:
+                      - img [ref=e1011]
+                      - heading "Información del centro del producto (0)" [level=2] [ref=e5161]:
+                        - link "Información del centro del producto (0)" [ref=e5162] [cursor=pointer]:
+                          - /url: /lightning/r/Product2/01tPs00000G8XYfIAN/related/ProductDistributionCenterRef__r/view
+                          - generic "Información del centro del producto" [ref=e5163]
+                          - generic "(0)" [ref=e5164]
+                    - button "Mostrar acciones para Información del centro del producto" [ref=e5165] [cursor=pointer]:
+                      - img [ref=e1023]
+                      - generic [ref=e1026]: Mostrar acciones para Información del centro del producto
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - status
+              - article [ref=e1033]:
+                - generic [ref=e1034]:
+                  - img [ref=e1036]
+                  - heading "Archivos" [level=2] [ref=e5168]
+  - generic:
+    - generic [ref=e5170]:
+      - generic [ref=e5172]:
+        - img [ref=e5174]
+        - generic [ref=e5177]: Operación correcta notificación,
+      - generic [ref=e5178]:
+        - generic [ref=e5181]: Se guardó Producto "RUFO CACHORRO 20 kg (44 lb)".
+        - generic [ref=e5182]: Pulse Control + F6 para navegar a la siguiente notificación emergente o región enfocable.
+      - button "Cerrar" [ref=e5184] [cursor=pointer]:
+        - img [ref=e5188]
+        - generic [ref=e5191]: Cerrar
+    - status
