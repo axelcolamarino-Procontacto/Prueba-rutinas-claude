@@ -1,0 +1,201 @@
+- generic:
+  - generic:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - link [ref=e428] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a navegación
+        - link [ref=e429] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a contenido principal
+        - generic [ref=e9]:
+          - img [ref=e13]
+          - generic [ref=e16]: "Inicio de sesión como [CMI] Supervisor (supervisor@cmi.com.staging) | Sandbox: Staging |"
+          - link [ref=e430] [cursor=pointer]:
+            - /url: /secur/logout.jsp
+            - text: Cerrar sesión como [CMI] Supervisor
+        - generic [ref=e18]:
+          - button [ref=e431]:
+            - img [ref=e26]
+            - text: Buscar...
+          - navigation [ref=e432]:
+            - list [ref=e31]:
+              - listitem [ref=e32]:
+                - group [ref=e33]:
+                  - button [ref=e433] [cursor=pointer]:
+                    - img [ref=e40]
+                  - button [ref=e434] [cursor=pointer]:
+                    - img [ref=e49]
+              - listitem [ref=e52]:
+                - button [ref=e435] [cursor=pointer]:
+                  - img [ref=e63]
+              - listitem [ref=e66]:
+                - button [ref=e436] [cursor=pointer]:
+                  - img [ref=e73]
+              - listitem [ref=e76]:
+                - button [ref=e437] [cursor=pointer]:
+                  - img [ref=e84]
+              - listitem [ref=e87]:
+                - button [ref=e438] [cursor=pointer]:
+                  - img [ref=e98]
+              - listitem [ref=e101]:
+                - button [ref=e439] [cursor=pointer]:
+                  - img [ref=e110]
+              - listitem [ref=e114]:
+                - button [ref=e440] [cursor=pointer]
+      - generic [ref=e122]:
+        - generic [ref=e125]:
+          - generic [ref=e127]:
+            - navigation [ref=e441]:
+              - button [ref=e442] [cursor=pointer]:
+                - generic [ref=e141]: Iniciador de aplicación
+            - heading [level=1] [ref=e443]:
+              - generic [ref=e444]: CG Offline Admin
+          - navigation [ref=e445]:
+            - list [ref=e147]:
+              - listitem [ref=e148]:
+                - link [ref=e446] [cursor=pointer]:
+                  - /url: /lightning/n/Sincronizar_materiales_del_combo
+                  - generic [ref=e150]: Sincronizar materiales del combo
+              - listitem [ref=e151]:
+                - link [ref=e447] [cursor=pointer]:
+                  - /url: /lightning/n/SyncProductAssortment
+                  - generic [ref=e153]: Sincronizar surtido de productos
+              - listitem [ref=e154]:
+                - link [ref=e448] [cursor=pointer]:
+                  - /url: /lightning/o/Case/home
+                  - generic [ref=e156]: Casos
+                - button [ref=e449] [cursor=pointer]:
+                  - img [ref=e164]
+                  - generic [ref=e167]: Lista de Casos
+              - listitem [ref=e168]:
+                - link [ref=e450] [cursor=pointer]:
+                  - /url: /lightning/o/Lead/home
+                  - generic [ref=e170]: Candidatos
+                - button [ref=e451] [cursor=pointer]:
+                  - img [ref=e178]
+                  - generic [ref=e181]: Lista de Candidatos
+              - listitem [ref=e182] [cursor=pointer]:
+                - link [ref=e452]:
+                  - /url: /lightning/o/Account/home
+                  - generic [ref=e184]: Cuentas
+                - button [ref=e453]:
+                  - img [ref=e192]
+                  - generic [ref=e195]: Lista de Cuentas
+              - listitem [ref=e196]:
+                - button [ref=e454] [cursor=pointer]:
+                  - generic [ref=e199]: Más
+                  - img [ref=e203]
+                  - generic [ref=e206]: Mostrar más elementos de navegación
+              - listitem [ref=e207]:
+                - button [ref=e455] [cursor=pointer]:
+                  - img [ref=e211]
+                  - generic [ref=e214]: Modificar elementos de navegación
+        - main [ref=e216]:
+          - generic [ref=e226]:
+            - generic [ref=e228]:
+              - generic [ref=e229]:
+                - generic [ref=e231]:
+                  - img [ref=e235]
+                  - generic [ref=e236]:
+                    - heading [level=1] [ref=e456]: Cuentas
+                    - generic [ref=e241]:
+                      - generic [ref=e243] [cursor=pointer]:
+                        - heading [level=1] [ref=e457]:
+                          - generic [ref=e245]: Cuentas
+                          - generic [ref=e246]: Vistos recientemente
+                        - button [ref=e458]:
+                          - img [ref=e251]
+                          - generic [ref=e254]: "Seleccionar una vista de lista: Cuentas"
+                      - button [disabled] [ref=e459] [cursor=pointer]:
+                        - img [ref=e260]
+                        - generic [ref=e263]: Esta lista está anclada.
+                - list [ref=e266]:
+                  - listitem [ref=e267]:
+                    - button [ref=e460] [cursor=pointer]:
+                      - generic [ref=e461]: Nuevo
+                  - listitem [ref=e270]:
+                    - button [ref=e462] [cursor=pointer]:
+                      - generic [ref=e463]: Asignar etiqueta
+              - generic [ref=e273]:
+                - paragraph [ref=e275]:
+                  - generic [ref=e277]:
+                    - status [ref=e464]: 0 elementos •
+                    - text: Se actualizó hace unos segundos
+                - generic [ref=e284]:
+                  - generic [ref=e285]: Buscar en esta lista...
+                  - generic [ref=e286]:
+                    - searchbox [ref=e465]
+                    - img [ref=e288]
+                - generic [ref=e291]:
+                  - button [ref=e466] [cursor=pointer]:
+                    - img [ref=e297]
+                    - img [ref=e301]
+                    - generic [ref=e304]: Controles de vista de lista
+                  - button [ref=e467] [cursor=pointer]:
+                    - img [ref=e309]
+                    - img [ref=e313]
+                    - generic [ref=e316]: Seleccionar visualización de lista
+                  - generic [ref=e318]:
+                    - button [ref=e468] [cursor=pointer]:
+                      - img [ref=e323]
+                      - generic [ref=e326]: Actualizar
+                    - button [ref=e469] [cursor=pointer]:
+                      - img [ref=e331]
+                      - generic [ref=e334]: La ordenación por columnas está desactivada. Para ordenar columnas, una vista de lista necesita al menos una fila y dos columnas.
+                    - button [ref=e470] [cursor=pointer]:
+                      - img [ref=e339]
+                      - generic [ref=e342]: La modificación en línea está desactivada. Para realizar modificaciones, filtre por un tipo de registro.
+                    - group [ref=e343]:
+                      - generic [ref=e345]:
+                        - generic:
+                          - generic:
+                            - button [disabled]:
+                              - generic:
+                                - img
+                              - generic: Gráficos
+                        - generic:
+                          - generic:
+                            - button [disabled]:
+                              - generic:
+                                - img
+                              - generic: Filtros
+            - generic [ref=e353]:
+              - img [ref=e354]
+              - generic [ref=e421]:
+                - paragraph [ref=e422]: Nada que ver aquí
+                - paragraph [ref=e423]: No hay nada aún en su lista. Pruebe a agregar un nuevo registro.
+    - dialog "Nueva Cuenta" [ref=e472]:
+      - generic [ref=e473]:
+        - button "Cancelar y cerrar" [active] [ref=e474] [cursor=pointer]:
+          - img [ref=e476]
+          - generic [ref=e479]: Cancelar y cerrar
+        - generic [ref=e480]:
+          - generic [ref=e482]:
+            - generic [ref=e484]:
+              - heading "Nueva Cuenta" [level=2] [ref=e485]
+              - group "Nueva Cuenta Seleccionar un tipo de registro" [ref=e488]:
+                - generic [ref=e489]:
+                  - generic [ref=e490]: Nueva Cuenta
+                  - text: Seleccionar un tipo de registro
+                - generic [ref=e491]:
+                  - generic:
+                    - generic:
+                      - radio "Prospecto" [checked] [ref=e493]
+                      - generic [ref=e495]: Prospecto
+                  - generic:
+                    - generic:
+                      - radio "Cliente" [ref=e498]
+                      - generic [ref=e500]: Cliente
+                  - generic:
+                    - generic:
+                      - radio "Sucursales" [ref=e503]
+                      - generic [ref=e505]: Sucursales
+            - generic [ref=e508]:
+              - button "Cancelar" [ref=e509] [cursor=pointer]:
+                - generic [ref=e510]: Cancelar
+              - button "Siguiente" [ref=e511] [cursor=pointer]:
+                - generic [ref=e512]: Siguiente
+          - status [ref=e513]
+  - generic:
+    - status

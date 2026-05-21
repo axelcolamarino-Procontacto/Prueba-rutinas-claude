@@ -1,0 +1,120 @@
+- generic:
+  - generic:
+    - generic [ref=e2]:
+      - generic [ref=e3]:
+        - link [ref=e208] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a navegación
+        - link [ref=e209] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a contenido principal
+        - generic [ref=e8]:
+          - img [ref=e12]
+          - generic [ref=e15]: "Inicio de sesión como [CMI] Supervisor (supervisor@cmi.com.staging) | Sandbox: Staging |"
+          - link [ref=e210] [cursor=pointer]:
+            - /url: /secur/logout.jsp
+            - text: Cerrar sesión como [CMI] Supervisor
+        - generic [ref=e17]:
+          - button [ref=e211]:
+            - img [ref=e25]
+            - text: Buscar...
+          - navigation [ref=e212]:
+            - list [ref=e30]:
+              - listitem [ref=e31]:
+                - group [ref=e32]:
+                  - button [ref=e213] [cursor=pointer]:
+                    - img [ref=e39]
+                  - button [ref=e214] [cursor=pointer]:
+                    - img [ref=e48]
+              - listitem [ref=e51]:
+                - button [ref=e219] [cursor=pointer]:
+                  - img [ref=e224]
+              - listitem [ref=e227]:
+                - button [ref=e229] [cursor=pointer]:
+                  - img [ref=e234]
+              - listitem [ref=e60]:
+                - button [ref=e237] [cursor=pointer]:
+                  - img [ref=e68]
+              - listitem [ref=e71]:
+                - button [ref=e238] [cursor=pointer]:
+                  - img [ref=e82]
+              - listitem [ref=e85]:
+                - button [ref=e239] [cursor=pointer]:
+                  - img [ref=e94]
+              - listitem [ref=e98]:
+                - button [ref=e240] [cursor=pointer]
+      - generic [ref=e106]:
+        - generic [ref=e109]:
+          - generic [ref=e111]:
+            - navigation [ref=e241]:
+              - button [ref=e242] [cursor=pointer]:
+                - generic [ref=e125]: Iniciador de aplicación
+            - heading [level=1] [ref=e243]:
+              - generic [ref=e244]: CG Offline Admin
+          - navigation [ref=e245]:
+            - list [ref=e131]:
+              - listitem [ref=e132]:
+                - link [ref=e246] [cursor=pointer]:
+                  - /url: /lightning/n/Sincronizar_materiales_del_combo
+                  - generic [ref=e134]: Sincronizar materiales del combo
+              - listitem [ref=e135]:
+                - link [ref=e247] [cursor=pointer]:
+                  - /url: /lightning/n/SyncProductAssortment
+                  - generic [ref=e137]: Sincronizar surtido de productos
+              - listitem [ref=e138]:
+                - link [ref=e248] [cursor=pointer]:
+                  - /url: /lightning/o/Case/home
+                  - generic [ref=e140]: Casos
+                - button [ref=e249] [cursor=pointer]:
+                  - img [ref=e148]
+                  - generic [ref=e151]: Lista de Casos
+              - listitem [ref=e152]:
+                - link [ref=e250] [cursor=pointer]:
+                  - /url: /lightning/o/Lead/home
+                  - generic [ref=e154]: Candidatos
+                - button [ref=e251] [cursor=pointer]:
+                  - img [ref=e162]
+                  - generic [ref=e165]: Lista de Candidatos
+              - listitem [ref=e166]:
+                - link [ref=e252] [cursor=pointer]:
+                  - /url: /lightning/o/Account/home
+                  - generic [ref=e168]: Cuentas
+                - button [ref=e253] [cursor=pointer]:
+                  - img [ref=e176]
+                  - generic [ref=e179]: Lista de Cuentas
+              - listitem [ref=e180]:
+                - button [ref=e254] [cursor=pointer]:
+                  - generic [ref=e183]: Más
+                  - img [ref=e187]
+                  - generic [ref=e190]: Mostrar más elementos de navegación
+              - listitem [ref=e191]:
+                - button [ref=e255] [cursor=pointer]:
+                  - img [ref=e195]
+                  - generic [ref=e198]: Modificar elementos de navegación
+        - main [ref=e200]
+    - 'dialog "Crear Cuenta: Usuario" [active] [ref=e257]':
+      - generic [ref=e258]:
+        - button "Cancelar y cerrar" [ref=e259] [cursor=pointer]:
+          - img [ref=e261]
+          - generic [ref=e264]: Cancelar y cerrar
+        - generic [ref=e265]:
+          - generic [ref=e272]:
+            - 'heading "Crear Cuenta: Usuario" [level=2] [ref=e274]'
+            - generic [ref=e276]:
+              - generic [ref=e277]: "* = Información obligatoria"
+              - generic [ref=e289]:
+                - heading "Información del Usuario" [level=3] [ref=e290]:
+                  - generic "Información del Usuario" [ref=e291]
+                - list [ref=e294]:
+                  - listitem [ref=e301]:
+                    - generic [ref=e304]: Usuario
+            - generic [ref=e313]:
+              - generic "Cancelar" [ref=e314]:
+                - button "Cancelar" [ref=e319] [cursor=pointer]
+              - generic "Guardar y nuevo" [ref=e320]:
+                - button "Guardar y nuevo" [ref=e325] [cursor=pointer]
+              - generic "Guardar" [ref=e326]:
+                - button "Guardar" [ref=e331] [cursor=pointer]
+          - status [ref=e333]
+  - generic:
+    - status

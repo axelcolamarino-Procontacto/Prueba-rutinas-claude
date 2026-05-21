@@ -1,0 +1,686 @@
+- generic:
+  - generic:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - link [ref=e1370] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a navegación
+        - link [ref=e1371] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a contenido principal
+        - generic [ref=e10]:
+          - generic [ref=e14]:
+            - button [ref=e1372] [cursor=pointer]:
+              - img [ref=e22]
+              - generic [ref=e25]: Menu
+            - generic [ref=e30]:
+              - img [ref=e34]
+              - generic [ref=e38]: Sandbox (Staging)
+          - button [ref=e1373] [cursor=pointer]:
+            - img [ref=e49]
+            - generic [ref=e52]: Show menu
+        - generic [ref=e53]:
+          - button [ref=e1374]:
+            - img [ref=e61]
+            - text: Buscar...
+          - navigation [ref=e1375]:
+            - list [ref=e66]:
+              - listitem [ref=e67]:
+                - group [ref=e68]:
+                  - button [ref=e1376] [cursor=pointer]:
+                    - img [ref=e75]
+                  - button [ref=e1377] [cursor=pointer]:
+                    - img [ref=e84]
+              - listitem [ref=e87]:
+                - button [ref=e1378] [cursor=pointer]:
+                  - img [ref=e98]
+              - listitem [ref=e101]:
+                - button [ref=e1379] [cursor=pointer]:
+                  - img [ref=e108]
+              - listitem [ref=e111]:
+                - button [ref=e1380] [cursor=pointer]:
+                  - img [ref=e119]
+              - listitem [ref=e122]:
+                - button [ref=e1381] [cursor=pointer]:
+                  - img [ref=e133]
+              - listitem [ref=e136]:
+                - button [ref=e1382] [cursor=pointer]:
+                  - generic [ref=e141]:
+                    - img [ref=e145]
+                    - generic [ref=e149]: 20+
+                - generic [ref=e150]: 26 nuevas notificaciones
+              - listitem [ref=e151]:
+                - button [ref=e1383] [cursor=pointer]
+      - generic [ref=e159]:
+        - generic [ref=e162]:
+          - generic [ref=e164]:
+            - navigation [ref=e1384]:
+              - button [ref=e1385] [cursor=pointer]:
+                - generic [ref=e178]: Iniciador de aplicación
+            - heading [level=1] [ref=e1386]:
+              - generic [ref=e1387]: CG Offline Admin
+          - navigation [ref=e1388]:
+            - list [ref=e184]:
+              - listitem [ref=e185]:
+                - link [ref=e1389] [cursor=pointer]:
+                  - /url: /lightning/page/home
+                  - generic [ref=e187]: Inicio
+              - listitem [ref=e188]:
+                - link [ref=e1390] [cursor=pointer]:
+                  - /url: /lightning/n/Sincronizar_materiales_del_combo
+                  - generic [ref=e190]: Sincronizar materiales del combo
+              - listitem [ref=e191]:
+                - link [ref=e1391] [cursor=pointer]:
+                  - /url: /lightning/n/SyncProductAssortment
+                  - generic [ref=e193]: Sincronizar surtido de productos
+              - listitem [ref=e194]:
+                - link [ref=e1392] [cursor=pointer]:
+                  - /url: /lightning/o/Case/home
+                  - generic [ref=e196]: Casos
+                - button [ref=e1393] [cursor=pointer]:
+                  - img [ref=e204]
+                  - generic [ref=e207]: Lista de Casos
+              - listitem [ref=e208]:
+                - link [ref=e1394] [cursor=pointer]:
+                  - /url: /lightning/o/Lead/home
+                  - generic [ref=e210]: Candidatos
+                - button [ref=e1395] [cursor=pointer]:
+                  - img [ref=e218]
+                  - generic [ref=e221]: Lista de Candidatos
+              - listitem [ref=e222] [cursor=pointer]:
+                - link [ref=e1396]:
+                  - /url: /lightning/o/Account/home
+                  - generic [ref=e224]: Cuentas
+                - button [ref=e1397]:
+                  - img [ref=e232]
+                  - generic [ref=e235]: Lista de Cuentas
+              - listitem [ref=e236]:
+                - button [ref=e1398] [cursor=pointer]:
+                  - generic [ref=e239]: Más
+                  - img [ref=e243]
+                  - generic [ref=e246]: Mostrar más elementos de navegación
+              - listitem [ref=e247]:
+                - button [ref=e1399] [cursor=pointer]:
+                  - img [ref=e251]
+                  - generic [ref=e254]: Modificar elementos de navegación
+        - main [ref=e256]:
+          - generic [ref=e266]:
+            - generic [ref=e268]:
+              - generic [ref=e269]:
+                - generic [ref=e271]:
+                  - img [ref=e275]
+                  - generic [ref=e276]:
+                    - heading [level=1] [ref=e1400]: Cuentas
+                    - generic [ref=e281]:
+                      - generic [ref=e283] [cursor=pointer]:
+                        - heading [level=1] [ref=e1401]:
+                          - generic [ref=e285]: Cuentas
+                          - generic [ref=e286]: Vistos recientemente
+                        - button [ref=e1402]:
+                          - img [ref=e291]
+                          - generic [ref=e294]: "Seleccionar una vista de lista: Cuentas"
+                      - button [disabled] [ref=e1403] [cursor=pointer]:
+                        - img [ref=e300]
+                        - generic [ref=e303]: Esta lista está anclada.
+                - list [ref=e306]:
+                  - listitem [ref=e307]:
+                    - button [ref=e1404] [cursor=pointer]:
+                      - generic [ref=e1405]: Nuevo
+                  - listitem [ref=e310]:
+                    - button [ref=e1406] [cursor=pointer]:
+                      - generic [ref=e1407]: Importar
+                  - listitem [ref=e313]:
+                    - button [ref=e1408] [cursor=pointer]:
+                      - generic [ref=e1409]: Asignar etiqueta
+              - generic [ref=e316]:
+                - paragraph [ref=e318]:
+                  - generic [ref=e320]:
+                    - status [ref=e1410]: 34 elementos •
+                    - text: Se actualizó hace unos segundos
+                - generic [ref=e327]:
+                  - generic [ref=e328]: Buscar en esta lista...
+                  - generic [ref=e329]:
+                    - searchbox [ref=e1411]
+                    - img [ref=e331]
+                - generic [ref=e334]:
+                  - button [ref=e1412] [cursor=pointer]:
+                    - img [ref=e340]
+                    - img [ref=e344]
+                    - generic [ref=e347]: Controles de vista de lista
+                  - button [ref=e1413] [cursor=pointer]:
+                    - img [ref=e352]
+                    - img [ref=e356]
+                    - generic [ref=e359]: Seleccionar visualización de lista
+                  - generic [ref=e361]:
+                    - button [ref=e1414] [cursor=pointer]:
+                      - img [ref=e366]
+                      - generic [ref=e369]: Actualizar
+                    - button [ref=e1415] [cursor=pointer]:
+                      - img [ref=e374]
+                      - generic [ref=e377]: Ordenación por columnas
+                    - button [ref=e1416] [cursor=pointer]:
+                      - img [ref=e382]
+                      - generic [ref=e385]: La modificación en línea está desactivada. Para realizar modificaciones, filtre por un tipo de registro.
+                    - group [ref=e386]:
+                      - generic [ref=e388]:
+                        - generic:
+                          - generic:
+                            - button [disabled]:
+                              - generic:
+                                - img
+                              - generic: Gráficos
+                        - generic:
+                          - generic:
+                            - button [disabled]:
+                              - generic:
+                                - img
+                              - generic: Filtros
+            - generic [ref=e395]:
+              - generic [ref=e396]: Modo de navegación
+              - grid [ref=e400]:
+                - generic [ref=e404]:
+                  - generic [ref=e405]: Seleccionar una fila
+                  - generic [ref=e407]:
+                    - checkbox [ref=e1417]
+                    - generic [ref=e411]: Seleccionar 34 elementos
+                - generic [ref=e413]:
+                  - button [ref=e1418] [cursor=pointer]:
+                    - generic [ref=e415]: "Ordenar por:"
+                    - generic [ref=e1419]: Nombre de la cuenta
+                  - generic [ref=e417]: "Ordenación: Ninguna"
+                  - button [ref=e1420] [cursor=pointer]:
+                    - img [ref=e421]
+                    - generic [ref=e424]: Mostrar Nombre de la cuenta acciones de columna
+                  - slider [ref=e1421]: "419"
+                - generic [ref=e429]:
+                  - button [ref=e1422] [cursor=pointer]:
+                    - generic [ref=e431]: "Ordenar por:"
+                    - generic [ref=e1423]: Número de cliente
+                  - generic [ref=e433]: "Ordenación: Ninguna"
+                  - button [ref=e1424] [cursor=pointer]:
+                    - img [ref=e437]
+                    - generic [ref=e440]: Mostrar Número de cliente acciones de columna
+                  - slider [ref=e1425]: "206"
+                - generic [ref=e445]:
+                  - button [ref=e1426] [cursor=pointer]:
+                    - generic [ref=e447]: "Ordenar por:"
+                    - generic [ref=e1427]: Teléfono
+                  - generic [ref=e449]: "Ordenación: Ninguna"
+                  - button [ref=e1428] [cursor=pointer]:
+                    - img [ref=e453]
+                    - generic [ref=e456]: Mostrar Teléfono acciones de columna
+                  - slider [ref=e1429]: "159"
+                - generic [ref=e461]:
+                  - button [ref=e1430] [cursor=pointer]:
+                    - generic [ref=e463]: "Ordenar por:"
+                    - generic [ref=e1431]: Organización de ventas
+                  - generic [ref=e465]: "Ordenación: Ninguna"
+                  - button [ref=e1432] [cursor=pointer]:
+                    - img [ref=e469]
+                    - generic [ref=e472]: Mostrar Organización de ventas acciones de columna
+                  - slider [ref=e1433]: "97"
+                - generic [ref=e477]:
+                  - button [ref=e1434] [cursor=pointer]:
+                    - generic [ref=e479]: "Ordenar por:"
+                    - generic [ref=e1435]: Organización de ventas
+                  - generic [ref=e481]: "Ordenación: Ninguna"
+                  - button [ref=e1436] [cursor=pointer]:
+                    - img [ref=e485]
+                    - generic [ref=e488]: Mostrar Organización de ventas acciones de columna
+                  - slider [ref=e1437]: "97"
+                - generic [ref=e493]:
+                  - button [ref=e1438] [cursor=pointer]:
+                    - generic [ref=e495]: "Ordenar por:"
+                    - generic [ref=e1439]: Alias del propietario de la cuenta
+                  - generic [ref=e497]: "Ordenación: Ninguna"
+                  - button [ref=e1440] [cursor=pointer]:
+                    - img [ref=e501]
+                    - generic [ref=e504]: Mostrar Alias del propietario de la cuenta acciones de columna
+                  - slider [ref=e1441]: "131"
+                - rowgroup [ref=e511]:
+                  - row [ref=e1442]:
+                    - gridcell [ref=e513]
+                    - gridcell [ref=e1443]:
+                      - generic [ref=e518]:
+                        - checkbox [ref=e1444]
+                        - generic [ref=e522]: Seleccionar elemento 1
+                    - rowheader [ref=e1445]:
+                      - link [ref=e1446] [cursor=pointer]:
+                        - /url: /lightning/r/001Ps000015MZnYIAW/view
+                        - generic [ref=e531]: ALFARO SOLANO XINIA MAYELA
+                    - gridcell [ref=e1447]:
+                      - generic [ref=e536]: "16301270194"
+                    - gridcell [ref=e1448]:
+                      - link [ref=e1449] [cursor=pointer]:
+                        - /url: tel:84556948
+                        - text: "84556948"
+                    - gridcell [ref=e1450]:
+                      - generic [ref=e548]: "0001"
+                    - gridcell [ref=e1451]:
+                      - generic [ref=e553]: "2350"
+                    - gridcell [ref=e1452]:
+                      - link [ref=e1453] [cursor=pointer]:
+                        - /url: /lightning/r/005Ps00000CYYmjIAH/view
+                        - generic [ref=e561]: InteB4B
+                    - gridcell [ref=e1454]:
+                      - button [ref=e1455] [cursor=pointer]:
+                        - img [ref=e570]
+                        - generic [ref=e573]: Mostrar acciones
+                  - row [ref=e1456]:
+                    - gridcell [ref=e575]
+                    - gridcell [ref=e1457]:
+                      - generic [ref=e580]:
+                        - checkbox [ref=e1458]
+                        - generic [ref=e584]: Seleccionar elemento 2
+                    - rowheader [ref=e1459]:
+                      - link [ref=e1460] [cursor=pointer]:
+                        - /url: /lightning/r/001Ps000015MZnkIAG/view
+                        - generic [ref=e593]: GANADERA EL FUTURO SOCIEDAD ANONIMA
+                    - gridcell [ref=e1461]:
+                      - generic [ref=e598]: "16301269132"
+                    - gridcell [ref=e1462]:
+                      - link [ref=e1463] [cursor=pointer]:
+                        - /url: tel:86686265
+                        - text: "86686265"
+                    - gridcell [ref=e1464]:
+                      - generic [ref=e610]: "0001"
+                    - gridcell [ref=e1465]:
+                      - generic [ref=e615]: "1630"
+                    - gridcell [ref=e1466]:
+                      - link [ref=e1467] [cursor=pointer]:
+                        - /url: /lightning/r/005Ps00000CYYmjIAH/view
+                        - generic [ref=e623]: InteB4B
+                    - gridcell [ref=e1468]:
+                      - button [ref=e1469] [cursor=pointer]:
+                        - img [ref=e632]
+                        - generic [ref=e635]: Mostrar acciones
+                  - row [ref=e1470]:
+                    - gridcell [ref=e637]
+                    - gridcell [ref=e1471]:
+                      - generic [ref=e642]:
+                        - checkbox [ref=e1472]
+                        - generic [ref=e646]: Seleccionar elemento 3
+                    - rowheader [ref=e1473]:
+                      - link [ref=e1474] [cursor=pointer]:
+                        - /url: /lightning/r/001gP00000H7HDeQAN/view
+                        - generic [ref=e655]: AccountGD
+                    - gridcell [ref=e656]
+                    - gridcell [ref=e1475]:
+                      - link [ref=e1476] [cursor=pointer]:
+                        - /url: tel:34683878568
+                        - text: "34683878568"
+                    - gridcell [ref=e663]
+                    - gridcell [ref=e664]
+                    - gridcell [ref=e1477]:
+                      - link [ref=e1478] [cursor=pointer]:
+                        - /url: /lightning/r/005gP00000GS2iqQAD/view
+                        - generic [ref=e672]: devNeg
+                    - gridcell [ref=e1479]:
+                      - button [ref=e1480] [cursor=pointer]:
+                        - img [ref=e681]
+                        - generic [ref=e684]: Mostrar acciones
+                  - row [ref=e1481]:
+                    - gridcell [ref=e686]
+                    - gridcell [ref=e1482]:
+                      - generic [ref=e691]:
+                        - checkbox [ref=e1483]
+                        - generic [ref=e695]: Seleccionar elemento 4
+                    - rowheader [ref=e1484]:
+                      - link [ref=e1485] [cursor=pointer]:
+                        - /url: /lightning/r/001gP00000GuAjRQAV/view
+                        - generic [ref=e704]: Cuenta Harinas
+                    - gridcell [ref=e705]
+                    - gridcell [ref=e1486]:
+                      - link [ref=e1487] [cursor=pointer]:
+                        - /url: tel:(785) 214-6200
+                        - text: (785) 214-6200
+                    - gridcell [ref=e712]
+                    - gridcell [ref=e713]
+                    - gridcell [ref=e1488]:
+                      - link [ref=e1489] [cursor=pointer]:
+                        - /url: /lightning/r/005Ps00000BdRZtIAN/view
+                        - generic [ref=e721]: uvare
+                    - gridcell [ref=e1490]:
+                      - button [ref=e1491] [cursor=pointer]:
+                        - img [ref=e730]
+                        - generic [ref=e733]: Mostrar acciones
+                  - row [ref=e1492]:
+                    - gridcell [ref=e735]
+                    - gridcell [ref=e1493]:
+                      - generic [ref=e740]:
+                        - checkbox [ref=e1494]
+                        - generic [ref=e744]: Seleccionar elemento 5
+                    - rowheader [ref=e1495]:
+                      - link [ref=e1496] [cursor=pointer]:
+                        - /url: /lightning/r/001gP00000GsuvMQAR/view
+                        - generic [ref=e753]: PCTest
+                    - gridcell [ref=e754]
+                    - gridcell [ref=e1497]:
+                      - link [ref=e1498] [cursor=pointer]:
+                        - /url: tel:(785) 271-6200
+                        - text: (785) 271-6200
+                    - gridcell [ref=e761]
+                    - gridcell [ref=e762]
+                    - gridcell [ref=e1499]:
+                      - link [ref=e1500] [cursor=pointer]:
+                        - /url: /lightning/r/005Ps00000BdRZtIAN/view
+                        - generic [ref=e770]: uvare
+                    - gridcell [ref=e1501]:
+                      - button [ref=e1502] [cursor=pointer]:
+                        - img [ref=e779]
+                        - generic [ref=e782]: Mostrar acciones
+                  - row [ref=e1503]:
+                    - gridcell [ref=e784]
+                    - gridcell [ref=e1504]:
+                      - generic [ref=e789]:
+                        - checkbox [ref=e1505]
+                        - generic [ref=e793]: Seleccionar elemento 6
+                    - rowheader [ref=e1506]:
+                      - link [ref=e1507] [cursor=pointer]:
+                        - /url: /lightning/r/001gP00000JqAjWQAV/view
+                        - generic [ref=e802]: PANADERIA PRUEBA 05/05
+                    - gridcell [ref=e803]
+                    - gridcell [ref=e1508]:
+                      - link [ref=e1509] [cursor=pointer]:
+                        - /url: tel:55576437
+                        - text: "55576437"
+                    - gridcell [ref=e1510]:
+                      - generic [ref=e815]: "0001"
+                    - gridcell [ref=e816]
+                    - gridcell [ref=e1511]:
+                      - link [ref=e1512] [cursor=pointer]:
+                        - /url: /lightning/r/005gP00000GS2jAQAT/view
+                        - generic [ref=e824]: atv1
+                    - gridcell [ref=e1513]:
+                      - button [ref=e1514] [cursor=pointer]:
+                        - img [ref=e833]
+                        - generic [ref=e836]: Mostrar acciones
+                  - row [ref=e1515]:
+                    - gridcell [ref=e838]
+                    - gridcell [ref=e1516]:
+                      - generic [ref=e843]:
+                        - checkbox [ref=e1517]
+                        - generic [ref=e847]: Seleccionar elemento 7
+                    - rowheader [ref=e1518]:
+                      - link [ref=e1519] [cursor=pointer]:
+                        - /url: /lightning/r/001gP00000JX3m3QAD/view
+                        - generic [ref=e856]: Chocopan
+                    - gridcell [ref=e857]
+                    - gridcell [ref=e1520]:
+                      - link [ref=e1521] [cursor=pointer]:
+                        - /url: tel:56738298
+                        - text: "56738298"
+                    - gridcell [ref=e1522]:
+                      - generic [ref=e869]: "0001"
+                    - gridcell [ref=e870]
+                    - gridcell [ref=e1523]:
+                      - link [ref=e1524] [cursor=pointer]:
+                        - /url: /lightning/r/005gP00000GS2iqQAD/view
+                        - generic [ref=e878]: devNeg
+                    - gridcell [ref=e1525]:
+                      - button [ref=e1526] [cursor=pointer]:
+                        - img [ref=e887]
+                        - generic [ref=e890]: Mostrar acciones
+                  - row [ref=e1527]:
+                    - gridcell [ref=e892]
+                    - gridcell [ref=e1528]:
+                      - generic [ref=e897]:
+                        - checkbox [ref=e1529]
+                        - generic [ref=e901]: Seleccionar elemento 8
+                    - rowheader [ref=e1530]:
+                      - link [ref=e1531] [cursor=pointer]:
+                        - /url: /lightning/r/001gP00000Gt1LnQAJ/view
+                        - generic [ref=e910]: LA PANERIA, S.A. REP.LEGAL JOSÉ ANDRES CASTILLOs
+                    - gridcell [ref=e1532]:
+                      - generic [ref=e915]: "23501011019"
+                    - gridcell [ref=e1533]:
+                      - link [ref=e1534] [cursor=pointer]:
+                        - /url: tel:24209999
+                        - text: "24209999"
+                    - gridcell [ref=e1535]:
+                      - generic [ref=e927]: "0001"
+                    - gridcell [ref=e1536]:
+                      - generic [ref=e932]: "2350"
+                    - gridcell [ref=e1537]:
+                      - link [ref=e1538] [cursor=pointer]:
+                        - /url: /lightning/r/005gP00000GS2iyQAD/view
+                        - generic [ref=e940]: atecnico
+                    - gridcell [ref=e1539]:
+                      - button [ref=e1540] [cursor=pointer]:
+                        - img [ref=e949]
+                        - generic [ref=e952]: Mostrar acciones
+                  - row [ref=e1541]:
+                    - gridcell [ref=e954]
+                    - gridcell [ref=e1542]:
+                      - generic [ref=e959]:
+                        - checkbox [ref=e1543]
+                        - generic [ref=e963]: Seleccionar elemento 9
+                    - rowheader [ref=e1544]:
+                      - link [ref=e1545] [cursor=pointer]:
+                        - /url: /lightning/r/001gP00000JX5pGQAT/view
+                        - generic [ref=e972]: CACHITO
+                    - gridcell [ref=e973]
+                    - gridcell [ref=e974]
+                    - gridcell [ref=e1546]:
+                      - generic [ref=e980]: "0001"
+                    - gridcell [ref=e981]
+                    - gridcell [ref=e1547]:
+                      - link [ref=e1548] [cursor=pointer]:
+                        - /url: /lightning/r/005gP00000GS2iqQAD/view
+                        - generic [ref=e989]: devNeg
+                    - gridcell [ref=e1549]:
+                      - button [ref=e1550] [cursor=pointer]:
+                        - img [ref=e998]
+                        - generic [ref=e1001]: Mostrar acciones
+                  - row [ref=e1551]:
+                    - gridcell [ref=e1003]
+                    - gridcell [ref=e1552]:
+                      - generic [ref=e1008]:
+                        - checkbox [ref=e1553]
+                        - generic [ref=e1012]: Seleccionar elemento 10
+                    - rowheader [ref=e1554]:
+                      - link [ref=e1555] [cursor=pointer]:
+                        - /url: /lightning/r/001Ps0000177ruMIAQ/view
+                        - generic [ref=e1021]: AVES Y HUEVOS DE GUATEMALA, S.A
+                    - gridcell [ref=e1556]:
+                      - generic [ref=e1026]: "15101056927"
+                    - gridcell [ref=e1027]
+                    - gridcell [ref=e1557]:
+                      - generic [ref=e1033]: "0001"
+                    - gridcell [ref=e1558]:
+                      - generic [ref=e1038]: "1510"
+                    - gridcell [ref=e1559]:
+                      - link [ref=e1560] [cursor=pointer]:
+                        - /url: /lightning/r/005Ps00000CYYmjIAH/view
+                        - generic [ref=e1046]: InteB4B
+                    - gridcell [ref=e1561]:
+                      - button [ref=e1562] [cursor=pointer]:
+                        - img [ref=e1055]
+                        - generic [ref=e1058]: Mostrar acciones
+                  - row [ref=e1563]:
+                    - gridcell [ref=e1060]
+                    - gridcell [ref=e1564]:
+                      - generic [ref=e1065]:
+                        - checkbox [ref=e1565]
+                        - generic [ref=e1069]: Seleccionar elemento 11
+                    - rowheader [ref=e1566]:
+                      - link [ref=e1567] [cursor=pointer]:
+                        - /url: /lightning/r/001gP00000HPnGnQAL/view
+                        - generic [ref=e1078]: PANADERIA ESQUIPULAS
+                    - gridcell [ref=e1079]
+                    - gridcell [ref=e1568]:
+                      - link [ref=e1569] [cursor=pointer]:
+                        - /url: tel:38741638
+                        - text: "38741638"
+                    - gridcell [ref=e1086]
+                    - gridcell [ref=e1087]
+                    - gridcell [ref=e1570]:
+                      - link [ref=e1571] [cursor=pointer]:
+                        - /url: /lightning/r/005Ps000002n8jFIAQ/view
+                        - generic [ref=e1095]: sapli
+                    - gridcell [ref=e1572]:
+                      - button [ref=e1573] [cursor=pointer]:
+                        - img [ref=e1104]
+                        - generic [ref=e1107]: Mostrar acciones
+                  - row [ref=e1574]:
+                    - gridcell [ref=e1109]
+                    - gridcell [ref=e1575]:
+                      - generic [ref=e1114]:
+                        - checkbox [ref=e1576]
+                        - generic [ref=e1118]: Seleccionar elemento 12
+                    - rowheader [ref=e1577]:
+                      - link [ref=e1578] [cursor=pointer]:
+                        - /url: /lightning/r/001gP00000JUHgPQAX/view
+                        - generic [ref=e1127]: PANDOLSA
+                    - gridcell [ref=e1579]:
+                      - generic [ref=e1132]: "1010791"
+                    - gridcell [ref=e1133]
+                    - gridcell [ref=e1134]
+                    - gridcell [ref=e1135]
+                    - gridcell [ref=e1580]:
+                      - link [ref=e1581] [cursor=pointer]:
+                        - /url: /lightning/r/005gP00000JHI5pQAH/view
+                        - generic [ref=e1143]: kambaker
+                    - gridcell [ref=e1582]:
+                      - button [ref=e1583] [cursor=pointer]:
+                        - img [ref=e1152]
+                        - generic [ref=e1155]: Mostrar acciones
+                  - row [ref=e1584]:
+                    - gridcell [ref=e1157]
+                    - gridcell [ref=e1585]:
+                      - generic [ref=e1162]:
+                        - checkbox [ref=e1586]
+                        - generic [ref=e1166]: Seleccionar elemento 13
+                    - rowheader [ref=e1587]:
+                      - link [ref=e1588] [cursor=pointer]:
+                        - /url: /lightning/r/001gP00000HDP5KQAX/view
+                        - generic [ref=e1175]: 12/3 v2
+                    - gridcell [ref=e1176]
+                    - gridcell [ref=e1589]:
+                      - link [ref=e1590] [cursor=pointer]:
+                        - /url: tel:145555
+                        - text: "145555"
+                    - gridcell [ref=e1183]
+                    - gridcell [ref=e1184]
+                    - gridcell [ref=e1591]:
+                      - link [ref=e1592] [cursor=pointer]:
+                        - /url: /lightning/r/005gP00000GS2iqQAD/view
+                        - generic [ref=e1192]: devNeg
+                    - gridcell [ref=e1593]:
+                      - button [ref=e1594] [cursor=pointer]:
+                        - img [ref=e1201]
+                        - generic [ref=e1204]: Mostrar acciones
+                  - row [ref=e1595]:
+                    - gridcell [ref=e1206]
+                    - gridcell [ref=e1596]:
+                      - generic [ref=e1211]:
+                        - checkbox [ref=e1597]
+                        - generic [ref=e1215]: Seleccionar elemento 14
+                    - rowheader [ref=e1598]:
+                      - link [ref=e1599] [cursor=pointer]:
+                        - /url: /lightning/r/001gP00000IcyHLQAZ/view
+                        - generic [ref=e1224]: CUENTA DE PROSPECTO
+                    - gridcell [ref=e1225]
+                    - gridcell [ref=e1600]:
+                      - link [ref=e1601] [cursor=pointer]:
+                        - /url: tel:55130089
+                        - text: "55130089"
+                    - gridcell [ref=e1602]:
+                      - generic [ref=e1237]: "0001"
+                    - gridcell [ref=e1238]
+                    - gridcell [ref=e1603]:
+                      - link [ref=e1604] [cursor=pointer]:
+                        - /url: /lightning/r/005Ps000002n8jFIAQ/view
+                        - generic [ref=e1246]: sapli
+                    - gridcell [ref=e1605]:
+                      - button [ref=e1606] [cursor=pointer]:
+                        - img [ref=e1255]
+                        - generic [ref=e1258]: Mostrar acciones
+                  - row [ref=e1607]:
+                    - gridcell [ref=e1260]
+                    - gridcell [ref=e1608]:
+                      - generic [ref=e1265]:
+                        - checkbox [ref=e1609]
+                        - generic [ref=e1269]: Seleccionar elemento 15
+                    - rowheader [ref=e1610]:
+                      - link [ref=e1611] [cursor=pointer]:
+                        - /url: /lightning/r/001gP00000JY2MRQA1/view
+                        - generic [ref=e1278]: PANIFICADORA LA ESTRELLA, S.A.
+                    - gridcell [ref=e1612]:
+                      - generic [ref=e1283]: "99000000008"
+                    - gridcell [ref=e1284]
+                    - gridcell [ref=e1613]:
+                      - generic [ref=e1290]: "0001"
+                    - gridcell [ref=e1291]
+                    - gridcell [ref=e1614]:
+                      - link [ref=e1615] [cursor=pointer]:
+                        - /url: /lightning/r/005Ps00000BdRZtIAN/view
+                        - generic [ref=e1299]: uvare
+                    - gridcell [ref=e1616]:
+                      - button [ref=e1617] [cursor=pointer]:
+                        - img [ref=e1308]
+                        - generic [ref=e1311]: Mostrar acciones
+                  - row [ref=e1618]:
+                    - gridcell [ref=e1313]
+                    - gridcell [ref=e1619]:
+                      - generic [ref=e1318]:
+                        - checkbox [ref=e1620]
+                        - generic [ref=e1322]: Seleccionar elemento 16
+                    - rowheader [ref=e1621]:
+                      - link [ref=e1622] [cursor=pointer]:
+                        - /url: /lightning/r/001gP00000ItgKVQAZ/view
+                        - generic [ref=e1331]: Panadería Andrea
+                    - gridcell [ref=e1332]
+                    - gridcell [ref=e1623]:
+                      - link [ref=e1624] [cursor=pointer]:
+                        - /url: tel:56262808
+                        - text: "56262808"
+                    - gridcell [ref=e1625]:
+                      - generic [ref=e1344]: "0001"
+                    - gridcell [ref=e1345]
+                    - gridcell [ref=e1626]:
+                      - link [ref=e1627] [cursor=pointer]:
+                        - /url: /lightning/r/005gP00000GS2iqQAD/view
+                        - generic [ref=e1353]: devNeg
+                    - gridcell [ref=e1628]:
+                      - button [ref=e1629] [cursor=pointer]:
+                        - img [ref=e1362]
+                        - generic [ref=e1365]: Mostrar acciones
+    - dialog "Nueva Cuenta" [ref=e1631]:
+      - generic [ref=e1632]:
+        - button "Cancelar y cerrar" [active] [ref=e1633] [cursor=pointer]:
+          - img [ref=e1635]
+          - generic [ref=e1638]: Cancelar y cerrar
+        - generic [ref=e1639]:
+          - generic [ref=e1641]:
+            - generic [ref=e1643]:
+              - heading "Nueva Cuenta" [level=2] [ref=e1644]
+              - group "Nueva Cuenta Seleccionar un tipo de registro" [ref=e1647]:
+                - generic [ref=e1648]:
+                  - generic [ref=e1649]: Nueva Cuenta
+                  - text: Seleccionar un tipo de registro
+                - generic [ref=e1650]:
+                  - generic:
+                    - generic:
+                      - radio "Cliente" [checked] [ref=e1652]
+                      - generic [ref=e1654]: Cliente
+                  - generic:
+                    - generic:
+                      - radio "Prospecto" [ref=e1657]
+                      - generic [ref=e1659]: Prospecto
+                  - generic:
+                    - generic:
+                      - radio "Sucursales" [ref=e1662]
+                      - generic [ref=e1664]: Sucursales
+                  - generic:
+                    - generic:
+                      - radio "Virtual" [ref=e1667]
+                      - generic [ref=e1669]: Virtual
+            - generic [ref=e1672]:
+              - button "Cancelar" [ref=e1673] [cursor=pointer]:
+                - generic [ref=e1674]: Cancelar
+              - button "Siguiente" [ref=e1675] [cursor=pointer]:
+                - generic [ref=e1676]: Siguiente
+          - status [ref=e1677]
+  - generic:
+    - status
