@@ -1,0 +1,94 @@
+{
+  "issue_key": "CMIV2-3408",
+  "issue_type": "Story",
+  "project_key": "CMIV2",
+  "trigger_state": "Pruebas",
+  "decision": "PASS",
+  "run_date": "2026-05-21T14:00:00-03:00",
+  "instance_url": "https://corporacionmultiinversiones--staging.sandbox.my.salesforce.com",
+  "slack_channel": "D0B28BZNFD4",
+  "context": {
+    "sf_objects_consulted": ["Product2", "Account", "cgcloud__Job_Definition_List__c", "cgcloud__Product_Assortment_Store__c"],
+    "sow_chunks_retrieved": 0,
+    "sow_found": false,
+    "similar_test_cases_found": 0,
+    "related_bugs_found": 0,
+    "is_retest": false,
+    "platform_detected": "web_and_mobile",
+    "lightning_analysis": {
+      "paso_1_2_b_completado": true,
+      "flexipages_retrieved": ["Customer_Lightning_Page"],
+      "conditional_fields_detected": [],
+      "fls_verified_for": [],
+      "related_lists_found": ["cgcloud__Product_Assortment_Store__r", "cgcloud__Account_Managers__r", "cgcloud__Account_Relation__r"]
+    }
+  },
+  "test_cases_generated": [
+    {
+      "tc_id": "TC-01",
+      "title": "Verificar Related List Surtido de productos en Account Customer",
+      "test_type": "positivo",
+      "platform": "web",
+      "status": "PASSED",
+      "screenshots": ["tc01_step01.png", "tc01_step02.png"],
+      "evidence_screenshot": "tc01_step02.png",
+      "reason": "Tab Productos muestra: Establecimiento de surtido de productos (cgcloud__Product_Assortment_Store__r), Surtidos del Cliente y Product Assortment Customers"
+    },
+    {
+      "tc_id": "TC-02",
+      "title": "Verificar campo Producto de la competencia visible y editable en Product2",
+      "test_type": "positivo",
+      "platform": "web",
+      "status": "PASSED",
+      "screenshots": ["tc02_step01.png", "tc02_step02.png"],
+      "evidence_screenshot": "tc02_step01.png",
+      "reason": "Campo cgcloud__Competitive_Product__c (Label: Producto de la competencia) visible en section Identification y editable como checkbox en modal de edición"
+    },
+    {
+      "tc_id": "TC-03",
+      "title": "Verificar actividad Captura de precios activa en Backoffice",
+      "test_type": "positivo",
+      "platform": "web",
+      "status": "PASSED",
+      "screenshots": ["tc03_step01.png"],
+      "evidence_screenshot": "tc03_step01.png",
+      "reason": "Actividad Obligatoria-Captura de precios: Activo=true, Plantilla=PRECIOS, DC-Captura de precios, 3 preguntas configuradas"
+    },
+    {
+      "tc_id": "TC-04",
+      "title": "Editar y guardar campo Producto de la competencia (borde)",
+      "test_type": "borde",
+      "platform": "web",
+      "status": "PASSED",
+      "screenshots": ["tc04_step01.png", "tc04_step02.png"],
+      "evidence_screenshot": "tc04_step02.png",
+      "reason": "Campo marcado y guardado exitosamente. Valor persiste en registro. Revertido al terminar el test."
+    },
+    {
+      "tc_id": "TC-05",
+      "title": "Lista CG Offline con diferenciación CMI/Competencia",
+      "test_type": "mobile",
+      "platform": "mobile",
+      "status": "REVIEW",
+      "screenshots": [],
+      "reason": "No ejecutable automáticamente - requiere app móvil nativa (iOS/Android). Capturas del dev (Julian Schmuker) en el ticket confirman implementación correcta: secciones Productos CMI y Productos Competencia visibles."
+    },
+    {
+      "tc_id": "TC-06",
+      "title": "Formulario encuesta CG Offline con Precio/Peso/Unidad de medida",
+      "test_type": "mobile",
+      "platform": "mobile",
+      "status": "REVIEW",
+      "screenshots": [],
+      "reason": "No ejecutable automáticamente - requiere app móvil nativa. Capturas del dev muestran secciones Standard Survey Activities (De Cara, Precio ML, Distribución) y Encuesta (Peso, Unidad de medida, Inventario)."
+    }
+  ],
+  "jira_actions": {
+    "issue_transitioned_to": "EN VALIDACIÓN DEL CLIENTE",
+    "assigned_to_reporter": "Matias Burgos (633b4baf61dbef2805c1317c)",
+    "story_bugs_created": [],
+    "comments_added": 0
+  },
+  "bugs_found": [],
+  "final_summary": "PASS: 4 TCs web ejecutados y aprobados. 2 TCs mobile marcados como REVIEW (no ejecutables con Playwright). Issue transitado a EN VALIDACIÓN DEL CLIENTE. BigQuery pending MCP approval."
+}
