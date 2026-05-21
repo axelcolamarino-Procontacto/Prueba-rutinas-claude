@@ -2,7 +2,11 @@
   "browser": {
     "browserName": "chromium",
     "launchOptions": {
-      "channel": "chromium"
+      "channel": "chromium",
+      "ignoreDefaultArgs": ["--disable-extensions"]
+    },
+    "contextOptions": {
+      "ignoreHTTPSErrors": true
     }
   }
 }
