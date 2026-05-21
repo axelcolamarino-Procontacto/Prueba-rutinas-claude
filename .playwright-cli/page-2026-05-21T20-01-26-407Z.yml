@@ -1,0 +1,64 @@
+- generic:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Skip to Navigation" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e6]:
+        - button "Search" [ref=e12]:
+          - img [ref=e14]
+          - text: Search...
+        - navigation "Global Header" [ref=e17]:
+          - list [ref=e18]:
+            - listitem [ref=e19]
+    - generic [ref=e23]:
+      - generic:
+        - generic [ref=e24]:
+          - generic [ref=e26]:
+            - generic [ref=e27]:
+              - navigation "App" [ref=e28]:
+                - button "App Launcher" [ref=e30] [cursor=pointer]:
+                  - generic [ref=e41]: App Launcher
+              - heading "Gestión de Órdenes" [level=1] [ref=e42]:
+                - generic "Gestión de Órdenes" [ref=e43]
+            - navigation "Global" [ref=e44]:
+              - link "Home" [ref=e46] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e47]: Home
+              - button "Show Navigation Menu" [ref=e50] [cursor=pointer]:
+                - img [ref=e52]
+                - generic [ref=e55]: Show Navigation Menu
+          - navigation "Workspaces" [ref=e57]:
+            - tablist [ref=e58]:
+              - generic [ref=e60]: Press Spacebar to reorder tabs.
+              - tab [active] [ref=e61] [cursor=pointer]:
+                - generic [ref=e62]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Loading...
+                - generic [ref=e63]: Loading...
+              - button [ref=e66] [cursor=pointer]:
+                - img [ref=e68]
+                - generic [ref=e71]: Actions
+              - button [ref=e73] [cursor=pointer]:
+                - img [ref=e75]
+                - generic [ref=e78]: Close Tab
+              - status [ref=e79]
+        - main [ref=e88]
+    - generic:
+      - contentinfo "Utility Bar":
+        - list [ref=e91]:
+          - listitem [ref=e92]:
+            - button "History" [ref=e95] [cursor=pointer]:
+              - img [ref=e99]
+              - generic [ref=e102]: History
+          - listitem [ref=e103]:
+            - button "Notes" [ref=e106] [cursor=pointer]:
+              - img [ref=e110]
+              - generic [ref=e113]: Notes
+  - generic:
+    - status

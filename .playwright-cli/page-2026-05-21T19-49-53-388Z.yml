@@ -1,0 +1,921 @@
+- generic:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - link "Skip to Navigation" [ref=e2369] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e2370] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e10]:
+        - generic [ref=e14]:
+          - button "Toggle Panel" [ref=e2371] [cursor=pointer]:
+            - img [ref=e22]
+            - generic [ref=e25]: Menu
+          - generic [ref=e30]:
+            - img [ref=e34]
+            - generic [ref=e38]: Sandbox (test)
+        - button "Show menu" [ref=e2372] [cursor=pointer]:
+          - img [ref=e49]
+          - generic [ref=e52]: Show menu
+      - generic [ref=e53]:
+        - button "Search" [ref=e2373]:
+          - img [ref=e61]
+          - text: Search...
+        - navigation "Global Header" [ref=e2374]:
+          - list [ref=e66]:
+            - listitem [ref=e67]:
+              - group [ref=e68]:
+                - button "This item doesn't support favorites" [ref=e2375] [cursor=pointer]:
+                  - generic [ref=e71]:
+                    - img [ref=e75]
+                    - tooltip "This item doesn't support favorites"
+                - button "Favorites list" [ref=e2376] [cursor=pointer]:
+                  - generic [ref=e80]:
+                    - img [ref=e84]
+                    - tooltip "Favorites list"
+            - listitem [ref=e87]:
+              - button "Global Actions" [ref=e2377] [cursor=pointer]:
+                - generic [ref=e280]:
+                  - img [ref=e284]
+                  - tooltip "Global Actions"
+            - listitem [ref=e287]:
+              - button "Guidance Center" [ref=e2378] [cursor=pointer]:
+                - generic [ref=e290]:
+                  - img [ref=e294]
+                  - tooltip "Guidance Center"
+            - listitem [ref=e96]:
+              - button "Salesforce Help" [ref=e2379] [cursor=pointer]:
+                - generic [ref=e100]:
+                  - img [ref=e104]
+                  - tooltip "Salesforce Help"
+            - listitem [ref=e107]:
+              - button "Setup" [ref=e2380] [cursor=pointer]:
+                - generic [ref=e114]:
+                  - img [ref=e118]
+                  - tooltip "Setup"
+            - listitem [ref=e121]:
+              - button "Notifications" [ref=e2381] [cursor=pointer]:
+                - generic [ref=e125]:
+                  - img [ref=e130]
+                  - tooltip "Notifications"
+            - listitem [ref=e134]:
+              - button "View profile" [ref=e2382] [cursor=pointer]:
+                - generic [ref=e138]:
+                  - tooltip "View profile"
+    - generic [ref=e142]:
+      - generic:
+        - generic [ref=e143]:
+          - generic [ref=e145]:
+            - generic [ref=e146]:
+              - navigation "App" [ref=e2383]:
+                - button "App Launcher" [ref=e2384] [cursor=pointer]:
+                  - generic [ref=e160]: App Launcher
+              - heading "Gestión de Órdenes" [level=1] [ref=e2385]:
+                - generic "Gestión de Órdenes" [ref=e2386]
+            - navigation "Global" [ref=e2387]:
+              - link "Home" [ref=e2388] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e166]: Home
+              - button "Show Navigation Menu" [ref=e2389] [cursor=pointer]:
+                - img [ref=e171]
+                - generic [ref=e174]: Show Navigation Menu
+          - navigation "Workspaces" [ref=e2390]:
+            - tablist "Workspace tabs for Gestión de Órdenes" [ref=e2391]:
+              - generic [ref=e179]: Press Spacebar to reorder tabs.
+              - 'tab "* New Order: Reservas" [selected] [ref=e2392] [cursor=pointer]':
+                - generic "Unsaved Changes" [ref=e2393]: "*"
+                - generic [ref=e181]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Order
+                - generic [ref=e182]: "New Order: Reservas"
+              - 'button "Close New Order: Reservas" [ref=e2394] [cursor=pointer]':
+                - img [ref=e186]
+                - generic [ref=e189]: "Close New Order: Reservas"
+              - status [ref=e190] [cursor=pointer]
+        - main [ref=e195]:
+          - tabpanel [ref=e196]:
+            - tabpanel [ref=e199]:
+              - generic [ref=e302]:
+                - 'heading "New Order: Reservas" [level=2] [ref=e2395]'
+                - generic [ref=e306]:
+                  - generic [ref=e307]: "* = Required Information"
+                  - generic [ref=e313]:
+                    - generic [ref=e319]:
+                      - heading "Order Information" [level=3] [ref=e2396]:
+                        - generic "Order Information" [ref=e2397]
+                      - list [ref=e324]:
+                        - generic [ref=e325]:
+                          - generic [ref=e328]:
+                            - listitem [ref=e331]:
+                              - generic [ref=e338]:
+                                - generic [ref=e339]: Número de orden
+                                - textbox "Número de orden" [ref=e2398]
+                            - listitem [ref=e344]:
+                              - generic [ref=e345]:
+                                - button "Undo Status" [ref=e2399] [cursor=pointer]:
+                                  - img [ref=e2123]
+                                - generic [ref=e349]:
+                                  - generic [ref=e352]:
+                                    - generic [ref=e354]: "*Status"
+                                    - generic [ref=e358]:
+                                      - combobox "Status" [ref=e2400] [cursor=pointer]:
+                                        - generic [ref=e360]: Impresa
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - generic:
+                                              - img
+                                    - status
+                                  - link "View all dependencies for Status" [ref=e2401] [cursor=pointer]:
+                                    - /url: javascript:void(0)
+                                    - text: View all dependencies
+                            - listitem [ref=e366]:
+                              - generic [ref=e374]:
+                                - generic [ref=e376]: Estado Pago Reserva
+                                - generic [ref=e380]:
+                                  - combobox "Estado Pago Reserva" [ref=e2402] [cursor=pointer]:
+                                    - generic [ref=e382]: No Abonado
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                            - listitem [ref=e385]:
+                              - generic [ref=e392]:
+                                - generic [ref=e393]: Impresion papeleta
+                                - generic [ref=e398]:
+                                  - combobox "Impresion papeleta" [ref=e2403]
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                            - listitem [ref=e404]:
+                              - generic [ref=e411]:
+                                - generic [ref=e412]: Vendedor
+                                - generic [ref=e417]:
+                                  - combobox "Vendedor" [ref=e2404]
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                            - listitem [ref=e423]:
+                              - generic [ref=e430]:
+                                - generic [ref=e431]: Envío que completó la orden
+                                - generic [ref=e436]:
+                                  - combobox "Envío que completó la orden" [ref=e2405]
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                            - listitem [ref=e442]:
+                              - generic [ref=e448]:
+                                - generic [ref=e450]: Fue Impresa desde Boton
+                                - checkbox "Fue Impresa desde Boton" [ref=e2406]
+                            - listitem [ref=e455]:
+                              - generic [ref=e461]:
+                                - generic [ref=e463]: Envío gratis
+                                - checkbox "Envío gratis" [ref=e2407]
+                            - listitem [ref=e468]:
+                              - generic [ref=e474]:
+                                - generic [ref=e476]: Reserva propia
+                                - checkbox "Reserva propia" [ref=e2408]
+                            - listitem [ref=e481]:
+                              - generic [ref=e487]:
+                                - generic [ref=e489]: Pendiente de llegada
+                                - checkbox "Pendiente de llegada" [ref=e2409]
+                          - generic [ref=e494]:
+                            - listitem [ref=e497]:
+                              - generic [ref=e502]:
+                                - generic [ref=e505]:
+                                  - generic [ref=e507]: "*Order Type"
+                                  - generic [ref=e511]:
+                                    - combobox "Order Type" [ref=e2410] [cursor=pointer]:
+                                      - generic [ref=e513]: Reservas
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - img
+                                  - status
+                                - link "View all dependencies for Order Type" [ref=e2411] [cursor=pointer]:
+                                  - /url: javascript:void(0)
+                                  - text: View all dependencies
+                            - listitem [ref=e519]:
+                              - generic [ref=e521]:
+                                - generic [ref=e522]: Order Record Type
+                                - generic [ref=e528]: Reservas
+                            - listitem [ref=e531]:
+                              - generic [ref=e537]:
+                                - generic [ref=e539]: Modificada
+                                - checkbox "Modificada" [ref=e2412]
+                            - listitem [ref=e544]:
+                              - generic [ref=e550]:
+                                - generic [ref=e552]: Llamar
+                                - checkbox "Llamar" [ref=e2413]
+                            - listitem [ref=e557]:
+                              - generic [ref=e565]:
+                                - generic [ref=e567]: Motivo llamar
+                                - generic [ref=e571]:
+                                  - combobox "Motivo llamar" [ref=e2414] [cursor=pointer]:
+                                    - generic [ref=e573]: "--None--"
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                            - listitem [ref=e576]:
+                              - generic [ref=e583]:
+                                - generic [ref=e584]: Llamar otros
+                                - textbox "Llamar otros" [ref=e2415]
+                            - listitem [ref=e589]:
+                              - generic [ref=e597]:
+                                - generic [ref=e599]: Tienda
+                                - generic [ref=e603]:
+                                  - combobox "Tienda" [ref=e2416] [cursor=pointer]:
+                                    - generic [ref=e605]: "--None--"
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                            - listitem [ref=e608]:
+                              - generic [ref=e613]:
+                                - generic [ref=e614]: Description
+                                - textbox "Description" [ref=e2417]
+                                - status
+                            - listitem [ref=e619]:
+                              - generic [ref=e626]:
+                                - generic [ref=e627]: Notas de la entrega
+                                - textbox "Notas de la entrega" [ref=e2418]
+                            - listitem [ref=e632]:
+                              - generic [ref=e638]:
+                                - generic [ref=e640]: Cupon solicitado
+                                - checkbox "Cupon solicitado" [ref=e2419]
+                    - generic [ref=e648]:
+                      - heading "Cliente" [level=3] [ref=e2420]:
+                        - generic "Cliente" [ref=e2421]
+                      - list [ref=e653]:
+                        - generic [ref=e654]:
+                          - generic [ref=e657]:
+                            - listitem [ref=e660]:
+                              - generic [ref=e667]:
+                                - generic [ref=e668]: "*Account Name"
+                                - generic [ref=e673]:
+                                  - combobox "Account Name" [expanded] [active] [ref=e2422]: test uno
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                  - listbox "Account Name" [ref=e2548]:
+                                    - option "Search Show more results for \"test uno\"" [ref=e2549]:
+                                      - generic [ref=e2552]:
+                                        - img [ref=e2554]
+                                        - generic [ref=e2557]: Search
+                                      - generic [ref=e2559]: Show more results for "test uno"
+                                    - group "Search Results" [ref=e2560]:
+                                      - text: Search Results
+                                      - option "test uno 11111111" [ref=e2561]:
+                                        - img [ref=e2566]
+                                        - generic [ref=e2569]:
+                                          - generic "test uno" [ref=e2571]:
+                                            - strong [ref=e2572]: test
+                                            - strong [ref=e2573]: uno
+                                          - generic [ref=e2574]: "11111111"
+                                    - option "Add New Account" [ref=e2575]:
+                                      - generic [ref=e2578]:
+                                        - img [ref=e2580]
+                                        - generic [ref=e2583]: Add
+                                      - generic [ref=e2585]: New Account
+                                - status [ref=e2126]:
+                                  - generic [ref=e2127]: Account Name
+                                  - text: Select an option from the picklist or remove the search term.
+                            - listitem [ref=e679]:
+                              - generic [ref=e686]:
+                                - generic [ref=e687]: Nombre del tercero autorizado
+                                - textbox "Nombre del tercero autorizado" [ref=e2423]
+                            - listitem [ref=e692]:
+                              - generic [ref=e699]:
+                                - generic [ref=e700]: Apellido del tercero autorizado
+                                - textbox "Apellido del tercero autorizado" [ref=e2424]
+                            - listitem [ref=e705]:
+                              - generic [ref=e712]:
+                                - generic [ref=e713]: DNI del tercero autorizado
+                                - textbox "DNI del tercero autorizado" [ref=e2425]
+                          - generic [ref=e718]:
+                            - listitem [ref=e721]:
+                              - generic [ref=e726]:
+                                - generic [ref=e727]: Código de autorización
+                                - textbox "Código de autorización" [ref=e2426]
+                                - status
+                            - listitem [ref=e732]:
+                              - generic [ref=e740]:
+                                - generic [ref=e742]: ¿Quien retira?
+                                - generic [ref=e746]:
+                                  - combobox "¿Quien retira?" [ref=e2427] [cursor=pointer]:
+                                    - generic [ref=e748]: Comprador
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                    - generic [ref=e754]:
+                      - heading "Fechas" [level=3] [ref=e2428]:
+                        - generic "Fechas" [ref=e2429]
+                      - list [ref=e759]:
+                        - generic [ref=e760]:
+                          - generic [ref=e763]:
+                            - listitem [ref=e766]:
+                              - generic [ref=e771]:
+                                - group [ref=e772]:
+                                  - generic [ref=e773]: "*Order Start Date"
+                                  - generic [ref=e774]:
+                                    - textbox "Order Start Date" [ref=e2430]
+                                    - generic:
+                                      - button "Select a date for Order Start Date":
+                                        - generic:
+                                          - img
+                                        - generic: Select a date for Order Start Date
+                                - generic [ref=e2128]:
+                                  - generic [ref=e2129]: Order Start Date
+                                  - text: Complete this field with format 31/12/2024.
+                            - listitem [ref=e779]:
+                              - generic [ref=e784]:
+                                - group [ref=e785]:
+                                  - generic [ref=e786]: Fecha Vencimiento
+                                  - generic [ref=e787]:
+                                    - textbox "Fecha Vencimiento" [ref=e2431]
+                                    - generic:
+                                      - button "Select a date for Fecha Vencimiento":
+                                        - generic:
+                                          - img
+                                        - generic: Select a date for Fecha Vencimiento
+                                - generic [ref=e789]: "Format: 31/12/2024"
+                          - listitem [ref=e795]:
+                            - generic [ref=e800]:
+                              - group [ref=e801]:
+                                - generic [ref=e802]: Order End Date
+                                - generic [ref=e803]:
+                                  - textbox "Order End Date" [ref=e2432]
+                                  - generic:
+                                    - button "Select a date for Order End Date":
+                                      - generic:
+                                        - img
+                                      - generic: Select a date for Order End Date
+                              - generic [ref=e805]: "Format: 31/12/2024"
+                    - generic [ref=e811]:
+                      - heading "Montos" [level=3] [ref=e2433]:
+                        - generic "Montos" [ref=e2434]
+                      - list [ref=e816]:
+                        - generic [ref=e817]:
+                          - generic [ref=e820]:
+                            - listitem [ref=e823]:
+                              - generic [ref=e830]:
+                                - generic [ref=e831]: Código de Cupón
+                                - textbox "Código de Cupón" [ref=e2435]
+                            - listitem [ref=e836]:
+                              - generic [ref=e843]:
+                                - generic [ref=e844]: Monto cupón
+                                - spinbutton "Monto cupón" [ref=e2436]: $ 0,00
+                          - generic [ref=e849]:
+                            - listitem [ref=e852]:
+                              - generic [ref=e855]: Total with Tax
+                            - listitem [ref=e859]:
+                              - generic [ref=e861]:
+                                - generic [ref=e862]: Cantidad de unidades
+                                - generic [ref=e866]:
+                                  - generic [ref=e867]: 0,00
+                                  - generic [ref=e868]: This field is calculated upon save
+                    - generic [ref=e874]:
+                      - heading "Envío de la Orden" [level=3] [ref=e2437]:
+                        - generic "Envío de la Orden" [ref=e2438]
+                      - list [ref=e879]:
+                        - generic [ref=e880]:
+                          - generic [ref=e883]:
+                            - listitem [ref=e886]:
+                              - generic [ref=e893]:
+                                - generic [ref=e894]: Sucursal
+                                - generic [ref=e899]:
+                                  - combobox "Sucursal" [ref=e2439]
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                            - listitem [ref=e905]:
+                              - generic [ref=e912]:
+                                - generic [ref=e913]: store_pickup_external_id
+                                - textbox "store_pickup_external_id" [ref=e2440]
+                            - listitem [ref=e918]:
+                              - generic [ref=e925]:
+                                - generic [ref=e926]: Store_pickup_Id
+                                - textbox "Store_pickup_Id" [ref=e2441]
+                          - generic [ref=e931]:
+                            - listitem [ref=e934]:
+                              - generic [ref=e941]:
+                                - generic [ref=e942]: Compañia
+                                - textbox "Compañia" [ref=e2442]
+                            - listitem [ref=e947]:
+                              - generic [ref=e954]:
+                                - generic [ref=e955]: Método de envío
+                                - generic [ref=e960]:
+                                  - combobox "Método de envío" [ref=e2443]
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                            - listitem [ref=e966]:
+                              - generic [ref=e973]:
+                                - generic [ref=e974]: Costo de envío
+                                - spinbutton "Costo de envío" [ref=e2444]
+                            - listitem [ref=e979]:
+                              - generic [ref=e986]:
+                                - generic [ref=e987]: Provincia
+                                - textbox "Provincia" [ref=e2445]
+                            - listitem [ref=e992]:
+                              - group "Direccion de Entrega" [ref=e2446]:
+                                - generic [ref=e999]: Direccion de Entrega
+                                - generic [ref=e1001]:
+                                  - generic [ref=e1003]:
+                                    - generic [ref=e1004]: Address Search
+                                    - generic [ref=e1008]:
+                                      - combobox "Address Search" [ref=e2447]
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - generic:
+                                              - img
+                                  - status [ref=e1012]
+                                  - generic [ref=e1016]:
+                                    - generic [ref=e1018]: Direccion de Entrega (Country/Territory)
+                                    - generic [ref=e1022]:
+                                      - combobox "Direccion de Entrega (Country/Territory)" [ref=e2448]: Argentina
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - generic:
+                                              - img
+                                    - status
+                                  - generic [ref=e1027]:
+                                    - generic [ref=e1028]: Direccion de Entrega (Street)
+                                    - textbox "Direccion de Entrega (Street)" [ref=e2449]
+                                    - status
+                                  - generic [ref=e1034]:
+                                    - generic [ref=e1035]: Direccion de Entrega (ZIP/Postal Code)
+                                    - textbox "Direccion de Entrega (ZIP/Postal Code)" [ref=e2450]
+                                  - generic [ref=e1038]:
+                                    - generic [ref=e1041]:
+                                      - generic [ref=e1042]: Direccion de Entrega (City)
+                                      - textbox "Direccion de Entrega (City)" [ref=e2451]
+                                    - generic [ref=e1047]:
+                                      - generic [ref=e1049]: Direccion de Entrega (State/Province)
+                                      - generic [ref=e1053]:
+                                        - combobox "Direccion de Entrega (State/Province)" [ref=e2452]: "--None--"
+                                        - generic:
+                                          - generic:
+                                            - generic:
+                                              - generic:
+                                                - img
+                                      - status
+                    - generic [ref=e1062]:
+                      - heading "Facturación" [level=3] [ref=e2453]:
+                        - generic "Facturación" [ref=e2454]
+                      - list [ref=e1067]:
+                        - generic [ref=e1068]:
+                          - generic [ref=e1071]:
+                            - listitem [ref=e1074]:
+                              - generic [ref=e1080]:
+                                - generic [ref=e1081]: Nro de Ticket
+                                - spinbutton "Nro de Ticket" [ref=e2455]
+                            - listitem [ref=e1086]:
+                              - generic [ref=e1094]:
+                                - generic [ref=e1096]: Tipo de Factura
+                                - generic [ref=e1100]:
+                                  - combobox "Tipo de Factura" [ref=e2456] [cursor=pointer]:
+                                    - generic [ref=e1102]: Factura B
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                            - listitem [ref=e1105]:
+                              - generic [ref=e1112]:
+                                - generic [ref=e1113]: CUIT facturacion
+                                - textbox "CUIT facturacion" [ref=e2457]
+                            - listitem [ref=e1118]:
+                              - generic [ref=e1125]:
+                                - generic [ref=e1126]: Detalle exento
+                                - textbox "Detalle exento" [ref=e2458]
+                          - generic [ref=e1131]:
+                            - listitem [ref=e1134]:
+                              - generic [ref=e1140]:
+                                - generic [ref=e1142]: Error Ticket
+                                - checkbox "Error Ticket" [ref=e2459]
+                            - listitem [ref=e1147]:
+                              - generic [ref=e1153]:
+                                - generic [ref=e1154]: Controlador
+                                - spinbutton "Controlador" [ref=e2460]
+                            - listitem [ref=e1159]:
+                              - group "Billing Address" [ref=e2461]:
+                                - generic [ref=e1166]: Billing Address
+                                - generic [ref=e1168]:
+                                  - generic [ref=e1170]:
+                                    - generic [ref=e1171]: Address Search
+                                    - generic [ref=e1175]:
+                                      - combobox "Address Search" [ref=e2462]
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - generic:
+                                              - img
+                                  - status [ref=e1179]
+                                  - generic [ref=e1181]:
+                                    - generic [ref=e1182]: Billing Street
+                                    - textbox "Billing Street" [ref=e2463]
+                                    - status
+                                  - generic [ref=e1188]:
+                                    - generic [ref=e1189]: Billing Zip/Postal Code
+                                    - textbox "Billing Zip/Postal Code" [ref=e2464]
+                                  - generic [ref=e1192]:
+                                    - generic [ref=e1195]:
+                                      - generic [ref=e1196]: Billing City
+                                      - textbox "Billing City" [ref=e2465]
+                                    - generic [ref=e1201]:
+                                      - generic [ref=e1202]: Billing State/Province
+                                      - textbox "Billing State/Province" [ref=e2466]
+                                  - generic [ref=e1208]:
+                                    - generic [ref=e1209]: Billing Country
+                                    - textbox "Billing Country" [ref=e2467]
+                            - listitem [ref=e1214]:
+                              - generic [ref=e1216]:
+                                - generic [ref=e1217]: Order Amount
+                                - generic [ref=e1220]: $ 0,00
+                    - generic [ref=e1226]:
+                      - heading "System Information" [level=3] [ref=e2468]:
+                        - generic "System Information" [ref=e2469]
+                      - list [ref=e1231]:
+                        - generic [ref=e1232]:
+                          - listitem [ref=e1238]:
+                            - generic [ref=e1241]: Created By
+                          - listitem [ref=e1248]:
+                            - generic [ref=e1251]: Last Modified By
+                    - generic [ref=e1258]:
+                      - heading "Templates enviados" [level=3] [ref=e2470]:
+                        - generic "Templates enviados" [ref=e2471]
+                      - list [ref=e1263]:
+                        - generic [ref=e1264]:
+                          - generic [ref=e1267]:
+                            - listitem [ref=e1270]:
+                              - generic [ref=e1276]:
+                                - generic [ref=e1278]: T- Aviso compra web en sucursal
+                                - checkbox "T- Aviso compra web en sucursal" [ref=e2472]
+                            - listitem [ref=e1283]:
+                              - generic [ref=e1289]:
+                                - generic [ref=e1291]: T- Orden ingresada al sistema
+                                - checkbox "T- Orden ingresada al sistema" [ref=e2473]
+                            - listitem [ref=e1296]:
+                              - generic [ref=e1302]:
+                                - generic [ref=e1304]: T-Rerserva disponible en sucursal
+                                - checkbox "T-Rerserva disponible en sucursal" [ref=e2474]
+                            - listitem [ref=e1309]:
+                              - generic [ref=e1315]:
+                                - generic [ref=e1317]: T-Reserva agotada en sucursal cambio abo
+                                - checkbox "T-Reserva agotada en sucursal cambio abo" [ref=e2475]
+                          - generic [ref=e1322]:
+                            - listitem [ref=e1325]:
+                              - generic [ref=e1331]:
+                                - generic [ref=e1333]: T- Envio despachado
+                                - checkbox "T- Envio despachado" [ref=e2476]
+                            - listitem [ref=e1338]:
+                              - generic [ref=e1344]:
+                                - generic [ref=e1346]: T-Reclamo MP
+                                - checkbox "T-Reclamo MP" [ref=e2477]
+                            - listitem [ref=e1351]:
+                              - generic [ref=e1357]:
+                                - generic [ref=e1359]: T-Reserva agotada en sucursal abonado
+                                - checkbox "T-Reserva agotada en sucursal abonado" [ref=e2478]
+                            - listitem [ref=e1364]:
+                              - generic [ref=e1370]:
+                                - generic [ref=e1372]: T-Reserva agotada en sucursal no abonado
+                                - checkbox "T-Reserva agotada en sucursal no abonado" [ref=e2479]
+                    - generic [ref=e1380]:
+                      - heading "Oculto Reservas" [level=3] [ref=e2480]:
+                        - generic "Oculto Reservas" [ref=e2481]
+                      - list [ref=e1385]:
+                        - generic [ref=e1386]:
+                          - generic [ref=e1389]:
+                            - listitem [ref=e1392]:
+                              - generic [ref=e1399]:
+                                - generic [ref=e1400]: Num. de Seguimiento de ML
+                                - textbox "Num. de Seguimiento de ML" [ref=e2482]
+                            - listitem [ref=e1405]:
+                              - generic [ref=e1412]:
+                                - generic [ref=e1413]: Motivo de Solicitud de Acreditacion
+                                - textbox "Motivo de Solicitud de Acreditacion" [ref=e2483]
+                            - listitem [ref=e1418]:
+                              - generic [ref=e1424]:
+                                - generic [ref=e1426]: Pedidos Solicitados
+                                - checkbox "Pedidos Solicitados" [ref=e2484]
+                            - listitem [ref=e1431]:
+                              - generic [ref=e1438]:
+                                - generic [ref=e1439]: Orden original
+                                - generic [ref=e1444]:
+                                  - combobox "Orden original" [ref=e2485]
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                            - listitem [ref=e1450]:
+                              - generic [ref=e1457]:
+                                - generic [ref=e1458]: Monto de tarjeta de regalo
+                                - spinbutton "Monto de tarjeta de regalo" [ref=e2486]
+                            - listitem [ref=e1463]:
+                              - generic [ref=e1469]:
+                                - generic [ref=e1470]: Página de compra
+                                - textbox "Página de compra" [ref=e2487]
+                            - listitem [ref=e1475]:
+                              - generic [ref=e1482]:
+                                - generic [ref=e1483]: Ticket
+                                - textbox "Ticket" [ref=e2488]
+                            - listitem [ref=e1488]:
+                              - generic [ref=e1495]:
+                                - generic [ref=e1496]: Monto cupón aplicado
+                                - spinbutton "Monto cupón aplicado" [ref=e2489]
+                            - listitem [ref=e1501]:
+                              - generic [ref=e1507]:
+                                - generic [ref=e1509]: Devolución de dinero
+                                - checkbox "Devolución de dinero" [ref=e2490]
+                            - listitem [ref=e1514]:
+                              - generic [ref=e1519]:
+                                - group [ref=e1520]:
+                                  - generic [ref=e1521]: PO Date
+                                  - generic [ref=e1522]:
+                                    - textbox "PO Date" [ref=e2491]
+                                    - generic:
+                                      - button "Select a date for PO Date":
+                                        - generic:
+                                          - img
+                                        - generic: Select a date for PO Date
+                                - generic [ref=e1524]: "Format: 31/12/2024"
+                            - listitem [ref=e1527]:
+                              - generic [ref=e1533]:
+                                - generic [ref=e1535]: Stock original
+                                - checkbox "Stock original" [ref=e2492]
+                            - listitem [ref=e1540]:
+                              - generic [ref=e1546]:
+                                - generic [ref=e1547]: Cantidad de Bultos
+                                - spinbutton "Cantidad de Bultos" [ref=e2493]
+                            - listitem [ref=e1552]:
+                              - generic [ref=e1557]:
+                                - generic [ref=e1560]:
+                                  - generic [ref=e1562]: Estado del paquete
+                                  - generic [ref=e1566]:
+                                    - combobox "Estado del paquete" [disabled] [ref=e2494]:
+                                      - generic [ref=e1568]: "--None--"
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - img
+                                  - status
+                                - link "View all dependencies for Estado del paquete" [ref=e2495] [cursor=pointer]:
+                                  - /url: javascript:void(0)
+                                  - text: View all dependencies
+                            - listitem [ref=e1574]:
+                              - generic [ref=e1576]:
+                                - generic [ref=e1577]: Order Owner
+                                - generic [ref=e1589]: QA Agent
+                          - generic [ref=e1592]:
+                            - listitem [ref=e1595]:
+                              - generic [ref=e1602]:
+                                - generic [ref=e1603]: Reclamo Garantia
+                                - textbox "Reclamo Garantia" [ref=e2496]
+                            - listitem [ref=e1608]:
+                              - generic [ref=e1615]:
+                                - generic [ref=e1616]: Estado de la Etiqueta
+                                - textbox "Estado de la Etiqueta" [ref=e2497]
+                            - listitem [ref=e1621]:
+                              - generic [ref=e1626]:
+                                - group [ref=e1627]:
+                                  - generic [ref=e1628]: Fecha de despacho
+                                  - generic [ref=e1629]:
+                                    - textbox "Fecha de despacho" [ref=e2498]
+                                    - generic:
+                                      - button "Select a date for Fecha de despacho":
+                                        - generic:
+                                          - img
+                                        - generic: Select a date for Fecha de despacho
+                                - generic [ref=e1631]: "Format: 31/12/2024"
+                            - listitem [ref=e1634]:
+                              - generic [ref=e1640]:
+                                - generic [ref=e1641]: Nro de Caja/Pallet
+                                - spinbutton "Nro de Caja/Pallet" [ref=e2499]
+                            - listitem [ref=e1646]:
+                              - generic [ref=e1652]:
+                                - generic [ref=e1653]: Nro de Despacho/Envío
+                                - spinbutton "Nro de Despacho/Envío" [ref=e2500]
+                            - listitem [ref=e1658]:
+                              - generic [ref=e1665]:
+                                - generic [ref=e1666]: Store_Id
+                                - textbox "Store_Id" [ref=e2501]
+                            - listitem [ref=e1671]:
+                              - generic [ref=e1677]:
+                                - generic [ref=e1679]: Pendiente Validar Comprobantes
+                                - checkbox "Pendiente Validar Comprobantes" [ref=e2502]
+                            - listitem [ref=e1684]:
+                              - generic [ref=e1690]:
+                                - generic [ref=e1692]: Creación Manual
+                                - checkbox "Creación Manual" [ref=e2503]
+                    - generic [ref=e1700]:
+                      - heading "Section Admin campos ocultos" [level=3] [ref=e2504]:
+                        - generic "Section Admin campos ocultos" [ref=e2505]
+                      - list [ref=e1705]:
+                        - generic [ref=e1706]:
+                          - generic [ref=e1709]:
+                            - listitem [ref=e1712]:
+                              - generic [ref=e1714]:
+                                - generic [ref=e1715]: Activar Reservas-Impresa
+                                - generic [ref=e1719]:
+                                  - generic [ref=e1723]:
+                                    - generic "False" [ref=e2506]:
+                                      - generic [ref=e1725]:
+                                        - img [ref=e1727]
+                                        - generic [ref=e1730]: "False"
+                                    - generic [ref=e1731]: Activar Reservas-Impresa
+                                  - generic [ref=e1732]: This field is calculated upon save
+                            - listitem [ref=e1735]:
+                              - generic [ref=e1741]:
+                                - generic [ref=e1743]: Control de calidad
+                                - checkbox "Control de calidad" [ref=e2507]
+                            - listitem [ref=e1748]:
+                              - generic [ref=e1754]:
+                                - generic [ref=e1756]: Es Giftcard Virtual
+                                - checkbox "Es Giftcard Virtual" [ref=e2508]
+                            - listitem [ref=e1761]:
+                              - generic [ref=e1769]:
+                                - generic [ref=e1771]: Prioridad
+                                - generic [ref=e1775]:
+                                  - combobox "Prioridad" [ref=e2509] [cursor=pointer]:
+                                    - generic [ref=e1777]: "--None--"
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                            - listitem [ref=e1780]:
+                              - generic [ref=e1786]:
+                                - generic [ref=e1788]: Modificada
+                                - checkbox "Modificada" [ref=e2510]
+                            - listitem [ref=e1793]:
+                              - generic [ref=e1799]:
+                                - generic [ref=e1801]: Activar Entregar
+                                - checkbox "Activar Entregar" [ref=e2511]
+                            - listitem [ref=e1806]:
+                              - generic [ref=e1813]:
+                                - generic [ref=e1814]: Método de envío
+                                - textbox "Método de envío" [ref=e2512]
+                            - listitem [ref=e1819]:
+                              - generic [ref=e1826]:
+                                - generic [ref=e1827]: store_pickup_external_id
+                                - textbox "store_pickup_external_id" [ref=e2513]
+                            - listitem [ref=e1832]:
+                              - generic [ref=e1839]:
+                                - generic [ref=e1840]: Order Reference Number
+                                - textbox "Order Reference Number" [ref=e2514]
+                            - listitem [ref=e1845]:
+                              - generic [ref=e1848]: Price Book
+                            - listitem [ref=e1853]:
+                              - group "Ordered Date" [ref=e2515]:
+                                - generic [ref=e1862]: Ordered Date
+                                - generic [ref=e1865]:
+                                  - generic [ref=e1866]:
+                                    - group [ref=e1867]:
+                                      - generic [ref=e1868]: Date
+                                      - generic [ref=e1869]:
+                                        - textbox "Date" [ref=e2516]
+                                        - generic:
+                                          - button "Select a date for Date":
+                                            - generic:
+                                              - img
+                                            - generic: Select a date for Date
+                                    - generic [ref=e1871]: "Format: 31/12/2024"
+                                  - generic [ref=e1872]:
+                                    - generic [ref=e1873]: Time
+                                    - generic [ref=e1877]:
+                                      - combobox "Time" [ref=e2517]
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - generic:
+                                              - img
+                            - listitem [ref=e1883]:
+                              - generic [ref=e1890]:
+                                - generic [ref=e1891]: Numero Sucursal fx
+                                - textbox "Numero Sucursal fx" [ref=e2518]
+                          - generic [ref=e1896]:
+                            - listitem [ref=e1899]:
+                              - generic [ref=e1906]:
+                                - generic [ref=e1907]: Motivo
+                                - textbox "Motivo" [ref=e2519]
+                            - listitem [ref=e1912]:
+                              - generic [ref=e1918]:
+                                - generic [ref=e1919]: Importe a devolver
+                                - spinbutton "Importe a devolver" [ref=e2520]
+                            - listitem [ref=e1924]:
+                              - generic [ref=e1930]:
+                                - generic [ref=e1932]: Boton Solicitar Devolucion
+                                - checkbox "Boton Solicitar Devolucion" [ref=e2521]
+                            - listitem [ref=e1937]:
+                              - generic [ref=e1943]:
+                                - generic [ref=e1945]: Boton Verificar Devolucion
+                                - checkbox "Boton Verificar Devolucion" [ref=e2522]
+                            - listitem [ref=e1950]:
+                              - generic [ref=e1956]:
+                                - generic [ref=e1958]: Verificar Cuando Llegue
+                                - checkbox "Verificar Cuando Llegue" [ref=e2523]
+                            - listitem [ref=e1963]:
+                              - generic [ref=e1969]:
+                                - generic [ref=e1971]: Boton Confirmar Devolucion
+                                - checkbox "Boton Confirmar Devolucion" [ref=e2524]
+                            - listitem [ref=e1976]:
+                              - generic [ref=e1982]:
+                                - generic [ref=e1984]: Boton Confirmar Cuando Llegue
+                                - checkbox "Boton Confirmar Cuando Llegue" [ref=e2525]
+                            - listitem [ref=e1989]:
+                              - generic [ref=e1995]:
+                                - generic [ref=e1997]: En despacho
+                                - checkbox "En despacho" [ref=e2526]
+                            - listitem [ref=e2002]:
+                              - generic [ref=e2010]:
+                                - generic [ref=e2012]: Motivo devolución
+                                - generic [ref=e2016]:
+                                  - combobox "Motivo devolución" [ref=e2527] [cursor=pointer]:
+                                    - generic [ref=e2018]: "--None--"
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                            - listitem [ref=e2021]:
+                              - generic [ref=e2029]:
+                                - generic [ref=e2031]: Clave de Despacho
+                                - generic [ref=e2035]:
+                                  - combobox "Clave de Despacho" [ref=e2528] [cursor=pointer]:
+                                    - generic [ref=e2037]: Expedicion2308
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                            - listitem [ref=e2040]:
+                              - generic [ref=e2046]:
+                                - generic [ref=e2048]: Reporte enviado
+                                - checkbox "Reporte enviado" [ref=e2529]
+                - generic [ref=e2053]:
+                  - button "Error" [ref=e2530] [cursor=pointer]:
+                    - generic "Error" [ref=e2531]:
+                      - generic [ref=e2132]:
+                        - img [ref=e2134]
+                        - generic [ref=e2137]: Error
+                  - generic [ref=e2055]:
+                    - generic "Cancel" [ref=e2532]:
+                      - button "Cancel" [ref=e2533] [cursor=pointer]
+                    - generic "Save & New" [ref=e2534]:
+                      - button "Save & New" [ref=e2535] [cursor=pointer]
+                    - generic "Save" [ref=e2536]:
+                      - button "Save" [ref=e2537] [cursor=pointer]
+    - generic:
+      - contentinfo "Utility Bar":
+        - list [ref=e251]:
+          - listitem [ref=e252]:
+            - button "History" [ref=e2538] [cursor=pointer]:
+              - img [ref=e259]
+              - generic [ref=e262]: History
+          - listitem [ref=e263]:
+            - button "Notes" [ref=e2539] [cursor=pointer]:
+              - img [ref=e270]
+              - generic [ref=e273]: Notes
+  - generic:
+    - status

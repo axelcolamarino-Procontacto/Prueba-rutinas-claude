@@ -1,0 +1,1044 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#skiplink"
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - table [ref=e5]:
+        - rowgroup [ref=e6]:
+          - 'row "Salesforce.com Search Logged in as QA Agent (solodeportes@solodeportes.test) Sandbox: test Switch to Lightning Experience QA Agent SetupHelp & Training" [ref=e7]':
+            - cell "Salesforce.com" [ref=e8]:
+              - img "Salesforce.com" [ref=e9]
+            - cell "Search" [ref=e10]:
+              - generic [ref=e13]:
+                - combobox "Search..." [ref=e15]
+                - button "Search" [ref=e17] [cursor=pointer]
+            - 'cell "Logged in as QA Agent (solodeportes@solodeportes.test) Sandbox: test Switch to Lightning Experience QA Agent SetupHelp & Training" [ref=e18]':
+              - generic [ref=e19]:
+                - generic [ref=e21]:
+                  - generic [ref=e22]: Logged in as QA Agent (solodeportes@solodeportes.test)
+                  - generic [ref=e23]: "Sandbox: test"
+                - generic [ref=e26]:
+                  - link "Switch to Lightning Experience" [ref=e27] [cursor=pointer]:
+                    - /url: javascript:sfdcPage.handleSwitchToLightningClick(%27LightningExperiencePreferred%27,true,%27/ltng/switcher?destination=lex-campaign%27);
+                    - img [ref=e28]
+                    - text: Switch to Lightning Experience
+                  - generic "User menu for QA Agent" [ref=e32] [cursor=pointer]:
+                    - generic [ref=e33]: QA Agent
+                  - link "Setup" [ref=e35] [cursor=pointer]:
+                    - /url: /lightning/setup/SetupOneHome/home
+                  - link "Help & Training" [ref=e36] [cursor=pointer]:
+                    - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?resource=https%3A%2F%2Fhelp.salesforce.com%2F&version=2&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                - generic "App Menu" [ref=e38] [cursor=pointer]
+      - navigation [ref=e43]:
+        - heading "Tab Navigation" [level=1] [ref=e44]
+        - navigation [ref=e45]:
+          - list [ref=e46]:
+            - listitem [ref=e47]:
+              - link "Home" [ref=e48] [cursor=pointer]:
+                - /url: /home/home.jsp
+            - listitem [ref=e49]:
+              - link "Accounts" [ref=e50] [cursor=pointer]:
+                - /url: /001/o
+            - listitem [ref=e51]:
+              - link "Orders" [ref=e52] [cursor=pointer]:
+                - /url: /801/o
+            - listitem [ref=e53]:
+              - link "Pedidos" [ref=e54] [cursor=pointer]:
+                - /url: /a0u/o
+            - listitem [ref=e55]:
+              - link "Comprobantes" [ref=e56] [cursor=pointer]:
+                - /url: /a0U/o
+            - listitem [ref=e57]:
+              - link "Envíos de stock" [ref=e58] [cursor=pointer]:
+                - /url: /a0Z/o
+            - listitem [ref=e59]:
+              - link "Pagos" [ref=e60] [cursor=pointer]:
+                - /url: /a0t/o
+            - listitem [ref=e61]:
+              - link "Impresiones" [ref=e62] [cursor=pointer]:
+                - /url: /a0k/o
+            - listitem [ref=e63]:
+              - link "Impresiones papeletas" [ref=e64] [cursor=pointer]:
+                - /url: /a0l/o
+            - listitem [ref=e65]:
+              - link "Impresiones Reporte Despacho" [ref=e66] [cursor=pointer]:
+                - /url: /a0j/o
+            - listitem [ref=e67]:
+              - link "All Tabs" [ref=e68] [cursor=pointer]:
+                - /url: /home/showAllTabs.jsp
+                - img "All Tabs" [ref=e69]
+    - table [ref=e71]:
+      - rowgroup [ref=e72]:
+        - row [ref=e73]:
+          - cell [ref=e74]:
+            - generic [ref=e75]:
+              - generic [ref=e78]:
+                - generic [ref=e79]: Quick Find
+                - textbox "Quick Find" [ref=e80]:
+                  - /placeholder: Quick Find / Search...
+                - button "Submit" [ref=e82] [cursor=pointer]
+              - generic [ref=e83]:
+                - link "Expand All" [ref=e84] [cursor=pointer]:
+                  - /url: "#"
+                - text: "|"
+                - link "Collapse All" [ref=e85] [cursor=pointer]:
+                  - /url: "#"
+              - generic [ref=e86]:
+                - heading "Salesforce Mobile Quick Start" [level=2] [ref=e88]:
+                  - link "Salesforce Mobile Quick Start" [ref=e89] [cursor=pointer]:
+                    - /url: /ui/setup/salesforce1/Salesforce1SetupHomePage?setupid=Salesforce1SetupSection&retURL=%2Fui%2Fsetup%2FSetup
+                - heading "Home" [level=2] [ref=e91]:
+                  - link "Home" [ref=e92] [cursor=pointer]:
+                    - /url: /setup/forcecomHomepage.apexp?setupid=ForceCom&retURL=%2Fui%2Fsetup%2FSetup
+                - heading "Administer" [level=2] [ref=e94]:
+                  - link "Administer" [ref=e95] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=AdminSetup
+                - link "Release Updates" [ref=e97] [cursor=pointer]:
+                  - /url: /ui/setup/releaseUpdate/ReleaseUpdatePage?setupid=ReleaseUpdates&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DAdminSetup
+                - generic [ref=e98]:
+                  - link "Collapse - Manage Users - Level 1" [ref=e99] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27Users%27%29
+                    - img "Collapse - Manage Users - Level 1" [ref=e100]
+                  - link "Manage Users" [ref=e101] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=Users
+                  - generic [ref=e102]:
+                    - link "Users" [ref=e104] [cursor=pointer]:
+                      - /url: /005?isUserEntityOverride=1&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DUsers&setupid=ManageUsers
+                    - link "Mass Email Users" [ref=e106] [cursor=pointer]:
+                      - /url: /ui/massmail/MassMailStageManager?setupid=EmailUsers&mm_type=User&wizardRetUrl=%2F005QQ00000Akr0LYAR%3Fnoredirect%3D1%26isUserEntityOverride%3D1&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DUsers
+                    - link "Roles" [ref=e108] [cursor=pointer]:
+                      - /url: /setup/user/roleSplash.jsp?retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DUsers&setupid=Roles
+                    - link "Permission Sets" [ref=e110] [cursor=pointer]:
+                      - /url: /0PS?setupid=PermSets&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DUsers
+                    - link "Permission Set Groups" [ref=e112] [cursor=pointer]:
+                      - /url: /_ui/perms/ui/setup/PermSetGroupsPage?setupid=PermSetGroups&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DUsers
+                    - link "User Management Settings" [ref=e114] [cursor=pointer]:
+                      - /url: /_ui/perms/ui/setup/UserManagementSettingsPage?setupid=UserManagementSettings&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DUsers
+                    - link "Profiles" [ref=e116] [cursor=pointer]:
+                      - /url: /00e?setupid=EnhancedProfiles&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DUsers
+                    - link "Public Groups" [ref=e118] [cursor=pointer]:
+                      - /url: /p/own/OrgPublicGroupsPage/d?setupid=PublicGroups&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DUsers
+                    - link "Queues" [ref=e120] [cursor=pointer]:
+                      - /url: /p/own/OrgQueuesPage/d?setupid=Queues&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DUsers
+                    - link "Login History" [ref=e122] [cursor=pointer]:
+                      - /url: /0Ya?retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DUsers&setupid=OrgLoginHistory
+                    - link "Identity Provider Event Log" [ref=e124] [cursor=pointer]:
+                      - /url: /setup/secur/IdpErrorLog.apexp?setupid=IdpErrorLog&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DUsers
+                    - link "Identity Verification History" [ref=e126] [cursor=pointer]:
+                      - /url: /setup/secur/VerificationHistory.apexp?setupid=VerificationHistory&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DUsers
+                - generic [ref=e127]:
+                  - link "Expand - Manage Apps - Level 1" [ref=e128] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27ManageApps%27%29
+                    - img "Expand - Manage Apps - Level 1" [ref=e129]
+                  - link "Manage Apps" [ref=e130] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=ManageApps
+                - generic [ref=e131]:
+                  - link "Expand - Manage Territories - Level 1" [ref=e132] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27ManageTerritories2%27%29
+                    - img "Expand - Manage Territories - Level 1" [ref=e133]
+                  - link "Manage Territories" [ref=e134] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=ManageTerritories2
+                - generic [ref=e135]:
+                  - link "Expand - Company Profile - Level 1" [ref=e136] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27CompanyProfile%27%29
+                    - img "Expand - Company Profile - Level 1" [ref=e137]
+                  - link "Company Profile" [ref=e138] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=CompanyProfile
+                - generic [ref=e139]:
+                  - link "Expand - Data Classification - Level 1" [ref=e140] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27DataClassification%27%29
+                    - img "Expand - Data Classification - Level 1" [ref=e141]
+                  - link "Data Classification" [ref=e142] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=DataClassification
+                - generic [ref=e143]:
+                  - link "Expand - Privacy Center - Level 1" [ref=e144] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27ConsentSettingsSection%27%29
+                    - img "Expand - Privacy Center - Level 1" [ref=e145]
+                  - link "Privacy Center" [ref=e146] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=ConsentSettingsSection
+                - generic [ref=e147]:
+                  - link "Expand - Security Controls - Level 1" [ref=e148] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27Security%27%29
+                    - img "Expand - Security Controls - Level 1" [ref=e149]
+                  - link "Security Controls" [ref=e150] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=Security
+                - generic [ref=e151]:
+                  - link "Expand - Domain Management - Level 1" [ref=e152] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27Domains%27%29
+                    - img "Expand - Domain Management - Level 1" [ref=e153]
+                  - link "Domain Management" [ref=e154] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=Domains
+                - generic [ref=e155]:
+                  - link "Expand - Communication Templates - Level 1" [ref=e156] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27CommunicationTemplates%27%29
+                    - img "Expand - Communication Templates - Level 1" [ref=e157]
+                  - link "Communication Templates" [ref=e158] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=CommunicationTemplates
+                - generic [ref=e159]:
+                  - link "Expand - Translation Workbench - Level 1" [ref=e160] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27LabelWorkbench%27%29
+                    - img "Expand - Translation Workbench - Level 1" [ref=e161]
+                  - link "Translation Workbench" [ref=e162] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=LabelWorkbench
+                - generic [ref=e163]:
+                  - link "Expand - Data Management - Level 1" [ref=e164] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27DataManagement%27%29
+                    - img "Expand - Data Management - Level 1" [ref=e165]
+                  - link "Data Management" [ref=e166] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=DataManagement
+                - generic [ref=e167]:
+                  - link "Expand - Mobile Administration - Level 1" [ref=e168] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27MobileAdministration%27%29
+                    - img "Expand - Mobile Administration - Level 1" [ref=e169]
+                  - link "Mobile Administration" [ref=e170] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=MobileAdministration
+                - generic [ref=e171]:
+                  - link "Expand - Desktop Administration - Level 1" [ref=e172] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27DesktopAdministration%27%29
+                    - img "Expand - Desktop Administration - Level 1" [ref=e173]
+                  - link "Desktop Administration" [ref=e174] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=DesktopAdministration
+                - generic [ref=e175]:
+                  - link "Expand - Outlook Integration and Sync - Level 1" [ref=e176] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27LightningForOutlookAndSyncSettings%27%29
+                    - img "Expand - Outlook Integration and Sync - Level 1" [ref=e177]
+                  - link "Outlook Integration and Sync" [ref=e178] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=LightningForOutlookAndSyncSettings
+                - generic [ref=e179]:
+                  - link "Expand - Gmail Integration and Sync - Level 1" [ref=e180] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27LightningForGmailAndSyncSettings%27%29
+                    - img "Expand - Gmail Integration and Sync - Level 1" [ref=e181]
+                  - link "Gmail Integration and Sync" [ref=e182] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=LightningForGmailAndSyncSettings
+                - generic [ref=e183]:
+                  - link "Expand - Email Administration - Level 1" [ref=e184] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27EmailAdmin%27%29
+                    - img "Expand - Email Administration - Level 1" [ref=e185]
+                  - link "Email Administration" [ref=e186] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=EmailAdmin
+                - generic [ref=e187]:
+                  - link "Expand - Google Apps - Level 1" [ref=e188] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27GoogleAppsFb%27%29
+                    - img "Expand - Google Apps - Level 1" [ref=e189]
+                  - link "Google Apps" [ref=e190] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=GoogleAppsFb
+                - generic [ref=e191]:
+                  - link "Expand - Analytics - Level 1" [ref=e192] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27Insights%27%29
+                    - img "Expand - Analytics - Level 1" [ref=e193]
+                  - link "Analytics" [ref=e194] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=Insights
+                - generic [ref=e195]:
+                  - link "Expand - Tableau - Level 1" [ref=e196] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27TableauEmbedding%27%29
+                    - img "Expand - Tableau - Level 1" [ref=e197]
+                  - link "Tableau" [ref=e198] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=TableauEmbedding
+                - heading "Build" [level=2] [ref=e200]:
+                  - link "Build" [ref=e201] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=Studio
+                - generic [ref=e202]:
+                  - link "Expand - Customize - Level 1" [ref=e203] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27Customize%27%29
+                    - img "Expand - Customize - Level 1" [ref=e204]
+                  - link "Customize" [ref=e205] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=Customize
+                - generic [ref=e206]:
+                  - link "Expand - Create - Level 1" [ref=e207] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27DevTools%27%29
+                    - img "Expand - Create - Level 1" [ref=e208]
+                  - link "Create" [ref=e209] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=DevTools
+                - generic [ref=e210]:
+                  - link "Expand - Develop - Level 1" [ref=e211] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27DevToolsIntegrate%27%29
+                    - img "Expand - Develop - Level 1" [ref=e212]
+                  - link "Develop" [ref=e213] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=DevToolsIntegrate
+                - generic [ref=e214]:
+                  - link "Expand - Lightning Bolt - Level 1" [ref=e215] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27LightningBoltNode%27%29
+                    - img "Expand - Lightning Bolt - Level 1" [ref=e216]
+                  - link "Lightning Bolt" [ref=e217] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=LightningBoltNode
+                - link "Schema Builder" [ref=e219] [cursor=pointer]:
+                  - /url: /_ui/platform/schema/ui/schemabuilder/SchemaBuilderUi?retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DStudio&setupid=SchemaBuilder
+                - link "Lightning App Builder" [ref=e221] [cursor=pointer]:
+                  - /url: /_ui/flexipage/ui/FlexiPageFilterListPage?retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DStudio&setupid=FlexiPageList
+                - link "Canvas App Previewer" [ref=e223] [cursor=pointer]:
+                  - /url: /_ui/force/canvas/ui/CanvasPreviewerUi?retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DStudio&setupid=CanvasPreviewerUi
+                - link "Installed Packages" [ref=e225] [cursor=pointer]:
+                  - /url: /0A3?setupid=ImportedPackage&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DStudio
+                - link "Package Usage" [ref=e227] [cursor=pointer]:
+                  - /url: /_ui/isvintel/ui/PackageUsageSummarySetupPage?setupid=PackageUsageSummary&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DStudio
+                - link "AppExchange Marketplace" [ref=e229] [cursor=pointer]:
+                  - /url: /packaging/viewAEMarketplace.apexp?retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DStudio&setupid=AppExchangeMarketplace
+                - heading "Deploy" [level=2] [ref=e231]:
+                  - link "Deploy" [ref=e232] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=Deploy
+                - link "Outbound Change Sets" [ref=e234] [cursor=pointer]:
+                  - /url: /changemgmt/changeMgmtSplash.apexp?splashPageTargetUrl=OutboundChangeSet&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DDeploy&setupid=OutboundChangeSet
+                - link "Inbound Change Sets" [ref=e236] [cursor=pointer]:
+                  - /url: /changemgmt/changeMgmtSplash.apexp?splashPageTargetUrl=InboundChangeSet&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DDeploy&setupid=InboundChangeSet
+                - link "Deployment Settings" [ref=e238] [cursor=pointer]:
+                  - /url: /changemgmt/changeMgmtSplash.apexp?splashPageTargetUrl=DeploymentSettings&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DDeploy&setupid=DeploymentSettings
+                - link "Deployment Status" [ref=e240] [cursor=pointer]:
+                  - /url: /changemgmt/monitorDeployment.apexp?retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DDeploy&setupid=DeployStatus
+                - heading "Monitor" [level=2] [ref=e242]:
+                  - link "Monitor" [ref=e243] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=Monitoring
+                - link "System Overview" [ref=e245] [cursor=pointer]:
+                  - /url: /setup/systemOverview.apexp?setupid=SystemOverview&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DMonitoring
+                - link "Imports" [ref=e247] [cursor=pointer]:
+                  - /url: /setup/imp/importqueue.jsp?setupid=DataManagementContactsQueue&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DMonitoring
+                - link "Outbound Messages" [ref=e249] [cursor=pointer]:
+                  - /url: /ui/setup/outbound/WfOutboundStatusUi?setupid=WorkflowOmStatus&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DMonitoring
+                - link "Time-Based Automations" [ref=e251] [cursor=pointer]:
+                  - /url: /setup/own/massdelete.jsp?ftype=WFTimeQ&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DMonitoring&setupid=DataManagementManageWorkflowQueue
+                - link "Case Escalations" [ref=e253] [cursor=pointer]:
+                  - /url: /setup/own/massdelete.jsp?ftype=CaseEscalation&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DMonitoring&setupid=DataManagementManageCaseEscalation
+                - link "Entitlement Processes" [ref=e255] [cursor=pointer]:
+                  - /url: /setup/own/massdelete.jsp?ftype=SlaProcessTimeQueue&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DMonitoring&setupid=DataManagementManageSlaProcess
+                - link "API Usage Notifications" [ref=e257] [cursor=pointer]:
+                  - /url: /076?spl1=1&setupid=MonitoringRateLimitingNotification&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DMonitoring
+                - link "Email Snapshots" [ref=e259] [cursor=pointer]:
+                  - /url: /email/capture/emailCapture.apexp?retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DMonitoring&setupid=EmailCapture
+                - generic [ref=e260]:
+                  - link "Expand - Jobs - Level 1" [ref=e261] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27Jobs%27%29
+                    - img "Expand - Jobs - Level 1" [ref=e262]
+                  - link "Jobs" [ref=e263] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=Jobs
+                - generic [ref=e264]:
+                  - link "Expand - Logs - Level 1" [ref=e265] [cursor=pointer]:
+                    - /url: javascript:HTMLTreeNode.prototype.toggleHTMLTree%28%27Logs%27%29
+                    - img "Expand - Logs - Level 1" [ref=e266]
+                  - link "Logs" [ref=e267] [cursor=pointer]:
+                    - /url: /ui/setup/Setup?setupid=Logs
+          - cell [ref=e268]:
+            - img [ref=e269]
+            - generic [ref=e271]:
+              - generic [ref=e272]:
+                - heading "User" [level=1] [ref=e273]
+                - heading "Emiliano Brito" [level=2] [ref=e274]
+              - generic [ref=e275]:
+                - link "Edit Layout" [ref=e276] [cursor=pointer]:
+                  - /url: /layouteditor/layoutEditor.apexp?type=User&lid=00hHs00000d7INA&retURL=%2F005QQ00000Akr0LYAR%3Fnoredirect%3D1%26isUserEntityOverride%3D1&setupid=ManageUsers
+                - text: "|"
+                - link "User Profile" [ref=e277] [cursor=pointer]:
+                  - /url: /_ui/core/userprofile/UserProfilePage?u=005QQ00000Akr0L
+                - text: "|"
+                - link "Help for this Page" [ref=e278] [cursor=pointer]:
+                  - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=editing_users.htm&section=User_Management&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+            - generic [ref=e279]:
+              - text: Salesforce now sends emails only from verified domains. To avoid delivery failures, verify your email domains or enable your substitute email-sending domain.
+              - link "Learn More" [ref=e280] [cursor=pointer]:
+                - /url: /HelpAndTrainingDoor?version=2&resource=https://help.salesforce.com/s/articleView?id=xcloud.security_user_email_verification_domain_auth.htm&type=5
+            - generic [ref=e281]:
+              - link "Permission Set Assignments[1]" [ref=e282] [cursor=pointer]:
+                - /url: "#005QQ00000Akr0L_RelatedPermsetAssignmentList_target"
+                - generic [ref=e283]: Permission Set Assignments[1]
+              - text: "|"
+              - 'link "Permission Set Assignments: Activation Required[0]" [ref=e284] [cursor=pointer]':
+                - /url: "#005QQ00000Akr0L_RelatedSessionPermsetAssignmentList_target"
+                - generic [ref=e285]: "Permission Set Assignments: Activation Required[0]"
+              - text: "|"
+              - link "Permission Set Group Assignments[1]" [ref=e286] [cursor=pointer]:
+                - /url: "#005QQ00000Akr0L_RelatedPermsetGroupsAssignmentList_target"
+                - generic [ref=e287]: Permission Set Group Assignments[1]
+              - text: "|"
+              - link "Permission Set License Assignments[0]" [ref=e288] [cursor=pointer]:
+                - /url: "#005QQ00000Akr0L_RelatedPermissionSetLicenseAssignList_target"
+                - generic [ref=e289]: Permission Set License Assignments[0]
+              - text: "|"
+              - link "Lightning Data Purchase Assignments[0]" [ref=e290] [cursor=pointer]:
+                - /url: "#RelatedDiscoveryLicenseList_target"
+                - generic [ref=e291]: Lightning Data Purchase Assignments[0]
+              - text: "|"
+              - link "Personal Groups[0]" [ref=e292] [cursor=pointer]:
+                - /url: "#RelatedPersonalGroupsList_target"
+                - generic [ref=e293]: Personal Groups[0]
+              - text: "|"
+              - link "Public Group Membership[2]" [ref=e294] [cursor=pointer]:
+                - /url: "#005QQ00000Akr0L_RelatedPublicGroupMemberList_target"
+                - generic [ref=e295]: Public Group Membership[2]
+              - text: "|"
+              - link "Queue Membership[0]" [ref=e296] [cursor=pointer]:
+                - /url: "#005QQ00000Akr0L_RelatedQueueMemberList_target"
+                - generic [ref=e297]: Queue Membership[0]
+              - text: "|"
+              - link "User Skills[0]" [ref=e298] [cursor=pointer]:
+                - /url: "#005QQ00000Akr0L_ProfileSkillUserByUserRelatedList_target"
+                - generic [ref=e299]: User Skills[0]
+              - text: "|"
+              - link "Team[0]" [ref=e300] [cursor=pointer]:
+                - /url: "#005QQ00000Akr0L_TeamList_target"
+                - generic [ref=e301]: Team[0]
+              - text: "|"
+              - link "Managers in the Role Hierarchy[0]" [ref=e302] [cursor=pointer]:
+                - /url: "#005QQ00000Akr0L_UserBossRelatedList_target"
+                - generic [ref=e303]: Managers in the Role Hierarchy[0]
+              - text: "|"
+              - link "OAuth Apps[0]" [ref=e304] [cursor=pointer]:
+                - /url: "#RelatedUserAccessTokenList_target"
+                - generic [ref=e305]: OAuth Apps[0]
+              - text: "|"
+              - link "Third-Party Account Links[0]" [ref=e306] [cursor=pointer]:
+                - /url: "#AuthorizationLinkRelatedList_target"
+                - generic [ref=e307]: Third-Party Account Links[0]
+              - text: "|"
+              - link "Installed Mobile Apps[0]" [ref=e308] [cursor=pointer]:
+                - /url: "#UserInstalledMobileAppRelatedList_target"
+                - generic [ref=e309]: Installed Mobile Apps[0]
+              - text: "|"
+              - link "Authentication Settings for External Systems[0]" [ref=e310] [cursor=pointer]:
+                - /url: "#005QQ00000Akr0L_ExternalUserAuthRelatedList_target"
+                - generic [ref=e311]: Authentication Settings for External Systems[0]
+              - text: "|"
+              - link "Login History[0+]" [ref=e312] [cursor=pointer]:
+                - /url: "#RelatedUserLoginHistoryList_target"
+                - generic [ref=e313]:
+                  - text: Login History
+                  - generic [ref=e314]: "[0+]"
+              - text: "|"
+              - link "User Provisioning Accounts[0]" [ref=e315] [cursor=pointer]:
+                - /url: "#005QQ00000Akr0L_RelatedUserProvAccountList_target"
+                - generic [ref=e316]: User Provisioning Accounts[0]
+            - generic [ref=e317]:
+              - table [ref=e319]:
+                - rowgroup [ref=e320]:
+                  - row "User Detail Edit Sharing Reset Password Freeze View Summary" [ref=e321]:
+                    - cell "User Detail" [ref=e322]:
+                      - heading "User Detail" [level=2] [ref=e323]
+                    - cell "Edit Sharing Reset Password Freeze View Summary" [ref=e324]:
+                      - button "Edit" [ref=e325] [cursor=pointer]
+                      - button "Sharing" [ref=e326] [cursor=pointer]
+                      - button "Reset Password" [ref=e327] [cursor=pointer]
+                      - button "Freeze" [ref=e328] [cursor=pointer]
+                      - button "View Summary" [ref=e329] [cursor=pointer]
+              - table [ref=e332]:
+                - rowgroup [ref=e333]:
+                  - row "Name Emiliano Brito Role" [ref=e334]:
+                    - cell "Name" [ref=e335]
+                    - cell "Emiliano Brito" [ref=e336]
+                    - cell "Role" [ref=e337]
+                    - cell [ref=e338]
+                  - row "Alias ebrito User License Salesforce" [ref=e339]:
+                    - cell "Alias" [ref=e340]
+                    - cell "ebrito" [ref=e341]
+                    - cell "User License" [ref=e342]
+                    - cell "Salesforce" [ref=e343]
+                  - row "Email emiliano.brito@solodeportes.com.invalid [Verify] Profile Standard User" [ref=e344]:
+                    - cell "Email" [ref=e345]
+                    - cell "emiliano.brito@solodeportes.com.invalid [Verify]" [ref=e346]:
+                      - link "emiliano.brito@solodeportes.com.invalid" [ref=e347] [cursor=pointer]:
+                        - /url: mailto:emiliano.brito@solodeportes.com.invalid
+                      - link "[Verify]" [ref=e348] [cursor=pointer]:
+                        - /url: /005QQ00000Akr0L?noredirect=1&isUserEntityOverride=1&sendEmailVerifyLink=1&_CONFIRMATIONTOKEN=VmpFPSxNakF5Tmkwd05TMHlORlF4T1RvMU9UbzBOUzR3TlROYSw3cXNOTWtZVzdqS21KNnB3MVBZdTlVaEVoVjRLdXhXR1B0MzJ1dk9tOE44PSxNR015TVRKag%3D%3D
+                    - cell "Profile" [ref=e350]
+                    - cell "Standard User" [ref=e351]:
+                      - link "Standard User" [ref=e352] [cursor=pointer]:
+                        - /url: /00eHs000002zqEp
+                  - row "Username emiliano.brito@solodeportes.com.test Active Checked" [ref=e353]:
+                    - cell "Username" [ref=e354]
+                    - cell "emiliano.brito@solodeportes.com.test" [ref=e355]
+                    - cell "Active" [ref=e356]
+                    - cell "Checked" [ref=e357]:
+                      - img "Checked" [ref=e358]
+                  - row "Nickname Usuario17652980167645055453 Marketing User Not Checked" [ref=e359]:
+                    - cell "Nickname" [ref=e360]
+                    - cell "Usuario17652980167645055453" [ref=e361]: Usuario17652980167645055453
+                    - cell "Marketing User" [ref=e363]
+                    - cell "Not Checked" [ref=e364]:
+                      - img "Not Checked" [ref=e365]
+                  - row "Title Offline User Not Checked" [ref=e366]:
+                    - cell "Title" [ref=e367]
+                    - cell [ref=e368]
+                    - cell "Offline User" [ref=e369]
+                    - cell "Not Checked" [ref=e370]:
+                      - img "Not Checked" [ref=e371]
+                  - row "Company Sales Anywhere User Not Checked" [ref=e372]:
+                    - cell "Company" [ref=e373]
+                    - cell [ref=e374]
+                    - cell "Sales Anywhere User" [ref=e375]
+                    - cell "Not Checked" [ref=e376]:
+                      - img "Not Checked" [ref=e377]
+                  - row "Department Flow User Checked" [ref=e378]:
+                    - cell "Department" [ref=e379]
+                    - cell [ref=e380]
+                    - cell "Flow User" [ref=e381]
+                    - cell "Checked" [ref=e382]:
+                      - img "Checked" [ref=e383]
+                  - row "Division Service Cloud User Not Checked" [ref=e384]:
+                    - cell "Division" [ref=e385]
+                    - cell [ref=e386]
+                    - cell "Service Cloud User" [ref=e387]
+                    - cell "Not Checked" [ref=e388]:
+                      - img "Not Checked" [ref=e389]
+                  - row "Address Chat User Not Checked" [ref=e390]:
+                    - cell "Address" [ref=e391]
+                    - cell [ref=e392]
+                    - cell "Chat User" [ref=e393]
+                    - cell "Not Checked" [ref=e394]:
+                      - img "Not Checked" [ref=e395]
+                  - row "Time Zone (GMT-03:00) Argentina Standard Time (America/Argentina/Mendoza) Mobile Push Registrations View" [ref=e396]:
+                    - cell "Time Zone" [ref=e397]
+                    - cell "(GMT-03:00) Argentina Standard Time (America/Argentina/Mendoza)" [ref=e398]
+                    - cell "Mobile Push Registrations" [ref=e399]
+                    - cell "View" [ref=e400]:
+                      - link "View" [ref=e401] [cursor=pointer]:
+                        - /url: /mobilepushservice/mobilePushServiceDeviceSearch.apexp?id=005QQ00000Akr0L
+                  - row "Locale Spanish (Argentina) Accessibility Mode (Classic Only) Not Checked" [ref=e402]:
+                    - cell "Locale" [ref=e403]
+                    - cell "Spanish (Argentina)" [ref=e404]
+                    - cell "Accessibility Mode (Classic Only)" [ref=e405]
+                    - cell "Not Checked" [ref=e406]:
+                      - img "Not Checked" [ref=e407]
+                  - row "Language Spanish Debug Mode Not Checked" [ref=e409]:
+                    - cell "Language" [ref=e410]
+                    - cell "Spanish" [ref=e411]
+                    - cell "Debug Mode" [ref=e412]
+                    - cell "Not Checked" [ref=e413]:
+                      - img "Not Checked" [ref=e414]
+                  - row "Delegated Approver High-Contrast Palette on Charts Not Checked" [ref=e416]:
+                    - cell "Delegated Approver" [ref=e417]
+                    - cell [ref=e418]
+                    - cell "High-Contrast Palette on Charts" [ref=e419]
+                    - cell "Not Checked" [ref=e420]:
+                      - img "Not Checked" [ref=e421]
+                  - row "Manager Load Lightning Pages While Scrolling Checked" [ref=e423]:
+                    - cell "Manager" [ref=e424]
+                    - cell [ref=e425]
+                    - cell "Load Lightning Pages While Scrolling" [ref=e426]
+                    - cell "Checked" [ref=e427]:
+                      - img "Checked" [ref=e428]
+                  - row "Receive Approval Request Emails Only if I am an approver Salesforce CRM Content User Checked" [ref=e430]:
+                    - cell "Receive Approval Request Emails" [ref=e431]
+                    - cell "Only if I am an approver" [ref=e432]
+                    - cell "Salesforce CRM Content User" [ref=e433]
+                    - cell "Checked" [ref=e434]:
+                      - img "Checked" [ref=e435]
+                  - row "Federation ID Receive Salesforce CRM Content Email Alerts Not Checked" [ref=e436]:
+                    - cell "Federation ID" [ref=e437]
+                    - cell [ref=e438]
+                    - cell "Receive Salesforce CRM Content Email Alerts" [ref=e439]
+                    - cell "Not Checked" [ref=e440]:
+                      - img "Not Checked" [ref=e441]
+                  - 'row "App Registration: One-Time Password Authenticator Receive Salesforce CRM Content Alerts as Daily Digest Not Checked" [ref=e442]':
+                    - 'cell "App Registration: One-Time Password Authenticator" [ref=e443]'
+                    - cell [ref=e444]
+                    - cell "Receive Salesforce CRM Content Alerts as Daily Digest" [ref=e446]
+                    - cell "Not Checked" [ref=e447]:
+                      - img "Not Checked" [ref=e448]
+                  - 'row "App Registration: Salesforce Authenticator Make Setup My Default Landing Page Not Checked" [ref=e449]':
+                    - 'cell "App Registration: Salesforce Authenticator" [ref=e450]'
+                    - cell [ref=e451]
+                    - cell "Make Setup My Default Landing Page" [ref=e453]
+                    - cell "Not Checked" [ref=e454]:
+                      - img "Not Checked" [ref=e455]
+                  - row "Security Key (U2F or WebAuthn) Allow Forecasting Not Checked" [ref=e456]:
+                    - cell "Security Key (U2F or WebAuthn)" [ref=e457]
+                    - cell [ref=e458]
+                    - cell "Allow Forecasting" [ref=e460]
+                    - cell "Not Checked" [ref=e461]:
+                      - img "Not Checked" [ref=e462]
+                  - row "Lightning Login No MRU Updates Not Checked" [ref=e463]:
+                    - cell "Lightning Login" [ref=e464]
+                    - cell [ref=e465]
+                    - cell "No MRU Updates" [ref=e467]
+                    - cell "Not Checked" [ref=e468]:
+                      - img "Not Checked" [ref=e469]
+                  - row "Temporary Verification Code (Expires in 1 to 24 Hours) [Generate] Call Center" [ref=e471]:
+                    - cell "Temporary Verification Code (Expires in 1 to 24 Hours)" [ref=e472]
+                    - cell "[Generate]" [ref=e473]:
+                      - link "[Generate]" [ref=e474] [cursor=pointer]:
+                        - /url: /05g/e?UserId=005QQ00000Akr0L&retURL=%2F005QQ00000Akr0LYAR%3Fnoredirect%3D1%26isUserEntityOverride%3D1
+                    - cell "Call Center" [ref=e476]
+                    - cell [ref=e477]
+                  - row "Phone" [ref=e478]:
+                    - cell [ref=e479]
+                    - cell [ref=e480]
+                    - cell "Phone" [ref=e481]
+                    - cell [ref=e482]
+                  - row "Extension" [ref=e483]:
+                    - cell [ref=e484]
+                    - cell [ref=e485]
+                    - cell "Extension" [ref=e486]
+                    - cell [ref=e487]
+                  - row "Fax" [ref=e488]:
+                    - cell [ref=e489]
+                    - cell [ref=e490]
+                    - cell "Fax" [ref=e491]
+                    - cell [ref=e492]
+                  - row "Mobile" [ref=e493]:
+                    - cell [ref=e494]
+                    - cell [ref=e495]
+                    - cell "Mobile" [ref=e496]
+                    - cell [ref=e497]
+                  - row "Email Encoding Unicode (UTF-8)" [ref=e498]:
+                    - cell [ref=e499]
+                    - cell [ref=e500]
+                    - cell "Email Encoding" [ref=e501]
+                    - cell "Unicode (UTF-8)" [ref=e502]
+                  - row "Employee Number" [ref=e503]:
+                    - cell [ref=e504]
+                    - cell [ref=e505]
+                    - cell "Employee Number" [ref=e506]
+                    - cell [ref=e507]
+                  - row "Used Data Space 4 KB [View]" [ref=e508]:
+                    - cell [ref=e509]
+                    - cell [ref=e510]
+                    - cell "Used Data Space" [ref=e511]
+                    - cell "4 KB [View]" [ref=e512]:
+                      - text: 4 KB
+                      - link "[View]" [ref=e513] [cursor=pointer]:
+                        - /url: /setup/user/userstorageusage.jsp?id=005QQ00000Akr0L
+                  - row "Used File Space 0 B [View]" [ref=e514]:
+                    - cell [ref=e515]
+                    - cell [ref=e516]
+                    - cell "Used File Space" [ref=e517]
+                    - cell "0 B [View]" [ref=e518]:
+                      - text: 0 B
+                      - link "[View]" [ref=e519] [cursor=pointer]:
+                        - /url: /setup/user/userstorageusage.jsp?id=005QQ00000Akr0L
+                  - row "Admin Not Checked Last Login" [ref=e520]:
+                    - cell "Admin" [ref=e521]
+                    - cell "Not Checked" [ref=e522]:
+                      - img "Not Checked" [ref=e523]
+                    - cell "Last Login" [ref=e524]
+                    - cell [ref=e525]
+                  - row "Sucursal deposito Last Password Change or Reset 22/12/2025, 15:11" [ref=e526]:
+                    - cell "Sucursal" [ref=e527]
+                    - cell "deposito" [ref=e528]
+                    - cell "Last Password Change or Reset" [ref=e529]
+                    - cell "22/12/2025, 15:11" [ref=e530]
+                  - row "Failed Login Attempts 0" [ref=e531]:
+                    - cell [ref=e532]
+                    - cell [ref=e533]
+                    - cell "Failed Login Attempts" [ref=e534]
+                    - cell "0" [ref=e535]: "0"
+                  - row "Individual" [ref=e537]:
+                    - cell [ref=e538]
+                    - cell [ref=e539]
+                    - cell "Individual" [ref=e540]
+                    - cell [ref=e541]
+                  - row [ref=e542]:
+                    - cell [ref=e543]
+                    - cell [ref=e544]
+                    - cell [ref=e545]
+                    - cell [ref=e546]
+                  - row [ref=e547]:
+                    - cell [ref=e548]
+                    - cell [ref=e549]
+                    - cell [ref=e550]
+                    - cell [ref=e551]
+                  - row "Created By Bruno Morales, 9/12/2025, 13:35 Modified By Bruno Morales, 9/12/2025, 13:35" [ref=e552]:
+                    - cell "Created By" [ref=e553]
+                    - cell "Bruno Morales, 9/12/2025, 13:35" [ref=e554]:
+                      - link "Bruno Morales" [ref=e555] [cursor=pointer]:
+                        - /url: /005QQ00000AkPDl
+                      - text: ", 9/12/2025, 13:35"
+                    - cell "Modified By" [ref=e556]
+                    - cell "Bruno Morales, 9/12/2025, 13:35" [ref=e557]:
+                      - link "Bruno Morales" [ref=e558] [cursor=pointer]:
+                        - /url: /005QQ00000AkPDl
+                      - text: ", 9/12/2025, 13:35"
+              - table [ref=e560]:
+                - rowgroup [ref=e561]:
+                  - row "Edit Sharing Reset Password Freeze View Summary" [ref=e562]:
+                    - cell [ref=e563]
+                    - cell "Edit Sharing Reset Password Freeze View Summary" [ref=e564]:
+                      - button "Edit" [ref=e565] [cursor=pointer]
+                      - button "Sharing" [ref=e566] [cursor=pointer]
+                      - button "Reset Password" [ref=e567] [cursor=pointer]
+                      - button "Freeze" [ref=e568] [cursor=pointer]
+                      - button "View Summary" [ref=e569] [cursor=pointer]
+            - generic [ref=e572]:
+              - table [ref=e574]:
+                - rowgroup [ref=e575]:
+                  - row "Permission Set Assignments Edit Assignments Permission Set Assignments Help Permission Set Assignments Help (New Window)" [ref=e576]:
+                    - cell "Permission Set Assignments" [ref=e577]:
+                      - heading "Permission Set Assignments" [level=3] [ref=e578]
+                    - cell "Edit Assignments" [ref=e579]:
+                      - button "Edit Assignments" [ref=e580] [cursor=pointer]
+                    - cell "Permission Set Assignments Help Permission Set Assignments Help (New Window)" [ref=e581]:
+                      - generic "Permission Set Assignments Help (New Window)" [ref=e582]:
+                        - link "Permission Set Assignments Help Permission Set Assignments Help (New Window)" [ref=e583] [cursor=pointer]:
+                          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=perm_sets_assigning.htm&section=User_Management&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                          - text: Permission Set Assignments Help
+                          - img "Permission Set Assignments Help (New Window)" [ref=e584]
+              - table [ref=e586]:
+                - rowgroup [ref=e587]:
+                  - row "Action Permission Set Name Date Assigned Expires On" [ref=e588]:
+                    - columnheader "Action" [ref=e589]
+                    - columnheader "Permission Set Name" [ref=e590]
+                    - columnheader "Date Assigned" [ref=e591]
+                    - columnheader "Expires On" [ref=e592]
+                  - row "Del API Envios 9/12/2025" [ref=e593]:
+                    - cell "Del" [ref=e594]:
+                      - link "Del" [ref=e595] [cursor=pointer]:
+                        - /url: /setup/own/deleteredirect.jsp?isUserEntityOverride=1&noredirect=1&delID=0PaQQ00000p1ckG&retURL=%2F005QQ00000Akr0LYAR%3Fnoredirect%3D1%26isUserEntityOverride%3D1&_CONFIRMATIONTOKEN=VmpFPSxNakF5Tmkwd05TMHlORlF4T1RvMU9UbzBOQzQ1TnpGYSxjNGlFeFVNMTVfc3NwMExrUWtPNll4M0NFX1cxLXR3VHpmbUVEVmhRWnNnPSxOamxsWXpGaw%3D%3D
+                    - rowheader "API Envios" [ref=e596]:
+                      - link "API Envios" [ref=e597] [cursor=pointer]:
+                        - /url: /0PSQQ000000AeU2
+                    - cell "9/12/2025" [ref=e598]
+                    - cell [ref=e599]
+            - generic [ref=e602]:
+              - table [ref=e604]:
+                - rowgroup [ref=e605]:
+                  - 'row "Permission Set Assignments: Activation Required Edit Assignments Permission Set Assignments: Activation Required Help Permission Set Assignments: Activation Required Help (New Window)" [ref=e606]':
+                    - 'cell "Permission Set Assignments: Activation Required" [ref=e607]':
+                      - 'heading "Permission Set Assignments: Activation Required" [level=3] [ref=e608]'
+                    - cell "Edit Assignments" [ref=e609]:
+                      - button "Edit Assignments" [ref=e610] [cursor=pointer]
+                    - 'cell "Permission Set Assignments: Activation Required Help Permission Set Assignments: Activation Required Help (New Window)" [ref=e611]':
+                      - 'generic "Permission Set Assignments: Activation Required Help (New Window)" [ref=e612]':
+                        - 'link "Permission Set Assignments: Activation Required Help Permission Set Assignments: Activation Required Help (New Window)" [ref=e613] [cursor=pointer]':
+                          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=perm_sets_session_use.htm&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                          - text: "Permission Set Assignments: Activation Required Help"
+                          - 'img "Permission Set Assignments: Activation Required Help (New Window)" [ref=e614]'
+              - table [ref=e616]:
+                - rowgroup [ref=e617]:
+                  - row "No records to display" [ref=e618]:
+                    - columnheader "No records to display" [ref=e619]
+            - generic [ref=e622]:
+              - table [ref=e624]:
+                - rowgroup [ref=e625]:
+                  - row "Permission Set Group Assignments Edit Assignments Permission Set Group Assignments Help Permission Set Group Assignments Help (New Window)" [ref=e626]:
+                    - cell "Permission Set Group Assignments" [ref=e627]:
+                      - heading "Permission Set Group Assignments" [level=3] [ref=e628]
+                    - cell "Edit Assignments" [ref=e629]:
+                      - button "Edit Assignments" [ref=e630] [cursor=pointer]
+                    - cell "Permission Set Group Assignments Help Permission Set Group Assignments Help (New Window)" [ref=e631]:
+                      - generic "Permission Set Group Assignments Help (New Window)" [ref=e632]:
+                        - link "Permission Set Group Assignments Help Permission Set Group Assignments Help (New Window)" [ref=e633] [cursor=pointer]:
+                          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=perm_set_groups.htm&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                          - text: Permission Set Group Assignments Help
+                          - img "Permission Set Group Assignments Help (New Window)" [ref=e634]
+              - table [ref=e636]:
+                - rowgroup [ref=e637]:
+                  - row "Action Label Date Assigned Expires On Session Activation Required" [ref=e638]:
+                    - columnheader "Action" [ref=e639]
+                    - columnheader "Label" [ref=e640]
+                    - columnheader "Date Assigned" [ref=e641]
+                    - columnheader "Expires On" [ref=e642]
+                    - columnheader "Session Activation Required" [ref=e643]
+                  - row "Del Deposito 11/12/2025 Not Checked" [ref=e644]:
+                    - cell "Del" [ref=e645]:
+                      - link "Del" [ref=e646] [cursor=pointer]:
+                        - /url: /setup/own/deleteredirect.jsp?isUserEntityOverride=1&noredirect=1&delID=0PaQQ00000pMRqe&retURL=%2F005QQ00000Akr0LYAR%3Fnoredirect%3D1%26isUserEntityOverride%3D1&_CONFIRMATIONTOKEN=VmpFPSxNakF5Tmkwd05TMHlORlF4T1RvMU9UbzBOQzQ1T0RaYSxBZExhUm5xbDhKT292LWpSM2xTRXo4dDVJT2lNX2Itd01Oemd5QkJ0Q1ZzPSxNVFl4WVRJeg%3D%3D
+                    - rowheader "Deposito" [ref=e647]:
+                      - link "Deposito" [ref=e648] [cursor=pointer]:
+                        - /url: /0PGQQ0000000nry
+                    - cell "11/12/2025" [ref=e649]
+                    - cell [ref=e650]
+                    - cell "Not Checked" [ref=e651]:
+                      - img "Not Checked" [ref=e652]
+            - generic [ref=e655]:
+              - table [ref=e657]:
+                - rowgroup [ref=e658]:
+                  - row "Permission Set License Assignments Edit Assignments Permission Set License Assignments Help Permission Set License Assignments Help (New Window)" [ref=e659]:
+                    - cell "Permission Set License Assignments" [ref=e660]:
+                      - heading "Permission Set License Assignments" [level=3] [ref=e661]
+                    - cell "Edit Assignments" [ref=e662]:
+                      - button "Edit Assignments" [ref=e663] [cursor=pointer]
+                    - cell "Permission Set License Assignments Help Permission Set License Assignments Help (New Window)" [ref=e664]:
+                      - generic "Permission Set License Assignments Help (New Window)" [ref=e665]:
+                        - link "Permission Set License Assignments Help Permission Set License Assignments Help (New Window)" [ref=e666] [cursor=pointer]:
+                          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=users_permissionset_licenses_assign.htm&section=User_Management&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                          - text: Permission Set License Assignments Help
+                          - img "Permission Set License Assignments Help (New Window)" [ref=e667]
+              - table [ref=e669]:
+                - rowgroup [ref=e670]:
+                  - row "No records to display" [ref=e671]:
+                    - columnheader "No records to display" [ref=e672]
+            - generic [ref=e675]:
+              - table [ref=e677]:
+                - rowgroup [ref=e678]:
+                  - row "Lightning Data Purchase Assignments Edit Assignments" [ref=e679]:
+                    - cell "Lightning Data Purchase Assignments" [ref=e680]:
+                      - heading "Lightning Data Purchase Assignments" [level=3] [ref=e681]
+                    - cell "Edit Assignments" [ref=e682]:
+                      - button "Edit Assignments" [ref=e683] [cursor=pointer]
+                    - cell [ref=e684]
+              - table [ref=e686]:
+                - rowgroup [ref=e687]:
+                  - row "No purchase assignments" [ref=e688]:
+                    - columnheader "No purchase assignments" [ref=e689]
+            - generic [ref=e692]:
+              - table [ref=e694]:
+                - rowgroup [ref=e695]:
+                  - row "Personal Groups New Group Personal Groups Help Personal Groups Help (New Window)" [ref=e696]:
+                    - cell "Personal Groups" [ref=e697]:
+                      - heading "Personal Groups" [level=3] [ref=e698]
+                    - cell "New Group" [ref=e699]:
+                      - button "New Group" [ref=e700] [cursor=pointer]
+                    - cell "Personal Groups Help Personal Groups Help (New Window)" [ref=e701]:
+                      - generic "Personal Groups Help (New Window)" [ref=e702]:
+                        - link "Personal Groups Help Personal Groups Help (New Window)" [ref=e703] [cursor=pointer]:
+                          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=user_groups.htm&section=User_Management&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                          - text: Personal Groups Help
+                          - img "Personal Groups Help (New Window)" [ref=e704]
+              - table [ref=e706]:
+                - rowgroup [ref=e707]:
+                  - row "No personal groups specified" [ref=e708]:
+                    - columnheader "No personal groups specified" [ref=e709]
+            - generic [ref=e712]:
+              - table [ref=e714]:
+                - rowgroup [ref=e715]:
+                  - row "Public Group Membership New Group Public Group Membership Help Public Group Membership Help (New Window)" [ref=e716]:
+                    - cell "Public Group Membership" [ref=e717]:
+                      - heading "Public Group Membership" [level=3] [ref=e718]
+                    - cell "New Group" [ref=e719]:
+                      - button "New Group" [ref=e720] [cursor=pointer]
+                    - cell "Public Group Membership Help Public Group Membership Help (New Window)" [ref=e721]:
+                      - generic "Public Group Membership Help (New Window)" [ref=e722]:
+                        - link "Public Group Membership Help Public Group Membership Help (New Window)" [ref=e723] [cursor=pointer]:
+                          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=users_public_group_membership_list.htm&section=User_Management&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                          - text: Public Group Membership Help
+                          - img "Public Group Membership Help (New Window)" [ref=e724]
+              - table [ref=e726]:
+                - rowgroup [ref=e727]:
+                  - row "Label Group Name Reason for Membership" [ref=e728]:
+                    - columnheader "Label" [ref=e729]
+                    - columnheader "Group Name" [ref=e730]
+                    - columnheader "Reason for Membership" [ref=e731]
+                  - row "Usuarios – deposito_38 UsuariosDeposito38 Group Member" [ref=e732]:
+                    - rowheader "Usuarios – deposito_38" [ref=e733]:
+                      - link "Usuarios – deposito_38" [ref=e734] [cursor=pointer]:
+                        - /url: /setup/own/groupdetail.jsp?id=00GQQ00000bZAKN
+                    - cell "UsuariosDeposito38" [ref=e735]:
+                      - link "UsuariosDeposito38" [ref=e736] [cursor=pointer]:
+                        - /url: /setup/own/groupdetail.jsp?id=00GQQ00000bZAKN
+                    - cell "Group Member" [ref=e737]
+                  - row "Usuarios – deposito Usuarios_deposito Group Member" [ref=e738]:
+                    - rowheader "Usuarios – deposito" [ref=e739]:
+                      - link "Usuarios – deposito" [ref=e740] [cursor=pointer]:
+                        - /url: /setup/own/groupdetail.jsp?id=00GQQ00000dfVKj
+                    - cell "Usuarios_deposito" [ref=e741]:
+                      - link "Usuarios_deposito" [ref=e742] [cursor=pointer]:
+                        - /url: /setup/own/groupdetail.jsp?id=00GQQ00000dfVKj
+                    - cell "Group Member" [ref=e743]
+            - generic [ref=e746]:
+              - table [ref=e748]:
+                - rowgroup [ref=e749]:
+                  - row "Queue Membership New Queue Queue Membership Help Queue Membership Help (New Window)" [ref=e750]:
+                    - cell "Queue Membership" [ref=e751]:
+                      - heading "Queue Membership" [level=3] [ref=e752]
+                    - cell "New Queue" [ref=e753]:
+                      - button "New Queue" [ref=e754] [cursor=pointer]
+                    - cell "Queue Membership Help Queue Membership Help (New Window)" [ref=e755]:
+                      - generic "Queue Membership Help (New Window)" [ref=e756]:
+                        - link "Queue Membership Help Queue Membership Help (New Window)" [ref=e757] [cursor=pointer]:
+                          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=users_queue_membership_list.htm&section=User_Management&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                          - text: Queue Membership Help
+                          - img "Queue Membership Help (New Window)" [ref=e758]
+              - table [ref=e760]:
+                - rowgroup [ref=e761]:
+                  - row "No records to display" [ref=e762]:
+                    - columnheader "No records to display" [ref=e763]
+            - generic [ref=e766]:
+              - table [ref=e768]:
+                - rowgroup [ref=e769]:
+                  - row "User Skills New Skill New Skill User" [ref=e770]:
+                    - cell "User Skills" [ref=e771]:
+                      - heading "User Skills" [level=3] [ref=e772]
+                    - cell "New Skill New Skill User" [ref=e773]:
+                      - button "New Skill" [ref=e774] [cursor=pointer]
+                      - button "New Skill User" [ref=e775] [cursor=pointer]
+                    - cell [ref=e776]
+              - table [ref=e778]:
+                - rowgroup [ref=e779]:
+                  - row "No records to display" [ref=e780]:
+                    - columnheader "No records to display" [ref=e781]
+            - generic [ref=e784]:
+              - table [ref=e786]:
+                - rowgroup [ref=e787]:
+                  - row "Team" [ref=e788]:
+                    - cell "Team" [ref=e789]:
+                      - heading "Team" [level=3] [ref=e790]
+                    - cell [ref=e791]
+                    - cell [ref=e792]
+              - table [ref=e794]:
+                - rowgroup [ref=e795]:
+                  - row "No records to display" [ref=e796]:
+                    - columnheader "No records to display" [ref=e797]
+            - generic [ref=e800]:
+              - table [ref=e802]:
+                - rowgroup [ref=e803]:
+                  - row "Managers in the Role Hierarchy Managers in the Role Hierarchy Help Managers in the Role Hierarchy Help (New Window)" [ref=e804]:
+                    - cell "Managers in the Role Hierarchy" [ref=e805]:
+                      - heading "Managers in the Role Hierarchy" [level=3] [ref=e806]
+                    - cell [ref=e807]
+                    - cell "Managers in the Role Hierarchy Help Managers in the Role Hierarchy Help (New Window)" [ref=e808]:
+                      - generic "Managers in the Role Hierarchy Help (New Window)" [ref=e809]:
+                        - link "Managers in the Role Hierarchy Help Managers in the Role Hierarchy Help (New Window)" [ref=e810] [cursor=pointer]:
+                          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=managers_in_the_role_hierarchy.htm&section=Personal_Setup&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                          - text: Managers in the Role Hierarchy Help
+                          - img "Managers in the Role Hierarchy Help (New Window)" [ref=e811]
+              - table [ref=e813]:
+                - rowgroup [ref=e814]:
+                  - row "No records to display" [ref=e815]:
+                    - columnheader "No records to display" [ref=e816]
+            - generic [ref=e819]:
+              - table [ref=e821]:
+                - rowgroup [ref=e822]:
+                  - row "OAuth Apps OAuth Apps Help OAuth Apps Help (New Window)" [ref=e823]:
+                    - cell "OAuth Apps" [ref=e824]:
+                      - heading "OAuth Apps" [level=3] [ref=e825]
+                    - cell [ref=e826]
+                    - cell "OAuth Apps Help OAuth Apps Help (New Window)" [ref=e827]:
+                      - generic "OAuth Apps Help (New Window)" [ref=e828]:
+                        - link "OAuth Apps Help OAuth Apps Help (New Window)" [ref=e829] [cursor=pointer]:
+                          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=remoteaccess_request_manage.htm&section=integrate&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                          - text: OAuth Apps Help
+                          - img "OAuth Apps Help (New Window)" [ref=e830]
+              - table [ref=e832]:
+                - rowgroup [ref=e833]:
+                  - row "No approved access tokens" [ref=e834]:
+                    - columnheader "No approved access tokens" [ref=e835]
+            - generic [ref=e838]:
+              - table [ref=e840]:
+                - rowgroup [ref=e841]:
+                  - row "Third-Party Account Links Third-Party Account Links Help Third-Party Account Links Help (New Window)" [ref=e842]:
+                    - cell "Third-Party Account Links" [ref=e843]:
+                      - heading "Third-Party Account Links" [level=3] [ref=e844]
+                    - cell [ref=e845]
+                    - cell "Third-Party Account Links Help Third-Party Account Links Help (New Window)" [ref=e846]:
+                      - generic "Third-Party Account Links Help (New Window)" [ref=e847]:
+                        - link "Third-Party Account Links Help Third-Party Account Links Help (New Window)" [ref=e848] [cursor=pointer]:
+                          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=sso_authentication_providers.htm&section=Security&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                          - text: Third-Party Account Links Help
+                          - img "Third-Party Account Links Help (New Window)" [ref=e849]
+              - table [ref=e851]:
+                - rowgroup [ref=e852]:
+                  - row "This account is not authorized for access from any third-party accounts" [ref=e853]:
+                    - columnheader "This account is not authorized for access from any third-party accounts" [ref=e854]
+            - generic [ref=e857]:
+              - table [ref=e859]:
+                - rowgroup [ref=e860]:
+                  - row "Installed Mobile Apps" [ref=e861]:
+                    - cell "Installed Mobile Apps" [ref=e862]:
+                      - heading "Installed Mobile Apps" [level=3] [ref=e863]
+                    - cell [ref=e864]
+                    - cell [ref=e865]
+              - table [ref=e867]:
+                - rowgroup [ref=e868]:
+                  - row "No records to display" [ref=e869]:
+                    - columnheader "No records to display" [ref=e870]
+            - generic [ref=e873]:
+              - table [ref=e875]:
+                - rowgroup [ref=e876]:
+                  - row "Authentication Settings for External Systems New Authentication Settings for External Systems Help Authentication Settings for External Systems Help (New Window)" [ref=e877]:
+                    - cell "Authentication Settings for External Systems" [ref=e878]:
+                      - heading "Authentication Settings for External Systems" [level=3] [ref=e879]
+                    - cell "New" [ref=e880]:
+                      - button "New" [ref=e881] [cursor=pointer]
+                    - cell "Authentication Settings for External Systems Help Authentication Settings for External Systems Help (New Window)" [ref=e882]:
+                      - generic "Authentication Settings for External Systems Help (New Window)" [ref=e883]:
+                        - link "Authentication Settings for External Systems Help Authentication Settings for External Systems Help (New Window)" [ref=e884] [cursor=pointer]:
+                          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=external_authentication.htm&section=Personal_Setup&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                          - text: Authentication Settings for External Systems Help
+                          - img "Authentication Settings for External Systems Help (New Window)" [ref=e885]
+              - table [ref=e887]:
+                - rowgroup [ref=e888]:
+                  - row "No records to display" [ref=e889]:
+                    - columnheader "No records to display" [ref=e890]
+            - generic [ref=e893]:
+              - table [ref=e895]:
+                - rowgroup [ref=e896]:
+                  - row "Login History Login History Help Login History Help (New Window)" [ref=e897]:
+                    - cell "Login History" [ref=e898]:
+                      - heading "Login History" [level=3] [ref=e899]
+                    - cell [ref=e900]
+                    - cell "Login History Help Login History Help (New Window)" [ref=e901]:
+                      - generic "Login History Help (New Window)" [ref=e902]:
+                        - link "Login History Help Login History Help (New Window)" [ref=e903] [cursor=pointer]:
+                          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=users_login_history.htm&section=User_Management&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                          - text: Login History Help
+                          - img "Login History Help (New Window)" [ref=e904]
+              - generic [ref=e905]:
+                - table [ref=e906]:
+                  - rowgroup [ref=e907]:
+                    - row "There is no login history available." [ref=e908]:
+                      - columnheader "There is no login history available." [ref=e909]
+                - link "Download login history for last six months, including logins from outside the website, such as API logins (Excel .csv file) »" [ref=e911] [cursor=pointer]:
+                  - /url: /servlet/servlet.LoginHistory?id=005QQ00000Akr0L
+            - generic [ref=e914]:
+              - table [ref=e916]:
+                - rowgroup [ref=e917]:
+                  - row "User User Provisioning Accounts User Provisioning Accounts Help User Provisioning Accounts Help (New Window)" [ref=e918]:
+                    - cell "User User Provisioning Accounts" [ref=e919]:
+                      - img "User" [ref=e920]
+                      - heading "User Provisioning Accounts" [level=3] [ref=e921]
+                    - cell [ref=e922]
+                    - cell "User Provisioning Accounts Help User Provisioning Accounts Help (New Window)" [ref=e923]:
+                      - generic "User Provisioning Accounts Help (New Window)" [ref=e924]:
+                        - link "User Provisioning Accounts Help User Provisioning Accounts Help (New Window)" [ref=e925] [cursor=pointer]:
+                          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=connected_app_user_provisioning.htm&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                          - text: User Provisioning Accounts Help
+                          - img "User Provisioning Accounts Help (New Window)" [ref=e926]
+              - table [ref=e928]:
+                - rowgroup [ref=e929]:
+                  - row "No records to display" [ref=e930]:
+                    - columnheader "No records to display" [ref=e931]
+            - generic [ref=e932]:
+              - link "Back to TopBack To Top" [ref=e934] [cursor=pointer]:
+                - /url: "#skiplink"
+                - img "Back to Top" [ref=e935]
+                - text: Back To Top
+              - text: Always show me
+              - link "Show Moremore" [ref=e936] [cursor=pointer]:
+                - /url: /005QQ00000Akr0LYAR?isUserEntityOverride=1&noredirect=1&rowsperlist=10
+                - img "Show More" [ref=e937]
+                - text: more
+              - text: records per related list
+    - generic [ref=e939]:
+      - text: Copyright © 2000-2026 salesforce.com, inc. All rights reserved. |
+      - link "Privacy Statement" [ref=e940] [cursor=pointer]:
+        - /url: http://www.salesforce.com/company/privacy.jsp
+      - text: "|"
+      - link "Security Statement" [ref=e941] [cursor=pointer]:
+        - /url: http://www.salesforce.com/company/security.jsp
+      - text: "|"
+      - link "Terms of Use" [ref=e942] [cursor=pointer]:
+        - /url: http://www.salesforce.com/company/msa.jsp
+      - text: "|"
+      - link "508 Compliance" [ref=e943] [cursor=pointer]:
+        - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=accessibility_overview.htm&section=accessibility&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+      - text: "|"
+      - link "Go to Salesforce mobile app" [ref=e944] [cursor=pointer]:
+        - /url: /ltng/oneAppRedirect
+  - iframe [ref=e945]:
+    
+  - generic:
+    - button "Expand Quick Access Menu" [ref=e947]
+    - generic [ref=e948]:
+      - generic [ref=e949]:
+        - link "Go to Setup" [ref=e950] [cursor=pointer]:
+          - /url: /lightning/setup/SetupOneHome/home
+          - img "Go to Setup" [ref=e951]
+        - link "Help" [ref=e952] [cursor=pointer]:
+          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?section=Dev_Tools&target=dev_quick_access_menu.htm&loc=help&language=en_US&release=262.6.1&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+          - img "Help" [ref=e953]
+      - generic [ref=e954]:
+        - list [ref=e955]:
+          - listitem [ref=e956]:
+            - link "View Fields" [ref=e957] [cursor=pointer]:
+              - /url: /p/setup/layout/LayoutFieldList?type=User&setupid=ManageUsers&setupid=UserFields
+          - listitem [ref=e958]:
+            - link "View Object" [ref=e959] [cursor=pointer]:
+              - /url: /ui/setup/Setup?setupid=UserCustomize
+          - listitem [ref=e960]:
+            - link "View Validation Rules" [ref=e961] [cursor=pointer]:
+              - /url: /_ui/common/config/entity/ValidationFormulaListUI/d?retURL=%2F005QQ00000Akr0LYAR%3Fnoredirect%3D1%26isUserEntityOverride%3D1&tableEnumOrId=User&setupid=ManageUsers&setupid=UserValidations
+        - separator [ref=e962]
+        - list [ref=e963]:
+          - listitem [ref=e964]:
+            - link "Edit App" [ref=e965] [cursor=pointer]:
+              - /url: /02uHs0000019Cl1/e?retURL=%2F005QQ00000Akr0LYAR%3Fnoredirect%3D1%26isUserEntityOverride%3D1&setupid=TabSet
+          - listitem [ref=e966]:
+            - link "Edit Layout" [ref=e967] [cursor=pointer]:
+              - /url: /layouteditor/layoutEditor.apexp?type=User&lid=00hHs00000d7INA&retURL=%2F005QQ00000Akr0LYAR%3Fnoredirect%3D1%26isUserEntityOverride%3D1&setupid=ManageUsers&setupid=UserLayouts
+      - link "Turn off menu" [ref=e969] [cursor=pointer]:
+        - /url: "#"
