@@ -1,0 +1,426 @@
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e131]:
+        - generic [ref=e135]:
+          - button "Toggle Panel" [ref=e139] [cursor=pointer]:
+            - img [ref=e143]
+            - generic [ref=e146]: Menu
+          - generic [ref=e151]:
+            - img [ref=e155]
+            - generic [ref=e159]: Sandbox (Staging)
+        - button "Show menu" [ref=e168] [cursor=pointer]:
+          - img [ref=e170]
+          - generic [ref=e173]: Show menu
+      - generic [ref=e6]:
+        - button "Buscar" [ref=e12]:
+          - img [ref=e14]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e17]:
+          - list [ref=e175]:
+            - listitem [ref=e176]:
+              - group [ref=e177]:
+                - button "Agregar favorito" [ref=e179] [cursor=pointer]:
+                  - generic [ref=e180]:
+                    - img [ref=e184]
+                    - tooltip "Agregar favorito"
+                - button "Lista de favoritos" [ref=e188] [cursor=pointer]:
+                  - generic [ref=e189]:
+                    - img [ref=e193]
+                    - tooltip "Lista de favoritos"
+            - listitem [ref=e196]:
+              - button "Acciones globales" [ref=e973] [cursor=pointer]:
+                - generic [ref=e974]:
+                  - img [ref=e978]
+                  - tooltip "Acciones globales"
+            - listitem [ref=e981]:
+              - button "Centro de orientación" [ref=e983] [cursor=pointer]:
+                - generic [ref=e984]:
+                  - img [ref=e988]
+                  - tooltip "Centro de orientación"
+            - listitem [ref=e205]:
+              - button "Ayuda de Salesforce" [ref=e208] [cursor=pointer]:
+                - generic [ref=e209]:
+                  - img [ref=e213]
+                  - tooltip "Ayuda de Salesforce"
+            - listitem [ref=e216]:
+              - button "Configuración" [ref=e222] [cursor=pointer]:
+                - generic [ref=e223]:
+                  - img [ref=e227]
+                  - tooltip "Configuración"
+            - listitem [ref=e230]:
+              - button "20+ Notificaciones" [ref=e991] [cursor=pointer]:
+                - generic [ref=e234]:
+                  - generic [ref=e235]:
+                    - img [ref=e239]
+                    - generic [ref=e993]: 20+
+                  - tooltip "Notificaciones"
+              - generic [ref=e242]: 26 nuevas notificaciones
+            - listitem [ref=e243]:
+              - button "Ver perfil" [ref=e246] [cursor=pointer]:
+                - generic [ref=e247]:
+                  - tooltip "Ver perfil"
+    - generic [ref=e23]:
+      - generic [ref=e26]:
+        - generic [ref=e28]:
+          - navigation "Aplicación" [ref=e29]:
+            - button "Iniciador de aplicación" [ref=e31] [cursor=pointer]:
+              - generic [ref=e42]: Iniciador de aplicación
+          - heading "CG Offline Admin" [level=1] [ref=e43]:
+            - generic "CG Offline Admin" [ref=e44]
+        - navigation "Global" [ref=e47]:
+          - list [ref=e48]:
+            - listitem [ref=e49]:
+              - link "Inicio" [ref=e50] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e51]: Inicio
+            - listitem [ref=e52]:
+              - link "Sincronizar materiales del combo" [ref=e53] [cursor=pointer]:
+                - /url: /lightning/n/Sincronizar_materiales_del_combo
+                - generic [ref=e54]: Sincronizar materiales del combo
+            - listitem [ref=e55]:
+              - link "Sincronizar surtido de productos" [ref=e56] [cursor=pointer]:
+                - /url: /lightning/n/SyncProductAssortment
+                - generic [ref=e57]: Sincronizar surtido de productos
+            - listitem [ref=e58]:
+              - link "Casos" [ref=e59] [cursor=pointer]:
+                - /url: /lightning/o/Case/home
+                - generic [ref=e60]: Casos
+              - button "Lista de Casos" [ref=e64] [cursor=pointer]:
+                - img [ref=e68]
+                - generic [ref=e71]: Lista de Casos
+            - listitem [ref=e72]:
+              - link "Candidatos" [ref=e73] [cursor=pointer]:
+                - /url: /lightning/o/Lead/home
+                - generic [ref=e74]: Candidatos
+              - button "Lista de Candidatos" [ref=e78] [cursor=pointer]:
+                - img [ref=e82]
+                - generic [ref=e85]: Lista de Candidatos
+            - listitem [ref=e86] [cursor=pointer]:
+              - link "Cuentas" [ref=e87]:
+                - /url: /lightning/o/Account/home
+                - generic [ref=e88]: Cuentas
+              - button "Lista de Cuentas" [ref=e92]:
+                - img [ref=e96]
+                - generic [ref=e99]: Lista de Cuentas
+            - listitem [ref=e100]:
+              - button "Mostrar más elementos de navegación" [ref=e102] [cursor=pointer]:
+                - generic [ref=e103]: Más
+                - img [ref=e107]
+                - generic [ref=e110]: Mostrar más elementos de navegación
+            - listitem [ref=e111]:
+              - button "Modificar elementos de navegación" [ref=e113] [cursor=pointer]:
+                - img [ref=e115]
+                - generic [ref=e118]: Modificar elementos de navegación
+      - main [ref=e120]:
+        - generic [ref=e262]:
+          - generic [ref=e264]:
+            - generic [ref=e271]:
+              - generic [ref=e272]:
+                - generic [ref=e273]:
+                  - img "Cuenta" [ref=e280]
+                  - heading "Cuenta AccountGD" [level=1] [ref=e282]:
+                    - generic [ref=e284]: Cuenta
+                    - generic [ref=e285]: AccountGD
+                  - button "Ver jerarquía de cuenta" [ref=e296] [cursor=pointer]:
+                    - img [ref=e298]
+                    - generic [ref=e301]: Ver jerarquía de cuenta
+                - generic [ref=e306]:
+                  - generic "Cancelar Prospecto" [ref=e307]:
+                    - button "Cancelar Prospecto" [ref=e312] [cursor=pointer]
+                  - generic "Modificar" [ref=e313]:
+                    - button "Modificar" [ref=e318] [cursor=pointer]
+                  - generic "Eliminar" [ref=e319]:
+                    - button "Eliminar" [ref=e324] [cursor=pointer]
+                  - generic "Ver jerarquía de cuenta" [ref=e325]:
+                    - button "Ver jerarquía de cuenta" [ref=e330] [cursor=pointer]
+              - generic [ref=e331]:
+                - generic [ref=e333]:
+                  - paragraph [ref=e334]: Número de prospecto
+                  - paragraph [ref=e335]:
+                    - generic [ref=e336]: SF00000012
+                - generic [ref=e338]:
+                  - paragraph [ref=e339]: Tipo de cliente
+                  - paragraph [ref=e340]:
+                    - generic [ref=e341]: Deudor Esporádico
+                - generic [ref=e343]:
+                  - paragraph [ref=e344]: Vendedor
+                  - paragraph [ref=e345]:
+                    - generic [ref=e350]:
+                      - link "[CMI] Desarrollador de Negocio Harinas" [ref=e351] [cursor=pointer]:
+                        - /url: /lightning/r/User/005gP00000GS2iqQAD/view
+                        - generic [ref=e355]: "[CMI] Desarrollador de Negocio Harinas"
+                      - button "Vista previa" [ref=e357] [cursor=pointer]:
+                        - img [ref=e359]
+                        - generic [ref=e362]: Vista previa
+                - generic [ref=e364]:
+                  - paragraph [ref=e365]: Televentista
+                  - paragraph
+            - article [ref=e372]:
+              - generic [ref=e373]:
+                - heading "Ruta" [level=2] [ref=e374]
+                - generic [ref=e377]:
+                  - button "Mostrar Campos clave y/o los detalles para Orientación hacia el éxito" [disabled]:
+                    - generic: Mostrar Campos clave y/o los detalles para Orientación hacia el éxito
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                  - listbox "Opciones de ruta" [ref=e390]:
+                    - option "En trabajo" [ref=e391] [cursor=pointer]:
+                      - generic [ref=e392]: En trabajo
+                    - option "Pendiente de aprobación" [ref=e393] [cursor=pointer]:
+                      - generic [ref=e394]: Pendiente de aprobación
+                    - option "Prospecto indirecto" [ref=e395] [cursor=pointer]:
+                      - generic [ref=e396]: Prospecto indirecto
+                    - option "Listo para EBX" [ref=e397] [cursor=pointer]:
+                      - generic [ref=e398]: Listo para EBX
+                    - option "En proceso de EBX" [ref=e399] [cursor=pointer]:
+                      - generic [ref=e400]: En proceso de EBX
+                    - option "Perdido" [ref=e401] [cursor=pointer]:
+                      - generic [ref=e402]: Perdido
+                    - option "Rechazado" [selected] [ref=e403] [cursor=pointer]:
+                      - generic [ref=e404]: Rechazado
+                  - generic [ref=e406]:
+                    - button [disabled]:
+                      - alert:
+                        - generic:
+                          - status:
+                            - generic: Cargando...
+                        - generic: Guardando...
+          - generic [ref=e415]:
+            - generic [ref=e421]:
+              - heading "Tabs" [level=2] [ref=e422]
+              - generic "Tabs" [ref=e423]:
+                - generic [ref=e424]:
+                  - heading "Tabs" [level=2] [ref=e425]
+                  - tablist "Tabs" [ref=e427]:
+                    - tab "Detalles" [selected] [ref=e428] [cursor=pointer]
+                    - tab "Actividad" [ref=e429] [cursor=pointer]
+                    - tab "Consumer Goods" [ref=e430] [cursor=pointer]
+                    - tab "EBX" [ref=e431] [cursor=pointer]
+                  - tabpanel "Detalles" [ref=e434]:
+                    - generic [ref=e435]:
+                      - generic [ref=e441]:
+                        - heading "Identificación del prospecto" [level=3] [ref=e442]:
+                          - button "Identificación del prospecto" [expanded] [ref=e443] [cursor=pointer]:
+                            - img [ref=e447]
+                            - generic "Identificación del prospecto" [ref=e450]
+                        - list [ref=e453]:
+                          - generic [ref=e454]:
+                            - generic [ref=e457]:
+                              - listitem [ref=e460]:
+                                - generic [ref=e462]:
+                                  - generic [ref=e463]: Saludo
+                                  - generic [ref=e464]:
+                                    - generic [ref=e466]: Empresa
+                                    - button "Modificar Saludo" [ref=e467] [cursor=pointer]:
+                                      - generic [ref=e469]: Modificar Saludo
+                              - listitem [ref=e472]:
+                                - generic [ref=e474]:
+                                  - generic [ref=e475]: Nombre de la cuenta
+                                  - generic [ref=e476]:
+                                    - generic [ref=e478]: AccountGD
+                                    - button "Modificar Nombre de la cuenta" [ref=e479] [cursor=pointer]:
+                                      - generic [ref=e481]: Modificar Nombre de la cuenta
+                              - listitem [ref=e484]:
+                                - generic [ref=e486]:
+                                  - generic [ref=e487]: Correo electrónico
+                                  - generic [ref=e488]:
+                                    - link "ulisesvarela283@gmail.com" [ref=e494] [cursor=pointer]:
+                                      - /url: mailto:ulisesvarela283@gmail.com
+                                    - button "Modificar Correo electrónico" [ref=e495] [cursor=pointer]:
+                                      - generic [ref=e497]: Modificar Correo electrónico
+                              - listitem [ref=e500]:
+                                - generic [ref=e502]:
+                                  - generic [ref=e503]: Número de identificación fiscal
+                                  - generic [ref=e504]:
+                                    - generic [ref=e506]: "421829646"
+                                    - button "Modificar Número de identificación fiscal" [ref=e507] [cursor=pointer]:
+                                      - generic [ref=e509]: Modificar Número de identificación fiscal
+                              - listitem [ref=e512]:
+                                - generic [ref=e514]:
+                                  - generic [ref=e515]: Documento personal de identificación
+                                  - generic [ref=e516]:
+                                    - generic [ref=e518]: "4324676"
+                                    - button "Modificar Documento personal de identificación" [ref=e519] [cursor=pointer]:
+                                      - generic [ref=e521]: Modificar Documento personal de identificación
+                              - listitem [ref=e524]:
+                                - generic [ref=e526]:
+                                  - generic [ref=e527]: Gerente Asignado
+                                  - button "Modificar Gerente Asignado" [ref=e530] [cursor=pointer]:
+                                    - generic [ref=e532]: Modificar Gerente Asignado
+                              - listitem [ref=e535]:
+                                - generic [ref=e537]:
+                                  - generic [ref=e538]: Descripción
+                                  - button "Modificar Descripción" [ref=e540] [cursor=pointer]:
+                                    - generic [ref=e542]: Modificar Descripción
+                            - generic [ref=e545]:
+                              - listitem [ref=e548]:
+                                - generic [ref=e550]:
+                                  - generic [ref=e551]: Tipo de cliente
+                                  - generic [ref=e552]:
+                                    - generic [ref=e554]: Deudor Esporádico
+                                    - button "Modificar Tipo de cliente" [ref=e555] [cursor=pointer]:
+                                      - generic [ref=e557]: Modificar Tipo de cliente
+                              - listitem [ref=e560]:
+                                - generic [ref=e562]:
+                                  - generic [ref=e563]: Nombre comercial
+                                  - generic [ref=e564]:
+                                    - generic [ref=e566]: test
+                                    - button "Modificar Nombre comercial" [ref=e567] [cursor=pointer]:
+                                      - generic [ref=e569]: Modificar Nombre comercial
+                              - listitem [ref=e572]:
+                                - generic [ref=e574]:
+                                  - generic [ref=e575]: Número de prospecto
+                                  - generic [ref=e576]:
+                                    - generic [ref=e578]: SF00000012
+                                    - button "Modificar Número de prospecto" [ref=e579] [cursor=pointer]:
+                                      - generic [ref=e581]: Modificar Número de prospecto
+                              - listitem [ref=e584]:
+                                - generic [ref=e586]:
+                                  - generic [ref=e587]: Origen de cuenta
+                                  - generic [ref=e588]:
+                                    - generic [ref=e590]: Miralaser
+                                    - button "Modificar Origen de cuenta" [ref=e591] [cursor=pointer]:
+                                      - generic [ref=e593]: Modificar Origen de cuenta
+                              - listitem [ref=e596]:
+                                - generic [ref=e598]:
+                                  - generic [ref=e599]: Propietario de la cuenta
+                                  - generic [ref=e604]:
+                                    - generic [ref=e611]:
+                                      - link "[CMI] Desarrollador de Negocio Harinas" [ref=e612] [cursor=pointer]:
+                                        - /url: /lightning/r/User/005gP00000GS2iqQAD/view
+                                        - generic [ref=e616]: "[CMI] Desarrollador de Negocio Harinas"
+                                      - button "Vista previa" [ref=e618] [cursor=pointer]:
+                                        - img [ref=e620]
+                                        - generic [ref=e623]: Vista previa
+                                    - button "Cambiar propietario" [ref=e625] [cursor=pointer]:
+                                      - img [ref=e627]
+                                      - generic [ref=e630]: Cambiar propietario
+                              - listitem [ref=e633]:
+                                - generic [ref=e635]:
+                                  - generic [ref=e636]: LEN
+                                  - generic [ref=e637]:
+                                    - generic [ref=e639]: Harinas
+                                    - button "Modificar LEN" [ref=e640] [cursor=pointer]:
+                                      - generic [ref=e642]: Modificar LEN
+                      - heading "Información de Dirección" [level=3] [ref=e649]:
+                        - button "Información de Dirección" [expanded] [ref=e650] [cursor=pointer]:
+                          - img [ref=e654]
+                          - generic "Información de Dirección" [ref=e657]
+                      - heading "Información de contacto" [level=3] [ref=e667]:
+                        - button "Información de contacto" [expanded] [ref=e668] [cursor=pointer]:
+                          - img [ref=e672]
+                          - generic "Información de contacto" [ref=e675]
+                      - heading "Información de Negocio" [level=3] [ref=e685]:
+                        - button "Información de Negocio" [expanded] [ref=e686] [cursor=pointer]:
+                          - img [ref=e690]
+                          - generic "Información de Negocio" [ref=e693]
+                      - heading "Información de ventas y visita" [level=3] [ref=e703]:
+                        - button "Información de ventas y visita" [expanded] [ref=e704] [cursor=pointer]:
+                          - img [ref=e708]
+                          - generic "Información de ventas y visita" [ref=e711]
+                      - heading "Datos Adicionales del Cliente" [level=3] [ref=e721]:
+                        - button "Datos Adicionales del Cliente" [expanded] [ref=e722] [cursor=pointer]:
+                          - img [ref=e726]
+                          - generic "Datos Adicionales del Cliente" [ref=e729]
+                      - heading "Otros" [level=3] [ref=e739]:
+                        - button "Otros" [expanded] [ref=e740] [cursor=pointer]:
+                          - img [ref=e744]
+                          - generic "Otros" [ref=e747]
+                      - heading "Datos Perfilamiento del Cliente" [level=3] [ref=e757]:
+                        - button "Datos Perfilamiento del Cliente" [expanded] [ref=e758] [cursor=pointer]:
+                          - img [ref=e762]
+                          - generic "Datos Perfilamiento del Cliente" [ref=e765]
+                      - heading "Información del sistema" [level=3] [ref=e775]:
+                        - button "Información del sistema" [expanded] [ref=e776] [cursor=pointer]:
+                          - img [ref=e780]
+                          - generic "Información del sistema" [ref=e783]
+            - generic [ref=e792]:
+              - heading "Tabs" [level=2] [ref=e793]
+              - generic "Tabs" [ref=e794]:
+                - generic [ref=e795]:
+                  - heading "Tabs" [level=2] [ref=e796]
+                  - tablist "Tabs" [ref=e798]:
+                    - tab "Relacionado" [selected] [ref=e799] [cursor=pointer]
+                    - tab "Tareas" [ref=e800] [cursor=pointer]
+                  - tabpanel "Relacionado" [ref=e803]:
+                    - generic [ref=e804]:
+                      - article "Oportunidades" [ref=e811]:
+                        - generic [ref=e812]:
+                          - generic [ref=e813]:
+                            - generic [ref=e816]:
+                              - generic [ref=e818]:
+                                - img [ref=e822]
+                                - heading "Oportunidades (1)" [level=2] [ref=e824]:
+                                  - link "Oportunidades (1)" [ref=e825] [cursor=pointer]:
+                                    - /url: /lightning/r/Account/001gP00000H7HDeQAN/related/Opportunities/view
+                                    - generic "Oportunidades" [ref=e826]
+                                    - generic "(1)" [ref=e827]
+                              - button "Mostrar acciones para Oportunidades" [ref=e832] [cursor=pointer]:
+                                - img [ref=e834]
+                                - generic [ref=e837]: Mostrar acciones para Oportunidades
+                            - article "Test" [ref=e848]:
+                              - generic [ref=e849]:
+                                - heading "Test Vista previa" [level=3] [ref=e851]:
+                                  - generic [ref=e857]:
+                                    - link "Test" [ref=e858] [cursor=pointer]:
+                                      - /url: /lightning/r/006gP00000Aboo6QAB/view
+                                      - generic [ref=e862]: Test
+                                    - button "Vista previa" [ref=e864] [cursor=pointer]:
+                                      - img [ref=e866]
+                                      - generic [ref=e869]: Vista previa
+                                - generic [ref=e871]:
+                                  - term [ref=e872]: "Etapa:"
+                                  - definition [ref=e873]:
+                                    - generic [ref=e875]: Apertura
+                                  - term [ref=e876]: "Potencial de la Oportunidad USD:"
+                                  - definition
+                                  - term [ref=e877]: "Fecha de cierre:"
+                                  - definition [ref=e878]:
+                                    - generic [ref=e879]: 4/23/2026
+                              - button "Mostrar acciones" [ref=e884] [cursor=pointer]:
+                                - img [ref=e886]
+                                - generic [ref=e889]: Mostrar acciones
+                          - link "Ver todos Oportunidades" [ref=e890] [cursor=pointer]:
+                            - /url: /lightning/r/Account/001gP00000H7HDeQAN/related/Opportunities/view
+                            - generic [ref=e891]:
+                              - text: Ver todos
+                              - generic [ref=e892]: Oportunidades
+                      - article "Visitas" [ref=e899]:
+                        - generic [ref=e995]:
+                          - generic [ref=e997]:
+                            - img [ref=e1001]
+                            - heading "Visitas (0)" [level=2] [ref=e1003]:
+                              - link "Visitas (0)" [ref=e1004] [cursor=pointer]:
+                                - /url: /lightning/r/Account/001gP00000H7HDeQAN/related/Visits/view
+                                - generic "Visitas" [ref=e1005]
+                                - generic "(0)" [ref=e1006]
+                          - button "Mostrar acciones para Visitas" [ref=e1010] [cursor=pointer]:
+                            - generic [ref=e1012]:
+                              - img [ref=e1014]
+                              - generic [ref=e1017]: Mostrar acciones para Visitas
+                      - article [ref=e925]:
+                        - generic [ref=e926]:
+                          - img [ref=e928]
+                          - heading "Contactos" [level=2] [ref=e929]
+                      - article "Cases" [ref=e934]:
+                        - article [ref=e938]:
+                          - generic [ref=e939]:
+                            - img [ref=e941]
+                            - heading "Cases" [level=2] [ref=e942]
+                      - article [ref=e950]:
+                        - generic [ref=e951]:
+                          - img [ref=e953]
+                          - heading "Historial de aprobaciones" [level=2] [ref=e954]
+                      - article [ref=e962]:
+                        - generic [ref=e963]:
+                          - img [ref=e965]
+                          - heading "Archivos" [level=2] [ref=e966]
+  - generic:
+    - status

@@ -1,0 +1,69 @@
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e6]:
+        - button "Buscar" [ref=e12]:
+          - img [ref=e14]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e17]:
+          - list [ref=e18]:
+            - listitem [ref=e19]
+    - generic [ref=e23]:
+      - generic [ref=e26]:
+        - generic [ref=e28]:
+          - navigation "Aplicación" [ref=e29]:
+            - button "Iniciador de aplicación" [ref=e31] [cursor=pointer]:
+              - generic [ref=e42]: Iniciador de aplicación
+          - heading "CG Offline Admin" [level=1] [ref=e43]:
+            - generic "CG Offline Admin" [ref=e44]
+        - navigation "Global" [ref=e47]:
+          - list [ref=e48]:
+            - listitem [ref=e49]:
+              - link "Inicio" [ref=e50] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e51]: Inicio
+            - listitem [ref=e52]:
+              - link "Sincronizar materiales del combo" [ref=e53] [cursor=pointer]:
+                - /url: /lightning/n/Sincronizar_materiales_del_combo
+                - generic [ref=e54]: Sincronizar materiales del combo
+            - listitem [ref=e55]:
+              - link "Sincronizar surtido de productos" [ref=e56] [cursor=pointer]:
+                - /url: /lightning/n/SyncProductAssortment
+                - generic [ref=e57]: Sincronizar surtido de productos
+            - listitem [ref=e58]:
+              - link "Casos" [ref=e59] [cursor=pointer]:
+                - /url: /lightning/o/Case/home
+                - generic [ref=e60]: Casos
+              - button "Lista de Casos" [ref=e64] [cursor=pointer]:
+                - img [ref=e68]
+                - generic [ref=e71]: Lista de Casos
+            - listitem [ref=e72]:
+              - link "Candidatos" [ref=e73] [cursor=pointer]:
+                - /url: /lightning/o/Lead/home
+                - generic [ref=e74]: Candidatos
+              - button "Lista de Candidatos" [ref=e78] [cursor=pointer]:
+                - img [ref=e82]
+                - generic [ref=e85]: Lista de Candidatos
+            - listitem [ref=e86]:
+              - link "Cuentas" [ref=e87] [cursor=pointer]:
+                - /url: /lightning/o/Account/home
+                - generic [ref=e88]: Cuentas
+              - button "Lista de Cuentas" [ref=e92] [cursor=pointer]:
+                - img [ref=e96]
+                - generic [ref=e99]: Lista de Cuentas
+            - listitem [ref=e100]:
+              - button "Mostrar más elementos de navegación" [ref=e102] [cursor=pointer]:
+                - generic [ref=e103]: Más
+                - img [ref=e107]
+                - generic [ref=e110]: Mostrar más elementos de navegación
+            - listitem [ref=e111]:
+              - button "Modificar elementos de navegación" [ref=e113] [cursor=pointer]:
+                - img [ref=e115]
+                - generic [ref=e118]: Modificar elementos de navegación
+      - main [ref=e120]
+  - generic:
+    - status

@@ -1,0 +1,1830 @@
+- generic:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - link "Saltar a navegación" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e6] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e10]:
+        - generic [ref=e14]:
+          - button "Toggle Panel" [ref=e18] [cursor=pointer]:
+            - img [ref=e22]
+            - generic [ref=e25]: Menu
+          - generic [ref=e30]:
+            - img [ref=e34]
+            - generic [ref=e38]: Sandbox (Staging)
+        - button "Show menu" [ref=e47] [cursor=pointer]:
+          - img [ref=e49]
+          - generic [ref=e52]: Show menu
+      - generic [ref=e53]:
+        - generic [ref=e58]:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - img
+          - generic [ref=e61]:
+            - combobox "Buscar en Configuración" [ref=e62]
+            - generic [ref=e63]: Buscar en Configuración
+        - navigation "Encabezado global" [ref=e64]:
+          - list [ref=e66]:
+            - listitem [ref=e67]:
+              - group [ref=e68]:
+                - button "Este elemento no admite favoritos" [ref=e70] [cursor=pointer]:
+                  - generic [ref=e71]:
+                    - img [ref=e75]
+                    - tooltip "Este elemento no admite favoritos"
+                - button "Lista de favoritos" [disabled] [ref=e79]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                    - tooltip "Lista de favoritos"
+            - listitem [ref=e80]:
+              - button "Acciones globales" [ref=e86] [cursor=pointer]:
+                - generic [ref=e87]:
+                  - img [ref=e91]
+                  - tooltip "Acciones globales"
+            - listitem [ref=e94]:
+              - button "Centro de orientación" [ref=e96] [cursor=pointer]:
+                - generic [ref=e97]:
+                  - img [ref=e101]
+                  - tooltip "Centro de orientación"
+            - listitem [ref=e104]:
+              - button "Ayuda de Salesforce" [ref=e107] [cursor=pointer]:
+                - generic [ref=e108]:
+                  - img [ref=e112]
+                  - tooltip "Ayuda de Salesforce"
+            - listitem [ref=e115]:
+              - button "Configuración" [ref=e121] [cursor=pointer]:
+                - generic [ref=e122]:
+                  - img [ref=e126]
+                  - tooltip "Configuración"
+            - listitem [ref=e129]:
+              - button "20+ Notificaciones" [ref=e2585] [cursor=pointer]:
+                - generic [ref=e133]:
+                  - generic [ref=e134]:
+                    - img [ref=e138]
+                    - generic [ref=e2587]: 20+
+                  - tooltip "Notificaciones"
+              - generic [ref=e141]: 26 nuevas notificaciones
+            - listitem [ref=e142]:
+              - button "Ver perfil" [ref=e145] [cursor=pointer]:
+                - generic [ref=e146]:
+                  - tooltip "Ver perfil"
+    - generic [ref=e150]:
+      - generic:
+        - generic [ref=e151]:
+          - generic [ref=e154]:
+            - navigation "Aplicación" [ref=e155]:
+              - button "Iniciador de aplicación" [ref=e157] [cursor=pointer]:
+                - generic [ref=e168]: Iniciador de aplicación
+            - generic "Configuración" [ref=e170]
+          - navigation "Espacios de trabajo" [ref=e172]:
+            - tablist "Fichas de espacio de trabajo de Configuración" [ref=e173]:
+              - generic [ref=e175]: Pulse la barra espaciadora para reordenar fichas.
+              - tab "Inicio" [selected] [ref=e176] [cursor=pointer]:
+                - generic [ref=e177]: Inicio
+              - status [ref=e178] [cursor=pointer]
+              - tab "Gestor de objetos" [ref=e179] [cursor=pointer]:
+                - generic [ref=e180]: Gestor de objetos
+              - button "Lista de Gestor de objetos" [ref=e185] [cursor=pointer]:
+                - generic [ref=e187]:
+                  - img [ref=e189]
+                  - generic [ref=e192]: Lista de Gestor de objetos
+              - status [ref=e193]
+        - generic [ref=e195]:
+          - generic [ref=e202]:
+            - generic [ref=e203]:
+              - generic [ref=e204]: Búsqueda rápida
+              - img [ref=e208]
+              - searchbox "Búsqueda rápida" [ref=e212]
+            - tree "Árbol de configuración" [ref=e213]:
+              - treeitem "Página principal de configuración" [level=1] [ref=e214]:
+                - generic "Página principal de configuración" [ref=e215]:
+                  - link "Página principal de configuración" [ref=e216] [cursor=pointer]:
+                    - /url: /lightning/setup/SetupOneHome/home
+              - treeitem "Salesforce Foundations" [level=1] [ref=e217]:
+                - generic "Salesforce Foundations" [ref=e218]:
+                  - link "Salesforce Foundations" [ref=e219] [cursor=pointer]:
+                    - /url: /lightning/setup/C360ProvisioningSetup/home
+              - treeitem "Salesforce Go" [level=1] [ref=e220]:
+                - generic "Salesforce Go" [ref=e221]:
+                  - link "Salesforce Go" [ref=e222] [cursor=pointer]:
+                    - /url: /lightning/setup/SalesforceGo/home
+              - treeitem "Asistente de configuración de Service" [level=1] [ref=e223]:
+                - generic "Asistente de configuración de Service" [ref=e224]:
+                  - link "Asistente de configuración de Service" [ref=e225] [cursor=pointer]:
+                    - /url: /lightning/setup/ServiceHome/home
+              - treeitem "Asistente de configuración de Commerce" [level=1] [ref=e226]:
+                - generic "Asistente de configuración de Commerce" [ref=e227]:
+                  - link "Asistente de configuración de Commerce" [ref=e228] [cursor=pointer]:
+                    - /url: /lightning/setup/CommerceSetupAssistant/home
+              - treeitem "Asistente de Hyperforce" [level=1] [ref=e229]:
+                - generic "Asistente de Hyperforce" [ref=e230]:
+                  - link "Asistente de Hyperforce" [ref=e231] [cursor=pointer]:
+                    - /url: /lightning/setup/HyperforceAssistant/home
+              - treeitem "Actualizaciones de versiones" [level=1] [ref=e232]:
+                - generic "Actualizaciones de versiones" [ref=e233]:
+                  - link "Actualizaciones de versiones" [ref=e234] [cursor=pointer]:
+                    - /url: /lightning/setup/ReleaseUpdates/home
+              - treeitem "Aplicación móvil Salesforce" [level=1] [ref=e235]:
+                - generic "Aplicación móvil Salesforce" [ref=e236]:
+                  - link "Aplicación móvil Salesforce" [ref=e237] [cursor=pointer]:
+                    - /url: /lightning/setup/SalesforceMobileAppQuickStart/home
+              - treeitem "Ofertas de AgentExchange" [level=1] [ref=e238]:
+                - generic "Ofertas de AgentExchange" [ref=e239]:
+                  - link "Ofertas de AgentExchange" [ref=e240] [cursor=pointer]:
+                    - /url: /lightning/setup/IsvTmOffersMarketplace/home
+              - treeitem "Definiciones de integración" [level=1] [ref=e241]:
+                - generic "Definiciones de integración" [ref=e242]:
+                  - link "Definiciones de integración" [ref=e243] [cursor=pointer]:
+                    - /url: /lightning/setup/IntegrationConfiguration/home
+              - treeitem "Sales Cloud Everywhere" [level=1] [ref=e244]:
+                - generic "Sales Cloud Everywhere" [ref=e245]:
+                  - link "Sales Cloud Everywhere" [ref=e246] [cursor=pointer]:
+                    - /url: /lightning/setup/SalesCloudEverywhereSettings/home
+              - treeitem "Administración" [level=1] [ref=e247]:
+                - heading "Administración" [level=4] [ref=e248]
+              - treeitem "Usuarios" [level=1] [ref=e249]:
+                - generic "Usuarios" [ref=e250]:
+                  - button "Ampliar" [ref=e251] [cursor=pointer]:
+                    - img [ref=e253]
+                    - generic [ref=e256]: Ampliar
+                  - link "Usuarios" [ref=e257] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Datos" [level=1] [ref=e258]:
+                - generic "Datos" [ref=e259]:
+                  - button "Ampliar" [ref=e260] [cursor=pointer]:
+                    - img [ref=e262]
+                    - generic [ref=e265]: Ampliar
+                  - link "Datos" [ref=e266] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Correo electrónico" [level=1] [ref=e267]:
+                - generic "Correo electrónico" [ref=e268]:
+                  - button "Ampliar" [ref=e269] [cursor=pointer]:
+                    - img [ref=e271]
+                    - generic [ref=e274]: Ampliar
+                  - link "Correo electrónico" [ref=e275] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Herramientas de la plataforma" [level=1] [ref=e276]:
+                - heading "Herramientas de la plataforma" [level=4] [ref=e277]
+              - treeitem "Aplicaciones" [level=1] [ref=e278]:
+                - generic "Aplicaciones" [ref=e279]:
+                  - button "Ampliar" [ref=e280] [cursor=pointer]:
+                    - img [ref=e282]
+                    - generic [ref=e285]: Ampliar
+                  - link "Aplicaciones" [ref=e286] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Configuración de funciones" [level=1] [ref=e287]:
+                - generic "Configuración de funciones" [ref=e288]:
+                  - button "Ampliar" [ref=e289] [cursor=pointer]:
+                    - img [ref=e291]
+                    - generic [ref=e294]: Ampliar
+                  - link "Configuración de funciones" [ref=e295] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Slack" [level=1] [ref=e296]:
+                - generic "Slack" [ref=e297]:
+                  - button "Ampliar" [ref=e298] [cursor=pointer]:
+                    - img [ref=e300]
+                    - generic [ref=e303]: Ampliar
+                  - link "Slack" [ref=e304] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Servicios de flujo de trabajo" [level=1] [ref=e305]:
+                - generic "Servicios de flujo de trabajo" [ref=e306]:
+                  - button "Ampliar" [ref=e307] [cursor=pointer]:
+                    - img [ref=e309]
+                    - generic [ref=e312]: Ampliar
+                  - link "Servicios de flujo de trabajo" [ref=e313] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Data Cloud" [level=1] [ref=e314]:
+                - generic "Data Cloud" [ref=e315]:
+                  - button "Ampliar" [ref=e316] [cursor=pointer]:
+                    - img [ref=e318]
+                    - generic [ref=e321]: Ampliar
+                  - link "Data Cloud" [ref=e322] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Heroku" [level=1] [ref=e323]:
+                - generic "Heroku" [ref=e324]:
+                  - button "Ampliar" [ref=e325] [cursor=pointer]:
+                    - img [ref=e327]
+                    - generic [ref=e330]: Ampliar
+                  - link "Heroku" [ref=e331] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "MuleSoft" [level=1] [ref=e332]:
+                - generic "MuleSoft" [ref=e333]:
+                  - button "Ampliar" [ref=e334] [cursor=pointer]:
+                    - img [ref=e336]
+                    - generic [ref=e339]: Ampliar
+                  - link "MuleSoft" [ref=e340] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Einstein" [level=1] [ref=e341]:
+                - generic "Einstein" [ref=e342]:
+                  - button "Ampliar" [ref=e343] [cursor=pointer]:
+                    - img [ref=e345]
+                    - generic [ref=e348]: Ampliar
+                  - link "Einstein" [ref=e349] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Objetos y campos" [level=1] [ref=e350]:
+                - generic "Objetos y campos" [ref=e351]:
+                  - button "Ampliar" [ref=e352] [cursor=pointer]:
+                    - img [ref=e354]
+                    - generic [ref=e357]: Ampliar
+                  - link "Objetos y campos" [ref=e358] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Eventos" [level=1] [ref=e359]:
+                - generic "Eventos" [ref=e360]:
+                  - button "Ampliar" [ref=e361] [cursor=pointer]:
+                    - img [ref=e363]
+                    - generic [ref=e366]: Ampliar
+                  - link "Eventos" [ref=e367] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Automatización de procesos" [expanded] [level=1] [ref=e368]:
+                - generic "Automatización de procesos" [ref=e369]:
+                  - button "Contraer" [ref=e370] [cursor=pointer]:
+                    - img [ref=e372]
+                    - generic [ref=e375]: Contraer
+                  - link "Automatización de procesos" [ref=e376] [cursor=pointer]:
+                    - /url: javascript:void(0)
+                - group [ref=e377]:
+                  - treeitem "Acciones de flujo de trabajo" [level=2] [ref=e378]:
+                    - generic "Acciones de flujo de trabajo" [ref=e379]:
+                      - button "Ampliar" [ref=e380] [cursor=pointer]:
+                        - img [ref=e382]
+                        - generic [ref=e385]: Ampliar
+                      - link "Acciones de flujo de trabajo" [ref=e386] [cursor=pointer]:
+                        - /url: javascript:void(0)
+                  - treeitem "Aplicación de automatización" [level=2] [ref=e387]:
+                    - generic "Aplicación de automatización" [ref=e388]:
+                      - link "Aplicación de automatización" [ref=e389] [cursor=pointer]:
+                        - /url: /lightning/setup/ProcessHome/home
+                  - treeitem "Configuración de automatización de procesos" [level=2] [ref=e390]:
+                    - generic "Configuración de automatización de procesos" [ref=e391]:
+                      - link "Configuración de automatización de procesos" [ref=e392] [cursor=pointer]:
+                        - /url: /lightning/setup/WorkflowSettings/home
+                  - treeitem "Entrevistas de flujo en pausa y con fallo" [level=2] [ref=e393]:
+                    - generic "Entrevistas de flujo en pausa y con fallo" [ref=e394]:
+                      - link "Entrevistas de flujo en pausa y con fallo" [ref=e395] [cursor=pointer]:
+                        - /url: /lightning/setup/Pausedflows/home
+                  - treeitem "Flujos" [level=2] [ref=e396]:
+                    - generic "Flujos" [ref=e397]:
+                      - link "Flujos" [ref=e398] [cursor=pointer]:
+                        - /url: /lightning/setup/Flows/home
+                  - treeitem "Migrar a Flujo" [level=2] [ref=e399]:
+                    - generic "Migrar a Flujo" [ref=e400]:
+                      - link "Migrar a Flujo" [ref=e401] [cursor=pointer]:
+                        - /url: /lightning/setup/MigrateToFlowTool/home
+                  - treeitem "Next Best Action" [level=2] [ref=e402]:
+                    - generic "Next Best Action" [ref=e403]:
+                      - link "Next Best Action" [ref=e404] [cursor=pointer]:
+                        - /url: /lightning/setup/NextBestAction/home
+                  - treeitem "Plantillas de publicación" [level=2] [ref=e405]:
+                    - generic "Plantillas de publicación" [ref=e406]:
+                      - link "Plantillas de publicación" [ref=e407] [cursor=pointer]:
+                        - /url: /lightning/setup/FeedTemplates/home
+                  - treeitem "Procesos de aprobación" [level=2] [ref=e408]:
+                    - generic "Procesos de aprobación" [ref=e409]:
+                      - link "Procesos de aprobación" [ref=e410] [cursor=pointer]:
+                        - /url: /lightning/setup/ApprovalProcesses/home
+                  - treeitem "Process Builder" [level=2] [ref=e411]:
+                    - generic "Process Builder" [ref=e412]:
+                      - link "Process Builder" [ref=e413] [cursor=pointer]:
+                        - /url: /lightning/setup/ProcessAutomation/home
+                  - treeitem "Reglas de flujo de trabajo" [level=2] [ref=e414]:
+                    - generic "Reglas de flujo de trabajo" [ref=e415]:
+                      - link "Reglas de flujo de trabajo" [ref=e416] [cursor=pointer]:
+                        - /url: /lightning/setup/WorkflowRules/home
+              - treeitem "Interfaz de usuario" [level=1] [ref=e417]:
+                - generic "Interfaz de usuario" [ref=e418]:
+                  - button "Ampliar" [ref=e419] [cursor=pointer]:
+                    - img [ref=e421]
+                    - generic [ref=e424]: Ampliar
+                  - link "Interfaz de usuario" [ref=e425] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Código personalizado" [level=1] [ref=e426]:
+                - generic "Código personalizado" [ref=e427]:
+                  - button "Ampliar" [ref=e428] [cursor=pointer]:
+                    - img [ref=e430]
+                    - generic [ref=e433]: Ampliar
+                  - link "Código personalizado" [ref=e434] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Desarrollo" [level=1] [ref=e435]:
+                - generic "Desarrollo" [ref=e436]:
+                  - button "Ampliar" [ref=e437] [cursor=pointer]:
+                    - img [ref=e439]
+                    - generic [ref=e442]: Ampliar
+                  - link "Desarrollo" [ref=e443] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Escala" [level=1] [ref=e444]:
+                - generic "Escala" [ref=e445]:
+                  - button "Ampliar" [ref=e446] [cursor=pointer]:
+                    - img [ref=e448]
+                    - generic [ref=e451]: Ampliar
+                  - link "Escala" [ref=e452] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Entornos" [level=1] [ref=e453]:
+                - generic "Entornos" [ref=e454]:
+                  - button "Ampliar" [ref=e455] [cursor=pointer]:
+                    - img [ref=e457]
+                    - generic [ref=e460]: Ampliar
+                  - link "Entornos" [ref=e461] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Participación de usuario" [level=1] [ref=e462]:
+                - generic "Participación de usuario" [ref=e463]:
+                  - button "Ampliar" [ref=e464] [cursor=pointer]:
+                    - img [ref=e466]
+                    - generic [ref=e469]: Ampliar
+                  - link "Participación de usuario" [ref=e470] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Habilitación" [level=1] [ref=e471]:
+                - generic "Habilitación" [ref=e472]:
+                  - button "Ampliar" [ref=e473] [cursor=pointer]:
+                    - img [ref=e475]
+                    - generic [ref=e478]: Ampliar
+                  - link "Habilitación" [ref=e479] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Integraciones" [level=1] [ref=e480]:
+                - generic "Integraciones" [ref=e481]:
+                  - button "Ampliar" [ref=e482] [cursor=pointer]:
+                    - img [ref=e484]
+                    - generic [ref=e487]: Ampliar
+                  - link "Integraciones" [ref=e488] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Generador de notificaciones" [level=1] [ref=e489]:
+                - generic "Generador de notificaciones" [ref=e490]:
+                  - button "Ampliar" [ref=e491] [cursor=pointer]:
+                    - img [ref=e493]
+                    - generic [ref=e496]: Ampliar
+                  - link "Generador de notificaciones" [ref=e497] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Sin conexión" [level=1] [ref=e498]:
+                - generic "Sin conexión" [ref=e499]:
+                  - button "Ampliar" [ref=e500] [cursor=pointer]:
+                    - img [ref=e502]
+                    - generic [ref=e505]: Ampliar
+                  - link "Sin conexión" [ref=e506] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Go Accelerate" [level=1] [ref=e507]:
+                - generic "Go Accelerate" [ref=e508]:
+                  - button "Ampliar" [ref=e509] [cursor=pointer]:
+                    - img [ref=e511]
+                    - generic [ref=e514]: Ampliar
+                  - link "Go Accelerate" [ref=e515] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Configuración" [level=1] [ref=e516]:
+                - heading "Configuración" [level=4] [ref=e517]
+              - treeitem "Configuración de la empresa" [level=1] [ref=e518]:
+                - generic "Configuración de la empresa" [ref=e519]:
+                  - button "Ampliar" [ref=e520] [cursor=pointer]:
+                    - img [ref=e522]
+                    - generic [ref=e525]: Ampliar
+                  - link "Configuración de la empresa" [ref=e526] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Gestor de versiones de Salesforce" [level=1] [ref=e527]:
+                - generic "Gestor de versiones de Salesforce" [ref=e528]:
+                  - button "Ampliar" [ref=e529] [cursor=pointer]:
+                    - img [ref=e531]
+                    - generic [ref=e534]: Ampliar
+                  - link "Gestor de versiones de Salesforce" [ref=e535] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Clasificación de datos" [level=1] [ref=e536]:
+                - generic "Clasificación de datos" [ref=e537]:
+                  - button "Ampliar" [ref=e538] [cursor=pointer]:
+                    - img [ref=e540]
+                    - generic [ref=e543]: Ampliar
+                  - link "Clasificación de datos" [ref=e544] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Centro de privacidad" [level=1] [ref=e545]:
+                - generic "Centro de privacidad" [ref=e546]:
+                  - button "Ampliar" [ref=e547] [cursor=pointer]:
+                    - img [ref=e549]
+                    - generic [ref=e552]: Ampliar
+                  - link "Centro de privacidad" [ref=e553] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Identidad" [level=1] [ref=e554]:
+                - generic "Identidad" [ref=e555]:
+                  - button "Ampliar" [ref=e556] [cursor=pointer]:
+                    - img [ref=e558]
+                    - generic [ref=e561]: Ampliar
+                  - link "Identidad" [ref=e562] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Seguridad" [level=1] [ref=e563]:
+                - generic "Seguridad" [ref=e564]:
+                  - button "Ampliar" [ref=e565] [cursor=pointer]:
+                    - img [ref=e567]
+                    - generic [ref=e570]: Ampliar
+                  - link "Seguridad" [ref=e571] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Asistente de configuración" [level=1] [ref=e572]:
+                - generic "Asistente de configuración" [ref=e573]:
+                  - link "Asistente de configuración" [ref=e574] [cursor=pointer]:
+                    - /url: /lightning/setup/GettingStartedEmbedded/home
+          - main [ref=e575]:
+            - tabpanel [ref=e576]:
+              - tabpanel [ref=e579]:
+                - generic [ref=e584]:
+                  - generic [ref=e586]:
+                    - generic [ref=e593]:
+                      - link "Configuración" [ref=e595] [cursor=pointer]:
+                        - /url: "#"
+                      - heading "Flujos" [level=1] [ref=e597]
+                    - generic [ref=e598]:
+                      - button "Explorador de desencadenador de flujo" [ref=e599] [cursor=pointer]:
+                        - generic [ref=e600]: Explorador de desencadenador de flujo
+                      - button "Nuevo flujo" [ref=e601] [cursor=pointer]:
+                        - generic [ref=e602]: Nuevo flujo
+                  - generic [ref=e603]:
+                    - article [ref=e605]:
+                      - generic [ref=e606]:
+                        - heading "¡Pruebe la aplicación Automatización Lightning!" [level=2] [ref=e607]:
+                          - generic [ref=e609]:
+                            - text: ¡Pruebe la
+                            - link "aplicación Automatización Lightning" [ref=e610] [cursor=pointer]:
+                              - /url: /lightning/app/standard__FlowsApp
+                            - text: "!"
+                        - generic [ref=e612]:
+                          - text: "Como su núcleo central para todas las automatizaciones de Salesforce, la aplicación Automatización Lightning entrega una experiencia de usuario mejorada y potentes funciones para gestionar y supervisar sus automatizaciones. Estas funciones están disponibles en exclusiva en la aplicación Automatización Lightning:"
+                          - list [ref=e613]:
+                            - listitem [ref=e614]: Buscar automatizaciones
+                            - listitem [ref=e615]: Ordenar sus vistas de lista con más opciones
+                            - listitem [ref=e616]: Organizar sus automatizaciones con categorías y subcategorías
+                            - listitem [ref=e617]: Ver y gestionar sus acciones en el núcleo central de acciones
+                            - listitem [ref=e618]: Conecte con sistemas externos con conectores con baja programación y con plantillas de flujo que contienen acciones de conectores
+                            - listitem [ref=e619]: Configure y gestione robots y tareas con automatización de procesos robótica
+                            - listitem [ref=e620]: Configure, construya y gestione automatizaciones basadas en documentos con procesamiento de documentos inteligente
+                          - generic [ref=e622]:
+                            - text: Si no ve la aplicación en el Iniciador de aplicación, compruebe que Activar la aplicación Automatización Lightning está seleccionada en
+                            - link "Configuración de automatización de procesos" [ref=e623] [cursor=pointer]:
+                              - /url: /lightning/setup/WorkflowSettings/home
+                            - text: .
+                      - img "flowListView banner astro" [ref=e625]
+                    - generic [ref=e627]:
+                      - generic [ref=e628]:
+                        - generic [ref=e632]:
+                          - heading "Definiciones de flujos" [level=1] [ref=e636]
+                          - generic [ref=e637]:
+                            - generic [ref=e641] [cursor=pointer]:
+                              - heading "Definiciones de flujos Todos los flujos" [level=1] [ref=e642]:
+                                - generic [ref=e643]: Definiciones de flujos
+                                - generic [ref=e644]: Todos los flujos
+                              - 'button "Seleccionar una vista de lista: Definiciones de flujos" [ref=e647]':
+                                - img [ref=e649]
+                                - generic [ref=e652]: "Seleccionar una vista de lista: Definiciones de flujos"
+                            - generic "Todos los flujos" [ref=e654]:
+                              - button "Esta lista está anclada." [disabled] [ref=e657] [cursor=pointer]:
+                                - img [ref=e659]
+                                - generic [ref=e662]: Esta lista está anclada.
+                        - generic [ref=e663]:
+                          - paragraph [ref=e665]:
+                            - generic [ref=e667]:
+                              - status "Todos los flujos" [ref=e668]: 50+ elementos • Ordenado por Etiqueta del flujo • Filtrado por Todas las definiciones de flujos •
+                              - text: Se actualizó hace unos segundos
+                          - generic [ref=e669]:
+                            - generic "Controles de vista de lista" [ref=e672]:
+                              - button "Controles de vista de lista" [ref=e673] [cursor=pointer]:
+                                - img [ref=e675]
+                                - img [ref=e679]
+                                - generic [ref=e682]: Controles de vista de lista
+                            - generic [ref=e684]:
+                              - button "Actualizar" [ref=e687] [cursor=pointer]:
+                                - img [ref=e689]
+                                - generic [ref=e692]: Actualizar
+                              - group [ref=e693]:
+                                - button "Filtros" [ref=e698] [cursor=pointer]:
+                                  - img [ref=e700]
+                                  - generic [ref=e703]: Filtros
+                      - generic [ref=e708]:
+                        - grid [ref=e712]:
+                          - rowgroup:
+                            - row "Etiqueta del flujo Tipo de proceso Activo Plantilla Estado de paquete Nombre de paquete Última modificación por Fecha de última modificación Nombre de API del flujo Acción":
+                              - columnheader "Etiqueta del flujo":
+                                - generic [ref=e713]:
+                                  - button "Ordenar Etiqueta del flujo" [ref=e714] [cursor=pointer]:
+                                    - generic [ref=e715]: Ordenar
+                                    - generic "Etiqueta del flujo" [ref=e716]
+                                  - generic [ref=e717]: Clasificados en orden ascendente
+                                  - button "Mostrar Etiqueta del flujo acciones de columna" [ref=e719] [cursor=pointer]:
+                                    - img [ref=e721]
+                                    - generic [ref=e724]: Mostrar Etiqueta del flujo acciones de columna
+                                  - slider "Etiqueta del flujo ancho de columna" [ref=e725]: "129"
+                              - columnheader "Tipo de proceso":
+                                - generic [ref=e728]:
+                                  - button "Ordenar Tipo de proceso" [ref=e729] [cursor=pointer]:
+                                    - generic [ref=e730]: Ordenar
+                                    - generic "Tipo de proceso" [ref=e731]
+                                  - button "Mostrar Tipo de proceso acciones de columna" [ref=e734] [cursor=pointer]:
+                                    - img [ref=e736]
+                                    - generic [ref=e739]: Mostrar Tipo de proceso acciones de columna
+                                  - slider "Tipo de proceso ancho de columna" [ref=e740]: "129"
+                              - columnheader "Activo":
+                                - generic [ref=e743]:
+                                  - button "Ordenar Activo" [ref=e744] [cursor=pointer]:
+                                    - generic [ref=e745]: Ordenar
+                                    - generic "Activo" [ref=e746]
+                                  - button "Mostrar Activo acciones de columna" [ref=e749] [cursor=pointer]:
+                                    - img [ref=e751]
+                                    - generic [ref=e754]: Mostrar Activo acciones de columna
+                                  - slider "Activo ancho de columna" [ref=e755]: "60"
+                              - columnheader "Plantilla":
+                                - generic [ref=e758]:
+                                  - button "Ordenar Plantilla" [ref=e759] [cursor=pointer]:
+                                    - generic [ref=e760]: Ordenar
+                                    - generic "Plantilla" [ref=e761]
+                                  - button "Mostrar Plantilla acciones de columna" [ref=e764] [cursor=pointer]:
+                                    - img [ref=e766]
+                                    - generic [ref=e769]: Mostrar Plantilla acciones de columna
+                                  - slider "Plantilla ancho de columna" [ref=e770]: "60"
+                              - columnheader "Estado de paquete":
+                                - generic [ref=e773]:
+                                  - button "Ordenar Estado de paquete" [ref=e774] [cursor=pointer]:
+                                    - generic [ref=e775]: Ordenar
+                                    - generic "Estado de paquete" [ref=e776]
+                                  - button "Mostrar Estado de paquete acciones de columna" [ref=e779] [cursor=pointer]:
+                                    - img [ref=e781]
+                                    - generic [ref=e784]: Mostrar Estado de paquete acciones de columna
+                                  - slider "Estado de paquete ancho de columna" [ref=e785]: "129"
+                              - columnheader "Nombre de paquete":
+                                - generic [ref=e788]:
+                                  - button "Ordenar Nombre de paquete" [ref=e789] [cursor=pointer]:
+                                    - generic [ref=e790]: Ordenar
+                                    - generic "Nombre de paquete" [ref=e791]
+                                  - button "Mostrar Nombre de paquete acciones de columna" [ref=e794] [cursor=pointer]:
+                                    - img [ref=e796]
+                                    - generic [ref=e799]: Mostrar Nombre de paquete acciones de columna
+                                  - slider "Nombre de paquete ancho de columna" [ref=e800]: "60"
+                              - columnheader "Última modificación por":
+                                - generic [ref=e803]:
+                                  - button "Ordenar Última modificación por" [ref=e804] [cursor=pointer]:
+                                    - generic [ref=e805]: Ordenar
+                                    - generic "Última modificación por" [ref=e806]
+                                  - button "Mostrar Última modificación por acciones de columna" [ref=e809] [cursor=pointer]:
+                                    - img [ref=e811]
+                                    - generic [ref=e814]: Mostrar Última modificación por acciones de columna
+                                  - slider "Última modificación por ancho de columna" [ref=e815]: "127"
+                              - columnheader "Fecha de última modificación":
+                                - generic [ref=e818]:
+                                  - button "Ordenar Fecha de última modificación" [ref=e819] [cursor=pointer]:
+                                    - generic [ref=e820]: Ordenar
+                                    - generic "Fecha de última modificación" [ref=e821]
+                                  - button "Mostrar Fecha de última modificación acciones de columna" [ref=e824] [cursor=pointer]:
+                                    - img [ref=e826]
+                                    - generic [ref=e829]: Mostrar Fecha de última modificación acciones de columna
+                                  - slider "Fecha de última modificación ancho de columna" [ref=e830]: "129"
+                              - columnheader "Nombre de API del flujo":
+                                - generic [ref=e833]:
+                                  - button "Ordenar Nombre de API del flujo" [ref=e834] [cursor=pointer]:
+                                    - generic [ref=e835]: Ordenar
+                                    - generic "Nombre de API del flujo" [ref=e836]
+                                  - button "Mostrar Nombre de API del flujo acciones de columna" [ref=e839] [cursor=pointer]:
+                                    - img [ref=e841]
+                                    - generic [ref=e844]: Mostrar Nombre de API del flujo acciones de columna
+                                  - slider "Nombre de API del flujo ancho de columna" [ref=e845]: "129"
+                              - columnheader "Acción":
+                                - generic [ref=e850]: Acción
+                          - rowgroup
+                          - rowgroup [ref=e851]:
+                            - row "Account [RTF] | (COU)-(FFU) | - Autocomplete name | [SYN] Flujo iniciado automáticamente true false No gestionado Victor Duarte 5/19/2026, 11:49 a. m. account_rtf_cou_ffu_autocomplete_name_syn Mostrar acciones" [ref=e852]:
+                              - rowheader "Account [RTF] | (COU)-(FFU) | - Autocomplete name | [SYN]" [ref=e853]:
+                                - link "Account [RTF] | (COU)-(FFU) | - Autocomplete name | [SYN]" [ref=e855] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e856]:
+                                - generic [ref=e858]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e859]:
+                                - checkbox "true" [checked] [disabled] [ref=e862]
+                              - gridcell "false" [ref=e863]:
+                                - checkbox "false" [disabled] [ref=e866]
+                              - gridcell "No gestionado" [ref=e867]:
+                                - generic [ref=e869]: No gestionado
+                              - gridcell [ref=e870]
+                              - gridcell "Victor Duarte" [ref=e871]:
+                                - generic "Victor Duarte" [ref=e873]
+                              - gridcell "5/19/2026, 11:49 a. m." [ref=e874]:
+                                - generic [ref=e876]: 5/19/2026, 11:49 a. m.
+                              - gridcell "account_rtf_cou_ffu_autocomplete_name_syn" [ref=e877]:
+                                - generic "account_rtf_cou_ffu_autocomplete_name_syn" [ref=e879]
+                              - gridcell "Mostrar acciones" [ref=e880]:
+                                - button "Mostrar acciones" [ref=e883] [cursor=pointer]:
+                                  - generic [ref=e884]:
+                                    - generic [ref=e885]:
+                                      - img
+                                    - generic [ref=e886]: Mostrar acciones
+                            - row "Account [RTF] | (COU)-(FFU) | - Estados de SAP | [SYN] Flujo iniciado automáticamente true false No gestionado Sergio Rodriguez 3/3/2026, 5:49 p. m. Account_RTF_COU_FFU_Estados_de_SAP_SYN Mostrar acciones" [ref=e887]:
+                              - rowheader "Account [RTF] | (COU)-(FFU) | - Estados de SAP | [SYN]" [ref=e888]:
+                                - link "Account [RTF] | (COU)-(FFU) | - Estados de SAP | [SYN]" [ref=e890] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e891]:
+                                - generic [ref=e893]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e894]:
+                                - checkbox "true" [checked] [disabled] [ref=e897]
+                              - gridcell "false" [ref=e898]:
+                                - checkbox "false" [disabled] [ref=e901]
+                              - gridcell "No gestionado" [ref=e902]:
+                                - generic [ref=e904]: No gestionado
+                              - gridcell [ref=e905]
+                              - gridcell "Sergio Rodriguez" [ref=e906]:
+                                - generic "Sergio Rodriguez" [ref=e908]
+                              - gridcell "3/3/2026, 5:49 p. m." [ref=e909]:
+                                - generic [ref=e911]: 3/3/2026, 5:49 p. m.
+                              - gridcell "Account_RTF_COU_FFU_Estados_de_SAP_SYN" [ref=e912]:
+                                - generic "Account_RTF_COU_FFU_Estados_de_SAP_SYN" [ref=e914]
+                              - gridcell "Mostrar acciones" [ref=e915]:
+                                - button "Mostrar acciones" [ref=e918] [cursor=pointer]:
+                                  - generic [ref=e919]:
+                                    - generic [ref=e920]:
+                                      - img
+                                    - generic [ref=e921]: Mostrar acciones
+                            - row "Account [RTF] | (CRT) - (ARR) | - Setear LEN y Sociedad Flujo iniciado automáticamente true false No gestionado Victor Duarte 5/22/2026, 9:11 a. m. Account_RTF_CRT_ARR_Setear_LEN Mostrar acciones" [ref=e922]:
+                              - rowheader "Account [RTF] | (CRT) - (ARR) | - Setear LEN y Sociedad" [ref=e923]:
+                                - link "Account [RTF] | (CRT) - (ARR) | - Setear LEN y Sociedad" [ref=e925] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e926]:
+                                - generic [ref=e928]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e929]:
+                                - checkbox "true" [checked] [disabled] [ref=e932]
+                              - gridcell "false" [ref=e933]:
+                                - checkbox "false" [disabled] [ref=e936]
+                              - gridcell "No gestionado" [ref=e937]:
+                                - generic [ref=e939]: No gestionado
+                              - gridcell [ref=e940]
+                              - gridcell "Victor Duarte" [ref=e941]:
+                                - generic "Victor Duarte" [ref=e943]
+                              - gridcell "5/22/2026, 9:11 a. m." [ref=e944]:
+                                - generic [ref=e946]: 5/22/2026, 9:11 a. m.
+                              - gridcell "Account_RTF_CRT_ARR_Setear_LEN" [ref=e947]:
+                                - generic "Account_RTF_CRT_ARR_Setear_LEN" [ref=e949]
+                              - gridcell "Mostrar acciones" [ref=e950]:
+                                - button "Mostrar acciones" [ref=e953] [cursor=pointer]:
+                                  - generic [ref=e954]:
+                                    - generic [ref=e955]:
+                                      - img
+                                    - generic [ref=e956]: Mostrar acciones
+                            - row "Account [RTF] | (CRT) - (ARR) | - Setear UEN Flujo iniciado automáticamente false false No gestionado Victor Duarte 5/22/2026, 9:11 a. m. Account_RTF_CRT_ARR_Setear_UEN Mostrar acciones" [ref=e957]:
+                              - rowheader "Account [RTF] | (CRT) - (ARR) | - Setear UEN" [ref=e958]:
+                                - link "Account [RTF] | (CRT) - (ARR) | - Setear UEN" [ref=e960] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e961]:
+                                - generic [ref=e963]: Flujo iniciado automáticamente
+                              - gridcell "false" [ref=e964]:
+                                - checkbox "false" [disabled] [ref=e967]
+                              - gridcell "false" [ref=e968]:
+                                - checkbox "false" [disabled] [ref=e971]
+                              - gridcell "No gestionado" [ref=e972]:
+                                - generic [ref=e974]: No gestionado
+                              - gridcell [ref=e975]
+                              - gridcell "Victor Duarte" [ref=e976]:
+                                - generic "Victor Duarte" [ref=e978]
+                              - gridcell "5/22/2026, 9:11 a. m." [ref=e979]:
+                                - generic [ref=e981]: 5/22/2026, 9:11 a. m.
+                              - gridcell "Account_RTF_CRT_ARR_Setear_UEN" [ref=e982]:
+                                - generic "Account_RTF_CRT_ARR_Setear_UEN" [ref=e984]
+                              - gridcell "Mostrar acciones" [ref=e985]:
+                                - button "Mostrar acciones" [ref=e988] [cursor=pointer]:
+                                  - generic [ref=e989]:
+                                    - generic [ref=e990]:
+                                      - img
+                                    - generic [ref=e991]: Mostrar acciones
+                            - row "ACCOUNT [RTF] | (UPD)-(ARR) | - Enviar Custom Notification Duplicidad EBX | [SYN] Flujo iniciado automáticamente false false No gestionado Victor Duarte 3/9/2026, 5:39 p. m. ACCOUNT_RTF_UPD_ARR_Enviar_Custom_Notification_Duplicidad_EBX_SYN Mostrar acciones" [ref=e992]:
+                              - rowheader "ACCOUNT [RTF] | (UPD)-(ARR) | - Enviar Custom Notification Duplicidad EBX | [SYN]" [ref=e993]:
+                                - link "ACCOUNT [RTF] | (UPD)-(ARR) | - Enviar Custom Notification Duplicidad EBX | [SYN]" [ref=e995] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e996]:
+                                - generic [ref=e998]: Flujo iniciado automáticamente
+                              - gridcell "false" [ref=e999]:
+                                - checkbox "false" [disabled] [ref=e1002]
+                              - gridcell "false" [ref=e1003]:
+                                - checkbox "false" [disabled] [ref=e1006]
+                              - gridcell "No gestionado" [ref=e1007]:
+                                - generic [ref=e1009]: No gestionado
+                              - gridcell [ref=e1010]
+                              - gridcell "Victor Duarte" [ref=e1011]:
+                                - generic "Victor Duarte" [ref=e1013]
+                              - gridcell "3/9/2026, 5:39 p. m." [ref=e1014]:
+                                - generic [ref=e1016]: 3/9/2026, 5:39 p. m.
+                              - gridcell "ACCOUNT_RTF_UPD_ARR_Enviar_Custom_Notification_Duplicidad_EBX_SYN" [ref=e1017]:
+                                - generic "ACCOUNT_RTF_UPD_ARR_Enviar_Custom_Notification_Duplicidad_EBX_SYN" [ref=e1019]
+                              - gridcell "Mostrar acciones" [ref=e1020]:
+                                - button "Mostrar acciones" [ref=e1023] [cursor=pointer]:
+                                  - generic [ref=e1024]:
+                                    - generic [ref=e1025]:
+                                      - img
+                                    - generic [ref=e1026]: Mostrar acciones
+                            - row "ACCOUNT [RTF] | (UPD)-(ARR) | - Enviar Notificacion Custom nuevo cliente | [SYN] Flujo iniciado automáticamente true false No gestionado Sergio Rodriguez 3/3/2026, 5:53 p. m. ACCOUNT_RTF_UPD_ARR_Enviar_Notificacion_Custom_nuevo_cliente_SYN Mostrar acciones" [ref=e1027]:
+                              - rowheader "ACCOUNT [RTF] | (UPD)-(ARR) | - Enviar Notificacion Custom nuevo cliente | [SYN]" [active] [ref=e1028]:
+                                - link "ACCOUNT [RTF] | (UPD)-(ARR) | - Enviar Notificacion Custom nuevo cliente | [SYN]" [ref=e1030] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1031]:
+                                - generic [ref=e1033]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1034]:
+                                - checkbox "true" [checked] [disabled] [ref=e1037]
+                              - gridcell "false" [ref=e1038]:
+                                - checkbox "false" [disabled] [ref=e1041]
+                              - gridcell "No gestionado" [ref=e1042]:
+                                - generic [ref=e1044]: No gestionado
+                              - gridcell [ref=e1045]
+                              - gridcell "Sergio Rodriguez" [ref=e1046]:
+                                - generic "Sergio Rodriguez" [ref=e1048]
+                              - gridcell "3/3/2026, 5:53 p. m." [ref=e1049]:
+                                - generic [ref=e1051]: 3/3/2026, 5:53 p. m.
+                              - gridcell "ACCOUNT_RTF_UPD_ARR_Enviar_Notificacion_Custom_nuevo_cliente_SYN" [ref=e1052]:
+                                - generic "ACCOUNT_RTF_UPD_ARR_Enviar_Notificacion_Custom_nuevo_cliente_SYN" [ref=e1054]
+                              - gridcell "Mostrar acciones" [ref=e1055]:
+                                - button "Mostrar acciones" [ref=e1058] [cursor=pointer]:
+                                  - generic [ref=e1059]:
+                                    - generic [ref=e1060]:
+                                      - img
+                                    - generic [ref=e1061]: Mostrar acciones
+                            - row "Account [RTF] | (UPD)-(FFU) | - Marcar cambios sensibles cuando prospecto Rechazado | [SYN] Flujo iniciado automáticamente true false No gestionado Victor Duarte 5/20/2026, 2:59 p. m. account_rtf_upd_ffu_marcar_cambios_sensibles_cuando_prospecto_rechazado_syn Mostrar acciones" [ref=e1062]:
+                              - rowheader "Account [RTF] | (UPD)-(FFU) | - Marcar cambios sensibles cuando prospecto Rechazado | [SYN]" [ref=e1063]:
+                                - link "Account [RTF] | (UPD)-(FFU) | - Marcar cambios sensibles cuando prospecto Rechazado | [SYN]" [ref=e1065] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1066]:
+                                - generic [ref=e1068]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1069]:
+                                - checkbox "true" [checked] [disabled] [ref=e1072]
+                              - gridcell "false" [ref=e1073]:
+                                - checkbox "false" [disabled] [ref=e1076]
+                              - gridcell "No gestionado" [ref=e1077]:
+                                - generic [ref=e1079]: No gestionado
+                              - gridcell [ref=e1080]
+                              - gridcell "Victor Duarte" [ref=e1081]:
+                                - generic "Victor Duarte" [ref=e1083]
+                              - gridcell "5/20/2026, 2:59 p. m." [ref=e1084]:
+                                - generic [ref=e1086]: 5/20/2026, 2:59 p. m.
+                              - gridcell "account_rtf_upd_ffu_marcar_cambios_sensibles_cuando_prospecto_rechazado_syn" [ref=e1087]:
+                                - generic "account_rtf_upd_ffu_marcar_cambios_sensibles_cuando_prospecto_rechazado_syn" [ref=e1089]
+                              - gridcell "Mostrar acciones" [ref=e1090]:
+                                - button "Mostrar acciones" [ref=e1093] [cursor=pointer]:
+                                  - generic [ref=e1094]:
+                                    - generic [ref=e1095]:
+                                      - img
+                                    - generic [ref=e1096]: Mostrar acciones
+                            - row "Account [RTF] | (UPD)-(FFU) | - Mover prospecto a Rechazado cuando EBX responde 400 | [SYN] Flujo iniciado automáticamente true false No gestionado Victor Duarte 5/19/2026, 11:49 a. m. account_rtf_upd_ffu_mover_prospecto_a_rechazado_cuando_ebx_responde_400_syn Mostrar acciones" [ref=e1097]:
+                              - rowheader "Account [RTF] | (UPD)-(FFU) | - Mover prospecto a Rechazado cuando EBX responde 400 | [SYN]" [ref=e1098]:
+                                - link "Account [RTF] | (UPD)-(FFU) | - Mover prospecto a Rechazado cuando EBX responde 400 | [SYN]" [ref=e1100] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1101]:
+                                - generic [ref=e1103]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1104]:
+                                - checkbox "true" [checked] [disabled] [ref=e1107]
+                              - gridcell "false" [ref=e1108]:
+                                - checkbox "false" [disabled] [ref=e1111]
+                              - gridcell "No gestionado" [ref=e1112]:
+                                - generic [ref=e1114]: No gestionado
+                              - gridcell [ref=e1115]
+                              - gridcell "Victor Duarte" [ref=e1116]:
+                                - generic "Victor Duarte" [ref=e1118]
+                              - gridcell "5/19/2026, 11:49 a. m." [ref=e1119]:
+                                - generic [ref=e1121]: 5/19/2026, 11:49 a. m.
+                              - gridcell "account_rtf_upd_ffu_mover_prospecto_a_rechazado_cuando_ebx_responde_400_syn" [ref=e1122]:
+                                - generic "account_rtf_upd_ffu_mover_prospecto_a_rechazado_cuando_ebx_responde_400_syn" [ref=e1124]
+                              - gridcell "Mostrar acciones" [ref=e1125]:
+                                - button "Mostrar acciones" [ref=e1128] [cursor=pointer]:
+                                  - generic [ref=e1129]:
+                                    - generic [ref=e1130]:
+                                      - img
+                                    - generic [ref=e1131]: Mostrar acciones
+                            - row "Account [SCF] | - Reenviar prospecto a EBX Flujo de pantalla true false No gestionado Victor Duarte 5/20/2026, 2:59 p. m. account_scf_reenviar_prospecto_a_ebx Mostrar acciones" [ref=e1132]:
+                              - rowheader "Account [SCF] | - Reenviar prospecto a EBX" [ref=e1133]:
+                                - link "Account [SCF] | - Reenviar prospecto a EBX" [ref=e1135] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo de pantalla" [ref=e1136]:
+                                - generic [ref=e1138]: Flujo de pantalla
+                              - gridcell "true" [ref=e1139]:
+                                - checkbox "true" [checked] [disabled] [ref=e1142]
+                              - gridcell "false" [ref=e1143]:
+                                - checkbox "false" [disabled] [ref=e1146]
+                              - gridcell "No gestionado" [ref=e1147]:
+                                - generic [ref=e1149]: No gestionado
+                              - gridcell [ref=e1150]
+                              - gridcell "Victor Duarte" [ref=e1151]:
+                                - generic "Victor Duarte" [ref=e1153]
+                              - gridcell "5/20/2026, 2:59 p. m." [ref=e1154]:
+                                - generic [ref=e1156]: 5/20/2026, 2:59 p. m.
+                              - gridcell "account_scf_reenviar_prospecto_a_ebx" [ref=e1157]:
+                                - generic "account_scf_reenviar_prospecto_a_ebx" [ref=e1159]
+                              - gridcell "Mostrar acciones" [ref=e1160]:
+                                - button "Mostrar acciones" [ref=e1163] [cursor=pointer]:
+                                  - generic [ref=e1164]:
+                                    - generic [ref=e1165]:
+                                      - img
+                                    - generic [ref=e1166]: Mostrar acciones
+                            - row "Account [STF] | (D)-(01:00) | - Estatus de compra Flujo iniciado automáticamente true false No gestionado Sergio Rodriguez 3/3/2026, 5:49 p. m. Account_STF_D_01_00_Estatus_de_compra Mostrar acciones" [ref=e1167]:
+                              - rowheader "Account [STF] | (D)-(01:00) | - Estatus de compra" [ref=e1168]:
+                                - link "Account [STF] | (D)-(01:00) | - Estatus de compra" [ref=e1170] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1171]:
+                                - generic [ref=e1173]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1174]:
+                                - checkbox "true" [checked] [disabled] [ref=e1177]
+                              - gridcell "false" [ref=e1178]:
+                                - checkbox "false" [disabled] [ref=e1181]
+                              - gridcell "No gestionado" [ref=e1182]:
+                                - generic [ref=e1184]: No gestionado
+                              - gridcell [ref=e1185]
+                              - gridcell "Sergio Rodriguez" [ref=e1186]:
+                                - generic "Sergio Rodriguez" [ref=e1188]
+                              - gridcell "3/3/2026, 5:49 p. m." [ref=e1189]:
+                                - generic [ref=e1191]: 3/3/2026, 5:49 p. m.
+                              - gridcell "Account_STF_D_01_00_Estatus_de_compra" [ref=e1192]:
+                                - generic "Account_STF_D_01_00_Estatus_de_compra" [ref=e1194]
+                              - gridcell "Mostrar acciones" [ref=e1195]:
+                                - button "Mostrar acciones" [ref=e1198] [cursor=pointer]:
+                                  - generic [ref=e1199]:
+                                    - generic [ref=e1200]:
+                                      - img
+                                    - generic [ref=e1201]: Mostrar acciones
+                            - row "Account Share - Test Flow Flujo iniciado automáticamente false false No gestionado Sergio Rodriguez 3/3/2026, 5:50 p. m. Account_Share_Test_Flow Mostrar acciones" [ref=e1202]:
+                              - rowheader "Account Share - Test Flow" [ref=e1203]:
+                                - link "Account Share - Test Flow" [ref=e1205] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1206]:
+                                - generic [ref=e1208]: Flujo iniciado automáticamente
+                              - gridcell "false" [ref=e1209]:
+                                - checkbox "false" [disabled] [ref=e1212]
+                              - gridcell "false" [ref=e1213]:
+                                - checkbox "false" [disabled] [ref=e1216]
+                              - gridcell "No gestionado" [ref=e1217]:
+                                - generic [ref=e1219]: No gestionado
+                              - gridcell [ref=e1220]
+                              - gridcell "Sergio Rodriguez" [ref=e1221]:
+                                - generic "Sergio Rodriguez" [ref=e1223]
+                              - gridcell "3/3/2026, 5:50 p. m." [ref=e1224]:
+                                - generic [ref=e1226]: 3/3/2026, 5:50 p. m.
+                              - gridcell "Account_Share_Test_Flow" [ref=e1227]:
+                                - generic "Account_Share_Test_Flow" [ref=e1229]
+                              - gridcell "Mostrar acciones" [ref=e1230]:
+                                - button "Mostrar acciones" [ref=e1233] [cursor=pointer]:
+                                  - generic [ref=e1234]:
+                                    - generic [ref=e1235]:
+                                      - img
+                                    - generic [ref=e1236]: Mostrar acciones
+                            - row "Account Share - Test Sharing Records Flujo iniciado automáticamente false false No gestionado Sergio Rodriguez 3/3/2026, 5:50 p. m. Account_Share_Test_Sharing_Records Mostrar acciones" [ref=e1237]:
+                              - rowheader "Account Share - Test Sharing Records" [ref=e1238]:
+                                - link "Account Share - Test Sharing Records" [ref=e1240] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1241]:
+                                - generic [ref=e1243]: Flujo iniciado automáticamente
+                              - gridcell "false" [ref=e1244]:
+                                - checkbox "false" [disabled] [ref=e1247]
+                              - gridcell "false" [ref=e1248]:
+                                - checkbox "false" [disabled] [ref=e1251]
+                              - gridcell "No gestionado" [ref=e1252]:
+                                - generic [ref=e1254]: No gestionado
+                              - gridcell [ref=e1255]
+                              - gridcell "Sergio Rodriguez" [ref=e1256]:
+                                - generic "Sergio Rodriguez" [ref=e1258]
+                              - gridcell "3/3/2026, 5:50 p. m." [ref=e1259]:
+                                - generic [ref=e1261]: 3/3/2026, 5:50 p. m.
+                              - gridcell "Account_Share_Test_Sharing_Records" [ref=e1262]:
+                                - generic "Account_Share_Test_Sharing_Records" [ref=e1264]
+                              - gridcell "Mostrar acciones" [ref=e1265]:
+                                - button "Mostrar acciones" [ref=e1268] [cursor=pointer]:
+                                  - generic [ref=e1269]:
+                                    - generic [ref=e1270]:
+                                      - img
+                                    - generic [ref=e1271]: Mostrar acciones
+                            - row "Account || Desactivar Contactos Masivo Flujo iniciado automáticamente true false No gestionado Sergio Rodriguez 3/3/2026, 5:49 p. m. Account_Desactivar_Contactos_Masivo Mostrar acciones" [ref=e1272]:
+                              - rowheader "Account || Desactivar Contactos Masivo" [ref=e1273]:
+                                - link "Account || Desactivar Contactos Masivo" [ref=e1275] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1276]:
+                                - generic [ref=e1278]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1279]:
+                                - checkbox "true" [checked] [disabled] [ref=e1282]
+                              - gridcell "false" [ref=e1283]:
+                                - checkbox "false" [disabled] [ref=e1286]
+                              - gridcell "No gestionado" [ref=e1287]:
+                                - generic [ref=e1289]: No gestionado
+                              - gridcell [ref=e1290]
+                              - gridcell "Sergio Rodriguez" [ref=e1291]:
+                                - generic "Sergio Rodriguez" [ref=e1293]
+                              - gridcell "3/3/2026, 5:49 p. m." [ref=e1294]:
+                                - generic [ref=e1296]: 3/3/2026, 5:49 p. m.
+                              - gridcell "Account_Desactivar_Contactos_Masivo" [ref=e1297]:
+                                - generic "Account_Desactivar_Contactos_Masivo" [ref=e1299]
+                              - gridcell "Mostrar acciones" [ref=e1300]:
+                                - button "Mostrar acciones" [ref=e1303] [cursor=pointer]:
+                                  - generic [ref=e1304]:
+                                    - generic [ref=e1305]:
+                                      - img
+                                    - generic [ref=e1306]: Mostrar acciones
+                            - row "Actualizar estado de versión de definición de flujo Flujo iniciado automáticamente true true Gestionado e instalado UpdtFlowDefVer Mostrar acciones" [ref=e1307]:
+                              - rowheader "Actualizar estado de versión de definición de flujo" [ref=e1308]:
+                                - link "Actualizar estado de versión de definición de flujo" [ref=e1310] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1311]:
+                                - generic [ref=e1313]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1314]:
+                                - checkbox "true" [checked] [disabled] [ref=e1317]
+                              - gridcell "true" [ref=e1318]:
+                                - checkbox "true" [checked] [disabled] [ref=e1321]
+                              - gridcell "Gestionado e instalado" [ref=e1322]:
+                                - generic [ref=e1324]: Gestionado e instalado
+                              - gridcell [ref=e1325]
+                              - gridcell [ref=e1326]
+                              - gridcell [ref=e1327]
+                              - gridcell "UpdtFlowDefVer" [ref=e1328]:
+                                - generic "UpdtFlowDefVer" [ref=e1330]
+                              - gridcell "Mostrar acciones" [ref=e1331]:
+                                - button "Mostrar acciones" [ref=e1334] [cursor=pointer]:
+                                  - generic [ref=e1335]:
+                                    - generic [ref=e1336]:
+                                      - img
+                                    - generic [ref=e1337]: Mostrar acciones
+                            - row "Acuerdo de desarrollo [RTF] | (CRT - UPD) | - Actualizar checkboxes Flujo iniciado automáticamente false false No gestionado Ulises Varela 4/6/2026, 6:42 a. m. Acuerdo_de_desarrollo_RTF_CRT_UPD_Actualizar_checkboxes Mostrar acciones" [ref=e1338]:
+                              - rowheader "Acuerdo de desarrollo [RTF] | (CRT - UPD) | - Actualizar checkboxes" [ref=e1339]:
+                                - link "Acuerdo de desarrollo [RTF] | (CRT - UPD) | - Actualizar checkboxes" [ref=e1341] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1342]:
+                                - generic [ref=e1344]: Flujo iniciado automáticamente
+                              - gridcell "false" [ref=e1345]:
+                                - checkbox "false" [disabled] [ref=e1348]
+                              - gridcell "false" [ref=e1349]:
+                                - checkbox "false" [disabled] [ref=e1352]
+                              - gridcell "No gestionado" [ref=e1353]:
+                                - generic [ref=e1355]: No gestionado
+                              - gridcell [ref=e1356]
+                              - gridcell "Ulises Varela" [ref=e1357]:
+                                - generic "Ulises Varela" [ref=e1359]
+                              - gridcell "4/6/2026, 6:42 a. m." [ref=e1360]:
+                                - generic [ref=e1362]: 4/6/2026, 6:42 a. m.
+                              - gridcell "Acuerdo_de_desarrollo_RTF_CRT_UPD_Actualizar_checkboxes" [ref=e1363]:
+                                - generic "Acuerdo_de_desarrollo_RTF_CRT_UPD_Actualizar_checkboxes" [ref=e1365]
+                              - gridcell "Mostrar acciones" [ref=e1366]:
+                                - button "Mostrar acciones" [ref=e1369] [cursor=pointer]:
+                                  - generic [ref=e1370]:
+                                    - generic [ref=e1371]:
+                                      - img
+                                    - generic [ref=e1372]: Mostrar acciones
+                            - row "Acuerdo de desarrollo [RTF] | (UPD) - (ARR) | - Determinar Autorizantes (Aprobadores) Flujo iniciado automáticamente true false No gestionado Victor Duarte 5/19/2026, 11:49 a. m. Acuerdo_de_desarrollo_RTF_UPD_FFU_Determinar_Autorizantes_Aprobadores Mostrar acciones" [ref=e1373]:
+                              - rowheader "Acuerdo de desarrollo [RTF] | (UPD) - (ARR) | - Determinar Autorizantes (Aprobadores)" [ref=e1374]:
+                                - link "Acuerdo de desarrollo [RTF] | (UPD) - (ARR) | - Determinar Autorizantes (Aprobadores)" [ref=e1376] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1377]:
+                                - generic [ref=e1379]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1380]:
+                                - checkbox "true" [checked] [disabled] [ref=e1383]
+                              - gridcell "false" [ref=e1384]:
+                                - checkbox "false" [disabled] [ref=e1387]
+                              - gridcell "No gestionado" [ref=e1388]:
+                                - generic [ref=e1390]: No gestionado
+                              - gridcell [ref=e1391]
+                              - gridcell "Victor Duarte" [ref=e1392]:
+                                - generic "Victor Duarte" [ref=e1394]
+                              - gridcell "5/19/2026, 11:49 a. m." [ref=e1395]:
+                                - generic [ref=e1397]: 5/19/2026, 11:49 a. m.
+                              - gridcell "Acuerdo_de_desarrollo_RTF_UPD_FFU_Determinar_Autorizantes_Aprobadores" [ref=e1398]:
+                                - generic "Acuerdo_de_desarrollo_RTF_UPD_FFU_Determinar_Autorizantes_Aprobadores" [ref=e1400]
+                              - gridcell "Mostrar acciones" [ref=e1401]:
+                                - button "Mostrar acciones" [ref=e1404] [cursor=pointer]:
+                                  - generic [ref=e1405]:
+                                    - generic [ref=e1406]:
+                                      - img
+                                    - generic [ref=e1407]: Mostrar acciones
+                            - row "Acuerdo de Desarrollo [RTF] | (UPD)-(ARR) | - Notificar resultado de aprobacion ADD | [SYN] Flujo iniciado automáticamente true false No gestionado Milagros Delgado 5/14/2026, 10:56 a. m. development_agreement_rtf_upd_arr_notificar_resultado_de_aprobacion_add_syn Mostrar acciones" [ref=e1408]:
+                              - rowheader "Acuerdo de Desarrollo [RTF] | (UPD)-(ARR) | - Notificar resultado de aprobacion ADD | [SYN]" [ref=e1409]:
+                                - link "Acuerdo de Desarrollo [RTF] | (UPD)-(ARR) | - Notificar resultado de aprobacion ADD | [SYN]" [ref=e1411] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1412]:
+                                - generic [ref=e1414]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1415]:
+                                - checkbox "true" [checked] [disabled] [ref=e1418]
+                              - gridcell "false" [ref=e1419]:
+                                - checkbox "false" [disabled] [ref=e1422]
+                              - gridcell "No gestionado" [ref=e1423]:
+                                - generic [ref=e1425]: No gestionado
+                              - gridcell [ref=e1426]
+                              - gridcell "Milagros Delgado" [ref=e1427]:
+                                - generic "Milagros Delgado" [ref=e1429]
+                              - gridcell "5/14/2026, 10:56 a. m." [ref=e1430]:
+                                - generic [ref=e1432]: 5/14/2026, 10:56 a. m.
+                              - gridcell "development_agreement_rtf_upd_arr_notificar_resultado_de_aprobacion_add_syn" [ref=e1433]:
+                                - generic "development_agreement_rtf_upd_arr_notificar_resultado_de_aprobacion_add_syn" [ref=e1435]
+                              - gridcell "Mostrar acciones" [ref=e1436]:
+                                - button "Mostrar acciones" [ref=e1439] [cursor=pointer]:
+                                  - generic [ref=e1440]:
+                                    - generic [ref=e1441]:
+                                      - img
+                                    - generic [ref=e1442]: Mostrar acciones
+                            - row "ADD [RTF] | (COU)-(ARR) | - Actualizar contador crear | [SYN] Flujo iniciado automáticamente true false No gestionado Victor Duarte 4/8/2026, 10:09 a. m. ADD_RTF_COU_ARR_Actualizar_contador_crear_SYN Mostrar acciones" [ref=e1443]:
+                              - rowheader "ADD [RTF] | (COU)-(ARR) | - Actualizar contador crear | [SYN]" [ref=e1444]:
+                                - link "ADD [RTF] | (COU)-(ARR) | - Actualizar contador crear | [SYN]" [ref=e1446] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1447]:
+                                - generic [ref=e1449]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1450]:
+                                - checkbox "true" [checked] [disabled] [ref=e1453]
+                              - gridcell "false" [ref=e1454]:
+                                - checkbox "false" [disabled] [ref=e1457]
+                              - gridcell "No gestionado" [ref=e1458]:
+                                - generic [ref=e1460]: No gestionado
+                              - gridcell [ref=e1461]
+                              - gridcell "Victor Duarte" [ref=e1462]:
+                                - generic "Victor Duarte" [ref=e1464]
+                              - gridcell "4/8/2026, 10:09 a. m." [ref=e1465]:
+                                - generic [ref=e1467]: 4/8/2026, 10:09 a. m.
+                              - gridcell "ADD_RTF_COU_ARR_Actualizar_contador_crear_SYN" [ref=e1468]:
+                                - generic "ADD_RTF_COU_ARR_Actualizar_contador_crear_SYN" [ref=e1470]
+                              - gridcell "Mostrar acciones" [ref=e1471]:
+                                - button "Mostrar acciones" [ref=e1474] [cursor=pointer]:
+                                  - generic [ref=e1475]:
+                                    - generic [ref=e1476]:
+                                      - img
+                                    - generic [ref=e1477]: Mostrar acciones
+                            - row "ADD [RTF] | (COU)-(ARR) | - Actualizar contador eliminar | [SYN] Flujo iniciado automáticamente true false No gestionado Victor Duarte 4/1/2026, 2:46 p. m. ADD_RTF_COU_ARR_Actualizar_contador_eliminar_SYN Mostrar acciones" [ref=e1478]:
+                              - rowheader "ADD [RTF] | (COU)-(ARR) | - Actualizar contador eliminar | [SYN]" [ref=e1479]:
+                                - link "ADD [RTF] | (COU)-(ARR) | - Actualizar contador eliminar | [SYN]" [ref=e1481] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1482]:
+                                - generic [ref=e1484]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1485]:
+                                - checkbox "true" [checked] [disabled] [ref=e1488]
+                              - gridcell "false" [ref=e1489]:
+                                - checkbox "false" [disabled] [ref=e1492]
+                              - gridcell "No gestionado" [ref=e1493]:
+                                - generic [ref=e1495]: No gestionado
+                              - gridcell [ref=e1496]
+                              - gridcell "Victor Duarte" [ref=e1497]:
+                                - generic "Victor Duarte" [ref=e1499]
+                              - gridcell "4/1/2026, 2:46 p. m." [ref=e1500]:
+                                - generic [ref=e1502]: 4/1/2026, 2:46 p. m.
+                              - gridcell "ADD_RTF_COU_ARR_Actualizar_contador_eliminar_SYN" [ref=e1503]:
+                                - generic "ADD_RTF_COU_ARR_Actualizar_contador_eliminar_SYN" [ref=e1505]
+                              - gridcell "Mostrar acciones" [ref=e1506]:
+                                - button "Mostrar acciones" [ref=e1509] [cursor=pointer]:
+                                  - generic [ref=e1510]:
+                                    - generic [ref=e1511]:
+                                      - img
+                                    - generic [ref=e1512]: Mostrar acciones
+                            - row "Add the Frequently Bought component Flujo de pantalla true false Gestionado e instalado GNR_Product_FBT Mostrar acciones" [ref=e1513]:
+                              - rowheader "Add the Frequently Bought component" [ref=e1514]:
+                                - link "Add the Frequently Bought component" [ref=e1516] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo de pantalla" [ref=e1517]:
+                                - generic [ref=e1519]: Flujo de pantalla
+                              - gridcell "true" [ref=e1520]:
+                                - checkbox "true" [checked] [disabled] [ref=e1523]
+                              - gridcell "false" [ref=e1524]:
+                                - checkbox "false" [disabled] [ref=e1527]
+                              - gridcell "Gestionado e instalado" [ref=e1528]:
+                                - generic [ref=e1530]: Gestionado e instalado
+                              - gridcell [ref=e1531]
+                              - gridcell [ref=e1532]
+                              - gridcell [ref=e1533]
+                              - gridcell "GNR_Product_FBT" [ref=e1534]:
+                                - generic "GNR_Product_FBT" [ref=e1536]
+                              - gridcell "Mostrar acciones" [ref=e1537]:
+                                - button "Mostrar acciones" [ref=e1540] [cursor=pointer]:
+                                  - generic [ref=e1541]:
+                                    - generic [ref=e1542]:
+                                      - img
+                                    - generic [ref=e1543]: Mostrar acciones
+                            - row "Artículos de devolución RMA Flujo de pantalla false true Gestionado e instalado Return_Item_RMA Mostrar acciones" [ref=e1544]:
+                              - rowheader "Artículos de devolución RMA" [ref=e1545]:
+                                - link "Artículos de devolución RMA" [ref=e1547] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo de pantalla" [ref=e1548]:
+                                - generic [ref=e1550]: Flujo de pantalla
+                              - gridcell "false" [ref=e1551]:
+                                - checkbox "false" [disabled] [ref=e1554]
+                              - gridcell "true" [ref=e1555]:
+                                - checkbox "true" [checked] [disabled] [ref=e1558]
+                              - gridcell "Gestionado e instalado" [ref=e1559]:
+                                - generic [ref=e1561]: Gestionado e instalado
+                              - gridcell [ref=e1562]
+                              - gridcell [ref=e1563]
+                              - gridcell [ref=e1564]
+                              - gridcell "Return_Item_RMA" [ref=e1565]:
+                                - generic "Return_Item_RMA" [ref=e1567]
+                              - gridcell "Mostrar acciones" [ref=e1568]:
+                                - button "Mostrar acciones" [ref=e1571] [cursor=pointer]:
+                                  - generic [ref=e1572]:
+                                    - generic [ref=e1573]:
+                                      - img
+                                    - generic [ref=e1574]: Mostrar acciones
+                            - row "Asegurar reembolsos para flujo de exceso fondos Flujo iniciado automáticamente false true Gestionado e instalado Refund_XSF_OS Mostrar acciones" [ref=e1575]:
+                              - rowheader "Asegurar reembolsos para flujo de exceso fondos" [ref=e1576]:
+                                - link "Asegurar reembolsos para flujo de exceso fondos" [ref=e1578] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1579]:
+                                - generic [ref=e1581]: Flujo iniciado automáticamente
+                              - gridcell "false" [ref=e1582]:
+                                - checkbox "false" [disabled] [ref=e1585]
+                              - gridcell "true" [ref=e1586]:
+                                - checkbox "true" [checked] [disabled] [ref=e1589]
+                              - gridcell "Gestionado e instalado" [ref=e1590]:
+                                - generic [ref=e1592]: Gestionado e instalado
+                              - gridcell [ref=e1593]
+                              - gridcell [ref=e1594]
+                              - gridcell [ref=e1595]
+                              - gridcell "Refund_XSF_OS" [ref=e1596]:
+                                - generic "Refund_XSF_OS" [ref=e1598]
+                              - gridcell "Mostrar acciones" [ref=e1599]:
+                                - button "Mostrar acciones" [ref=e1602] [cursor=pointer]:
+                                  - generic [ref=e1603]:
+                                    - generic [ref=e1604]:
+                                      - img
+                                    - generic [ref=e1605]: Mostrar acciones
+                            - row "Auto de Atrasado en Tareas Flujo iniciado automáticamente true false No gestionado Sergio Rodriguez 3/3/2026, 9:02 p. m. Automatizacion_de Mostrar acciones" [ref=e1606]:
+                              - rowheader "Auto de Atrasado en Tareas" [ref=e1607]:
+                                - link "Auto de Atrasado en Tareas" [ref=e1609] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1610]:
+                                - generic [ref=e1612]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1613]:
+                                - checkbox "true" [checked] [disabled] [ref=e1616]
+                              - gridcell "false" [ref=e1617]:
+                                - checkbox "false" [disabled] [ref=e1620]
+                              - gridcell "No gestionado" [ref=e1621]:
+                                - generic [ref=e1623]: No gestionado
+                              - gridcell [ref=e1624]
+                              - gridcell "Sergio Rodriguez" [ref=e1625]:
+                                - generic "Sergio Rodriguez" [ref=e1627]
+                              - gridcell "3/3/2026, 9:02 p. m." [ref=e1628]:
+                                - generic [ref=e1630]: 3/3/2026, 9:02 p. m.
+                              - gridcell "Automatizacion_de" [ref=e1631]:
+                                - generic "Automatizacion_de" [ref=e1633]
+                              - gridcell "Mostrar acciones" [ref=e1634]:
+                                - button "Mostrar acciones" [ref=e1637] [cursor=pointer]:
+                                  - generic [ref=e1638]:
+                                    - generic [ref=e1639]:
+                                      - img
+                                    - generic [ref=e1640]: Mostrar acciones
+                            - row "Buyer Account Before Handler Flujo iniciado automáticamente true false No gestionado Maximiliano Osorio 9/24/2025, 5:50 p. m. Buyer_Account_Before_Handler Mostrar acciones" [ref=e1641]:
+                              - rowheader "Buyer Account Before Handler" [ref=e1642]:
+                                - link "Buyer Account Before Handler" [ref=e1644] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1645]:
+                                - generic [ref=e1647]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1648]:
+                                - checkbox "true" [checked] [disabled] [ref=e1651]
+                              - gridcell "false" [ref=e1652]:
+                                - checkbox "false" [disabled] [ref=e1655]
+                              - gridcell "No gestionado" [ref=e1656]:
+                                - generic [ref=e1658]: No gestionado
+                              - gridcell [ref=e1659]
+                              - gridcell "Maximiliano Osorio" [ref=e1660]:
+                                - generic "Maximiliano Osorio" [ref=e1662]
+                              - gridcell "9/24/2025, 5:50 p. m." [ref=e1663]:
+                                - generic [ref=e1665]: 9/24/2025, 5:50 p. m.
+                              - gridcell "Buyer_Account_Before_Handler" [ref=e1666]:
+                                - generic "Buyer_Account_Before_Handler" [ref=e1668]
+                              - gridcell "Mostrar acciones" [ref=e1669]:
+                                - button "Mostrar acciones" [ref=e1672] [cursor=pointer]:
+                                  - generic [ref=e1673]:
+                                    - generic [ref=e1674]:
+                                      - img
+                                    - generic [ref=e1675]: Mostrar acciones
+                            - row "Cambiar Propietario de caso a Propietario de incidente Flujo de pantalla false true Gestionado e instalado CCOIO Mostrar acciones" [ref=e1676]:
+                              - rowheader "Cambiar Propietario de caso a Propietario de incidente" [ref=e1677]:
+                                - link "Cambiar Propietario de caso a Propietario de incidente" [ref=e1679] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo de pantalla" [ref=e1680]:
+                                - generic [ref=e1682]: Flujo de pantalla
+                              - gridcell "false" [ref=e1683]:
+                                - checkbox "false" [disabled] [ref=e1686]
+                              - gridcell "true" [ref=e1687]:
+                                - checkbox "true" [checked] [disabled] [ref=e1690]
+                              - gridcell "Gestionado e instalado" [ref=e1691]:
+                                - generic [ref=e1693]: Gestionado e instalado
+                              - gridcell [ref=e1694]
+                              - gridcell [ref=e1695]
+                              - gridcell [ref=e1696]
+                              - gridcell "CCOIO" [ref=e1697]:
+                                - generic "CCOIO" [ref=e1699]
+                              - gridcell "Mostrar acciones" [ref=e1700]:
+                                - button "Mostrar acciones" [ref=e1703] [cursor=pointer]:
+                                  - generic [ref=e1704]:
+                                    - generic [ref=e1705]:
+                                      - img
+                                    - generic [ref=e1706]: Mostrar acciones
+                            - row "Canal [STF] | (D)-(01:00) | - Perfilamiento de cliente Flujo iniciado automáticamente true false No gestionado Victor Duarte 3/31/2026, 11:23 a. m. canal_stf_d_01_00_perfilamiento_de_cliente Mostrar acciones" [ref=e1707]:
+                              - rowheader "Canal [STF] | (D)-(01:00) | - Perfilamiento de cliente" [ref=e1708]:
+                                - link "Canal [STF] | (D)-(01:00) | - Perfilamiento de cliente" [ref=e1710] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1711]:
+                                - generic [ref=e1713]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1714]:
+                                - checkbox "true" [checked] [disabled] [ref=e1717]
+                              - gridcell "false" [ref=e1718]:
+                                - checkbox "false" [disabled] [ref=e1721]
+                              - gridcell "No gestionado" [ref=e1722]:
+                                - generic [ref=e1724]: No gestionado
+                              - gridcell [ref=e1725]
+                              - gridcell "Victor Duarte" [ref=e1726]:
+                                - generic "Victor Duarte" [ref=e1728]
+                              - gridcell "3/31/2026, 11:23 a. m." [ref=e1729]:
+                                - generic [ref=e1731]: 3/31/2026, 11:23 a. m.
+                              - gridcell "canal_stf_d_01_00_perfilamiento_de_cliente" [ref=e1732]:
+                                - generic "canal_stf_d_01_00_perfilamiento_de_cliente" [ref=e1734]
+                              - gridcell "Mostrar acciones" [ref=e1735]:
+                                - button "Mostrar acciones" [ref=e1738] [cursor=pointer]:
+                                  - generic [ref=e1739]:
+                                    - generic [ref=e1740]:
+                                      - img
+                                    - generic [ref=e1741]: Mostrar acciones
+                            - row "Cancelar Prospecto (Account) Flujo de pantalla true false No gestionado Sergio Rodriguez 3/3/2026, 5:49 p. m. Account_Cancelar_Prospecto Mostrar acciones" [ref=e1742]:
+                              - rowheader "Cancelar Prospecto (Account)" [ref=e1743]:
+                                - link "Cancelar Prospecto (Account)" [ref=e1745] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo de pantalla" [ref=e1746]:
+                                - generic [ref=e1748]: Flujo de pantalla
+                              - gridcell "true" [ref=e1749]:
+                                - checkbox "true" [checked] [disabled] [ref=e1752]
+                              - gridcell "false" [ref=e1753]:
+                                - checkbox "false" [disabled] [ref=e1756]
+                              - gridcell "No gestionado" [ref=e1757]:
+                                - generic [ref=e1759]: No gestionado
+                              - gridcell [ref=e1760]
+                              - gridcell "Sergio Rodriguez" [ref=e1761]:
+                                - generic "Sergio Rodriguez" [ref=e1763]
+                              - gridcell "3/3/2026, 5:49 p. m." [ref=e1764]:
+                                - generic [ref=e1766]: 3/3/2026, 5:49 p. m.
+                              - gridcell "Account_Cancelar_Prospecto" [ref=e1767]:
+                                - generic "Account_Cancelar_Prospecto" [ref=e1769]
+                              - gridcell "Mostrar acciones" [ref=e1770]:
+                                - button "Mostrar acciones" [ref=e1773] [cursor=pointer]:
+                                  - generic [ref=e1774]:
+                                    - generic [ref=e1775]:
+                                      - img
+                                    - generic [ref=e1776]: Mostrar acciones
+                            - row "Cancelled Order Item Flujo iniciado automáticamente true false No gestionado Maximiliano Osorio 11/6/2025, 7:55 p. m. Cancelled_Order_Item Mostrar acciones" [ref=e1777]:
+                              - rowheader "Cancelled Order Item" [ref=e1778]:
+                                - link "Cancelled Order Item" [ref=e1780] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1781]:
+                                - generic [ref=e1783]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1784]:
+                                - checkbox "true" [checked] [disabled] [ref=e1787]
+                              - gridcell "false" [ref=e1788]:
+                                - checkbox "false" [disabled] [ref=e1791]
+                              - gridcell "No gestionado" [ref=e1792]:
+                                - generic [ref=e1794]: No gestionado
+                              - gridcell [ref=e1795]
+                              - gridcell "Maximiliano Osorio" [ref=e1796]:
+                                - generic "Maximiliano Osorio" [ref=e1798]
+                              - gridcell "11/6/2025, 7:55 p. m." [ref=e1799]:
+                                - generic [ref=e1801]: 11/6/2025, 7:55 p. m.
+                              - gridcell "Cancelled_Order_Item" [ref=e1802]:
+                                - generic "Cancelled_Order_Item" [ref=e1804]
+                              - gridcell "Mostrar acciones" [ref=e1805]:
+                                - button "Mostrar acciones" [ref=e1808] [cursor=pointer]:
+                                  - generic [ref=e1809]:
+                                    - generic [ref=e1810]:
+                                      - img
+                                    - generic [ref=e1811]: Mostrar acciones
+                            - row "Capture Transaction Flujo de pantalla true false No gestionado Jhonatan Valero 8/22/2025, 6:04 p. m. Capture_Transaction Mostrar acciones" [ref=e1812]:
+                              - rowheader "Capture Transaction" [ref=e1813]:
+                                - link "Capture Transaction" [ref=e1815] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo de pantalla" [ref=e1816]:
+                                - generic [ref=e1818]: Flujo de pantalla
+                              - gridcell "true" [ref=e1819]:
+                                - checkbox "true" [checked] [disabled] [ref=e1822]
+                              - gridcell "false" [ref=e1823]:
+                                - checkbox "false" [disabled] [ref=e1826]
+                              - gridcell "No gestionado" [ref=e1827]:
+                                - generic [ref=e1829]: No gestionado
+                              - gridcell [ref=e1830]
+                              - gridcell "Jhonatan Valero" [ref=e1831]:
+                                - generic "Jhonatan Valero" [ref=e1833]
+                              - gridcell "8/22/2025, 6:04 p. m." [ref=e1834]:
+                                - generic [ref=e1836]: 8/22/2025, 6:04 p. m.
+                              - gridcell "Capture_Transaction" [ref=e1837]:
+                                - generic "Capture_Transaction" [ref=e1839]
+                              - gridcell "Mostrar acciones" [ref=e1840]:
+                                - button "Mostrar acciones" [ref=e1843] [cursor=pointer]:
+                                  - generic [ref=e1844]:
+                                    - generic [ref=e1845]:
+                                      - img
+                                    - generic [ref=e1846]: Mostrar acciones
+                            - row "Cart Item After Handler Flujo iniciado automáticamente true false No gestionado Victor Duarte 1/14/2026, 5:12 p. m. Cart_Item_After_Handler Mostrar acciones" [ref=e1847]:
+                              - rowheader "Cart Item After Handler" [ref=e1848]:
+                                - link "Cart Item After Handler" [ref=e1850] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1851]:
+                                - generic [ref=e1853]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1854]:
+                                - checkbox "true" [checked] [disabled] [ref=e1857]
+                              - gridcell "false" [ref=e1858]:
+                                - checkbox "false" [disabled] [ref=e1861]
+                              - gridcell "No gestionado" [ref=e1862]:
+                                - generic [ref=e1864]: No gestionado
+                              - gridcell [ref=e1865]
+                              - gridcell "Victor Duarte" [ref=e1866]:
+                                - generic "Victor Duarte" [ref=e1868]
+                              - gridcell "1/14/2026, 5:12 p. m." [ref=e1869]:
+                                - generic [ref=e1871]: 1/14/2026, 5:12 p. m.
+                              - gridcell "Cart_Item_After_Handler" [ref=e1872]:
+                                - generic "Cart_Item_After_Handler" [ref=e1874]
+                              - gridcell "Mostrar acciones" [ref=e1875]:
+                                - button "Mostrar acciones" [ref=e1878] [cursor=pointer]:
+                                  - generic [ref=e1879]:
+                                    - generic [ref=e1880]:
+                                      - img
+                                    - generic [ref=e1881]: Mostrar acciones
+                            - row "Case [RTF] | (COU)-(ARR) | - Asignar Area responsable | [SYN] Flujo iniciado automáticamente true false No gestionado Ulises Varela 5/6/2026, 3:07 p. m. Case_RTF_COU_ARR_Asignar_Area_responsable_SYN Mostrar acciones" [ref=e1882]:
+                              - rowheader "Case [RTF] | (COU)-(ARR) | - Asignar Area responsable | [SYN]" [ref=e1883]:
+                                - link "Case [RTF] | (COU)-(ARR) | - Asignar Area responsable | [SYN]" [ref=e1885] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1886]:
+                                - generic [ref=e1888]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1889]:
+                                - checkbox "true" [checked] [disabled] [ref=e1892]
+                              - gridcell "false" [ref=e1893]:
+                                - checkbox "false" [disabled] [ref=e1896]
+                              - gridcell "No gestionado" [ref=e1897]:
+                                - generic [ref=e1899]: No gestionado
+                              - gridcell [ref=e1900]
+                              - gridcell "Ulises Varela" [ref=e1901]:
+                                - generic "Ulises Varela" [ref=e1903]
+                              - gridcell "5/6/2026, 3:07 p. m." [ref=e1904]:
+                                - generic [ref=e1906]: 5/6/2026, 3:07 p. m.
+                              - gridcell "Case_RTF_COU_ARR_Asignar_Area_responsable_SYN" [ref=e1907]:
+                                - generic "Case_RTF_COU_ARR_Asignar_Area_responsable_SYN" [ref=e1909]
+                              - gridcell "Mostrar acciones" [ref=e1910]:
+                                - button "Mostrar acciones" [ref=e1913] [cursor=pointer]:
+                                  - generic [ref=e1914]:
+                                    - generic [ref=e1915]:
+                                      - img
+                                    - generic [ref=e1916]: Mostrar acciones
+                            - row "Case [RTF] | (COU)-(FFU) | - Rechazar atribución de caso | [SYN] Flujo iniciado automáticamente true false No gestionado Victor Duarte 4/28/2026, 1:11 p. m. Case_RTF_COU_FFU_Rechazar_atribuci_n_de_caso_SYN Mostrar acciones" [ref=e1917]:
+                              - rowheader "Case [RTF] | (COU)-(FFU) | - Rechazar atribución de caso | [SYN]" [ref=e1918]:
+                                - link "Case [RTF] | (COU)-(FFU) | - Rechazar atribución de caso | [SYN]" [ref=e1920] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1921]:
+                                - generic [ref=e1923]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1924]:
+                                - checkbox "true" [checked] [disabled] [ref=e1927]
+                              - gridcell "false" [ref=e1928]:
+                                - checkbox "false" [disabled] [ref=e1931]
+                              - gridcell "No gestionado" [ref=e1932]:
+                                - generic [ref=e1934]: No gestionado
+                              - gridcell [ref=e1935]
+                              - gridcell "Victor Duarte" [ref=e1936]:
+                                - generic "Victor Duarte" [ref=e1938]
+                              - gridcell "4/28/2026, 1:11 p. m." [ref=e1939]:
+                                - generic [ref=e1941]: 4/28/2026, 1:11 p. m.
+                              - gridcell "Case_RTF_COU_FFU_Rechazar_atribuci_n_de_caso_SYN" [ref=e1942]:
+                                - generic "Case_RTF_COU_FFU_Rechazar_atribuci_n_de_caso_SYN" [ref=e1944]
+                              - gridcell "Mostrar acciones" [ref=e1945]:
+                                - button "Mostrar acciones" [ref=e1948] [cursor=pointer]:
+                                  - generic [ref=e1949]:
+                                    - generic [ref=e1950]:
+                                      - img
+                                    - generic [ref=e1951]: Mostrar acciones
+                            - row "Case [RTF] | (COU-(DEL) | - Notificar resolución de caso| [SYN] Flujo iniciado automáticamente true false No gestionado Milagros Delgado 4/27/2026, 8:52 a. m. Case_RTF_COU_DEL_Notificar_resolucion_de_caso_SYN Mostrar acciones" [ref=e1952]:
+                              - rowheader "Case [RTF] | (COU-(DEL) | - Notificar resolución de caso| [SYN]" [ref=e1953]:
+                                - link "Case [RTF] | (COU-(DEL) | - Notificar resolución de caso| [SYN]" [ref=e1955] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1956]:
+                                - generic [ref=e1958]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1959]:
+                                - checkbox "true" [checked] [disabled] [ref=e1962]
+                              - gridcell "false" [ref=e1963]:
+                                - checkbox "false" [disabled] [ref=e1966]
+                              - gridcell "No gestionado" [ref=e1967]:
+                                - generic [ref=e1969]: No gestionado
+                              - gridcell [ref=e1970]
+                              - gridcell "Milagros Delgado" [ref=e1971]:
+                                - generic "Milagros Delgado" [ref=e1973]
+                              - gridcell "4/27/2026, 8:52 a. m." [ref=e1974]:
+                                - generic [ref=e1976]: 4/27/2026, 8:52 a. m.
+                              - gridcell "Case_RTF_COU_DEL_Notificar_resolucion_de_caso_SYN" [ref=e1977]:
+                                - generic "Case_RTF_COU_DEL_Notificar_resolucion_de_caso_SYN" [ref=e1979]
+                              - gridcell "Mostrar acciones" [ref=e1980]:
+                                - button "Mostrar acciones" [ref=e1983] [cursor=pointer]:
+                                  - generic [ref=e1984]:
+                                    - generic [ref=e1985]:
+                                      - img
+                                    - generic [ref=e1986]: Mostrar acciones
+                            - row "Case [RTF] | (COU-(DEL) | - Rechazado por politica | [ARR] Flujo iniciado automáticamente true false No gestionado Sergio Rodriguez 3/3/2026, 11:00 p. m. Case_RTF_CUT_FFU_Establecer_valores_por_defecto_SYN Mostrar acciones" [ref=e1987]:
+                              - rowheader "Case [RTF] | (COU-(DEL) | - Rechazado por politica | [ARR]" [ref=e1988]:
+                                - link "Case [RTF] | (COU-(DEL) | - Rechazado por politica | [ARR]" [ref=e1990] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e1991]:
+                                - generic [ref=e1993]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e1994]:
+                                - checkbox "true" [checked] [disabled] [ref=e1997]
+                              - gridcell "false" [ref=e1998]:
+                                - checkbox "false" [disabled] [ref=e2001]
+                              - gridcell "No gestionado" [ref=e2002]:
+                                - generic [ref=e2004]: No gestionado
+                              - gridcell [ref=e2005]
+                              - gridcell "Sergio Rodriguez" [ref=e2006]:
+                                - generic "Sergio Rodriguez" [ref=e2008]
+                              - gridcell "3/3/2026, 11:00 p. m." [ref=e2009]:
+                                - generic [ref=e2011]: 3/3/2026, 11:00 p. m.
+                              - gridcell "Case_RTF_CUT_FFU_Establecer_valores_por_defecto_SYN" [ref=e2012]:
+                                - generic "Case_RTF_CUT_FFU_Establecer_valores_por_defecto_SYN" [ref=e2014]
+                              - gridcell "Mostrar acciones" [ref=e2015]:
+                                - button "Mostrar acciones" [ref=e2018] [cursor=pointer]:
+                                  - generic [ref=e2019]:
+                                    - generic [ref=e2020]:
+                                      - img
+                                    - generic [ref=e2021]: Mostrar acciones
+                            - row "Case [RTF] | (CRT)-(ARR) | - Enviar correo a desarrollador | [SYN] Flujo iniciado automáticamente true false No gestionado Victor Duarte 3/10/2026, 11:10 a. m. Case_RTF_CRT_ARR_Enviar_correo_a_desarrollador_SYN Mostrar acciones" [ref=e2022]:
+                              - rowheader "Case [RTF] | (CRT)-(ARR) | - Enviar correo a desarrollador | [SYN]" [ref=e2023]:
+                                - link "Case [RTF] | (CRT)-(ARR) | - Enviar correo a desarrollador | [SYN]" [ref=e2025] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2026]:
+                                - generic [ref=e2028]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2029]:
+                                - checkbox "true" [checked] [disabled] [ref=e2032]
+                              - gridcell "false" [ref=e2033]:
+                                - checkbox "false" [disabled] [ref=e2036]
+                              - gridcell "No gestionado" [ref=e2037]:
+                                - generic [ref=e2039]: No gestionado
+                              - gridcell [ref=e2040]
+                              - gridcell "Victor Duarte" [ref=e2041]:
+                                - generic "Victor Duarte" [ref=e2043]
+                              - gridcell "3/10/2026, 11:10 a. m." [ref=e2044]:
+                                - generic [ref=e2046]: 3/10/2026, 11:10 a. m.
+                              - gridcell "Case_RTF_CRT_ARR_Enviar_correo_a_desarrollador_SYN" [ref=e2047]:
+                                - generic "Case_RTF_CRT_ARR_Enviar_correo_a_desarrollador_SYN" [ref=e2049]
+                              - gridcell "Mostrar acciones" [ref=e2050]:
+                                - button "Mostrar acciones" [ref=e2053] [cursor=pointer]:
+                                  - generic [ref=e2054]:
+                                    - generic [ref=e2055]:
+                                      - img
+                                    - generic [ref=e2056]: Mostrar acciones
+                            - row "Case [RTF] | (CRT)-(ARR) | - Enviar correo de recepcion del caso | [SYN] Flujo iniciado automáticamente true false No gestionado Victor Duarte 5/6/2026, 7:10 p. m. Case_RTF_CRT_ARR_Enviar_correo_de_recepcion_del_caso_SYN Mostrar acciones" [ref=e2057]:
+                              - rowheader "Case [RTF] | (CRT)-(ARR) | - Enviar correo de recepcion del caso | [SYN]" [ref=e2058]:
+                                - link "Case [RTF] | (CRT)-(ARR) | - Enviar correo de recepcion del caso | [SYN]" [ref=e2060] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2061]:
+                                - generic [ref=e2063]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2064]:
+                                - checkbox "true" [checked] [disabled] [ref=e2067]
+                              - gridcell "false" [ref=e2068]:
+                                - checkbox "false" [disabled] [ref=e2071]
+                              - gridcell "No gestionado" [ref=e2072]:
+                                - generic [ref=e2074]: No gestionado
+                              - gridcell [ref=e2075]
+                              - gridcell "Victor Duarte" [ref=e2076]:
+                                - generic "Victor Duarte" [ref=e2078]
+                              - gridcell "5/6/2026, 7:10 p. m." [ref=e2079]:
+                                - generic [ref=e2081]: 5/6/2026, 7:10 p. m.
+                              - gridcell "Case_RTF_CRT_ARR_Enviar_correo_de_recepcion_del_caso_SYN" [ref=e2082]:
+                                - generic "Case_RTF_CRT_ARR_Enviar_correo_de_recepcion_del_caso_SYN" [ref=e2084]
+                              - gridcell "Mostrar acciones" [ref=e2085]:
+                                - button "Mostrar acciones" [ref=e2088] [cursor=pointer]:
+                                  - generic [ref=e2089]:
+                                    - generic [ref=e2090]:
+                                      - img
+                                    - generic [ref=e2091]: Mostrar acciones
+                            - row "Case [RTF] | (CRT)-(ARR) | - Imposibilidad de creación de caso | [SYN] Flujo iniciado automáticamente true false No gestionado Victor Duarte 5/22/2026, 9:12 a. m. Case_RTF_CRT_ARR_Imposibilidad_de_creacion_de_caso_SYN Mostrar acciones" [ref=e2092]:
+                              - rowheader "Case [RTF] | (CRT)-(ARR) | - Imposibilidad de creación de caso | [SYN]" [ref=e2093]:
+                                - link "Case [RTF] | (CRT)-(ARR) | - Imposibilidad de creación de caso | [SYN]" [ref=e2095] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2096]:
+                                - generic [ref=e2098]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2099]:
+                                - checkbox "true" [checked] [disabled] [ref=e2102]
+                              - gridcell "false" [ref=e2103]:
+                                - checkbox "false" [disabled] [ref=e2106]
+                              - gridcell "No gestionado" [ref=e2107]:
+                                - generic [ref=e2109]: No gestionado
+                              - gridcell [ref=e2110]
+                              - gridcell "Victor Duarte" [ref=e2111]:
+                                - generic "Victor Duarte" [ref=e2113]
+                              - gridcell "5/22/2026, 9:12 a. m." [ref=e2114]:
+                                - generic [ref=e2116]: 5/22/2026, 9:12 a. m.
+                              - gridcell "Case_RTF_CRT_ARR_Imposibilidad_de_creacion_de_caso_SYN" [ref=e2117]:
+                                - generic "Case_RTF_CRT_ARR_Imposibilidad_de_creacion_de_caso_SYN" [ref=e2119]
+                              - gridcell "Mostrar acciones" [ref=e2120]:
+                                - button "Mostrar acciones" [ref=e2123] [cursor=pointer]:
+                                  - generic [ref=e2124]:
+                                    - generic [ref=e2125]:
+                                      - img
+                                    - generic [ref=e2126]: Mostrar acciones
+                            - row "Case [RTF] | (CRT)-(ARR) | - Notificación a asesor técnico sobre nueva visita | [SYN] Flujo iniciado automáticamente true false No gestionado Sergio Rodriguez 3/3/2026, 10:54 p. m. Case_RTF_CRT_ARR_Notificaci_n_a_asesor_t_cnico_sobre_nueva_visita_SYN Mostrar acciones" [ref=e2127]:
+                              - rowheader "Case [RTF] | (CRT)-(ARR) | - Notificación a asesor técnico sobre nueva visita | [SYN]" [ref=e2128]:
+                                - link "Case [RTF] | (CRT)-(ARR) | - Notificación a asesor técnico sobre nueva visita | [SYN]" [ref=e2130] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2131]:
+                                - generic [ref=e2133]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2134]:
+                                - checkbox "true" [checked] [disabled] [ref=e2137]
+                              - gridcell "false" [ref=e2138]:
+                                - checkbox "false" [disabled] [ref=e2141]
+                              - gridcell "No gestionado" [ref=e2142]:
+                                - generic [ref=e2144]: No gestionado
+                              - gridcell [ref=e2145]
+                              - gridcell "Sergio Rodriguez" [ref=e2146]:
+                                - generic "Sergio Rodriguez" [ref=e2148]
+                              - gridcell "3/3/2026, 10:54 p. m." [ref=e2149]:
+                                - generic [ref=e2151]: 3/3/2026, 10:54 p. m.
+                              - gridcell "Case_RTF_CRT_ARR_Notificaci_n_a_asesor_t_cnico_sobre_nueva_visita_SYN" [ref=e2152]:
+                                - generic "Case_RTF_CRT_ARR_Notificaci_n_a_asesor_t_cnico_sobre_nueva_visita_SYN" [ref=e2154]
+                              - gridcell "Mostrar acciones" [ref=e2155]:
+                                - button "Mostrar acciones" [ref=e2158] [cursor=pointer]:
+                                  - generic [ref=e2159]:
+                                    - generic [ref=e2160]:
+                                      - img
+                                    - generic [ref=e2161]: Mostrar acciones
+                            - row "Case [RTF] | (CRT)-(ARR) | -Notificar cierre de caso a cliente |[SYN] Flujo iniciado automáticamente true false No gestionado Victor Duarte 5/13/2026, 12:20 p. m. Case_RTF_CRT_ARR_Notificar_cierre_de_caso_a_cliente_SYN Mostrar acciones" [ref=e2162]:
+                              - rowheader "Case [RTF] | (CRT)-(ARR) | -Notificar cierre de caso a cliente |[SYN]" [ref=e2163]:
+                                - link "Case [RTF] | (CRT)-(ARR) | -Notificar cierre de caso a cliente |[SYN]" [ref=e2165] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2166]:
+                                - generic [ref=e2168]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2169]:
+                                - checkbox "true" [checked] [disabled] [ref=e2172]
+                              - gridcell "false" [ref=e2173]:
+                                - checkbox "false" [disabled] [ref=e2176]
+                              - gridcell "No gestionado" [ref=e2177]:
+                                - generic [ref=e2179]: No gestionado
+                              - gridcell [ref=e2180]
+                              - gridcell "Victor Duarte" [ref=e2181]:
+                                - generic "Victor Duarte" [ref=e2183]
+                              - gridcell "5/13/2026, 12:20 p. m." [ref=e2184]:
+                                - generic [ref=e2186]: 5/13/2026, 12:20 p. m.
+                              - gridcell "Case_RTF_CRT_ARR_Notificar_cierre_de_caso_a_cliente_SYN" [ref=e2187]:
+                                - generic "Case_RTF_CRT_ARR_Notificar_cierre_de_caso_a_cliente_SYN" [ref=e2189]
+                              - gridcell "Mostrar acciones" [ref=e2190]:
+                                - button "Mostrar acciones" [ref=e2193] [cursor=pointer]:
+                                  - generic [ref=e2194]:
+                                    - generic [ref=e2195]:
+                                      - img
+                                    - generic [ref=e2196]: Mostrar acciones
+                            - row "Case [RTF] | (UPD)-(ARR) | - Apertura-Asignacion | [SYN] Flujo iniciado automáticamente true false No gestionado Sergio Rodriguez 3/3/2026, 9:02 p. m. Case_RTF_UPD_ARR_Apertura_Asignacion_SYN Mostrar acciones" [ref=e2197]:
+                              - rowheader "Case [RTF] | (UPD)-(ARR) | - Apertura-Asignacion | [SYN]" [ref=e2198]:
+                                - link "Case [RTF] | (UPD)-(ARR) | - Apertura-Asignacion | [SYN]" [ref=e2200] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2201]:
+                                - generic [ref=e2203]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2204]:
+                                - checkbox "true" [checked] [disabled] [ref=e2207]
+                              - gridcell "false" [ref=e2208]:
+                                - checkbox "false" [disabled] [ref=e2211]
+                              - gridcell "No gestionado" [ref=e2212]:
+                                - generic [ref=e2214]: No gestionado
+                              - gridcell [ref=e2215]
+                              - gridcell "Sergio Rodriguez" [ref=e2216]:
+                                - generic "Sergio Rodriguez" [ref=e2218]
+                              - gridcell "3/3/2026, 9:02 p. m." [ref=e2219]:
+                                - generic [ref=e2221]: 3/3/2026, 9:02 p. m.
+                              - gridcell "Case_RTF_UPD_ARR_Apertura_Asignacion_SYN" [ref=e2222]:
+                                - generic "Case_RTF_UPD_ARR_Apertura_Asignacion_SYN" [ref=e2224]
+                              - gridcell "Mostrar acciones" [ref=e2225]:
+                                - button "Mostrar acciones" [ref=e2228] [cursor=pointer]:
+                                  - generic [ref=e2229]:
+                                    - generic [ref=e2230]:
+                                      - img
+                                    - generic [ref=e2231]: Mostrar acciones
+                            - row "Case [RTF] | (UPD)-(ARR) | - Escalar Milestone Vencido | [SYN] Flujo iniciado automáticamente true false No gestionado Sergio Rodriguez 3/3/2026, 9:28 p. m. Case_RTF_UPD_ARR_Escalar_Milestone_Vencido_SYN Mostrar acciones" [ref=e2232]:
+                              - rowheader "Case [RTF] | (UPD)-(ARR) | - Escalar Milestone Vencido | [SYN]" [ref=e2233]:
+                                - link "Case [RTF] | (UPD)-(ARR) | - Escalar Milestone Vencido | [SYN]" [ref=e2235] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2236]:
+                                - generic [ref=e2238]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2239]:
+                                - checkbox "true" [checked] [disabled] [ref=e2242]
+                              - gridcell "false" [ref=e2243]:
+                                - checkbox "false" [disabled] [ref=e2246]
+                              - gridcell "No gestionado" [ref=e2247]:
+                                - generic [ref=e2249]: No gestionado
+                              - gridcell [ref=e2250]
+                              - gridcell "Sergio Rodriguez" [ref=e2251]:
+                                - generic "Sergio Rodriguez" [ref=e2253]
+                              - gridcell "3/3/2026, 9:28 p. m." [ref=e2254]:
+                                - generic [ref=e2256]: 3/3/2026, 9:28 p. m.
+                              - gridcell "Case_RTF_UPD_ARR_Escalar_Milestone_Vencido_SYN" [ref=e2257]:
+                                - generic "Case_RTF_UPD_ARR_Escalar_Milestone_Vencido_SYN" [ref=e2259]
+                              - gridcell "Mostrar acciones" [ref=e2260]:
+                                - button "Mostrar acciones" [ref=e2263] [cursor=pointer]:
+                                  - generic [ref=e2264]:
+                                    - generic [ref=e2265]:
+                                      - img
+                                    - generic [ref=e2266]: Mostrar acciones
+                            - row "Case [RTF] | (UPD)-(ARR) | - Noti Insatisfacción de resolución de caso | [SYN] Flujo iniciado automáticamente true false No gestionado Sergio Rodriguez 3/3/2026, 5:53 p. m. Case_RTF_UPD_ARR_Noti_Insatisfaccion_de_resolucion_de_caso_SYN Mostrar acciones" [ref=e2267]:
+                              - rowheader "Case [RTF] | (UPD)-(ARR) | - Noti Insatisfacción de resolución de caso | [SYN]" [ref=e2268]:
+                                - link "Case [RTF] | (UPD)-(ARR) | - Noti Insatisfacción de resolución de caso | [SYN]" [ref=e2270] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2271]:
+                                - generic [ref=e2273]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2274]:
+                                - checkbox "true" [checked] [disabled] [ref=e2277]
+                              - gridcell "false" [ref=e2278]:
+                                - checkbox "false" [disabled] [ref=e2281]
+                              - gridcell "No gestionado" [ref=e2282]:
+                                - generic [ref=e2284]: No gestionado
+                              - gridcell [ref=e2285]
+                              - gridcell "Sergio Rodriguez" [ref=e2286]:
+                                - generic "Sergio Rodriguez" [ref=e2288]
+                              - gridcell "3/3/2026, 5:53 p. m." [ref=e2289]:
+                                - generic [ref=e2291]: 3/3/2026, 5:53 p. m.
+                              - gridcell "Case_RTF_UPD_ARR_Noti_Insatisfaccion_de_resolucion_de_caso_SYN" [ref=e2292]:
+                                - generic "Case_RTF_UPD_ARR_Noti_Insatisfaccion_de_resolucion_de_caso_SYN" [ref=e2294]
+                              - gridcell "Mostrar acciones" [ref=e2295]:
+                                - button "Mostrar acciones" [ref=e2298] [cursor=pointer]:
+                                  - generic [ref=e2299]:
+                                    - generic [ref=e2300]:
+                                      - img
+                                    - generic [ref=e2301]: Mostrar acciones
+                            - row "Case [RTF] | (UPD)-(ARR) | - Notificacion de cierre ST | [SYN] Flujo iniciado automáticamente true false No gestionado Milagros Delgado 5/12/2026, 9:18 a. m. Case_RTF_UPD_ARR_Notificacion_de_cierre_ST_SYN Mostrar acciones" [ref=e2302]:
+                              - rowheader "Case [RTF] | (UPD)-(ARR) | - Notificacion de cierre ST | [SYN]" [ref=e2303]:
+                                - link "Case [RTF] | (UPD)-(ARR) | - Notificacion de cierre ST | [SYN]" [ref=e2305] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2306]:
+                                - generic [ref=e2308]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2309]:
+                                - checkbox "true" [checked] [disabled] [ref=e2312]
+                              - gridcell "false" [ref=e2313]:
+                                - checkbox "false" [disabled] [ref=e2316]
+                              - gridcell "No gestionado" [ref=e2317]:
+                                - generic [ref=e2319]: No gestionado
+                              - gridcell [ref=e2320]
+                              - gridcell "Milagros Delgado" [ref=e2321]:
+                                - generic "Milagros Delgado" [ref=e2323]
+                              - gridcell "5/12/2026, 9:18 a. m." [ref=e2324]:
+                                - generic [ref=e2326]: 5/12/2026, 9:18 a. m.
+                              - gridcell "Case_RTF_UPD_ARR_Notificacion_de_cierre_ST_SYN" [ref=e2327]:
+                                - generic "Case_RTF_UPD_ARR_Notificacion_de_cierre_ST_SYN" [ref=e2329]
+                              - gridcell "Mostrar acciones" [ref=e2330]:
+                                - button "Mostrar acciones" [ref=e2333] [cursor=pointer]:
+                                  - generic [ref=e2334]:
+                                    - generic [ref=e2335]:
+                                      - img
+                                    - generic [ref=e2336]: Mostrar acciones
+                            - row "Case [RTF] | (UPD)-(ARR) | - Notificacion-Validacion | [SYN] Flujo iniciado automáticamente true false No gestionado Victor Duarte 4/8/2026, 10:09 a. m. Case_RTF_UPD_ARR_Notificacion_Validacion_SYN Mostrar acciones" [ref=e2337]:
+                              - rowheader "Case [RTF] | (UPD)-(ARR) | - Notificacion-Validacion | [SYN]" [ref=e2338]:
+                                - link "Case [RTF] | (UPD)-(ARR) | - Notificacion-Validacion | [SYN]" [ref=e2340] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2341]:
+                                - generic [ref=e2343]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2344]:
+                                - checkbox "true" [checked] [disabled] [ref=e2347]
+                              - gridcell "false" [ref=e2348]:
+                                - checkbox "false" [disabled] [ref=e2351]
+                              - gridcell "No gestionado" [ref=e2352]:
+                                - generic [ref=e2354]: No gestionado
+                              - gridcell [ref=e2355]
+                              - gridcell "Victor Duarte" [ref=e2356]:
+                                - generic "Victor Duarte" [ref=e2358]
+                              - gridcell "4/8/2026, 10:09 a. m." [ref=e2359]:
+                                - generic [ref=e2361]: 4/8/2026, 10:09 a. m.
+                              - gridcell "Case_RTF_UPD_ARR_Notificacion_Validacion_SYN" [ref=e2362]:
+                                - generic "Case_RTF_UPD_ARR_Notificacion_Validacion_SYN" [ref=e2364]
+                              - gridcell "Mostrar acciones" [ref=e2365]:
+                                - button "Mostrar acciones" [ref=e2368] [cursor=pointer]:
+                                  - generic [ref=e2369]:
+                                    - generic [ref=e2370]:
+                                      - img
+                                    - generic [ref=e2371]: Mostrar acciones
+                            - row "Case [RTF] | (UPD)-(ARR) | - Notificar cierre cuando no es ST | [SYN] Flujo iniciado automáticamente true false No gestionado Victor Duarte 4/21/2026, 8:52 a. m. Case_RTF_UPD_ARR_Notificar_cierre_cuando_no_es_ST_SYN Mostrar acciones" [ref=e2372]:
+                              - rowheader "Case [RTF] | (UPD)-(ARR) | - Notificar cierre cuando no es ST | [SYN]" [ref=e2373]:
+                                - link "Case [RTF] | (UPD)-(ARR) | - Notificar cierre cuando no es ST | [SYN]" [ref=e2375] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2376]:
+                                - generic [ref=e2378]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2379]:
+                                - checkbox "true" [checked] [disabled] [ref=e2382]
+                              - gridcell "false" [ref=e2383]:
+                                - checkbox "false" [disabled] [ref=e2386]
+                              - gridcell "No gestionado" [ref=e2387]:
+                                - generic [ref=e2389]: No gestionado
+                              - gridcell [ref=e2390]
+                              - gridcell "Victor Duarte" [ref=e2391]:
+                                - generic "Victor Duarte" [ref=e2393]
+                              - gridcell "4/21/2026, 8:52 a. m." [ref=e2394]:
+                                - generic [ref=e2396]: 4/21/2026, 8:52 a. m.
+                              - gridcell "Case_RTF_UPD_ARR_Notificar_cierre_cuando_no_es_ST_SYN" [ref=e2397]:
+                                - generic "Case_RTF_UPD_ARR_Notificar_cierre_cuando_no_es_ST_SYN" [ref=e2399]
+                              - gridcell "Mostrar acciones" [ref=e2400]:
+                                - button "Mostrar acciones" [ref=e2403] [cursor=pointer]:
+                                  - generic [ref=e2404]:
+                                    - generic [ref=e2405]:
+                                      - img
+                                    - generic [ref=e2406]: Mostrar acciones
+                            - row "Case [RTF] | (UPD)-(ARR) | - Notificar responsable asignado | [SYN] Flujo iniciado automáticamente false false No gestionado Milagros Delgado 5/15/2026, 3:13 p. m. case_rtf_upd_arr_notificar_responsable_asignado_syn Mostrar acciones" [ref=e2407]:
+                              - rowheader "Case [RTF] | (UPD)-(ARR) | - Notificar responsable asignado | [SYN]" [ref=e2408]:
+                                - link "Case [RTF] | (UPD)-(ARR) | - Notificar responsable asignado | [SYN]" [ref=e2410] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2411]:
+                                - generic [ref=e2413]: Flujo iniciado automáticamente
+                              - gridcell "false" [ref=e2414]:
+                                - checkbox "false" [disabled] [ref=e2417]
+                              - gridcell "false" [ref=e2418]:
+                                - checkbox "false" [disabled] [ref=e2421]
+                              - gridcell "No gestionado" [ref=e2422]:
+                                - generic [ref=e2424]: No gestionado
+                              - gridcell [ref=e2425]
+                              - gridcell "Milagros Delgado" [ref=e2426]:
+                                - generic "Milagros Delgado" [ref=e2428]
+                              - gridcell "5/15/2026, 3:13 p. m." [ref=e2429]:
+                                - generic [ref=e2431]: 5/15/2026, 3:13 p. m.
+                              - gridcell "case_rtf_upd_arr_notificar_responsable_asignado_syn" [ref=e2432]:
+                                - generic "case_rtf_upd_arr_notificar_responsable_asignado_syn" [ref=e2434]
+                              - gridcell "Mostrar acciones" [ref=e2435]:
+                                - button "Mostrar acciones" [ref=e2438] [cursor=pointer]:
+                                  - generic [ref=e2439]:
+                                    - generic [ref=e2440]:
+                                      - img
+                                    - generic [ref=e2441]: Mostrar acciones
+                            - row "Case [RTF] | (UPD)-(ARR) | - Notificar Usuario responsable asignado | [SYN] Flujo iniciado automáticamente true false No gestionado Milagros Delgado 5/15/2026, 3:14 p. m. Case_RTF_UPD_ARR_Notificar_Usuario_Responsable_Asignado_SYN Mostrar acciones" [ref=e2442]:
+                              - rowheader "Case [RTF] | (UPD)-(ARR) | - Notificar Usuario responsable asignado | [SYN]" [ref=e2443]:
+                                - link "Case [RTF] | (UPD)-(ARR) | - Notificar Usuario responsable asignado | [SYN]" [ref=e2445] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2446]:
+                                - generic [ref=e2448]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2449]:
+                                - checkbox "true" [checked] [disabled] [ref=e2452]
+                              - gridcell "false" [ref=e2453]:
+                                - checkbox "false" [disabled] [ref=e2456]
+                              - gridcell "No gestionado" [ref=e2457]:
+                                - generic [ref=e2459]: No gestionado
+                              - gridcell [ref=e2460]
+                              - gridcell "Milagros Delgado" [ref=e2461]:
+                                - generic "Milagros Delgado" [ref=e2463]
+                              - gridcell "5/15/2026, 3:14 p. m." [ref=e2464]:
+                                - generic [ref=e2466]: 5/15/2026, 3:14 p. m.
+                              - gridcell "Case_RTF_UPD_ARR_Notificar_Usuario_Responsable_Asignado_SYN" [ref=e2467]:
+                                - generic "Case_RTF_UPD_ARR_Notificar_Usuario_Responsable_Asignado_SYN" [ref=e2469]
+                              - gridcell "Mostrar acciones" [ref=e2470]:
+                                - button "Mostrar acciones" [ref=e2473] [cursor=pointer]:
+                                  - generic [ref=e2474]:
+                                    - generic [ref=e2475]:
+                                      - img
+                                    - generic [ref=e2476]: Mostrar acciones
+                            - row "Case [RTF] | (UPD)-(ARR) | - Update Record Type | [SYN] Flujo iniciado automáticamente true false No gestionado Milagros Delgado 3/25/2026, 7:02 p. m. Case_RTF_UPD_ARR_Update_Record_Type_SYN Mostrar acciones" [ref=e2477]:
+                              - rowheader "Case [RTF] | (UPD)-(ARR) | - Update Record Type | [SYN]" [ref=e2478]:
+                                - link "Case [RTF] | (UPD)-(ARR) | - Update Record Type | [SYN]" [ref=e2480] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2481]:
+                                - generic [ref=e2483]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2484]:
+                                - checkbox "true" [checked] [disabled] [ref=e2487]
+                              - gridcell "false" [ref=e2488]:
+                                - checkbox "false" [disabled] [ref=e2491]
+                              - gridcell "No gestionado" [ref=e2492]:
+                                - generic [ref=e2494]: No gestionado
+                              - gridcell [ref=e2495]
+                              - gridcell "Milagros Delgado" [ref=e2496]:
+                                - generic "Milagros Delgado" [ref=e2498]
+                              - gridcell "3/25/2026, 7:02 p. m." [ref=e2499]:
+                                - generic [ref=e2501]: 3/25/2026, 7:02 p. m.
+                              - gridcell "Case_RTF_UPD_ARR_Update_Record_Type_SYN" [ref=e2502]:
+                                - generic "Case_RTF_UPD_ARR_Update_Record_Type_SYN" [ref=e2504]
+                              - gridcell "Mostrar acciones" [ref=e2505]:
+                                - button "Mostrar acciones" [ref=e2508] [cursor=pointer]:
+                                  - generic [ref=e2509]:
+                                    - generic [ref=e2510]:
+                                      - img
+                                    - generic [ref=e2511]: Mostrar acciones
+                            - row "Case [RTF] | (UPD)-(FFU) | - Asignacion-Seguimiento de area responsable | [SYN] Flujo iniciado automáticamente true false No gestionado Sergio Rodriguez 3/3/2026, 9:27 p. m. Case_RTF_UPD_FFU_Asignacion_Seguimiento_de_area_responsable_SYN Mostrar acciones" [ref=e2512]:
+                              - rowheader "Case [RTF] | (UPD)-(FFU) | - Asignacion-Seguimiento de area responsable | [SYN]" [ref=e2513]:
+                                - link "Case [RTF] | (UPD)-(FFU) | - Asignacion-Seguimiento de area responsable | [SYN]" [ref=e2515] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2516]:
+                                - generic [ref=e2518]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2519]:
+                                - checkbox "true" [checked] [disabled] [ref=e2522]
+                              - gridcell "false" [ref=e2523]:
+                                - checkbox "false" [disabled] [ref=e2526]
+                              - gridcell "No gestionado" [ref=e2527]:
+                                - generic [ref=e2529]: No gestionado
+                              - gridcell [ref=e2530]
+                              - gridcell "Sergio Rodriguez" [ref=e2531]:
+                                - generic "Sergio Rodriguez" [ref=e2533]
+                              - gridcell "3/3/2026, 9:27 p. m." [ref=e2534]:
+                                - generic [ref=e2536]: 3/3/2026, 9:27 p. m.
+                              - gridcell "Case_RTF_UPD_FFU_Asignacion_Seguimiento_de_area_responsable_SYN" [ref=e2537]:
+                                - generic "Case_RTF_UPD_FFU_Asignacion_Seguimiento_de_area_responsable_SYN" [ref=e2539]
+                              - gridcell "Mostrar acciones" [ref=e2540]:
+                                - button "Mostrar acciones" [ref=e2543] [cursor=pointer]:
+                                  - generic [ref=e2544]:
+                                    - generic [ref=e2545]:
+                                      - img
+                                    - generic [ref=e2546]: Mostrar acciones
+                            - row "Case [RTF] | (UPD)-(FFU) | - Seguimiento-Notificacion | [SYN] Flujo iniciado automáticamente true false No gestionado Victor Duarte 5/15/2026, 2:38 p. m. Case_RTF_UPD_FFU_Seguimiento_Notificacion_SYN Mostrar acciones" [ref=e2547]:
+                              - rowheader "Case [RTF] | (UPD)-(FFU) | - Seguimiento-Notificacion | [SYN]" [ref=e2548]:
+                                - link "Case [RTF] | (UPD)-(FFU) | - Seguimiento-Notificacion | [SYN]" [ref=e2550] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                              - gridcell "Flujo iniciado automáticamente" [ref=e2551]:
+                                - generic [ref=e2553]: Flujo iniciado automáticamente
+                              - gridcell "true" [ref=e2554]:
+                                - checkbox "true" [checked] [disabled] [ref=e2557]
+                              - gridcell "false" [ref=e2558]:
+                                - checkbox "false" [disabled] [ref=e2561]
+                              - gridcell "No gestionado" [ref=e2562]:
+                                - generic [ref=e2564]: No gestionado
+                              - gridcell [ref=e2565]
+                              - gridcell "Victor Duarte" [ref=e2566]:
+                                - generic "Victor Duarte" [ref=e2568]
+                              - gridcell "5/15/2026, 2:38 p. m." [ref=e2569]:
+                                - generic [ref=e2571]: 5/15/2026, 2:38 p. m.
+                              - gridcell "Case_RTF_UPD_FFU_Seguimiento_Notificacion_SYN" [ref=e2572]:
+                                - generic "Case_RTF_UPD_FFU_Seguimiento_Notificacion_SYN" [ref=e2574]
+                              - gridcell "Mostrar acciones" [ref=e2575]:
+                                - button "Mostrar acciones" [ref=e2578] [cursor=pointer]:
+                                  - generic [ref=e2579]:
+                                    - generic [ref=e2580]:
+                                      - img
+                                    - generic [ref=e2581]: Mostrar acciones
+                        - generic:
+                          - status
+  - generic:
+    - status

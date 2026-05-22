@@ -1,0 +1,337 @@
+- generic [ref=e4]:
+  - generic:
+    - status
+  - generic [ref=e8]:
+    - generic [ref=e12]:
+      - button "Toggle Panel" [ref=e16] [cursor=pointer]:
+        - img [ref=e20]
+        - generic [ref=e23]: Menu
+      - generic [ref=e28]:
+        - img [ref=e32]
+        - generic [ref=e36]: Sandbox (Staging)
+    - button "Show menu" [ref=e45] [cursor=pointer]:
+      - img [ref=e47]
+      - generic [ref=e50]: Show menu
+  - main [ref=e54]:
+    - generic [ref=e55]:
+      - banner "Encabezado" [ref=e56]:
+        - generic [ref=e57]:
+          - link "Atrás" [ref=e59] [cursor=pointer]:
+            - /url: /lightning/setup/Flows/home
+            - generic "Atrás" [ref=e60]:
+              - img [ref=e63]
+          - generic [ref=e67]:
+            - img [ref=e71]
+            - generic [ref=e74]: Flow Builder
+          - generic [ref=e76] [cursor=pointer]:
+            - img [ref=e80]
+            - heading "ACCOUNT [RTF] | (UPD)-(ARR) | - Enviar Notificacion Custom nuevo cliente | [SYN] - V1" [level=1] [ref=e83]:
+              - generic [ref=e84]: ACCOUNT [RTF] | (UPD)-(ARR) | - Enviar Notificacion Custom nuevo cliente | [SYN]
+              - generic [ref=e85]: "- V1"
+            - button "Versiones" [ref=e87]:
+              - img [ref=e89]
+              - generic [ref=e92]: Versiones
+          - button "Ayuda de Flow Builder" [ref=e97] [cursor=pointer]:
+            - img [ref=e99]
+            - img [ref=e103]
+            - generic [ref=e106]: Ayuda de Flow Builder
+      - banner "Barra de botones" [ref=e107]:
+        - toolbar [ref=e108]:
+          - generic [ref=e109]:
+            - button "Alternar caja de herramientas" [ref=e112] [cursor=pointer]:
+              - img [ref=e114]
+              - generic [ref=e117]: Alternar caja de herramientas
+            - button "Seleccionar elementos" [ref=e119] [cursor=pointer]:
+              - img [ref=e121]
+              - generic [ref=e124]: Seleccionar elementos
+            - group [ref=e125]:
+              - generic [ref=e127]:
+                - generic:
+                  - button "Deshacer" [disabled]:
+                    - generic:
+                      - img
+                    - generic: Deshacer
+                - generic:
+                  - button "Deshacer" [disabled]:
+                    - generic:
+                      - img
+                    - generic: Deshacer
+            - button "Mostrar panel de errores" [ref=e134] [cursor=pointer]:
+              - img [ref=e136]
+            - button "Ver propiedades" [ref=e140] [cursor=pointer]:
+              - img [ref=e142]
+              - generic [ref=e145]: Ver propiedades
+            - generic "Modo de lienzo" [ref=e147]:
+              - generic [ref=e148]:
+                - generic [ref=e149]: Modo de lienzo
+                - generic [ref=e153]:
+                  - combobox "Modo de lienzo" [ref=e154] [cursor=pointer]:
+                    - generic [ref=e155]: Formato automático
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                - status
+          - generic [ref=e156]:
+            - 'generic "Versión 1: Activo" [ref=e157]':
+              - generic [ref=e158]: Se guardó por última vez el 3/3/2026, 11:53 PM
+            - generic "No puede guardar cambios en la versión activa de un flujo, pero puede guardarlos como una nueva versión." [ref=e161]:
+              - generic [ref=e162]: Activo
+            - group [ref=e163]:
+              - generic [ref=e165]:
+                - button "Ejecutar" [ref=e167] [cursor=pointer]
+                - button "Depurar" [ref=e169] [cursor=pointer]
+            - button "Ver pruebas" [ref=e171] [cursor=pointer]
+            - group [ref=e172]:
+              - generic [ref=e174]:
+                - button "Guardar como nueva versión" [ref=e176] [cursor=pointer]
+                - button "Mostrar menú" [ref=e178] [cursor=pointer]:
+                  - img [ref=e180]
+                  - generic [ref=e183]: Mostrar menú
+            - generic:
+              - button "Guardar" [disabled]
+            - button "Desactivar" [ref=e185] [cursor=pointer]
+    - generic [ref=e186]:
+      - complementary "Cuadro de herramientas" [ref=e187]:
+        - generic [ref=e188]:
+          - generic [ref=e191]:
+            - heading [level=2]
+            - group [ref=e193]:
+              - button "Ampliar panel" [ref=e195] [cursor=pointer]:
+                - img [ref=e197]
+                - generic [ref=e200]: Ampliar panel
+              - button "Ocultar caja de herramientas" [ref=e202] [cursor=pointer]:
+                - img [ref=e204]
+                - generic [ref=e207]: Ocultar caja de herramientas
+          - img [ref=e215]
+      - region "Lienzo" [ref=e219]:
+        - generic [ref=e221]:
+          - generic [ref=e223]:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - menu "Elemento START_ELEMENT, Flujo desencadenado por registro" [ref=e225] [cursor=pointer]:
+                        - generic [ref=e226]:
+                          - generic [ref=e229]: Flujo desencadenado por registro
+                          - generic [ref=e230]:
+                            - generic [ref=e232]:
+                              - button "Elemento START_ELEMENT, Flujo desencadenado por registro" [ref=e233]:
+                                - generic [ref=e234]:
+                                  - img [ref=e236]
+                                  - generic [ref=e239]: Icono de elemento
+                              - generic [ref=e240]: seguido por isClient? (ejecutar inmediatamente)
+                            - generic [ref=e241]:
+                              - generic "Flujo desencadenado por registro" [ref=e244]
+                              - menuitem "Iniciar" [ref=e246]:
+                                - generic [ref=e247]: Iniciar
+                        - menu [ref=e250]:
+                          - generic [ref=e252]:
+                            - 'menuitem "Objeto: Cuenta Modificar Desencadenador: Se actualiza un registro Condiciones:1 Optimizar para:Acciones y registros relacionados" [ref=e254]':
+                              - generic [ref=e257]:
+                                - generic [ref=e258]:
+                                  - generic [ref=e259]:
+                                    - generic [ref=e260]: "Objeto:"
+                                    - generic "Cuenta" [ref=e261]
+                                  - generic "Modificar" [ref=e263]
+                                - generic "Se actualiza un registro" [ref=e265]: "Desencadenador: Se actualiza un registro"
+                                - generic [ref=e266]: Condiciones:1
+                                - generic "Acciones y registros relacionados" [ref=e267]: Optimizar para:Acciones y registros relacionados
+                            - menuitem "Agregar rutas programadas (Opcional)" [ref=e268]:
+                              - generic [ref=e271]:
+                                - img [ref=e275]
+                                - text: Agregar rutas programadas (Opcional)
+                            - menuitem "Abrir explorador de desencadenador de flujo para Cuenta" [ref=e278]:
+                              - generic [ref=e280]:
+                                - img [ref=e284]
+                                - text: Abrir explorador de desencadenador de flujo para Cuenta
+                      - generic:
+                        - img [ref=e288]
+                        - generic "Ejecutar inmediatamente" [ref=e290]
+                        - generic [ref=e294]:
+                          - button "Agregar elemento" [ref=e295] [cursor=pointer]:
+                            - generic "Agregar elemento" [ref=e298]:
+                              - generic [ref=e299]:
+                                - img [ref=e301]
+                                - generic [ref=e304]: Agregar elemento
+                          - generic [ref=e305]: Entre START_ELEMENT y isClient? (ejecutar inmediatamente)
+                  - generic:
+                    - generic:
+                      - menu "Elemento Decision, isClient?" [ref=e307] [cursor=pointer]:
+                        - generic [ref=e308]:
+                          - generic [ref=e311]: isClient?
+                          - generic [ref=e312]:
+                            - button "Contraer" [expanded] [ref=e315]:
+                              - img [ref=e317]
+                            - generic [ref=e321]:
+                              - button "Elemento Decision, isClient?" [ref=e322]:
+                                - generic [ref=e323]:
+                                  - img [ref=e325]
+                                  - generic [ref=e328]: Icono de elemento
+                              - generic [ref=e329]: En la ruta (ejecutar inmediatamente), Ampliado, Resultado (Si) Get Notification Type, Resultado (Default Outcome) Fin
+                            - generic [ref=e330]:
+                              - generic "isClient?" [ref=e333]
+                              - menuitem "Decisión" [ref=e335]:
+                                - generic [ref=e336]: Decisión
+                      - img [ref=e340]
+                      - img [ref=e344]
+                      - generic:
+                        - generic:
+                          - generic [ref=e347]:
+                            - img [ref=e348]
+                            - generic "Si" [ref=e350]
+                            - generic [ref=e354]:
+                              - button "Agregar elemento" [ref=e355] [cursor=pointer]:
+                                - generic "Agregar elemento" [ref=e358]:
+                                  - generic [ref=e359]:
+                                    - img [ref=e361]
+                                    - generic [ref=e364]: Agregar elemento
+                              - generic [ref=e365]: Entre isClient? y Get Notification Type (Si)
+                          - generic:
+                            - generic:
+                              - generic:
+                                - menu "Elemento RecordQuery, Get Notification Type" [ref=e367] [cursor=pointer]:
+                                  - generic [ref=e368]:
+                                    - generic [ref=e371]: Get Notification Type
+                                    - generic [ref=e372]:
+                                      - generic [ref=e374]:
+                                        - button "Elemento RecordQuery, Get Notification Type" [ref=e375]:
+                                          - generic [ref=e376]:
+                                            - img [ref=e378]
+                                            - generic [ref=e381]: Icono de elemento
+                                        - generic [ref=e382]: En el resultado (Si), seguido de Get User
+                                      - generic [ref=e383]:
+                                        - generic "Get Notification Type" [ref=e386]
+                                        - menuitem "Obtener registros" [ref=e388]:
+                                          - generic [ref=e389]: Obtener registros
+                                - generic:
+                                  - img [ref=e392]
+                                  - generic [ref=e396]:
+                                    - button "Agregar elemento" [ref=e397] [cursor=pointer]:
+                                      - generic "Agregar elemento" [ref=e400]:
+                                        - generic [ref=e401]:
+                                          - img [ref=e403]
+                                          - generic [ref=e406]: Agregar elemento
+                                    - generic [ref=e407]: Entre Get Notification Type y Get User
+                            - generic:
+                              - generic:
+                                - menu "Elemento RecordQuery, Get User" [ref=e409] [cursor=pointer]:
+                                  - generic [ref=e410]:
+                                    - generic [ref=e413]: Get User
+                                    - generic [ref=e414]:
+                                      - generic [ref=e416]:
+                                        - button "Elemento RecordQuery, Get User" [ref=e417]:
+                                          - generic [ref=e418]:
+                                            - img [ref=e420]
+                                            - generic [ref=e423]: Icono de elemento
+                                        - generic [ref=e424]: seguido de Assignment
+                                      - generic [ref=e425]:
+                                        - generic "Get User" [ref=e428]
+                                        - menuitem "Obtener registros" [ref=e430]:
+                                          - generic [ref=e431]: Obtener registros
+                                - generic:
+                                  - img [ref=e434]
+                                  - generic [ref=e438]:
+                                    - button "Agregar elemento" [ref=e439] [cursor=pointer]:
+                                      - generic "Agregar elemento" [ref=e442]:
+                                        - generic [ref=e443]:
+                                          - img [ref=e445]
+                                          - generic [ref=e448]: Agregar elemento
+                                    - generic [ref=e449]: Entre Get User y Assignment
+                            - generic:
+                              - generic:
+                                - menu "Elemento Assignment, Assignment" [ref=e451] [cursor=pointer]:
+                                  - generic [ref=e452]:
+                                    - generic [ref=e455]: Assignment
+                                    - generic [ref=e456]:
+                                      - generic [ref=e458]:
+                                        - button "Elemento Assignment, Assignment" [ref=e459]:
+                                          - generic [ref=e460]:
+                                            - img [ref=e462]
+                                            - generic [ref=e465]: Icono de elemento
+                                        - generic [ref=e466]: seguido de Prospecto aprobado
+                                      - generic [ref=e467]:
+                                        - generic "Assignment" [ref=e470]
+                                        - menuitem "Asignación" [ref=e472]:
+                                          - generic [ref=e473]: Asignación
+                                - generic:
+                                  - img [ref=e476]
+                                  - generic [ref=e480]:
+                                    - button "Agregar elemento" [ref=e481] [cursor=pointer]:
+                                      - generic "Agregar elemento" [ref=e484]:
+                                        - generic [ref=e485]:
+                                          - img [ref=e487]
+                                          - generic [ref=e490]: Agregar elemento
+                                    - generic [ref=e491]: Entre Assignment y Prospecto aprobado
+                            - generic:
+                              - generic:
+                                - menu "Elemento ActionCall, Prospecto aprobado" [ref=e493] [cursor=pointer]:
+                                  - generic [ref=e494]:
+                                    - generic [ref=e497]: Prospecto aprobado
+                                    - generic [ref=e498]:
+                                      - generic [ref=e500]:
+                                        - button "Elemento ActionCall, Prospecto aprobado" [ref=e501]:
+                                          - generic [ref=e502]:
+                                            - img [ref=e504]
+                                            - generic [ref=e507]: Icono de elemento
+                                        - generic [ref=e508]: seguido de Fin
+                                      - generic [ref=e509]:
+                                        - generic "Prospecto aprobado" [ref=e512]
+                                        - menuitem "Acción" [ref=e514]:
+                                          - generic [ref=e515]: Acción
+                                - generic:
+                                  - img [ref=e518]
+                                  - generic [ref=e522]:
+                                    - button "Agregar elemento" [ref=e523] [cursor=pointer]:
+                                      - generic "Agregar elemento" [ref=e526]:
+                                        - generic [ref=e527]:
+                                          - img [ref=e529]
+                                          - generic [ref=e532]: Agregar elemento
+                                    - generic [ref=e533]: Entre Prospecto aprobado y Fin
+                            - menu "Elemento END_ELEMENT, Fin" [ref=e535] [cursor=pointer]:
+                              - generic [ref=e536]:
+                                - generic [ref=e539]: Fin
+                                - generic [ref=e540]:
+                                  - button "Elemento END_ELEMENT, Fin" [ref=e543]:
+                                    - generic [ref=e544]:
+                                      - img [ref=e546]
+                                      - generic [ref=e549]: Icono de elemento
+                                  - generic "Fin" [ref=e554]
+                      - generic:
+                        - generic:
+                          - generic [ref=e557]:
+                            - img [ref=e558]
+                            - generic "Default Outcome" [ref=e560]
+                            - generic [ref=e564]:
+                              - button "Agregar elemento" [ref=e565] [cursor=pointer]:
+                                - generic "Agregar elemento" [ref=e568]:
+                                  - generic [ref=e569]:
+                                    - img [ref=e571]
+                                    - generic [ref=e574]: Agregar elemento
+                              - generic [ref=e575]: Entre isClient? y Fin (Default Outcome)
+                          - menu "Elemento END_ELEMENT, Fin" [ref=e577] [cursor=pointer]:
+                            - generic [ref=e578]:
+                              - generic [ref=e581]: Fin
+                              - generic [ref=e582]:
+                                - button "Elemento END_ELEMENT, Fin" [ref=e585]:
+                                  - generic [ref=e586]:
+                                    - img [ref=e588]
+                                    - generic [ref=e591]: Icono de elemento
+                                - generic "Fin" [ref=e596]
+          - group [ref=e601]:
+            - generic [ref=e603]:
+              - button "Alejar zoom" [active] [ref=e605] [cursor=pointer]:
+                - generic [ref=e606]:
+                  - img
+                - generic [ref=e610]: Alejar zoom
+              - button "Restablecer zoom" [ref=e630] [cursor=pointer]:
+                - img [ref=e631]
+                - generic [ref=e617]: Restablecer zoom
+              - button "Acercar zoom" [ref=e635] [cursor=pointer]:
+                - img [ref=e637]
+                - generic [ref=e640]: Acercar zoom
+              - button "Contraer todo" [expanded] [ref=e619] [cursor=pointer]:
+                - img [ref=e621]
+                - generic [ref=e624]: Contraer todo
