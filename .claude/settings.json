@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__d4b95019-2715-4122-9ee6-af6c26aa3160__execute_sql_readonly",
+      "mcp__d4b95019-2715-4122-9ee6-af6c26aa3160__execute_sql",
+      "mcp__d4b95019-2715-4122-9ee6-af6c26aa3160__list_dataset_ids",
+      "mcp__d4b95019-2715-4122-9ee6-af6c26aa3160__list_table_ids",
+      "mcp__d4b95019-2715-4122-9ee6-af6c26aa3160__get_table_info",
+      "mcp__d4b95019-2715-4122-9ee6-af6c26aa3160__get_dataset_info",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__getJiraIssue",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__getConfluencePage",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__searchJiraIssuesUsingJql",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__atlassianUserInfo",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__createJiraIssue",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__editJiraIssue",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__transitionJiraIssue",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__getTransitionsForJiraIssue",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__getJiraIssueTypeMetaWithFields",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__getJiraProjectIssueTypesMetadata",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__getVisibleJiraProjects",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__lookupJiraAccountId",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__search",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__searchConfluenceUsingCql",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__getConfluenceSpaces",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__getPagesInConfluenceSpace",
+      "mcp__55cb4e50-ef59-4d52-b5ae-5377b7bc571a__getAccessibleAtlassianResources",
+      "mcp__f5164108-86c0-4896-b8e2-83cb829ff582__get_zone_operation",
+      "mcp__f5164108-86c0-4896-b8e2-83cb829ff582__get_instance_basic_info",
+      "mcp__f5164108-86c0-4896-b8e2-83cb829ff582__list_instances",
+      "mcp__ebf93048-dcf2-4f39-a266-0368debab5a2__read_file_content"
+    ]
+  }
+}
