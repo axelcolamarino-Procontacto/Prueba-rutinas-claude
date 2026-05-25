@@ -26,7 +26,8 @@ TIPO A — Historia de Usuario:
 
 TIPO B — Feedback Tracker:
 ├── Alcance de tests: REDUCIDO — solo lo que reporta el cliente (explícito o implícito)
-├── Si todos PASS → transicionar por 3 estados: "En testing" → "Listo en dev" → "Listo para pruebas"
+├── Si todos PASS → transicionar por 2 estados: "EN TESTING" → "Listo en dev" → "Listo para pruebas"
+│   (nota: el issue COMIENZA en "EN TESTING", por lo que hay 2 transiciones a ejecutar)
 └── Si algún FAIL → transicionar a "Observaciones detectadas" + crear Story Bugs
 
 TRIGGER B — Slack @mención
@@ -55,8 +56,8 @@ En la práctica: trabajar en silencio total salvo falla catastrófica.
 
 ## VARIABLES DE ENTORNO REQUERIDAS
 
-Disponibles como variables de entorno en el entorno de la rutina (configuradas en el
-entorno "QA Agent" de Claude Code — NO son GitHub Secrets):
+Disponibles como variables de entorno en el entorno "QA Agent" de Claude Code
+(configuradas en el archivo .env de la rutina — NO están en GitHub Secrets):
 
 SF*AUTH_URL*{PROJECT_KEY} Auth Salesforce por proyecto (ej: SF_AUTH_URL_CMIV2)
 SLACK_BOT_TOKEN Token del bot "QA Agent" (xoxb-...)
@@ -184,19 +185,25 @@ def log_agent_event(trigger_type, project, issue_key, event_type, category, mess
     category   : 'sf_cli' | 'bigquery' | 'slack_api' | 'jira' | 'flow' | 'playwright' | 'knowledge'
     severity   : 'low' | 'medium' | 'high'
     """
-    row = {
-        "id": str(uuid.uuid4()),
-        "timestamp": "AUTO",   # BigQuery usa CURRENT_TIMESTAMP() en INSERT
-        "trigger_type": trigger_type,
-        "project": project or "unknown",
-        "issue_key": issue_key or None,
-        "event_type": event_type,
-        "category": category,
-        "message": message,
-        "context": json.dumps(context) if context else None,
-        "severity": severity
-    }
-    client.insert_rows_json("procontacto-claude.qa_agent.agent_logs", [row])
+    context_json = json.dumps(context).replace("'", "\\'") if context else None
+    insert_sql = f"""
+    INSERT INTO `procontacto-claude.qa_agent.agent_logs`
+      (id, timestamp, trigger_type, project, issue_key, event_type, category, message, context, severity)
+    VALUES (
+      GENERATE_UUID(),
+      CURRENT_TIMESTAMP(),
+      '{trigger_type}',
+      '{project or "unknown"}',
+      {f"'{issue_key}'" if issue_key else 'NULL'},
+      '{event_type}',
+      '{category}',
+      '{message.replace(chr(39), chr(92)+chr(39))}',
+      {f"PARSE_JSON('{context_json}')" if context_json else 'NULL'},
+      '{severity}'
+    )
+    """
+    # Usar MCP execute_sql — ya está autenticado en el entorno
+    # Nota: en la práctica, llamar a mcp_bigquery.execute_sql(insert_sql)
 ```
 
 CUÁNDO LLAMARLA:
@@ -254,10 +261,16 @@ elif raw_text.strip() == "weekly_report" or not raw_text.strip():
         pass
     else:
         raise SystemExit("Sin trigger válido. Esperando webhook de Jira o mención de Slack.")
-elif raw_text.strip() and "-" in raw_text.strip():
-    # → Ir a FLUJO TRIGGER A — JIRA WEBHOOK
-    issue_key   = raw_text.strip()  # ej: "CMIV2-2807"
-    project_key = issue_key.split("-")[0].upper()
+elif raw_text.strip():
+    # → Validar formato de Jira issue key (ej: "CMIV2-2807")
+    import re
+    match = re.match(r'^([A-Z]+)-(\d+)$', raw_text.strip())
+    if match:
+        # → Ir a FLUJO TRIGGER A — JIRA WEBHOOK
+        issue_key   = raw_text.strip()
+        project_key = issue_key.split("-")[0].upper()
+    else:
+        raise SystemExit(f"Trigger inválido: '{raw_text}' no tiene formato de Jira issue key (ej: CMIV2-2807)")
 else:
     # Sin trigger válido → salir sin hacer nada
     # NUNCA realizar acciones implícitas ni verificaciones de entorno
@@ -270,6 +283,37 @@ FLUJO TRIGGER A — JIRA WEBHOOK
 
 ---
 
+## HELPER — DETECTAR PLATAFORMA (mobile vs web)
+
+Función auxiliar usada en múltiples puntos del flujo (PASO 0.A, FASE 2, Trigger B.V1):
+
+```python
+def detectar_plataforma(issue_summary, issue_description, labels):
+    """
+    Retorna: 'mobile' | 'web'
+    """
+    # Señal 1: Labels explícitos
+    if "App_Offline" in labels or any("app offline" in label.lower() for label in labels):
+        return "mobile"
+    if "Backoffice" in labels or any("backoffice" in label.lower() for label in labels):
+        return "web"
+    
+    # Señal 2: Contenido (móvil)
+    mobile_keywords = ["App Offline", "app móvil", "mobile", "offline", "dispositivo",
+                       "GPS", "cámara", "Field Service Mobile", "Consumer Goods Cloud Mobile",
+                       "iOS", "Android", "app nativa"]
+    combined_text = f"{issue_summary} {issue_description}".lower()
+    if any(keyword.lower() in combined_text for keyword in mobile_keywords):
+        return "mobile"
+    
+    # Default: web
+    return "web"
+```
+
+Usar: `plataforma = detectar_plataforma(summary, description, labels)`
+
+---
+
 ## PASO 0 — DETECCIÓN INICIAL
 
 ── PASO 0.0 — DEDUPLICACIÓN DE EJECUCIÓN ────────────────────────────────────
@@ -277,11 +321,12 @@ ANTES de cualquier otra acción, verificar si ya existe una ejecución reciente
 del mismo issue para evitar runs duplicados por doble disparo del webhook.
 
 ```sql
-SELECT execution_id, started_at, status
-FROM `procontacto-claude.qa_agent.executions`
+SELECT id, timestamp, message
+FROM `procontacto-claude.qa_agent.agent_logs`
 WHERE issue_key = '{issue_key}'
-  AND started_at >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 10 MINUTE)
-ORDER BY started_at DESC
+  AND event_type = 'run_started'
+  AND timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 10 MINUTE)
+ORDER BY timestamp DESC
 LIMIT 1
 ```
 
@@ -289,12 +334,11 @@ Si la consulta devuelve alguna fila:
 → DETENER inmediatamente — ya hay (o hubo) una ejecución en los últimos 10 minutos
 → NO enviar mensaje a Slack
 → NO hacer ninguna acción en Jira ni BigQuery
-→ Registrar solo en agent_logs:
-event_type='skip_duplicate', issue_key=issue_key,
-message=f"Ejecución omitida: ya existe run reciente iniciado a {started_at}"
 → Salir con raise SystemExit("Duplicate run skipped")
 
-Si la consulta devuelve 0 filas → continuar normalmente con PASO 0.A.
+Si la consulta devuelve 0 filas:
+→ Registrar event_type='run_started' en agent_logs con el timestamp actual
+→ Continuar normalmente con PASO 0.A
 
 NOTA: Esta verificación protege contra el doble disparo del webhook de Jira
 (Jira envía 2 eventos simultáneos: issue_updated + issue_transitioned).
@@ -393,14 +437,19 @@ e insertarlos en BigQuery junto a los existentes.
 PASO RT.3 — MENSAJE DE INICIO RE-TEST AL CANAL
 
 ```python
+# Variables que vienen del PASO RT.1 y RT.2:
+# - failed_tcs: lista de TCs con status FAILED o REVIEW
+# - open_bugs: lista de Story Bugs abiertos vinculados al issue
 message = (
     f":repeat: *QA Agent — Re-testing*\n"
-    f"*Issue:* {issue_key} — {issue_summary}\n"
+    f"*Issue:* {jira_link(issue_key)} — {issue_summary}\n"
     f"*TCs a re-verificar:* {len(failed_tcs)} ({', '.join([tc['tc_id'] for tc in failed_tcs])})\n"
     f"*Story Bugs vinculados:* {len(open_bugs)}\n"
     f"_Verificando correcciones del equipo de desarrollo..._"
 )
 # Enviar al canal del proyecto (mismo mecanismo que flujo normal)
+payload = json.dumps({"channel": slack_channel, "text": message}).encode()
+# ... (usar request a Slack API)
 ```
 
 PASO RT.4 — EJECUTAR RE-TEST (Fase 3 normal con scope reducido)
@@ -585,20 +634,29 @@ for att in images[:5]:
     path = out_dir / att["filename"]
     path.write_bytes(img_data)
     image_paths.append(str(path))
-    print(f"Descargado: {att['filename']} ({len(img_data)} bytes)")
-
-print(json.dumps(image_paths))
-```
+    # LOG: usar log_agent_event para registrar descarga
 
 # 3. Leer y analizar visualmente cada imagen descargada
+# → Usar Read tool (o bash cat en base64) para ver cada archivo en image_paths
+# → Analizar: qué muestra la imagen, qué error/campo/comportamiento se ve
+# → Incorporar el análisis al CONTEXT antes de generar los TCs
 
-# Usar el Read tool (o bash cat en base64) para ver cada archivo guardado en image_paths.
+# USO DE LAS IMÁGENES SEGÚN TIPO:
+# - TIPO A (HU): mockups o diseños → referencia comportamiento esperado en TCs
+# - TIPO B (Feedback Tracker): screenshots del bug → entender qué está fallando
+#
+# Si no hay imágenes adjuntas → continuar sin este paso
+# Si hay error al descargar → loggear y continuar con las demás
+#
+# Para TIPO B (FT), prestar atención a:
+# - Comentarios del cliente (contienen el problema real)
+# - Screenshots (evidencia más directa del bug)
+# - Issue padre (Story o Epic relacionado)
 
-# Analizar: qué muestra la imagen, qué error/campo/comportamiento se ve.
+return image_paths
+```
 
-# Incorporar el análisis al CONTEXT antes de generar los TCs.
-
-USO DE LAS IMÁGENES SEGÚN TIPO:
+SIGUIENTE PASO — PASO 1.1.B
 
 - TIPO A (HU): mockups o diseños → referencia del comportamiento esperado en los TCs
 - TIPO B (Feedback Tracker): screenshots del bug → entender exactamente qué está
@@ -705,9 +763,9 @@ TABLA DE METADATA TYPES — los más relevantes para QA:
 ├──────────────────────────────────┼───────────────────────────┼───────────────────────────────────────────────────────────────────────┤
 │ Lightning Page (Dynamic Forms) │ FlexiPage │ sf project retrieve start --metadata "FlexiPage:MiPagina" │
 │ Page Layout clásico │ Layout │ sf project retrieve start --metadata "Layout:Obj-NombreLayout" │
-│ Objeto custom │ CustomObject │ sf project retrieve start --metadata "CustomObject:MiObjeto**c" │
-│ Campo custom (obj custom) │ CustomField │ sf project retrieve start --metadata "CustomField:Obj**c.Campo**c" │
-│ Campo custom (obj standard) │ CustomField │ sf project retrieve start --metadata "CustomField:Case.MiCampo**c" │
+│ Objeto custom │ CustomObject │ sf project retrieve start --metadata "CustomObject:MiObjeto\_\_c" │
+│ Campo custom (obj custom) │ CustomField │ sf project retrieve start --metadata "CustomField:Obj\_\_c.Campo\_\_c" │
+│ Campo custom (obj standard) │ CustomField │ sf project retrieve start --metadata "CustomField:Case.MiCampo\_\_c" │
 │ Record Type │ RecordType │ sf project retrieve start --metadata "RecordType:Obj.MiRecordType" │
 │ Validation Rule │ ValidationRule │ sf project retrieve start --metadata "ValidationRule:Obj.MiRegla" │
 │ Flow (Screen/Record-Triggered) │ Flow │ sf project retrieve start --metadata "Flow:MiFlow" │
@@ -718,13 +776,13 @@ TABLA DE METADATA TYPES — los más relevantes para QA:
 │ Permission Set Group │ PermissionSetGroup │ sf project retrieve start --metadata "PermissionSetGroup:MiPSG" │
 │ Profile │ Profile │ sf project retrieve start --metadata "Profile:MiPerfil" │
 │ Global Value Set (picklist) │ GlobalValueSet │ sf project retrieve start --metadata "GlobalValueSet:MiPicklist" │
-│ Custom Metadata Type (def.) │ CustomObject │ sf project retrieve start --metadata "CustomObject:Config**mdt" │
+│ Custom Metadata Type (def.) │ CustomObject │ sf project retrieve start --metadata "CustomObject:Config\_\_mdt" │
 │ Custom Metadata registros │ CustomMetadata │ sf project retrieve start --metadata "CustomMetadata:Config.Reg" │
 │ Quick Action │ QuickAction │ sf project retrieve start --metadata "QuickAction:Obj.MiAccion" │
 │ Approval Process │ ApprovalProcess │ sf project retrieve start --metadata "ApprovalProcess:Obj.MiProc" │
 │ Assignment Rules │ AssignmentRules │ sf project retrieve start --metadata "AssignmentRules:Case" │
 │ Duplicate Rule │ DuplicateRule │ sf project retrieve start --metadata "DuplicateRule:Obj.MiRegla" │
-│ Platform Event │ CustomObject │ sf project retrieve start --metadata "CustomObject:MiEvento**e" │
+│ Platform Event │ CustomObject │ sf project retrieve start --metadata "CustomObject:MiEvento\_\_e" │
 │ Entitlement Process │ EntitlementProcess │ sf project retrieve start --metadata "EntitlementProcess:MiProc" │
 │ Path Assistant (Sales Path) │ PathAssistant │ sf project retrieve start --metadata "PathAssistant:MiPath" │
 │ Custom Permission │ CustomPermission │ sf project retrieve start --metadata "CustomPermission:MiPermiso" │
@@ -734,8 +792,8 @@ NOTAS IMPORTANTES:
 
 - --target-org debe ser siempre el alias del org del proyecto (ej: qaorg, cmiv2org)
 - El XML queda en: force-app/main/default/{tipo_carpeta}/{NombreComponente}.{ext}-meta.xml
-- Sufijos de objeto: **c = custom object, **mdt = Custom Metadata Type, **e = Platform Event,
-  **b = Big Object, \_\_x = External Object
+- Sufijos de objeto: \_\_c = custom object, \_\_mdt = Custom Metadata Type, \_\_e = Platform Event,
+  \_\_b = Big Object, \_\_x = External Object
 - CustomMetadata registros SÍ son metadata y se despliegan entre ambientes (a diferencia de
   datos de Custom Objects). Útil para entender diferencias de comportamiento entre Staging y Prod.
 - Las List Views privadas ("Visible solo para mí") NO son recuperables por Metadata API.
@@ -969,7 +1027,7 @@ PASO 1.2.C — METADATA ADICIONAL DE SALESFORCE (ANÁLISIS COMPLETO OBLIGATORIO)
 Además del análisis Lightning del PASO 1.2.B, Salesforce tiene múltiples capas de
 configuración que pueden afectar el comportamiento visible en la UI.
 
-REGLA GENERAL: EJECUTAR EL ANÁLISIS COMPLETO de las secciones A-U para cada ticket.
+REGLA GENERAL: EJECUTAR EL ANÁLISIS COMPLETO de las secciones A-Q para cada ticket.
 No omitir secciones "porque no parecen relevantes" — en Salesforce es imposible saber
 a priori qué capa está causando el comportamiento inesperado. Por ejemplo, un campo
 ausente puede deberse a FLS, Dynamic Forms, una condición de visibilidad, un Custom
@@ -979,7 +1037,7 @@ El RESUMEN al final del catálogo sirve como referencia rápida de qué seccione
 MÁS probables según la señal del ticket, pero NO como filtro para omitir secciones.
 
 ────────────────────────────────────────────
-E) OWD Y SHARING SETTINGS (Org-Wide Defaults)
+A) OWD Y SHARING SETTINGS (Org-Wide Defaults)
 ────────────────────────────────────────────
 Relevante cuando: el ticket involucra visibilidad de registros entre usuarios, "no veo
 los registros de otro usuario", "acceso restringido a casos/oportunidades", perfiles que
@@ -1005,7 +1063,7 @@ INTERPRETAR:
 - Si un usuario no ve un registro que "debería" ver → verificar OWD + Sharing Rules antes de reportar FAIL
 
 ────────────────────────────────────────────
-F) RESTRICTION RULES
+B) RESTRICTION RULES
 ────────────────────────────────────────────
 Relevante cuando: un perfil o permission set no ve registros que según OWD debería ver.
 Las Restriction Rules son más restrictivas que OWD — limitan visibilidad a nivel de fila.
@@ -1023,7 +1081,7 @@ INTERPRETAR:
 - Documentar en precondiciones del TC si el usuario de prueba está sujeto a una Restriction Rule
 
 ────────────────────────────────────────────
-G) CUSTOM PERMISSIONS
+C) CUSTOM PERMISSIONS
 ────────────────────────────────────────────
 Relevante cuando: botones, acciones, componentes LWC o secciones aparecen para algunos
 usuarios y no para otros, y no hay explicación en FLS ni FlexiPage.
@@ -1047,7 +1105,7 @@ INTERPRETAR:
 - Documentar qué Custom Permission requiere el componente antes de marcar como FAIL
 
 ────────────────────────────────────────────
-H) PERMISSION SET GROUPS Y MUTING PERMISSION SETS
+D) PERMISSION SET GROUPS Y MUTING PERMISSION SETS
 ────────────────────────────────────────────
 Relevante cuando: un usuario tiene los Permission Sets esperados pero aún no puede ver
 o editar algo. Los Muting PS pueden negar permisos dentro de un PSG.
@@ -1071,7 +1129,7 @@ INTERPRETAR:
 - Documentar en precondiciones: "Usuario sujeto a PSG {nombre} con Muting PS {nombre}"
 
 ────────────────────────────────────────────
-I) APPROVAL PROCESSES
+E) APPROVAL PROCESSES
 ────────────────────────────────────────────
 Relevante cuando: el ticket involucra botones de aprobación/rechazo, estados "Pending
 Approval", bloqueo de edición durante aprobación, notificaciones de aprobación.
@@ -1090,7 +1148,7 @@ INTERPRETAR:
 - Si el flujo de aprobación reasigna el registro → incluir verificación de propietario
 
 ────────────────────────────────────────────
-J) DUPLICATE RULES Y MATCHING RULES
+F) DUPLICATE RULES Y MATCHING RULES
 ────────────────────────────────────────────
 Relevante cuando: el ticket involucra creación de registros y se reporta un mensaje de
 "posible duplicado", bloqueo de guardado, o el registro no se guarda sin error visible.
@@ -1108,7 +1166,7 @@ INTERPRETAR:
 - Si el TC de creación falla con error inesperado → verificar si una Duplicate Rule lo bloqueó
 
 ────────────────────────────────────────────
-K) ENTITLEMENT PROCESS Y MILESTONES
+G) ENTITLEMENT PROCESS Y MILESTONES
 ────────────────────────────────────────────
 Relevante cuando: el ticket involucra Cases con SLA, tiempos de respuesta, estado de
 cumplimiento, campos "Time to First Response", "Time to Close", escalaciones automáticas.
@@ -1132,7 +1190,7 @@ INTERPRETAR:
 - Si el TC manipula un Case con Entitlement → incluir en precondiciones el estado del Entitlement
 
 ────────────────────────────────────────────
-L) ASSIGNMENT RULES Y QUEUES
+H) ASSIGNMENT RULES Y QUEUES
 ────────────────────────────────────────────
 Relevante cuando: el ticket involucra asignación automática de registros (Lead/Case),
 registros que van a colas en vez de usuarios, "el registro no me llegó", cambio de dueño.
@@ -1156,7 +1214,7 @@ INTERPRETAR:
 - Si el registro fue a una Queue → el dueño visible es la Queue, no un usuario
 
 ────────────────────────────────────────────
-M) FIELD DEPENDENCIES (Dependencias de Campo Nativas)
+I) FIELD DEPENDENCIES (Dependencias de Campo Nativas)
 ────────────────────────────────────────────
 Relevante cuando: un campo picklist solo muestra ciertos valores según lo que se seleccionó
 en otro campo (campo controlador → campo dependiente). Diferente a Dynamic Forms.
@@ -1175,7 +1233,7 @@ INTERPRETAR:
 - Nunca reportar "valores incorrectos en picklist" sin haber seleccionado el campo controlador
 
 ────────────────────────────────────────────
-N) FORMULA FIELDS Y CAMPOS CALCULADOS
+J) FORMULA FIELDS Y CAMPOS CALCULADOS
 ────────────────────────────────────────────
 Relevante cuando: un campo muestra un valor que parece incorrecto, calculado o derivado
 de otros campos. Los campos fórmula son de solo lectura y no se editan directamente.
@@ -1193,7 +1251,7 @@ INTERPRETAR:
 - Si la fórmula referencia campos de objetos relacionados (lookup) → verificar que el registro relacionado tiene los datos correctos
 
 ────────────────────────────────────────────
-O) GLOBAL VALUE SETS (Picklists Globales Compartidas)
+K) GLOBAL VALUE SETS (Picklists Globales Compartidas)
 ────────────────────────────────────────────
 Relevante cuando: un campo picklist tiene valores inesperados, faltantes o en idioma
 incorrecto. Puede estar usando un Global Value Set compartido entre múltiples objetos.
@@ -1217,7 +1275,7 @@ INTERPRETAR:
 - Documentar qué Global Value Set usa el campo al reportar un bug de picklist
 
 ────────────────────────────────────────────
-P) TERRITORY MANAGEMENT
+L) TERRITORY MANAGEMENT
 ────────────────────────────────────────────
 Relevante cuando: el ticket involucra asignación de territorios de ventas, visibilidad
 de cuentas/oportunidades por territorio, acceso por zona geográfica.
@@ -1241,7 +1299,7 @@ INTERPRETAR:
 - Documentar en precondiciones del TC el territorio del usuario de prueba
 
 ────────────────────────────────────────────
-Q) OMNI-CHANNEL Y CTI
+M) OMNI-CHANNEL Y CTI
 ────────────────────────────────────────────
 Relevante cuando: el ticket involucra distribución de trabajo (work items), agentes de
 atención, estados de presencia, enrutamiento de casos/chats/llamadas.
@@ -1265,7 +1323,7 @@ INTERPRETAR:
 - Si el trabajo no llega → verificar capacity del Routing Config y estado del agente
 
 ────────────────────────────────────────────
-R) EXPERIENCE CLOUD (Portal / Comunidad)
+N) EXPERIENCE CLOUD (Portal / Comunidad)
 ────────────────────────────────────────────
 Relevante cuando: el ticket involucra un portal externo, acceso de clientes/partners,
 Salesforce Sites, o componentes que se comportan diferente en portal vs interno.
@@ -1284,7 +1342,7 @@ INTERPRETAR:
 - Si el TC involucra un portal → el usuario de prueba debe ser un usuario de comunidad, no un usuario interno
 
 ────────────────────────────────────────────
-S) PAGE LAYOUTS (para usuarios sin Dynamic Forms)
+O) PAGE LAYOUTS (para usuarios sin Dynamic Forms)
 ────────────────────────────────────────────
 Relevante cuando: el usuario de prueba usa un perfil con Page Layout clásico (sin Dynamic
 Forms activado para ese RecordType/Perfil).
@@ -1303,7 +1361,7 @@ INTERPRETAR:
 - Para usuarios con Dynamic Forms: la FlexiPage manda. Para usuarios sin Dynamic Forms: el Page Layout manda.
 
 ────────────────────────────────────────────
-T) EMAIL ALERTS Y NOTIFICACIONES
+P) EMAIL ALERTS Y NOTIFICACIONES
 ────────────────────────────────────────────
 Relevante cuando: el requisito del ticket incluye que el sistema debe enviar un email
 automático ante cierta acción (creación de caso, resolución, asignación, aprobación, etc.).
@@ -1363,7 +1421,7 @@ Emails de System Notifications o alertas de Approval Process sin relacionar a un
 pueden no aparecer en EmailMessage — en ese caso el resultado es REVIEW.
 
 ────────────────────────────────────────────
-U) PATH ASSISTANT (SALES PATH / STAGE GUIDANCE)
+Q) PATH ASSISTANT (SALES PATH / STAGE GUIDANCE)
 ────────────────────────────────────────────
 Relevante cuando: el ticket involucra el componente Path visible en la parte superior de
 un registro (Case, Opportunity, Lead) — etapas del proceso, Key Fields por etapa, texto
@@ -1415,23 +1473,23 @@ RESUMEN DE METADATA A CONSULTAR POR TIPO DE TICKET:
 
 | Señal en el ticket                            | Metadata a consultar           |
 | --------------------------------------------- | ------------------------------ |
-| Campo no visible / no aparece                 | B, C, D, G, H, S, E(1.2.B)     |
-| Registro no visible / no lo encuentro         | E, F, P                        |
-| No puedo editar / campo de solo lectura       | D, G, H, N                     |
-| Picklist con valores incorrectos / faltantes  | M, O + API Name vs Label (1.2) |
-| Guardado bloqueado / error al crear           | C (Validation Rules), J        |
-| Asignación incorrecta / dueño inesperado      | L                              |
-| Campo calculado con valor incorrecto          | N                              |
-| SLA / tiempo de respuesta / escalación        | K                              |
-| Aprobación / botón Approve / estado bloqueado | I                              |
-| Visibilidad diferente entre usuarios          | E, F, G, H, P                  |
-| Portal / acceso externo                       | R                              |
-| CTI / enrutamiento / agente no recibe trabajo | Q                              |
-| Territorios / visibilidad por zona            | P                              |
-| Email no enviado / no notificó                | T                              |
-| Etapas / Path incorrectos / Key Fields mal    | U                              |
-| Botón/sección no visible en componente custom | E(1.2.B), G                    |
-| Campo cambia solo sin acción del usuario      | C (Scheduled Flow)             |
+| Campo no visible / no aparece                 | B, C, D, C(1.2.C), D(1.2.C), O(1.2.C), E(1.2.B) |
+| Registro no visible / no lo encuentro         | A(1.2.C), B(1.2.C), L(1.2.C)                   |
+| No puedo editar / campo de solo lectura       | D, C(1.2.C), D(1.2.C), J(1.2.C)                |
+| Picklist con valores incorrectos / faltantes  | I(1.2.C), K(1.2.C) + API Name vs Label (1.2) |
+| Guardado bloqueado / error al crear           | C (Validation Rules), F(1.2.C)                  |
+| Asignación incorrecta / dueño inesperado      | H(1.2.C)                                       |
+| Campo calculado con valor incorrecto          | J(1.2.C)                                       |
+| SLA / tiempo de respuesta / escalación        | G(1.2.C)                                       |
+| Aprobación / botón Approve / estado bloqueado | E(1.2.C)                                       |
+| Visibilidad diferente entre usuarios          | A(1.2.C), B(1.2.C), C(1.2.C), D(1.2.C), L(1.2.C) |
+| Portal / acceso externo                       | N(1.2.C)                                       |
+| CTI / enrutamiento / agente no recibe trabajo | M(1.2.C)                                       |
+| Territorios / visibilidad por zona            | L(1.2.C)                                       |
+| Email no enviado / no notificó                | P(1.2.C)                                       |
+| Etapas / Path incorrectos / Key Fields mal    | Q(1.2.C)                                       |
+| Botón/sección no visible en componente custom | E(1.2.B), C(1.2.C)                             |
+| Campo cambia solo sin acción del usuario      | C (Scheduled Flow)                              |
 
 PASO 1.3 — RAG EN BIGQUERY: SOW DEL PROYECTO
 Buscar en el vector store los chunks de SOW más relevantes para el proceso descrito en la HU:
@@ -1668,16 +1726,16 @@ AUTENTICACIÓN SALESFORCE
 
 ---
 
-MECANISMO VALIDADO: SF*AUTH_URL*{PROJECT_KEY} (GitHub Secret) → SF CLI → access token → frontdoor.jsp
+MECANISMO VALIDADO: SF_AUTH_URL_{PROJECT_KEY} (variable de entorno .env) → SF CLI → access token → frontdoor.jsp
 
 Esta es la ÚNICA forma de autenticación. NO usar username/password interactivo.
 NO usar OAuth flows que abran browser.
 
 CONVENCIÓN DE NAMING:
-project*key = prefijo antes del primer guión: "SOLO-123" → "SOLO", "CMIV2-456" → "CMIV2"
-secret esperado: SF_AUTH_URL*{project_key} (debe existir en las variables de entorno del cloud)
+project_key = prefijo antes del primer guión: "SOLO-123" → "SOLO", "CMIV2-456" → "CMIV2"
+variable esperada: SF_AUTH_URL_{project_key} (debe existir en .env de la rutina)
 
-Si el secret no existe → decision = REVIEW, motivo: "SF*AUTH_URL*{PROJECT_KEY} no encontrado".
+Si la variable no existe → decision = REVIEW, motivo: "SF_AUTH_URL_{PROJECT_KEY} no encontrado".
 
 FLUJO DE AUTH:
 
@@ -1716,11 +1774,11 @@ playwright-cli screenshot --filename=auth_check.png
 # Si muestra login form = SF_AUTH_URL inválido → decision = REVIEW
 ```
 
-CUÁNDO SE INVALIDA EL SECRET:
+CUÁNDO SE INVALIDA LA VARIABLE:
 
 - Usuario cambia contraseña en el org
 - Admin revoca el acceso desde Setup → Connected Apps
-  Solución: correr sf org login web desde local y actualizar el secret en GitHub.
+  Solución: regenerar el auth URL via `sf org display` y actualizar la variable en .env de la rutina
 
 ---
 
@@ -1984,10 +2042,10 @@ ERROR: INVALID_OR_NULL_FOR_RESTRICTED_PICKLIST: {campo}
 primero asignar el campo controlador, luego el dependiente.
 → Reintentar con el primer valor activo disponible.
 
-ERROR: DUPLICATE*VALUE
-→ Duplicate Rule bloqueó la creación (PASO 1.2.C sección J ya la documentó).
+ERROR: DUPLICATE_VALUE
+→ Duplicate Rule bloqueó la creación (PASO 1.2.C sección F ya la documentó).
 → Cambiar los campos únicos (email, nombre, número externo) por valores distintos
-ej: agregar sufijo "\_qa_test*{timestamp}".
+ej: agregar sufijo "_qa_test_{timestamp}".
 → Reintentar.
 
 ERROR: INSUFFICIENT_ACCESS / FLS
@@ -2046,22 +2104,17 @@ Ejecutar según el resultado y el tipo de trigger.
 
 VERIFICACIÓN DE ESTADO ANTES DE TRANSICIONAR:
 
-# Refuerzo intencional de la REGLA CRÍTICA — TRANSICIONES PERMITIDAS definida al inicio.
+VER: REGLA CRÍTICA — TRANSICIONES PERMITIDAS (definida en inicio del documento).
 
-# Esta verificación en tiempo de ejecución previene transiciones no deseadas incluso si
+Esta verificación en tiempo de ejecución previene transiciones no deseadas incluso si
+el estado del issue cambió externamente entre el inicio del run y este punto.
 
-# el estado del issue cambió externamente entre el inicio del run y este punto.
-
-Antes de cualquier transición, re-leer el estado actual del issue en Jira:
-estado_actual_ahora = getJiraIssue(issue_key).status.name
-
-Si estado_ya_avanzado = True (detectado en PASO 0.A) O
-estado_actual_ahora == estado_destino (ya está donde lo moveríamos):
-→ NO transicionar
-→ Solo reportar resultados en Slack y guardar en BigQuery
-→ Agregar nota en Slack: "Transición omitida — el issue ya se encuentra en '{estado_actual_ahora}'."
-
-Si no → proceder con la transición normalmente.
+Pasos:
+1. Re-leer el estado actual del issue en Jira: estado_actual_ahora = getJiraIssue(issue_key).status.name
+2. Si estado_ya_avanzado = True (detectado en PASO 0.A): NO transicionar
+3. Si estado_actual_ahora == estado_destino: NO transicionar (ya está en el destino)
+4. En ambos casos: Solo reportar resultados en Slack y guardar en BigQuery
+5. Si no aplica: proceder con la transición normalmente (validando que el estado destino está en la lista permitida)
 
 ═══════════════════════════════════════
 4.A — SI TODOS LOS TCs PASAN (PASS)
@@ -2110,29 +2163,17 @@ PASO 4.B.1 — TRANSICIÓN DEL ISSUE PRINCIPAL
 PASO 4.B.2 — CREAR STORY BUG POR CADA TC FALLIDO
 Para cada TC con status FAILED:
 
-a) DEDUPLICACIÓN (verificar si ya existe en BigQuery):
+POLÍTICA DE BUGS: Se crean TODOS los bugs sin deduplicación por similitud. Los bugs se
+diferencian automáticamente por:
+- project: project_key del issue (ej: CMIV2, SOLO)
+- test_id: TC que falló (TC-01, TC-02, etc.)
+- jira_issue: issue_key del Story Bug (vinculado como subtask)
+- timestamp: created_at — permite rastrear múltiples fallos del mismo escenario en el tiempo
 
-```sql
-SELECT base.id, base.summary, base.jira_issue, base.status, distance
-FROM VECTOR_SEARCH(
-  (SELECT * FROM `procontacto-claude.qa_agent.bugs` WHERE project = '{project_key}'),
-  'embedding',
-  (SELECT ml_generate_embedding_result FROM ML.GENERATE_EMBEDDING(
-    MODEL `procontacto-claude.qa_agent.embedding_model`,
-    (SELECT '{tc_title}: {observed_behavior}' AS content)
-  )),
-  top_k => 3
-)
-WHERE distance < 0.4
-ORDER BY distance ASC
-```
-
-b) Si distance < 0.4 (DUPLICADO):
-→ NO crear Story Bug nuevo
-→ Registrar en BigQuery que el bug ya existe (no hacer nada en Jira)
-→ Mencionar el bug existente en el mensaje de Slack del resultado
-
-c) Si distance >= 0.4 (BUG NUEVO):
+RAZONAMIENTO: Un mismo TC puede fallar por motivos distintos en ejecuciones diferentes
+(regresión, ambiente inestable, cambio de datos). Deduplicar por similitud semántica
+ocultaría estos patrones. BigQuery + embeddings permiten análisis de tendencias y
+correlaciones — mejor mantener el historial completo.
 
      PASO PREVIO — DETERMINAR ASSIGNEE DEL BUG:
      El Story Bug debe asignarse al desarrollador que tenía el issue cuando estaba "En curso".
@@ -2283,8 +2324,10 @@ d) ADJUNTAR SCREENSHOT al Story Bug creado:
 ```python
 import urllib.request, base64, os
 
+jira_domain = os.environ["JIRA_DOMAIN"]
+jira_email  = os.environ["JIRA_EMAIL"]
 jira_token = os.environ["JIRA_API_TOKEN"]
-issue_key = "CMI-234"  # key del Story Bug recién creado
+story_bug_key = "{bug_key_creado_en_paso_anterior}"
 screenshot_path = "tc01_step05.png"
 
 auth = base64.b64encode(f"{jira_email}:{jira_token}".encode()).decode()
@@ -2300,7 +2343,7 @@ body = (
 ).encode() + file_data + f"\r\n--{boundary}--\r\n".encode()
 
 req = urllib.request.Request(
-    f"https://{jira_domain}/rest/api/3/issue/{issue_key}/attachments",
+    f"https://{jira_domain}/rest/api/3/issue/{story_bug_key}/attachments",
     data=body,
     headers={
         "Authorization": f"Basic {auth}",
