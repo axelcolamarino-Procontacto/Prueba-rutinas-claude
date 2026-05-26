@@ -1,0 +1,6 @@
+{
+  "packageDirectories": [{"path": "force-app", "default": true}],
+  "name": "qa-agent-solo",
+  "namespace": "",
+  "sourceApiVersion": "59.0"
+}
