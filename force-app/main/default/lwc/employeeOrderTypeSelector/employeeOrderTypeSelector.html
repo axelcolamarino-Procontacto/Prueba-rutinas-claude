@@ -1,0 +1,71 @@
+<template>
+    <lightning-card title="Selección de Tipo de Orden de Empleado">
+        <div class="slds-p-around_medium">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Cargando..." size="medium"></lightning-spinner>
+            </template>
+
+            <template if:false={isLoading}>
+                <!-- Mensaje de error -->
+                <template if:true={errorMessage}>
+                    <div class="slds-notify slds-notify_alert slds-alert_error slds-m-bottom_medium" role="alert">
+                        <span class="slds-assistive-text">Error</span>
+                        <h2>{errorMessage}</h2>
+                    </div>
+                </template>
+
+                <!-- Selección de tipo de orden -->
+                <div class="slds-form-element slds-m-bottom_medium">
+                    <label class="slds-form-element__label" for="order-type">
+                        <abbr class="slds-required" title="required">* </abbr>
+                        Tipo de Orden
+                    </label>
+                    <div class="slds-form-element__control">
+                        <lightning-radio-group
+                            name="orderType"
+                            label="Tipo de Orden"
+                            options={orderTypeOptions}
+                            value={selectedOrderType}
+                            onchange={handleOrderTypeChange}
+                            type="radio"
+                            variant="label-hidden">
+                        </lightning-radio-group>
+                    </div>
+                </div>
+
+                <!-- Selección de porcentaje de descuento -->
+                <template if:true={selectedOrderType}>
+                    <div class="slds-form-element slds-m-bottom_medium">
+                        <label class="slds-form-element__label" for="discount-percentage">
+                            <abbr class="slds-required" title="required">* </abbr>
+                            Porcentaje de Descuento
+                        </label>
+                        <div class="slds-form-element__control">
+                            <lightning-radio-group
+                                name="discountPercentage"
+                                label="Porcentaje de Descuento"
+                                options={discountOptions}
+                                value={selectedDiscountPercentage}
+                                onchange={handleDiscountPercentageChange}
+                                type="radio"
+                                variant="label-hidden">
+                            </lightning-radio-group>
+                        </div>
+                        <template if:false={isFiftyPercentEnabled}>
+                            <div class="slds-text-color_weak slds-m-top_x-small">
+                                <lightning-icon 
+                                    icon-name="utility:info" 
+                                    size="x-small" 
+                                    class="slds-m-right_x-small">
+                                </lightning-icon>
+                                El descuento del 50% no está disponible porque se alcanzó el límite de unidades para este semestre.
+                            </div>
+                        </template>
+                    </div>
+                </template>
+
+
+            </template>
+        </div>
+    </lightning-card>
+</template>
