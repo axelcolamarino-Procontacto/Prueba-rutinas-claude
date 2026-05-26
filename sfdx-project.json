@@ -1,0 +1,7 @@
+{
+  "packageDirectories": [{"path": "force-app", "default": true}],
+  "name": "qa-testing",
+  "namespace": "",
+  "sfdcLoginUrl": "https://test.salesforce.com",
+  "sourceApiVersion": "61.0"
+}
