@@ -1,19 +1,14 @@
 #!/usr/bin/env python3
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import random
-import sys
+import os
 import base64
 
 # Configuración
 JIRA_URL = "https://procontacto.atlassian.net"
 EMAIL = "axel.colamarino@procontacto.com.mx"
-
-if len(sys.argv) < 2:
-    print("Uso: python3 jira_worklog.py <API_TOKEN>")
-    sys.exit(1)
-
-API_TOKEN = sys.argv[1]
+API_TOKEN = os.getenv("JIRA_API_TOKEN")
 
 # Tareas
 TASKS = [
@@ -32,31 +27,18 @@ def get_business_days(start_date, end_date):
         current += timedelta(days=1)
     return business_days
 
-def add_worklog(task_key, date, hours):
-    """Agrega un worklog a una tarea"""
+def add_worklog(task_key, date, hours, max_retries=3):
+    """Agrega un worklog a una tarea con reintentos en caso de error"""
     url = f"{JIRA_URL}/rest/api/3/issue/{task_key}/worklog"
 
     # Convertir horas a segundos
     time_spent_seconds = int(hours * 3600)
 
+    started_str = date.strftime("%Y-%m-%dT09:00:00.000+0000")
+
     payload = {
         "timeSpentSeconds": time_spent_seconds,
-        "started": date.isoformat() + "T09:00:00.000+0000",
-        "comment": {
-            "type": "doc",
-            "version": 1,
-            "content": [
-                {
-                    "type": "paragraph",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": f"Trabajo registrado: {hours} horas"
-                        }
-                    ]
-                }
-            ]
-        }
+        "started": started_str
     }
 
     auth_string = base64.b64encode(f"{EMAIL}:{API_TOKEN}".encode()).decode()
@@ -65,14 +47,25 @@ def add_worklog(task_key, date, hours):
         "Content-Type": "application/json",
     }
 
-    response = requests.post(url, json=payload, headers=headers)
+    for attempt in range(max_retries):
+        try:
+            response = requests.post(url, json=payload, headers=headers, timeout=10)
 
-    if response.status_code in [201, 200]:
-        print(f"✓ {task_key}: {hours}h agregadas para {date.strftime('%Y-%m-%d')}")
-        return True
-    else:
-        print(f"✗ {task_key}: Error {response.status_code} - {response.text}")
-        return False
+            if response.status_code in [201, 200]:
+                print(f"✓ {task_key}: {hours}h agregadas para {date.strftime('%Y-%m-%d')}")
+                return True
+            else:
+                print(f"✗ {task_key}: Error {response.status_code} - {response.text}")
+                return False
+        except requests.exceptions.RequestException as e:
+            if attempt < max_retries - 1:
+                wait_time = 2 ** attempt
+                print(f"⚠ {task_key}: Reintentando en {wait_time}s ({attempt + 1}/{max_retries})...")
+                import time
+                time.sleep(wait_time)
+            else:
+                print(f"✗ {task_key}: Error de conexión después de {max_retries} intentos - {str(e)}")
+                return False
 
 def main():
     # Calcular rango de fechas (1 al 15 de mayo de 2026)
