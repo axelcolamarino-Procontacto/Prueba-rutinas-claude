@@ -1994,7 +1994,35 @@ REGISTRAR en el TC:
 preconditions_note: "Registro {SObjectApiName} creado por el agente vía SF CLI (ID: {id})"
 El resultado sigue siendo PASSED/FAILED normal — no REVIEW.
 
-PROTOCOLO DE REINTENTO SI `sf data create record` FALLA (máx 3 intentos):
+DEPENDENCIAS DE OBJETOS PADRE (resolver antes de crear el objeto principal):
+
+Cuando el objeto a crear requiere registros relacionados (lookup o master-detail
+requerido), crear primero los registros padre en orden jerárquico antes de intentar
+crear el objeto principal. NUNCA marcar REVIEW por falta de datos padre sin haber
+intentado crearlos.
+
+ALGORITMO DE RESOLUCIÓN DE DEPENDENCIAS:
+1. Intentar crear el objeto principal (ej: Pedido__c)
+2. Si falla con error de lookup/trigger/required-relationship:
+   a. Identificar el objeto padre requerido del mensaje de error
+      (ej: "RestockTrigger impide crear Pedido__c sin OrderItem válido")
+   b. Consultar los campos requeridos del objeto padre igual que en el paso 2 del FLUJO
+   c. Si el objeto padre también tiene dependencias → aplicar este mismo algoritmo
+      recursivamente (máx 3 niveles de profundidad)
+   d. Crear el objeto padre con datos mínimos válidos
+   e. Usar el ID del padre creado como valor del campo lookup en el objeto principal
+   f. Reintentar la creación del objeto principal
+
+EJEMPLO DE CADENA:
+  Pedido__c requiere OrderItem → OrderItem requiere Order + Product2 →
+  Order requiere Account + Pricebook2 activo →
+  Secuencia de creación: Account → Pricebook2 (buscar existente) →
+  Product2 → PricebookEntry → Order → OrderItem → Pedido__c
+
+REGLA IMPORTANTE: antes de crear cualquier objeto padre, verificar si ya existe
+uno válido en el sandbox (SOQL) — reusar existente si hay uno.
+
+PROTOCOLO DE REINTENTO SI `sf data create record` FALLA (máx 3 intentos por objeto):
 
 El error de SF CLI identifica exactamente qué falla. Parsear el error y hacer la
 consulta de metadata correspondiente antes de reintentar:
@@ -2018,10 +2046,10 @@ ERROR: INVALID_OR_NULL_FOR_RESTRICTED_PICKLIST: {campo}
 primero asignar el campo controlador, luego el dependiente.
 → Reintentar con el primer valor activo disponible.
 
-ERROR: DUPLICATE*VALUE
+ERROR: DUPLICATE_VALUE
 → Duplicate Rule bloqueó la creación (PASO 1.2.C sección J ya la documentó).
 → Cambiar los campos únicos (email, nombre, número externo) por valores distintos
-ej: agregar sufijo "\_qa_test*{timestamp}".
+ej: agregar sufijo "_qa_test_{timestamp}".
 → Reintentar.
 
 ERROR: INSUFFICIENT_ACCESS / FLS
@@ -2030,6 +2058,11 @@ ERROR: INSUFFICIENT_ACCESS / FLS
 PermissionsEdit = false → confirmar que efectivamente no es editable.
 → Omitir ese campo del create (si no es realmente requerido) y reintentar.
 → Si es requerido Y no editable → el perfil admin no puede crearlo → TC = REVIEW.
+
+ERROR POR TRIGGER (cualquier mensaje que mencione trigger name):
+→ El trigger requiere que existan registros relacionados antes de crear este objeto.
+→ Aplicar el ALGORITMO DE RESOLUCIÓN DE DEPENDENCIAS descrito arriba.
+→ Identificar el objeto que el trigger espera, crearlo primero, reintentar.
 
 INTENTO 1 → falla → aplicar fix según tipo de error → INTENTO 2
 INTENTO 2 → falla → aplicar fix adicional → INTENTO 3
