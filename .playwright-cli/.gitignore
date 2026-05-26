@@ -1,0 +1,4 @@
+# Playwright CLI session artifacts — generated at runtime
+*.log
+*.yml
+traces/
