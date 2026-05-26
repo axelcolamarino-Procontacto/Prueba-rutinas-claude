@@ -2467,29 +2467,40 @@ El agente no puede leer su propio usage exacto, pero puede estimarlo:
 
 ```python
 # Constantes conocidas
-PROMPT_TOKENS_BASE = 20000   # system prompt (~2750 líneas)
-TOKENS_PER_TOOL_CALL = 300   # promedio input+output por tool call (BQ, Jira, Slack, SF CLI)
-TOKENS_PER_TC = 800          # estimado por TC ejecutado (Playwright output + análisis)
+PROMPT_TOKENS_BASE      = 20_000  # system prompt (~2750 líneas)
+TOKENS_PER_TEXT_CALL    = 500     # tool call sin imagen: BQ, Jira, Slack, SF CLI (request + response)
+TOKENS_PER_SCREENSHOT   = 1_500   # cada imagen enviada a visión (Playwright screenshot)
+TOKENS_PER_TC_OUTPUT    = 800     # output generado por TC (análisis + decisión PASS/FAIL)
 
-# Variables del run
-tool_calls_count = (
+# Variables del run — conteo por tipo
+text_calls_count = (
     jira_calls      # getJiraIssue, getTransitions, transitionJiraIssue, createJiraIssue
     + bq_calls      # execute_sql (queries + inserts)
     + slack_calls   # chat.postMessage
     + sf_calls      # sf data query + sf data create
-    + playwright_calls  # screenshots + comandos
+    + playwright_text_calls  # comandos CLI sin imagen (run, navigate, click, etc.)
 )
-tcs_ejecutados = len([tc for tc in test_cases if tc["status"] != "REVIEW"])
+screenshots_count  = playwright_screenshot_calls  # cada vez que se captura y analiza una imagen
+tcs_ejecutados     = len([tc for tc in test_cases if tc["status"] != "REVIEW"])
 
-estimated_input_tokens  = PROMPT_TOKENS_BASE + (tool_calls_count * TOKENS_PER_TOOL_CALL)
-estimated_output_tokens = tcs_ejecutados * TOKENS_PER_TC
+# Estimación: si no llevaste conteo separado de screenshots,
+# usar aproximación de 2 screenshots por TC ejecutado
+if screenshots_count == 0:
+    screenshots_count = tcs_ejecutados * 2
+
+estimated_input_tokens  = (
+    PROMPT_TOKENS_BASE
+    + (text_calls_count   * TOKENS_PER_TEXT_CALL)
+    + (screenshots_count  * TOKENS_PER_SCREENSHOT)
+)
+estimated_output_tokens = tcs_ejecutados * TOKENS_PER_TC_OUTPUT
 estimated_total_tokens  = estimated_input_tokens + estimated_output_tokens
 
 # Costo estimado USD (precios Sonnet 4.6 — ajustar si cambia modelo)
 # Input: $3 / 1M tokens (sin caché — tratar siempre como sin caché)
 # Output: $15 / 1M tokens
-cost_input_usd  = (estimated_input_tokens  / 1_000_000) * 3.00   # sin caché (conservador)
-cost_output_usd = (estimated_output_tokens / 1_000_000) * 15.00
+cost_input_usd     = (estimated_input_tokens  / 1_000_000) * 3.00   # sin caché (conservador)
+cost_output_usd    = (estimated_output_tokens / 1_000_000) * 15.00
 estimated_cost_usd = round(cost_input_usd + cost_output_usd, 5)
 ```
 
@@ -2506,7 +2517,8 @@ VALUES (
     "estimated_output_tokens": {estimated_output_tokens},
     "estimated_total_tokens": {estimated_total_tokens},
     "estimated_cost_usd": {estimated_cost_usd},
-    "tool_calls_count": {tool_calls_count},
+    "text_calls_count": {text_calls_count},
+    "screenshots_count": {screenshots_count},
     "tcs_ejecutados": {tcs_ejecutados}
   }',
   'low'
