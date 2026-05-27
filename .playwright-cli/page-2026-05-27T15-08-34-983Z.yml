@@ -1,0 +1,196 @@
+- generic:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - link "Skip to Navigation" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e6] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e10]:
+        - generic [ref=e14]:
+          - button "Toggle Panel" [ref=e18] [cursor=pointer]:
+            - img [ref=e22]
+            - generic [ref=e25]: Menu
+          - generic [ref=e30]:
+            - img [ref=e34]
+            - generic [ref=e38]: Sandbox (test)
+        - button "Show menu" [ref=e47] [cursor=pointer]:
+          - img [ref=e49]
+          - generic [ref=e52]: Show menu
+      - generic [ref=e53]:
+        - button "Search" [ref=e59]:
+          - img [ref=e61]
+          - text: Search...
+        - navigation "Global Header" [ref=e64]:
+          - list [ref=e66]:
+            - listitem [ref=e67]:
+              - group [ref=e68]:
+                - button "This item doesn't support favorites" [ref=e70] [cursor=pointer]:
+                  - generic [ref=e71]:
+                    - img [ref=e75]
+                    - tooltip "This item doesn't support favorites"
+                - button "Favorites list" [ref=e79] [cursor=pointer]:
+                  - generic [ref=e80]:
+                    - img [ref=e84]
+                    - tooltip "Favorites list"
+            - listitem [ref=e87]:
+              - button "Global Actions" [ref=e93] [cursor=pointer]:
+                - generic [ref=e94]:
+                  - img [ref=e98]
+                  - tooltip "Global Actions"
+            - listitem [ref=e101]:
+              - button "Guidance Center" [ref=e103] [cursor=pointer]:
+                - generic [ref=e104]:
+                  - img [ref=e108]
+                  - tooltip "Guidance Center"
+            - listitem [ref=e111]:
+              - button "Salesforce Help" [ref=e114] [cursor=pointer]:
+                - generic [ref=e115]:
+                  - img [ref=e119]
+                  - tooltip "Salesforce Help"
+            - listitem [ref=e122]:
+              - button "Setup" [ref=e128] [cursor=pointer]:
+                - generic [ref=e129]:
+                  - img [ref=e133]
+                  - tooltip "Setup"
+            - listitem [ref=e136]:
+              - button "Notifications" [ref=e139] [cursor=pointer]:
+                - generic [ref=e140]:
+                  - img [ref=e145]
+                  - tooltip "Notifications"
+            - listitem [ref=e149]:
+              - button "View profile" [ref=e152] [cursor=pointer]:
+                - generic [ref=e153]:
+                  - tooltip "View profile"
+    - generic [ref=e157]:
+      - generic:
+        - generic [ref=e158]:
+          - generic [ref=e160]:
+            - generic [ref=e161]:
+              - navigation "App" [ref=e162]:
+                - button "App Launcher" [ref=e164] [cursor=pointer]:
+                  - generic [ref=e175]: App Launcher
+              - heading "Gestión de Órdenes" [level=1] [ref=e176]:
+                - generic "Gestión de Órdenes" [ref=e177]
+            - navigation "Global" [ref=e178]:
+              - link "Home" [ref=e180] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e181]: Home
+              - button "Show Navigation Menu" [ref=e184] [cursor=pointer]:
+                - img [ref=e186]
+                - generic [ref=e189]: Show Navigation Menu
+          - navigation "Workspaces" [ref=e191]:
+            - tablist "Workspace tabs for Gestión de Órdenes" [ref=e192]:
+              - generic [ref=e194]: Press Spacebar to reorder tabs.
+              - tab "80000000002 | Order" [ref=e195] [cursor=pointer]:
+                - generic [ref=e196]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Order
+                - generic [ref=e197]: 80000000002 | Order
+              - button "Actions" [ref=e200] [cursor=pointer]:
+                - img [ref=e202]
+                - generic [ref=e205]: Actions
+              - button "Close Tab" [ref=e207] [cursor=pointer]:
+                - img [ref=e209]
+                - generic [ref=e212]: Close Tab
+              - status [ref=e213]
+              - tab "Loading..." [ref=e214] [cursor=pointer]:
+                - generic [ref=e215]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Loading...
+                - generic [ref=e216]: Loading...
+              - button "Actions" [ref=e219] [cursor=pointer]:
+                - img [ref=e221]
+                - generic [ref=e224]: Actions
+              - button "Close Tab" [ref=e226] [cursor=pointer]:
+                - img [ref=e228]
+                - generic [ref=e231]: Close Tab
+              - status [ref=e232]
+              - tab "Loading..." [ref=e233] [cursor=pointer]:
+                - generic [ref=e234]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Loading...
+                - generic [ref=e235]: Loading...
+              - button "Actions" [ref=e238] [cursor=pointer]:
+                - img [ref=e240]
+                - generic [ref=e243]: Actions
+              - button "Close Tab" [ref=e245] [cursor=pointer]:
+                - img [ref=e247]
+                - generic [ref=e250]: Close Tab
+              - status [ref=e251]
+              - tab "Recently Viewed | Sucursales" [ref=e252] [cursor=pointer]:
+                - generic [ref=e253]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Sucursal c
+                - generic [ref=e254]: Recently Viewed | Sucursales
+              - button "Actions" [ref=e257] [cursor=pointer]:
+                - img [ref=e259]
+                - generic [ref=e262]: Actions
+              - button "Close Tab" [ref=e264] [cursor=pointer]:
+                - img [ref=e266]
+                - generic [ref=e269]: Close Tab
+              - status [ref=e270]
+              - tab "Loading..." [selected] [ref=e271] [cursor=pointer]:
+                - generic [ref=e272]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Loading...
+                - generic [ref=e273]: Loading...
+              - button "Actions" [ref=e276] [cursor=pointer]:
+                - img [ref=e278]
+                - generic [ref=e281]: Actions
+              - button "Close Tab" [ref=e283] [cursor=pointer]:
+                - img [ref=e285]
+                - generic [ref=e288]: Close Tab
+              - status [ref=e289] [cursor=pointer]
+              - button "More Show additional tabs" [ref=e294] [cursor=pointer]:
+                - generic [ref=e295]: More
+                - generic [ref=e297]:
+                  - img [ref=e299]
+                  - generic [ref=e302]: Show additional tabs
+        - main [ref=e305]:
+          - tabpanel [ref=e306]:
+            - tabpanel [ref=e309]:
+              - generic [ref=e314]:
+                - generic [ref=e315]:
+                  - heading "Responder pedidos - Rechazar" [level=2] [ref=e427]
+                  - generic [ref=e432]:
+                    - generic [ref=e433]: Buscar por Número de impresión
+                    - generic [ref=e434]:
+                      - searchbox "Buscar por Número de impresión" [ref=e435]
+                      - generic:
+                        - img
+                - generic [ref=e340]:
+                  - button "Volver" [ref=e438] [cursor=pointer]
+                  - button "Siguiente" [active] [ref=e343] [cursor=pointer]
+    - generic:
+      - contentinfo "Utility Bar":
+        - list [ref=e346]:
+          - listitem [ref=e347]:
+            - button "History" [ref=e350] [cursor=pointer]:
+              - img [ref=e354]
+              - generic [ref=e357]: History
+          - listitem [ref=e358]:
+            - button "Notes" [ref=e361] [cursor=pointer]:
+              - img [ref=e365]
+              - generic [ref=e368]: Notes
+  - generic:
+    - status

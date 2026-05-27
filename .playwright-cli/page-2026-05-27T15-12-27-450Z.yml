@@ -1,0 +1,1287 @@
+- generic [active]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - link "Skip to Navigation" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e6] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e10]:
+        - generic [ref=e14]:
+          - button "Toggle Panel" [ref=e18] [cursor=pointer]:
+            - img [ref=e22]
+            - generic [ref=e25]: Menu
+          - generic [ref=e30]:
+            - img [ref=e34]
+            - generic [ref=e38]: Sandbox (test)
+        - button "Show menu" [ref=e47] [cursor=pointer]:
+          - img [ref=e49]
+          - generic [ref=e52]: Show menu
+      - generic [ref=e53]:
+        - generic [ref=e58]:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - img
+          - generic [ref=e61]:
+            - combobox "Search Setup" [ref=e62]
+            - generic [ref=e63]: Search Setup
+        - navigation "Global Header" [ref=e64]:
+          - list [ref=e66]:
+            - listitem [ref=e67]:
+              - group [ref=e68]:
+                - button "This item doesn't support favorites" [ref=e70] [cursor=pointer]:
+                  - generic [ref=e71]:
+                    - img [ref=e75]
+                    - tooltip "This item doesn't support favorites"
+                - button "Favorites list" [disabled] [ref=e79]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                    - tooltip "Favorites list"
+            - listitem [ref=e80]:
+              - button "Global Actions" [ref=e86] [cursor=pointer]:
+                - generic [ref=e87]:
+                  - img [ref=e91]
+                  - tooltip "Global Actions"
+            - listitem [ref=e94]:
+              - button "Guidance Center" [ref=e96] [cursor=pointer]:
+                - generic [ref=e97]:
+                  - img [ref=e101]
+                  - tooltip "Guidance Center"
+            - listitem [ref=e104]:
+              - button "Salesforce Help" [ref=e107] [cursor=pointer]:
+                - generic [ref=e108]:
+                  - img [ref=e112]
+                  - tooltip "Salesforce Help"
+            - listitem [ref=e115]:
+              - button "Setup" [ref=e121] [cursor=pointer]:
+                - generic [ref=e122]:
+                  - img [ref=e126]
+                  - tooltip "Setup"
+            - listitem [ref=e129]:
+              - button "Notifications" [ref=e132] [cursor=pointer]:
+                - generic [ref=e133]:
+                  - img [ref=e138]
+                  - tooltip "Notifications"
+            - listitem [ref=e142]:
+              - button "View profile" [ref=e145] [cursor=pointer]:
+                - generic [ref=e146]:
+                  - tooltip "View profile"
+    - generic [ref=e150]:
+      - generic:
+        - generic [ref=e151]:
+          - generic [ref=e154]:
+            - navigation "App" [ref=e155]:
+              - button "App Launcher" [ref=e157] [cursor=pointer]:
+                - generic [ref=e168]: App Launcher
+            - generic "Setup" [ref=e170]
+          - navigation "Workspaces" [ref=e172]:
+            - tablist "Workspace tabs for Setup" [ref=e173]:
+              - generic [ref=e175]: Press Spacebar to reorder tabs.
+              - tab "Home" [selected] [ref=e176] [cursor=pointer]:
+                - generic [ref=e177]: Home
+              - status [ref=e178] [cursor=pointer]
+              - tab "Object Manager" [ref=e179] [cursor=pointer]:
+                - generic [ref=e180]: Object Manager
+              - button "Object Manager List" [ref=e185] [cursor=pointer]:
+                - generic [ref=e187]:
+                  - img [ref=e189]
+                  - generic [ref=e192]: Object Manager List
+              - status [ref=e193]
+        - generic [ref=e195]:
+          - generic [ref=e202]:
+            - generic [ref=e203]:
+              - generic [ref=e204]: Quick Find
+              - img [ref=e208]
+              - searchbox "Quick Find" [ref=e212]
+            - tree "Setup Tree" [ref=e213]:
+              - treeitem "Setup Home" [level=1] [ref=e214]:
+                - generic "Setup Home" [ref=e215]:
+                  - link "Setup Home" [ref=e216] [cursor=pointer]:
+                    - /url: /lightning/setup/SetupOneHome/home
+              - treeitem "Salesforce Foundations" [level=1] [ref=e217]:
+                - generic "Salesforce Foundations" [ref=e218]:
+                  - link "Salesforce Foundations" [ref=e219] [cursor=pointer]:
+                    - /url: /lightning/setup/C360ProvisioningSetup/home
+              - treeitem "Salesforce Go" [level=1] [ref=e220]:
+                - generic "Salesforce Go" [ref=e221]:
+                  - link "Salesforce Go" [ref=e222] [cursor=pointer]:
+                    - /url: /lightning/setup/SalesforceGo/home
+              - treeitem "Service Setup Assistant" [level=1] [ref=e223]:
+                - generic "Service Setup Assistant" [ref=e224]:
+                  - link "Service Setup Assistant" [ref=e225] [cursor=pointer]:
+                    - /url: /lightning/setup/ServiceHome/home
+              - treeitem "Service Cloud Reports" [level=1] [ref=e226]:
+                - generic "Service Cloud Reports" [ref=e227]:
+                  - link "Service Cloud Reports" [ref=e228] [cursor=pointer]:
+                    - /url: /lightning/setup/ServiceCloudReportsSetupAssistant/home
+              - treeitem "Hyperforce Assistant" [level=1] [ref=e229]:
+                - generic "Hyperforce Assistant" [ref=e230]:
+                  - link "Hyperforce Assistant" [ref=e231] [cursor=pointer]:
+                    - /url: /lightning/setup/HyperforceAssistant/home
+              - treeitem "Release Updates" [level=1] [ref=e232]:
+                - generic "Release Updates" [ref=e233]:
+                  - link "Release Updates" [ref=e234] [cursor=pointer]:
+                    - /url: /lightning/setup/ReleaseUpdates/home
+              - treeitem "Salesforce Mobile App" [level=1] [ref=e235]:
+                - generic "Salesforce Mobile App" [ref=e236]:
+                  - link "Salesforce Mobile App" [ref=e237] [cursor=pointer]:
+                    - /url: /lightning/setup/SalesforceMobileAppQuickStart/home
+              - treeitem "AgentExchange Offers" [level=1] [ref=e238]:
+                - generic "AgentExchange Offers" [ref=e239]:
+                  - link "AgentExchange Offers" [ref=e240] [cursor=pointer]:
+                    - /url: /lightning/setup/IsvTmOffersMarketplace/home
+              - treeitem "Integration Definitions" [level=1] [ref=e241]:
+                - generic "Integration Definitions" [ref=e242]:
+                  - link "Integration Definitions" [ref=e243] [cursor=pointer]:
+                    - /url: /lightning/setup/IntegrationConfiguration/home
+              - treeitem "Sales Cloud Everywhere" [level=1] [ref=e244]:
+                - generic "Sales Cloud Everywhere" [ref=e245]:
+                  - link "Sales Cloud Everywhere" [ref=e246] [cursor=pointer]:
+                    - /url: /lightning/setup/SalesCloudEverywhereSettings/home
+              - treeitem "Administration" [level=1] [ref=e247]:
+                - heading "Administration" [level=4] [ref=e248]
+              - treeitem "Users" [expanded] [level=1] [ref=e249]:
+                - generic "Users" [ref=e250]:
+                  - button "Collapse" [ref=e251] [cursor=pointer]:
+                    - img [ref=e253]
+                    - generic [ref=e256]: Collapse
+                  - link "Users" [ref=e257] [cursor=pointer]:
+                    - /url: javascript:void(0)
+                - group [ref=e258]:
+                  - treeitem "Analytics Groups" [level=2] [ref=e259]:
+                    - generic "Analytics Groups" [ref=e260]:
+                      - link "Analytics Groups" [ref=e261] [cursor=pointer]:
+                        - /url: /lightning/setup/DataAnalyticsGroups/home
+                  - treeitem "Permission Set Groups" [level=2] [ref=e262]:
+                    - generic "Permission Set Groups" [ref=e263]:
+                      - link "Permission Set Groups" [ref=e264] [cursor=pointer]:
+                        - /url: /lightning/setup/PermSetGroups/home
+                  - treeitem "Permission Sets" [level=2] [ref=e265]:
+                    - generic "Permission Sets" [ref=e266]:
+                      - link "Permission Sets" [ref=e267] [cursor=pointer]:
+                        - /url: /lightning/setup/PermSets/home
+                  - treeitem "Profiles" [level=2] [ref=e268]:
+                    - generic "Profiles" [ref=e269]:
+                      - link "Profiles" [ref=e270] [cursor=pointer]:
+                        - /url: /lightning/setup/EnhancedProfiles/home
+                  - treeitem "Public Groups" [level=2] [ref=e271]:
+                    - generic "Public Groups" [ref=e272]:
+                      - link "Public Groups" [ref=e273] [cursor=pointer]:
+                        - /url: /lightning/setup/PublicGroups/home
+                  - treeitem "Queues" [level=2] [ref=e274]:
+                    - generic "Queues" [ref=e275]:
+                      - link "Queues" [ref=e276] [cursor=pointer]:
+                        - /url: /lightning/setup/Queues/home
+                  - treeitem "Roles" [level=2] [ref=e277]:
+                    - generic "Roles" [ref=e278]:
+                      - link "Roles" [ref=e279] [cursor=pointer]:
+                        - /url: /lightning/setup/Roles/home
+                  - treeitem "User Management Settings" [level=2] [ref=e280]:
+                    - generic "User Management Settings" [ref=e281]:
+                      - link "User Management Settings" [ref=e282] [cursor=pointer]:
+                        - /url: /lightning/setup/UserManagementSettings/home
+                  - treeitem "Users" [level=2] [selected] [ref=e283]:
+                    - generic "Users" [ref=e284]:
+                      - link "Users" [ref=e285] [cursor=pointer]:
+                        - /url: /lightning/setup/ManageUsers/home
+              - treeitem "Data" [level=1] [ref=e286]:
+                - generic "Data" [ref=e287]:
+                  - button "Expand" [ref=e288] [cursor=pointer]:
+                    - img [ref=e290]
+                    - generic [ref=e293]: Expand
+                  - link "Data" [ref=e294] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Email" [level=1] [ref=e295]:
+                - generic "Email" [ref=e296]:
+                  - button "Expand" [ref=e297] [cursor=pointer]:
+                    - img [ref=e299]
+                    - generic [ref=e302]: Expand
+                  - link "Email" [ref=e303] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Platform Tools" [level=1] [ref=e304]:
+                - heading "Platform Tools" [level=4] [ref=e305]
+              - treeitem "Apps" [level=1] [ref=e306]:
+                - generic "Apps" [ref=e307]:
+                  - button "Expand" [ref=e308] [cursor=pointer]:
+                    - img [ref=e310]
+                    - generic [ref=e313]: Expand
+                  - link "Apps" [ref=e314] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Feature Settings" [level=1] [ref=e315]:
+                - generic "Feature Settings" [ref=e316]:
+                  - button "Expand" [ref=e317] [cursor=pointer]:
+                    - img [ref=e319]
+                    - generic [ref=e322]: Expand
+                  - link "Feature Settings" [ref=e323] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Slack" [level=1] [ref=e324]:
+                - generic "Slack" [ref=e325]:
+                  - button "Expand" [ref=e326] [cursor=pointer]:
+                    - img [ref=e328]
+                    - generic [ref=e331]: Expand
+                  - link "Slack" [ref=e332] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Workflow Services" [level=1] [ref=e333]:
+                - generic "Workflow Services" [ref=e334]:
+                  - button "Expand" [ref=e335] [cursor=pointer]:
+                    - img [ref=e337]
+                    - generic [ref=e340]: Expand
+                  - link "Workflow Services" [ref=e341] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Data Cloud" [level=1] [ref=e342]:
+                - generic "Data Cloud" [ref=e343]:
+                  - button "Expand" [ref=e344] [cursor=pointer]:
+                    - img [ref=e346]
+                    - generic [ref=e349]: Expand
+                  - link "Data Cloud" [ref=e350] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Heroku" [level=1] [ref=e351]:
+                - generic "Heroku" [ref=e352]:
+                  - button "Expand" [ref=e353] [cursor=pointer]:
+                    - img [ref=e355]
+                    - generic [ref=e358]: Expand
+                  - link "Heroku" [ref=e359] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "MuleSoft" [level=1] [ref=e360]:
+                - generic "MuleSoft" [ref=e361]:
+                  - button "Expand" [ref=e362] [cursor=pointer]:
+                    - img [ref=e364]
+                    - generic [ref=e367]: Expand
+                  - link "MuleSoft" [ref=e368] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Einstein" [level=1] [ref=e369]:
+                - generic "Einstein" [ref=e370]:
+                  - button "Expand" [ref=e371] [cursor=pointer]:
+                    - img [ref=e373]
+                    - generic [ref=e376]: Expand
+                  - link "Einstein" [ref=e377] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Objects and Fields" [level=1] [ref=e378]:
+                - generic "Objects and Fields" [ref=e379]:
+                  - button "Expand" [ref=e380] [cursor=pointer]:
+                    - img [ref=e382]
+                    - generic [ref=e385]: Expand
+                  - link "Objects and Fields" [ref=e386] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Events" [level=1] [ref=e387]:
+                - generic "Events" [ref=e388]:
+                  - button "Expand" [ref=e389] [cursor=pointer]:
+                    - img [ref=e391]
+                    - generic [ref=e394]: Expand
+                  - link "Events" [ref=e395] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Process Automation" [level=1] [ref=e396]:
+                - generic "Process Automation" [ref=e397]:
+                  - button "Expand" [ref=e398] [cursor=pointer]:
+                    - img [ref=e400]
+                    - generic [ref=e403]: Expand
+                  - link "Process Automation" [ref=e404] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "User Interface" [level=1] [ref=e405]:
+                - generic "User Interface" [ref=e406]:
+                  - button "Expand" [ref=e407] [cursor=pointer]:
+                    - img [ref=e409]
+                    - generic [ref=e412]: Expand
+                  - link "User Interface" [ref=e413] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Custom Code" [level=1] [ref=e414]:
+                - generic "Custom Code" [ref=e415]:
+                  - button "Expand" [ref=e416] [cursor=pointer]:
+                    - img [ref=e418]
+                    - generic [ref=e421]: Expand
+                  - link "Custom Code" [ref=e422] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Development" [level=1] [ref=e423]:
+                - generic "Development" [ref=e424]:
+                  - button "Expand" [ref=e425] [cursor=pointer]:
+                    - img [ref=e427]
+                    - generic [ref=e430]: Expand
+                  - link "Development" [ref=e431] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Scale" [level=1] [ref=e432]:
+                - generic "Scale" [ref=e433]:
+                  - button "Expand" [ref=e434] [cursor=pointer]:
+                    - img [ref=e436]
+                    - generic [ref=e439]: Expand
+                  - link "Scale" [ref=e440] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Environments" [level=1] [ref=e441]:
+                - generic "Environments" [ref=e442]:
+                  - button "Expand" [ref=e443] [cursor=pointer]:
+                    - img [ref=e445]
+                    - generic [ref=e448]: Expand
+                  - link "Environments" [ref=e449] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "User Engagement" [level=1] [ref=e450]:
+                - generic "User Engagement" [ref=e451]:
+                  - button "Expand" [ref=e452] [cursor=pointer]:
+                    - img [ref=e454]
+                    - generic [ref=e457]: Expand
+                  - link "User Engagement" [ref=e458] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Enablement" [level=1] [ref=e459]:
+                - generic "Enablement" [ref=e460]:
+                  - button "Expand" [ref=e461] [cursor=pointer]:
+                    - img [ref=e463]
+                    - generic [ref=e466]: Expand
+                  - link "Enablement" [ref=e467] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Integrations" [level=1] [ref=e468]:
+                - generic "Integrations" [ref=e469]:
+                  - button "Expand" [ref=e470] [cursor=pointer]:
+                    - img [ref=e472]
+                    - generic [ref=e475]: Expand
+                  - link "Integrations" [ref=e476] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Notification Builder" [level=1] [ref=e477]:
+                - generic "Notification Builder" [ref=e478]:
+                  - button "Expand" [ref=e479] [cursor=pointer]:
+                    - img [ref=e481]
+                    - generic [ref=e484]: Expand
+                  - link "Notification Builder" [ref=e485] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Offline" [level=1] [ref=e486]:
+                - generic "Offline" [ref=e487]:
+                  - button "Expand" [ref=e488] [cursor=pointer]:
+                    - img [ref=e490]
+                    - generic [ref=e493]: Expand
+                  - link "Offline" [ref=e494] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Go Accelerate" [level=1] [ref=e495]:
+                - generic "Go Accelerate" [ref=e496]:
+                  - button "Expand" [ref=e497] [cursor=pointer]:
+                    - img [ref=e499]
+                    - generic [ref=e502]: Expand
+                  - link "Go Accelerate" [ref=e503] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Settings" [level=1] [ref=e504]:
+                - heading "Settings" [level=4] [ref=e505]
+              - treeitem "Company Settings" [level=1] [ref=e506]:
+                - generic "Company Settings" [ref=e507]:
+                  - button "Expand" [ref=e508] [cursor=pointer]:
+                    - img [ref=e510]
+                    - generic [ref=e513]: Expand
+                  - link "Company Settings" [ref=e514] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Salesforce Release Manager" [level=1] [ref=e515]:
+                - generic "Salesforce Release Manager" [ref=e516]:
+                  - button "Expand" [ref=e517] [cursor=pointer]:
+                    - img [ref=e519]
+                    - generic [ref=e522]: Expand
+                  - link "Salesforce Release Manager" [ref=e523] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Data Classification" [level=1] [ref=e524]:
+                - generic "Data Classification" [ref=e525]:
+                  - button "Expand" [ref=e526] [cursor=pointer]:
+                    - img [ref=e528]
+                    - generic [ref=e531]: Expand
+                  - link "Data Classification" [ref=e532] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Privacy Center" [level=1] [ref=e533]:
+                - generic "Privacy Center" [ref=e534]:
+                  - button "Expand" [ref=e535] [cursor=pointer]:
+                    - img [ref=e537]
+                    - generic [ref=e540]: Expand
+                  - link "Privacy Center" [ref=e541] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Identity" [level=1] [ref=e542]:
+                - generic "Identity" [ref=e543]:
+                  - button "Expand" [ref=e544] [cursor=pointer]:
+                    - img [ref=e546]
+                    - generic [ref=e549]: Expand
+                  - link "Identity" [ref=e550] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Security" [level=1] [ref=e551]:
+                - generic "Security" [ref=e552]:
+                  - button "Expand" [ref=e553] [cursor=pointer]:
+                    - img [ref=e555]
+                    - generic [ref=e558]: Expand
+                  - link "Security" [ref=e559] [cursor=pointer]:
+                    - /url: javascript:void(0)
+              - treeitem "Setup Assistant" [level=1] [ref=e560]:
+                - generic "Setup Assistant" [ref=e561]:
+                  - link "Setup Assistant" [ref=e562] [cursor=pointer]:
+                    - /url: /lightning/setup/GettingStartedEmbedded/home
+          - main [ref=e563]:
+            - tabpanel [ref=e564]:
+              - tabpanel [ref=e567]:
+                - generic [ref=e602]:
+                  - generic [ref=e605]:
+                    - img [ref=e610]
+                    - generic [ref=e615]:
+                      - link "Setup" [ref=e617] [cursor=pointer]:
+                        - /url: "#"
+                      - heading "Users" [level=1] [ref=e619]
+                  - iframe [ref=e624]:
+                    - generic [active] [ref=f10e1]:
+                      - img [ref=f10e2]
+                      - generic [ref=f10e4]:
+                        - heading "All Users" [level=1] [ref=f10e6]
+                        - link "Help for this Page" [ref=f10e8] [cursor=pointer]:
+                          - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=admin_users.htm&section=User_Management&language=en_US&release=262.7&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                      - generic [ref=f10e9]:
+                        - text: On this page you can create, view, and manage users.
+                        - text: To get more licenses, use the Your Account app.
+                        - link "Let's Go" [ref=f10e10] [cursor=pointer]:
+                          - /url: /lightning/app/standard__OnlineSales/n/standard-OnlineSalesHome
+                      - generic [ref=f10e12]:
+                        - generic [ref=f10e16]:
+                          - generic [ref=f10e17]:
+                            - generic [ref=f10e18]: "*"
+                            - text: "View:"
+                          - combobox "* View:" [ref=f10e20]:
+                            - option "Active Users"
+                            - option "Admin Users"
+                            - option "All Users" [selected]
+                          - generic [ref=f10e21]:
+                            - link "Edit" [ref=f10e22] [cursor=pointer]:
+                              - /url: javascript:srcUp(%27%2Fui%2Flist%2FFilterEditPage%3Fid%3D00BHs00000NlHH2%26setupid%3DManageUsers%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%27);
+                            - text: "|"
+                            - link "Create New View" [ref=f10e23] [cursor=pointer]:
+                              - /url: javascript:srcUp(%27%2Fui%2Flist%2FFilterEditPage%3Fftype%3Ds%26setupid%3DManageUsers%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%27);
+                        - generic [ref=f10e24]:
+                          - link "<Previous Page" [ref=f10e25] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26lsr%3D0%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26retURL%3D%252Fsetup%252Fhome%27);
+                          - text: "|"
+                          - link "Next Page>" [ref=f10e26] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26lsr%3D50%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26retURL%3D%252Fsetup%252Fhome%27);
+                      - generic [ref=f10e29]:
+                        - link "A" [ref=f10e30] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D0%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "B" [ref=f10e31] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D1%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "C" [ref=f10e32] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D2%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "D" [ref=f10e33] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D3%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "E" [ref=f10e34] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D4%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "F" [ref=f10e35] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D5%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "G" [ref=f10e36] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D6%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "H" [ref=f10e37] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D7%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "I" [ref=f10e38] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D8%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "J" [ref=f10e39] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D9%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "K" [ref=f10e40] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D10%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "L" [ref=f10e41] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D11%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "M" [ref=f10e42] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D12%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "N" [ref=f10e43] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D13%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "Ñ" [ref=f10e44] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D14%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "O" [ref=f10e45] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D15%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "P" [ref=f10e46] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D16%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "Q" [ref=f10e47] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D17%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "R" [ref=f10e48] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D18%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "S" [ref=f10e49] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D19%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "T" [ref=f10e50] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D20%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "U" [ref=f10e51] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D21%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "V" [ref=f10e52] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D22%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "W" [ref=f10e53] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D23%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "X" [ref=f10e54] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D24%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "Y" [ref=f10e55] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D25%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "Z" [ref=f10e56] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D26%26retURL%3D%252Fsetup%252Fhome%27);
+                        - link "Other" [ref=f10e57] [cursor=pointer]:
+                          - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D27%26retURL%3D%252Fsetup%252Fhome%27);
+                        - text: All
+                      - generic [ref=f10e60]:
+                        - table [ref=f10e62]:
+                          - rowgroup [ref=f10e63]:
+                            - row "New User Reset Password(s) Add Multiple Users" [ref=f10e64]:
+                              - cell [ref=f10e65]
+                              - cell "New User Reset Password(s) Add Multiple Users" [ref=f10e66]:
+                                - button "New User" [ref=f10e67] [cursor=pointer]
+                                - button "Reset Password(s)" [ref=f10e68] [cursor=pointer]
+                                - button "Add Multiple Users" [ref=f10e69] [cursor=pointer]
+                        - generic [ref=f10e70]:
+                          - table [ref=f10e71]:
+                            - rowgroup [ref=f10e72]:
+                              - row "Toggle All Rows Action Full NameSorted Ascending Alias Username Last Login Role Active Profile" [ref=f10e73]:
+                                - columnheader "Toggle All Rows Action" [ref=f10e74]:
+                                  - checkbox "Toggle All Rows" [ref=f10e75]
+                                  - text: Action
+                                - columnheader "Full NameSorted Ascending" [ref=f10e76]:
+                                  - link "Full NameSorted Ascending" [ref=f10e77] [cursor=pointer]:
+                                    - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsi%3D-1%26retURL%3D%252Fsetup%252Fhome%27);
+                                    - text: Full Name
+                                    - img "Sorted Ascending" [ref=f10e78]
+                                - columnheader "Alias" [ref=f10e79]:
+                                  - link "Alias" [ref=f10e80] [cursor=pointer]:
+                                    - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsi%3D2%26retURL%3D%252Fsetup%252Fhome%27);
+                                - columnheader "Username" [ref=f10e81]:
+                                  - link "Username" [ref=f10e82] [cursor=pointer]:
+                                    - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsi%3D3%26retURL%3D%252Fsetup%252Fhome%27);
+                                - columnheader "Last Login" [ref=f10e83]:
+                                  - link "Last Login" [ref=f10e84] [cursor=pointer]:
+                                    - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsi%3D4%26retURL%3D%252Fsetup%252Fhome%27);
+                                - columnheader "Role" [ref=f10e85]:
+                                  - link "Role" [ref=f10e86] [cursor=pointer]:
+                                    - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsi%3D5%26retURL%3D%252Fsetup%252Fhome%27);
+                                - columnheader "Active" [ref=f10e87]:
+                                  - link "Active" [ref=f10e88] [cursor=pointer]:
+                                    - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsi%3D6%26retURL%3D%252Fsetup%252Fhome%27);
+                                - columnheader "Profile" [ref=f10e89]:
+                                  - link "Profile" [ref=f10e90] [cursor=pointer]:
+                                    - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsi%3D7%26retURL%3D%252Fsetup%252Fhome%27);
+                              - row "Select 26, Sucursal | Edit | Login 26, Sucursal s26 sucursal.26@solodeportes.com.test Checked Standard User" [ref=f10e91]:
+                                - cell "Select 26, Sucursal | Edit | Login" [ref=f10e92]:
+                                  - checkbox "Select 26, Sucursal" [ref=f10e93]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e94] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkQxp%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e95] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "26, Sucursal" [ref=f10e96]:
+                                  - link "26, Sucursal" [ref=f10e97] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkQxp%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s26" [ref=f10e98]:
+                                  - link "s26" [ref=f10e99] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkQxp%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.26@solodeportes.com.test" [ref=f10e100]:
+                                  - link "sucursal.26@solodeportes.com.test" [ref=f10e101] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkQxp%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e102]
+                                - cell [ref=f10e103]
+                                - cell "Checked" [ref=f10e104]:
+                                  - img "Checked" [ref=f10e105]
+                                - cell "Standard User" [ref=f10e106]:
+                                  - link "Standard User" [ref=f10e107] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 27, Expedicion | Edit | Login 27, Expedicion e27 expedicion.27@solodeportes.com.test Checked Standard User" [ref=f10e108]:
+                                - cell "Select 27, Expedicion | Edit | Login" [ref=f10e109]:
+                                  - checkbox "Select 27, Expedicion" [ref=f10e110]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e111] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkjZ3%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e112] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "27, Expedicion" [ref=f10e113]:
+                                  - link "27, Expedicion" [ref=f10e114] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkjZ3%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "e27" [ref=f10e115]:
+                                  - link "e27" [ref=f10e116] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkjZ3%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "expedicion.27@solodeportes.com.test" [ref=f10e117]:
+                                  - link "expedicion.27@solodeportes.com.test" [ref=f10e118] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkjZ3%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e119]
+                                - cell [ref=f10e120]
+                                - cell "Checked" [ref=f10e121]:
+                                  - img "Checked" [ref=f10e122]
+                                - cell "Standard User" [ref=f10e123]:
+                                  - link "Standard User" [ref=f10e124] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 27, Sucursal | Edit | Login 27, Sucursal s27 sucursal.27@solodeportes.com.test Checked Standard User" [ref=f10e125]:
+                                - cell "Select 27, Sucursal | Edit | Login" [ref=f10e126]:
+                                  - checkbox "Select 27, Sucursal" [ref=f10e127]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e128] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akda5%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e129] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "27, Sucursal" [ref=f10e130]:
+                                  - link "27, Sucursal" [ref=f10e131] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akda5%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s27" [ref=f10e132]:
+                                  - link "s27" [ref=f10e133] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akda5%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.27@solodeportes.com.test" [ref=f10e134]:
+                                  - link "sucursal.27@solodeportes.com.test" [ref=f10e135] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akda5%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e136]
+                                - cell [ref=f10e137]
+                                - cell "Checked" [ref=f10e138]:
+                                  - img "Checked" [ref=f10e139]
+                                - cell "Standard User" [ref=f10e140]:
+                                  - link "Standard User" [ref=f10e141] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 28, Sucursal | Edit | Login 28, Sucursal s28 sucursal.28@solodeportes.com.test Checked Standard User" [ref=f10e142]:
+                                - cell "Select 28, Sucursal | Edit | Login" [ref=f10e143]:
+                                  - checkbox "Select 28, Sucursal" [ref=f10e144]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e145] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkR13%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e146] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "28, Sucursal" [ref=f10e147]:
+                                  - link "28, Sucursal" [ref=f10e148] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkR13%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s28" [ref=f10e149]:
+                                  - link "s28" [ref=f10e150] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkR13%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.28@solodeportes.com.test" [ref=f10e151]:
+                                  - link "sucursal.28@solodeportes.com.test" [ref=f10e152] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkR13%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e153]
+                                - cell [ref=f10e154]
+                                - cell "Checked" [ref=f10e155]:
+                                  - img "Checked" [ref=f10e156]
+                                - cell "Standard User" [ref=f10e157]:
+                                  - link "Standard User" [ref=f10e158] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 29, Sucursal | Edit | Login 29, Sucursal s29 sucursal.29@solourbano.com.test Checked Standard User" [ref=f10e159]:
+                                - cell "Select 29, Sucursal | Edit | Login" [ref=f10e160]:
+                                  - checkbox "Select 29, Sucursal" [ref=f10e161]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e162] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRKP%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e163] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "29, Sucursal" [ref=f10e164]:
+                                  - link "29, Sucursal" [ref=f10e165] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRKP%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s29" [ref=f10e166]:
+                                  - link "s29" [ref=f10e167] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRKP%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.29@solourbano.com.test" [ref=f10e168]:
+                                  - link "sucursal.29@solourbano.com.test" [ref=f10e169] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRKP%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e170]
+                                - cell [ref=f10e171]
+                                - cell "Checked" [ref=f10e172]:
+                                  - img "Checked" [ref=f10e173]
+                                - cell "Standard User" [ref=f10e174]:
+                                  - link "Standard User" [ref=f10e175] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 30, Sucursal | Edit | Login 30, Sucursal s30 sucursal.30@solodeportes.com.test Checked Standard User" [ref=f10e176]:
+                                - cell "Select 30, Sucursal | Edit | Login" [ref=f10e177]:
+                                  - checkbox "Select 30, Sucursal" [ref=f10e178]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e179] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRNd%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e180] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "30, Sucursal" [ref=f10e181]:
+                                  - link "30, Sucursal" [ref=f10e182] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRNd%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s30" [ref=f10e183]:
+                                  - link "s30" [ref=f10e184] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRNd%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.30@solodeportes.com.test" [ref=f10e185]:
+                                  - link "sucursal.30@solodeportes.com.test" [ref=f10e186] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRNd%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e187]
+                                - cell [ref=f10e188]
+                                - cell "Checked" [ref=f10e189]:
+                                  - img "Checked" [ref=f10e190]
+                                - cell "Standard User" [ref=f10e191]:
+                                  - link "Standard User" [ref=f10e192] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 31, Sucursal | Edit | Login 31, Sucursal s31 sucursal.31@solourbano.com.test Checked Standard User" [ref=f10e193]:
+                                - cell "Select 31, Sucursal | Edit | Login" [ref=f10e194]:
+                                  - checkbox "Select 31, Sucursal" [ref=f10e195]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e196] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRQr%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e197] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "31, Sucursal" [ref=f10e198]:
+                                  - link "31, Sucursal" [ref=f10e199] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRQr%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s31" [ref=f10e200]:
+                                  - link "s31" [ref=f10e201] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRQr%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.31@solourbano.com.test" [ref=f10e202]:
+                                  - link "sucursal.31@solourbano.com.test" [ref=f10e203] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRQr%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e204]
+                                - cell [ref=f10e205]
+                                - cell "Checked" [ref=f10e206]:
+                                  - img "Checked" [ref=f10e207]
+                                - cell "Standard User" [ref=f10e208]:
+                                  - link "Standard User" [ref=f10e209] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 32, Sucursal | Edit | Login 32, Sucursal s32 sucursal.32@solodeportes.com.test Checked Standard User" [ref=f10e210]:
+                                - cell "Select 32, Sucursal | Edit | Login" [ref=f10e211]:
+                                  - checkbox "Select 32, Sucursal" [ref=f10e212]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e213] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRXJ%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e214] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "32, Sucursal" [ref=f10e215]:
+                                  - link "32, Sucursal" [ref=f10e216] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRXJ%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s32" [ref=f10e217]:
+                                  - link "s32" [ref=f10e218] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRXJ%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.32@solodeportes.com.test" [ref=f10e219]:
+                                  - link "sucursal.32@solodeportes.com.test" [ref=f10e220] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRXJ%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e221]
+                                - cell [ref=f10e222]
+                                - cell "Checked" [ref=f10e223]:
+                                  - img "Checked" [ref=f10e224]
+                                - cell "Standard User" [ref=f10e225]:
+                                  - link "Standard User" [ref=f10e226] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 33, Sucursal | Edit | Login 33, Sucursal s33 sucursal.33@solodeportes.com.test Checked Standard User" [ref=f10e227]:
+                                - cell "Select 33, Sucursal | Edit | Login" [ref=f10e228]:
+                                  - checkbox "Select 33, Sucursal" [ref=f10e229]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e230] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRdl%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e231] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "33, Sucursal" [ref=f10e232]:
+                                  - link "33, Sucursal" [ref=f10e233] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRdl%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s33" [ref=f10e234]:
+                                  - link "s33" [ref=f10e235] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRdl%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.33@solodeportes.com.test" [ref=f10e236]:
+                                  - link "sucursal.33@solodeportes.com.test" [ref=f10e237] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRdl%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e238]
+                                - cell [ref=f10e239]
+                                - cell "Checked" [ref=f10e240]:
+                                  - img "Checked" [ref=f10e241]
+                                - cell "Standard User" [ref=f10e242]:
+                                  - link "Standard User" [ref=f10e243] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 34, Sucursal | Edit | Login 34, Sucursal s34 sucursal.34@solourbano.com.test Checked Standard User" [ref=f10e244]:
+                                - cell "Select 34, Sucursal | Edit | Login" [ref=f10e245]:
+                                  - checkbox "Select 34, Sucursal" [ref=f10e246]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e247] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRfN%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e248] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "34, Sucursal" [ref=f10e249]:
+                                  - link "34, Sucursal" [ref=f10e250] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRfN%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s34" [ref=f10e251]:
+                                  - link "s34" [ref=f10e252] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRfN%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.34@solourbano.com.test" [ref=f10e253]:
+                                  - link "sucursal.34@solourbano.com.test" [ref=f10e254] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRfN%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e255]
+                                - cell [ref=f10e256]
+                                - cell "Checked" [ref=f10e257]:
+                                  - img "Checked" [ref=f10e258]
+                                - cell "Standard User" [ref=f10e259]:
+                                  - link "Standard User" [ref=f10e260] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 35, Sucursal | Edit | Login 35, Sucursal s35 sucursal.35@solodeportes.com.test Checked Standard User" [ref=f10e261]:
+                                - cell "Select 35, Sucursal | Edit | Login" [ref=f10e262]:
+                                  - checkbox "Select 35, Sucursal" [ref=f10e263]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e264] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRkD%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e265] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "35, Sucursal" [ref=f10e266]:
+                                  - link "35, Sucursal" [ref=f10e267] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRkD%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s35" [ref=f10e268]:
+                                  - link "s35" [ref=f10e269] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRkD%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.35@solodeportes.com.test" [ref=f10e270]:
+                                  - link "sucursal.35@solodeportes.com.test" [ref=f10e271] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRkD%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e272]
+                                - cell [ref=f10e273]
+                                - cell "Checked" [ref=f10e274]:
+                                  - img "Checked" [ref=f10e275]
+                                - cell "Standard User" [ref=f10e276]:
+                                  - link "Standard User" [ref=f10e277] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 36, Sucursal | Edit | Login 36, Sucursal s36 sucursal.36@solodeportes.com.test Checked Standard User" [ref=f10e278]:
+                                - cell "Select 36, Sucursal | Edit | Login" [ref=f10e279]:
+                                  - checkbox "Select 36, Sucursal" [ref=f10e280]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e281] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRqf%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e282] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "36, Sucursal" [ref=f10e283]:
+                                  - link "36, Sucursal" [ref=f10e284] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRqf%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s36" [ref=f10e285]:
+                                  - link "s36" [ref=f10e286] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRqf%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.36@solodeportes.com.test" [ref=f10e287]:
+                                  - link "sucursal.36@solodeportes.com.test" [ref=f10e288] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkRqf%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e289]
+                                - cell [ref=f10e290]
+                                - cell "Checked" [ref=f10e291]:
+                                  - img "Checked" [ref=f10e292]
+                                - cell "Standard User" [ref=f10e293]:
+                                  - link "Standard User" [ref=f10e294] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 37, Sucursal | Edit | Login 37, Sucursal s37 sucursal.37@solodeportes.com.test Checked Standard User" [ref=f10e295]:
+                                - cell "Select 37, Sucursal | Edit | Login" [ref=f10e296]:
+                                  - checkbox "Select 37, Sucursal" [ref=f10e297]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e298] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkS0L%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e299] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "37, Sucursal" [ref=f10e300]:
+                                  - link "37, Sucursal" [ref=f10e301] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkS0L%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s37" [ref=f10e302]:
+                                  - link "s37" [ref=f10e303] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkS0L%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.37@solodeportes.com.test" [ref=f10e304]:
+                                  - link "sucursal.37@solodeportes.com.test" [ref=f10e305] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkS0L%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e306]
+                                - cell [ref=f10e307]
+                                - cell "Checked" [ref=f10e308]:
+                                  - img "Checked" [ref=f10e309]
+                                - cell "Standard User" [ref=f10e310]:
+                                  - link "Standard User" [ref=f10e311] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 40, Sucursal | Edit | Login 40, Sucursal s40 sucursal.40@solodeportes.com.test Checked Standard User" [ref=f10e312]:
+                                - cell "Select 40, Sucursal | Edit | Login" [ref=f10e313]:
+                                  - checkbox "Select 40, Sucursal" [ref=f10e314]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e315] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkaHF%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e316] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "40, Sucursal" [ref=f10e317]:
+                                  - link "40, Sucursal" [ref=f10e318] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkaHF%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s40" [ref=f10e319]:
+                                  - link "s40" [ref=f10e320] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkaHF%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.40@solodeportes.com.test" [ref=f10e321]:
+                                  - link "sucursal.40@solodeportes.com.test" [ref=f10e322] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkaHF%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e323]
+                                - cell [ref=f10e324]
+                                - cell "Checked" [ref=f10e325]:
+                                  - img "Checked" [ref=f10e326]
+                                - cell "Standard User" [ref=f10e327]:
+                                  - link "Standard User" [ref=f10e328] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 43, Sucursal | Edit | Login 43, Sucursal s43 sucursal.43@solodeportes.com.test Checked Standard User" [ref=f10e329]:
+                                - cell "Select 43, Sucursal | Edit | Login" [ref=f10e330]:
+                                  - checkbox "Select 43, Sucursal" [ref=f10e331]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e332] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkZoD%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e333] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "43, Sucursal" [ref=f10e334]:
+                                  - link "43, Sucursal" [ref=f10e335] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkZoD%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s43" [ref=f10e336]:
+                                  - link "s43" [ref=f10e337] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkZoD%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.43@solodeportes.com.test" [ref=f10e338]:
+                                  - link "sucursal.43@solodeportes.com.test" [ref=f10e339] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AkZoD%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e340]
+                                - cell [ref=f10e341]
+                                - cell "Checked" [ref=f10e342]:
+                                  - img "Checked" [ref=f10e343]
+                                - cell "Standard User" [ref=f10e344]:
+                                  - link "Standard User" [ref=f10e345] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select 44, Sucursal | Edit | Login 44, Sucursal s44 sucursal.44@solodeportes.com.test Checked Standard User" [ref=f10e346]:
+                                - cell "Select 44, Sucursal | Edit | Login" [ref=f10e347]:
+                                  - checkbox "Select 44, Sucursal" [ref=f10e348]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e349] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Aka4L%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e350] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "44, Sucursal" [ref=f10e351]:
+                                  - link "44, Sucursal" [ref=f10e352] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Aka4L%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "s44" [ref=f10e353]:
+                                  - link "s44" [ref=f10e354] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Aka4L%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "sucursal.44@solodeportes.com.test" [ref=f10e355]:
+                                  - link "sucursal.44@solodeportes.com.test" [ref=f10e356] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Aka4L%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e357]
+                                - cell [ref=f10e358]
+                                - cell "Checked" [ref=f10e359]:
+                                  - img "Checked" [ref=f10e360]
+                                - cell "Standard User" [ref=f10e361]:
+                                  - link "Standard User" [ref=f10e362] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select Admin, Pooled Org | Edit | Login Admin, Pooled Org PAdmi admin-nuqvrqtnimrb@example.com.test Checked System Administrator" [ref=f10e363]:
+                                - cell "Select Admin, Pooled Org | Edit | Login" [ref=f10e364]:
+                                  - checkbox "Select Admin, Pooled Org" [ref=f10e365]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e366] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005Hs00000EDHvV%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e367] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "Admin, Pooled Org" [ref=f10e368]:
+                                  - link "Admin, Pooled Org" [ref=f10e369] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005Hs00000EDHvV%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "PAdmi" [ref=f10e370]:
+                                  - link "PAdmi" [ref=f10e371] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005Hs00000EDHvV%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "admin-nuqvrqtnimrb@example.com.test" [ref=f10e372]:
+                                  - link "admin-nuqvrqtnimrb@example.com.test" [ref=f10e373] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005Hs00000EDHvV%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e374]
+                                - cell [ref=f10e375]
+                                - cell "Checked" [ref=f10e376]:
+                                  - img "Checked" [ref=f10e377]
+                                - cell "System Administrator" [ref=f10e378]:
+                                  - link "System Administrator" [ref=f10e379] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEr%3Fisdtp%3Dp1%27);
+                              - row "Select Agent, QA | Edit Agent, QA qagen solodeportes@solodeportes.test 27/5/2026, 12:05 Checked System Administrator" [ref=f10e380]:
+                                - cell "Select Agent, QA | Edit" [ref=f10e381]:
+                                  - checkbox "Select Agent, QA" [ref=f10e382]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e383] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F0057x00000iLGzh%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                - rowheader "Agent, QA" [ref=f10e384]:
+                                  - link "Agent, QA" [ref=f10e385] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F0057x00000iLGzh%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "qagen" [ref=f10e386]:
+                                  - link "qagen" [ref=f10e387] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F0057x00000iLGzh%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "solodeportes@solodeportes.test" [ref=f10e388]:
+                                  - link "solodeportes@solodeportes.test" [ref=f10e389] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F0057x00000iLGzh%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "27/5/2026, 12:05" [ref=f10e390]
+                                - cell [ref=f10e391]
+                                - cell "Checked" [ref=f10e392]:
+                                  - img "Checked" [ref=f10e393]
+                                - cell "System Administrator" [ref=f10e394]:
+                                  - link "System Administrator" [ref=f10e395] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEr%3Fisdtp%3Dp1%27);
+                              - row "Select Arredondo, Cristian | Edit | Login Arredondo, Cristian Coqui cristian.arredondo@solodeportes.com.test Checked Standard User" [ref=f10e396]:
+                                - cell "Select Arredondo, Cristian | Edit | Login" [ref=f10e397]:
+                                  - checkbox "Select Arredondo, Cristian" [ref=f10e398]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e399] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akxk5%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e400] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "Arredondo, Cristian" [ref=f10e401]:
+                                  - link "Arredondo, Cristian" [ref=f10e402] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akxk5%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "Coqui" [ref=f10e403]:
+                                  - link "Coqui" [ref=f10e404] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akxk5%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "cristian.arredondo@solodeportes.com.test" [ref=f10e405]:
+                                  - link "cristian.arredondo@solodeportes.com.test" [ref=f10e406] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akxk5%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e407]
+                                - cell [ref=f10e408]
+                                - cell "Checked" [ref=f10e409]:
+                                  - img "Checked" [ref=f10e410]
+                                - cell "Standard User" [ref=f10e411]:
+                                  - link "Standard User" [ref=f10e412] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select Arriola, Dania | Edit | Login Arriola, Dania darri dania.arriola@solodeportes.com.test Checked Standard User" [ref=f10e413]:
+                                - cell "Select Arriola, Dania | Edit | Login" [ref=f10e414]:
+                                  - checkbox "Select Arriola, Dania" [ref=f10e415]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e416] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akymb%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e417] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "Arriola, Dania" [ref=f10e418]:
+                                  - link "Arriola, Dania" [ref=f10e419] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akymb%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "darri" [ref=f10e420]:
+                                  - link "darri" [ref=f10e421] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akymb%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "dania.arriola@solodeportes.com.test" [ref=f10e422]:
+                                  - link "dania.arriola@solodeportes.com.test" [ref=f10e423] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akymb%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e424]
+                                - cell [ref=f10e425]
+                                - cell "Checked" [ref=f10e426]:
+                                  - img "Checked" [ref=f10e427]
+                                - cell "Standard User" [ref=f10e428]:
+                                  - link "Standard User" [ref=f10e429] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select Beccari, Ricardo | Edit Beccari, Ricardo rbecc ricardo.beccari@procontacto.com.mx.prodsl.test Not Checked System Administrator" [ref=f10e430]:
+                                - cell "Select Beccari, Ricardo | Edit" [ref=f10e431]:
+                                  - checkbox "Select Beccari, Ricardo" [ref=f10e432]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e433] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ000001uRub%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                - rowheader "Beccari, Ricardo" [ref=f10e434]:
+                                  - link "Beccari, Ricardo" [ref=f10e435] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ000001uRub%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "rbecc" [ref=f10e436]:
+                                  - link "rbecc" [ref=f10e437] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ000001uRub%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "ricardo.beccari@procontacto.com.mx.prodsl.test" [ref=f10e438]:
+                                  - link "ricardo.beccari@procontacto.com.mx.prodsl.test" [ref=f10e439] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ000001uRub%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e440]
+                                - cell [ref=f10e441]
+                                - cell "Not Checked" [ref=f10e442]:
+                                  - img "Not Checked" [ref=f10e443]
+                                - cell "System Administrator" [ref=f10e444]:
+                                  - link "System Administrator" [ref=f10e445] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEr%3Fisdtp%3Dp1%27);
+                              - row "Select Belaustegui, Antonio | Edit | Login Belaustegui, Antonio abela antonio.belaustegui@solodeportes.prod.test Checked System Administrator" [ref=f10e446]:
+                                - cell "Select Belaustegui, Antonio | Edit | Login" [ref=f10e447]:
+                                  - checkbox "Select Belaustegui, Antonio" [ref=f10e448]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e449] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AoJbB%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e450] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "Belaustegui, Antonio" [ref=f10e451]:
+                                  - link "Belaustegui, Antonio" [ref=f10e452] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AoJbB%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "abela" [ref=f10e453]:
+                                  - link "abela" [ref=f10e454] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AoJbB%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "antonio.belaustegui@solodeportes.prod.test" [ref=f10e455]:
+                                  - link "antonio.belaustegui@solodeportes.prod.test" [ref=f10e456] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000AoJbB%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e457]
+                                - cell [ref=f10e458]
+                                - cell "Checked" [ref=f10e459]:
+                                  - img "Checked" [ref=f10e460]
+                                - cell "System Administrator" [ref=f10e461]:
+                                  - link "System Administrator" [ref=f10e462] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEr%3Fisdtp%3Dp1%27);
+                              - row "Select Berlanga, Priscila | Edit | Login Berlanga, Priscila pberl priscila.berlanga@solodeportes.com.test Checked Standard User" [ref=f10e463]:
+                                - cell "Select Berlanga, Priscila | Edit | Login" [ref=f10e464]:
+                                  - checkbox "Select Berlanga, Priscila" [ref=f10e465]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e466] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Al1cP%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e467] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "Berlanga, Priscila" [ref=f10e468]:
+                                  - link "Berlanga, Priscila" [ref=f10e469] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Al1cP%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "pberl" [ref=f10e470]:
+                                  - link "pberl" [ref=f10e471] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Al1cP%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "priscila.berlanga@solodeportes.com.test" [ref=f10e472]:
+                                  - link "priscila.berlanga@solodeportes.com.test" [ref=f10e473] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Al1cP%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e474]
+                                - cell [ref=f10e475]
+                                - cell "Checked" [ref=f10e476]:
+                                  - img "Checked" [ref=f10e477]
+                                - cell "Standard User" [ref=f10e478]:
+                                  - link "Standard User" [ref=f10e479] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select Blumin, Ailen | Edit | Login Blumin, Ailen ablum ailen.blumin@solodeportes.com.test Checked Standard User" [ref=f10e480]:
+                                - cell "Select Blumin, Ailen | Edit | Login" [ref=f10e481]:
+                                  - checkbox "Select Blumin, Ailen" [ref=f10e482]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e483] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000DghnR%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e484] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "Blumin, Ailen" [ref=f10e485]:
+                                  - link "Blumin, Ailen" [ref=f10e486] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000DghnR%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "ablum" [ref=f10e487]:
+                                  - link "ablum" [ref=f10e488] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000DghnR%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "ailen.blumin@solodeportes.com.test" [ref=f10e489]:
+                                  - link "ailen.blumin@solodeportes.com.test" [ref=f10e490] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000DghnR%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e491]
+                                - cell [ref=f10e492]
+                                - cell "Checked" [ref=f10e493]:
+                                  - img "Checked" [ref=f10e494]
+                                - cell "Standard User" [ref=f10e495]:
+                                  - link "Standard User" [ref=f10e496] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                              - row "Select Boggiano, Julieta | Edit | Login Boggiano, Julieta jbogg julieta.boggiano@solodeportes.com.test Checked Standard User" [ref=f10e497]:
+                                - cell "Select Boggiano, Julieta | Edit | Login" [ref=f10e498]:
+                                  - checkbox "Select Boggiano, Julieta" [ref=f10e499]
+                                  - text: "|"
+                                  - link "Edit" [ref=f10e500] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akecb%2Fe%3FisUserEntityOverride%3D1%26retURL%3D%252F005%253FappLayout%253Dsetup%2526ltn_app_id%253D%2526isUserEntityOverride%253D1%2526sfdcIFrameHost%253Dweb%2526clc%253D1%2526sfdcIFrameOrigin%253Dhttps%25253A%25252F%25252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%2526nonce%253D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%2526tour%253D%2526lsr%253D25%2526retURL%253D%25252Fsetup%25252Fhome%2526noredirect%253D1%2526isdtp%253Dp1%26isdtp%3Dp1%26noredirect%3D1%27);
+                                  - text: "|"
+                                  - link "Login" [ref=f10e501] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                - rowheader "Boggiano, Julieta" [ref=f10e502]:
+                                  - link "Boggiano, Julieta" [ref=f10e503] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akecb%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "jbogg" [ref=f10e504]:
+                                  - link "jbogg" [ref=f10e505] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akecb%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell "julieta.boggiano@solodeportes.com.test" [ref=f10e506]:
+                                  - link "julieta.boggiano@solodeportes.com.test" [ref=f10e507] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F005QQ00000Akecb%3Fnoredirect%3D1%26isUserEntityOverride%3D1%26isdtp%3Dp1%27);
+                                - cell [ref=f10e508]
+                                - cell [ref=f10e509]
+                                - cell "Checked" [ref=f10e510]:
+                                  - img "Checked" [ref=f10e511]
+                                - cell "Standard User" [ref=f10e512]:
+                                  - link "Standard User" [ref=f10e513] [cursor=pointer]:
+                                    - /url: javascript:srcUp(%27%2F00eHs000002zqEp%3Fisdtp%3Dp1%27);
+                          - generic [ref=f10e514]:
+                            - text: Show me
+                            - link "fewerShow Fewer" [ref=f10e515] [cursor=pointer]:
+                              - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26lsr%3D25%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26rowsperpage%3D15%26retURL%3D%252Fsetup%252Fhome%27);
+                              - text: fewer
+                              - img "Show Fewer" [ref=f10e516]
+                            - text: /
+                            - link "Show Moremore" [ref=f10e517] [cursor=pointer]:
+                              - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26lsr%3D25%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26rowsperpage%3D35%26retURL%3D%252Fsetup%252Fhome%27);
+                              - img "Show More" [ref=f10e518]
+                              - text: more
+                            - text: records per list page
+                          - table [ref=f10e520]:
+                            - rowgroup [ref=f10e521]:
+                              - row "New User Reset Password(s) Add Multiple Users" [ref=f10e522]:
+                                - cell [ref=f10e523]
+                                - cell "New User Reset Password(s) Add Multiple Users" [ref=f10e524]:
+                                  - button "New User" [ref=f10e525] [cursor=pointer]
+                                  - button "Reset Password(s)" [ref=f10e526] [cursor=pointer]
+                                  - button "Add Multiple Users" [ref=f10e527] [cursor=pointer]
+                      - generic [ref=f10e529]:
+                        - generic [ref=f10e530]:
+                          - link "A" [ref=f10e531] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D0%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "B" [ref=f10e532] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D1%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "C" [ref=f10e533] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D2%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "D" [ref=f10e534] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D3%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "E" [ref=f10e535] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D4%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "F" [ref=f10e536] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D5%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "G" [ref=f10e537] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D6%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "H" [ref=f10e538] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D7%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "I" [ref=f10e539] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D8%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "J" [ref=f10e540] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D9%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "K" [ref=f10e541] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D10%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "L" [ref=f10e542] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D11%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "M" [ref=f10e543] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D12%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "N" [ref=f10e544] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D13%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "Ñ" [ref=f10e545] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D14%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "O" [ref=f10e546] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D15%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "P" [ref=f10e547] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D16%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "Q" [ref=f10e548] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D17%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "R" [ref=f10e549] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D18%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "S" [ref=f10e550] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D19%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "T" [ref=f10e551] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D20%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "U" [ref=f10e552] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D21%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "V" [ref=f10e553] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D22%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "W" [ref=f10e554] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D23%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "X" [ref=f10e555] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D24%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "Y" [ref=f10e556] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D25%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "Z" [ref=f10e557] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D26%26retURL%3D%252Fsetup%252Fhome%27);
+                          - link "Other" [ref=f10e558] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsc%3D27%26retURL%3D%252Fsetup%252Fhome%27);
+                          - text: All
+                        - generic [ref=f10e559]:
+                          - link "<Previous Page" [ref=f10e560] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26lsr%3D0%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26retURL%3D%252Fsetup%252Fhome%27);
+                          - text: "|"
+                          - link "Next Page>" [ref=f10e561] [cursor=pointer]:
+                            - /url: javascript:srcSelf(%27%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26lsr%3D50%26noredirect%3D1%26clc%3D1%26isdtp%3Dp1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26retURL%3D%252Fsetup%252Fhome%27);
+                      - iframe [ref=f10e562]:
+                        
+                      - generic:
+                        - button "Expand Quick Access Menu" [ref=f10e564]
+                        - generic [ref=f10e565]:
+                          - generic [ref=f10e566]:
+                            - link "Go to Setup" [ref=f10e567] [cursor=pointer]:
+                              - /url: /lightning/setup/SetupOneHome/home
+                              - img "Go to Setup" [ref=f10e568]
+                            - link "Help" [ref=f10e569] [cursor=pointer]:
+                              - /url: javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?section=Dev_Tools&target=dev_quick_access_menu.htm&loc=help&language=en_US&release=262.7&instance=USA3S%27, %27Help%27, 700, 600, %27width=700,height=600,resizable=yes,toolbar=yes,status=no,scrollbars=yes,menubar=yes,directories=no,location=no,dependant=no%27, false, false);
+                              - img "Help" [ref=f10e570]
+                          - generic [ref=f10e571]:
+                            - list [ref=f10e572]:
+                              - listitem [ref=f10e573]:
+                                - link "View Fields" [ref=f10e574] [cursor=pointer]:
+                                  - /url: /p/setup/layout/LayoutFieldList?type=User&setupid=ManageUsers&setupid=UserFields
+                              - listitem [ref=f10e575]:
+                                - link "View Object" [ref=f10e576] [cursor=pointer]:
+                                  - /url: /ui/setup/Setup?setupid=UserCustomize
+                              - listitem [ref=f10e577]:
+                                - link "View Record Types" [ref=f10e578] [cursor=pointer]:
+                                  - /url: /ui/setup/rectype/RecordTypes?type=User&setupid=ManageUsers&setupid=UserRecords
+                              - listitem [ref=f10e579]:
+                                - link "View Validation Rules" [ref=f10e580] [cursor=pointer]:
+                                  - /url: /_ui/common/config/entity/ValidationFormulaListUI/d?retURL=%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26clc%3D1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsr%3D25%26retURL%3D%252Fsetup%252Fhome%26noredirect%3D1%26isdtp%3Dp1&tableEnumOrId=User&setupid=ManageUsers&setupid=UserValidations
+                            - separator [ref=f10e581]
+                            - list [ref=f10e582]:
+                              - listitem [ref=f10e583]:
+                                - link "Edit App" [ref=f10e584] [cursor=pointer]:
+                                  - /url: /02uHs0000019Cl1/e?retURL=%2F005%3FappLayout%3Dsetup%26ltn_app_id%3D%26isUserEntityOverride%3D1%26sfdcIFrameHost%3Dweb%26clc%3D1%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fsfsolodeportes--test.sandbox.my.salesforce-setup.com%26nonce%3D7615656bdc2dbfbea64657ede1fceff01be62ed7b6def24b3ec9481ac3ec4215%26tour%3D%26lsr%3D25%26retURL%3D%252Fsetup%252Fhome%26noredirect%3D1%26isdtp%3Dp1&setupid=TabSet
+                          - link "Turn off menu" [ref=f10e586] [cursor=pointer]:
+                            - /url: "#"
+  - generic:
+    - status

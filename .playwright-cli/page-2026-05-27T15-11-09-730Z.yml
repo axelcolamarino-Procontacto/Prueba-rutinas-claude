@@ -1,0 +1,18 @@
+- table [ref=e2]:
+  - rowgroup [ref=e3]:
+    - row "An internal server error has occurred" [ref=e4]:
+      - cell "An internal server error has occurred" [ref=e5]
+    - 'row "An error has occurred while processing your request. The salesforce.com support team has been notified of the problem. If you believe you have additional information that may be of help in reproducing or correcting the error, please contact Salesforce Support. Please indicate the URL of the page you were requesting, any error id shown on this page as well as any other related information. We apologize for the inconvenience. Thank you again for your patience and assistance. And thanks for using salesforce.com! Error ID: 669961260-104861 (-644516495)" [ref=e6]':
+      - 'cell "An error has occurred while processing your request. The salesforce.com support team has been notified of the problem. If you believe you have additional information that may be of help in reproducing or correcting the error, please contact Salesforce Support. Please indicate the URL of the page you were requesting, any error id shown on this page as well as any other related information. We apologize for the inconvenience. Thank you again for your patience and assistance. And thanks for using salesforce.com! Error ID: 669961260-104861 (-644516495)" [ref=e7]':
+        - text: An error has occurred while processing your request. The salesforce.com support team has been notified of the problem. If you believe you have additional information that may be of help in reproducing or correcting the error, please contact
+        - link "Salesforce Support" [ref=e8] [cursor=pointer]:
+          - /url: /HelpAndTrainingDoor?version=2&resource=https://help.salesforce.com
+        - text: . Please indicate the URL of the page you were requesting, any error id shown on this page as well as any other related information. We apologize for the inconvenience.
+        - text: Thank you again for your patience and assistance. And thanks for using salesforce.com!
+        - text: "Error ID: 669961260-104861 (-644516495)"
+    - row "Click here to return to the previous page." [ref=e9]:
+      - cell "Click here to return to the previous page." [ref=e10]:
+        - text: Click
+        - link "here" [ref=e11] [cursor=pointer]:
+          - /url: /lightning/cmp/c__RestockReplyHandlerWrapper
+        - text: to return to the previous page.
