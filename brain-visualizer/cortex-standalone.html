@@ -7,7 +7,22 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #060c1a; color: #c8d8f0; font-family: 'Segoe UI', system-ui, sans-serif; overflow: hidden; height: 100vh; }
-    #graph-container { position: absolute; inset: 0; }
+    #graph-3d, #graph-2d { position: absolute; inset: 0; }
+    #graph-2d { display: none; }
+
+    .tabs {
+      display: flex; gap: 4px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(100,150,255,0.15);
+      border-radius: 8px; padding: 3px;
+    }
+    .tab {
+      padding: 4px 16px; border-radius: 6px; font-size: 12px; font-weight: 600;
+      cursor: pointer; border: none; background: none;
+      color: #4a6a90; transition: all 0.18s; letter-spacing: 0.5px;
+    }
+    .tab.active { background: rgba(79,195,247,0.18); color: #4fc3f7; }
+    .tab:hover:not(.active) { color: #7aaac8; }
 
     #topbar {
       position: absolute; top: 0; left: 0; right: 0; height: 56px;
@@ -67,10 +82,15 @@
   </style>
 </head>
 <body>
-<div id="graph-container"></div>
+<div id="graph-3d"></div>
+<div id="graph-2d"></div>
 
 <div id="topbar">
   <div id="brain-title">🧠 <span>Cortex</span></div>
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('3d')">3D</button>
+    <button class="tab"        onclick="switchTab('2d')">2D</button>
+  </div>
   <div class="chip"><strong id="sn">—</strong>&nbsp;entidades</div>
   <div class="chip"><strong id="sl">—</strong>&nbsp;relaciones</div>
   <div class="chip green"><strong id="ss">—</strong>&nbsp;skills</div>
@@ -98,6 +118,7 @@
 </div>
 
 <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
+<script src="https://unpkg.com/force-graph@1.43.5/dist/force-graph.min.js"></script>
 <script>
 
 // ── Demo data — reemplazado por BigQuery cuando el agente ejecuta runs reales ──
@@ -170,8 +191,10 @@ const TYPE_LABEL = {
   flow:'Flow / Trigger', test_case:'Test Case', generic:'Entidad'
 }
 
-let gData = DEMO
-let Graph = null
+let gData  = DEMO
+let Graph3 = null
+let Graph2 = null
+let activeTab = '3d'
 
 // ── Stats ─────────────────────────────────────────────────────────────────────
 function updateStats() {
@@ -181,9 +204,21 @@ function updateStats() {
   document.getElementById('ss').textContent = skills
 }
 
-// ── Init graph ────────────────────────────────────────────────────────────────
-function initGraph() {
-  Graph = ForceGraph3D({ controlType: 'orbit' })(document.getElementById('graph-container'))
+// ── Tab switching ─────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  activeTab = tab
+  document.getElementById('graph-3d').style.display = tab === '3d' ? 'block' : 'none'
+  document.getElementById('graph-2d').style.display = tab === '2d' ? 'block' : 'none'
+  document.querySelectorAll('.tab').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && tab === '3d') || (i === 1 && tab === '2d'))
+  })
+  if (tab === '2d' && !Graph2) initGraph2D()
+  closeD()
+}
+
+// ── Init 3D graph ─────────────────────────────────────────────────────────────
+function initGraph3D() {
+  Graph3 = ForceGraph3D({ controlType: 'orbit' })(document.getElementById('graph-3d'))
     .backgroundColor('#060c1a')
     .showNavInfo(false)
     .nodeLabel(n => n.name || n.id)
@@ -200,10 +235,58 @@ function initGraph() {
     .onNodeClick(showDetail)
     .onBackgroundClick(closeD)
 
-  Graph.d3Force('charge').strength(-130)
-  Graph.cameraPosition({ z: 380 })
-  Graph.graphData({ nodes: gData.nodes, links: gData.links.map(l => ({...l})) })
+  Graph3.d3Force('charge').strength(-130)
+  Graph3.cameraPosition({ z: 380 })
+  Graph3.graphData({ nodes: gData.nodes, links: gData.links.map(l => ({...l})) })
   updateStats()
+}
+
+// ── Init 2D graph ─────────────────────────────────────────────────────────────
+function initGraph2D() {
+  Graph2 = ForceGraph()(document.getElementById('graph-2d'))
+    .backgroundColor('#060c1a')
+    .nodeLabel(n => n.name || n.id)
+    .nodeVal(n => Math.max(1, n.val || 1))
+    .nodeColor(n => n.is_new ? '#ffffff' : (COLORS[n.type] || COLORS.generic))
+    .nodeCanvasObject((node, ctx, scale) => {
+      const r     = Math.sqrt(Math.max(1, node.val || 1)) * 3
+      const color = node.is_new ? '#ffffff' : (COLORS[node.type] || COLORS.generic)
+
+      // glow
+      ctx.beginPath()
+      ctx.arc(node.x, node.y, r + 3, 0, 2 * Math.PI)
+      ctx.fillStyle = color.replace(')', ',0.15)').replace('rgb','rgba').replace('#', 'rgba(').replace('rgba(', 'rgba(').startsWith('rgba') ? color : color + '28'
+      ctx.fill()
+
+      // node circle
+      ctx.beginPath()
+      ctx.arc(node.x, node.y, r, 0, 2 * Math.PI)
+      ctx.fillStyle = color
+      ctx.fill()
+
+      // label (visible from zoom ~1.5)
+      if (scale >= 1.2) {
+        const label    = node.name || node.id
+        const fontSize = Math.max(7, 11 / scale)
+        ctx.font      = `${fontSize}px Segoe UI, system-ui, sans-serif`
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'top'
+        ctx.fillStyle = 'rgba(180,210,240,0.9)'
+        ctx.fillText(label, node.x, node.y + r + 2)
+      }
+    })
+    .nodeCanvasObjectMode(() => 'replace')
+    .linkColor(l => `rgba(100,160,255,${Math.max(0.1, (l.value||0.5)*0.45)})`)
+    .linkWidth(l => Math.max(0.5, (l.value||0.5) * 1.5))
+    .linkDirectionalParticles(l => l.value > 0.85 ? 3 : 0)
+    .linkDirectionalParticleWidth(2)
+    .linkDirectionalParticleColor(() => 'rgba(79,195,247,0.95)')
+    .linkLabel(l => l.relation || '')
+    .onNodeClick(showDetail)
+    .onBackgroundClick(closeD)
+
+  Graph2.d3Force('charge').strength(-180)
+  Graph2.graphData({ nodes: gData.nodes, links: gData.links.map(l => ({...l})) })
 }
 
 // ── Detail panel ──────────────────────────────────────────────────────────────
@@ -242,16 +325,19 @@ function showDetail(node) {
       + (out.length+inc.length > 14 ? `<div style="font-size:10px;color:#3a5060;margin-top:6px">y ${out.length+inc.length-14} más...</div>` : '')
     : '<h4>Relaciones</h4><div style="font-size:11px;color:#3a5060;margin-top:4px">Sin relaciones visibles</div>'
 
-  const d = 120, r = 1 + d / Math.hypot(node.x||1, node.y||1, node.z||1)
-  Graph.cameraPosition(
-    {x:(node.x||0)*r, y:(node.y||0)*r, z:(node.z||0)*r}, node, 700
-  )
+  if (activeTab === '3d' && Graph3) {
+    const d = 120, r = 1 + d / Math.hypot(node.x||1, node.y||1, node.z||1)
+    Graph3.cameraPosition({x:(node.x||0)*r, y:(node.y||0)*r, z:(node.z||0)*r}, node, 700)
+  } else if (activeTab === '2d' && Graph2) {
+    Graph2.centerAt(node.x, node.y, 500)
+    Graph2.zoom(4, 500)
+  }
 }
 
 function closeD() { document.getElementById('detail').classList.remove('show') }
 
 // ── Boot ─────────────────────────────────────────────────────────────────────
-initGraph()
+initGraph3D()
 </script>
 </body>
 </html>
