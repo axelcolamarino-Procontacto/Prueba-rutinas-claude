@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QA Agent — Brain Visualizer</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #060c1a;
+      color: #c8d8f0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    #graph-container { position: absolute; inset: 0; }
+
+    /* ── Top bar ── */
+    #topbar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      background: rgba(6, 12, 26, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(100, 150, 255, 0.15);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 24px;
+      z-index: 100;
+    }
+
+    #brain-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #a0c4ff;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    #brain-title span { color: #4fc3f7; }
+
+    .stat-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(79, 195, 247, 0.08);
+      border: 1px solid rgba(79, 195, 247, 0.2);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: #8ab4d4;
+      white-space: nowrap;
+    }
+    .stat-chip strong { color: #e0f0ff; font-size: 13px; }
+
+    .stat-chip.new { border-color: rgba(102, 187, 106, 0.4); background: rgba(102, 187, 106, 0.08); }
+    .stat-chip.new strong { color: #a5d6a7; }
+
+    #project-filter {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(100,150,255,0.2);
+      color: #c8d8f0;
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      outline: none;
+      margin-left: auto;
+    }
+    #project-filter:hover { border-color: rgba(79, 195, 247, 0.5); }
+
+    #refresh-btn {
+      background: rgba(79, 195, 247, 0.1);
+      border: 1px solid rgba(79, 195, 247, 0.3);
+      color: #4fc3f7;
+      border-radius: 6px;
+      padding: 5px 14px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    #refresh-btn:hover { background: rgba(79, 195, 247, 0.2); }
+    #refresh-btn.loading { opacity: 0.5; cursor: default; }
+
+    /* ── Legend ── */
+    #legend {
+      position: absolute;
+      bottom: 28px;
+      left: 20px;
+      background: rgba(6, 12, 26, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(100, 150, 255, 0.12);
+      border-radius: 10px;
+      padding: 14px 16px;
+      z-index: 100;
+      min-width: 160px;
+    }
+    #legend h4 {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #5a7090;
+      margin-bottom: 10px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 11px;
+      color: #8090a8;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 6px currentColor;
+    }
+
+    /* ── Detail panel ── */
+    #detail-panel {
+      position: absolute;
+      top: 72px;
+      right: 20px;
+      width: 280px;
+      background: rgba(6, 12, 26, 0.9);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(100, 150, 255, 0.15);
+      border-radius: 10px;
+      padding: 16px;
+      z-index: 100;
+      display: none;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+    }
+    #detail-panel.visible { display: block; }
+
+    #detail-panel h3 {
+      font-size: 13px;
+      color: #c8d8f0;
+      margin-bottom: 4px;
+      word-break: break-all;
+    }
+    #detail-type {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #7090a8;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(100,150,255,0.06);
+    }
+    .detail-row span:last-child { color: #a0c0d8; text-align: right; }
+
+    #detail-relations { margin-top: 12px; }
+    #detail-relations h4 {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #4a6070;
+      margin-bottom: 8px;
+    }
+    .rel-item {
+      font-size: 11px;
+      color: #7090a8;
+      padding: 4px 0;
+      display: flex;
+      gap: 6px;
+      align-items: baseline;
+    }
+    .rel-label {
+      color: #5a7a9a;
+      font-size: 10px;
+      background: rgba(79,195,247,0.08);
+      border-radius: 3px;
+      padding: 1px 5px;
+      white-space: nowrap;
+    }
+    .rel-target { color: #90b8d8; word-break: break-all; }
+
+    #close-detail {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: none;
+      border: none;
+      color: #5a7090;
+      font-size: 16px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    #close-detail:hover { color: #a0c0d8; }
+
+    /* ── Demo banner ── */
+    #demo-banner {
+      position: absolute;
+      top: 64px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 167, 38, 0.12);
+      border: 1px solid rgba(255, 167, 38, 0.3);
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 12px;
+      color: #ffcc80;
+      z-index: 100;
+      display: none;
+      text-align: center;
+    }
+    #demo-banner.visible { display: block; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(100,150,255,0.2); border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+  <div id="graph-container"></div>
+
+  <!-- Top bar -->
+  <div id="topbar">
+    <div id="brain-title">🧠 <span>QA Agent</span> Brain</div>
+    <div class="stat-chip"><strong id="stat-entities">—</strong> entidades</div>
+    <div class="stat-chip"><strong id="stat-triples">—</strong> relaciones</div>
+    <div class="stat-chip"><strong id="stat-skills">—</strong> skills</div>
+    <div class="stat-chip new"><strong id="stat-new">—</strong> nuevas hoy</div>
+    <select id="project-filter">
+      <option value="ALL">Todos los proyectos</option>
+    </select>
+    <button id="refresh-btn" onclick="loadAll()">↺ Actualizar</button>
+  </div>
+
+  <!-- Demo banner -->
+  <div id="demo-banner">
+    Modo demo — BigQuery no disponible. Ejecutá el agente para poblar el grafo real.
+  </div>
+
+  <!-- Legend -->
+  <div id="legend">
+    <h4>Tipos de nodo</h4>
+    <div class="legend-item"><div class="legend-dot" style="background:#ffffff;color:#ffffff"></div> Proyecto</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4fc3f7;color:#4fc3f7"></div> Campo SF</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ab47bc;color:#ab47bc"></div> Perfil/Usuario</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#66bb6a;color:#66bb6a"></div> Skill aprendido</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ff7043;color:#ff7043"></div> Root cause</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ec407a;color:#ec407a"></div> Condición/Flow</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ffa726;color:#ffa726"></div> Test Case</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#607d8b;color:#607d8b"></div> Genérico</div>
+  </div>
+
+  <!-- Detail panel -->
+  <div id="detail-panel">
+    <button id="close-detail" onclick="closeDetail()">✕</button>
+    <h3 id="detail-name"></h3>
+    <div id="detail-type"></div>
+    <div id="detail-meta"></div>
+    <div id="detail-relations"></div>
+  </div>
+
+  <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
+
+  <script>
+    // ── Color palette ─────────────────────────────────────────────────────────
+    const NODE_COLORS = {
+      project:    '#ffffff',
+      sf_field:   '#4fc3f7',
+      sf_profile: '#ab47bc',
+      skill:      '#66bb6a',
+      root_cause: '#ff7043',
+      condition:  '#ec407a',
+      flow:       '#29b6f6',
+      test_case:  '#ffa726',
+      generic:    '#607d8b'
+    }
+
+    const TYPE_LABELS = {
+      project:    'Proyecto',
+      sf_field:   'Campo Salesforce',
+      sf_profile: 'Perfil / Usuario',
+      skill:      'Skill aprendido',
+      root_cause: 'Root Cause',
+      condition:  'Condición / Dynamic Forms',
+      flow:       'Flow / Trigger',
+      test_case:  'Test Case',
+      generic:    'Entidad'
+    }
+
+    // ── State ─────────────────────────────────────────────────────────────────
+    let graphData  = { nodes: [], links: [] }
+    let Graph      = null
+    let refreshTimer = null
+
+    // ── Init graph ────────────────────────────────────────────────────────────
+    function initGraph() {
+      Graph = ForceGraph3D({ controlType: 'orbit' })(document.getElementById('graph-container'))
+        .backgroundColor('#060c1a')
+        .showNavInfo(false)
+        .nodeLabel(node => node.name || node.id)
+        .nodeVal(node => Math.max(1, node.val || 1))
+        .nodeColor(node => {
+          if (node.is_new) return '#ffffff'  // nuevos: blancos/brillantes
+          return NODE_COLORS[node.type] || NODE_COLORS.generic
+        })
+        .nodeOpacity(0.92)
+        .nodeResolution(16)
+        .linkColor(link => `rgba(120,170,255,${Math.max(0.15, (link.value || 0.5) * 0.55)})`)
+        .linkWidth(link => Math.max(0.3, (link.value || 0.5) * 1.2))
+        .linkDirectionalParticles(link => link.value > 0.8 ? 2 : 0)
+        .linkDirectionalParticleWidth(1.2)
+        .linkDirectionalParticleColor(() => 'rgba(79,195,247,0.8)')
+        .linkLabel(link => link.relation || '')
+        .onNodeClick(handleNodeClick)
+        .onBackgroundClick(closeDetail)
+
+      // Ajustar distancia inicial de la cámara
+      Graph.d3Force('charge').strength(-120)
+      Graph.cameraPosition({ z: 400 })
+    }
+
+    // ── Load graph data ───────────────────────────────────────────────────────
+    async function loadGraph() {
+      const btn = document.getElementById('refresh-btn')
+      btn.classList.add('loading')
+      btn.textContent = '⟳ Cargando...'
+
+      const project = document.getElementById('project-filter').value
+      const url     = `/api/graph?project=${encodeURIComponent(project)}`
+
+      try {
+        const res  = await fetch(url)
+        const data = await res.json()
+
+        graphData = data
+
+        if (data.meta?.demo) {
+          document.getElementById('demo-banner').classList.add('visible')
+        } else {
+          document.getElementById('demo-banner').classList.remove('visible')
+        }
+
+        Graph.graphData({
+          nodes: data.nodes,
+          links: data.links.map(l => ({ ...l }))
+        })
+
+        // Populate project dropdown if first load
+        if (document.getElementById('project-filter').options.length <= 1) {
+          await loadProjects()
+        }
+
+      } catch (e) {
+        console.error('Error cargando grafo:', e)
+      } finally {
+        btn.classList.remove('loading')
+        btn.textContent = '↺ Actualizar'
+      }
+    }
+
+    async function loadStats() {
+      try {
+        const res  = await fetch('/api/stats')
+        const data = await res.json()
+        document.getElementById('stat-entities').textContent = data.total_entities ?? '—'
+        document.getElementById('stat-triples').textContent  = data.total_triples  ?? '—'
+        document.getElementById('stat-skills').textContent   = data.total_skills   ?? '—'
+        document.getElementById('stat-new').textContent      = data.new_today      ?? '—'
+      } catch {}
+    }
+
+    async function loadProjects() {
+      try {
+        const res      = await fetch('/api/projects')
+        const projects = await res.json()
+        const sel      = document.getElementById('project-filter')
+        projects.forEach(p => {
+          if (![...sel.options].some(o => o.value === p)) {
+            const opt   = document.createElement('option')
+            opt.value   = p
+            opt.textContent = p
+            sel.appendChild(opt)
+          }
+        })
+      } catch {}
+    }
+
+    async function loadAll() {
+      await Promise.all([loadGraph(), loadStats()])
+      scheduleRefresh()
+    }
+
+    function scheduleRefresh() {
+      if (refreshTimer) clearTimeout(refreshTimer)
+      refreshTimer = setTimeout(loadAll, 60_000)
+    }
+
+    // ── Node click handler ────────────────────────────────────────────────────
+    function handleNodeClick(node) {
+      const panel = document.getElementById('detail-panel')
+      panel.classList.add('visible')
+
+      document.getElementById('detail-name').textContent = node.name || node.id
+
+      const typeEl = document.getElementById('detail-type')
+      const color  = NODE_COLORS[node.type] || NODE_COLORS.generic
+      typeEl.textContent = TYPE_LABELS[node.type] || node.type
+      typeEl.style.color = color
+
+      // Meta rows
+      const meta = []
+      if (node.project)      meta.push(['Proyecto',    node.project])
+      if (node.val)          meta.push(['Conexiones',  node.val])
+      if (node.success_rate) meta.push(['Éxito skill', `${Math.round(node.success_rate * 100)}%`])
+      if (node.use_count)    meta.push(['Usos',        node.use_count])
+      if (node.is_new)       meta.push(['', '🟢 Nuevo (últimas 24h)'])
+
+      document.getElementById('detail-meta').innerHTML =
+        meta.map(([k, v]) => `
+          <div class="detail-row">
+            <span>${k}</span><span>${v}</span>
+          </div>`).join('')
+
+      // Relations
+      const outgoing = graphData.links.filter(l =>
+        (typeof l.source === 'object' ? l.source.id : l.source) === node.id)
+      const incoming = graphData.links.filter(l =>
+        (typeof l.target === 'object' ? l.target.id : l.target) === node.id)
+
+      const rels = [
+        ...outgoing.map(l => ({
+          dir:      '→',
+          label:    l.relation,
+          target:   typeof l.target === 'object' ? l.target.id : l.target,
+          value:    l.value
+        })),
+        ...incoming.map(l => ({
+          dir:      '←',
+          label:    l.relation,
+          target:   typeof l.source === 'object' ? l.source.id : l.source,
+          value:    l.value
+        }))
+      ].slice(0, 12)
+
+      const relsEl = document.getElementById('detail-relations')
+      if (rels.length) {
+        relsEl.innerHTML = `
+          <h4>Relaciones (${outgoing.length + incoming.length})</h4>
+          ${rels.map(r => `
+            <div class="rel-item">
+              <span style="color:#4a6a8a;font-size:10px">${r.dir}</span>
+              <span class="rel-label">${r.label}</span>
+              <span class="rel-target">${r.target}</span>
+            </div>`).join('')}
+          ${outgoing.length + incoming.length > 12 ? `<div style="font-size:10px;color:#4a6070;margin-top:6px">y ${outgoing.length + incoming.length - 12} más...</div>` : ''}`
+      } else {
+        relsEl.innerHTML = '<h4>Relaciones</h4><div style="font-size:11px;color:#4a6070;margin-top:4px">Sin relaciones visibles</div>'
+      }
+
+      // Focus camera on clicked node
+      const distance = 120
+      const distRatio = 1 + distance / Math.hypot(node.x || 1, node.y || 1, node.z || 1)
+      Graph.cameraPosition(
+        { x: (node.x || 0) * distRatio, y: (node.y || 0) * distRatio, z: (node.z || 0) * distRatio },
+        node,
+        800
+      )
+    }
+
+    function closeDetail() {
+      document.getElementById('detail-panel').classList.remove('visible')
+    }
+
+    // ── Project filter change ─────────────────────────────────────────────────
+    document.getElementById('project-filter').addEventListener('change', () => {
+      loadGraph()
+    })
+
+    // ── Boot ──────────────────────────────────────────────────────────────────
+    initGraph()
+    loadAll()
+  </script>
+</body>
+</html>
