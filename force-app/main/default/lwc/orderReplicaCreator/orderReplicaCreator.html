@@ -1,0 +1,448 @@
+<template>
+
+    <template if:true={loading}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>
+    <template if:false={loading}>
+        <template if:true={showScreen1}>
+            <div class="screen">
+                <h2>¿Qué tipo de réplica desea crear?</h2>
+                <lightning-radio-group
+                    options={replicaOptions}
+                    value={type}
+                    data-id="type"
+                    onchange={handleInputChange}
+                ></lightning-radio-group>
+            </div>
+        </template>
+
+        <template if:true={showScreen1ReShip}>
+            <div class="screen">
+                <h2>¿Qué stock desea utilizar?</h2>
+                <lightning-radio-group
+                    label=""
+                    options={stockOptions}
+                    value={selectedStock}
+                    data-id="selectedStock"
+                    onchange={handleInputChange}
+                ></lightning-radio-group>
+            </div>
+        </template>
+
+        <template if:true={showScreen1Cambio}> 
+            <div class="screen">
+                <h2>Devolución de dinero:</h2>
+                <h2><lightning-input 
+                    type="toggle" 
+                    label="¿Es cambio devolución?" 
+                    data-id="esInversaDevolucion" 
+                    value={esInversaDevolucion} 
+                    onchange={handleEsInversaChange}
+                    message-toggle-active="Si"
+                    message-toggle-inactive="No">
+                </lightning-input></h2>
+            </div>
+        </template>
+
+        <template if:true={showScreen2}>
+            <div class="screen">
+                <h2>{screen2Title}</h2>
+                <br>
+                <lightning-datatable
+                        key-field="SKU__c"
+                        data={orderItemsNotLost}
+                        columns={columns}
+                        onrowselection={handleRowSelection}
+                        oncellchange={handleCellChange}
+                        selected-rows={selectedRows}
+                        suppress-bottom-bar = "true"
+                        hide-checkbox-column={originalStock}
+                    ></lightning-datatable>
+
+            </div>
+        </template>
+    
+        <template if:true={showScreen3}>
+            <div class="screen">
+                <h2>¿Qué artículos se utilizarán?</h2>
+                <br>
+                <lightning-datatable
+                        key-field="SKU__c"
+                        data={orderItems}
+                        columns={columns}
+                        onrowselection={handleRowSelection}
+                        oncellchange={handleCellChange}
+                        selected-rows={selectedRows}
+                        suppress-bottom-bar = "true"
+                        hide-checkbox-column={originalStock}
+                    ></lightning-datatable>
+                
+                    
+                <!-- Modal de selección de productos -->
+                <c-product-selector-modal
+                    product-columns={productColumns}
+                    onproductselected={handleProductSelected}
+                    onproductdeselected={handleProductDeselected}
+                ></c-product-selector-modal>
+                
+                
+            </div>
+        </template>
+    
+        <template if:true={showScreen4}>
+            <div class="screen">
+                <h1>Detalles de la replica</h1>
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <div class="slds-col slds-size_6-of-12">
+                        <h3>Dirección de entrega</h3>
+                        <div class="slds-grid slds-wrap detail">
+                            <div class="slds-col slds-size_12-of-12 slds-grid">
+                                <div class="slds-col slds-size_6-of-12">
+                                    <p>Calle:</p>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12 output">
+                                    <p><lightning-input type="text" variant="label-hidden" data-id="shippingStreet" value={shippingStreet} onchange={handleInputChange}></lightning-input></p>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-grid">
+                                <div class="slds-col slds-size_6-of-12">
+                                    <p>Ciudad:</p>    
+                                </div>
+                                <div class="slds-col slds-size_6-of-12 output">
+                                    <p><lightning-input type="text" variant="label-hidden" data-id="shippingCity" value={shippingCity} onchange={handleInputChange}></lightning-input></p>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-grid">
+                                <div class="slds-col slds-size_6-of-12">
+                                    <p>Código postal:</p>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12 output">
+                                    <p><lightning-input type="text" variant="label-hidden" data-id="shippingPostalCode" value={shippingPostalCode} onchange={handleInputChange}></lightning-input></p>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-grid">
+                                <div class="slds-col slds-size_6-of-12">
+                                    <p>Metodo de envío:</p>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12 output">
+                                    <p>{metodoEnvio}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <template if:true={mostrarCambioMetodo}>
+                            <div class="slds-col slds-size_4-of-12 slds-p-top-xxx-small">
+                                <lightning-button 
+                                    label="Cambiar método de Envío" 
+                                    onclick={openShippingEditorModal}>
+                                </lightning-button>
+                            </div>
+                            <template if:true={showMetodoEnvioEditor}>
+                                <c-replica-metodo-envio-editor
+                                    record-id={recordId}
+                                    onconfirm={handleMetodoEnvioConfirm}
+                                    onclose={closeModal}>
+                                </c-replica-metodo-envio-editor>
+                            </template>
+                        </template>
+                        <template if:true={esInversa}>
+                            <div class="slds-col slds-size_6-of-12 slds-p-top-xxx-small">
+                                <lightning-button 
+                                    label="Seleccionar método de envío inversa" 
+                                    onclick={openShippingEditorModal}>
+                                </lightning-button>
+                            </div>
+                            <template if:true={showMetodoEnvioInversaEditor}>
+                                <c-replica-inversa-metodo-envio-editor
+                                    record-id={recordId}
+                                    onconfirm={handleMetodoEnvioConfirm}
+                                    onclose={closeModal}>
+                                </c-replica-inversa-metodo-envio-editor>
+                            </template>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12">
+                        <h3>Sección Réplica</h3>
+                        <div class="slds-col slds-size_12-of-12 slds-grid slds-wrap detail">
+                            <div class="slds-col slds-size_6-of-12">
+                                <p>Tipo de réplica:</p>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12 output">
+                                <p>{type}</p>
+                            </div>
+                            <div class="detailBlock slds-col slds-size_12-of-12 slds-grid slds-wrap">
+                                <div class="slds-col slds-size_6-of-12" style="padding-left: 0px;">
+                                    <p>Motivo de réplica:</p>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning-radio-group
+                                        label="Motivo de réplica"
+                                        options={replicaReasonOptions}
+                                        value={selectedReplicaReason}
+                                        data-id="reason"
+                                        onchange={handleInputChange}
+                                        ></lightning-radio-group>
+                                        <template if:true={showOtherReplicaReason}>
+                                            <lightning-input
+                                            label="Detalle Motivo de réplica"
+                                            value={otherReason}
+                                            data-id="otherReason"
+                                            onchange={handleInputChange}
+                                            ></lightning-input>
+                                        </template>
+                                </div>
+                            </div>
+                            <template if:true={esInversa}> 
+                                <div class="slds-col slds-size_12-of-12 slds-grid">
+                                    <div class="slds-col slds-size_6-of-12" style="padding-left: 0px;">
+                                        <p>Forzar envío gratis:</p>
+                                    </div>
+                                    <div class="slds-col slds-size_6-of-12 output">
+                                        <p><lightning-input 
+                                            type="toggle" 
+                                            variant="label-hidden" 
+                                            data-id="esEnvioGratis" 
+                                            value={esEnvioGratis} 
+                                            onchange={handleEsEnvioGratis}
+                                            message-toggle-active="Si"
+                                            message-toggle-inactive="No">
+                                        </lightning-input></p>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12">
+                        <h3>Sección Pagos</h3>
+                        
+                        <lightning-datatable
+                        key-field="SKU__c"
+                        data={orderItemsSelected}
+                        columns={columnsOrderItemsSelected}
+                        hide-checkbox-column="true"
+                         ></lightning-datatable>
+                         <br>   
+                    </div>
+                    <div class="slds-col slds-size_6-of-12 slds-grid slds-wrap detail">
+                        <div class="slds-col slds-size_6-of-12">
+                            <p>Total de productos (Orden Original):</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 output">
+                            <p>${totalOrderItems}</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <p>Costo de envío:</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 output">
+                            <p>${shippingCost}</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <p>Costo de financiación:</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 output">
+                            <p>${financingCost}</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <p>Giftcards consumidas:</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 output">
+                            <p>${consumedGiftcards}</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <p>Cupones utilizados:</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 output">
+                            <p>${consumedCoupons}</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <p>Devolución de saldo:</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 output">
+                            <p>${discount}</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <p>Pago anterior:</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 output">
+                            <p>${pagoAnterior}</p>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12 slds-grid slds-wrap detail">
+                        <div class="slds-col slds-size_6-of-12">
+                            <p>Total de productos (Orden Replica):</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 output">
+                            <p>${totalOrderItemsReplica}</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <p>Giftcards consumidas:</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 output">
+                            <p>${consumedGiftcards}</p> 
+                                <!--
+                            <lightning-input type="number" onchange={handleInputChange} value={consumedGiftcards} class="custom-input" readonly></lightning-input>
+                            <div class="slds-form-element__control">
+                                <input type="text" id="text-input-id-47" placeholder="" class="custom-input" value={consumedGiftcards} />
+                            </div>
+                            -->
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <p>Cupones utilizados:</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 output">
+                            <p>${consumedCoupons}</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <p>Devolución de saldo:</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 output">
+                            <p>${discount}</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <p>Bonificación:</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 output">
+                            <p>$0</p>
+                        </div>
+                        <template if:true={mostrarBonificacion}>
+                            <div class="slds-col slds-size_6-of-12">
+                                <p>Nueva Devolución de saldo ({tipoBonificacion}):</p>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12 output">
+                                <p>${montoBonificacion}</p>
+                            </div>
+                        </template>
+                        <template if:true={mostrarPago}>
+                            <div class="slds-col slds-size_6-of-12">
+                                <p>Nuevo pago ({tipoPago}):</p>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12 output">
+                                <p>${montoPago}</p>
+                            </div>
+                        </template>
+                        <div class="slds-col slds-size_6-of-12">
+                            <p>Balance:</p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 output">
+                            <p>{balance}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </template>
+    
+        <template if:true={showScreen5}>
+            <div class="screen">
+                <template if:true={showErrorMessage}>
+                    <h2>Error al momento de crear registros:</h2>
+                    <p>{errorMessage}</p>
+                </template>
+                <template if:false={showErrorMessage}>
+                    <h2>Se han creado con éxito los siguientes registros:</h2>
+                    <ul>
+                        <template for:each={createdOrders} for:item="order">
+                            <li key={order.id}>
+                                <a href={order.link} target="_blank">{order.name}</a>
+                            </li>
+                        </template>
+                    </ul>
+                </template>
+                
+            </div>
+        </template>
+
+
+        <div class="buttons-container slds-grid">
+            <template if:true={showBonificationGenerator}>
+            <div class="slds-col slds-size_2-of-12 ">
+                    <!-- Botón para abrir el modal -->
+                    <lightning-button label="Crear devolución de saldo" onclick={openModal}></lightning-button>
+                
+                </div>
+                <!-- Modal -->
+                <template if:true={isModalOpen}>
+                    <c-bonification-creator
+                        monto={montoBonificacion}
+                        onbonificacioncreated={handleBonificacionCreated}
+                        onclosemodal={closeModal}>
+                    </c-bonification-creator>
+                </template>
+            </template>
+            <template if:true={showPaymentGenerator}>
+            <div class="slds-col slds-size_1-of-12 ">
+                    <lightning-button label="Crear Pago" onclick={openPaymentModal}></lightning-button>
+                    <!--
+                        <lightning-button label="Crear Bonificación"></lightning-button>
+                    -->
+                </div>
+                <!-- Modal -->
+                <template if:true={isPaymentModalOpen}>
+                    <c-payment-creator
+                        monto={montoPago}
+                        paymenttypeoptions={paymentTypeOptions}
+                        paymentstatusoptions={paymentStatusOptions}
+                        onpaymentcreated={handlePaymentCreated}
+                        onclosemodal={closeModal}>
+                    </c-payment-creator>
+                </template>
+            </template>
+            <!-- Botón para modificar gastos de envío --> 
+            <template if:true={showScreen4}>
+                <template if:false={esInversa}>   
+                    <div class="slds-col slds-size_3-of-12">
+                        <lightning-button 
+                            label="Modificar Gastos de Envío" 
+                            onclick={openShippingCostModal}>
+                        </lightning-button>
+                    </div>
+                    <template if:true={isShippingCostModalOpen}>
+                        <c-shipping-cost-editor
+                            current-shipping-cost={shippingCost}
+                            onshippingcostmodified={handleShippingCostModified}
+                            onclosemodal={closeModal}>
+                        </c-shipping-cost-editor>
+                    </template>
+                    <template if:false={esDevolucionProducto}>
+                        <div class="slds-col slds-size_3-of-12">
+                            <lightning-button 
+                                label="Modificar Costo de financiación" 
+                                onclick={openFinancingCostModal}>
+                            </lightning-button>
+                        </div>
+                        <template if:true={isFinancingCostModalOpen}>
+                            <c-financing-cost-editor
+                                current-financing-cost={financingCost}
+                                onfinancingcostmodified={handleFinancingCostModified}
+                                onclosemodal={closeModal}>
+                            </c-financing-cost-editor>
+                        </template>
+                    </template>
+                </template>
+            </template> 
+            <template if:true={showReturnButton}>
+                <div class="slds-col slds-size_1-of-12  slds-col_bump-left">
+                    <lightning-button label="Volver" onclick={goToPreviousScreen} stretch></lightning-button>
+                </div>
+            </template>
+            <template if:true={showAddProductButton}>
+                <div class="slds-col slds-size_1-of-12 ">
+                    <lightning-button label="Agregar Producto" onclick={addProduct}></lightning-button>
+                </div>
+            </template>
+            <template if:true={showNextButton}>
+                <template if:true={showReturnButton}>
+                    <div class="slds-col slds-size_1-of-12 ">
+                        <lightning-button   label={nextButtonLabel} variant="brand" onclick={goToNextScreen} stretch></lightning-button>    
+                    </div>
+                </template>
+                <template if:false={showReturnButton}>
+                    <div class="slds-col slds-size_1-of-12  slds-col_bump-left">
+                        <lightning-button   label={nextButtonLabel} variant="brand" onclick={goToNextScreen} stretch></lightning-button>    
+                    </div>
+                </template>
+            </template>
+
+        </div>
+    </template>
+    
+</template>

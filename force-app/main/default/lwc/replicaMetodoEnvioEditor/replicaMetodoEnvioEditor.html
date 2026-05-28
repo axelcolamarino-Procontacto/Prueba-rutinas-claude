@@ -1,0 +1,177 @@
+<template>
+    <!-- Modal Backdrop -->
+    <div class="slds-backdrop slds-backdrop_open" onclick={handleBackdropClick}></div>
+    
+    <!-- Modal Container -->
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium" aria-labelledby="modal-heading" aria-modal="true">
+        <div class="slds-modal__container">
+            <!-- Modal Header -->
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Cerrar" onclick={handleCerrar}>
+                    <lightning-icon icon-name="utility:close" alternative-text="Cerrar" size="small"></lightning-icon>
+                    <span class="slds-assistive-text">Cerrar</span>
+                </button>
+                <h2 id="modal-heading" class="slds-modal__title slds-hyphenate">
+                    Seleccionar Método de Envío
+                </h2>
+            </header>
+            
+            <!-- Modal Content -->
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content">
+                <!-- Selección de Método de Envío -->
+                <div class="slds-form-element slds-m-bottom_medium">
+                    <fieldset class="slds-form-element">
+                        <legend class="slds-form-element__legend slds-form-element__label">
+                            Método de Envío
+                        </legend>
+                        <div class="slds-form-element__control">
+                            <div class="slds-radio_button-group">
+                                <span class="slds-button slds-radio_button">
+                                    <input 
+                                        type="radio" 
+                                        name="metodo-envio" 
+                                        id="domicilio" 
+                                        value="domicilio" 
+                                        checked={isDomicilioSelected}
+                                        onchange={handleMetodoEnvioChange}>
+                                    <label class="slds-radio_button__label" for="domicilio">
+                                        <span class="slds-radio_faux">Envío a domicilio</span>
+                                    </label>
+                                </span>
+                                <span class="slds-button slds-radio_button">
+                                    <input 
+                                        type="radio" 
+                                        name="metodo-envio" 
+                                        id="sucursal" 
+                                        value="sucursal" 
+                                        checked={isSucursalSelected}
+                                        onchange={handleMetodoEnvioChange}>
+                                    <label class="slds-radio_button__label" for="sucursal">
+                                        <span class="slds-radio_faux">Retiro en sucursal</span>
+                                    </label>
+                                </span>
+                                <span class="slds-button slds-radio_button">
+                                    <input 
+                                        type="radio" 
+                                        name="metodo-envio" 
+                                        id="cambiomanomano" 
+                                        value="cambiomanomano" 
+                                        checked={isCambioSelected}
+                                        onchange={handleMetodoEnvioChange}>
+                                    <label class="slds-radio_button__label" for="cambiomanomano">
+                                        <span class="slds-radio_faux">Cambio mano a mano</span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- Sección Envío a Domicilio -->
+                <template if:true={showDomicilioSection}>
+                    <div class="slds-card slds-m-bottom_medium">
+                        <div class="slds-card__header">
+                            <h3 class="slds-card__header-title slds-truncate">
+                                Seleccionar Operador Logístico
+                            </h3>
+                        </div>
+                        <div class="slds-card__body slds-card__body_inner">
+                            <lightning-combobox
+                                label="Operador Logístico"
+                                value={operadorLogisticoSeleccionado}
+                                options={operadoresLogisticos}
+                                onchange={handleOperadorLogisticoChange}
+                                placeholder="Seleccione un operador logístico"
+                                variant="label-stacked"
+                                is-loading={isLoadingOperadores}
+                                required>
+                            </lightning-combobox>
+                            
+                            <!-- Mostrar error si existe -->
+                            <template if:true={operadoresError}>
+                                <div class="slds-text-color_error slds-m-top_x-small">
+                                    Error al cargar operadores logísticos
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Sección Retiro en Sucursal -->
+                <template if:true={showSucursalSection}>
+                    <div class="slds-card">
+                        <div class="slds-card__header">
+                            <h3 class="slds-card__header-title slds-truncate">
+                                Seleccionar Sucursal
+                            </h3>
+                        </div>
+                        <div class="slds-card__body slds-card__body_inner">
+                            <!-- Hijo que emite los filtros -->
+                            <c-parametros-cambio-metodo-envio onbuscar={handleBusqueda}>
+                            </c-parametros-cambio-metodo-envio>
+                            
+                            <!-- Hijo que muestra la tabla de resultados -->
+                            <template if:true={hasResultados}>
+                                <c-datatable-cambio-metodo-envio
+                                    table-data={resultados}
+                                    hide-button={hideButton}
+                                    pagina-anterior={paginaAnterior}
+                                    pagina-siguiente={paginaSiguiente}
+                                    pagina-actual={valorPaginaActual}
+                                    onsucursalselected={handleSucursalSelected}
+                                    onpreviouspage={handlePreviousPage}
+                                    onnextpage={handleNextPage}>
+                                </c-datatable-cambio-metodo-envio>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Sección Cambio mano a mano -->
+                <template if:true={showCambioSection}>
+                    <div class="slds-card slds-m-bottom_medium">
+                        <div class="slds-card__header">
+                            <h3 class="slds-card__header-title slds-truncate">
+                                Seleccionar Operador Logístico
+                            </h3>
+                        </div>
+                        <div class="slds-card__body slds-card__body_inner">
+                            <lightning-combobox
+                                label="Operador Logístico"
+                                value={operadorLogisticoSeleccionado}
+                                options={operadoresLogisticosCambio}
+                                onchange={handleOperadorLogisticoChange}
+                                placeholder="Seleccione un operador logístico"
+                                variant="label-stacked"
+                                is-loading={isLoadingOperadores}
+                                required>
+                            </lightning-combobox>
+                            
+                            <!-- Mostrar error si existe -->
+                            <template if:true={operadoresError}>
+                                <div class="slds-text-color_error slds-m-top_x-small">
+                                    Error al cargar operadores logísticos
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            
+            <!-- Modal Footer -->
+            <footer class="slds-modal__footer">
+                <lightning-button
+                    variant="neutral"
+                    label="Cancelar"
+                    onclick={handleCerrar}>
+                </lightning-button>
+                <lightning-button
+                    variant="brand"
+                    label="Confirmar"
+                    onclick={handleConfirmar}
+                    disabled={isConfirmarDisabled}>
+                </lightning-button>
+            </footer>
+        </div>
+    </section>
+</template>
