@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cortex — QA Agent Brain</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #060c1a; color: #c8d8f0; font-family: 'Segoe UI', system-ui, sans-serif; overflow: hidden; height: 100vh; }
+    #graph-container { position: absolute; inset: 0; }
+
+    #topbar {
+      position: absolute; top: 0; left: 0; right: 0; height: 56px;
+      background: rgba(6,12,26,0.88); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(100,150,255,0.15);
+      display: flex; align-items: center; padding: 0 20px; gap: 16px; z-index: 100;
+    }
+    #brain-title { font-size: 17px; font-weight: 700; letter-spacing: 1px; color: #a0c4ff; white-space: nowrap; }
+    #brain-title span { color: #4fc3f7; }
+
+    .chip {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(79,195,247,0.07); border: 1px solid rgba(79,195,247,0.18);
+      border-radius: 20px; padding: 4px 13px; font-size: 12px; color: #7a9ab8; white-space: nowrap;
+    }
+    .chip strong { color: #dceeff; font-size: 13px; }
+    .chip.green { border-color: rgba(102,187,106,0.35); background: rgba(102,187,106,0.07); }
+    .chip.green strong { color: #a5d6a7; }
+
+    #demo-tag {
+      margin-left: auto; font-size: 11px; color: #ffa040;
+      background: rgba(255,160,64,0.1); border: 1px solid rgba(255,160,64,0.3);
+      border-radius: 12px; padding: 3px 12px;
+    }
+
+    #legend {
+      position: absolute; bottom: 24px; left: 18px;
+      background: rgba(6,12,26,0.82); backdrop-filter: blur(10px);
+      border: 1px solid rgba(100,150,255,0.1); border-radius: 10px;
+      padding: 14px 16px; z-index: 100; min-width: 155px;
+    }
+    #legend h4 { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #3a5060; margin-bottom: 10px; }
+    .li { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 11px; color: #6080a0; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 5px currentColor; }
+
+    #detail {
+      position: absolute; top: 68px; right: 18px; width: 270px;
+      background: rgba(6,12,26,0.92); backdrop-filter: blur(14px);
+      border: 1px solid rgba(100,150,255,0.13); border-radius: 10px;
+      padding: 16px; z-index: 100; display: none;
+      max-height: calc(100vh - 110px); overflow-y: auto;
+    }
+    #detail.show { display: block; }
+    #detail h3 { font-size: 13px; color: #c8d8f0; margin-bottom: 3px; word-break: break-all; }
+    #dtype { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .drow { display: flex; justify-content: space-between; font-size: 11px; color: #607888;
+            padding: 4px 0; border-bottom: 1px solid rgba(100,150,255,0.06); }
+    .drow span:last-child { color: #90b0c8; }
+    #drels { margin-top: 12px; }
+    #drels h4 { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #3a5060; margin-bottom: 8px; }
+    .ritem { font-size: 11px; display: flex; gap: 6px; align-items: baseline; padding: 3px 0; }
+    .rlabel { color: #4a6880; font-size: 10px; background: rgba(79,195,247,0.07); border-radius: 3px; padding: 1px 5px; white-space: nowrap; }
+    .rtarget { color: #80a8c8; word-break: break-all; }
+    #dclose { position: absolute; top: 10px; right: 12px; background: none; border: none; color: #4a6070; font-size: 16px; cursor: pointer; }
+    #dclose:hover { color: #90b0c8; }
+    ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: rgba(100,150,255,0.2); border-radius: 2px; }
+  </style>
+</head>
+<body>
+<div id="graph-container"></div>
+
+<div id="topbar">
+  <div id="brain-title">🧠 <span>Cortex</span></div>
+  <div class="chip"><strong id="sn">—</strong>&nbsp;entidades</div>
+  <div class="chip"><strong id="sl">—</strong>&nbsp;relaciones</div>
+  <div class="chip green"><strong id="ss">—</strong>&nbsp;skills</div>
+  <div id="demo-tag">⚠ Demo — ejecutá el agente para datos reales</div>
+</div>
+
+<div id="legend">
+  <h4>Tipos de nodo</h4>
+  <div class="li"><div class="dot" style="background:#ffffff;color:#fff"></div>Proyecto</div>
+  <div class="li"><div class="dot" style="background:#4fc3f7;color:#4fc3f7"></div>Campo SF</div>
+  <div class="li"><div class="dot" style="background:#ab47bc;color:#ab47bc"></div>Perfil / Usuario</div>
+  <div class="li"><div class="dot" style="background:#66bb6a;color:#66bb6a"></div>Skill aprendido</div>
+  <div class="li"><div class="dot" style="background:#ff7043;color:#ff7043"></div>Root cause</div>
+  <div class="li"><div class="dot" style="background:#ec407a;color:#ec407a"></div>Condición / Flow</div>
+  <div class="li"><div class="dot" style="background:#ffa726;color:#ffa726"></div>Test Case</div>
+  <div class="li"><div class="dot" style="background:#607d8b;color:#607d8b"></div>Genérico</div>
+</div>
+
+<div id="detail">
+  <button id="dclose" onclick="closeD()">✕</button>
+  <h3 id="dname"></h3>
+  <div id="dtype"></div>
+  <div id="dmeta"></div>
+  <div id="drels"></div>
+</div>
+
+<script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
+<script>
+
+// ── Demo data — reemplazado por BigQuery cuando el agente ejecuta runs reales ──
+const DEMO = {
+  nodes: [
+    {id:"CMIV2",             name:"CMIV2",                 type:"project",    val:28, is_new:false},
+    {id:"SOLO",              name:"SOLO",                  type:"project",    val:18, is_new:false},
+    {id:"Contact.Email__c",  name:"Contact.Email__c",      type:"sf_field",   val:9,  is_new:true},
+    {id:"Contact.Phone__c",  name:"Contact.Phone__c",      type:"sf_field",   val:5,  is_new:false},
+    {id:"Account.Type",      name:"Account.Type",          type:"sf_field",   val:7,  is_new:false},
+    {id:"Opportunity.Stage", name:"Opportunity.Stage",     type:"sf_field",   val:4,  is_new:true},
+    {id:"Sales_User",        name:"Sales_User",            type:"sf_profile", val:8,  is_new:false},
+    {id:"Gerente_Comercial", name:"Gerente Comercial",     type:"sf_profile", val:6,  is_new:false},
+    {id:"Admin",             name:"Admin",                 type:"sf_profile", val:4,  is_new:false},
+    {id:"skill:dyn-forms",   name:"Dynamic Forms Check",   type:"skill",      val:5,  is_new:true,  success_rate:0.95, use_count:7},
+    {id:"skill:fls-diag",    name:"FLS Diagnosis",         type:"skill",      val:4,  is_new:false, success_rate:0.88, use_count:4},
+    {id:"skill:val-rule",    name:"Validation Rule Bypass", type:"skill",     val:3,  is_new:false, success_rate:0.80, use_count:2},
+    {id:"dynamic_forms",     name:"dynamic_forms",         type:"condition",  val:8,  is_new:false},
+    {id:"fls_restriction",   name:"fls_restriction",       type:"root_cause", val:7,  is_new:false},
+    {id:"apex_trigger_block",name:"apex_trigger_block",    type:"root_cause", val:5,  is_new:false},
+    {id:"validation_rule",   name:"validation_rule",       type:"root_cause", val:5,  is_new:false},
+    {id:"TC-0047",           name:"TC-0047",               type:"test_case",  val:3,  is_new:false},
+    {id:"TC-0023",           name:"TC-0023",               type:"test_case",  val:3,  is_new:false},
+    {id:"TC-0061",           name:"TC-0061",               type:"test_case",  val:2,  is_new:true},
+    {id:"Contact_Page",      name:"Contact Record Page",   type:"sf_field",   val:4,  is_new:false},
+    {id:"Partner_Account",   name:"Account.Type=Partner",  type:"condition",  val:4,  is_new:false},
+    {id:"Opp_Stage_Flow",    name:"Stage Change Flow",     type:"flow",       val:4,  is_new:true},
+    {id:"Sprint_24",         name:"Sprint 24",             type:"generic",    val:3,  is_new:false},
+  ],
+  links: [
+    {source:"Contact.Email__c",  target:"Sales_User",         relation:"hidden_when",      value:0.95},
+    {source:"Contact.Email__c",  target:"fls_restriction",    relation:"blocked_by",       value:0.92},
+    {source:"Contact.Phone__c",  target:"Sales_User",         relation:"readonly_when",    value:0.80},
+    {source:"Contact_Page",      target:"dynamic_forms",      relation:"uses",             value:0.90},
+    {source:"dynamic_forms",     target:"Account.Type",       relation:"depends_on",       value:0.85},
+    {source:"Account.Type",      target:"Partner_Account",    relation:"triggers_flow",    value:0.78},
+    {source:"TC-0047",           target:"Contact.Email__c",   relation:"tests",            value:1.00},
+    {source:"TC-0047",           target:"fls_restriction",    relation:"failed_because",   value:0.95},
+    {source:"TC-0023",           target:"Account.Type",       relation:"tests",            value:1.00},
+    {source:"TC-0061",           target:"Opportunity.Stage",  relation:"tests",            value:1.00},
+    {source:"TC-0061",           target:"Opp_Stage_Flow",     relation:"failed_because",   value:0.88},
+    {source:"Opportunity.Stage", target:"Opp_Stage_Flow",     relation:"triggers_flow",    value:0.85},
+    {source:"Opp_Stage_Flow",    target:"apex_trigger_block", relation:"blocked_by",       value:0.70},
+    {source:"Gerente_Comercial", target:"Opportunity.Stage",  relation:"can_edit",         value:0.95},
+    {source:"Sales_User",        target:"Opportunity.Stage",  relation:"restricted_to",    value:0.75},
+    {source:"skill:dyn-forms",   target:"dynamic_forms",      relation:"covers",           value:0.90},
+    {source:"skill:dyn-forms",   target:"fls_restriction",    relation:"covers",           value:0.75},
+    {source:"skill:fls-diag",    target:"fls_restriction",    relation:"covers",           value:0.95},
+    {source:"skill:fls-diag",    target:"validation_rule",    relation:"covers",           value:0.65},
+    {source:"skill:val-rule",    target:"validation_rule",    relation:"covers",           value:0.90},
+    {source:"validation_rule",   target:"Contact.Email__c",   relation:"blocked_by",       value:0.65},
+    {source:"TC-0047",           target:"Sprint_24",          relation:"fixed_in",         value:0.80},
+    {source:"CMIV2",             target:"Contact.Email__c",   relation:"contains",         value:0.50},
+    {source:"CMIV2",             target:"Sales_User",         relation:"contains",         value:0.50},
+    {source:"CMIV2",             target:"Gerente_Comercial",  relation:"contains",         value:0.50},
+    {source:"SOLO",              target:"Opportunity.Stage",  relation:"contains",         value:0.50},
+    {source:"SOLO",              target:"Opp_Stage_Flow",     relation:"contains",         value:0.50},
+  ]
+}
+
+// ── Colores por tipo ──────────────────────────────────────────────────────────
+const COLORS = {
+  project:'#ffffff', sf_field:'#4fc3f7', sf_profile:'#ab47bc',
+  skill:'#66bb6a', root_cause:'#ff7043', condition:'#ec407a',
+  flow:'#29b6f6', test_case:'#ffa726', generic:'#607d8b'
+}
+const TYPE_LABEL = {
+  project:'Proyecto', sf_field:'Campo Salesforce', sf_profile:'Perfil / Usuario',
+  skill:'Skill aprendido', root_cause:'Root Cause', condition:'Condición / Dynamic Forms',
+  flow:'Flow / Trigger', test_case:'Test Case', generic:'Entidad'
+}
+
+let gData = DEMO
+let Graph = null
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+function updateStats() {
+  const skills = gData.nodes.filter(n => n.type === 'skill').length
+  document.getElementById('sn').textContent = gData.nodes.length
+  document.getElementById('sl').textContent = gData.links.length
+  document.getElementById('ss').textContent = skills
+}
+
+// ── Init graph ────────────────────────────────────────────────────────────────
+function initGraph() {
+  Graph = ForceGraph3D({ controlType: 'orbit' })(document.getElementById('graph-container'))
+    .backgroundColor('#060c1a')
+    .showNavInfo(false)
+    .nodeLabel(n => n.name || n.id)
+    .nodeVal(n => Math.max(1, n.val || 1))
+    .nodeColor(n => n.is_new ? '#ffffff' : (COLORS[n.type] || COLORS.generic))
+    .nodeOpacity(0.90)
+    .nodeResolution(16)
+    .linkColor(l => `rgba(100,160,255,${Math.max(0.12, (l.value||0.5)*0.5)})`)
+    .linkWidth(l => Math.max(0.3, (l.value||0.5) * 1.2))
+    .linkDirectionalParticles(l => l.value > 0.85 ? 2 : 0)
+    .linkDirectionalParticleWidth(1.2)
+    .linkDirectionalParticleColor(() => 'rgba(79,195,247,0.9)')
+    .linkLabel(l => l.relation || '')
+    .onNodeClick(showDetail)
+    .onBackgroundClick(closeD)
+
+  Graph.d3Force('charge').strength(-130)
+  Graph.cameraPosition({ z: 380 })
+  Graph.graphData({ nodes: gData.nodes, links: gData.links.map(l => ({...l})) })
+  updateStats()
+}
+
+// ── Detail panel ──────────────────────────────────────────────────────────────
+function showDetail(node) {
+  const p = document.getElementById('detail')
+  p.classList.add('show')
+  document.getElementById('dname').textContent = node.name || node.id
+
+  const te = document.getElementById('dtype')
+  te.textContent = TYPE_LABEL[node.type] || node.type
+  te.style.color = COLORS[node.type] || COLORS.generic
+
+  const meta = []
+  if (node.type)         meta.push(['Tipo', TYPE_LABEL[node.type] || node.type])
+  if (node.val)          meta.push(['Conexiones', node.val])
+  if (node.success_rate) meta.push(['Éxito skill', Math.round(node.success_rate*100)+'%'])
+  if (node.use_count)    meta.push(['Usos', node.use_count])
+  if (node.is_new)       meta.push(['', '🟢 Nuevo — últimas 24h'])
+  document.getElementById('dmeta').innerHTML = meta.map(([k,v]) =>
+    `<div class="drow"><span>${k}</span><span>${v}</span></div>`).join('')
+
+  const out = gData.links.filter(l => (l.source?.id||l.source) === node.id)
+  const inc = gData.links.filter(l => (l.target?.id||l.target) === node.id)
+  const all = [
+    ...out.map(l => ({dir:'→', label:l.relation, other: l.target?.id||l.target, v:l.value})),
+    ...inc.map(l => ({dir:'←', label:l.relation, other: l.source?.id||l.source, v:l.value}))
+  ].slice(0, 14)
+
+  document.getElementById('drels').innerHTML = all.length
+    ? `<h4>Relaciones (${out.length+inc.length})</h4>`
+      + all.map(r => `<div class="ritem">
+          <span style="color:#3a5a70;font-size:10px">${r.dir}</span>
+          <span class="rlabel">${r.label}</span>
+          <span class="rtarget">${r.other}</span>
+        </div>`).join('')
+      + (out.length+inc.length > 14 ? `<div style="font-size:10px;color:#3a5060;margin-top:6px">y ${out.length+inc.length-14} más...</div>` : '')
+    : '<h4>Relaciones</h4><div style="font-size:11px;color:#3a5060;margin-top:4px">Sin relaciones visibles</div>'
+
+  const d = 120, r = 1 + d / Math.hypot(node.x||1, node.y||1, node.z||1)
+  Graph.cameraPosition(
+    {x:(node.x||0)*r, y:(node.y||0)*r, z:(node.z||0)*r}, node, 700
+  )
+}
+
+function closeD() { document.getElementById('detail').classList.remove('show') }
+
+// ── Boot ─────────────────────────────────────────────────────────────────────
+initGraph()
+</script>
+</body>
+</html>
