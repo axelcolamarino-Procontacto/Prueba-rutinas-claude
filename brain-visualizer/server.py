@@ -63,6 +63,45 @@ REAL_PROFILES = {
 }
 
 
+# Keywords por módulo — para conectar bugs/skills a su módulo por contenido.
+# Escalable: cualquier bug nuevo se ata al módulo cuyo texto matchee mejor.
+MODULE_KEYWORDS = {
+    "Oportunidades":          ["oportunidad","opportunity","potencial","desarrollo de producto","monto","amount","stagename","opportunitylineitem","desarrollo de negocio"],
+    "Gestión de Visitas":     ["visita","visit","tareas del cliente","medición","medicion","formulario nueva visita","intencionalidad","motivo de visita","tipo del evento","asunto"],
+    "Gestión de Casos":       ["caso","case","reclamo","validación st","validacion st","resolutionsatisfaction","servicesuggestions","etapas del caso","área responsable","area responsable","tab resumen","marcar estado","servicio técnico","servicio tecnico"],
+    "Gestión de Candidatos":  ["candidato","clasificacion","clasificación","notificacion","notificación","ebx","desarrollador responsable","get_user"],
+    "Gestión de Prospectos":  ["prospecto","indirecto","directo","transformacion","transformación","casa matriz","macro canal","distribuidor","customertype","fecha_reclasific","customer","cliente indirecto"],
+    "App Offline":            ["app offline","field service","mobile","offline","gps","sincroniz"],
+    "Acuerdo de Desarrollo":  ["acuerdo","add","campo país","campo pais","tms","otro recursos","otros recursos","justificativo","otherbenefit","justification"],
+    "Gestión de Rutas":       ["ruta","ventana de visita","cobrador","ruta avanzada"],
+    "Consumer Goods Cloud":   ["cgcloud","consumer goods","salesforce maps"],
+    "Servicio Técnico":       ["servicio técnico premezclas","servicio tecnico premezclas","premezclas"],
+    "Segmentación":           ["segmentación","segmentacion"],
+    "Perfilamiento":          ["perfilamiento","encuesta"],
+    "Gestión de Eventos":     ["evento"],
+    "Gestión de Contactos":   ["contacto","contact"],
+    "Pagos":                  ["pago","estado_del_paquete","entrega en sucursal"],
+    "Gestión de Despacho":    ["despacho","destinatarios_email","reporte de órdenes","reporte de ordenes"],
+    "Expedicion":             ["expedicion","expedición","clase apex"],
+    "Gestión de Órdenes":     ["orden","revertir full"],
+    "Reservas":               ["reserva"],
+    "Crear Reserva":          ["crear reserva","búsqueda por teléfono","busqueda por telefono"],
+    "Bot de Mensajería":      ["bot","mensajería","mensajeria"],
+}
+
+def guess_module(text: str, available_modules: set):
+    """Devuelve el módulo cuyo texto matchee mejor, o None. Solo módulos presentes."""
+    t = (text or "").lower()
+    best, best_score = None, 0
+    for mod, kws in MODULE_KEYWORDS.items():
+        if available_modules and mod not in available_modules:
+            continue
+        score = sum(1 for kw in kws if kw in t)
+        if score > best_score:
+            best_score, best = score, mod
+    return best
+
+
 def _normalize(s: str) -> str:
     """Minúsculas + sin tildes para comparación."""
     return unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().lower().strip()
@@ -139,14 +178,17 @@ def build_graph(kg_rows: list, skill_rows: list) -> dict:
         if row["relation"] == "has_open_bug"
     }
 
-    # b) Nombres de módulos que aparecen en contains_module
-    module_names: set = {
-        _normalize(row["object"]) for row in kg_rows
-        if row["relation"] == "contains_module"
-    } | {
+    # b) Nombres canónicos de módulos (objetos de contains_module) y proyectos (subjects)
+    canonical_modules: set = {
+        row["object"] for row in kg_rows if row["relation"] == "contains_module"
+    }
+    project_keys: set = {
+        row["subject"] for row in kg_rows if row["relation"] == "contains_module"
+    }
+    # Versión normalizada para type inference
+    module_names: set = { _normalize(m) for m in canonical_modules } | {
         _normalize(row["subject"]) for row in kg_rows
         if row["relation"] in ("contains_module", "has_submodule", "failure_rate")
-        and row["relation"] != "has_open_bug"
     }
 
     # c) failure_rate max por módulo (de triples module → failure_rate → "alto (58.1%)")
@@ -207,33 +249,35 @@ def build_graph(kg_rows: list, skill_rows: list) -> dict:
         obj_type  = infer_node_type(obj,     bug_ids, module_names)
 
         if relation == "has_open_bug":
-            # Intentar conectar directo al módulo via issue_key
-            module = issue_to_module.get(subject)
-            if module:
-                k = f"{module}||{obj}"
-                if k not in bug_link_targets:
-                    bug_link_targets.add(k)
-                    upsert_node(module, "module", False, project=project)
-                    upsert_node(obj, "bug", is_new, project=project)
-                    links.append({"source": module, "target": obj, "relation": "has_open_bug", "value": conf})
+            # Resolver el módulo del bug, en orden de preferencia:
+            # 1) si el subject YA es un módulo → usarlo
+            # 2) via issue_key → módulo (tested_in_module)
+            # 3) keyword matching del texto del bug
+            # 4) fallback: colgar del proyecto (nunca de un issue key suelto)
+            module = None
+            if subject in canonical_modules:
+                module = subject
+            elif issue_to_module.get(subject) in canonical_modules:
+                module = issue_to_module.get(subject)
             else:
-                # Sin módulo mapeado — conectar directo al subject (issue key o manual)
-                upsert_node(subject, subj_type, is_new, project=project)
+                module = guess_module(obj, canonical_modules)
+            anchor = module if module else project   # proyecto como último recurso
+
+            k = f"{anchor}||{obj}"
+            if k not in bug_link_targets:
+                bug_link_targets.add(k)
+                upsert_node(anchor, "module" if module else "project", False, project=project)
                 upsert_node(obj, "bug", is_new, project=project)
-                links.append({"source": subject, "target": obj, "relation": relation, "value": conf})
+                links.append({"source": anchor, "target": obj, "relation": "has_open_bug", "value": conf})
             continue
 
-        if relation == "failure_rate":
-            # No crear nodo "alto (58.1%)" — la info va al módulo como failure_rate_pct
-            continue
-
-        if relation in ("tested_in_module",):
-            # Omitir del grafo visual — solo útil como lookup interno
-            continue
-
-        upsert_node(subject, subj_type, is_new, project=project)
-        upsert_node(obj,     obj_type,  is_new, project=project)
-        links.append({"source": subject, "target": obj, "relation": relation, "value": conf})
+        # Estructura del cerebro: proyecto→módulo y módulo→submódulo
+        if relation in ("contains_module", "has_submodule"):
+            upsert_node(subject, subj_type, is_new, project=project)
+            upsert_node(obj,     obj_type,  is_new, project=project)
+            links.append({"source": subject, "target": obj, "relation": relation, "value": conf})
+        # Resto de relaciones (failure_rate, tested_in_module, has_label, failed_because,
+        # signals, etc.) NO se renderizan como nodos sueltos — son metadata o ruido visual.
 
     # ── Paso 4: skills ───────────────────────────────────────────────────────
 
@@ -241,16 +285,22 @@ def build_graph(kg_rows: list, skill_rows: list) -> dict:
         skill_id = f"skill:{row['skill_id']}"
         project  = row.get("project") or "GLOBAL"
         is_new   = bool(row.get("is_new", False))
-        upsert_node(skill_id, "skill", is_new,
-                    label=row["title"], project=project,
-                    success_rate=float(row.get("success_rate") or 1.0),
-                    use_count=int(row.get("use_count") or 0))
-        for kw in (row.get("keywords") or "").split(",")[:3]:
-            kw = kw.strip()
-            if not kw:
-                continue
-            upsert_node(kw, "root_cause", False, project=project)
-            links.append({"source": skill_id, "target": kw, "relation": "covers", "value": 0.7})
+        title    = row["title"]
+        keywords = row.get("keywords") or ""
+        sr       = float(row.get("success_rate") or 1.0)
+        upsert_node(skill_id, "skill", is_new, label=title, project=project,
+                    success_rate=sr, use_count=int(row.get("use_count") or 0))
+
+        # Conectar la skill a su(s) ancla(s), sin crear nodos keyword sueltos:
+        mod = guess_module(title + " " + keywords, canonical_modules)
+        if mod:
+            links.append({"source": skill_id, "target": mod, "relation": "covers", "value": sr})
+        elif project != "GLOBAL" and project in project_keys:
+            links.append({"source": skill_id, "target": project, "relation": "covers", "value": sr})
+        else:
+            # Skill GLOBAL sin módulo claro → cuelga de todos los proyectos
+            for p in project_keys:
+                links.append({"source": skill_id, "target": p, "relation": "covers", "value": sr})
 
     # ── Paso 5: enriquecer módulos con failure_rate_pct ──────────────────────
 
