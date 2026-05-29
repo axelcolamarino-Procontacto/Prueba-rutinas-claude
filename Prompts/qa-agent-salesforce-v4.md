@@ -92,6 +92,17 @@ nombres estándar de Salesforce (no nombres de cliente):
 
 Si un issue menciona un módulo con nombre del cliente → mapear al estándar SF más cercano.
 
+REGLA CRÍTICA — REUTILIZAR NOMBRES EXISTENTES ANTES DE CREAR NUEVOS:
+Antes de usar cualquier nombre de módulo, campo o entidad como subject/object en el
+knowledge graph, SIEMPRE ejecutar `canonicalize()` (ver PASO 4.C.4) para verificar si
+ya existe una entidad con nombre similar (diferente tilde, capitalización, nivel de
+especificidad). Nunca crear un nodo nuevo si ya existe uno equivalente.
+
+Ejemplos de lo que canonicalize() previene:
+- "Gestion de Visitas" cuando ya existe "Gestión de Visitas" → usa el existente
+- "App Offline - Gestión de Casos" cuando ya existe "App Offline" → usa el existente
+- "Casos (Service Cloud)" cuando ya existe "Gestión de Casos" → usa el existente
+
 ---
 
 ## REGLA DE OUTPUT — MODO SILENCIOSO
@@ -2842,6 +2853,68 @@ VALUES
 ```
 
 Insertar una fila por triple. Máximo 5 triples por TC para no saturar.
+
+── CANONICALIZACIÓN DE ENTIDADES (OBLIGATORIO ANTES DE CUALQUIER INSERT) ──────
+Antes de usar cualquier nombre como subject u object en un triple, verificar si
+ya existe una entidad similar en el grafo para ese proyecto. Esto evita duplicados
+por tildes, capitalización o nivel de especificidad diferente.
+
+EJECUTAR UNA VEZ POR RUN (al inicio de PASO 4.C.4, no por cada triple):
+
+```python
+import unicodedata
+
+def normalize_name(s):
+    """Normaliza para comparación: sin tildes, minúsculas, sin espacios extra."""
+    s = unicodedata.normalize('NFKD', s).encode('ascii', 'ignore').decode()
+    return s.lower().strip()
+
+# 1. Leer entidades existentes del proyecto (subjects y objects) del knowledge graph
+existing_rows = execute_sql(f"""
+    SELECT DISTINCT subject AS entity FROM `procontacto-claude.qa_agent.agent_knowledge_graph`
+    WHERE project IN ('{project_key}', 'GLOBAL')
+    UNION DISTINCT
+    SELECT DISTINCT object AS entity FROM `procontacto-claude.qa_agent.agent_knowledge_graph`
+    WHERE project IN ('{project_key}', 'GLOBAL')
+""")
+
+# 2. Construir mapa: nombre_normalizado → nombre_canónico
+canon_map = {{ normalize_name(row['entity']): row['entity'] for row in existing_rows }}
+
+def canonicalize(name):
+    """Devuelve el nombre canónico si existe uno similar, sino devuelve el nombre original."""
+    norm = normalize_name(name)
+    if norm in canon_map:
+        return canon_map[norm]  # usar el nombre que ya existe en el grafo
+    # Buscar coincidencia parcial: si el nombre nuevo está contenido en uno existente
+    # o viceversa (ej: "App Offline - Casos" → "App Offline")
+    for existing_norm, existing_canon in canon_map.items():
+        if norm in existing_norm or existing_norm in norm:
+            # El más corto es generalmente el canónico (más general)
+            if len(existing_canon) <= len(name):
+                return existing_canon
+    # No existe → este nombre se convierte en el nuevo canónico
+    canon_map[norm] = name  # agregar al mapa para los siguientes triples del mismo run
+    return name
+```
+
+APLICAR canonicalize() a TODO nombre antes de usarlo como subject u object:
+```python
+# ❌ INCORRECTO — insertar sin verificar
+subject = "Gestion de Visitas"
+
+# ✅ CORRECTO — siempre canonicalizar primero
+subject = canonicalize("Gestion de Visitas")
+# → devuelve "Gestión de Visitas" si ya existe en el grafo
+```
+
+REGLA: Si `canonicalize()` devuelve un nombre diferente al inferido → loggear el
+mapeo para trazabilidad:
+```python
+if canonical != inferred:
+    log_agent_event(..., category='knowledge',
+        message=f"Módulo canonicalizado: '{inferred}' → '{canonical}'")
+```
 
 ANTES DE INSERTAR: verificar si el triple ya existe (evitar duplicados):
 ```sql

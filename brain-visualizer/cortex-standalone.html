@@ -79,6 +79,26 @@
     #dclose { position: absolute; top: 10px; right: 12px; background: none; border: none; color: #4a6070; font-size: 16px; cursor: pointer; }
     #dclose:hover { color: #90b0c8; }
     ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: rgba(100,150,255,0.2); border-radius: 2px; }
+
+    /* ── Minimap ─────────────────────────────────────────────────────────── */
+    #minimap {
+      position: absolute; bottom: 80px; right: 18px; z-index: 100;
+      width: 220px; height: 160px;
+      background: rgba(4,9,20,0.88); backdrop-filter: blur(8px);
+      border: 1px solid rgba(100,150,255,0.18); border-radius: 10px;
+      cursor: crosshair; overflow: hidden;
+    }
+    #minimap:hover { border-color: rgba(100,150,255,0.40); }
+    #minimap-canvas { display: block; width: 220px; height: 160px; }
+    #minimap-label {
+      position: absolute; top: 5px; left: 9px;
+      font-size: 8px; letter-spacing: 1.2px; color: rgba(100,150,200,0.5);
+      pointer-events: none; user-select: none;
+    }
+    #minimap-viewport {
+      position: absolute; border: 1px solid rgba(79,195,247,0.6);
+      background: rgba(79,195,247,0.07); pointer-events: none; border-radius: 2px;
+    }
   </style>
 </head>
 <body>
@@ -94,6 +114,38 @@
   <div class="chip"><strong id="sn">—</strong>&nbsp;entidades</div>
   <div class="chip"><strong id="sl">—</strong>&nbsp;relaciones</div>
   <div class="chip green"><strong id="ss">—</strong>&nbsp;skills</div>
+
+  <!-- Filtro de proyecto -->
+  <div style="display:flex;align-items:center;gap:6px;margin-left:8px;">
+    <span style="font-size:11px;color:#4a6a90;white-space:nowrap">Proyecto:</span>
+    <select id="project-filter" onchange="render()"
+      style="background:rgba(171,71,188,0.1);border:1px solid rgba(171,71,188,0.3);
+             border-radius:6px;color:#e0c8f0;font-size:11px;padding:3px 8px;cursor:pointer;">
+      <option value="ALL">Todos</option>
+    </select>
+  </div>
+
+  <!-- Filtro de vista -->
+  <div style="display:flex;align-items:center;gap:6px;">
+    <span style="font-size:11px;color:#4a6a90;white-space:nowrap">Vista:</span>
+    <select id="view-preset" onchange="render()"
+      style="background:rgba(79,195,247,0.08);border:1px solid rgba(79,195,247,0.2);
+             border-radius:6px;color:#c8d8f0;font-size:11px;padding:3px 8px;cursor:pointer;">
+      <option value="proyectos">⚪ Proyectos</option>
+      <option value="estructura">🏗 Estructura</option>
+      <option value="salud">📊 Salud módulos</option>
+      <option value="bugs">🐛 Bugs abiertos</option>
+      <option value="issues">🎫 Issues + módulos</option>
+      <option value="todo">🌐 Todo</option>
+    </select>
+  </div>
+
+  <!-- Toggle labels -->
+  <label style="display:flex;align-items:center;gap:4px;font-size:11px;color:#4a6a90;cursor:pointer;white-space:nowrap;">
+    <input type="checkbox" id="labels-toggle" onchange="render()" style="cursor:pointer;">
+    Etiquetas
+  </label>
+
   <div id="demo-tag">⚠ Demo — ejecutá el agente para datos reales</div>
 </div>
 
@@ -107,6 +159,12 @@
   <div class="li"><div class="dot" style="background:#ec407a;color:#ec407a"></div>Condición / Flow</div>
   <div class="li"><div class="dot" style="background:#ffa726;color:#ffa726"></div>Test Case</div>
   <div class="li"><div class="dot" style="background:#607d8b;color:#607d8b"></div>Genérico</div>
+</div>
+
+<!-- ── Minimap ───────────────────────────────────────────────────────────── -->
+<div id="minimap">
+  <canvas id="minimap-canvas" width="220" height="160"></canvas>
+  <div id="minimap-label">MAPA GENERAL</div>
 </div>
 
 <div id="detail">
@@ -191,17 +249,101 @@ const TYPE_LABEL = {
   flow:'Flow / Trigger', test_case:'Test Case', generic:'Entidad'
 }
 
-let gData  = DEMO
-let Graph3 = null
-let Graph2 = null
+let gData     = DEMO
+let gFiltered = DEMO   // vista filtrada activa
+let Graph3    = null
+let Graph2    = null
 let activeTab = '3d'
 
-// ── Stats ─────────────────────────────────────────────────────────────────────
+// ── Presets de filtro ─────────────────────────────────────────────────────────
+const PRESETS = {
+  proyectos:  [],  // solo nodos tipo project, sin links
+  estructura: ['contains_module', 'has_submodule'],
+  salud:      ['contains_module', 'has_submodule', 'failure_rate', 'has_failed_tc_count'],
+  bugs:       ['contains_module', 'has_submodule', 'has_open_bug',
+               'unexpected_edit_access', 'unexpected_access', 'not_visible_for',
+               'incorrectly_visible', 'not_configured_in', 'missing_picklist_value',
+               'shows_wrong_value', 'not_auto_removed_on', 'incorrect_flow_for',
+               'not_working_in', 'picklist_restricted_for'],
+  issues:     ['contains_module', 'tested_in_module', 'failure_rate'],
+  todo:       null   // null = mostrar todo
+}
+
+// ── Filtrado combinado: vista (relaciones) + proyecto ───────────────────────
+function computeFiltered() {
+  const preset  = document.getElementById('view-preset')?.value || 'proyectos'
+  // Sincronizar el dropdown con el default
+  const sel = document.getElementById('view-preset')
+  if (sel && !sel.dataset.initialized) { sel.value = 'proyectos'; sel.dataset.initialized = '1' }
+  const proj    = document.getElementById('project-filter')?.value || 'ALL'
+  const relations = PRESETS[preset]
+
+  // Preset especial: solo proyectos, sin links
+  if (Array.isArray(relations) && relations.length === 0) {
+    let nodes = gData.nodes.filter(n => n.type === 'project')
+    if (proj !== 'ALL') nodes = nodes.filter(n => n.project === proj || n.id === proj)
+    return { nodes, links: [], meta: gData.meta }
+  }
+
+  // 1. Filtrar links por relación
+  let links = relations
+    ? gData.links.filter(l => new Set(relations).has(l.relation))
+    : gData.links.slice()
+
+  // 2. Filtrar por proyecto (si no es ALL)
+  if (proj !== 'ALL') {
+    const projNodeIds = new Set(gData.nodes.filter(n => n.project === proj).map(n => n.id))
+    links = links.filter(l => {
+      const s = l.source?.id || l.source, t = l.target?.id || l.target
+      return projNodeIds.has(s) || projNodeIds.has(t)
+    })
+  }
+
+  // 3. Nodos que participan en esos links
+  const nodeIds = new Set()
+  links.forEach(l => { nodeIds.add(l.source?.id || l.source); nodeIds.add(l.target?.id || l.target) })
+  let nodes = gData.nodes.filter(n => nodeIds.has(n.id))
+  if (proj !== 'ALL') nodes = nodes.filter(n => n.project === proj || n.type === 'project')
+
+  return { nodes, links, meta: gData.meta }
+}
+
+// ── Render: recalcula filtro y redibuja el grafo activo ─────────────────────
+function render() {
+  gFiltered = computeFiltered()
+  const labelsOn = document.getElementById('labels-toggle')?.checked
+
+  if (activeTab === '3d') {
+    if (!Graph3) { initGraph3D(); return }  // initGraph3D ya carga los datos
+    Graph3.graphData({ nodes: gFiltered.nodes, links: gFiltered.links.map(l => ({...l})) })
+    // zoomToFit lo maneja onEngineStop, pero forzamos uno por si el motor ya estaba quieto
+    setTimeout(() => Graph3.zoomToFit(800, 60), 3000)
+  } else {
+    if (!Graph2) initGraph2D()
+    Graph2.nodeCanvasObjectMode(() => 'replace')
+    Graph2.graphData({ nodes: gFiltered.nodes, links: gFiltered.links.map(l => ({...l})) })
+    setTimeout(() => Graph2.zoomToFit(700, 60), 1800)
+  }
+  updateStats()
+  startMinimap()   // arrancar/reiniciar el minimap
+}
+
 function updateStats() {
-  const skills = gData.nodes.filter(n => n.type === 'skill').length
-  document.getElementById('sn').textContent = gData.nodes.length
-  document.getElementById('sl').textContent = gData.links.length
-  document.getElementById('ss').textContent = skills
+  document.getElementById('sn').textContent = gFiltered.nodes.length
+  document.getElementById('sl').textContent = gFiltered.links.length
+  document.getElementById('ss').textContent = gFiltered.nodes.filter(n => n.type === 'skill').length
+}
+
+// ── Poblar dropdown de proyectos desde los datos ────────────────────────────
+function populateProjects() {
+  const projects = [...new Set(gData.nodes.map(n => n.project).filter(Boolean))].sort()
+  const sel = document.getElementById('project-filter')
+  projects.forEach(p => {
+    if (p === 'GLOBAL') return
+    const opt = document.createElement('option')
+    opt.value = p; opt.textContent = p
+    sel.appendChild(opt)
+  })
 }
 
 // ── Tab switching ─────────────────────────────────────────────────────────────
@@ -212,8 +354,8 @@ function switchTab(tab) {
   document.querySelectorAll('.tab').forEach((b, i) => {
     b.classList.toggle('active', (i === 0 && tab === '3d') || (i === 1 && tab === '2d'))
   })
-  if (tab === '2d' && !Graph2) initGraph2D()
   closeD()
+  render()
 }
 
 // ── Init 3D graph ─────────────────────────────────────────────────────────────
@@ -222,9 +364,9 @@ function initGraph3D() {
     .backgroundColor('#060c1a')
     .showNavInfo(false)
     .nodeLabel(n => n.name || n.id)
-    .nodeVal(n => Math.max(1, n.val || 1))
-    .nodeColor(n => n.is_new ? '#ffffff' : (COLORS[n.type] || COLORS.generic))
-    .nodeOpacity(0.90)
+    .nodeVal(n => n.type === 'project' ? 80 : Math.max(1, n.val || 1))
+    .nodeColor(n => COLORS[n.type] || COLORS.generic)
+    .nodeOpacity(0.9)
     .nodeResolution(16)
     .linkColor(l => `rgba(100,160,255,${Math.max(0.12, (l.value||0.5)*0.5)})`)
     .linkWidth(l => Math.max(0.3, (l.value||0.5) * 1.2))
@@ -235,9 +377,20 @@ function initGraph3D() {
     .onNodeClick(showDetail)
     .onBackgroundClick(closeD)
 
-  Graph3.d3Force('charge').strength(-130)
-  Graph3.cameraPosition({ z: 380 })
-  Graph3.graphData({ nodes: gData.nodes, links: gData.links.map(l => ({...l})) })
+  Graph3.d3Force('charge').strength(-180).distanceMax(600)
+  Graph3.d3Force('link').distance(l => {
+    if (l.relation === 'has_open_bug')     return 100
+    if (l.relation === 'has_submodule')    return 70
+    if (l.relation === 'tested_in_module') return 60
+    return 50
+  })
+  Graph3.d3AlphaDecay(0.02)
+  Graph3.d3VelocityDecay(0.4)
+  // Sin warmupTicks — dejar que anime desde el inicio para que la cámara vea los nodos
+  Graph3.cooldownTime(8000)
+  // zoomToFit cuando el motor se detiene (nodos ya posicionados)
+  Graph3.onEngineStop(() => Graph3.zoomToFit(800, 60))
+  Graph3.graphData({ nodes: gFiltered.nodes, links: gFiltered.links.map(l => ({...l})) })
   updateStats()
 }
 
@@ -246,16 +399,17 @@ function initGraph2D() {
   Graph2 = ForceGraph()(document.getElementById('graph-2d'))
     .backgroundColor('#060c1a')
     .nodeLabel(n => n.name || n.id)
-    .nodeVal(n => Math.max(1, n.val || 1))
-    .nodeColor(n => n.is_new ? '#ffffff' : (COLORS[n.type] || COLORS.generic))
+    .nodeVal(n => n.type === 'project' ? 80 : Math.max(1, n.val || 1))
+    .nodeColor(n => COLORS[n.type] || COLORS.generic)
     .nodeCanvasObject((node, ctx, scale) => {
-      const r     = Math.sqrt(Math.max(1, node.val || 1)) * 3
-      const color = node.is_new ? '#ffffff' : (COLORS[node.type] || COLORS.generic)
+      const isProject = node.type === 'project'
+      const r     = isProject ? 28 : Math.sqrt(Math.max(1, node.val || 1)) * 3
+      const color = COLORS[node.type] || COLORS.generic
 
-      // glow
+      // glow (más grande para proyectos)
       ctx.beginPath()
-      ctx.arc(node.x, node.y, r + 3, 0, 2 * Math.PI)
-      ctx.fillStyle = color.replace(')', ',0.15)').replace('rgb','rgba').replace('#', 'rgba(').replace('rgba(', 'rgba(').startsWith('rgba') ? color : color + '28'
+      ctx.arc(node.x, node.y, r + (isProject ? 10 : 3), 0, 2 * Math.PI)
+      ctx.fillStyle = isProject ? 'rgba(255,255,255,0.12)' : (color + '28')
       ctx.fill()
 
       // node circle
@@ -264,14 +418,29 @@ function initGraph2D() {
       ctx.fillStyle = color
       ctx.fill()
 
-      // label (visible from zoom ~1.5)
-      if (scale >= 1.2) {
-        const label    = node.name || node.id
-        const fontSize = Math.max(7, 11 / scale)
+      // ring exterior para proyectos
+      if (isProject) {
+        ctx.beginPath()
+        ctx.arc(node.x, node.y, r + 3, 0, 2 * Math.PI)
+        ctx.strokeStyle = 'rgba(255,255,255,0.6)'
+        ctx.lineWidth = 1.5
+        ctx.stroke()
+      }
+
+      // label: solo si el toggle "Etiquetas" está activo.
+      // Sin toggle: solo proyectos (siempre) y nodos grandes al hacer zoom.
+      const labelsOn  = document.getElementById('labels-toggle')?.checked
+      const showLabel = isProject                           // proyectos: siempre
+                     || (labelsOn && scale >= 1.0)          // toggle on: todos
+                     || (!labelsOn && scale >= 3 && (node.val||1) >= 5) // zoom fuerte
+      if (showLabel) {
+        const raw      = node.name || node.id
+        const label    = raw.length > 28 ? raw.substring(0, 26) + '…' : raw
+        const fontSize = Math.max(6, 10 / scale)
         ctx.font      = `${fontSize}px Segoe UI, system-ui, sans-serif`
         ctx.textAlign = 'center'
         ctx.textBaseline = 'top'
-        ctx.fillStyle = 'rgba(180,210,240,0.9)'
+        ctx.fillStyle = node.type === 'project' ? 'rgba(255,255,255,0.95)' : 'rgba(170,200,235,0.8)'
         ctx.fillText(label, node.x, node.y + r + 2)
       }
     })
@@ -285,8 +454,19 @@ function initGraph2D() {
     .onNodeClick(showDetail)
     .onBackgroundClick(closeD)
 
-  Graph2.d3Force('charge').strength(-180)
-  Graph2.graphData({ nodes: gData.nodes, links: gData.links.map(l => ({...l})) })
+  Graph2.d3Force('charge').strength(-700).distanceMax(1000)
+  Graph2.d3Force('link').distance(l => {
+    if (l.relation === 'has_open_bug')     return 180
+    if (l.relation === 'has_submodule')    return 130
+    if (l.relation === 'tested_in_module') return 110
+    return 90
+  })
+  Graph2.d3AlphaDecay(0.008)
+  Graph2.d3VelocityDecay(0.25)
+  Graph2.warmupTicks(200)
+  Graph2.cooldownTime(8000)
+  Graph2.graphData({ nodes: gFiltered.nodes, links: gFiltered.links.map(l => ({...l})) })
+  setTimeout(() => Graph2.zoomToFit(600, 40), 2000)
 }
 
 // ── Detail panel ──────────────────────────────────────────────────────────────
@@ -336,8 +516,170 @@ function showDetail(node) {
 
 function closeD() { document.getElementById('detail').classList.remove('show') }
 
-// ── Boot ─────────────────────────────────────────────────────────────────────
-initGraph3D()
+// ── Minimap ───────────────────────────────────────────────────────────────────
+let _mmRaf = null
+
+function startMinimap() {
+  if (_mmRaf) cancelAnimationFrame(_mmRaf)
+  drawMinimap()
+}
+
+function drawMinimap() {
+  const canvas = document.getElementById('minimap-canvas')
+  if (!canvas) return
+  const ctx = canvas.getContext('2d')
+  const W = canvas.width, H = canvas.height
+  const PAD = 14
+
+  ctx.clearRect(0, 0, W, H)
+
+  // Obtener nodos con posición ya calculada por la simulación
+  const nodes = gFiltered.nodes.filter(n => n.x != null)
+  if (!nodes.length) { _mmRaf = requestAnimationFrame(drawMinimap); return }
+
+  // Bounding box del grafo completo
+  // Usar getGraphBounds() para consistencia con el click handler
+  const bounds = getGraphBounds()
+  if (!bounds) { _mmRaf = requestAnimationFrame(drawMinimap); return }
+  const { minX, minY, rangeX, rangeY } = bounds
+
+  // Proyección: coordenada grafo → píxel minimap
+  const toMX = x => PAD + (x - minX) / rangeX * (W - PAD*2)
+  const toMY = y => PAD + (y - minY) / rangeY * (H - PAD*2)
+
+  // Links
+  ctx.lineWidth = 0.6
+  gFiltered.links.forEach(l => {
+    const s = l.source?.x != null ? l.source : null
+    const t = l.target?.x != null ? l.target : null
+    if (!s || !t) return
+    const sy = s.y || 0
+    const ty = t.y || 0
+    ctx.beginPath()
+    ctx.strokeStyle = `rgba(100,150,255,${Math.max(0.08, (l.value||0.5)*0.25)})`
+    ctx.moveTo(toMX(s.x), toMY(sy))
+    ctx.lineTo(toMX(t.x), toMY(ty))
+    ctx.stroke()
+  })
+
+  // Nodos
+  nodes.forEach(n => {
+    const ny = n.y || 0
+    const mx = toMX(n.x), my = toMY(ny)
+    const r = n.type === 'project' ? 5 : Math.min(3, Math.sqrt(n.val||1))
+    ctx.beginPath()
+    ctx.arc(mx, my, r, 0, 2*Math.PI)
+    ctx.fillStyle = COLORS[n.type] || COLORS.generic
+    ctx.fill()
+    // Label solo para proyectos en el minimap
+    if (n.type === 'project') {
+      ctx.font = 'bold 8px Segoe UI, sans-serif'
+      ctx.fillStyle = 'rgba(255,255,255,0.8)'
+      ctx.textAlign = 'center'
+      ctx.fillText(n.name || n.id, mx, my + r + 7)
+    }
+  })
+
+  // Rectángulo de viewport (solo 2D — podemos leer zoom y center)
+  if (activeTab === '2d' && Graph2) {
+    try {
+      const zoom   = Graph2.zoom()
+      const center = Graph2.centerAt()  // {x, y}
+      if (center && zoom) {
+        const cont = document.getElementById('graph-2d')
+        const vpW  = cont.clientWidth  / zoom
+        const vpH  = cont.clientHeight / zoom
+        const vx1  = toMX(center.x - vpW/2), vy1 = toMY(center.y - vpH/2)
+        const vx2  = toMX(center.x + vpW/2), vy2 = toMY(center.y + vpH/2)
+        ctx.strokeStyle = 'rgba(79,195,247,0.7)'
+        ctx.lineWidth = 1
+        ctx.setLineDash([3,2])
+        ctx.strokeRect(vx1, vy1, vx2-vx1, vy2-vy1)
+        ctx.fillStyle = 'rgba(79,195,247,0.06)'
+        ctx.fillRect(vx1, vy1, vx2-vx1, vy2-vy1)
+        ctx.setLineDash([])
+      }
+    } catch(e) { /* zoom/center no disponible aún */ }
+  }
+
+  _mmRaf = requestAnimationFrame(drawMinimap)
+}
+
+// ── Helpers compartidos minimap: bounding box y proyección ───────────────────
+function getGraphBounds() {
+  const nodes = gFiltered.nodes.filter(n => n.x != null)
+  if (!nodes.length) return null
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
+  nodes.forEach(n => {
+    // En 3D usamos x/y (vista frontal), igual que en drawMinimap
+    const gy = activeTab === '3d' ? (n.y||0) : (n.y||0)
+    if (n.x < minX) minX = n.x;  if (n.x > maxX) maxX = n.x
+    if (gy < minY)  minY = gy;   if (gy > maxY)  maxY = gy
+  })
+  return { minX, maxX, minY, maxY,
+    rangeX: maxX - minX || 1,
+    rangeY: maxY - minY || 1 }
+}
+
+// Click en el minimap → navegar a esa zona
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('minimap').addEventListener('click', e => {
+    const rect  = e.currentTarget.getBoundingClientRect()
+    const normX = (e.clientX - rect.left)  / rect.width
+    const normY = (e.clientY - rect.top)   / rect.height
+    const PAD   = 14, W = 220, H = 160
+
+    const bounds = getGraphBounds()
+    if (!bounds) return
+
+    // Convertir click normalizado → coordenada en espacio del grafo
+    const clickX = bounds.minX + ((normX * W - PAD) / (W - PAD*2)) * bounds.rangeX
+    const clickY = bounds.minY + ((normY * H - PAD) / (H - PAD*2)) * bounds.rangeY
+
+    if (activeTab === '2d' && Graph2) {
+      // 2D: centrar en ese punto y hacer zoom para ver bien el área
+      const zoomLevel = Math.max(2, Math.min(6, 400 / Math.max(bounds.rangeX, bounds.rangeY) * 10))
+      Graph2.centerAt(clickX, clickY, 500)
+      Graph2.zoom(zoomLevel, 500)
+
+    } else if (activeTab === '3d' && Graph3) {
+      // 3D: posición cámara = punto clickeado pero con Z proporcional al rango del grafo
+      // para estar lo suficientemente lejos y ver el área completa alrededor del click
+      const camZ = Math.max(100, bounds.rangeX * 0.5)
+      Graph3.cameraPosition(
+        { x: clickX, y: clickY, z: camZ },
+        { x: clickX, y: clickY, z: 0 },
+        600
+      )
+    }
+  })
+})
+
+// ── Boot — intenta cargar datos reales de BigQuery, cae en DEMO si falla ─────
+async function boot() {
+  try {
+    const resp = await fetch('./cortex-data.json')
+    if (!resp.ok) throw new Error('no data file')
+    const data = await resp.json()
+    if (data.nodes && data.nodes.length > 0) {
+      gData = data
+      // Ocultar banner de demo y mostrar banner de datos reales
+      const tag = document.getElementById('demo-tag')
+      tag.style.background = 'rgba(102,187,106,0.1)'
+      tag.style.border = '1px solid rgba(102,187,106,0.4)'
+      tag.style.color = '#a5d6a7'
+      const ts = data.meta && data.meta.generated_at
+        ? new Date(data.meta.generated_at).toLocaleString('es-AR', {dateStyle:'short', timeStyle:'short'})
+        : ''
+      tag.textContent = `✓ Datos reales BigQuery${ts ? ' · ' + ts : ''} · ${data.nodes.length} entidades`
+    }
+  } catch(e) {
+    // Sin cortex-data.json → usar DEMO silenciosamente
+  }
+  populateProjects()   // llenar dropdown de proyectos
+  render()             // dibuja con vista "Estructura" + proyecto "Todos"
+}
+boot()
 </script>
 </body>
 </html>

@@ -8,10 +8,18 @@ Abre:   http://localhost:8000
 
 from fastapi import FastAPI, Query
 from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 import json
 
 app = FastAPI(title="QA Agent Brain Visualizer")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 PROJECT_ID = "procontacto-claude"
 DATASET    = "qa_agent"
@@ -67,12 +75,17 @@ def build_graph(kg_rows, skill_rows):
         project   = row.get("project") or "GLOBAL"
         is_new    = bool(row.get("is_new", False))
 
+        obj_full  = row["object"]
+        # Para nodos de bugs (objetos largos), usar label corto y guardar texto completo
+        obj_label = (obj_full[:35] + "…") if len(obj_full) > 38 else obj_full
+
         upsert_node(row["subject"], subj_type, is_new, project=project)
-        upsert_node(row["object"],  obj_type,  is_new, project=project)
+        upsert_node(obj_full, obj_type, is_new, project=project,
+                    label=obj_label, full_text=obj_full if len(obj_full) > 38 else None)
 
         links.append({
             "source":   row["subject"],
-            "target":   row["object"],
+            "target":   obj_full,
             "relation": row["relation"],
             "value":    float(row.get("confidence_score") or 1.0)
         })
@@ -247,4 +260,4 @@ def _demo_links():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run(app, host="0.0.0.0", port=8001, reload=False)

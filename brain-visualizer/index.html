@@ -270,6 +270,9 @@
   <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
 
   <script>
+    // ── API base URL (backend FastAPI en puerto 8001) ──────────────────────────
+    const API_BASE = 'http://localhost:8001'
+
     // ── Color palette ─────────────────────────────────────────────────────────
     const NODE_COLORS = {
       project:    '#ffffff',
@@ -300,31 +303,44 @@
     let Graph      = null
     let refreshTimer = null
 
+    // ── Helpers ───────────────────────────────────────────────────────────────
+    function shortLabel(name, max = 28) {
+      if (!name) return ''
+      return name.length > max ? name.substring(0, max) + '…' : name
+    }
+
     // ── Init graph ────────────────────────────────────────────────────────────
     function initGraph() {
       Graph = ForceGraph3D({ controlType: 'orbit' })(document.getElementById('graph-container'))
         .backgroundColor('#060c1a')
         .showNavInfo(false)
+        // Tooltip completo al hover; en pantalla solo etiqueta corta
         .nodeLabel(node => node.name || node.id)
         .nodeVal(node => Math.max(1, node.val || 1))
         .nodeColor(node => {
-          if (node.is_new) return '#ffffff'  // nuevos: blancos/brillantes
+          if (node.is_new) return '#ffffff'
           return NODE_COLORS[node.type] || NODE_COLORS.generic
         })
         .nodeOpacity(0.92)
         .nodeResolution(16)
-        .linkColor(link => `rgba(120,170,255,${Math.max(0.15, (link.value || 0.5) * 0.55)})`)
-        .linkWidth(link => Math.max(0.3, (link.value || 0.5) * 1.2))
-        .linkDirectionalParticles(link => link.value > 0.8 ? 2 : 0)
-        .linkDirectionalParticleWidth(1.2)
+        .linkColor(link => `rgba(120,170,255,${Math.max(0.10, (link.value || 0.5) * 0.40)})`)
+        .linkWidth(link => Math.max(0.2, (link.value || 0.5) * 0.9))
+        .linkDirectionalParticles(link => link.value > 0.9 ? 2 : 0)
+        .linkDirectionalParticleWidth(1.0)
         .linkDirectionalParticleColor(() => 'rgba(79,195,247,0.8)')
         .linkLabel(link => link.relation || '')
         .onNodeClick(handleNodeClick)
         .onBackgroundClick(closeDetail)
 
-      // Ajustar distancia inicial de la cámara
-      Graph.d3Force('charge').strength(-120)
-      Graph.cameraPosition({ z: 400 })
+      // Separar bien los nodos — fuerza de repulsión alta
+      Graph.d3Force('charge').strength(-350)
+      Graph.d3Force('link').distance(link => {
+        if (link.relation === 'has_open_bug')    return 150
+        if (link.relation === 'has_submodule')   return 90
+        if (link.relation === 'tested_in_module') return 70
+        return 60
+      })
+      Graph.cameraPosition({ z: 700 })
     }
 
     // ── Load graph data ───────────────────────────────────────────────────────
@@ -334,7 +350,7 @@
       btn.textContent = '⟳ Cargando...'
 
       const project = document.getElementById('project-filter').value
-      const url     = `/api/graph?project=${encodeURIComponent(project)}`
+      const url     = `${API_BASE}/api/graph?project=${encodeURIComponent(project)}`
 
       try {
         const res  = await fetch(url)
@@ -368,7 +384,7 @@
 
     async function loadStats() {
       try {
-        const res  = await fetch('/api/stats')
+        const res  = await fetch(`${API_BASE}/api/stats`)
         const data = await res.json()
         document.getElementById('stat-entities').textContent = data.total_entities ?? '—'
         document.getElementById('stat-triples').textContent  = data.total_triples  ?? '—'
@@ -379,7 +395,7 @@
 
     async function loadProjects() {
       try {
-        const res      = await fetch('/api/projects')
+        const res      = await fetch(`${API_BASE}/api/projects`)
         const projects = await res.json()
         const sel      = document.getElementById('project-filter')
         projects.forEach(p => {
