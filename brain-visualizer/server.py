@@ -112,17 +112,17 @@ def infer_node_type(name: str, bug_ids: set = None, module_set: set = None) -> s
     n      = _normalize(name)
     name_l = name.lower()
 
-    # Tipos explícitos primero
+    # Proyecto SIEMPRE primero — un nombre de proyecto nunca es otra cosa
+    if re.match(r'^(cmiv2|solo|cmi|global)$', n):
+        return "project"
+
+    # Tipos explícitos
     if bug_ids and name in bug_ids:
         return "bug"
     if module_set and n in module_set:
         return "module"
     if n in CANONICAL_MODULES:
         return "module"
-
-    # Proyecto
-    if re.match(r'^(cmiv2|solo|cmi|global)$', n):
-        return "project"
 
     # Skills
     if n.startswith("skill:"):
@@ -185,10 +185,12 @@ def build_graph(kg_rows: list, skill_rows: list) -> dict:
     project_keys: set = {
         row["subject"] for row in kg_rows if row["relation"] == "contains_module"
     }
-    # Versión normalizada para type inference
+    # Versión normalizada para type inference.
+    # Módulos = objects de contains_module + subjects de has_submodule/failure_rate.
+    # OJO: NO incluir subjects de contains_module → esos son PROYECTOS, no módulos.
     module_names: set = { _normalize(m) for m in canonical_modules } | {
         _normalize(row["subject"]) for row in kg_rows
-        if row["relation"] in ("contains_module", "has_submodule", "failure_rate")
+        if row["relation"] in ("has_submodule", "failure_rate")
     }
 
     # c) failure_rate max por módulo (de triples module → failure_rate → "alto (58.1%)")
