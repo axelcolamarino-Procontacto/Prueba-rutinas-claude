@@ -1,0 +1,8 @@
+{
+  "use": {
+    "ignoreHTTPSErrors": true,
+    "launchOptions": {
+      "args": ["--ignore-certificate-errors"]
+    }
+  }
+}

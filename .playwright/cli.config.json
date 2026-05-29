@@ -1,8 +1,5 @@
 {
-  "browser": {
-    "browserName": "chromium",
-    "launchOptions": {
-      "channel": "chromium"
-    }
+  "use": {
+    "ignoreHTTPSErrors": true
   }
 }
