@@ -220,8 +220,8 @@ let Graph3    = null
 let Graph2    = null
 let activeTab = '3d'
 
-// Capas activas — vamos sumando de a una.
-const VISIBLE_RELATIONS = ['contains_module', 'has_submodule', 'has_open_bug']
+// Capas activas — cerebro completo.
+const VISIBLE_RELATIONS = ['contains_module', 'has_submodule', 'has_open_bug', 'covers']
 
 // ── Filtrado por proyecto ──────────────────────────────────────────────────
 function computeFiltered() {
@@ -548,8 +548,8 @@ async function boot(){
   let data=null, live=false
   // 1. Backend FastAPI (BigQuery en vivo)
   try{ const d=await tryFetch(`${BACKEND}/api/graph`,5000); if(d?.nodes?.length){ data=d; live=!d.meta?.demo } }catch(e){}
-  // 2. JSON estático (snapshot)
-  if(!data){ try{ const d=await tryFetch('./cortex-data.json',3000); if(d?.nodes?.length) data=d }catch(e){} }
+  // 2. JSON estático (snapshot) — cache-bust para tomar siempre la última versión
+  if(!data){ try{ const d=await tryFetch('./cortex-data.json?t='+Date.now(),3000); if(d?.nodes?.length) data=d }catch(e){} }
 
   if(data){
     gData=data
