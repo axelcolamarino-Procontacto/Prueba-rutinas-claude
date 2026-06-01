@@ -1,0 +1,508 @@
+- generic:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e167]:
+        - img [ref=e171]
+        - generic [ref=e174]: Inicio de sesión como Sucursal 30 (sucursal.30@solodeportes.com.test)
+        - link "Cerrar sesión como Sucursal 30" [ref=e175] [cursor=pointer]:
+          - /url: /secur/logout.jsp
+      - generic [ref=e179]:
+        - generic [ref=e183]:
+          - button "Toggle Panel" [ref=e187] [cursor=pointer]:
+            - img [ref=e191]
+            - generic [ref=e194]: Menu
+          - generic [ref=e199]:
+            - img [ref=e203]
+            - generic [ref=e207]: Sandbox (test)
+        - button "Show menu" [ref=e216] [cursor=pointer]:
+          - img [ref=e218]
+          - generic [ref=e221]: Show menu
+      - generic [ref=e6]:
+        - button "Buscar" [ref=e12]:
+          - img [ref=e14]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e17]:
+          - list [ref=e19]:
+            - listitem [ref=e20]:
+              - group [ref=e21]:
+                - button "Agregar favorito" [ref=e222] [cursor=pointer]:
+                  - generic [ref=e24]:
+                    - img [ref=e28]
+                    - tooltip "Agregar favorito"
+                - button "Lista de favoritos" [ref=e32] [cursor=pointer]:
+                  - generic [ref=e33]:
+                    - img [ref=e37]
+                    - tooltip "Lista de favoritos"
+            - listitem [ref=e40]:
+              - button "Acciones globales" [ref=e227] [cursor=pointer]:
+                - generic [ref=e228]:
+                  - img [ref=e232]
+                  - tooltip "Acciones globales"
+            - listitem [ref=e235]:
+              - button "Centro de orientación" [ref=e237] [cursor=pointer]:
+                - generic [ref=e238]:
+                  - img [ref=e242]
+                  - tooltip "Centro de orientación"
+            - listitem [ref=e49]:
+              - button "Ayuda de Salesforce" [ref=e52] [cursor=pointer]:
+                - generic [ref=e53]:
+                  - img [ref=e57]
+                  - tooltip "Ayuda de Salesforce"
+            - listitem [ref=e60]:
+              - button "Configuración" [ref=e66] [cursor=pointer]:
+                - generic [ref=e67]:
+                  - img [ref=e71]
+                  - tooltip "Configuración"
+            - listitem [ref=e74]:
+              - button "Notificaciones" [ref=e77] [cursor=pointer]:
+                - generic [ref=e78]:
+                  - img [ref=e83]
+                  - tooltip "Notificaciones"
+            - listitem [ref=e87]:
+              - button "Ver perfil" [ref=e90] [cursor=pointer]:
+                - generic [ref=e91]:
+                  - tooltip "Ver perfil"
+    - generic [ref=e93]:
+      - generic:
+        - generic [ref=e94]:
+          - generic [ref=e96]:
+            - generic [ref=e97]:
+              - navigation "Aplicación" [ref=e98]:
+                - button "Iniciador de aplicación" [ref=e100] [cursor=pointer]:
+                  - generic [ref=e111]: Iniciador de aplicación
+              - heading "Gestión de Órdenes" [level=1] [ref=e112]:
+                - generic "Gestión de Órdenes" [ref=e113]
+            - navigation "Global" [ref=e114]:
+              - link "Inicio" [ref=e247] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e117]: Inicio
+              - button "Mostrar menú de navegación" [ref=e120] [cursor=pointer]:
+                - img [ref=e122]
+                - generic [ref=e125]: Mostrar menú de navegación
+          - navigation "Espacios de trabajo" [ref=e127]:
+            - tablist "Fichas de espacio de trabajo de Gestión de Órdenes" [ref=e248]:
+              - generic [ref=e130]: Pulse la barra espaciadora para reordenar fichas.
+              - tab "80000000004 | Órden" [selected] [ref=e249] [cursor=pointer]:
+                - generic [ref=e250]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Order
+                - generic [ref=e251]: 80000000004 | Órden
+              - generic "Acciones para 80000000004 | Órden" [ref=e253] [cursor=pointer]:
+                - button "Acciones para 80000000004 | Órden" [expanded] [ref=e254]:
+                  - generic [ref=e255]:
+                    - img
+                  - generic [ref=e259]: Acciones para 80000000004 | Órden
+                - menu [ref=e1067]:
+                  - menuitem "Actualizar ficha" [active] [ref=e1068]:
+                    - generic [ref=e1069]: Actualizar ficha
+                  - menuitem "Anclar ficha" [ref=e1070]:
+                    - generic [ref=e1071]: Anclar ficha
+                  - menuitem "Personalizar ficha" [ref=e1072]:
+                    - generic [ref=e1073]: Personalizar ficha
+                  - menuitem "Cerrar ficha" [ref=e1074]:
+                    - generic [ref=e1075]: Cerrar ficha
+              - button "Cerrar 80000000004 | Órden" [ref=e261] [cursor=pointer]:
+                - img [ref=e263]
+                - generic [ref=e266]: Cerrar 80000000004 | Órden
+              - status [ref=e267] [cursor=pointer]
+        - main [ref=e268]:
+          - tabpanel [ref=e269]:
+            - tabpanel [ref=e272]:
+              - generic [ref=e287]:
+                - generic [ref=e296]:
+                  - generic [ref=e297]:
+                    - heading "Órden 80000000004" [level=1] [ref=e304]:
+                      - generic [ref=e306]: Órden
+                      - generic [ref=e307]: "80000000004"
+                    - generic "Editar productos" [ref=e313]:
+                      - button "Editar productos" [ref=e318] [cursor=pointer]
+                  - generic [ref=e319]:
+                    - generic [ref=e321]:
+                      - paragraph [ref=e322]: Tipo de órden
+                      - paragraph [ref=e323]:
+                        - generic [ref=e324]: Reservas
+                    - generic [ref=e326]:
+                      - paragraph [ref=e327]: Nombre de la cuenta
+                      - paragraph [ref=e328]:
+                        - generic [ref=e333]:
+                          - link "test uno" [ref=e334] [cursor=pointer]:
+                            - /url: /lightning/r/Account/0017x00001bjgrxAAA/view
+                            - generic [ref=e338]: test uno
+                          - button "Vista previa" [ref=e340] [cursor=pointer]:
+                            - img [ref=e342]
+                            - generic [ref=e345]: Vista previa
+                    - generic [ref=e347]:
+                      - paragraph [ref=e348]: Cantidad de órden
+                      - paragraph [ref=e349]:
+                        - generic [ref=e350]: $ 0,00
+                    - generic [ref=e352]:
+                      - paragraph [ref=e353]: Estado
+                      - paragraph [ref=e354]:
+                        - generic [ref=e355]: Nueva
+                    - generic [ref=e357]:
+                      - paragraph [ref=e358]: Estado del paquete
+                      - paragraph
+                - generic [ref=e359]:
+                  - generic [ref=e361]:
+                    - article [ref=e367]:
+                      - generic [ref=e368]:
+                        - heading "Ruta" [level=2] [ref=e369]
+                        - generic [ref=e372]:
+                          - generic [ref=e373]:
+                            - listbox "Opciones de ruta" [ref=e377]:
+                              - option "Nueva" [selected] [ref=e378] [cursor=pointer]:
+                                - generic [ref=e379]: Nueva
+                              - option "Impresión comprobante reserva" [ref=e380] [cursor=pointer]:
+                                - generic [ref=e381]: Impresión comprobante reserva
+                              - option "Solicitar pedidos" [ref=e382] [cursor=pointer]:
+                                - generic [ref=e383]: Solicitar pedidos
+                              - option "Sin Stock" [ref=e384] [cursor=pointer]:
+                                - generic [ref=e385]: Sin Stock
+                              - option "Completa" [ref=e386] [cursor=pointer]:
+                                - generic [ref=e387]: Completa
+                              - option "Impresa" [ref=e388] [cursor=pointer]:
+                                - generic [ref=e389]: Impresa
+                              - option "Entregada" [ref=e390] [cursor=pointer]:
+                                - generic [ref=e391]: Entregada
+                              - option "Rechazada" [ref=e392] [cursor=pointer]:
+                                - generic [ref=e393]: Rechazada
+                              - option "Devuelta por el cliente" [ref=e394] [cursor=pointer]:
+                                - generic [ref=e395]: Devuelta por el cliente
+                              - option "Cancelada" [ref=e396] [cursor=pointer]:
+                                - generic [ref=e397]: Cancelada
+                              - option "Vencida" [ref=e398] [cursor=pointer]:
+                                - generic [ref=e399]: Vencida
+                            - generic [ref=e400]:
+                              - button "Anterior" [ref=e401] [cursor=pointer]:
+                                - generic [ref=e402]: Anterior
+                                - img [ref=e406]
+                              - button "Siguiente" [ref=e409] [cursor=pointer]:
+                                - generic [ref=e410]: Siguiente
+                                - img [ref=e414]
+                          - generic [ref=e417]:
+                            - paragraph [ref=e418]:
+                              - generic [ref=e419]: "Estado: Nueva"
+                            - button "Marcar Estado como completado(a)" [ref=e421] [cursor=pointer]:
+                              - img [ref=e425]
+                              - generic [ref=e428]: Marcar Estado como completado(a)
+                    - generic [ref=e432]:
+                      - heading "Tabs" [level=2] [ref=e433]
+                      - generic "Tabs" [ref=e434]:
+                        - generic [ref=e435]:
+                          - heading "Tabs" [level=2] [ref=e436]
+                          - tablist "Tabs" [ref=e438]:
+                            - tab "Detalles" [selected] [ref=e439] [cursor=pointer]
+                            - tab "Relacionado" [ref=e440] [cursor=pointer]
+                          - tabpanel "Detalles" [ref=e443]:
+                            - generic [ref=e444]:
+                              - generic [ref=e450]:
+                                - heading "Información de pedido" [level=3] [ref=e451]:
+                                  - button "Información de pedido" [expanded] [ref=e452] [cursor=pointer]:
+                                    - img [ref=e456]
+                                    - generic "Información de pedido" [ref=e459]
+                                - list [ref=e462]:
+                                  - generic [ref=e463]:
+                                    - generic [ref=e466]:
+                                      - listitem [ref=e469]:
+                                        - generic [ref=e471]:
+                                          - generic [ref=e472]: Número de orden
+                                          - generic [ref=e473]:
+                                            - generic [ref=e475]: "80000000004"
+                                            - button "Modificar Número de orden" [ref=e476] [cursor=pointer]:
+                                              - generic [ref=e478]: Modificar Número de orden
+                                      - listitem [ref=e481]:
+                                        - generic [ref=e483]:
+                                          - generic [ref=e484]: Estado
+                                          - generic [ref=e485]:
+                                            - generic [ref=e487]: Nueva
+                                            - button "Modificar Estado" [ref=e488] [cursor=pointer]:
+                                              - generic [ref=e490]: Modificar Estado
+                                      - listitem [ref=e493]:
+                                        - generic [ref=e495]:
+                                          - generic [ref=e496]: Estado Pago Reserva
+                                          - generic [ref=e497]:
+                                            - generic [ref=e499]: No Abonado
+                                            - button "Modificar Estado Pago Reserva" [ref=e500] [cursor=pointer]:
+                                              - generic [ref=e502]: Modificar Estado Pago Reserva
+                                      - listitem [ref=e505]:
+                                        - generic [ref=e508]: Impresion papeleta
+                                      - listitem [ref=e513]:
+                                        - generic [ref=e515]:
+                                          - generic [ref=e516]: Vendedor
+                                          - button "Modificar Vendedor" [ref=e519] [cursor=pointer]:
+                                            - generic [ref=e521]: Modificar Vendedor
+                                      - listitem [ref=e524]:
+                                        - generic [ref=e526]:
+                                          - generic [ref=e527]: Envío que completó la orden
+                                          - button "Modificar Envío que completó la orden" [ref=e530] [cursor=pointer]:
+                                            - generic [ref=e532]: Modificar Envío que completó la orden
+                                      - listitem [ref=e535]:
+                                        - generic [ref=e537]:
+                                          - generic [ref=e538]: Fue Impresa desde Boton
+                                          - generic [ref=e539]:
+                                            - generic [ref=e544]:
+                                              - generic "Falso" [ref=e545]:
+                                                - generic [ref=e546]:
+                                                  - img [ref=e548]
+                                                  - generic [ref=e551]: Falso
+                                              - generic [ref=e552]: Fue Impresa desde Boton
+                                            - button "Modificar Fue Impresa desde Boton" [ref=e553] [cursor=pointer]:
+                                              - generic [ref=e555]: Modificar Fue Impresa desde Boton
+                                      - listitem [ref=e558]:
+                                        - generic [ref=e560]:
+                                          - generic [ref=e561]: Envío gratis
+                                          - generic [ref=e567]:
+                                            - generic "Falso" [ref=e568]:
+                                              - generic [ref=e569]:
+                                                - img [ref=e571]
+                                                - generic [ref=e574]: Falso
+                                            - generic [ref=e575]: Envío gratis
+                                      - listitem [ref=e578]:
+                                        - generic [ref=e580]:
+                                          - generic [ref=e581]: Reserva propia
+                                          - generic [ref=e582]:
+                                            - generic [ref=e587]:
+                                              - generic "Falso" [ref=e588]:
+                                                - generic [ref=e589]:
+                                                  - img [ref=e591]
+                                                  - generic [ref=e594]: Falso
+                                              - generic [ref=e595]: Reserva propia
+                                            - button "Modificar Reserva propia" [ref=e596] [cursor=pointer]:
+                                              - generic [ref=e598]: Modificar Reserva propia
+                                      - listitem [ref=e601]:
+                                        - generic [ref=e603]:
+                                          - generic [ref=e604]: Pendiente de llegada
+                                          - generic [ref=e610]:
+                                            - generic "Falso" [ref=e611]:
+                                              - generic [ref=e612]:
+                                                - img [ref=e614]
+                                                - generic [ref=e617]: Falso
+                                            - generic [ref=e618]: Pendiente de llegada
+                                    - generic [ref=e621]:
+                                      - listitem [ref=e624]:
+                                        - generic [ref=e626]:
+                                          - generic [ref=e627]: Tipo de órden
+                                          - generic [ref=e628]:
+                                            - generic [ref=e630]: Reservas
+                                            - button "Modificar Tipo de órden" [ref=e631] [cursor=pointer]:
+                                              - generic [ref=e633]: Modificar Tipo de órden
+                                      - listitem [ref=e636]:
+                                        - generic [ref=e638]:
+                                          - generic [ref=e639]: Tipo de registro del órden
+                                          - generic [ref=e644]:
+                                            - generic [ref=e645]: Reservas
+                                            - button "Cambiar tipo de registro" [ref=e647] [cursor=pointer]:
+                                              - img [ref=e649]
+                                              - generic [ref=e652]: Cambiar tipo de registro
+                                      - listitem [ref=e655]:
+                                        - generic [ref=e657]:
+                                          - generic [ref=e658]: Tienda
+                                          - button "Modificar Tienda" [ref=e660] [cursor=pointer]:
+                                            - generic [ref=e662]: Modificar Tienda
+                                      - listitem [ref=e665]:
+                                        - generic [ref=e667]:
+                                          - generic [ref=e668]: Descripción
+                                          - button "Modificar Descripción" [ref=e670] [cursor=pointer]:
+                                            - generic [ref=e672]: Modificar Descripción
+                                      - listitem [ref=e675]:
+                                        - generic [ref=e677]:
+                                          - generic [ref=e678]: Notas de la entrega
+                                          - button "Modificar Notas de la entrega" [ref=e680] [cursor=pointer]:
+                                            - generic [ref=e682]: Modificar Notas de la entrega
+                              - heading "Cliente" [level=3] [ref=e689]:
+                                - button "Cliente" [expanded] [ref=e690] [cursor=pointer]:
+                                  - img [ref=e694]
+                                  - generic "Cliente" [ref=e697]
+                              - heading "Fechas" [level=3] [ref=e707]:
+                                - button "Fechas" [expanded] [ref=e708] [cursor=pointer]:
+                                  - img [ref=e712]
+                                  - generic "Fechas" [ref=e715]
+                              - heading "Montos" [level=3] [ref=e725]:
+                                - button "Montos" [expanded] [ref=e726] [cursor=pointer]:
+                                  - img [ref=e730]
+                                  - generic "Montos" [ref=e733]
+                              - heading "Envío de la Orden" [level=3] [ref=e743]:
+                                - button "Envío de la Orden" [expanded] [ref=e744] [cursor=pointer]:
+                                  - img [ref=e748]
+                                  - generic "Envío de la Orden" [ref=e751]
+                              - heading "Facturación" [level=3] [ref=e761]:
+                                - button "Facturación" [expanded] [ref=e762] [cursor=pointer]:
+                                  - img [ref=e766]
+                                  - generic "Facturación" [ref=e769]
+                              - heading "Información del sistema" [level=3] [ref=e779]:
+                                - button "Información del sistema" [expanded] [ref=e780] [cursor=pointer]:
+                                  - img [ref=e784]
+                                  - generic "Información del sistema" [ref=e787]
+                  - generic [ref=e792]:
+                    - article "Historial del órden" [ref=e799]:
+                      - generic [ref=e800]:
+                        - generic [ref=e801]:
+                          - generic [ref=e804]:
+                            - generic [ref=e806]:
+                              - img [ref=e810]
+                              - heading "Historial del órden (1)" [level=2] [ref=e812]:
+                                - link "Historial del órden (1)" [ref=e813] [cursor=pointer]:
+                                  - /url: /lightning/r/Order/8017x00001cYDKjAAO/related/Histories/view
+                                  - generic "Historial del órden" [ref=e814]
+                                  - generic "(1)" [ref=e815]
+                            - button "Mostrar acciones para Historial del órden" [ref=e819] [cursor=pointer]:
+                              - generic [ref=e821]:
+                                - img [ref=e823]
+                                - generic [ref=e826]: Mostrar acciones para Historial del órden
+                          - article [ref=e837]:
+                            - generic [ref=e840]:
+                              - term [ref=e841]: "Fecha:"
+                              - definition [ref=e842]:
+                                - generic [ref=e844]: 21/5/2026, 17:06
+                              - term [ref=e845]: "Campo:"
+                              - definition [ref=e846]:
+                                - generic [ref=e848]: Creado.
+                              - term [ref=e849]: "Usuario:"
+                              - definition [ref=e850]:
+                                - link "QA Agent" [ref=e854] [cursor=pointer]:
+                                  - /url: /lightning/r/0057x00000iLGzhAAG/view
+                                  - generic [ref=e855]: QA Agent
+                              - term [ref=e856]: "Valor original:"
+                              - definition
+                              - term [ref=e857]: "Valor nuevo:"
+                              - definition
+                        - link "Ver todos Historial del órden" [ref=e858] [cursor=pointer]:
+                          - /url: /lightning/r/Order/8017x00001cYDKjAAO/related/Histories/view
+                          - generic [ref=e859]:
+                            - text: Ver todos
+                            - generic [ref=e860]: Historial del órden
+                    - article "Notas" [ref=e869]:
+                      - generic [ref=e870]:
+                        - heading "Notas (0)" [level=2] [ref=e876]:
+                          - link "Notas (0)" [ref=e877] [cursor=pointer]:
+                            - /url: /lightning/r/Order/8017x00001cYDKjAAO/related/AttachedContentNotes/view
+                            - generic "Notas" [ref=e878]
+                            - generic "(0)" [ref=e879]
+                        - button "Mostrar acciones para Notas" [ref=e883] [cursor=pointer]:
+                          - generic [ref=e885]:
+                            - img [ref=e887]
+                            - generic [ref=e890]: Mostrar acciones para Notas
+                    - article "Notas y archivos adjuntos" [ref=e899]:
+                      - generic [ref=e900]:
+                        - heading "Notas y archivos adjuntos (0)" [level=2] [ref=e906]:
+                          - link "Notas y archivos adjuntos (0)" [ref=e907] [cursor=pointer]:
+                            - /url: /lightning/r/Order/8017x00001cYDKjAAO/related/CombinedAttachments/view
+                            - generic "Notas y archivos adjuntos" [ref=e908]
+                            - generic "(0)" [ref=e909]
+                        - button "Mostrar acciones para Notas y archivos adjuntos" [ref=e913] [cursor=pointer]:
+                          - generic [ref=e915]:
+                            - img [ref=e917]
+                            - generic [ref=e920]: Mostrar acciones para Notas y archivos adjuntos
+                      - generic [ref=e926]:
+                        - generic [ref=e928]:
+                          - img [ref=e932]
+                          - generic [ref=e935]: Soltar archivos
+                        - generic [ref=e936]:
+                          - generic [ref=e938]:
+                            - generic [ref=e942]:
+                              - button "Cargar archivos O suelte archivos" [ref=e943]
+                              - generic [ref=e944]:
+                                - generic [ref=e945]:
+                                  - img [ref=e947]
+                                  - text: Cargar archivos
+                                - generic [ref=e950]: O suelte archivos
+                            - status
+                          - list
+                    - generic [ref=e954]:
+                      - heading "Tabs" [level=2] [ref=e955]
+                      - generic "Tabs" [ref=e956]:
+                        - generic [ref=e957]:
+                          - heading "Tabs" [level=2] [ref=e958]
+                          - tablist "Tabs" [ref=e960]:
+                            - tab "Actividad" [selected] [ref=e961] [cursor=pointer]
+                          - tabpanel "Actividad" [ref=e964]:
+                            - generic [ref=e970]:
+                              - heading "Publicador de actividad" [level=2] [ref=e971]
+                              - generic [ref=e972]:
+                                - group [ref=e973]:
+                                  - generic [ref=e975]:
+                                    - button "Nueva tarea" [ref=e976] [cursor=pointer]:
+                                      - generic [ref=e978]:
+                                        - img [ref=e980]
+                                        - generic [ref=e983]: Nueva tarea
+                                      - generic: Nueva tarea
+                                    - button "No hay acciones adicionales Nueva tarea" [disabled] [ref=e985]:
+                                      - generic:
+                                        - img
+                                      - generic: No hay acciones adicionales Nueva tarea
+                                - group [ref=e986]:
+                                  - generic [ref=e988]:
+                                    - button "Nuevo evento" [ref=e989] [cursor=pointer]:
+                                      - generic [ref=e991]:
+                                        - img [ref=e993]
+                                        - generic [ref=e996]: Nuevo evento
+                                      - generic: Nuevo evento
+                                    - button "Más acciones Nuevo evento" [ref=e998] [cursor=pointer]:
+                                      - img [ref=e1000]
+                                      - generic [ref=e1003]: Más acciones Nuevo evento
+                                - group [ref=e1004]:
+                                  - generic [ref=e1006]:
+                                    - button "Registrar una llamada" [ref=e1007] [cursor=pointer]:
+                                      - generic [ref=e1009]:
+                                        - img [ref=e1011]
+                                        - generic [ref=e1014]: Registrar una llamada
+                                      - generic: Registrar una llamada
+                                    - button "No hay acciones adicionales Registrar una llamada" [disabled] [ref=e1016]:
+                                      - generic:
+                                        - img
+                                      - generic: No hay acciones adicionales Registrar una llamada
+                              - heading "Cronología de actividad" [level=2] [ref=e1017]
+                              - generic [ref=e1019]:
+                                - link "Omitir hasta la parte inferior de la cronología de actividad" [ref=e1020] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                                - generic [ref=e1022]:
+                                  - generic [ref=e1024]: "Filtros: Siempre • Todas las actividades • Todos los tipos"
+                                  - button "Configuración de cronología de actividad" [ref=e1025] [cursor=pointer]:
+                                    - img [ref=e1027]
+                                    - generic [ref=e1030]: Configuración de cronología de actividad
+                                - generic [ref=e1033]:
+                                  - button "Actualizar" [ref=e1034] [cursor=pointer]
+                                  - text: •
+                                  - button "Ampliar todo. Muestra detalles para actividades en la cronología." [ref=e1035] [cursor=pointer]: Ampliar todo
+                                  - text: •
+                                  - button "Ver todo" [ref=e1036] [cursor=pointer]
+                                - generic [ref=e1038]:
+                                  - heading "Próximas y vencidas" [level=3] [ref=e1039]:
+                                    - button "Próximas y vencidas" [expanded] [ref=e1040] [cursor=pointer]:
+                                      - img [ref=e1042]
+                                      - text: Próximas y vencidas
+                                  - generic [ref=e1045]:
+                                    - generic:
+                                      - list
+                                    - generic [ref=e1048]:
+                                      - text: No hay actividades para mostrar.
+                                      - text: Empiece a trabajar enviando un mensaje de correo electrónico, programando una tarea, entre otras.
+                                - status [ref=e1049]:
+                                  - generic [ref=e1051]:
+                                    - img [ref=e1055]
+                                    - generic [ref=e1058]: information
+                                  - paragraph [ref=e1060]: Para cambiar lo que se muestra, pruebe a cambiar sus filtros.
+                                - button "Mostrar todas las actividades" [ref=e1062] [cursor=pointer]
+                                - link "Omitir hasta la parte superior de la cronología de actividad" [ref=e1063] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+    - generic:
+      - contentinfo "Barra de utilidades":
+        - list [ref=e141]:
+          - listitem [ref=e142]:
+            - button "History" [ref=e145] [cursor=pointer]:
+              - img [ref=e149]
+              - generic [ref=e152]: History
+          - listitem [ref=e153]:
+            - button "Notes" [ref=e156] [cursor=pointer]:
+              - img [ref=e160]
+              - generic [ref=e163]: Notes
+  - generic:
+    - status

@@ -1,0 +1,48 @@
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e6]:
+        - button "Buscar" [ref=e12]:
+          - img [ref=e14]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e17]:
+          - list [ref=e18]:
+            - listitem [ref=e19]
+    - generic [ref=e23]:
+      - generic:
+        - generic [ref=e24]:
+          - generic [ref=e26]:
+            - generic [ref=e27]:
+              - navigation "Aplicación" [ref=e28]:
+                - button "Iniciador de aplicación" [ref=e30] [cursor=pointer]:
+                  - generic [ref=e41]: Iniciador de aplicación
+              - heading "Gestión de Órdenes" [level=1] [ref=e42]:
+                - generic "Gestión de Órdenes" [ref=e43]
+            - navigation "Global" [ref=e44]:
+              - link "Seleccionar..." [ref=e46] [cursor=pointer]:
+                - /url: ""
+                - generic [ref=e47]: Seleccionar...
+              - button "Mostrar menú de navegación" [ref=e50] [cursor=pointer]:
+                - img [ref=e52]
+                - generic [ref=e55]: Mostrar menú de navegación
+          - navigation "Espacios de trabajo" [ref=e57]:
+            - tablist [ref=e58]:
+              - generic [ref=e60]: Pulse la barra espaciadora para reordenar fichas.
+        - main [ref=e63]
+    - generic:
+      - contentinfo "Barra de utilidades":
+        - list [ref=e71]:
+          - listitem [ref=e72]:
+            - button "History" [ref=e75] [cursor=pointer]:
+              - img [ref=e79]
+              - generic [ref=e82]: History
+          - listitem [ref=e83]:
+            - button "Notes" [ref=e86] [cursor=pointer]:
+              - img [ref=e90]
+              - generic [ref=e93]: Notes
+  - generic:
+    - status

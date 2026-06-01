@@ -1,0 +1,79 @@
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e6]:
+        - button "Buscar" [ref=e12]:
+          - img [ref=e14]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e17]:
+          - list [ref=e19]:
+            - listitem [ref=e20]:
+              - group [ref=e21]:
+                - button "Este elemento no admite favoritos" [ref=e23] [cursor=pointer]:
+                  - generic [ref=e24]:
+                    - img [ref=e28]
+                    - tooltip "Este elemento no admite favoritos"
+                - button "Lista de favoritos" [ref=e32] [cursor=pointer]:
+                  - generic [ref=e33]:
+                    - img [ref=e37]
+                    - tooltip "Lista de favoritos"
+            - listitem [ref=e40]:
+              - button "Acciones globales" [ref=e42]:
+                - img [ref=e46]
+            - listitem [ref=e49]:
+              - button "Ayuda de Salesforce" [ref=e52] [cursor=pointer]:
+                - generic [ref=e53]:
+                  - img [ref=e57]
+                  - tooltip "Ayuda de Salesforce"
+            - listitem [ref=e60]:
+              - button "Configuración" [ref=e66] [cursor=pointer]:
+                - generic [ref=e67]:
+                  - img [ref=e71]
+                  - tooltip "Configuración"
+            - listitem [ref=e74]:
+              - button "Notificaciones" [ref=e77] [cursor=pointer]:
+                - generic [ref=e78]:
+                  - img [ref=e83]
+                  - tooltip "Notificaciones"
+            - listitem [ref=e87]:
+              - button "Ver perfil" [ref=e90] [cursor=pointer]:
+                - generic [ref=e91]:
+                  - tooltip "Ver perfil"
+    - generic [ref=e93]:
+      - generic:
+        - generic [ref=e94]:
+          - generic [ref=e96]:
+            - generic [ref=e97]:
+              - navigation "Aplicación" [ref=e98]:
+                - button "Iniciador de aplicación" [ref=e100] [cursor=pointer]:
+                  - generic [ref=e111]: Iniciador de aplicación
+              - heading "Gestión de Órdenes" [level=1] [ref=e112]:
+                - generic "Gestión de Órdenes" [ref=e113]
+            - navigation "Global" [ref=e114]:
+              - link "Seleccionar..." [ref=e116] [cursor=pointer]:
+                - /url: ""
+                - generic [ref=e117]: Seleccionar...
+              - button "Mostrar menú de navegación" [ref=e120] [cursor=pointer]:
+                - img [ref=e122]
+                - generic [ref=e125]: Mostrar menú de navegación
+          - navigation "Espacios de trabajo" [ref=e127]:
+            - tablist [ref=e128]:
+              - generic [ref=e130]: Pulse la barra espaciadora para reordenar fichas.
+        - main [ref=e133]
+    - generic:
+      - contentinfo "Barra de utilidades":
+        - list [ref=e141]:
+          - listitem [ref=e142]:
+            - button "History" [ref=e145] [cursor=pointer]:
+              - img [ref=e149]
+              - generic [ref=e152]: History
+          - listitem [ref=e153]:
+            - button "Notes" [ref=e156] [cursor=pointer]:
+              - img [ref=e160]
+              - generic [ref=e163]: Notes
+  - generic:
+    - status

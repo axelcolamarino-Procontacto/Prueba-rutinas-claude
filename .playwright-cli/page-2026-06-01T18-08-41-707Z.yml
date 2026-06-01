@@ -1,0 +1,69 @@
+- generic:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Saltar a navegación" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Saltar a contenido principal" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e8]:
+        - img [ref=e12]
+        - generic [ref=e15]: Inicio de sesión como Sucursal 30 (sucursal.30@solodeportes.com.test)
+        - link "Cerrar sesión como Sucursal 30" [ref=e16] [cursor=pointer]:
+          - /url: /secur/logout.jsp
+      - generic [ref=e17]:
+        - button "Buscar" [ref=e23]:
+          - img [ref=e25]
+          - text: Buscar...
+        - navigation "Encabezado global" [ref=e28]:
+          - list [ref=e29]:
+            - listitem [ref=e30]
+    - generic [ref=e34]:
+      - generic:
+        - generic [ref=e35]:
+          - generic [ref=e37]:
+            - generic [ref=e38]:
+              - navigation "Aplicación" [ref=e39]:
+                - button "Iniciador de aplicación" [ref=e41] [cursor=pointer]:
+                  - generic [ref=e52]: Iniciador de aplicación
+              - heading "Gestión de Órdenes" [level=1] [ref=e53]:
+                - generic "Gestión de Órdenes" [ref=e54]
+            - navigation "Global" [ref=e55]:
+              - link "Inicio" [ref=e57] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e58]: Inicio
+              - button "Mostrar menú de navegación" [ref=e61] [cursor=pointer]:
+                - img [ref=e63]
+                - generic [ref=e66]: Mostrar menú de navegación
+          - navigation "Espacios de trabajo" [ref=e68]:
+            - tablist [ref=e69]:
+              - generic [ref=e71]: Pulse la barra espaciadora para reordenar fichas.
+              - tab [active] [ref=e72] [cursor=pointer]:
+                - generic [ref=e73]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Cargando...
+                - generic [ref=e74]: Cargando...
+              - button [ref=e77] [cursor=pointer]:
+                - img [ref=e79]
+                - generic [ref=e82]: Acciones
+              - button [ref=e84] [cursor=pointer]:
+                - img [ref=e86]
+                - generic [ref=e89]: Cerrar ficha
+              - status [ref=e90]
+        - main [ref=e93]
+    - generic:
+      - contentinfo "Barra de utilidades":
+        - list [ref=e96]:
+          - listitem [ref=e97]:
+            - button "History" [ref=e100] [cursor=pointer]:
+              - img [ref=e104]
+              - generic [ref=e107]: History
+          - listitem [ref=e108]:
+            - button "Notes" [ref=e111] [cursor=pointer]:
+              - img [ref=e115]
+              - generic [ref=e118]: Notes
+  - generic:
+    - status

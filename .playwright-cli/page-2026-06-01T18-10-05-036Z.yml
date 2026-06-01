@@ -1,0 +1,601 @@
+- generic:
+  - generic:
+    - generic [ref=e2]:
+      - generic [ref=e3]:
+        - link [ref=e1232] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a navegación
+        - link [ref=e1233] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Saltar a contenido principal
+        - generic [ref=e8]:
+          - img [ref=e12]
+          - generic [ref=e15]: Inicio de sesión como Sucursal 30 (sucursal.30@solodeportes.com.test)
+          - link [ref=e1234] [cursor=pointer]:
+            - /url: /secur/logout.jsp
+            - text: Cerrar sesión como Sucursal 30
+        - generic [ref=e109]:
+          - generic [ref=e113]:
+            - button [ref=e1235] [cursor=pointer]:
+              - img [ref=e121]
+              - generic [ref=e124]: Menu
+            - generic [ref=e129]:
+              - img [ref=e133]
+              - generic [ref=e137]: Sandbox (test)
+          - button [ref=e1236] [cursor=pointer]:
+            - img [ref=e148]
+            - generic [ref=e151]: Show menu
+        - generic [ref=e17]:
+          - button [ref=e1237]:
+            - img [ref=e25]
+            - text: Buscar...
+          - navigation [ref=e1238]:
+            - list [ref=e153]:
+              - listitem [ref=e154]:
+                - group [ref=e155]:
+                  - button [ref=e1239] [cursor=pointer]:
+                    - img [ref=e162]
+                  - button [ref=e1240] [cursor=pointer]:
+                    - img [ref=e171]
+              - listitem [ref=e174]:
+                - button [ref=e1241] [cursor=pointer]:
+                  - img [ref=e185]
+              - listitem [ref=e188]:
+                - button [ref=e1242] [cursor=pointer]:
+                  - img [ref=e195]
+              - listitem [ref=e198]:
+                - button [ref=e1243] [cursor=pointer]:
+                  - img [ref=e206]
+              - listitem [ref=e209]:
+                - button [ref=e1244] [cursor=pointer]:
+                  - img [ref=e220]
+              - listitem [ref=e223]:
+                - button [ref=e1245] [cursor=pointer]:
+                  - img [ref=e232]
+              - listitem [ref=e236]:
+                - button [ref=e1246] [cursor=pointer]
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - generic [ref=e37]:
+            - generic [ref=e38]:
+              - navigation [ref=e1247]:
+                - button [ref=e1248] [cursor=pointer]:
+                  - generic [ref=e52]: Iniciador de aplicación
+              - heading [level=1] [ref=e1249]:
+                - generic [ref=e1250]: Gestión de Órdenes
+            - navigation [ref=e1251]:
+              - link [ref=e1252] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e58]: Inicio
+              - button [ref=e1253] [cursor=pointer]:
+                - img [ref=e63]
+                - generic [ref=e66]: Mostrar menú de navegación
+          - navigation [ref=e1254]:
+            - tablist [ref=e1255]:
+              - generic [ref=e71]: Pulse la barra espaciadora para reordenar fichas.
+              - tab [ref=e1256] [cursor=pointer]:
+                - generic [ref=e247]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Order
+                - generic [ref=e248]: 80000000004 | Órden
+              - button [ref=e1257] [cursor=pointer]:
+                - img [ref=e1258]
+                - generic [ref=e253]: Acciones
+              - button [ref=e1261] [cursor=pointer]:
+                - img [ref=e257]
+                - generic [ref=e260]: Cerrar ficha
+              - status [ref=e261]
+              - tab [selected] [ref=e1262] [cursor=pointer]:
+                - generic [ref=e263]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Order
+                - generic [ref=e264]: 80000000005 | Órden
+              - button [ref=e1264] [cursor=pointer]:
+                - img [ref=e269]
+                - generic [ref=e272]: Acciones para 80000000005 | Órden
+              - button [ref=e1265] [cursor=pointer]:
+                - img [ref=e276]
+                - generic [ref=e279]: Cerrar 80000000005 | Órden
+              - status [ref=e280] [cursor=pointer]
+              - tab [ref=e1266] [cursor=pointer]:
+                - generic [ref=e282]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Order
+                - generic [ref=e283]: 80000000002 | Órden
+              - button [ref=e1267] [cursor=pointer]:
+                - img [ref=e288]
+                - generic [ref=e291]: Acciones
+              - button [ref=e1268] [cursor=pointer]:
+                - img [ref=e295]
+                - generic [ref=e298]: Cerrar ficha
+              - status [ref=e299]
+        - main [ref=e300]:
+          - tabpanel [ref=e301]:
+            - tabpanel [ref=e304]:
+              - generic [ref=e319]:
+                - generic [ref=e328]:
+                  - generic [ref=e329]:
+                    - heading [level=1] [ref=e1269]:
+                      - generic [ref=e338]: Órden
+                      - generic [ref=e339]: "80000000005"
+                    - generic [ref=e344]:
+                      - button [ref=e1271] [cursor=pointer]: Editar productos
+                      - button [ref=e1273] [cursor=pointer]: Cancelar Orden
+                  - generic [ref=e357]:
+                    - generic [ref=e359]:
+                      - paragraph [ref=e360]: Tipo de órden
+                      - paragraph [ref=e361]:
+                        - generic [ref=e362]: Venta nueva
+                    - generic [ref=e364]:
+                      - paragraph [ref=e365]: Nombre de la cuenta
+                      - paragraph [ref=e366]:
+                        - generic [ref=e371]:
+                          - link [ref=e1274] [cursor=pointer]:
+                            - /url: /lightning/r/Account/0017x00001bjgrxAAA/view
+                            - generic [ref=e376]: test uno
+                          - button [ref=e1275] [cursor=pointer]:
+                            - img [ref=e380]
+                            - generic [ref=e383]: Vista previa
+                    - generic [ref=e385]:
+                      - paragraph [ref=e386]: Cantidad de órden
+                      - paragraph [ref=e387]:
+                        - generic [ref=e388]: $ 8.700,00
+                    - generic [ref=e390]:
+                      - paragraph [ref=e391]: Estado
+                      - paragraph [ref=e392]:
+                        - generic [ref=e393]: Enviada
+                    - paragraph [ref=e396]: Estado del paquete
+                - generic [ref=e397]:
+                  - generic [ref=e399]:
+                    - article [ref=e405]:
+                      - generic [ref=e406]:
+                        - heading [level=2] [ref=e1276]: Ruta
+                        - generic [ref=e410]:
+                          - generic [ref=e411]:
+                            - listbox [ref=e1277]:
+                              - option [ref=e1278] [cursor=pointer]:
+                                - generic [ref=e417]: Nueva
+                              - option [ref=e1279] [cursor=pointer]:
+                                - generic [ref=e419]: Impresión comprobante reserva
+                              - option [ref=e1280] [cursor=pointer]:
+                                - generic [ref=e421]: Solicitar pedidos
+                              - option [ref=e1281] [cursor=pointer]:
+                                - generic [ref=e423]: Sin Stock
+                              - option [ref=e1282] [cursor=pointer]:
+                                - generic [ref=e425]: Completa
+                              - option [ref=e1283] [cursor=pointer]:
+                                - generic [ref=e427]: Impresa
+                              - option [ref=e1284] [cursor=pointer]:
+                                - generic [ref=e429]: Entregada
+                              - option [ref=e1285] [cursor=pointer]:
+                                - generic [ref=e431]: Rechazada
+                              - option [ref=e1286] [cursor=pointer]:
+                                - generic [ref=e433]: Devuelta por el cliente
+                              - option [ref=e1287] [cursor=pointer]:
+                                - generic [ref=e435]: Cancelada
+                              - option [ref=e1288] [cursor=pointer]:
+                                - generic [ref=e437]: Vencida
+                            - generic [ref=e438]:
+                              - button [ref=e1289] [cursor=pointer]:
+                                - generic [ref=e440]: Anterior
+                                - img [ref=e444]
+                              - button [ref=e1290] [cursor=pointer]:
+                                - generic [ref=e448]: Siguiente
+                                - img [ref=e452]
+                          - generic [ref=e455]:
+                            - paragraph [ref=e456]:
+                              - generic [ref=e457]: "Estado:"
+                            - button [disabled] [ref=e1291]:
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - img
+                              - generic: Marcar Estado como completado(a)
+                    - generic [ref=e463]:
+                      - heading [level=2] [ref=e1292]: Tabs
+                      - generic [ref=e466]:
+                        - heading [level=2] [ref=e1294]: Tabs
+                        - tablist [ref=e1295]:
+                          - tab [selected] [ref=e1296] [cursor=pointer]: Detalles
+                          - tab [ref=e1297] [cursor=pointer]: Relacionado
+                        - tabpanel [ref=e1298]:
+                          - generic [ref=e475]:
+                            - generic [ref=e481]:
+                              - heading [level=3] [ref=e1299]:
+                                - button [expanded] [ref=e1300] [cursor=pointer]:
+                                  - img [ref=e487]
+                                  - generic [ref=e1301]: Información de pedido
+                              - list [ref=e493]:
+                                - generic [ref=e494]:
+                                  - generic [ref=e497]:
+                                    - listitem [ref=e500]:
+                                      - generic [ref=e502]:
+                                        - generic [ref=e503]: Número de orden
+                                        - generic [ref=e504]:
+                                          - generic [ref=e506]: "80000000005"
+                                          - button [ref=e1302] [cursor=pointer]:
+                                            - generic [ref=e509]: Modificar Número de orden
+                                    - listitem [ref=e512]:
+                                      - generic [ref=e514]:
+                                        - generic [ref=e515]: Estado
+                                        - generic [ref=e516]:
+                                          - generic [ref=e518]: Enviada
+                                          - button [ref=e1303] [cursor=pointer]:
+                                            - generic [ref=e521]: Modificar Estado
+                                    - listitem [ref=e524]:
+                                      - generic [ref=e526]:
+                                        - generic [ref=e527]: Estado Pago Reserva
+                                        - generic [ref=e528]:
+                                          - generic [ref=e530]: No Abonado
+                                          - button [ref=e1304] [cursor=pointer]:
+                                            - generic [ref=e533]: Modificar Estado Pago Reserva
+                                    - listitem [ref=e536]:
+                                      - generic [ref=e539]: Impresion papeleta
+                                    - listitem [ref=e544]:
+                                      - generic [ref=e546]:
+                                        - generic [ref=e547]: Vendedor
+                                        - button [ref=e1305] [cursor=pointer]:
+                                          - generic [ref=e552]: Modificar Vendedor
+                                    - listitem [ref=e555]:
+                                      - generic [ref=e557]:
+                                        - generic [ref=e558]: Envío que completó la orden
+                                        - button [ref=e1306] [cursor=pointer]:
+                                          - generic [ref=e563]: Modificar Envío que completó la orden
+                                    - listitem [ref=e566]:
+                                      - generic [ref=e568]:
+                                        - generic [ref=e569]: Fue Impresa desde Boton
+                                        - generic [ref=e570]:
+                                          - generic [ref=e575]:
+                                            - generic [ref=e577]:
+                                              - img [ref=e579]
+                                              - generic [ref=e582]: Falso
+                                            - generic [ref=e583]: Fue Impresa desde Boton
+                                          - button [ref=e1308] [cursor=pointer]:
+                                            - generic [ref=e586]: Modificar Fue Impresa desde Boton
+                                    - listitem [ref=e589]:
+                                      - generic [ref=e591]:
+                                        - generic [ref=e592]: Envío gratis
+                                        - generic [ref=e598]:
+                                          - generic [ref=e600]:
+                                            - img [ref=e602]
+                                            - generic [ref=e605]: Falso
+                                          - generic [ref=e606]: Envío gratis
+                                    - listitem [ref=e609]:
+                                      - generic [ref=e611]:
+                                        - generic [ref=e612]: Reserva propia
+                                        - generic [ref=e613]:
+                                          - generic [ref=e618]:
+                                            - generic [ref=e620]:
+                                              - img [ref=e622]
+                                              - generic [ref=e625]: Falso
+                                            - generic [ref=e626]: Reserva propia
+                                          - button [ref=e1311] [cursor=pointer]:
+                                            - generic [ref=e629]: Modificar Reserva propia
+                                    - listitem [ref=e632]:
+                                      - generic [ref=e634]:
+                                        - generic [ref=e635]: Pendiente de llegada
+                                        - generic [ref=e641]:
+                                          - generic [ref=e643]:
+                                            - img [ref=e645]
+                                            - generic [ref=e648]: Falso
+                                          - generic [ref=e649]: Pendiente de llegada
+                                  - generic [ref=e652]:
+                                    - listitem [ref=e655]:
+                                      - generic [ref=e657]:
+                                        - generic [ref=e658]: Tipo de órden
+                                        - generic [ref=e659]:
+                                          - generic [ref=e661]: Venta nueva
+                                          - button [ref=e1313] [cursor=pointer]:
+                                            - generic [ref=e664]: Modificar Tipo de órden
+                                    - listitem [ref=e667]:
+                                      - generic [ref=e669]:
+                                        - generic [ref=e670]: Tipo de registro del órden
+                                        - generic [ref=e675]:
+                                          - generic [ref=e676]: Reservas
+                                          - button [ref=e1314] [cursor=pointer]:
+                                            - img [ref=e680]
+                                            - generic [ref=e683]: Cambiar tipo de registro
+                                    - listitem [ref=e686]:
+                                      - generic [ref=e688]:
+                                        - generic [ref=e689]: Tienda
+                                        - button [ref=e1315] [cursor=pointer]:
+                                          - generic [ref=e693]: Modificar Tienda
+                                    - listitem [ref=e696]:
+                                      - generic [ref=e698]:
+                                        - generic [ref=e699]: Descripción
+                                        - button [ref=e1316] [cursor=pointer]:
+                                          - generic [ref=e703]: Modificar Descripción
+                                    - listitem [ref=e706]:
+                                      - generic [ref=e708]:
+                                        - generic [ref=e709]: Notas de la entrega
+                                        - button [ref=e1317] [cursor=pointer]:
+                                          - generic [ref=e713]: Modificar Notas de la entrega
+                            - generic [ref=e719]:
+                              - heading [level=3] [ref=e1318]:
+                                - button [expanded] [ref=e1319] [cursor=pointer]:
+                                  - img [ref=e725]
+                                  - generic [ref=e1320]: Cliente
+                              - list [ref=e731]:
+                                - generic [ref=e732]:
+                                  - generic [ref=e735]:
+                                    - listitem [ref=e738]:
+                                      - generic [ref=e740]:
+                                        - generic [ref=e741]: Nombre de la cuenta
+                                        - generic [ref=e742]:
+                                          - generic [ref=e748]:
+                                            - link [ref=e1321] [cursor=pointer]:
+                                              - /url: /lightning/r/Account/0017x00001bjgrxAAA/view
+                                              - generic [ref=e753]: test uno
+                                            - button [ref=e1322] [cursor=pointer]:
+                                              - img [ref=e757]
+                                              - generic [ref=e760]: Vista previa
+                                          - button [ref=e1323] [cursor=pointer]:
+                                            - generic [ref=e763]: Modificar Nombre de la cuenta
+                                    - listitem [ref=e766]:
+                                      - generic [ref=e768]:
+                                        - generic [ref=e769]: Nombre del tercero autorizado
+                                        - button [ref=e1324] [cursor=pointer]:
+                                          - generic [ref=e773]: Modificar Nombre del tercero autorizado
+                                    - listitem [ref=e776]:
+                                      - generic [ref=e778]:
+                                        - generic [ref=e779]: Apellido del tercero autorizado
+                                        - button [ref=e1325] [cursor=pointer]:
+                                          - generic [ref=e783]: Modificar Apellido del tercero autorizado
+                                    - listitem [ref=e786]:
+                                      - generic [ref=e788]:
+                                        - generic [ref=e789]: DNI del tercero autorizado
+                                        - button [ref=e1326] [cursor=pointer]:
+                                          - generic [ref=e793]: Modificar DNI del tercero autorizado
+                                  - listitem [ref=e799]:
+                                    - generic [ref=e801]:
+                                      - generic [ref=e802]: ¿Quien retira?
+                                      - generic [ref=e803]:
+                                        - generic [ref=e805]: Comprador
+                                        - button [ref=e1327] [cursor=pointer]:
+                                          - generic [ref=e808]: Modificar ¿Quien retira?
+                            - heading [level=3] [ref=e1328]:
+                              - button [expanded] [ref=e1329] [cursor=pointer]:
+                                - img [ref=e820]
+                                - generic [ref=e1330]: Fechas
+                            - heading [level=3] [ref=e1331]:
+                              - button [expanded] [ref=e1332] [cursor=pointer]:
+                                - img [ref=e838]
+                                - generic [ref=e1333]: Montos
+                            - heading [level=3] [ref=e1334]:
+                              - button [expanded] [ref=e1335] [cursor=pointer]:
+                                - img [ref=e856]
+                                - generic [ref=e1336]: Envío de la Orden
+                            - heading [level=3] [ref=e1337]:
+                              - button [expanded] [ref=e1338] [cursor=pointer]:
+                                - img [ref=e874]
+                                - generic [ref=e1339]: Facturación
+                            - heading [level=3] [ref=e1340]:
+                              - button [expanded] [ref=e1341] [cursor=pointer]:
+                                - img [ref=e892]
+                                - generic [ref=e1342]: Información del sistema
+                  - generic [ref=e900]:
+                    - article [ref=e1343]:
+                      - generic [ref=e908]:
+                        - generic [ref=e909]:
+                          - generic [ref=e912]:
+                            - generic [ref=e914]:
+                              - img [ref=e918]
+                              - heading [level=2] [ref=e1344]:
+                                - link [ref=e1345] [cursor=pointer]:
+                                  - /url: /lightning/r/Order/8017x00001cw7cDAAQ/related/Histories/view
+                                  - generic [ref=e1346]: Historial del órden
+                                  - generic [ref=e1347]: (3+)
+                            - button [ref=e1348] [cursor=pointer]:
+                              - generic [ref=e929]:
+                                - img [ref=e931]
+                                - generic [ref=e934]: Mostrar acciones para Historial del órden
+                          - generic [ref=e942]:
+                            - article [ref=e945]:
+                              - generic [ref=e948]:
+                                - term [ref=e949]: "Fecha:"
+                                - definition [ref=e950]:
+                                  - generic [ref=e952]: 28/5/2026, 18:53
+                                - term [ref=e953]: "Campo:"
+                                - definition [ref=e954]:
+                                  - generic [ref=e956]: Estado
+                                - term [ref=e957]: "Usuario:"
+                                - definition [ref=e958]:
+                                  - link [ref=e1349] [cursor=pointer]:
+                                    - /url: /lightning/r/0057x00000iLGzhAAG/view
+                                    - generic [ref=e963]: QA Agent
+                                - term [ref=e964]: "Valor original:"
+                                - definition [ref=e965]:
+                                  - generic [ref=e967]: Lista para impresión
+                                - term [ref=e968]: "Valor nuevo:"
+                                - definition [ref=e969]:
+                                  - generic [ref=e971]: Enviada
+                            - article [ref=e974]:
+                              - generic [ref=e977]:
+                                - term [ref=e978]: "Fecha:"
+                                - definition [ref=e979]:
+                                  - generic [ref=e981]: 26/5/2026, 23:19
+                                - term [ref=e982]: "Campo:"
+                                - definition [ref=e983]:
+                                  - generic [ref=e985]: Pedido activado.
+                                - term [ref=e986]: "Usuario:"
+                                - definition [ref=e987]:
+                                  - link [ref=e1350] [cursor=pointer]:
+                                    - /url: /lightning/r/0057x00000iLGzhAAG/view
+                                    - generic [ref=e992]: QA Agent
+                                - term [ref=e993]: "Valor original:"
+                                - term [ref=e994]: "Valor nuevo:"
+                            - article [ref=e997]:
+                              - generic [ref=e1000]:
+                                - term [ref=e1001]: "Fecha:"
+                                - definition [ref=e1002]:
+                                  - generic [ref=e1004]: 26/5/2026, 23:19
+                                - term [ref=e1005]: "Campo:"
+                                - definition [ref=e1006]:
+                                  - generic [ref=e1008]: Estado
+                                - term [ref=e1009]: "Usuario:"
+                                - definition [ref=e1010]:
+                                  - link [ref=e1351] [cursor=pointer]:
+                                    - /url: /lightning/r/0057x00000iLGzhAAG/view
+                                    - generic [ref=e1015]: QA Agent
+                                - term [ref=e1016]: "Valor original:"
+                                - definition [ref=e1017]:
+                                  - generic [ref=e1019]: Nueva
+                                - term [ref=e1020]: "Valor nuevo:"
+                                - definition [ref=e1021]:
+                                  - generic [ref=e1023]: Lista para impresión
+                        - link [ref=e1352] [cursor=pointer]:
+                          - /url: /lightning/r/Order/8017x00001cw7cDAAQ/related/Histories/view
+                          - generic [ref=e1025]:
+                            - text: Ver todos
+                            - generic [ref=e1026]: Historial del órden
+                    - article [ref=e1353]:
+                      - generic [ref=e1036]:
+                        - heading [level=2] [ref=e1354]:
+                          - link [ref=e1355] [cursor=pointer]:
+                            - /url: /lightning/r/Order/8017x00001cw7cDAAQ/related/AttachedContentNotes/view
+                            - generic [ref=e1356]: Notas
+                            - generic [ref=e1357]: (0)
+                        - button [ref=e1358] [cursor=pointer]:
+                          - generic [ref=e1051]:
+                            - img [ref=e1053]
+                            - generic [ref=e1056]: Mostrar acciones para Notas
+                    - article [ref=e1359]:
+                      - generic [ref=e1066]:
+                        - heading [level=2] [ref=e1360]:
+                          - link [ref=e1361] [cursor=pointer]:
+                            - /url: /lightning/r/Order/8017x00001cw7cDAAQ/related/CombinedAttachments/view
+                            - generic [ref=e1362]: Notas y archivos adjuntos
+                            - generic [ref=e1363]: (0)
+                        - button [ref=e1364] [cursor=pointer]:
+                          - generic [ref=e1081]:
+                            - img [ref=e1083]
+                            - generic [ref=e1086]: Mostrar acciones para Notas y archivos adjuntos
+                      - generic [ref=e1092]:
+                        - generic [ref=e1094]:
+                          - img [ref=e1098]
+                          - generic [ref=e1101]: Soltar archivos
+                        - generic [ref=e1108]:
+                          - button [ref=e1365]
+                          - generic [ref=e1110]:
+                            - generic [ref=e1111]:
+                              - img [ref=e1113]
+                              - text: Cargar archivos
+                            - generic [ref=e1116]: O suelte archivos
+                    - generic [ref=e1120]:
+                      - heading [level=2] [ref=e1366]: Tabs
+                      - generic [ref=e1123]:
+                        - heading [level=2] [ref=e1368]: Tabs
+                        - tablist [ref=e1369]:
+                          - tab [selected] [ref=e1370] [cursor=pointer]: Actividad
+                        - tabpanel [ref=e1371]:
+                          - generic [ref=e1136]:
+                            - heading [level=2] [ref=e1372]: Publicador de actividad
+                            - generic [ref=e1138]:
+                              - group [ref=e1139]:
+                                - generic [ref=e1141]:
+                                  - button [ref=e1373] [cursor=pointer]:
+                                    - generic [ref=e1144]:
+                                      - img [ref=e1146]
+                                      - generic [ref=e1149]: Nueva tarea
+                                  - button [disabled] [ref=e1374]:
+                                    - generic:
+                                      - img
+                                    - generic: No hay acciones adicionales Nueva tarea
+                              - group [ref=e1152]:
+                                - generic [ref=e1154]:
+                                  - button [ref=e1375] [cursor=pointer]:
+                                    - generic [ref=e1157]:
+                                      - img [ref=e1159]
+                                      - generic [ref=e1162]: Nuevo evento
+                                  - button [ref=e1376] [cursor=pointer]:
+                                    - img [ref=e1166]
+                                    - generic [ref=e1169]: Más acciones Nuevo evento
+                              - group [ref=e1170]:
+                                - generic [ref=e1172]:
+                                  - button [ref=e1377] [cursor=pointer]:
+                                    - generic [ref=e1175]:
+                                      - img [ref=e1177]
+                                      - generic [ref=e1180]: Registrar una llamada
+                                  - button [disabled] [ref=e1378]:
+                                    - generic:
+                                      - img
+                                    - generic: No hay acciones adicionales Registrar una llamada
+                            - heading [level=2] [ref=e1379]: Cronología de actividad
+                            - generic [ref=e1185]:
+                              - link [ref=e1380] [cursor=pointer]:
+                                - /url: javascript:void(0);
+                                - text: Omitir hasta la parte inferior de la cronología de actividad
+                              - generic [ref=e1188]:
+                                - generic [ref=e1190]: "Filtros: Siempre • Todas las actividades • Todos los tipos"
+                                - button [ref=e1381] [cursor=pointer]:
+                                  - img [ref=e1193]
+                                  - generic [ref=e1196]: Configuración de cronología de actividad
+                              - generic [ref=e1199]:
+                                - button [ref=e1382] [cursor=pointer]: Actualizar
+                                - text: •
+                                - button [ref=e1383] [cursor=pointer]: Ampliar todo
+                                - text: •
+                                - button [ref=e1384] [cursor=pointer]: Ver todo
+                              - generic [ref=e1204]:
+                                - heading [level=3] [ref=e1385]:
+                                  - button [expanded] [ref=e1386] [cursor=pointer]:
+                                    - img [ref=e1208]
+                                    - text: Próximas y vencidas
+                                - generic [ref=e1214]: No hay actividades para mostrar. Empiece a trabajar enviando un mensaje de correo electrónico, programando una tarea, entre otras.
+                              - status [ref=e1215]:
+                                - generic [ref=e1217]:
+                                  - img [ref=e1221]
+                                  - generic [ref=e1224]: information
+                                - paragraph [ref=e1226]: Para cambiar lo que se muestra, pruebe a cambiar sus filtros.
+                              - button [ref=e1387] [cursor=pointer]: Mostrar todas las actividades
+                              - link [ref=e1388] [cursor=pointer]:
+                                - /url: javascript:void(0);
+                                - text: Omitir hasta la parte superior de la cronología de actividad
+      - list [ref=e82]:
+        - listitem [ref=e83]:
+          - button [ref=e1389] [cursor=pointer]:
+            - img [ref=e90]
+            - generic [ref=e93]: History
+        - listitem [ref=e94]:
+          - button [ref=e1390] [cursor=pointer]:
+            - img [ref=e101]
+            - generic [ref=e104]: Notes
+    - dialog [ref=e1392]:
+      - generic [ref=e1393]:
+        - button "Cancelar y cerrar" [ref=e1394] [cursor=pointer]:
+          - img [ref=e1439]
+          - generic [ref=e1396]: Cancelar y cerrar
+        - generic [ref=e1397]:
+          - generic [ref=e1399]:
+            - heading "Cancelar Orden" [level=2] [ref=e1443]
+            - article [ref=e1404]:
+              - generic [ref=e1405]:
+                - group "¿Está seguro que desea cancelar la orden?" [ref=e1454]:
+                  - generic [ref=e1455]:
+                    - text: "*"
+                    - generic [ref=e1456]: ¿Está seguro que desea cancelar la orden?
+                  - generic [ref=e1457]:
+                    - generic [ref=e1458]:
+                      - radio "Sí" [active] [ref=e1459]
+                      - generic [ref=e1463] [cursor=pointer]: Sí
+                    - generic [ref=e1464]:
+                      - radio "No" [ref=e1465]
+                      - generic [ref=e1469] [cursor=pointer]: "No"
+                    - status [ref=e1470]:
+                      - generic [ref=e1471]: Seleccione una opción.
+                - button "Siguiente" [ref=e1476] [cursor=pointer]
+          - status [ref=e1438]
+  - generic:
+    - status
