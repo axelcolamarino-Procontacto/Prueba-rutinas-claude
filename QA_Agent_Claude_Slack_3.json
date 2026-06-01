@@ -72,7 +72,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// routeKey (canal o usuario)  ->  rutina\nconst RUTAS = {\n  // \"C0AAA\": { trig: \"trig_aaa\", team: \"QA_A\" },  // canal equipo A\n  // \"U123\":  { trig: \"trig_aaa\", team: \"QA_A\" },  // DM de Fulano -> equipo A\n};\n\n// si el routeKey no está mapeado -> rutina default\nconst r = RUTAS[$json.routeKey] || { trig: \"trig_01636Bhg2PNz4huo35eM9CSz\", team: \"DEFAULT\" };\n\nreturn [{ json: { ...$json, trig: r.trig, team: r.team } }];"
+        "jsCode": "// routeKey (canal o usuario)  ->  rutina (trig + token INLINE)\nconst RUTAS = {\n  // \"C0AAA\": { trig: \"trig_aaa\", token: \"sk-ant-oat01-PEGA_TOKEN_EQUIPO_A\" },\n  // \"U123\":  { trig: \"trig_aaa\", token: \"sk-ant-oat01-PEGA_TOKEN_EQUIPO_A\" },\n};\n\n// si el routeKey no está mapeado -> rutina default\nconst r = RUTAS[$json.routeKey] || { trig: \"trig_01636Bhg2PNz4huo35eM9CSz\", token: \"sk-ant-oat01-PEGA_TOKEN_DEFAULT\" };\n\nreturn [{ json: { ...$json, trig: r.trig, token: r.token } }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -89,7 +89,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $env['TOKEN_' + $json.team] }}"
+              "value": "=Bearer {{ $json.token }}"
             },
             {
               "name": "anthropic-version",
