@@ -1,0 +1,165 @@
+{
+  "name": "QA Agent Claude Slack",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/qa-agent-slack",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "id": "829005b1-49aa-4e68-b934-c72c01f10bb9",
+      "name": "Webhook",
+      "webhookId": "9481b6de-0a46-4c84-ba34-b87d02c73f78"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "407761b6-ab3a-4bba-a51c-901dabea6f67",
+              "leftValue": "={{ $json.body.type }}",
+              "rightValue": "url_verification",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [208, 0],
+      "id": "320b7f6e-6fe3-4e57-ac4f-6956beeb79f0",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"challenge\": \"{{ $json.body.challenge }}\"}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [640, -112],
+      "id": "3106dadd-972b-40b2-9ef9-ee1012a2f66c",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "const event = $input.item.json.body.event;\n\n// 1) igual que hoy: tira ruido\nif (event.bot_id || ['bot_message','message_changed','message_deleted'].includes(event.subtype)) {\n  return [];\n}\n\n// 2) de dónde viene (DM → usuario, si no → canal)\nconst routeKey = event.channel_type === 'im' ? event.user : event.channel;\n\n// 3) arrastra el dato de ruteo\nreturn [{ json: { text: JSON.stringify(event), routeKey } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [416, 128],
+      "id": "0abf6410-a2b9-4352-9c50-3c9382b98e5f",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "jsCode": "// routeKey (canal o usuario)  ->  rutina\nconst RUTAS = {\n  // \"C0AAA\": { trig: \"trig_aaa\", team: \"QA_A\" },  // canal equipo A\n  // \"U123\":  { trig: \"trig_aaa\", team: \"QA_A\" },  // DM de Fulano -> equipo A\n};\n\n// si el routeKey no está mapeado -> rutina default\nconst r = RUTAS[$json.routeKey] || { trig: \"trig_01636Bhg2PNz4huo35eM9CSz\", team: \"DEFAULT\" };\n\nreturn [{ json: { ...$json, trig: r.trig, team: r.team } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [560, 128],
+      "id": "a1b2c3d4-1111-2222-3333-444455556666",
+      "name": "Lookup ruta"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.anthropic.com/v1/claude_code/routines/{{ $json.trig }}/fire",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env['TOKEN_' + $json.team] }}"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "anthropic-beta",
+              "value": "experimental-cc-routine-2026-04-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "={{ $json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [760, 128],
+      "id": "7734e41d-58e6-4d65-ab06-aaf9ac6659f3",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [964, 128],
+      "id": "2e575add-9864-4d1c-931f-7947ad399f8b",
+      "name": "Respond to Webhook1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "If", "type": "main", "index": 0 }]]
+    },
+    "If": {
+      "main": [
+        [{ "node": "Respond to Webhook", "type": "main", "index": 0 }],
+        [{ "node": "Code", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code": {
+      "main": [[{ "node": "Lookup ruta", "type": "main", "index": 0 }]]
+    },
+    "Lookup ruta": {
+      "main": [[{ "node": "HTTP Request", "type": "main", "index": 0 }]]
+    },
+    "HTTP Request": {
+      "main": [[{ "node": "Respond to Webhook1", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "instanceId": "10807eaf1246d904fec6d32d8bd119b09f9b5a4a0d2a8e04de60db5ac165f969"
+  },
+  "id": "eCMpeaHUIxY0OY3t",
+  "tags": []
+}
