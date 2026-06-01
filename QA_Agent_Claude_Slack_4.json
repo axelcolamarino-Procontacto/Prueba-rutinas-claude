@@ -1,0 +1,170 @@
+{
+  "name": "QA Agent Claude Slack",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/qa-agent-slack",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "id": "829005b1-49aa-4e68-b934-c72c01f10bb9",
+      "name": "Webhook",
+      "webhookId": "9481b6de-0a46-4c84-ba34-b87d02c73f78"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2 },
+          "conditions": [
+            {
+              "id": "407761b6-ab3a-4bba-a51c-901dabea6f67",
+              "leftValue": "={{ $json.body.type }}",
+              "rightValue": "url_verification",
+              "operator": { "type": "string", "operation": "equals", "name": "filter.operator.equals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [220, 0],
+      "id": "320b7f6e-6fe3-4e57-ac4f-6956beeb79f0",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"challenge\": \"{{ $json.body.challenge }}\"}",
+        "options": { "responseCode": 200 }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [440, -120],
+      "id": "3106dadd-972b-40b2-9ef9-ee1012a2f66c",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "const event = $input.item.json.body.event;\n\n// tira ruido (bots / editados / borrados)\nif (event.bot_id || ['bot_message','message_changed','message_deleted'].includes(event.subtype)) {\n  return [];\n}\n\n// de donde viene: DM -> usuario, si no -> canal\nconst routeKey = event.channel_type === 'im' ? event.user : event.channel;\n\nreturn [{ json: { text: JSON.stringify(event), routeKey } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 160],
+      "id": "0abf6410-a2b9-4352-9c50-3c9382b98e5f",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": { "responseCode": 200 }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [660, 160],
+      "id": "2e575add-9864-4d1c-931f-7947ad399f8b",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "resource": "sheet",
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "1GvEHfm2enOUC04N5ck_nT4ijEULT1LAZ4zzZLO9zxPE",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "ID",
+              "lookupValue": "={{ $('Code').first().json.routeKey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [880, 160],
+      "id": "b2c3d4e5-1111-2222-3333-444455556666",
+      "name": "Buscar equipo"
+    },
+    {
+      "parameters": {
+        "jsCode": "// fila encontrada en el Sheet (puede no venir)\nconst filas = $input.all();\nconst equipo = filas.length ? String(filas[0].json.Equipo || '').trim() : '';\n\n// equipo -> rutina (trig + token INLINE)\nconst EQUIPOS = {\n  \"DREAMTEAM\": { trig: \"trig_01636Bhg2PNz4huo35eM9CSz\", token: \"sk-ant-oat01-PEGA_TU_TOKEN\" }, // tu rutina (hoy)\n  \"TADEO\":     { trig: \"TRIG_DE_TADEO_PENDIENTE\",        token: \"PENDIENTE_MANANA\" }           // manana con Tadeo\n};\n\nconst r = EQUIPOS[equipo];\nif (!r) return []; // sin equipo o no mapeado -> no dispara\n\nreturn [{ json: { text: $('Code').first().json.text, trig: r.trig, token: r.token, equipo } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1100, 160],
+      "id": "c3d4e5f6-2222-3333-4444-555566667777",
+      "name": "Mapa rutina"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.anthropic.com/v1/claude_code/routines/{{ $json.trig }}/fire",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{ $json.token }}" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "anthropic-beta", "value": "experimental-cc-routine-2026-04-01" }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "text", "value": "={{ $json.text }}" }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1320, 160],
+      "id": "7734e41d-58e6-4d65-ab06-aaf9ac6659f3",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "If", "type": "main", "index": 0 }]]
+    },
+    "If": {
+      "main": [
+        [{ "node": "Respond to Webhook", "type": "main", "index": 0 }],
+        [{ "node": "Code", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code": {
+      "main": [[{ "node": "Respond to Webhook1", "type": "main", "index": 0 }]]
+    },
+    "Respond to Webhook1": {
+      "main": [[{ "node": "Buscar equipo", "type": "main", "index": 0 }]]
+    },
+    "Buscar equipo": {
+      "main": [[{ "node": "Mapa rutina", "type": "main", "index": 0 }]]
+    },
+    "Mapa rutina": {
+      "main": [[{ "node": "HTTP Request", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": true,
+  "settings": { "executionOrder": "v1" },
+  "meta": { "instanceId": "10807eaf1246d904fec6d32d8bd119b09f9b5a4a0d2a8e04de60db5ac165f969" },
+  "id": "eCMpeaHUIxY0OY3t",
+  "tags": []
+}
