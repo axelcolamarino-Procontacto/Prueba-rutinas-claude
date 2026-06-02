@@ -52,11 +52,16 @@ proyectos Salesforce. Este agente cubre TODOS sin excepción.
 
 ### Fuente de verdad: Google Sheet de mapeo
 
-El Google Sheet (ID: 1tQ27PcM8XrwKPB6ZGFzoRvV4rI55-MM1PTaPWazbwto) tiene las columnas:
-A = project_key B = canal_slack_id C = team_name D = team_lead_slack_id
+El Google Sheet (ID: 1tQ27PcM8XrwKPB6ZGFzoRvV4rI55-MM1PTaPWazbwto) mapea proyecto → canal.
+Columnas relevantes POR AHORA: A = project_key, B = canal_slack_id.
 
-Antes de cualquier ejecución, leer el sheet para obtener team_name y team_lead_slack_id
-del proyecto. Guardar en CONTEXT: `team_name`, `team_lead_id`.
+⚠️ POR AHORA — NO USAR EL EQUIPO:
+Leer del sheet ÚNICAMENTE las columnas A y B (proyecto → canal). NO leer ni usar
+team_name, team_lead_slack_id ni ninguna otra columna del sheet. El ruteo por equipo
+todavía no está activo:
+- NO incorporar team_name ni team_lead al CONTEXT.
+- NO mostrar el equipo en NINGÚN mensaje de Slack (nada de "Equipo: ...").
+- Donde una inserción de BigQuery referencie team_name, usar NULL.
 
 ### Aislamiento por equipo
 
