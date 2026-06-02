@@ -13,9 +13,9 @@ else
 fi
 
 case "$file" in
-  */Prompts/qa-agent-salesforce-v2.md | Prompts/qa-agent-salesforce-v2.md)
+  */Prompts/qa-agent-salesforce-v4.md | Prompts/qa-agent-salesforce-v4.md)
     cat <<'JSON'
-{"hookSpecificOutput":{"hookEventName":"PostToolUse","additionalContext":"El prompt fuente (Prompts/qa-agent-salesforce-v2.md) acaba de cambiar. Preguntale al usuario si desea regenerar la skill derivada ejecutando scripts/sync-skill.sh (regenera .claude/skills/qa-agent-salesforce/SKILL.md desde el prompt). No la regeneres sin confirmar."},"systemMessage":"Cambio el prompt del QA Agent - recuerda regenerar la skill: scripts/sync-skill.sh"}
+{"hookSpecificOutput":{"hookEventName":"PostToolUse","additionalContext":"El prompt fuente (Prompts/qa-agent-salesforce-v4.md) acaba de cambiar. Preguntale al usuario si desea regenerar la skill derivada ejecutando scripts/sync-skill.sh (regenera .claude/skills/qa-agent-salesforce/SKILL.md desde el prompt). No la regeneres sin confirmar."},"systemMessage":"Cambio el prompt del QA Agent - recuerda regenerar la skill: scripts/sync-skill.sh"}
 JSON
     ;;
 esac

@@ -10,7 +10,7 @@ actividades de Jira y responde consultas de Slack sin intervención humana. El "
    `qa-agent-salesforce`. Habrá **una rutina por PM/equipo**, y cada una corre con la
    cuenta y los conectores de ese PM.
 2. **Skill `qa-agent-salesforce`** — el prompt (~3k líneas), versionado en el repo.
-   - Fuente única: `Prompts/qa-agent-salesforce-v2.md` (editar AQUÍ).
+   - Fuente única: `Prompts/qa-agent-salesforce-v4.md` (editar AQUÍ).
    - Skill generada: `.claude/skills/qa-agent-salesforce/SKILL.md` (vía `scripts/sync-skill.sh`).
 3. **n8n (despachador)** — recibe los disparos (Slack hoy; Jira después) y **solo enruta**:
    decide a qué rutina pegarle y la dispara con `POST .../routines/<trig>/fire`.
@@ -46,7 +46,7 @@ actividades de Jira y responde consultas de Slack sin intervención humana. El "
 
 ## Skill: del prompt a la skill
 
-- Editás **siempre** el prompt: `Prompts/qa-agent-salesforce-v2.md`.
+- Editás **siempre** el prompt: `Prompts/qa-agent-salesforce-v4.md`.
 - Regenerás la skill: `scripts/sync-skill.sh`.
 - Un **hook** (`PostToolUse` en `.claude/settings.json` → `.claude/hooks/prompt-changed.sh`)
   detecta cuando cambia el prompt y le pide a Claude que te pregunte si regenerar la skill.

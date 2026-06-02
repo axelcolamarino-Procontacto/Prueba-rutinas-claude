@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Regenera la skill del QA Agent desde el prompt fuente.
 #
-#   Fuente : Prompts/qa-agent-salesforce-v2.md   <- editar AQUI
+#   Fuente : Prompts/qa-agent-salesforce-v4.md   <- editar AQUI
 #   Salida : .claude/skills/qa-agent-salesforce/SKILL.md  (generado)
 #
 # La skill = frontmatter + el contenido del prompt. Correr este script cada vez
@@ -9,7 +9,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-PROMPT="$ROOT/Prompts/qa-agent-salesforce-v2.md"
+PROMPT="$ROOT/Prompts/qa-agent-salesforce-v4.md"
 SKILL_DIR="$ROOT/.claude/skills/qa-agent-salesforce"
 SKILL="$SKILL_DIR/SKILL.md"
 
