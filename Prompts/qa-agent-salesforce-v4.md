@@ -642,6 +642,11 @@ INSERT INTO `procontacto-claude.qa_agent.executions` ...
 
 Antes de comenzar Fase 1, buscar el canal Slack del proyecto y enviar mensaje de inicio:
 
+REGLA — FORMATO FIJO DEL MENSAJE DE INICIO:
+Enviar el mensaje con EXACTAMENTE los campos del template de abajo. NO agregar el equipo
+ni ningún dato del Sheet de equipos. (La única línea extra permitida es el indicador de
+riesgo del PASO 0.C, si aplica.)
+
 ```python
 import urllib.request, json, os
 
@@ -679,6 +684,7 @@ message = (
     f"━━━━━━━━━━━━━━━━━━━━━━\n"
     f":ticket: *{issue_key}* — {issue_summary}\n"
     f":label: *Tipo:* {issue_type_label}   |   :computer: *Entorno:* {project_key} Staging\n"
+    f":small_red_triangle: *Prioridad:* {issue_priority}\n"
     f"{extra_line}"
     f"━━━━━━━━━━━━━━━━━━━━━━\n"
     f"_Generando casos de prueba y accediendo al ambiente..._"
