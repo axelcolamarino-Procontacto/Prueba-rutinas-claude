@@ -29,5 +29,18 @@
       "mcp__f5164108-86c0-4896-b8e2-83cb829ff582__list_instances",
       "mcp__ebf93048-dcf2-4f39-a266-0368debab5a2__read_file_content"
     ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/prompt-changed.sh\""
+          }
+        ]
+      }
+    ]
   }
 }
