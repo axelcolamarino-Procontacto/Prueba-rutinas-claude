@@ -25,7 +25,7 @@ disable-model-invocation: true
 ---
 
 <!-- ARCHIVO GENERADO - NO EDITAR A MANO.
-     Fuente:    Prompts/qa-agent-salesforce-v2.md
+     Fuente:    Prompts/qa-agent-salesforce-v4.md
      Regenerar: scripts/sync-skill.sh -->
 
 FM
