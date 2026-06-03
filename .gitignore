@@ -1,0 +1,12 @@
+# Playwright CLI session artifacts (ephemeral — test evidence stored in BigQuery)
+.playwright-cli/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Temp files
+*.tmp
+*.log
