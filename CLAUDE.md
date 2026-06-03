@@ -20,3 +20,16 @@ El system prompt de la rutina "QA Agent Salesforce" está en:
 - Repo: axelcolamarino-Procontacto/Prueba-rutinas-claude
 - Para ver el prompt completo leer `qa-agent-salesforce.md` directamente
 - El archivo de uploads del usuario suele llegar en `/root/.claude/uploads/.../*.md`
+
+---
+
+## 📌 Infraestructura Mobile (VM Android en GCP)
+
+Documentación transversal entre sesiones: [`docs/mobile-vm-infrastructure.md`](docs/mobile-vm-infrastructure.md)
+
+- Estado de la VM `android-qa-setup`, imágenes (`android-qa-base-v3` → objetivo `v4`), scripts en GCS, próximos pasos y bloqueantes.
+- **Cada avance en la VM debe documentarse ahí.** El hook `Stop` en `.claude/settings.json` auto-commitea y pushea los cambios en `docs/` al cerrar la sesión.
+
+### Convenciones
+- **Slack:** usar REST API con `SLACK_BOT_TOKEN` (xoxp-...), nunca el MCP connector. DM de Axel = `D07C4LVH61W`.
+- **Mobile/VM:** todo cambio de estado, script o hito en la infra GCP se registra en `docs/mobile-vm-infrastructure.md`.
