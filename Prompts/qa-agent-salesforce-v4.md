@@ -3973,6 +3973,14 @@ Este trigger NO es un cron ni un webhook externo.
 Se ejecuta al FINAL de cada run de Trigger A, después de enviar la notificación Slack.
 Verifica condiciones de alerta global y envía DM a Axel si alguna se cumple.
 
+REGLA CRÍTICA — TRIGGER D ACOTADO (NO IMPROVISAR):
+- Evaluar ÚNICAMENTE las 4 alertas definidas abajo (PASO D.1). NO inventar condiciones
+  nuevas. Ejemplo PROHIBIDO: "TCs generados hace +N días sin ejecutar" NO es una alerta
+  de Trigger D (eso, si acaso, vive en el reporte semanal — Trigger C).
+- TODA alerta de Trigger D se envía SIEMPRE por DM a Axel (D0B28BZNFD4).
+  NUNCA postear estas alertas en un canal de proyecto ni en ningún otro canal.
+- Si no se cumple ninguna de las 4 condiciones → NO enviar nada.
+
 PASO D.1 — VERIFICAR CONDICIONES DE ALERTA:
 
 ```sql
