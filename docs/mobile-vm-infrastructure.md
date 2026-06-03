@@ -33,8 +33,7 @@ Shutdown VM  (costo $0 en reposo)
 | Proyecto | `procontacto-claude` |
 | Zona | `us-central1-a` |
 | VM de setup | `android-qa-setup` |
-| **Imagen activa** | **`android-qa-base-v5`** (con apps) |
-| Imagen anterior | `android-qa-base-v4` (2026-05-17), `v3` (deprecada) |
+| **Imagen activa (única)** | **`android-qa-base-v5`** (con apps) — `v4` y `v3` borradas |
 | Bucket GCS | `gs://procontacto-claude-qa/` |
 | Machine type | `n2-standard-4` |
 | CPU platform | `Intel Cascade Lake` (requerido para nested virtualization / KVM) |
@@ -58,7 +57,7 @@ Shutdown VM  (costo $0 en reposo)
 | Script | Ruta | Propósito |
 |---|---|---|
 | `setup-emulator.sh` | `gs://procontacto-claude-qa/scripts/setup-emulator.sh` | Inicia emulador, toma screenshot, sube a GCS (sin shutdown — para setup) |
-| `startup-v7-image-based.sh` | `gs://procontacto-claude-qa/scripts/startup-v7-image-based.sh` | Producción: boot + screenshot + shutdown |
+| `startup-v7-image-based.sh` | `gs://procontacto-claude-qa/scripts/startup-v7-image-based.sh` | **Producción**: boot + screenshot + shutdown. Usa `gcloud storage` (fix de `gsutil`). Apps v5 ya preinstaladas. |
 | `appium-install-v2.sh` | `gs://procontacto-claude-qa/scripts/appium-install-v2.sh` | Instala Appium en la VM |
 
 ---
