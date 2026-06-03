@@ -1,4 +1,17 @@
 {
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /c/Users/axelc/Prueba-rutinas-claude && git add docs/ && git diff --cached --quiet || (git commit -m \"docs: update VM mobile infrastructure [auto]\" && git push origin HEAD)"
+          }
+        ]
+      }
+    ]
+  },
   "permissions": {
     "allow": [
       "mcp__d4b95019-2715-4122-9ee6-af6c26aa3160__execute_sql_readonly",
