@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd /c/Users/axelc/Prueba-rutinas-claude && git add docs/ && git diff --cached --quiet || (git commit -m \"docs: update VM mobile infrastructure [auto]\" && git push origin HEAD)"
+            "command": "cd /c/Users/axelc/Prueba-rutinas-claude && git add docs/ && git diff --cached --quiet || (git commit -m \"docs: update VM mobile infrastructure [auto]\" && GH_TOKEN=$(gh auth token 2>/dev/null) && git -c http.extraheader=\"Authorization: Bearer $GH_TOKEN\" push origin HEAD)"
           }
         ]
       }
