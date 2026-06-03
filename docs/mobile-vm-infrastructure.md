@@ -1,7 +1,7 @@
 # Infraestructura Mobile QA — VM Android en GCP
 
-> **Última actualización:** 2026-06-03  
-> **Estado general:** ⏳ Emulador verificado — pendiente APKs para crear imagen v4
+> **Última actualización:** 2026-06-03
+> **Estado general:** ✅ Imagen `android-qa-base-v5` creada con Salesforce + CG Cloud preinstalados
 
 ---
 
@@ -15,7 +15,7 @@ Trigger (Jira/Slack)
        ↓
 Crear VM desde imagen android-qa-base-vN  (~30 seg)
        ↓
-Startup script: boot emulador + wait ADB + instalar APK  (~2 min)
+Startup script: boot emulador + wait ADB + (apps ya preinstaladas)  (~2 min)
        ↓
 Correr tests Appium  (variable)
        ↓
@@ -33,11 +33,23 @@ Shutdown VM  (costo $0 en reposo)
 | Proyecto | `procontacto-claude` |
 | Zona | `us-central1-a` |
 | VM de setup | `android-qa-setup` |
-| Imagen activa | `android-qa-base-v3` |
-| Imagen objetivo | `android-qa-base-v4` ⏳ pendiente |
+| **Imagen activa** | **`android-qa-base-v5`** (con apps) |
+| Imagen anterior | `android-qa-base-v4` (2026-05-17), `v3` (deprecada) |
 | Bucket GCS | `gs://procontacto-claude-qa/` |
 | Machine type | `n2-standard-4` |
 | CPU platform | `Intel Cascade Lake` (requerido para nested virtualization / KVM) |
+| Nested virtualization | habilitada (`--enable-nested-virtualization`) |
+
+---
+
+## Acceso a GCP (importante)
+
+- **Auth gcloud:** `gcloud auth login` (flujo navegador / loopback localhost) como `axel.colamarino@procontacto.com.mx`.
+  - ⚠️ NO usar `--no-launch-browser`: en el entorno del agente el stdin se rompe (`lost sys.stdin`) y no se puede pegar el código. El login normal con navegador sí funciona.
+- **SSH:** usar SSH **directo** (la VM tiene IP externa), NO `--tunnel-through-iap`.
+  - El usuario no tiene rol `IAP-secured Tunnel User` → IAP da error `4033: not authorized`.
+  - `gcloud compute ssh android-qa-setup --zone=us-central1-a`
+- **GCS:** usar `gcloud storage` (NO `gsutil` — falla con `python3.13: command not found` en este SDK).
 
 ---
 
@@ -51,25 +63,49 @@ Shutdown VM  (costo $0 en reposo)
 
 ---
 
-## Imagen `android-qa-base-v3` — Contenido
+## Imagen `android-qa-base-v5` — Contenido
 
 **Incluye:**
 - Android SDK completo
-- AVD `test_avd` — Android 34, `google_apis_playstore`, `x86_64`
+- AVD `test_avd` — Android 34, `google_apis_playstore`, ABI list `x86_64,arm64-v8a`
 - Appium
 - ADB (`/android/platform-tools/adb`)
 - ADB key en `/root/.android/adbkey` (auto-autoriza el emulador sin diálogos)
 - Nested virtualization habilitada
+- **Snapshot `default_boot`** del AVD con los apps ya instalados (~68M)
+- **Apps preinstaladas:**
+  - `com.salesforce.chatter` (Salesforce) — versión **260.050.0**, ABI `x86_64`, launcher `.Chatter`
+  - `com.salesforce.industries.offlineapp` (CG Cloud) — versión **260.0006.00**, ABI `arm64-v8a`, launcher `.MainActivity`
 
-**NO incluye (APKs — pendiente):**
-- `app_offline.apk` (app custom `appoffline.com.mx`)
-- `salesforce.apk` (Salesforce Mobile)
+---
+
+## Apps Salesforce — Detalle de instalación
+
+| App | Package | Versión | ABI instalada | Launcher |
+|---|---|---|---|---|
+| Salesforce | `com.salesforce.chatter` | 260.050.0 | x86_64 | `.Chatter` |
+| CG Cloud | `com.salesforce.industries.offlineapp` | 260.0006.00 | arm64-v8a | `.MainActivity` |
+
+**Fuente de los APKs:**
+- Salesforce: `salesforce1.apk` (APK universal — trae libs x86_64, x86, arm64-v8a, armeabi-v7a). Instala nativo. → `gs://procontacto-claude-qa/apks/salesforce1.apk`
+- CG Cloud: del `.xapk` de APKPure (split bundle). ⚠️ El xapk de APKPure trae **solo `config.armeabi_v7a`** (ARM 32-bit), que **NO instala** en el emulador x86_64 (`INSTALL_FAILED_NO_MATCHING_ABIS`, el abilist no incluye armeabi-v7a). La instalación que quedó usa el split **`arm64-v8a`** (de una fuente previa), que SÍ funciona por la traducción ARM64 del emulador.
+
+> 🔑 **Regla ABI:** el emulador soporta `x86_64,arm64-v8a`. Para apps split, instalar el split **`arm64-v8a`** o `x86_64`, NUNCA `armeabi-v7a`.
+
+**Comando de instalación (referencia):**
+```bash
+ADB="sudo HOME=/root ANDROID_HOME=/android /android/platform-tools/adb"
+# Salesforce (universal)
+$ADB install -r salesforce1.apk
+# CG Cloud (split — base + arm64_v8a + dpi + idiomas)
+$ADB install-multiple -r base.apk config.arm64_v8a.apk config.mdpi.apk config.es.apk config.en.apk
+```
 
 ---
 
 ## Patrón Correcto para Iniciar el Emulador
 
-> ⚠️ Bug conocido y corregido: `nohup HOME=/root ...` no funciona — nohup trata `HOME=/root` como el comando.  
+> ⚠️ Bug conocido y corregido: `nohup HOME=/root ...` no funciona — nohup trata `HOME=/root` como el comando.
 > Fix: usar variables de entorno inline sin nohup.
 
 ```bash
@@ -92,19 +128,32 @@ nohup HOME=/root ANDROID_HOME=/android $EMU ...
 
 ```bash
 # Ver estado actual
-gcloud compute instances list \
-  --project=procontacto-claude \
-  --filter="name=android-qa-setup" \
-  --format="table(name,status,zone)"
+gcloud compute instances list --project=procontacto-claude \
+  --filter="name=android-qa-setup" --format="table(name,status,zone)"
 
 # Levantar para setup
 gcloud compute instances start android-qa-setup --zone=us-central1-a
 
-# SSH
+# SSH directo (NO IAP)
 gcloud compute ssh android-qa-setup --zone=us-central1-a
 ```
 
-**Estado al 2026-06-03:** `TERMINATED` (apagada, sin costo)
+**Estado al 2026-06-03:** `android-qa-setup` apagada tras crear v5. VM de prueba `android-qa-v5-test` se borra tras verificar.
+
+---
+
+## Crear VM desde imagen v5 (referencia)
+
+```bash
+gcloud compute instances create android-qa-<nombre> \
+  --zone=us-central1-a \
+  --image=android-qa-base-v5 \
+  --machine-type=n2-standard-4 \
+  --min-cpu-platform="Intel Cascade Lake" \
+  --enable-nested-virtualization \
+  --scopes=https://www.googleapis.com/auth/cloud-platform \
+  --metadata=startup-script-url=gs://procontacto-claude-qa/scripts/setup-emulator.sh
+```
 
 ---
 
@@ -115,70 +164,32 @@ gcloud compute ssh android-qa-setup --zone=us-central1-a
 - [x] Ciclo rápido verificado: imagen → emulador → screenshot → shutdown en **~4 min**
 - [x] Bug de `nohup` encontrado y corregido
 - [x] Emulador Android 14 confirmado funcionando
-- [x] Screenshot de prueba exitosa: `gs://procontacto-claude-qa/mobile-test/boot_test_20260517_042229.png`
 - [x] ADB detecta `sys.boot_completed=1` en ~50 segundos desde inicio del emulador
+- [x] **Salesforce (`chatter` 260.050.0) instalado y lanza sin crash**
+- [x] **CG Cloud (`offlineapp` 260.0006.00) instalado y lanza sin crash (traducción arm64)**
+- [x] **Snapshot `default_boot` guardado con apps**
+- [x] **Imagen `android-qa-base-v5` creada con ambos apps preinstalados**
 
 ---
 
-## Próximos Pasos para `android-qa-base-v4`
+## Próximos Pasos
 
-### 1. Obtener APKs ⏳ — bloqueante
-- `app_offline.apk` — app custom de `appoffline.com.mx` → **Axel lo provee**
-- `salesforce.apk` — Salesforce Mobile → **Axel confirma: APK directo o Play Store**
-
-### 2. Subir APKs a GCS
-```bash
-gsutil cp app_offline.apk gs://procontacto-claude-qa/apks/
-gsutil cp salesforce.apk gs://procontacto-claude-qa/apks/
-```
-
-### 3. Instalar APKs en el emulador activo
-```bash
-# Levantar VM y SSH
-gcloud compute instances start android-qa-setup --zone=us-central1-a
-gcloud compute ssh android-qa-setup --zone=us-central1-a
-
-# Descargar e instalar APKs
-sudo gsutil cp gs://procontacto-claude-qa/apks/app_offline.apk /tmp/
-sudo HOME=/root ANDROID_HOME=/android /android/platform-tools/adb install /tmp/app_offline.apk
-
-sudo gsutil cp gs://procontacto-claude-qa/apks/salesforce.apk /tmp/
-sudo HOME=/root ANDROID_HOME=/android /android/platform-tools/adb install /tmp/salesforce.apk
-```
-
-### 4. Guardar snapshot del AVD
-```bash
-HOME=/root ANDROID_HOME=/android /android/platform-tools/adb emu avd snapshot save qa_with_apps
-```
-
-### 5. Crear imagen `android-qa-base-v4`
-```bash
-gcloud compute instances stop android-qa-setup --zone=us-central1-a
-
-gcloud compute images create android-qa-base-v4 \
-  --source-disk=android-qa-setup \
-  --source-disk-zone=us-central1-a \
-  --family=android-qa
-```
-
-### 6. Escribir test Appium
+### 1. Test Appium de login
 - Path en VM: `/opt/tests/salesforce_login.js`
-- Objetivo: login con usuario/password en Salesforce Mobile
+- Objetivo: login con usuario/password en Salesforce Mobile y/o CG Cloud
 - Ver también: Permission Set "QA MFA Waiver" en Salesforce ⏳ pendiente confirmar con equipo
+
+### 2. Actualizar startup de producción
+- Que `startup-v7-image-based.sh` apunte a `android-qa-base-v5`
 
 ---
 
 ## Notas de Arquitectura
 
-**¿Por qué sin snapshot en el startup script de producción?**  
-Se usa `-no-snapshot-save` para evitar corrupción si el emulador es matado abruptamente.
-El snapshot se guarda UNA sola vez durante el setup de la imagen, antes de crearla.
+**¿Por qué snapshot `default_boot`?**
+Los scripts usan `-no-snapshot-save` (no guardan al salir) pero NO `-no-snapshot-load` (cargan snapshot al bootear si existe). Guardar `default_boot` con los apps garantiza que el boot rápido tenga los apps. Además el `userdata-qemu.img` ya persiste los apps (ningún script usa `-wipe-data`), cubriendo también el cold-boot.
 
-**¿Por qué no hay APKs en la imagen v3?**  
-Se separó el setup del SDK/AVD de la instalación de apps para tener una base limpia
-y poder recrear la imagen v4 fácilmente cuando cambien los APKs.
-
-**Credenciales MFA en Salesforce Mobile**  
+**Credenciales MFA en Salesforce Mobile**
 Para que el agente pueda loguearse sin intervención humana, se necesita
 un Permission Set que exima al usuario QA del MFA. Consultar con el equipo de SF.
 
@@ -188,6 +199,5 @@ un Permission Set que exima al usuario QA del MFA. Consultar con el equipo de SF
 
 | Item | Responsable | Estado |
 |---|---|---|
-| APK de App Offline (`appoffline.com.mx`) | Axel | ⏳ Pendiente |
-| APK de Salesforce Mobile | Axel | ⏳ Pendiente (APK o Play Store?) |
 | Permission Set "QA MFA Waiver" en Salesforce | Axel + equipo SF | ⏳ Pendiente confirmar |
+| Test Appium de login | Claude/Axel | ⏳ Próximo |
