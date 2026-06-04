@@ -2,7 +2,14 @@
   "browser": {
     "browserName": "chromium",
     "launchOptions": {
-      "channel": "chromium"
+      "channel": "chromium",
+      "args": [
+        "--ignore-certificate-errors",
+        "--ignore-ssl-errors"
+      ]
     }
+  },
+  "contextOptions": {
+    "ignoreHTTPSErrors": true
   }
 }
