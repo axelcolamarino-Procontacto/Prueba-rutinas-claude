@@ -1,7 +1,7 @@
 # Infraestructura Mobile QA — VM Android en GCP
 
-> **Última actualización:** 2026-06-03
-> **Estado general:** ✅ Imagen `android-qa-base-v5` creada con Salesforce + CG Cloud preinstalados
+> **Última actualización:** 2026-06-04
+> **Estado general:** ✅ Imagen `android-qa-base-v6` (apps + PIN + Sandbox + Appium). ⚠️ Login de CG Cloud NO automatizable con herramientas estándar (ver sección "Login automático mobile").
 
 ---
 
@@ -33,7 +33,7 @@ Shutdown VM  (costo $0 en reposo)
 | Proyecto | `procontacto-claude` |
 | Zona | `us-central1-a` |
 | VM de setup | `android-qa-setup` |
-| **Imagen activa (única)** | **`android-qa-base-v5`** (con apps) — `v4` y `v3` borradas |
+| **Imagen activa** | **`android-qa-base-v6`** (apps + PIN + Sandbox + Appium driver). `v5` queda como respaldo; `v4`/`v3` borradas |
 | Bucket GCS | `gs://procontacto-claude-qa/` |
 | Machine type | `n2-standard-4` |
 | CPU platform | `Intel Cascade Lake` (requerido para nested virtualization / KVM) |
@@ -171,15 +171,51 @@ gcloud compute instances create android-qa-<nombre> \
 
 ---
 
+## Imagen `android-qa-base-v6` — Agregados sobre v5 (2026-06-04)
+
+- **PIN de dispositivo `1234`** (`adb shell locksettings set-pin 1234`). CG Cloud (datos offline cifrados) exige lock screen; sin PIN tira *"The device is insecure... (Code: U1006)"*. Con PIN, pasa.
+- **CG Cloud server = Sandbox** (`https://test.salesforce.com`). Por defecto apuntaba a producción (`login.salesforce.com`). Se cambió desde el login: menú ⋮ (arriba der.) → **Change Server** → **Sandbox**. El picker es nativo (no FLAG_SECURE).
+- **Permisos runtime concedidos** a CG Cloud (`pm grant`: CAMERA, location, contacts/GET_ACCOUNTS, media, bluetooth, etc.) → no aparecen diálogos al abrir.
+- **Driver Appium `uiautomator2@7.6.0`** instalado (`appium driver install uiautomator2`).
+- Snapshot `default_boot` re-guardado capturando todo lo anterior.
+
+---
+
+## ⚠️ Login automático mobile — Hallazgo / Bloqueante
+
+**El login de credenciales de CG Cloud (y Salesforce mobile) NO se puede automatizar con herramientas estándar.** El login es un **WebView OAuth de Salesforce** (`CustomLoginActivity`, resource `sf__oauth_webview`) con 3 candados simultáneos:
+
+1. **`FLAG_SECURE`** → `screencap`/`screenrecord` devuelven **negro/0 bytes**. No hay screenshots ni grabación de la pantalla de login.
+2. **WebView `NAF=true`** (Not Accessibility Friendly) → `uiautomator` **no ve** los campos usuario/contraseña (solo el contenedor WebView).
+3. **WebView debugging DESHABILITADO** (APK release) → no hay socket `@webview_devtools_remote_*` → **Appium no puede entrar al contexto WebView** (chromedriver se conecta por ese socket).
+
+**Prueba definitiva (Appium):** sesión UiAutomator2 sobre la app → `GET /contexts` devuelve **`["NATIVE_APP"]`** únicamente (sin `WEBVIEW_*`).
+
+> Conclusión: tapear "a ciegas" por coordenadas es inviable (no se ve nada y el flujo SF es de 2 pasos). Appium sirve para las pantallas **nativas** (post-login) pero NO para el webview de login.
+
+**MFA:** resuelto aparte — Permission Set `QA_MFA_Waiver` (BypassMFAForUiLogins + SkipDeviceActivation) en CMI staging, asignado a `axel.colamarino@appoffline.com.mx` y `...cmiprod.staging`. (El MFA NO era el bloqueante; el webview sí.)
+
+### Camino recomendado para el login
+**Login manual UNA vez + hornear sesión en la imagen.** El Salesforce Mobile SDK guarda el refresh token en el store cifrado de la app; una vez logueado, la sesión persiste. Pasos:
+1. Exponer el emulador a una pantalla remota (scrcpy vía túnel SSH del adb, o VNC en la VM).
+2. Axel hace el login manual una vez (usuario/pass; MFA ya exento).
+3. Guardar snapshot + crear imagen v7 con la sesión activa.
+4. Los tests Appium corren **post-login** (pantallas nativas de CG Cloud) reusando la sesión.
+
+Alternativas descartadas: token injection (store cifrado device-bound), build debuggable de CG Cloud (no disponible), OCR sobre screenshot (bloqueado por FLAG_SECURE).
+
+---
+
 ## Próximos Pasos
 
-### 1. Test Appium de login
-- Path en VM: `/opt/tests/salesforce_login.js`
-- Objetivo: login con usuario/password en Salesforce Mobile y/o CG Cloud
-- Ver también: Permission Set "QA MFA Waiver" en Salesforce ⏳ pendiente confirmar con equipo
+### 1. Login manual one-time + imagen v7 con sesión (ver sección de arriba)
+- scrcpy/VNC → login manual → snapshot → `android-qa-base-v7`
 
-### 2. Actualizar startup de producción
-- Que `startup-v7-image-based.sh` apunte a `android-qa-base-v5`
+### 2. Test Appium de las pantallas nativas post-login
+- Una vez con sesión activa, automatizar el flujo real de CG Cloud (nativo) con uiautomator2.
+
+### 3. Actualizar startup de producción
+- Que `startup-v7-image-based.sh` apunte a `android-qa-base-v6` (o v7 cuando exista).
 
 ---
 
