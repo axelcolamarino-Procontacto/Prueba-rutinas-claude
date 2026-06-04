@@ -70,7 +70,9 @@ Shutdown VM  (costo $0 en reposo)
 | Proyecto | `procontacto-claude` |
 | Zona | `us-central1-a` |
 | VM de setup | `android-qa-setup` |
-| **Imagen activa** | **`android-qa-base-v6`** (apps + PIN + Sandbox + Appium driver). `v5` queda como respaldo; `v4`/`v3` borradas |
+| **Imagen activa** | **`android-qa-base-v7`** (userdebug + apps + PIN + Sandbox + Appium + scripts `/opt/qa` + snapshot desbloqueado + login automatizado). `v5`/`v6` = playstore obsoletas (sin webview debugging) |
+| Cloud NAT | router `qa-router` + nat `qa-nat`, IP egreso **`34.135.241.169`** (confiar en cada org) |
+| VMs de test | crear **sin IP externa** (`--no-address`) → egresan por NAT. SSH por IAP |
 | Bucket GCS | `gs://procontacto-claude-qa/` |
 | Machine type | `n2-standard-4` |
 | CPU platform | `Intel Cascade Lake` (requerido para nested virtualization / KVM) |
