@@ -2,7 +2,10 @@
   "browser": {
     "browserName": "chromium",
     "launchOptions": {
-      "channel": "chromium"
+      "headless": true
+    },
+    "contextOptions": {
+      "ignoreHTTPSErrors": true
     }
   }
 }
