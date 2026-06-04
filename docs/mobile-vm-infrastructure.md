@@ -1,7 +1,44 @@
 # Infraestructura Mobile QA — VM Android en GCP
 
 > **Última actualización:** 2026-06-04
-> **Estado general:** ✅ Imagen `android-qa-base-v6` (apps + PIN + Sandbox + Appium). ⚠️ Login de CG Cloud NO automatizable con herramientas estándar (ver sección "Login automático mobile").
+> **Estado general:** ✅✅ **Login mobile de CG Cloud 100% AUTOMATIZADO** (probado end-to-end). Imagen userdebug + Appium webview + Cloud NAT + IP confiada. Ver "SOLUCIÓN — Login automático".
+
+---
+
+## ✅ SOLUCIÓN — Login automático mobile (RESUELTO 2026-06-04)
+
+El login de CG Cloud quedó **100% automatizado**, sin intervención humana. Probado: la app loguea y empieza a sincronizar datos del org (CMI staging). Las 4 piezas:
+
+1. **Imagen de sistema `google_apis` (userdebug), NO `google_apis_playstore`**
+   - Causa raíz del bloqueo anterior: playstore = build `user` (`ro.debuggable=0`) → webview debugging APAGADO → Appium no veía el webview de login.
+   - `google_apis` = `userdebug` (`ro.debuggable=1`) → **webview debugging AUTO-ON** para todas las apps → Appium entra al webview. (Play Store no se necesita: los APK se sideloadean.)
+   - AVD recreado: `avdmanager create avd -n test_avd -k "system-images;android-34;google_apis;x86_64" --force`
+
+2. **Appium driltea el webview de login por window handle**
+   - El login OAuth de SF es una *página* (window handle) distinta del Cordova interno de la app ("Clockwork Framework", `file:///android_asset/www/index.html`).
+   - Flujo: `getContexts` → switch a `WEBVIEW_*` → `getWindowHandles` → switch al handle cuya URL tiene `salesforce.com` → `#username` / `#password` / `#Login`.
+   - Server Sandbox: menú ⋮ → Change Server → Sandbox (nativo, vía uiautomator2).
+   - Appium server: `--allow-insecure=uiautomator2:chromedriver_autodownload` (baja chromedriver 113 para el webview).
+   - Script: `/opt/qa/login2.mjs` (webdriverio). Apps helper de Appium se instalan solas.
+
+3. **Cloud NAT con IP estática de egreso → IP confiada en Salesforce**
+   - La verificación de identidad por email se dispara por IP desconocida. (El permiso "Skip Device Activation" NO la suprime — la IP es la palanca.)
+   - **Cloud NAT** (`qa-nat` / router `qa-router` / IP `qa-nat-ip` = **`34.135.241.169`**) da una IP de egreso fija a TODAS las VMs efímeras (sin IP externa propia) → escala multi-proyecto y concurrente.
+   - Esa IP se carga como **Login IP Range** en el perfil `CGCloud_User_Profile` (o Trusted IP Range org-wide), **una vez por org/proyecto**.
+   - Con la IP confiada → login directo sin verificación.
+
+4. **MFA exento:** PS `QA_MFA_Waiver` (BypassMFAForUiLogins + SkipIdentityConfirmation) en el user QA.
+
+### ⚠️ Detalle crítico: PIN + cold boot
+La app exige lock screen (PIN 1234, fix U1006). Pero en **cold boot el device arranca BLOQUEADO** → ni `io.appium.settings` ni la app arrancan ("Appium Settings app is not running"). **Hay que desbloquear con el PIN tras el boot** antes de correr Appium:
+```bash
+$ADB shell input keyevent KEYCODE_WAKEUP; $ADB shell input swipe 200 600 200 150
+$ADB shell input text 1234; $ADB shell input keyevent KEYCODE_ENTER
+```
+(Con snapshot-boot que restaura estado desbloqueado no haría falta, pero el startup debe contemplarlo.)
+
+### Acceso SSH sin IP externa
+VMs sin IP externa (para egresar por NAT) → SSH por **IAP** (`--tunnel-through-iap`). Requiere rol `roles/iap.tunnelResourceAccessor` (ya otorgado a axel). En producción el test corre por startup script, sin SSH.
 
 ---
 
