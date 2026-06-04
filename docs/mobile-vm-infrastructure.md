@@ -42,6 +42,40 @@ VMs sin IP externa (para egresar por NAT) → SSH por **IAP** (`--tunnel-through
 
 ---
 
+## Runner de producción (multi-proyecto)
+
+**`startup-prod-mobile.sh`** (`gs://procontacto-claude-qa/scripts/startup-prod-mobile.sh`) es el orquestador que corre en el **boot de la VM**. Flujo: boot emulador → desbloquear PIN → Appium → baja scripts de test de GCS → login → evidencia a GCS → apaga la VM.
+
+**Multi-proyecto:** los datos que cambian por proyecto se pasan como **metadata de la instancia** (NO van en la imagen ni en el script):
+
+| metadata | qué es |
+|---|---|
+| `sf_user` / `sf_pass` | credenciales del usuario QA **de ese proyecto** |
+| `project_key` / `issue_key` | para nombrar los resultados |
+| `app` | `offlineapp` (CG Cloud) o `chatter` (Salesforce) |
+
+Los **scripts de test** (`login2.mjs`, futuros `test_*.mjs`) viven en `gs://.../scripts/mobile/` y se bajan frescos en cada run → se actualizan **sin re-hornear la imagen**. La imagen v7 solo aporta el runtime (AVD, apps, Appium, node, webdriverio en `/opt/qa`).
+
+### Lanzar un test de un proyecto (ejemplo)
+```bash
+gcloud compute instances create qa-mobile-$RANDOM \
+  --zone=us-central1-a --image=android-qa-base-v7 \
+  --machine-type=n2-standard-4 --min-cpu-platform="Intel Cascade Lake" \
+  --enable-nested-virtualization \
+  --no-address \   # SIN IP externa -> egresa por Cloud NAT (IP confiada)
+  --scopes=https://www.googleapis.com/auth/cloud-platform \
+  --metadata=startup-script-url=gs://procontacto-claude-qa/scripts/startup-prod-mobile.sh,sf_user=USUARIO@proyecto.sandbox,sf_pass=PASSWORD,project_key=CMIV2,issue_key=CMI-123,app=offlineapp
+```
+La VM se crea, corre el login/test sola, sube resultados a `gs://.../mobile-test/results/<proyecto>_<issue>_<ts>.{log,png}` y se apaga.
+
+> 🔐 **Credenciales:** hoy van por metadata (simple, sirve para sandboxes). Para endurecer, migrar a **Secret Manager** (metadata solo con el nombre del secreto; la VM lo resuelve con su SA).
+>
+> 🌐 **Por cada proyecto nuevo:** confiar la IP `34.135.241.169` (Cloud NAT) en esa org (Login IP Range en el perfil QA o Trusted IP Range). Una vez por org.
+>
+> 📱 **`chatter` (Salesforce app):** `login2.mjs` está validado para CG Cloud (`offlineapp`). La app Salesforce usa otra activity/flujo de login — requiere ajustar el script (pendiente).
+
+---
+
 ## Arquitectura General
 
 El agente QA ejecuta tests mobile en una VM efímera de GCP que levanta un emulador Android,
