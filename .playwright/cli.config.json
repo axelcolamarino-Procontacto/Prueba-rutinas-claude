@@ -1,8 +1,16 @@
 {
+  "use": {
+    "ignoreHTTPSErrors": true
+  },
   "browser": {
     "browserName": "chromium",
     "launchOptions": {
-      "channel": "chromium"
+      "args": [
+        "--ignore-certificate-errors",
+        "--ignore-ssl-errors",
+        "--no-sandbox",
+        "--disable-dev-shm-usage"
+      ]
     }
   }
 }
