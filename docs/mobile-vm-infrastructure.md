@@ -76,23 +76,32 @@ La VM se crea, corre el login/test sola, sube resultados a `gs://.../mobile-test
 
 ---
 
-## ⛔ Limitación: app Salesforce común (`com.salesforce.chatter`) — RASP
+## ✅ App Salesforce común (`com.salesforce.chatter`) — RASP RESUELTO con build oficial
 
-**La app Salesforce común NO se puede automatizar en el emulador.** Probado a fondo (2026-06-05):
+**El problema del RASP se resuelve usando el build de desarrollo oficial de Salesforce — NO hay que bypassear nada.**
 
-- APK correcto: `com.salesforce.chatter` v250020020 (universal, x86_64) → `gs://procontacto-claude-qa/apks/salesforce-chatter.apk`.
-- **Crashea al inicio** con `ktegnp.D: !null` + **segfault nativo**. Confirmado:
-  - Crashea con libs **x86_64** y **arm64-v8a** → no es la ABI.
-  - Crashea **sin Appium** instalado → no es detección de automatización.
-  - → Es **RASP (Runtime App Self-Protection)** que detecta el entorno emulador/`ro.debuggable=1` y se mata sola (anti-tamper nativo, paquete `com.salesforce.android.compliance.security`).
-- **Bypass con Frida intentado y fallido:** frida-server + script anti-detección (spoof de props qemu/`ro.debuggable`, ocultar archivos su/qemu/frida, neutralizar `ptrace`, Build a nivel Java) → **crasheó igual**. El RASP es nativo, ofuscado (`ktegnp`) y probablemente comercial (estilo Promon/Guardsquare) con anti-Frida. Vencerlo requeriría RE profundo, frágil y que se rompe en cada update.
+### El problema (con el APK de Play Store)
+- `com.salesforce.chatter` v250020020 de Play Store/APKPure → **crashea al inicio** (`ktegnp.D: !null` + segfault nativo).
+- Confirmado que es **RASP/anti-tamper** (paquete `com.salesforce.android.compliance.security`): crashea con x86_64 y arm64, y **sin** Appium → detecta el emulador/`ro.debuggable=1`.
+- Bypass con **Frida intentado y fallido** (RASP nativo ofuscado, probablemente comercial Promon/Guardsquare con anti-Frida).
 
-**Conflicto de fondo:** la imagen **userdebug** (necesaria para webview debugging → automatizar login) es justo lo que el RASP de `chatter` detecta para crashear. CG Cloud no tiene ese RASP, por eso sí funciona.
+### La solución (build oficial `externalDev`) ✅ PROBADO
+Salesforce publica un **build de emulador/desarrollo de la app SIN el RASP**, hecho justo para correr en emulador y automatizar con Appium:
+- **Fuente:** Salesforce Mobile Debugging Tools → https://developer.salesforce.com/tools/mobile-debugging
+- **Shortlink Android:** `sfdc.co/salesforce-mobile-app-android-emulator`
+- **APK directo (v260.040.0):** `https://developer.salesforce.com/files/sfmobiletools/SalesforceApp-Android-260.040.0%236-s1-externalDev.apk`
+- Respaldado por el blog oficial: *"Automated Testing with the Salesforce Mobile App & Appium"* (developer.salesforce.com/blogs/2021/08).
 
-**Recomendación:**
-- QA mobile → **CG Cloud** (automatizado, funciona).
-- Salesforce "común" → testear por **web (Lightning + Playwright)**, que ya hace el agente (misma cobertura funcional, sin RASP).
-- Si se requiere la app nativa Salesforce sí o sí → **device farm con devices reales** (Firebase Test Lab / BrowserStack); el RASP pasa en device real, pero automatizar el login OAuth ahí es otro desafío.
+**Probado (2026-06-05):** el build `externalDev` instala (`com.salesforce.chatter`), **arranca SIN crashear**, acepta EULA (`ChatterLoginEulaActivity` → "I AGREE" en ~(289,48)) y llega al **login** (`ChatterLoginActivity`). Los campos del login (`username`, `password`, `Login`) son accesibles. Hay **"Use Custom Domain"** para apuntar al sandbox.
+
+### Pasos para completar el login de chatter (mismo patrón que CG Cloud)
+1. Instalar el build `externalDev` (no el de Play Store) → subir a `gs://.../apks/`.
+2. Lanzar `com.salesforce.chatter/.Chatter` → tap **"I AGREE"** (EULA).
+3. **"Use Custom Domain"** → ingresar `corporacionmultiinversiones--staging.sandbox.my.salesforce.com` → Continue. (O cambiar server a Sandbox.)
+4. Appium webview: `#username` / `#password` / `#Login` (igual que CG Cloud).
+5. Verificación de identidad: cubierta por la **IP NAT confiada** — ⚠️ pero el user `...cmiprod.staging` es **System Administrator**, no `CGCloud_User_Profile`. Si la IP se confió solo en ese perfil, hay que confiarla también para System Administrator (o usar **Trusted IP Ranges org-wide**).
+
+> Conclusión: la app Salesforce común **SÍ es automatizable** — con el build oficial externalDev, no con el de Play Store (que tiene RASP). Login pendiente de cierre mecánico (custom domain + creds), idéntico al de CG Cloud que ya funciona.
 
 ---
 
