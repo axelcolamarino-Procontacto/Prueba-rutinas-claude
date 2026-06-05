@@ -101,7 +101,22 @@ Salesforce publica un **build de emulador/desarrollo de la app SIN el RASP**, he
 4. Appium webview: `#username` / `#password` / `#Login` (igual que CG Cloud).
 5. Verificación de identidad: cubierta por la **IP NAT confiada** — ⚠️ pero el user `...cmiprod.staging` es **System Administrator**, no `CGCloud_User_Profile`. Si la IP se confió solo en ese perfil, hay que confiarla también para System Administrator (o usar **Trusted IP Ranges org-wide**).
 
-> Conclusión: la app Salesforce común **SÍ es automatizable** — con el build oficial externalDev, no con el de Play Store (que tiene RASP). Login pendiente de cierre mecánico (custom domain + creds), idéntico al de CG Cloud que ya funciona.
+> Conclusión: la app Salesforce común **SÍ es automatizable** — con el build oficial externalDev, no con el de Play Store (que tiene RASP).
+
+### Progreso del login chatter (2026-06-05) — autentica, pero el callback OAuth nativo no cierra
+- ✅ El build `externalDev` corre, EULA OK, llega al login.
+- ✅ **Las credenciales AUTENTICAN en la org**: con server picker nativo → Sandbox (test.salesforce.com) o My Domain, el form `#username`/`#password`/`#Login` (tipeo real) entra y se ve la org (Axel Colamarino / Sandbox: Staging / tabs Home, **Leads**, Accounts…). Sin verificación (IP NAT confiada funciona).
+- ⚠️ **PERO no llega a `MainActivity` (app nativa).** El callback OAuth `sfdc://` no se completa → queda en `ChatterLoginActivity`. Causas que lo hacen muy frágil:
+  - Usar el `#mydomain` del webview hace redirect plano → rompe el contexto OAuth (queda sesión web, no token).
+  - El default del build es `welcome.salesforce.com` (discovery, **shadow DOM** → no automatable por querySelector).
+  - Cookies de sesiones previas en el My Domain → la página no muestra el form de login.
+  - `pm clear` resetea server (a welcome) y EULA; seleccionar Sandbox manda la app a background un instante → falla el attach de Appium.
+- **Camino correcto identificado:** server picker NATIVO del SDK (menú ⋮ → **Change Server** → **Sandbox**, que preserva el OAuth) + cookies limpias + llenar `#username` directo (sin `#mydomain`). No convergió por la combinación de timing/estado + inestabilidad del entorno.
+- ⛔ **Video:** el login webview es `FLAG_SECURE` (no grabable). Para grabar habría que llegar a `MainActivity` (nativo, grabable como CG Cloud), que es justo lo que no se logró cerrar.
+
+**Artefactos guardados:** `gs://procontacto-claude-qa/apks/salesforce-chatter-externalDev.apk` y `gs://.../scripts/mobile/chatter_login.mjs`.
+
+**Recomendación:** para QA mobile con video usar **CG Cloud** (login nativo 100% + grabable). Para Salesforce común, **web (Lightning + Playwright)**. El login nativo de chatter queda como pendiente avanzado (requiere más trabajo sobre el flujo OAuth/welcome de SF).
 
 ---
 
