@@ -72,7 +72,27 @@ La VM se crea, corre el login/test sola, sube resultados a `gs://.../mobile-test
 >
 > 🌐 **Por cada proyecto nuevo:** confiar la IP `34.135.241.169` (Cloud NAT) en esa org (Login IP Range en el perfil QA o Trusted IP Range). Una vez por org.
 >
-> 📱 **`chatter` (Salesforce app):** `login2.mjs` está validado para CG Cloud (`offlineapp`). La app Salesforce usa otra activity/flujo de login — requiere ajustar el script (pendiente).
+> 📱 **`chatter` (Salesforce app):** `login2.mjs` está validado para CG Cloud (`offlineapp`). La app Salesforce NO es automatizable en emulador — ver sección siguiente.
+
+---
+
+## ⛔ Limitación: app Salesforce común (`com.salesforce.chatter`) — RASP
+
+**La app Salesforce común NO se puede automatizar en el emulador.** Probado a fondo (2026-06-05):
+
+- APK correcto: `com.salesforce.chatter` v250020020 (universal, x86_64) → `gs://procontacto-claude-qa/apks/salesforce-chatter.apk`.
+- **Crashea al inicio** con `ktegnp.D: !null` + **segfault nativo**. Confirmado:
+  - Crashea con libs **x86_64** y **arm64-v8a** → no es la ABI.
+  - Crashea **sin Appium** instalado → no es detección de automatización.
+  - → Es **RASP (Runtime App Self-Protection)** que detecta el entorno emulador/`ro.debuggable=1` y se mata sola (anti-tamper nativo, paquete `com.salesforce.android.compliance.security`).
+- **Bypass con Frida intentado y fallido:** frida-server + script anti-detección (spoof de props qemu/`ro.debuggable`, ocultar archivos su/qemu/frida, neutralizar `ptrace`, Build a nivel Java) → **crasheó igual**. El RASP es nativo, ofuscado (`ktegnp`) y probablemente comercial (estilo Promon/Guardsquare) con anti-Frida. Vencerlo requeriría RE profundo, frágil y que se rompe en cada update.
+
+**Conflicto de fondo:** la imagen **userdebug** (necesaria para webview debugging → automatizar login) es justo lo que el RASP de `chatter` detecta para crashear. CG Cloud no tiene ese RASP, por eso sí funciona.
+
+**Recomendación:**
+- QA mobile → **CG Cloud** (automatizado, funciona).
+- Salesforce "común" → testear por **web (Lightning + Playwright)**, que ya hace el agente (misma cobertura funcional, sin RASP).
+- Si se requiere la app nativa Salesforce sí o sí → **device farm con devices reales** (Firebase Test Lab / BrowserStack); el RASP pasa en device real, pero automatizar el login OAuth ahí es otro desafío.
 
 ---
 
