@@ -118,6 +118,23 @@ Salesforce publica un **build de emulador/desarrollo de la app SIN el RASP**, he
 
 **Recomendación:** para QA mobile con video usar **CG Cloud** (login nativo 100% + grabable). Para Salesforce común, **web (Lightning + Playwright)**. El login nativo de chatter queda como pendiente avanzado (requiere más trabajo sobre el flujo OAuth/welcome de SF).
 
+### Diagnóstico fino del callback OAuth de chatter (2026-06-05, investigación multi-agente)
+Causa raíz confirmada contra el código del Salesforce Mobile SDK: el SDK completa el login SOLO cuando su `WebViewClient.shouldOverrideUrlLoading` intercepta una navegación al `redirect_uri` `sfdc://` (que dispara `onAuthFlowComplete` → token PKCE → `USER_SWITCH_INTENT` → MainActivity). Eso solo ocurre si el WebView está sobre `/services/oauth2/authorize?...redirect_uri=sfdc://...`. Caminos que lo rompen (descartados): el widget `#mydomain`/welcome hacen login de **sesión web plana** (frontdoor → /home) que nunca navega a `sfdc://`.
+
+**El camino correcto** (server picker nativo ⋮ → Change Server → **Sandbox/test.salesforce.com**) SÍ carga el authorize. Pero quedó un **catch-22** al automatizar el submit:
+- **Click vía Appium/CDP (JS):** submitea y autentica, PERO con ChromeDriver enganchado al WebView la navegación a `sfdc://` la captura la capa CDP → el `WebViewClient` nativo no intercepta → no hay token → queda en `ChatterLoginActivity` (solo sesión web).
+- **Tap nativo (adb input tap):** preserva el OAuth, PERO no registra el click en el botón del webview, y no se puede calibrar la coordenada porque la pantalla de login es **FLAG_SECURE** (screenshot negro). Confirmado por logcat: tras el tap no hay actividad OAuth ni cambia la pantalla.
+
+**Camino para destrabarlo (documentado, no completado por inestabilidad del entorno):**
+1. Frida hook para quitar `FLAG_SECURE` (hook `Window.setFlags`/`addFlags`, strip 0x2000; script en `gs://.../scripts/mobile/flagsecure.js`). Spawnear chatter con el hook (`frida -U -f com.salesforce.chatter -l flagsecure.js`). Tenemos root + frida-server x86_64.
+2. Con la pantalla visible → login **100% nativo** (ver campos, `input text`, tap del botón "Log In to Sandbox" por adb, **sin CDP**) → el SDK intercepta `sfdc://` → completa OAuth → MainActivity.
+3. Con FLAG_SECURE removido → `screenrecord` funciona → grabar la navegación a un Lead.
+- Fallback (research): capturar el `sfdc://...?code=...` y reinyectarlo como deep link (`am start -a VIEW -d "sfdc://...?code=..." com.salesforce.chatter`).
+
+⚠️ **Blocker práctico actual = inestabilidad del entorno**, no la lógica: el emulador no persiste de forma confiable entre comandos SSH (muere → deja lock → FATAL "multiple emulators"), las conexiones SSH cortan y pierden output, y `/tmp` se limpia. La orquestación multi-paso de Frida (emulador + frida-server + spawn + taps) no converge en este setup. Para retomar conviene un entorno más estable (o startup-script que deje emulador+frida-server como servicios de sistema persistentes).
+
+**Artefactos:** `gs://.../apks/salesforce-chatter-externalDev.apk`, `gs://.../scripts/mobile/{chatter_login.mjs,chatter_type.mjs,flagsecure.js}`.
+
 ---
 
 ## Arquitectura General
