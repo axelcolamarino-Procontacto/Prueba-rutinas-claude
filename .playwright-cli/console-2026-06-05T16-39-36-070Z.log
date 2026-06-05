@@ -1,0 +1,13 @@
+[     764ms] [WARNING] ComponentProfiler: Component-level profiling has not been enabled.
+[     791ms] [LOG] O11Y Error: Unsupported WebVital metrics: [2]
+[     824ms] [WARNING] defineState: The callback pattern that returns a factory function is deprecated.
+[    1083ms] [LOG] empApi setting initialized true for : undefined
+[    3736ms] [WARNING] An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+[    4280ms] [WARNING] <lightning-spinner> The alternativeText attribute should not be empty.
+[    4804ms] [WARNING] <lightning-spinner> The alternativeText attribute should not be empty.
+[    5167ms] [WARNING] <lightning-spinner> The alternativeText attribute should not be empty.
+[    6114ms] [LOG] InstrumentationResult: RECEIVED=29, SUCCESS=29, Topic=AILTN
+[    6149ms] [WARNING] [ORCHESTRATION] In-App Guidance is disabled.
+[    7119ms] [LOG] InstrumentationResult: RECEIVED=4, SUCCESS=4, Topic=AILTN
+[   15147ms] [WARNING] <lightning-formatted-location> expects latitude in range [-90.0, 90.0], longitude in range [-180.0, 180.0].
+[   15484ms] [WARNING] <lightning-spinner> The alternativeText attribute should not be empty.

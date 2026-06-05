@@ -1,0 +1,12 @@
+[    1608ms] [INFO] Applying inline style violates the following Content Security Policy directive 'style-src 'none''. Either the 'unsafe-inline' keyword, a hash ('sha256-egdm1gZ7EIrEfe2hBmkCksMWbk4wbU/HQlspDMrjzqI='), or a nonce ('nonce-...') is required to enable inline execution. Note that hashes do not apply to event handlers, style attributes and javascript: navigations unless the 'unsafe-hashes' keyword is present. The policy is report-only, so the violation has been logged but no further action has been taken. @ https://corporacionmultiinversiones--staging.sandbox.my.salesforce.com/?ec=301&startURL=%2Fhome%2Fhome.jsp:1
+[    1609ms] [INFO] Loading the stylesheet 'https://corporacionmultiinversiones--staging.sandbox.my.salesforce.com/css/sfdc_210.css?v=7' violates the following Content Security Policy directive: "style-src 'none'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The policy is report-only, so the violation has been logged but no further action has been taken. @ https://corporacionmultiinversiones--staging.sandbox.my.salesforce.com/?ec=301&startURL=%2Fhome%2Fhome.jsp:1
+[    1610ms] [INFO] Applying inline style violates the following Content Security Policy directive 'style-src 'none''. Either the 'unsafe-inline' keyword, a hash ('sha256-tTRH0KVc0Vzpzg7no5bPV4bolIFHQ4aor6gkejwdnyc='), or a nonce ('nonce-...') is required to enable inline execution. The policy is report-only, so the violation has been logged but no further action has been taken. @ https://corporacionmultiinversiones--staging.sandbox.my.salesforce.com/?ec=301&startURL=%2Fhome%2Fhome.jsp:1
+[   25352ms] [WARNING] ComponentProfiler: Component-level profiling has not been enabled. @ https://b.static.lightning.force.com/usa1088s.sfdc-yfeipo/aurafile/apppart1-4.js:2383
+[   25408ms] [LOG] O11Y Error: Unsupported WebVital metrics: [2]
+[   27122ms] [LOG] empApi setting initialized true for : undefined
+[   29247ms] [LOG] InstrumentationResult: RECEIVED=32, SUCCESS=32, Topic=AILTN
+[   29460ms] [WARNING] sfdc-lightning/charts/hbar.js has been deprecated.
+[   29461ms] [WARNING] sfdc-lightning/charts/vbar.js has been deprecated.
+[   29461ms] [WARNING] sfdc-lightning/charts/stackvbar.js has been deprecated.
+[   29663ms] [WARNING] [ORCHESTRATION] In-App Guidance is disabled.
+[   30661ms] [LOG] InstrumentationResult: RECEIVED=3, SUCCESS=3, Topic=AILTN

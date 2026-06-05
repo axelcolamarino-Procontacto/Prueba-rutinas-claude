@@ -1,0 +1,110 @@
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Skip to Navigation" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e8]:
+        - img [ref=e12]
+        - generic [ref=e15]: Salesforce enforces new security requirements in June 2026.
+        - link "See What's Changing" [ref=e16] [cursor=pointer]:
+          - /url: https://help.salesforce.com/s/articleView?id=005317465&type=1
+        - link "Close" [ref=e17] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - generic [ref=e19]:
+            - img [ref=e21]
+            - generic [ref=e24]: Close
+      - generic [ref=e25]:
+        - button "Search" [ref=e31]:
+          - img [ref=e33]
+          - text: Search...
+        - navigation "Global Header" [ref=e36]:
+          - list [ref=e38]:
+            - listitem [ref=e39]:
+              - group [ref=e40]:
+                - button "This item doesn't support favorites" [ref=e42] [cursor=pointer]:
+                  - generic [ref=e43]:
+                    - img [ref=e47]
+                    - tooltip "This item doesn't support favorites"
+                - button "Favorites list" [ref=e51] [cursor=pointer]:
+                  - generic [ref=e52]:
+                    - img [ref=e56]
+                    - tooltip "Favorites list"
+            - listitem [ref=e59]:
+              - button "Global Actions" [ref=e61]:
+                - img [ref=e65]
+            - listitem [ref=e68]:
+              - button "Salesforce Help" [ref=e71] [cursor=pointer]:
+                - generic [ref=e72]:
+                  - img [ref=e76]
+                  - tooltip "Salesforce Help"
+            - listitem [ref=e79]:
+              - button "Setup" [ref=e85] [cursor=pointer]:
+                - generic [ref=e86]:
+                  - img [ref=e90]
+                  - tooltip "Setup"
+            - listitem [ref=e93]:
+              - button "Notifications" [ref=e96] [cursor=pointer]:
+                - generic [ref=e97]:
+                  - img [ref=e102]
+                  - tooltip "Notifications"
+            - listitem [ref=e106]:
+              - button "View profile" [ref=e109] [cursor=pointer]:
+                - generic [ref=e110]:
+                  - tooltip "View profile"
+    - generic [ref=e112]:
+      - generic [ref=e115]:
+        - generic [ref=e117]:
+          - navigation "App" [ref=e118]:
+            - button "App Launcher" [ref=e120] [cursor=pointer]:
+              - generic [ref=e131]: App Launcher
+          - heading "CG Offline Admin" [level=1] [ref=e132]:
+            - generic "CG Offline Admin" [ref=e133]
+        - navigation "Global" [ref=e136]:
+          - list [ref=e137]:
+            - listitem [ref=e138]:
+              - link "Home" [ref=e139] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e140]: Home
+            - listitem [ref=e141]:
+              - link "Sincronizar materiales del combo" [ref=e142] [cursor=pointer]:
+                - /url: /lightning/n/Sincronizar_materiales_del_combo
+                - generic [ref=e143]: Sincronizar materiales del combo
+            - listitem [ref=e144]:
+              - link "Sincronizar surtido de productos" [ref=e145] [cursor=pointer]:
+                - /url: /lightning/n/SyncProductAssortment
+                - generic [ref=e146]: Sincronizar surtido de productos
+            - listitem [ref=e147]:
+              - link "Cases" [ref=e148] [cursor=pointer]:
+                - /url: /lightning/o/Case/home
+                - generic [ref=e149]: Cases
+              - button "Cases List" [ref=e153] [cursor=pointer]:
+                - img [ref=e157]
+                - generic [ref=e160]: Cases List
+            - listitem [ref=e161]:
+              - link "Leads" [ref=e162] [cursor=pointer]:
+                - /url: /lightning/o/Lead/home
+                - generic [ref=e163]: Leads
+              - button "Leads List" [ref=e167] [cursor=pointer]:
+                - img [ref=e171]
+                - generic [ref=e174]: Leads List
+            - listitem [ref=e175]:
+              - link "Accounts" [ref=e176] [cursor=pointer]:
+                - /url: /lightning/o/Account/home
+                - generic [ref=e177]: Accounts
+              - button "Accounts List" [ref=e181] [cursor=pointer]:
+                - img [ref=e185]
+                - generic [ref=e188]: Accounts List
+            - listitem [ref=e189]:
+              - button "Show more navigation items" [ref=e191] [cursor=pointer]:
+                - generic [ref=e192]: More
+                - img [ref=e196]
+                - generic [ref=e199]: Show more navigation items
+            - listitem [ref=e200]:
+              - button "Edit nav items" [ref=e202] [cursor=pointer]:
+                - img [ref=e204]
+                - generic [ref=e207]: Edit nav items
+      - main [ref=e209]
+  - generic:
+    - status

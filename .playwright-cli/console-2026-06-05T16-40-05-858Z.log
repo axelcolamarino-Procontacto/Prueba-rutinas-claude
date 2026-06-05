@@ -1,0 +1,13 @@
+[     488ms] [WARNING] ComponentProfiler: Component-level profiling has not been enabled.
+[     504ms] [LOG] O11Y Error: Unsupported WebVital metrics: [2]
+[     536ms] [WARNING] defineState: The callback pattern that returns a factory function is deprecated.
+[     724ms] [LOG] empApi setting initialized true for : undefined
+[    1743ms] [WARNING] An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+[    2697ms] [WARNING] <lightning-spinner> The alternativeText attribute should not be empty.
+[    3148ms] [WARNING] <lightning-spinner> The alternativeText attribute should not be empty.
+[    4109ms] [WARNING] [ORCHESTRATION] In-App Guidance is disabled.
+[    4150ms] [LOG] InstrumentationResult: RECEIVED=29, SUCCESS=29, Topic=AILTN
+[    4760ms] [LOG] InstrumentationResult: RECEIVED=4, SUCCESS=4, Topic=AILTN
+[   17557ms] [WARNING] <lightning-spinner> The alternativeText attribute should not be empty.
+[   17722ms] [WARNING] <lightning-spinner> The alternativeText attribute should not be empty.
+[   18459ms] [WARNING] <lightning-spinner> The alternativeText attribute should not be empty.
