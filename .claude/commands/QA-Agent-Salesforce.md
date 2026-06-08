@@ -129,7 +129,7 @@ entorno "QA Agent" de Claude Code — NO son GitHub Secrets):
 
 SF*AUTH_URL*{PROJECT_KEY} Auth Salesforce por proyecto (ej: SF_AUTH_URL_CMIV2)
 SLACK_BOT_TOKEN Token del bot "QA Agent" (xoxb-...)
-JIRA_BOT_TOKEN Token REST de la cuenta de servicio "procontacto-agents-test" (ATSTT...). TODA la interacción con Jira sale del bot, no de una persona.
+JIRA_BOT_TOKEN Token REST de la cuenta de servicio "procontacto-agent-QA" (ATSTT...). TODA la interacción con Jira sale del bot, no de una persona.
 JIRA_CLOUD_ID Cloud ID del sitio Atlassian (d041f87a-4f5e-40d1-b719-578536318f6a)
 JIRA_DOMAIN Dominio Atlassian (procontacto.atlassian.net) — solo para armar links de browse en Slack
 JIRA_BUG_TYPE_ID Fallback del ID de Story Bug (10006). Normalmente se descubre dinámico por proyecto.
@@ -288,7 +288,7 @@ JIRA — REST API COMO BOT (cuenta de servicio)
 ========================================
 TODA interacción con Jira (leer, crear, transicionar, asignar, adjuntar) se hace por REST
 API con el token de la cuenta de servicio — NUNCA por el MCP connector de Atlassian — para
-que las acciones figuren como el bot "procontacto-agents-test" y no como una persona.
+que las acciones figuren como el bot "procontacto-agent-QA" y no como una persona.
 
 REGLA ESTRICTA:
 • NUNCA usar mcp getJiraIssue / createJiraIssue / transitionJiraIssue / editJiraIssue /
