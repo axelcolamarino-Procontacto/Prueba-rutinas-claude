@@ -2,7 +2,10 @@
   "browser": {
     "browserName": "chromium",
     "launchOptions": {
-      "channel": "chromium"
+      "executablePath": "/opt/pw-browsers/chromium-1224/chrome-linux64/chrome"
+    },
+    "contextOptions": {
+      "ignoreHTTPSErrors": true
     }
   }
 }

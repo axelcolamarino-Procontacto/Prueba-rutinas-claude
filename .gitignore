@@ -1,0 +1,13 @@
+# Playwright CLI runtime artifacts
+.playwright-cli/
+
+# Session artifacts
+/mnt/session/
+
+# Node modules
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+.env
