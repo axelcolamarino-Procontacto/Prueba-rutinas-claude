@@ -1700,7 +1700,7 @@ SELECT
   distance
 FROM VECTOR_SEARCH(
   (SELECT * FROM `procontacto-claude.qa_agent.knowledge`
-   WHERE project = '{project_key}' AND collection = 'sow'),
+   WHERE project = '{project_key}' AND collection = 'sow' AND ARRAY_LENGTH(embedding) = 768),
   'embedding',
   (SELECT ml_generate_embedding_result
    FROM ML.GENERATE_EMBEDDING(
@@ -1729,7 +1729,7 @@ SELECT
   issue_key, distance
 FROM VECTOR_SEARCH(
   (SELECT * FROM `procontacto-claude.qa_agent.test_cases`
-   WHERE project = '{project_key}'),
+   WHERE project = '{project_key}' AND ARRAY_LENGTH(embedding) = 768),
   'embedding',
   (SELECT ml_generate_embedding_result
    FROM ML.GENERATE_EMBEDDING(
@@ -1754,7 +1754,7 @@ SELECT
   jira_issue, sow_reference, distance
 FROM VECTOR_SEARCH(
   (SELECT * FROM `procontacto-claude.qa_agent.bugs`
-   WHERE project = '{project_key}'),
+   WHERE project = '{project_key}' AND ARRAY_LENGTH(embedding) = 768),
   'embedding',
   (SELECT ml_generate_embedding_result
    FROM ML.GENERATE_EMBEDDING(
@@ -2019,20 +2019,19 @@ PREGUNTAS DE AUTO-CRÍTICA (responder internamente, ajustar la suite):
 2. COBERTURA SOW: ¿Hay requisitos del SOW relevantes a este issue sin TC asignado?
 
    ```sql
-   SELECT chunk_text, metadata
-   FROM `procontacto-claude.qa_agent.knowledge`
-   WHERE project = '{project_key}'
-     AND VECTOR_SEARCH(
-       TABLE `procontacto-claude.qa_agent.knowledge`,
-       'embedding',
-       (SELECT ml_generate_embedding_result FROM ML.GENERATE_EMBEDDING(
-         MODEL `procontacto-claude.qa_agent.embedding_model`,
-         (SELECT '{issue_summary} {criterios_aceptacion}' AS content)
-       )),
-       top_k => 5,
-       distance_type => 'COSINE'
-     ).distance < 0.45
-     AND confidence_score >= 0.5
+   SELECT base.text AS content, base.metadata, distance
+   FROM VECTOR_SEARCH(
+     (SELECT * FROM `procontacto-claude.qa_agent.knowledge`
+      WHERE project = '{project_key}' AND collection = 'sow' AND ARRAY_LENGTH(embedding) = 768),
+     'embedding',
+     (SELECT ml_generate_embedding_result FROM ML.GENERATE_EMBEDDING(
+       MODEL `procontacto-claude.qa_agent.embedding_model`,
+       (SELECT '{issue_summary} {criterios_aceptacion}' AS content)
+     )),
+     top_k => 5,
+     distance_type => 'COSINE'
+   )
+   WHERE distance < 0.45
    ```
 
    Si un chunk del SOW no tiene cobertura en la suite → agregar TC faltante.
@@ -2565,7 +2564,7 @@ a) DEDUPLICACIÓN (verificar si ya existe en BigQuery):
 ```sql
 SELECT base.id, base.summary, base.jira_issue, base.status, distance
 FROM VECTOR_SEARCH(
-  (SELECT * FROM `procontacto-claude.qa_agent.bugs` WHERE project = '{project_key}'),
+  (SELECT * FROM `procontacto-claude.qa_agent.bugs` WHERE project = '{project_key}' AND ARRAY_LENGTH(embedding) = 768),
   'embedding',
   (SELECT ml_generate_embedding_result FROM ML.GENERATE_EMBEDDING(
     MODEL `procontacto-claude.qa_agent.embedding_model`,
@@ -3438,7 +3437,7 @@ a la conversación — si no cae en las 3 variantes, responder siempre con el me
           JSON_VALUE(base.metadata, '$.h3') AS detail, distance
    FROM VECTOR_SEARCH(
      (SELECT * FROM `procontacto-claude.qa_agent.knowledge`
-      WHERE project = '{project_key}'),
+      WHERE project = '{project_key}' AND ARRAY_LENGTH(embedding) = 768),
      'embedding',
      (SELECT ml_generate_embedding_result FROM ML.GENERATE_EMBEDDING(
        MODEL `procontacto-claude.qa_agent.embedding_model`,
