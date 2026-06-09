@@ -1,0 +1,21 @@
+# Playwright CLI runtime artifacts
+.playwright-cli/
+
+# Salesforce CLI auth temp files
+sf_auth.txt
+/tmp/sf_auth.txt
+
+# Session screenshots (generated during QA runs)
+*.png
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+
+# SF CLI
+.sf/
+.sfdx/
