@@ -1,0 +1,9 @@
+[    8573ms] [WARNING] ComponentProfiler: Component-level profiling has not been enabled.
+[    8655ms] [LOG] O11Y Error: Unsupported WebVital metrics: [2]
+[    9519ms] [LOG] empApi setting initialized true for : undefined
+[   12510ms] [WARNING] sfdc-lightning/charts/hbar.js has been deprecated.
+[   13022ms] [WARNING] sfdc-lightning/charts/stackvbar.js has been deprecated.
+[   13611ms] [LOG] InstrumentationResult: RECEIVED=28, SUCCESS=28
+[   13646ms] [WARNING] [ORCHESTRATION] In-App Guidance is disabled.
+[   14070ms] [WARNING] sfdc-lightning/charts/vbar.js has been deprecated.
+[   14220ms] [LOG] InstrumentationResult: RECEIVED=4, SUCCESS=4

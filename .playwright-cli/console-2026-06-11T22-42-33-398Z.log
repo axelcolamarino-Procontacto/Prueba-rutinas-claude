@@ -1,0 +1,16 @@
+[     327ms] [INFO] Loading stylesheet violates Content Security Policy directive (report-only)
+[     458ms] [INFO] Loading stylesheet violates Content Security Policy directive (report-only)
+[     846ms] [WARNING] ComponentProfiler: Component-level profiling has not been enabled.
+[     875ms] [LOG] O11Y Error: Unsupported WebVital metrics: [2]
+[     914ms] [WARNING] defineState: The callback pattern that returns a factory function is deprecated.
+[    1241ms] [LOG] empApi setting initialized true for : undefined
+[    6618ms] [WARNING] An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+[    7764ms] [WARNING] <lightning-spinner> The alternativeText attribute should not be empty.
+[    8367ms] [LOG] InstrumentationResult: RECEIVED=30, SUCCESS=30
+[    8457ms] [WARNING] [ORCHESTRATION] In-App Guidance is disabled.
+[    9103ms] [WARNING] <lightning-spinner> The alternativeText attribute should not be empty.
+[   10422ms] [LOG] InstrumentationResult: RECEIVED=4, SUCCESS=4
+[   45204ms] [WARNING] <lightning-formatted-location> expects latitude in range [-90.0, 90.0], longitude in range [-180.0, 180.0].
+[   45899ms] [WARNING] <lightning-spinner> The alternativeText attribute should not be empty.
+[   46108ms] [WARNING] <lightning-spinner> The alternativeText attribute should not be empty.
+[   47225ms] [WARNING] <lightning-spinner> The alternativeText attribute should not be empty.
