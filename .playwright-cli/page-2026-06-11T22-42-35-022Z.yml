@@ -1,0 +1,141 @@
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Skip to Navigation" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e8]:
+        - img [ref=e12]
+        - generic [ref=e15]: Salesforce enforces new security requirements in June 2026.
+        - link "See What's Changing" [ref=e16] [cursor=pointer]:
+          - /url: https://help.salesforce.com/s/articleView?id=005317465&type=1
+        - link "Close" [ref=e17] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - generic [ref=e19]:
+            - img [ref=e21]
+            - generic [ref=e24]: Close
+      - generic [ref=e28]:
+        - generic [ref=e32]:
+          - button "Toggle Panel" [ref=e36] [cursor=pointer]:
+            - img [ref=e40]
+            - generic [ref=e43]: Menu
+          - generic [ref=e48]:
+            - img [ref=e52]
+            - generic [ref=e56]: Sandbox (Staging)
+        - button "Show menu" [ref=e65] [cursor=pointer]:
+          - img [ref=e67]
+          - generic [ref=e70]: Show menu
+      - generic [ref=e71]:
+        - button "Search" [ref=e77]:
+          - img [ref=e79]
+          - text: Search...
+        - navigation "Global Header" [ref=e82]:
+          - list [ref=e84]:
+            - listitem [ref=e85]:
+              - group [ref=e86]:
+                - button "This item doesn't support favorites" [ref=e88] [cursor=pointer]:
+                  - generic [ref=e89]:
+                    - img [ref=e93]
+                    - tooltip "This item doesn't support favorites"
+                - button "Favorites list" [ref=e97] [cursor=pointer]:
+                  - generic [ref=e98]:
+                    - img [ref=e102]
+                    - tooltip "Favorites list"
+            - listitem [ref=e105]:
+              - button "Global Actions" [ref=e107]:
+                - img [ref=e111]
+            - listitem [ref=e114]:
+              - button "Salesforce Help" [ref=e117] [cursor=pointer]:
+                - generic [ref=e118]:
+                  - img [ref=e122]
+                  - tooltip "Salesforce Help"
+            - listitem [ref=e125]:
+              - button "Setup" [ref=e131] [cursor=pointer]:
+                - generic [ref=e132]:
+                  - img [ref=e136]
+                  - tooltip "Setup"
+            - listitem [ref=e139]:
+              - button "Notifications" [ref=e142] [cursor=pointer]:
+                - generic [ref=e143]:
+                  - img [ref=e148]
+                  - tooltip "Notifications"
+            - listitem [ref=e152]:
+              - button "View profile" [ref=e155] [cursor=pointer]:
+                - generic [ref=e156]:
+                  - tooltip "View profile"
+    - generic [ref=e158]:
+      - generic [ref=e161]:
+        - generic [ref=e163]:
+          - navigation "App" [ref=e164]:
+            - button "App Launcher" [ref=e166] [cursor=pointer]:
+              - generic [ref=e177]: App Launcher
+          - heading "CG Offline Admin" [level=1] [ref=e178]:
+            - generic "CG Offline Admin" [ref=e179]
+        - navigation "Global" [ref=e182]:
+          - list [ref=e183]:
+            - listitem [ref=e184]:
+              - link "Home" [ref=e185] [cursor=pointer]:
+                - /url: /lightning/page/home
+                - generic [ref=e186]: Home
+            - listitem [ref=e187]:
+              - link "Cases" [ref=e188] [cursor=pointer]:
+                - /url: /lightning/o/Case/home
+                - generic [ref=e189]: Cases
+              - button "Cases List" [ref=e193] [cursor=pointer]:
+                - img [ref=e197]
+                - generic [ref=e200]: Cases List
+            - listitem [ref=e201]:
+              - link "Leads" [ref=e202] [cursor=pointer]:
+                - /url: /lightning/o/Lead/home
+                - generic [ref=e203]: Leads
+              - button "Leads List" [ref=e207] [cursor=pointer]:
+                - img [ref=e211]
+                - generic [ref=e214]: Leads List
+            - listitem [ref=e215]:
+              - link "Accounts" [ref=e216] [cursor=pointer]:
+                - /url: /lightning/o/Account/home
+                - generic [ref=e217]: Accounts
+              - button "Accounts List" [ref=e221] [cursor=pointer]:
+                - img [ref=e225]
+                - generic [ref=e228]: Accounts List
+            - listitem [ref=e229]:
+              - link "Contacts" [ref=e230] [cursor=pointer]:
+                - /url: /lightning/o/Contact/home
+                - generic [ref=e231]: Contacts
+              - button "Contacts List" [ref=e235] [cursor=pointer]:
+                - img [ref=e239]
+                - generic [ref=e242]: Contacts List
+            - listitem [ref=e243]:
+              - link "Tasks" [ref=e244] [cursor=pointer]:
+                - /url: /lightning/o/Task/home
+                - generic [ref=e245]: Tasks
+              - button "Tasks List" [ref=e249] [cursor=pointer]:
+                - img [ref=e253]
+                - generic [ref=e256]: Tasks List
+            - listitem [ref=e257]:
+              - link "Activities" [ref=e258] [cursor=pointer]:
+                - /url: /lightning/o/cgcloud__Job_Definition_List__c/home
+                - generic [ref=e259]: Activities
+              - button "Activities List" [ref=e263] [cursor=pointer]:
+                - img [ref=e267]
+                - generic [ref=e270]: Activities List
+            - listitem [ref=e271]:
+              - link "Foco de productos" [ref=e272] [cursor=pointer]:
+                - /url: /lightning/o/Foco__c/home
+                - generic [ref=e273]: Foco de productos
+              - button "Foco de productos List" [ref=e277] [cursor=pointer]:
+                - img [ref=e281]
+                - generic [ref=e284]: Foco de productos List
+            - listitem [ref=e285]:
+              - button "Show more navigation items" [ref=e287] [cursor=pointer]:
+                - generic [ref=e288]: More
+                - img [ref=e292]
+                - generic [ref=e295]: Show more navigation items
+            - listitem [ref=e296]:
+              - button "Edit nav items" [ref=e298] [cursor=pointer]:
+                - img [ref=e300]
+                - generic [ref=e303]: Edit nav items
+      - main [ref=e305]
+  - generic:
+    - status

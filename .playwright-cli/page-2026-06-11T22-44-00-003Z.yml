@@ -1,0 +1,31 @@
+# Snapshot: ALFARO SOLANO XINIA MAYELA Account record - Georreferencia field visible
+# TC-02 evidence: field Georeferencing__c (label Georreferencia) confirmed visible
+# in section 'Informacion de direccion' of Customer_Lightning_Page
+# ref=e1179: Georreferencia label
+# ref=e1181: Edit Georreferencia button
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e28]:
+        - generic [ref=e32]:
+          - generic [ref=e56]: Sandbox (Staging)
+    - generic [ref=e158]:
+      - main [ref=e305]:
+        - generic [ref=e352]:
+          - generic [ref=e362]:
+            - heading "Account ALFARO SOLANO XINIA MAYELA" [level=1] [ref=e373]
+          - generic [ref=e443]:
+            - generic [ref=e445]:
+              - generic [ref=e449]:
+                - generic "Tabs" [ref=e451]:
+                  - tabpanel "Details" [ref=e463]:
+                    - generic [ref=e730]:
+                      - heading "Informacion de direccion" [level=3] [ref=e731]
+                      - list [ref=e1152]:
+                        - generic [ref=e1153]:
+                          - generic [ref=e1156]:
+                            - listitem [ref=e1176]:
+                              - generic [ref=e1178]:
+                                - generic [ref=e1179]: Georreferencia
+                                - button "Edit Georreferencia" [ref=e1181] [cursor=pointer]:
+                                  - generic [ref=e1183]: Edit Georreferencia
