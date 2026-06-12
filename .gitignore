@@ -1,0 +1,13 @@
+# Playwright CLI session artifacts
+.playwright-cli/
+
+# Backup files
+*.bak
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Temp files
+*.tmp
