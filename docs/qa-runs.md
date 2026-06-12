@@ -28,7 +28,7 @@ esEnvioGratis = false;
 
 **Controller Apex:**
 ```apex
-// OrderReplicaCreatorController.java L321-322
+// OrderReplicaCreatorController L321-322
 clone.Devolucion_de_dinero__c = inversaDevolucion;
 clone.Envio_gratis__c = envioGratis; // asigna directo del toggle
 ```
