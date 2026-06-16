@@ -1,7 +1,7 @@
 # Infraestructura Mobile QA — VM Android en GCP
 
-> **Última actualización:** 2026-06-03  
-> **Estado general:** ⏳ Emulador verificado — pendiente APKs para crear imagen v4
+> **Última actualización:** 2026-06-16  
+> **Estado general:** ✅ Producción funcionando — imagen `android-qa-base-v7`, script `startup-prod-mobile.sh`
 
 ---
 
@@ -31,13 +31,12 @@ Shutdown VM  (costo $0 en reposo)
 | Recurso | Valor |
 |---|---|
 | Proyecto | `procontacto-claude` |
-| Zona | `us-central1-a` |
-| VM de setup | `android-qa-setup` |
-| Imagen activa | `android-qa-base-v3` |
-| Imagen objetivo | `android-qa-base-v4` ⏳ pendiente |
+| Zona | `us-central1-b` (us-central1-a/c/f con stockout frecuente para n2-standard-4) |
+| Imagen activa | `android-qa-base-v7` |
 | Bucket GCS | `gs://procontacto-claude-qa/` |
 | Machine type | `n2-standard-4` |
 | CPU platform | `Intel Cascade Lake` (requerido para nested virtualization / KVM) |
+| Cloud NAT | Sólo en `us-central1` — VMs con `--no-address` necesitan esta región |
 
 ---
 
@@ -45,126 +44,100 @@ Shutdown VM  (costo $0 en reposo)
 
 | Script | Ruta | Propósito |
 |---|---|---|
-| `setup-emulator.sh` | `gs://procontacto-claude-qa/scripts/setup-emulator.sh` | Inicia emulador, toma screenshot, sube a GCS (sin shutdown — para setup) |
-| `startup-v7-image-based.sh` | `gs://procontacto-claude-qa/scripts/startup-v7-image-based.sh` | Producción: boot + screenshot + shutdown |
-| `appium-install-v2.sh` | `gs://procontacto-claude-qa/scripts/appium-install-v2.sh` | Instala Appium en la VM |
+| `startup-prod-mobile.sh` | `gs://procontacto-claude-qa/scripts/startup-prod-mobile.sh` | **PRODUCCIÓN** — startup script multi-proyecto |
+| `login2.mjs` | `gs://procontacto-claude-qa/scripts/mobile/login2.mjs` | Login Appium (maneja sesión activa desde snapshot) |
+| `test_CMIV2_CMIV2-3526.mjs` | `gs://procontacto-claude-qa/scripts/mobile/` | Suite de TCs por issue |
 
 ---
 
-## Imagen `android-qa-base-v3` — Contenido
+## Imagen `android-qa-base-v7` — Contenido
 
 **Incluye:**
 - Android SDK completo
-- AVD `test_avd` — Android 34, `google_apis_playstore`, `x86_64`
+- AVD `test_avd` — Android 34, `google_apis`, `x86_64`
+- Snapshot `cmiv2_synced` — estado post-sync del org CMIV2 (~15 min data)
 - Appium
 - ADB (`/android/platform-tools/adb`)
-- ADB key en `/root/.android/adbkey` (auto-autoriza el emulador sin diálogos)
-- Nested virtualization habilitada
-
-**NO incluye (APKs — pendiente):**
-- `app_offline.apk` (app custom `appoffline.com.mx`)
-- `salesforce.apk` (Salesforce Mobile)
+- Nested virtualization habilitada en la imagen base
 
 ---
 
-## Patrón Correcto para Iniciar el Emulador
+## Patrón Correcto para Crear VMs (Python API)
 
-> ⚠️ Bug conocido y corregido: `nohup HOME=/root ...` no funciona — nohup trata `HOME=/root` como el comando.  
-> Fix: usar variables de entorno inline sin nohup.
+```python
+from google.cloud import compute_v1
 
-```bash
-# ✅ Correcto
-HOME=/root ANDROID_HOME=/android $ADB kill-server 2>/dev/null || true
-HOME=/root ANDROID_HOME=/android $ADB start-server
-sleep 3
-HOME=/root ANDROID_HOME=/android $EMU -avd test_avd \
-  -no-window -no-audio -gpu swiftshader_indirect \
-  -no-boot-anim -no-metrics -no-snapshot-save \
-  > /tmp/emu.log 2>&1 &
-
-# ❌ Incorrecto (falla silenciosamente)
-nohup HOME=/root ANDROID_HOME=/android $EMU ...
+instance = compute_v1.Instance(
+    name=vm_name,
+    machine_type=f"zones/{zone}/machineTypes/n2-standard-4",
+    # CRÍTICO: habilitar nested virtualization para KVM
+    advanced_machine_features=compute_v1.AdvancedMachineFeatures(
+        enable_nested_virtualization=True,
+    ),
+    disks=[compute_v1.AttachedDisk(
+        boot=True, auto_delete=True,
+        initialize_params=compute_v1.AttachedDiskInitializeParams(
+            source_image="projects/procontacto-claude/global/images/android-qa-base-v7",
+            disk_size_gb=50))],
+    network_interfaces=[compute_v1.NetworkInterface(
+        network="global/networks/default",
+        # Sin access_configs = sin IP externa (usa Cloud NAT)
+    )],
+    metadata=compute_v1.Metadata(items=[
+        compute_v1.Items(key="startup-script-url",
+                         value="gs://procontacto-claude-qa/scripts/startup-prod-mobile.sh"),
+        # ... resto de parámetros del proyecto
+    ]),
+    service_accounts=[compute_v1.ServiceAccount(
+        email="default",
+        scopes=["https://www.googleapis.com/auth/cloud-platform"])],
+)
 ```
 
----
-
-## Estado de la VM
-
-```bash
-# Ver estado actual
-gcloud compute instances list \
-  --project=procontacto-claude \
-  --filter="name=android-qa-setup" \
-  --format="table(name,status,zone)"
-
-# Levantar para setup
-gcloud compute instances start android-qa-setup --zone=us-central1-a
-
-# SSH
-gcloud compute ssh android-qa-setup --zone=us-central1-a
+**IMPORTANTE:** Sin `enable_nested_virtualization=True`, el emulador falla con:
 ```
-
-**Estado al 2026-06-03:** `TERMINATED` (apagada, sin costo)
+ERROR | x86_64 emulation currently requires hardware acceleration!
+CPU acceleration status: KVM requires a CPU that supports vmx or svm
+```
 
 ---
 
 ## Hitos Completados ✅
 
-- [x] Imagen `android-qa-base-v3` creada con SDK + AVD + Appium
-- [x] Nested virtualization habilitada (KVM acceleration)
-- [x] Ciclo rápido verificado: imagen → emulador → screenshot → shutdown en **~4 min**
-- [x] Bug de `nohup` encontrado y corregido
-- [x] Emulador Android 14 confirmado funcionando
-- [x] Screenshot de prueba exitosa: `gs://procontacto-claude-qa/mobile-test/boot_test_20260517_042229.png`
-- [x] ADB detecta `sys.boot_completed=1` en ~50 segundos desde inicio del emulador
+- [x] Imagen `android-qa-base-v7` con snapshot `cmiv2_synced` (org sincronizado ~15 min data)
+- [x] Ciclo completo en producción: VM creada → emulador → snapshot → login → sync → TC → GCS → auto-delete
+- [x] `startup-prod-mobile.sh` con parámetros por metadata (multi-proyecto)
+- [x] `login2.mjs` maneja sesión activa desde snapshot (activity `.MainActivity` != Login)
+- [x] Sync loop detecta "Home detectado" en ~8-9 iteraciones (~3 min desde snapshot)
+- [x] TC scripts en `/opt/qa/` descargados frescos desde GCS en cada run
 
----
+## Bugs Encontrados y Resueltos (2026-06-16)
 
-## Próximos Pasos para `android-qa-base-v4`
+### BUG 1 — `enable_nested_virtualization` faltante ⚠️ CRÍTICO
+**Síntoma:** `adb shell getprop sys.boot_completed` retorna `''` eternamente; emu.log muestra `KVM requires hardware acceleration`.  
+**Causa:** VMs creadas sin `AdvancedMachineFeatures.enable_nested_virtualization=True`.  
+**Efecto:** Emulador no arranca. Todos los runs fallaban silenciosamente.  
+**Fix:** Siempre crear VMs con `AdvancedMachineFeatures(enable_nested_virtualization=True)` via Python API, o `--enable-nested-virtualization` en gcloud CLI.
 
-### 1. Obtener APKs ⏳ — bloqueante
-- `app_offline.apk` — app custom de `appoffline.com.mx` → **Axel lo provee**
-- `salesforce.apk` — Salesforce Mobile → **Axel confirma: APK directo o Play Store**
+### BUG 2 — `login2.mjs` asume pantalla de login
+**Síntoma:** `No encontré la ventana de login de Salesforce` cuando el snapshot carga con sesión activa.  
+**Causa:** `gotoSF()` retorna `false` cuando no hay webview de login → throw sin verificar actividad actual.  
+**Fix:** Antes y después de `gotoSF()`, verificar `getCurrentActivity()` — si no incluye "Login", el usuario ya está logueado.
 
-### 2. Subir APKs a GCS
-```bash
-gsutil cp app_offline.apk gs://procontacto-claude-qa/apks/
-gsutil cp salesforce.apk gs://procontacto-claude-qa/apks/
-```
+### BUG 3 — `adb` no en PATH para TC scripts
+**Síntoma:** `adb: not found` en los scripts de TC cuando usan `execSync('adb ...')`.  
+**Causa:** `startup-prod-mobile.sh` define `ADB=/android/platform-tools/adb` pero no exporta PATH.  
+**Fix:** Agregar `export PATH="/android/platform-tools:/android/emulator:$PATH"` al inicio del script.
 
-### 3. Instalar APKs en el emulador activo
-```bash
-# Levantar VM y SSH
-gcloud compute instances start android-qa-setup --zone=us-central1-a
-gcloud compute ssh android-qa-setup --zone=us-central1-a
+### BUG 4 — Race condition package manager
+**Síntoma:** `monkey: No activities found to run` cuando el emulador bootea rápido.  
+**Causa:** El monkey corre antes de que el Activity Manager indexe el paquete.  
+**Fix:** Loop de verificación `pm list packages | grep $PKG` (hasta 60s) antes del monkey.
 
-# Descargar e instalar APKs
-sudo gsutil cp gs://procontacto-claude-qa/apks/app_offline.apk /tmp/
-sudo HOME=/root ANDROID_HOME=/android /android/platform-tools/adb install /tmp/app_offline.apk
+## Consideraciones de Seguridad
 
-sudo gsutil cp gs://procontacto-claude-qa/apks/salesforce.apk /tmp/
-sudo HOME=/root ANDROID_HOME=/android /android/platform-tools/adb install /tmp/salesforce.apk
-```
-
-### 4. Guardar snapshot del AVD
-```bash
-HOME=/root ANDROID_HOME=/android /android/platform-tools/adb emu avd snapshot save qa_with_apps
-```
-
-### 5. Crear imagen `android-qa-base-v4`
-```bash
-gcloud compute instances stop android-qa-setup --zone=us-central1-a
-
-gcloud compute images create android-qa-base-v4 \
-  --source-disk=android-qa-setup \
-  --source-disk-zone=us-central1-a \
-  --family=android-qa
-```
-
-### 6. Escribir test Appium
-- Path en VM: `/opt/tests/salesforce_login.js`
-- Objetivo: login con usuario/password en Salesforce Mobile
-- Ver también: Permission Set "QA MFA Waiver" en Salesforce ⏳ pendiente confirmar con equipo
+⚠️ **`set -x` expone credenciales en GCE Serial Console**: `SF_PASS=...` aparece en texto claro.  
+Recomendación: usar Secret Manager + cargar en runtime sin exponer en `set -x`.
 
 ---
 
@@ -174,20 +147,10 @@ gcloud compute images create android-qa-base-v4 \
 Se usa `-no-snapshot-save` para evitar corrupción si el emulador es matado abruptamente.
 El snapshot se guarda UNA sola vez durante el setup de la imagen, antes de crearla.
 
-**¿Por qué no hay APKs en la imagen v3?**  
-Se separó el setup del SDK/AVD de la instalación de apps para tener una base limpia
-y poder recrear la imagen v4 fácilmente cuando cambien los APKs.
+**¿Por qué `cmiv2_synced` y no `qa_with_apps`?**  
+El snapshot incluye datos del org ya sincronizados (post-login, post-sync). Esto reduce
+el tiempo de sync en producción de ~15 min a ~3 min.
 
-**Credenciales MFA en Salesforce Mobile**  
-Para que el agente pueda loguearse sin intervención humana, se necesita
-un Permission Set que exima al usuario QA del MFA. Consultar con el equipo de SF.
-
----
-
-## Bloqueantes Pendientes
-
-| Item | Responsable | Estado |
-|---|---|---|
-| APK de App Offline (`appoffline.com.mx`) | Axel | ⏳ Pendiente |
-| APK de Salesforce Mobile | Axel | ⏳ Pendiente (APK o Play Store?) |
-| Permission Set "QA MFA Waiver" en Salesforce | Axel + equipo SF | ⏳ Pendiente confirmar |
+**Watchdog de 60 min**  
+Un proceso background mata la VM si el script no termina en 60 min. Esto evita VMs
+"stuck" que seguirían cobrando. Se cancela en el paso 7 si la eliminación normal funciona.
