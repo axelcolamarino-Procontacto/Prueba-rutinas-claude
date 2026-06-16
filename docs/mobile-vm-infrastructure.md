@@ -1,7 +1,7 @@
 # Infraestructura Mobile QA — VM Android en GCP
 
-> **Última actualización:** 2026-06-03  
-> **Estado general:** ⏳ Emulador verificado — pendiente APKs para crear imagen v4
+> **Última actualización:** 2026-06-16  
+> **Estado general:** ⚠️ Bug activo en startup script — Pixel Launcher ANR bloquea sync
 
 ---
 
@@ -33,8 +33,7 @@ Shutdown VM  (costo $0 en reposo)
 | Proyecto | `procontacto-claude` |
 | Zona | `us-central1-a` |
 | VM de setup | `android-qa-setup` |
-| Imagen activa | `android-qa-base-v3` |
-| Imagen objetivo | `android-qa-base-v4` ⏳ pendiente |
+| Imagen activa | `android-qa-base-v7` |
 | Bucket GCS | `gs://procontacto-claude-qa/` |
 | Machine type | `n2-standard-4` |
 | CPU platform | `Intel Cascade Lake` (requerido para nested virtualization / KVM) |
@@ -45,25 +44,22 @@ Shutdown VM  (costo $0 en reposo)
 
 | Script | Ruta | Propósito |
 |---|---|---|
+| `startup-prod-mobile.sh` | `gs://procontacto-claude-qa/scripts/startup-prod-mobile.sh` | Producción: boot + login + sync + tests + shutdown |
 | `setup-emulator.sh` | `gs://procontacto-claude-qa/scripts/setup-emulator.sh` | Inicia emulador, toma screenshot, sube a GCS (sin shutdown — para setup) |
-| `startup-v7-image-based.sh` | `gs://procontacto-claude-qa/scripts/startup-v7-image-based.sh` | Producción: boot + screenshot + shutdown |
 | `appium-install-v2.sh` | `gs://procontacto-claude-qa/scripts/appium-install-v2.sh` | Instala Appium en la VM |
 
 ---
 
-## Imagen `android-qa-base-v3` — Contenido
+## Imagen `android-qa-base-v7` — Contenido
 
 **Incluye:**
 - Android SDK completo
-- AVD `test_avd` — Android 34, `google_apis_playstore`, `x86_64`
-- Appium
+- AVD `test_avd` — Android 34, `google_apis` userdebug (`ro.debuggable=1`)
+- Appium 3.4.2, UiAutomator2 7.6.0
 - ADB (`/android/platform-tools/adb`)
-- ADB key en `/root/.android/adbkey` (auto-autoriza el emulador sin diálogos)
-- Nested virtualization habilitada
-
-**NO incluye (APKs — pendiente):**
-- `app_offline.apk` (app custom `appoffline.com.mx`)
-- `salesforce.apk` (Salesforce Mobile)
+- CG Cloud App Offline instalada y cuenta logueada (`noReset: true`)
+- Cloud NAT IP confiada en cada org (34.135.241.169) → sin MFA
+- Nested virtualization habilitada (KVM)
 
 ---
 
@@ -104,67 +100,61 @@ gcloud compute instances start android-qa-setup --zone=us-central1-a
 gcloud compute ssh android-qa-setup --zone=us-central1-a
 ```
 
-**Estado al 2026-06-03:** `TERMINATED` (apagada, sin costo)
+**Estado al 2026-06-16:** `TERMINATED` (apagada, sin costo)
+
+---
+
+## Bug Activo — Pixel Launcher ANR durante sync (2026-06-16)
+
+**Síntoma:** Al crear una VM efímera con `android-qa-base-v7` (sin imagen pre-sincronizada del proyecto), el emulador muestra el diálogo "Pixel Launcher isn't responding" durante la fase de sync de datos del org. El `startup-prod-mobile.sh` no detecta ni descarta este diálogo, y el sync loop termina en SYNC_TIMEOUT.
+
+**Reproducido en:** 3 VMs consecutivas del run CMIV2-3526 (2026-06-16).
+
+**Causa raíz:** El sync de datos completo (~15 min) genera carga en el emulador que provoca el ANR del Pixel Launcher. El diálogo aparece mientras `login2.mjs` aún está ejecutando, antes de que el sync loop arranque. `uiautomator dump` no lo detecta correctamente en ese contexto.
+
+**Screenshot del bug:** `gs://procontacto-claude-qa/mobile-test/results/CMIV2_CMIV2-3526_20260616_143630.png`
+
+**Fix pendiente en `startup-prod-mobile.sh`:**
+Agregar después del paso de unlock (línea ~109) y antes del sync loop:
+```bash
+# Dismissar diálogos ANR que pueden aparecer durante el boot/login
+# Tap en coordenadas del botón "Wait" en 320×640 (aparece ~y=391)
+for i in $(seq 1 10); do
+  $ADB shell input tap 160 391 2>/dev/null || true
+  sleep 2
+done
+```
+
+**Workaround temporal:** Usar imagen pre-sincronizada del proyecto (`create_snapshot=true` en primer run con sync completo).
+
+**Issue relacionado:** CMIV2-3526 — todos los TCs quedaron en REVIEW por esta causa.
 
 ---
 
 ## Hitos Completados ✅
 
-- [x] Imagen `android-qa-base-v3` creada con SDK + AVD + Appium
+- [x] Imagen `android-qa-base-v7` creada con CG Cloud + cuenta logueada
 - [x] Nested virtualization habilitada (KVM acceleration)
-- [x] Ciclo rápido verificado: imagen → emulador → screenshot → shutdown en **~4 min**
+- [x] Cloud NAT con IP fija (`34.135.241.169`) → sin MFA en todos los orgs
 - [x] Bug de `nohup` encontrado y corregido
 - [x] Emulador Android 14 confirmado funcionando
-- [x] Screenshot de prueba exitosa: `gs://procontacto-claude-qa/mobile-test/boot_test_20260517_042229.png`
 - [x] ADB detecta `sys.boot_completed=1` en ~50 segundos desde inicio del emulador
+- [x] Pipeline de test mobile E2E funcionando: CMIV2 Productos Iniciales (TC-01/TC-02)
+- [x] Auto-eliminación de VM al terminar (costo $0 en reposo)
 
 ---
 
-## Próximos Pasos para `android-qa-base-v4`
+## Próximos Pasos — Infra
 
-### 1. Obtener APKs ⏳ — bloqueante
-- `app_offline.apk` — app custom de `appoffline.com.mx` → **Axel lo provee**
-- `salesforce.apk` — Salesforce Mobile → **Axel confirma: APK directo o Play Store**
+### 1. Fix Pixel Launcher ANR (bloqueante para sync completo)
+Ver sección "Bug Activo" arriba. Fix en `startup-prod-mobile.sh`.
 
-### 2. Subir APKs a GCS
+### 2. Imagen pre-sincronizada por proyecto (opcional)
+Para sync rápido (~2 min vs ~15 min), crear imagen post-sync por proyecto:
 ```bash
-gsutil cp app_offline.apk gs://procontacto-claude-qa/apks/
-gsutil cp salesforce.apk gs://procontacto-claude-qa/apks/
+gcloud compute instances create qa-mobile-sync-cmiv2 \
+  --metadata=create_snapshot=true,snapshot_image_name=android-qa-cmiv2-synced-v1,...
 ```
-
-### 3. Instalar APKs en el emulador activo
-```bash
-# Levantar VM y SSH
-gcloud compute instances start android-qa-setup --zone=us-central1-a
-gcloud compute ssh android-qa-setup --zone=us-central1-a
-
-# Descargar e instalar APKs
-sudo gsutil cp gs://procontacto-claude-qa/apks/app_offline.apk /tmp/
-sudo HOME=/root ANDROID_HOME=/android /android/platform-tools/adb install /tmp/app_offline.apk
-
-sudo gsutil cp gs://procontacto-claude-qa/apks/salesforce.apk /tmp/
-sudo HOME=/root ANDROID_HOME=/android /android/platform-tools/adb install /tmp/salesforce.apk
-```
-
-### 4. Guardar snapshot del AVD
-```bash
-HOME=/root ANDROID_HOME=/android /android/platform-tools/adb emu avd snapshot save qa_with_apps
-```
-
-### 5. Crear imagen `android-qa-base-v4`
-```bash
-gcloud compute instances stop android-qa-setup --zone=us-central1-a
-
-gcloud compute images create android-qa-base-v4 \
-  --source-disk=android-qa-setup \
-  --source-disk-zone=us-central1-a \
-  --family=android-qa
-```
-
-### 6. Escribir test Appium
-- Path en VM: `/opt/tests/salesforce_login.js`
-- Objetivo: login con usuario/password en Salesforce Mobile
-- Ver también: Permission Set "QA MFA Waiver" en Salesforce ⏳ pendiente confirmar con equipo
 
 ---
 
@@ -174,13 +164,10 @@ gcloud compute images create android-qa-base-v4 \
 Se usa `-no-snapshot-save` para evitar corrupción si el emulador es matado abruptamente.
 El snapshot se guarda UNA sola vez durante el setup de la imagen, antes de crearla.
 
-**¿Por qué no hay APKs en la imagen v3?**  
-Se separó el setup del SDK/AVD de la instalación de apps para tener una base limpia
-y poder recrear la imagen v4 fácilmente cuando cambien los APKs.
-
-**Credenciales MFA en Salesforce Mobile**  
-Para que el agente pueda loguearse sin intervención humana, se necesita
-un Permission Set que exima al usuario QA del MFA. Consultar con el equipo de SF.
+**Cloud NAT — anti-MFA**  
+Router `qa-router` (us-central1) + IP estática `qa-nat-ip` = `34.135.241.169`.
+Todas las VMs se crean `--no-address` → egreso por Cloud NAT con esa IP → la IP está
+confiada en cada org → CG Cloud no pide MFA.
 
 ---
 
@@ -188,6 +175,5 @@ un Permission Set que exima al usuario QA del MFA. Consultar con el equipo de SF
 
 | Item | Responsable | Estado |
 |---|---|---|
-| APK de App Offline (`appoffline.com.mx`) | Axel | ⏳ Pendiente |
-| APK de Salesforce Mobile | Axel | ⏳ Pendiente (APK o Play Store?) |
-| Permission Set "QA MFA Waiver" en Salesforce | Axel + equipo SF | ⏳ Pendiente confirmar |
+| Fix ANR Pixel Launcher en startup-prod-mobile.sh | QA Agent / Axel | ⚠️ Activo |
+| Imagen pre-sincronizada por proyecto | QA Agent | ⏳ Pendiente |
