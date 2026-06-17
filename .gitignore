@@ -1,0 +1,5 @@
+# Playwright CLI session artifacts (console logs, page snapshots)
+.playwright-cli/
+
+# Temporary files
+/tmp/
