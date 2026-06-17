@@ -1,6 +1,6 @@
 # Infraestructura Mobile QA — VM Android en GCP
 
-> **Última actualización:** 2026-06-03  
+> **Última actualización:** 2026-06-17  
 > **Estado general:** ⏳ Emulador verificado — pendiente APKs para crear imagen v4
 
 ---
