@@ -366,6 +366,25 @@ def get_graph(project: str = Query("ALL")):
         kg_rows    = run(kg_query)
         skill_rows = run(skills_query)
         graph      = build_graph(kg_rows, skill_rows)
+
+        # Sembrar TODOS los proyectos conocidos desde config_canales (para que aparezcan aunque
+        # todavía no tengan conocimiento aprendido en el KG — ej proyectos recién onboardeados).
+        if project == "ALL":
+            try:
+                existing = {n["id"] for n in graph["nodes"]}
+                seeded = 0
+                for r in client.query(
+                    f"SELECT DISTINCT project FROM `{PROJECT_ID}.{DATASET}.config_canales` WHERE project IS NOT NULL"
+                ).result():
+                    p = r["project"]
+                    if p and p not in existing:
+                        graph["nodes"].append({"id": p, "name": p, "type": "project",
+                                               "val": 18, "is_new": False, "empty": True})
+                        seeded += 1
+                graph["seeded_projects"] = seeded
+            except Exception:
+                pass
+
         graph["meta"] = {
             "project": project, "kg_rows": len(kg_rows),
             "skill_rows": len(skill_rows), "demo": False

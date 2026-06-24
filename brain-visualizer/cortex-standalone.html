@@ -9,6 +9,9 @@
   body { background:#060c1a; color:#c8d8f0; font-family:'Segoe UI',system-ui,sans-serif; overflow:hidden; height:100vh; }
   #graph-3d, #graph-2d { position:absolute; inset:0; }
   #graph-2d { display:none; }
+  #graph-loading { position:absolute; inset:56px 0 0 0; z-index:80; background:#060c1a;
+    display:flex; align-items:center; justify-content:center; flex-direction:column;
+    color:#5a7a98; font-size:13px; letter-spacing:.5px; }
 
   /* Topbar */
   #topbar {
@@ -130,6 +133,7 @@
 <body>
 <div id="graph-3d"></div>
 <div id="graph-2d"></div>
+<div id="graph-loading"><div class="cost-spinner"></div>Cargando cerebro…</div>
 
 <div id="costs-view">
   <div class="cost-head">
@@ -286,7 +290,8 @@ function computeFiltered() {
 
   const ids = new Set()
   links.forEach(l => { ids.add(l.source?.id||l.source); ids.add(l.target?.id||l.target) })
-  let nodes = gData.nodes.filter(n => ids.has(n.id))
+  // incluí también los nodos de PROYECTO aunque no tengan links (proyectos sin KG aún) cuando se ven todos
+  let nodes = gData.nodes.filter(n => ids.has(n.id) || (proj==='ALL' && n.type==='project'))
   if (proj !== 'ALL') nodes = nodes.filter(n => n.project === proj || n.type === 'project')
 
   return { nodes, links }
@@ -697,6 +702,7 @@ async function boot(){
     fillProjects([...new Set(DEMO.nodes.map(x=>x.project))])
   }
   render()
+  const gl=document.getElementById('graph-loading'); if(gl) gl.style.display='none'   // cargó -> sacar spinner del cerebro
 }
 boot()
 </script>
