@@ -122,6 +122,9 @@
   .usd { color:#b8e0c8; } .usd.total { color:#66ffa6; font-weight:700; }
   .cost-empty { color:#5a7a98; font-size:13px; padding:44px; text-align:center; line-height:1.8; }
   .cost-empty code { color:#7aaac8; background:rgba(255,255,255,0.05); padding:1px 6px; border-radius:4px; }
+  .cost-spinner { width:34px; height:34px; margin:0 auto 14px; border:3px solid rgba(100,150,255,0.15);
+    border-top-color:#4fc3f7; border-radius:50%; animation:cost-spin .8s linear infinite; }
+  @keyframes cost-spin { to { transform:rotate(360deg); } }
 </style>
 </head>
 <body>
@@ -143,7 +146,7 @@
   <div class="tabs">
     <button class="tab active" id="tab-3d" onclick="switchTab('3d')">3D</button>
     <button class="tab"        id="tab-2d" onclick="switchTab('2d')">2D</button>
-    <button class="tab"        id="tab-costos" onclick="switchTab('costos')">💲 Costos</button>
+    <button class="tab"        id="tab-costos" onclick="switchTab('costos')">Costos</button>
   </div>
   <div class="chip"><strong id="sn">—</strong>&nbsp;entidades</div>
   <div class="chip"><strong id="sl">—</strong>&nbsp;relaciones</div>
@@ -338,6 +341,13 @@ function switchTab(tab) {
 function fmtUSD(v){ return (v==null) ? '—' : '$'+Number(v).toFixed(Math.abs(v)<1?4:2) }
 
 async function loadCosts(){
+  const body=document.getElementById('cost-body')
+  if(!body.querySelector('table')){   // primer load (no en los auto-refresh) -> spinner, evita el estado vacío "$—"
+    body.innerHTML = `<div class="cost-empty"><div class="cost-spinner"></div>Cargando costos…</div>`
+    document.getElementById('cost-grand').textContent='…'
+    document.getElementById('cost-runs').textContent='…'
+    document.getElementById('cost-refresh').textContent='cargando…'
+  }
   try {
     const d = await tryFetch(`${BACKEND}/api/costs?limit=500`, 20000)
     costsData = d
