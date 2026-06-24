@@ -88,17 +88,62 @@
   #dclose { position:absolute; top:10px; right:12px; background:none; border:none; color:#4a6070; font-size:16px; cursor:pointer; }
   #dclose:hover { color:#90b0c8; }
   ::-webkit-scrollbar { width:4px; } ::-webkit-scrollbar-thumb { background:rgba(100,150,255,0.2); border-radius:2px; }
+
+  /* ── Pestaña Costos ──────────────────────────────────────────────────────── */
+  #costs-view { position:absolute; top:56px; left:0; right:0; bottom:0; display:none;
+    overflow-y:auto; padding:22px 26px 40px; z-index:95; background:#060c1a; }
+  #costs-view.show { display:block; }
+  .cost-head { display:flex; align-items:center; gap:14px; margin-bottom:18px; flex-wrap:wrap; }
+  .cost-kpi { background:rgba(79,195,247,0.06); border:1px solid rgba(79,195,247,0.18);
+    border-radius:10px; padding:9px 16px; }
+  .cost-kpi .v { font-size:21px; font-weight:700; color:#dceeff; line-height:1.1; }
+  .cost-kpi .l { font-size:10px; color:#6a8aa8; letter-spacing:.6px; }
+  .cost-kpi.total .v { color:#66ffa6; }
+  #cost-search { flex:1; min-width:180px; max-width:340px; background:rgba(255,255,255,0.04);
+    border:1px solid rgba(100,150,255,0.2); border-radius:8px; color:#cfe2ff; font-size:13px; padding:9px 13px; }
+  #cost-search::placeholder { color:#4a6a90; }
+  .cost-refresh { font-size:11px; color:#4a6a90; margin-left:auto; white-space:nowrap; }
+  table.cost-tbl { width:100%; border-collapse:collapse; font-size:12.5px; }
+  table.cost-tbl th { text-align:right; color:#5a7a98; font-size:10px; text-transform:uppercase;
+    letter-spacing:.6px; padding:8px 11px; border-bottom:1px solid rgba(100,150,255,0.15);
+    position:sticky; top:0; background:#060c1a; z-index:1; }
+  table.cost-tbl th.l, table.cost-tbl td.l { text-align:left; }
+  table.cost-tbl td { padding:9px 11px; text-align:right; border-bottom:1px solid rgba(100,150,255,0.06); color:#9fc0dc; }
+  tr.proj-row { cursor:pointer; } tr.proj-row:hover { background:rgba(79,195,247,0.06); }
+  tr.proj-row td { font-weight:600; color:#dceeff; }
+  td.proj-name { color:#4fc3f7 !important; }
+  .caret { display:inline-block; width:11px; color:#4a6a90; transition:transform .15s; }
+  tr.exec-row > td { padding:0 0 0 18px; background:rgba(255,255,255,0.015); }
+  tr.exec-row table.cost-tbl td { font-size:11px; color:#80a0bc; border-bottom:1px solid rgba(100,150,255,0.04); }
+  .vt { padding:1px 7px; border-radius:10px; font-size:9.5px; font-weight:700; }
+  .vt.PASS { background:rgba(102,187,106,0.15); color:#88e0a0; }
+  .vt.FAIL { background:rgba(239,83,80,0.15); color:#ff8a86; }
+  .vt.REVIEW { background:rgba(255,179,0,0.15); color:#ffd166; }
+  .usd { color:#b8e0c8; } .usd.total { color:#66ffa6; font-weight:700; }
+  .cost-empty { color:#5a7a98; font-size:13px; padding:44px; text-align:center; line-height:1.8; }
+  .cost-empty code { color:#7aaac8; background:rgba(255,255,255,0.05); padding:1px 6px; border-radius:4px; }
 </style>
 </head>
 <body>
 <div id="graph-3d"></div>
 <div id="graph-2d"></div>
 
+<div id="costs-view">
+  <div class="cost-head">
+    <div class="cost-kpi total"><div class="v" id="cost-grand">$—</div><div class="l">GASTO TOTAL</div></div>
+    <div class="cost-kpi"><div class="v" id="cost-runs">—</div><div class="l">EJECUCIONES</div></div>
+    <input id="cost-search" placeholder="🔎 Buscar issue (ej: PDDARTEL-69)…" oninput="renderCosts()">
+    <span class="cost-refresh" id="cost-refresh">—</span>
+  </div>
+  <div id="cost-body"></div>
+</div>
+
 <div id="topbar">
   <div id="brain-title">🧠 <span>Cortex</span></div>
   <div class="tabs">
     <button class="tab active" id="tab-3d" onclick="switchTab('3d')">3D</button>
     <button class="tab"        id="tab-2d" onclick="switchTab('2d')">2D</button>
+    <button class="tab"        id="tab-costos" onclick="switchTab('costos')">💲 Costos</button>
   </div>
   <div class="chip"><strong id="sn">—</strong>&nbsp;entidades</div>
   <div class="chip"><strong id="sl">—</strong>&nbsp;relaciones</div>
@@ -219,6 +264,7 @@ let gFiltered = DEMO
 let Graph3    = null
 let Graph2    = null
 let activeTab = '3d'
+let costsData = null, costsExpanded = new Set(), _costsTimer = null
 
 // Capas activas — cerebro completo.
 const VISIBLE_RELATIONS = ['contains_module', 'has_submodule', 'has_open_bug', 'covers']
@@ -267,15 +313,95 @@ function updateStats() {
 
 function switchTab(tab) {
   activeTab = tab
-  document.getElementById('graph-3d').style.display = tab==='3d'?'block':'none'
-  document.getElementById('graph-2d').style.display = tab==='2d'?'block':'none'
+  const isCosts = tab==='costos'
+  document.getElementById('graph-3d').style.display = (tab==='3d')?'block':'none'
+  document.getElementById('graph-2d').style.display = (tab==='2d')?'block':'none'
+  document.getElementById('costs-view').classList.toggle('show', isCosts)
   document.getElementById('tab-3d').classList.toggle('active', tab==='3d')
   document.getElementById('tab-2d').classList.toggle('active', tab==='2d')
+  document.getElementById('tab-costos').classList.toggle('active', isCosts)
+  // chrome del grafo (leyenda/minimap) molesta sobre la vista de costos → ocultar ahí
+  ;['legend','minimap'].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display = isCosts?'none':'' })
   closeD()
+  if (isCosts) {
+    loadCosts()
+    if (!_costsTimer) _costsTimer = setInterval(()=>{ if(activeTab==='costos') loadCosts() }, 30000)  // auto-refresh
+    return
+  }
+  if (_costsTimer) { clearInterval(_costsTimer); _costsTimer = null }
   // Si el grafo ya existe, solo mostrarlo (no re-renderizar para no perder posiciones)
   if ((tab==='3d' && Graph3) || (tab==='2d' && Graph2)) { startMinimap(); return }
   render()
 }
+
+// ── Costos: carga + render de tabla dinámica (auto-refresh cada 30s) ──────────
+function fmtUSD(v){ return (v==null) ? '—' : '$'+Number(v).toFixed(Math.abs(v)<1?4:2) }
+
+async function loadCosts(){
+  try {
+    const d = await tryFetch(`${BACKEND}/api/costs?limit=500`, 20000)
+    costsData = d
+    document.getElementById('cost-refresh').textContent = (d&&d.ok?'✓ ':'⚠ ') + new Date().toLocaleTimeString()
+  } catch(e){
+    document.getElementById('cost-refresh').textContent = '✗ sin backend'
+    if(!costsData) costsData = {ok:false}
+  }
+  renderCosts()
+}
+
+function execTable(rows, showProj){
+  if(!rows.length) return `<div class="cost-empty">Sin ejecuciones.</div>`
+  let h = `<table class="cost-tbl"><thead><tr><th class="l">Issue</th>${showProj?'<th class="l">Proy</th>':''}`
+        + `<th class="l">Plat</th><th class="l">Verdict</th><th>Dur</th><th>Calls</th><th>DeepSeek</th><th>Cloud Run</th><th>Total</th><th class="l">Fecha</th></tr></thead><tbody>`
+  for(const e of rows){
+    const v=(e.verdict||'').toUpperCase()
+    h += `<tr><td class="l" style="color:#cfe2ff">${e.issue||'—'}</td>${showProj?`<td class="l">${e.project||''}</td>`:''}`
+       + `<td class="l">${e.platform||''}</td><td class="l">${v?`<span class="vt ${v}">${v}</span>`:'—'}</td>`
+       + `<td>${e.duration_s?Math.round(e.duration_s)+'s':'—'}</td><td>${e.deepseek_calls??'—'}</td>`
+       + `<td class="usd">${fmtUSD(e.deepseek_usd)}</td><td class="usd">${fmtUSD(e.cloudrun_usd)}</td>`
+       + `<td class="usd total">${fmtUSD(e.total_usd)}</td><td class="l">${e.ts?new Date(e.ts).toLocaleString():'—'}</td></tr>`
+  }
+  return h+`</tbody></table>`
+}
+
+function renderCosts(){
+  const body=document.getElementById('cost-body'), grand=document.getElementById('cost-grand'), runs=document.getElementById('cost-runs')
+  if(!costsData || !costsData.ok){
+    grand.textContent='$0'; runs.textContent='0'
+    body.innerHTML = `<div class="cost-empty">Aún no hay datos de costos.<br>Se llenan a medida que el runner ejecuta issues — el agente escribe una fila por ejecución en <code>qa_agent.run_costs</code>.</div>`
+    return
+  }
+  grand.textContent = fmtUSD(costsData.grand_total_usd)
+  runs.textContent  = costsData.total_runs||0
+  const q=(document.getElementById('cost-search').value||'').trim().toUpperCase()
+
+  if(q){   // modo búsqueda: ejecuciones cuyo issue matchea
+    const rows=(costsData.executions||[]).filter(e=>(e.issue||'').toUpperCase().includes(q))
+    body.innerHTML = `<div style="font-size:11px;color:#6a8aa8;margin-bottom:8px">${rows.length} ejecución(es) para "${q}"</div>` + execTable(rows,true)
+    return
+  }
+  // modo agregado por proyecto (comparación), expandible a ejecuciones
+  let html = `<table class="cost-tbl"><thead><tr><th class="l">Proyecto</th><th>Runs</th>`
+    + `<th>DeepSeek</th><th>Cloud Run</th><th>Gemini</th><th>BQ</th><th>VM</th><th>$/run</th><th>Total</th><th class="l">Último</th></tr></thead><tbody>`
+  for(const p of (costsData.by_project||[])){
+    const open=costsExpanded.has(p.project)
+    html += `<tr class="proj-row" onclick="toggleProj('${p.project}')"><td class="l proj-name">`
+      + `<span class="caret" style="transform:rotate(${open?90:0}deg)">▶</span> ${p.project}</td>`
+      + `<td>${p.runs}</td><td class="usd">${fmtUSD(p.deepseek_usd)}</td><td class="usd">${fmtUSD(p.cloudrun_usd)}</td>`
+      + `<td class="usd">${fmtUSD(p.gemini_usd)}</td><td class="usd">${fmtUSD(p.bigquery_usd)}</td><td class="usd">${fmtUSD(p.vm_usd)}</td>`
+      + `<td class="usd">${fmtUSD(p.avg_usd)}</td><td class="usd total">${fmtUSD(p.total_usd)}</td>`
+      + `<td class="l">${p.last_run?new Date(p.last_run).toLocaleString():'—'}</td></tr>`
+    if(open){
+      const ex=(costsData.executions||[]).filter(e=>e.project===p.project)
+      html += `<tr class="exec-row"><td colspan="10">${execTable(ex,false)}</td></tr>`
+    }
+  }
+  html += `</tbody></table>`
+  body.innerHTML = (costsData.by_project&&costsData.by_project.length) ? html
+    : `<div class="cost-empty">Aún no hay datos de costos. Se llenan a medida que el runner ejecuta issues.</div>`
+}
+
+function toggleProj(p){ costsExpanded.has(p)?costsExpanded.delete(p):costsExpanded.add(p); renderCosts() }
 
 // ── Init 3D ───────────────────────────────────────────────────────────────────
 function initGraph3D() {

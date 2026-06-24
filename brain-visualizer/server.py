@@ -415,6 +415,49 @@ def get_projects():
         return ["CMIV2", "SOLO"]
 
 
+@app.get("/api/costs")
+def get_costs(project: str = Query("ALL"), limit: int = Query(300)):
+    """Ledger de costos (Capa 1). Devuelve agregados POR PROYECTO + ejecuciones recientes (expand/búsqueda).
+    Lee qa_agent.run_costs (estimación in-app). Si la tabla no existe / sin datos -> ok:false, listas vacías."""
+    try:
+        from google.cloud import bigquery
+        from google.cloud.bigquery import QueryJobConfig, ScalarQueryParameter
+        client = bigquery.Client(project=PROJECT_ID)
+
+        by_proj = [dict(r) for r in client.query(f"""
+            SELECT project,
+              COUNT(*) AS runs,
+              ROUND(SUM(total_usd), 4)     AS total_usd,
+              ROUND(SUM(deepseek_usd), 4)  AS deepseek_usd,
+              ROUND(SUM(cloudrun_usd), 4)  AS cloudrun_usd,
+              ROUND(SUM(gemini_usd), 4)    AS gemini_usd,
+              ROUND(SUM(bigquery_usd), 4)  AS bigquery_usd,
+              ROUND(SUM(vm_usd), 4)        AS vm_usd,
+              ROUND(AVG(total_usd), 4)     AS avg_usd,
+              MAX(ts)                      AS last_run
+            FROM `{PROJECT_ID}.{DATASET}.run_costs`
+            GROUP BY project ORDER BY total_usd DESC
+        """).result()]
+
+        proj_filter = "" if project == "ALL" else "WHERE project = @project"
+        cfg = None if project == "ALL" else QueryJobConfig(
+            query_parameters=[ScalarQueryParameter("project", "STRING", project)])
+        execs = [dict(r) for r in client.query(f"""
+            SELECT run_id, ts, project, issue, platform, verdict, duration_s,
+                   deepseek_calls, deepseek_usd, cloudrun_usd, total_usd
+            FROM `{PROJECT_ID}.{DATASET}.run_costs`
+            {proj_filter}
+            ORDER BY ts DESC LIMIT {int(limit)}
+        """, job_config=cfg).result()]
+
+        grand = round(sum((p.get("total_usd") or 0) for p in by_proj), 4)
+        return {"by_project": by_proj, "executions": execs,
+                "grand_total_usd": grand, "total_runs": sum(p["runs"] for p in by_proj), "ok": True}
+    except Exception as e:
+        return {"by_project": [], "executions": [], "grand_total_usd": 0,
+                "total_runs": 0, "ok": False, "error": str(e)}
+
+
 # ── Demo data ─────────────────────────────────────────────────────────────────
 
 def _demo_nodes():
