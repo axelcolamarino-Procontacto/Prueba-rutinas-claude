@@ -374,11 +374,13 @@ def get_graph(project: str = Query("ALL")):
                 existing = {n["id"] for n in graph["nodes"]}
                 seeded = 0
                 for r in client.query(
-                    f"SELECT DISTINCT project FROM `{PROJECT_ID}.{DATASET}.config_canales` WHERE project IS NOT NULL"
+                    f"SELECT project, ANY_VALUE(project_name) AS pname FROM `{PROJECT_ID}.{DATASET}.config_canales` "
+                    f"WHERE project IS NOT NULL GROUP BY project"
                 ).result():
-                    p = r["project"]
+                    p = r["project"]; pname = r["pname"]
                     if p and p not in existing:
-                        graph["nodes"].append({"id": p, "name": p, "type": "project",
+                        label = f"{p} · {pname}" if (pname and pname != p) else p   # ej "IMPSLJ · SALJAMEX"
+                        graph["nodes"].append({"id": p, "name": label, "type": "project",
                                                "val": 18, "is_new": False, "empty": True})
                         seeded += 1
                 graph["seeded_projects"] = seeded
