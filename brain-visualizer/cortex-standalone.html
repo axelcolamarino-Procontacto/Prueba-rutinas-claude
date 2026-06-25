@@ -139,6 +139,7 @@
   <div class="cost-head">
     <div class="cost-kpi total"><div class="v" id="cost-grand">$—</div><div class="l">GASTO TOTAL</div></div>
     <div class="cost-kpi"><div class="v" id="cost-runs">—</div><div class="l">EJECUCIONES</div></div>
+    <div class="cost-kpi" id="ds-kpi" title="Saldo restante de la cuenta DeepSeek (API /user/balance)"><div class="v" id="ds-balance">$—</div><div class="l">DEEPSEEK RESTANTE</div></div>
     <input id="cost-search" placeholder="🔎 Buscar issue (ej: PDDARTEL-69)…" oninput="renderCosts()">
     <span class="cost-refresh" id="cost-refresh">—</span>
   </div>
@@ -362,6 +363,25 @@ async function loadCosts(){
     if(!costsData) costsData = {ok:false}
   }
   renderCosts()
+  loadDeepseekBalance()
+}
+
+async function loadDeepseekBalance(){
+  const el=document.getElementById('ds-balance'), kpi=document.getElementById('ds-kpi')
+  if(!el) return
+  try {
+    const d = await tryFetch(`${BACKEND}/api/deepseek-balance`, 15000)
+    if(d && d.ok){
+      const bal = Number(d.total_balance)
+      el.textContent = '$'+bal.toFixed(2)
+      kpi.title = `DeepSeek restante: $${bal.toFixed(2)} ${d.currency} `
+        + `(otorgado $${Number(d.granted_balance).toFixed(2)} + recargado $${Number(d.topped_up_balance).toFixed(2)})`
+        + (d.is_available ? '' : ' — ⚠ CUENTA NO DISPONIBLE')
+      el.style.color = (!d.is_available || bal < 5) ? '#ff6b6b' : (bal < 20 ? '#ffd166' : '#34d399')
+    } else {
+      el.textContent='—'; el.style.color=''; kpi.title='No se pudo leer el balance: ' + ((d&&d.error)||'sin backend')
+    }
+  } catch(e){ el.textContent='—'; el.style.color=''; kpi.title='No se pudo leer el balance de DeepSeek' }
 }
 
 function execTable(rows, showProj){

@@ -479,6 +479,48 @@ def get_costs(project: str = Query("ALL"), limit: int = Query(300)):
                 "total_runs": 0, "ok": False, "error": str(e)}
 
 
+@app.get("/api/deepseek-balance")
+def deepseek_balance():
+    """Saldo restante de la cuenta DeepSeek (API GET /user/balance). El key se lee de
+    Secret Manager (DEEPSEEK_API_KEY) con las credenciales de gcloud locales."""
+    try:
+        import urllib.request, json, os, subprocess, shutil
+        # key: env -> Secret Manager (si está la lib) -> gcloud CLI (fallback sin dep)
+        key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+        if not key:
+            try:
+                from google.cloud import secretmanager
+                sm = secretmanager.SecretManagerServiceClient()
+                key = sm.access_secret_version(
+                    name=f"projects/{PROJECT_ID}/secrets/DEEPSEEK_API_KEY/versions/latest").payload.data.decode().strip()
+            except Exception:
+                gc = shutil.which("gcloud") or "gcloud"
+                key = subprocess.run([gc, "secrets", "versions", "access", "latest",
+                                      "--secret", "DEEPSEEK_API_KEY", "--project", PROJECT_ID],
+                                     capture_output=True, text=True, timeout=25).stdout.strip()
+        if not key:
+            return {"ok": False, "error": "no pude obtener DEEPSEEK_API_KEY (env/secretmanager/gcloud)"}
+        req = urllib.request.Request(
+            "https://api.deepseek.com/user/balance",
+            headers={"Authorization": f"Bearer {key}", "Accept": "application/json"})
+        with urllib.request.urlopen(req, timeout=15) as r:
+            data = json.loads(r.read())
+        infos = data.get("balance_infos") or []
+        usd = next((b for b in infos if (b.get("currency") or "").upper() == "USD"),
+                   (infos[0] if infos else {}))
+        def _f(v):
+            try: return round(float(v), 2)
+            except Exception: return 0.0
+        return {"ok": True,
+                "is_available": bool(data.get("is_available")),
+                "currency": usd.get("currency", "USD"),
+                "total_balance": _f(usd.get("total_balance", 0)),
+                "granted_balance": _f(usd.get("granted_balance", 0)),
+                "topped_up_balance": _f(usd.get("topped_up_balance", 0))}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
 # ── Demo data ─────────────────────────────────────────────────────────────────
 
 def _demo_nodes():
