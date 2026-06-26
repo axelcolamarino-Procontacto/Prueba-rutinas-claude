@@ -457,9 +457,10 @@ function initGraph3D() {
     .onNodeClick(showDetail)
     .onBackgroundClick(closeD)
 
-  Graph3.d3Force('charge').strength(-200).distanceMax(600)
+  Graph3.d3Force('charge').strength(n => n.type==='project' ? -900 : -200).distanceMax(900)
   Graph3.d3Force('link').distance(l =>
-    l.relation==='has_open_bug'?90 : l.relation==='has_submodule'?60 : l.relation==='covers'?45 : 55)
+    l.relation==='covers'?150 : l.relation==='has_open_bug'?90 : l.relation==='has_submodule'?60 : 55)
+    .strength(l => l.relation==='covers' ? 0.02 : 0.5)
   Graph3.d3VelocityDecay(0.4)
   Graph3.cooldownTime(8000)
   Graph3.onEngineStop(()=>{ if(!Graph3._stoppedOnce){Graph3._stoppedOnce=true; Graph3.zoomToFit(700,60)} })
@@ -547,9 +548,10 @@ function initGraph2D() {
     .onNodeClick(showDetail)
     .onBackgroundClick(closeD)
 
-  Graph2.d3Force('charge').strength(-220).distanceMax(500)
+  Graph2.d3Force('charge').strength(n => n.type==='project' ? -1000 : -220).distanceMax(900)
   Graph2.d3Force('link').distance(l =>
-    l.relation==='has_open_bug'?85 : l.relation==='has_submodule'?55 : l.relation==='covers'?42 : 50)
+    l.relation==='covers'?150 : l.relation==='has_open_bug'?85 : l.relation==='has_submodule'?55 : 50)
+    .strength(l => l.relation==='covers' ? 0.02 : 0.5)
   Graph2.d3VelocityDecay(0.4)
   Graph2.cooldownTime(8000)
 }
