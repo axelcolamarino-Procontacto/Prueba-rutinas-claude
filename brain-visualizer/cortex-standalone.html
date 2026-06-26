@@ -299,15 +299,29 @@ function computeFiltered() {
 }
 
 // ── Render ──────────────────────────────────────────────────────────────────
+function anchorProjects(nodes){
+  // Ancla cada proyecto a una posicion FIJA en un circulo amplio (fx/fy) -> quedan repartidos
+  // parejos y cada uno arma su cluster alrededor; las skills GLOBAL (links debiles) van al centro.
+  const projs = nodes.filter(n => n.type === 'project');
+  if (projs.length < 2) { projs.forEach(p => { delete p.fx; delete p.fy; }); return nodes; }
+  const R = Math.max(380, projs.length * 130);   // circulo amplio; crece con la cantidad de proyectos
+  projs.forEach((p, i) => {
+    const ang = (2 * Math.PI * i) / projs.length - Math.PI / 2;   // arranca arriba, sentido horario
+    p.fx = Math.round(R * Math.cos(ang));
+    p.fy = Math.round(R * Math.sin(ang));
+  });
+  return nodes;
+}
+
 function render() {
   gFiltered = computeFiltered()
   if (activeTab === '3d') {
     if (!Graph3) { initGraph3D(); }
-    Graph3.graphData({ nodes: gFiltered.nodes.map(n=>({...n})), links: gFiltered.links.map(l=>({...l})) })
+    Graph3.graphData({ nodes: anchorProjects(gFiltered.nodes.map(n=>({...n}))), links: gFiltered.links.map(l=>({...l})) })
     if (!Graph3._zoomed) { Graph3._zoomed = true; setTimeout(()=>Graph3.zoomToFit(700,60), 2500) }
   } else {
     if (!Graph2) { initGraph2D(); }
-    Graph2.graphData({ nodes: gFiltered.nodes.map(n=>({...n})), links: gFiltered.links.map(l=>({...l})) })
+    Graph2.graphData({ nodes: anchorProjects(gFiltered.nodes.map(n=>({...n}))), links: gFiltered.links.map(l=>({...l})) })
     if (!Graph2._zoomed) { Graph2._zoomed = true; setTimeout(()=>Graph2.zoomToFit(700,60), 2500) }
   }
   updateStats()
