@@ -299,29 +299,68 @@ function computeFiltered() {
 }
 
 // ── Render ──────────────────────────────────────────────────────────────────
-function anchorProjects(nodes){
-  // Ancla cada proyecto a una posicion FIJA en un circulo amplio (fx/fy) -> quedan repartidos
-  // parejos y cada uno arma su cluster alrededor; las skills GLOBAL (links debiles) van al centro.
-  const projs = nodes.filter(n => n.type === 'project');
-  if (projs.length < 2) { projs.forEach(p => { delete p.fx; delete p.fy; }); return nodes; }
-  const R = Math.max(380, projs.length * 130);   // circulo amplio; crece con la cantidad de proyectos
-  projs.forEach((p, i) => {
-    const ang = (2 * Math.PI * i) / projs.length - Math.PI / 2;   // arranca arriba, sentido horario
-    p.fx = Math.round(R * Math.cos(ang));
-    p.fy = Math.round(R * Math.sin(ang));
+function radialLayout(nodes, links){
+  // Layout RADIAL JERÁRQUICO determinístico (fx/fy fijos): skills GLOBAL en círculo CENTRAL ->
+  // proyectos en círculo EXTERNO -> submódulos en anillo alrededor de cada proyecto -> bugs en
+  // anillo alrededor de cada submódulo. Lo que no entre en la jerarquía lo ubica la física.
+  const byId = new Map(nodes.map(n => [n.id, n]));
+  const isSkill = n => String(n.id).startsWith('skill:');
+  const skills = nodes.filter(isSkill);
+  const projects = nodes.filter(n => n.type === 'project');
+  nodes.forEach(n => { delete n.fx; delete n.fy; });
+
+  // adyacencia padre -> hijos (excluye 'covers' de skills para no contaminar la jerarquía)
+  const kids = new Map();
+  for (const l of links){
+    const s = typeof l.source === 'object' ? l.source.id : l.source;
+    const t = typeof l.target === 'object' ? l.target.id : l.target;
+    if (l.relation === 'covers') continue;
+    if (String(s).startsWith('skill:') || String(t).startsWith('skill:')) continue;
+    if (!kids.has(s)) kids.set(s, []);
+    kids.get(s).push(t);
+  }
+  const visited = new Set();
+
+  // 1) skills GLOBAL: círculo central (acceso ordenado de todos los proyectos)
+  const Rs = Math.max(140, skills.length * 11);
+  skills.forEach((s, i) => {
+    const a = 2*Math.PI*i / Math.max(1, skills.length);
+    s.fx = Math.round(Rs*Math.cos(a)); s.fy = Math.round(Rs*Math.sin(a)); visited.add(s.id);
+  });
+
+  // recursivo: ubica un nodo y reparte sus hijos en un anillo (nivel 0=proyecto,1=submódulo,2=bug)
+  function place(node, x, y, level){
+    node.fx = Math.round(x); node.fy = Math.round(y); visited.add(node.id);
+    if (level >= 3) return;   // más profundo lo deja la física
+    const ch = [...new Set(kids.get(node.id) || [])].map(id => byId.get(id)).filter(c => c && !visited.has(c.id));
+    if (!ch.length) return;
+    const r = level === 0 ? Math.min(620, Math.max(220, ch.length*26))
+                          : Math.min(130, Math.max(45, ch.length*11));
+    const base = level * 0.7;   // rota cada nivel para no alinear radialmente
+    ch.forEach((c, j) => { const a = 2*Math.PI*j/ch.length + base; place(c, x + r*Math.cos(a), y + r*Math.sin(a), level+1); });
+  }
+
+  if (projects.length < 2){ if (projects.length) place(projects[0], 0, 0, 0); return nodes; }
+  const R1 = Math.max(1600, projects.length * 240);   // círculo externo de proyectos
+  projects.forEach((p, i) => {
+    const ang = 2*Math.PI*i/projects.length - Math.PI/2;
+    place(p, R1*Math.cos(ang), R1*Math.sin(ang), 0);
   });
   return nodes;
 }
 
 function render() {
   gFiltered = computeFiltered()
+  const _nodes = gFiltered.nodes.map(n=>({...n}))
+  const _links = gFiltered.links.map(l=>({...l}))
+  radialLayout(_nodes, _links)
   if (activeTab === '3d') {
     if (!Graph3) { initGraph3D(); }
-    Graph3.graphData({ nodes: anchorProjects(gFiltered.nodes.map(n=>({...n}))), links: gFiltered.links.map(l=>({...l})) })
+    Graph3.graphData({ nodes: _nodes, links: _links })
     if (!Graph3._zoomed) { Graph3._zoomed = true; setTimeout(()=>Graph3.zoomToFit(700,60), 2500) }
   } else {
     if (!Graph2) { initGraph2D(); }
-    Graph2.graphData({ nodes: anchorProjects(gFiltered.nodes.map(n=>({...n}))), links: gFiltered.links.map(l=>({...l})) })
+    Graph2.graphData({ nodes: _nodes, links: _links })
     if (!Graph2._zoomed) { Graph2._zoomed = true; setTimeout(()=>Graph2.zoomToFit(700,60), 2500) }
   }
   updateStats()
