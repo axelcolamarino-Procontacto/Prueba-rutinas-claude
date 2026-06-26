@@ -107,13 +107,16 @@ def _normalize(s: str) -> str:
     return unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().lower().strip()
 
 
+KNOWN_PROJECTS: set = set()   # claves de proyecto NORMALIZADAS (config_canales); lo puebla get_graph
+
+
 def infer_node_type(name: str, bug_ids: set = None, module_set: set = None) -> str:
     """Infiere el tipo del nodo dado su nombre."""
     n      = _normalize(name)
     name_l = name.lower()
 
     # Proyecto SIEMPRE primero — un nombre de proyecto nunca es otra cosa
-    if re.match(r'^(cmiv2|solo|cmi|global)$', n):
+    if n in KNOWN_PROJECTS or re.match(r'^(cmiv2|solo|cmi|global)$', n):
         return "project"
 
     # Tipos explícitos
@@ -159,7 +162,7 @@ def infer_node_type(name: str, bug_ids: set = None, module_set: set = None) -> s
     return "generic"
 
 
-def build_graph(kg_rows: list, skill_rows: list) -> dict:
+def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None) -> dict:
     """
     Construye nodes + links con toda la inteligencia:
     - Tipos correctos (module, bug, sf_field, sf_profile...)
@@ -185,6 +188,7 @@ def build_graph(kg_rows: list, skill_rows: list) -> dict:
     project_keys: set = {
         row["subject"] for row in kg_rows if row["relation"] == "contains_module"
     }
+    project_keys |= (known_projects or set())   # + proyectos de config_canales (aunque no tengan contains_module)
     # Versión normalizada para type inference.
     # Módulos = objects de contains_module + subjects de has_submodule/failure_rate.
     # OJO: NO incluir subjects de contains_module → esos son PROYECTOS, no módulos.
@@ -304,6 +308,21 @@ def build_graph(kg_rows: list, skill_rows: list) -> dict:
             for p in project_keys:
                 links.append({"source": skill_id, "target": p, "relation": "covers", "value": sr})
 
+    # ── Paso 4.5: anclar triples sueltos al nodo proyecto ────────────────────
+    # Proyectos SIN jerarquía contains_module (ej recién onboardeados cuyo LEARNER escribió
+    # relaciones libres en vez de project→contains_module→módulo) tienen triples que flotan sueltos.
+    # Colgamos cada subject de su nodo proyecto para que el cluster sea VISIBLE y conectado.
+    _proj_with_mods = {row["subject"] for row in kg_rows if row["relation"] == "contains_module"}
+    _known = known_projects or set()
+    for row in kg_rows:
+        p = row.get("project")
+        if not p or p not in _known or p in _proj_with_mods:
+            continue   # solo proyectos conocidos que NO armaron jerarquía de módulos
+        subj = row.get("subject")
+        if subj and _normalize(subj) != _normalize(p):
+            upsert_node(p, "project", False, project=p)
+            links.append({"source": p, "target": subj, "relation": "tracks", "value": 0.4})
+
     # ── Paso 5: enriquecer módulos con failure_rate_pct ──────────────────────
 
     for node_id, node in nodes.items():
@@ -365,7 +384,17 @@ def get_graph(project: str = Query("ALL")):
 
         kg_rows    = run(kg_query)
         skill_rows = run(skills_query)
-        graph      = build_graph(kg_rows, skill_rows)
+        # Proyectos conocidos (config_canales) -> el grafo los reconoce como proyectos, ancla sus
+        # triples sueltos al nodo proyecto, y cuelga las skills GLOBAL de TODOS ellos.
+        global KNOWN_PROJECTS
+        try:
+            known_projects = {r["project"] for r in client.query(
+                f"SELECT DISTINCT project FROM `{PROJECT_ID}.{DATASET}.config_canales` "
+                f"WHERE project IS NOT NULL").result() if r["project"]}
+        except Exception:
+            known_projects = set()
+        KNOWN_PROJECTS = {_normalize(p) for p in known_projects}
+        graph      = build_graph(kg_rows, skill_rows, known_projects)
 
         # Sembrar TODOS los proyectos conocidos desde config_canales (para que aparezcan aunque
         # todavía no tengan conocimiento aprendido en el KG — ej proyectos recién onboardeados).
