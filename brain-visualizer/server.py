@@ -327,20 +327,40 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None) -> 
             for p in project_keys:
                 links.append({"source": skill_id, "target": p, "relation": "covers", "value": sr})
 
-    # ── Paso 4.5: anclar triples sueltos al nodo proyecto ────────────────────
-    # Proyectos SIN jerarquía contains_module (ej recién onboardeados cuyo LEARNER escribió
-    # relaciones libres en vez de project→contains_module→módulo) tienen triples que flotan sueltos.
-    # Colgamos cada subject de su nodo proyecto para que el cluster sea VISIBLE y conectado.
+    # ── Paso 4.5: render del CONOCIMIENTO LIBRE de proyectos SIN backbone de módulos ──
+    # Algunos proyectos (ej PDDARTEL) aprendieron MUCHO pero en relaciones libres
+    # (blocked_by, depends_on, has_root_cause, missing_field…) y CERO contains_module -> sin esto
+    # el nodo proyecto se ve VACÍO aunque haya testeado un montón. Renderizamos esas triples como
+    # subject→object (ambos nodos, con la relación real) y colgamos el subject del proyecto, para que
+    # el cluster sea visible y conectado. Saltamos relaciones de PURA métrica (no son entidades).
+    _STRUCT = {"contains_module", "has_submodule", "has_open_bug", "covers"}
+    _META = {"failure_rate", "tested_in_module", "has_failed_tc_count", "has_label", "confidence_score",
+             "validation_result", "execution_result", "verification_result", "has_test_result",
+             "execution_outcome", "retest_confirmed", "test_platform", "tested_in", "display_format"}
     _proj_with_mods = {row["subject"] for row in kg_rows if row["relation"] == "contains_module"}
     _known = known_projects or set()
+    _anchored = set()
     for row in kg_rows:
-        p = row.get("project")
+        rel = row["relation"]; p = row.get("project")
+        if rel in _STRUCT or rel in _META:
+            continue
         if not p or p not in _known or p in _proj_with_mods:
-            continue   # solo proyectos conocidos que NO armaron jerarquía de módulos
-        subj = row.get("subject")
-        if subj and _normalize(subj) != _normalize(p):
+            continue   # solo proyectos conocidos que NO armaron jerarquía de módulos propia
+        subj = row.get("subject"); obj = row.get("object")
+        if not subj or _normalize(subj) == _normalize(p):
+            continue
+        is_new = bool(row.get("is_new", False))
+        upsert_node(subj, infer_node_type(subj, bug_ids, module_names), is_new, project=p)
+        # subject -> object (el conocimiento real), si el object parece una entidad (no un valor largo)
+        if obj and len(str(obj)) <= 60 and _normalize(obj) not in (_normalize(subj), _normalize(p)):
+            upsert_node(obj, infer_node_type(obj, bug_ids, module_names), False, project=p)
+            links.append({"source": subj, "target": obj, "relation": rel,
+                          "value": float(row.get("confidence_score") or 0.6)})
+        # anclar el subject al nodo proyecto (una sola vez) para que el cluster cuelgue del proyecto
+        if subj not in _anchored:
+            _anchored.add(subj)
             upsert_node(p, "project", False, project=p)
-            links.append({"source": p, "target": subj, "relation": "tracks", "value": 0.4})
+            links.append({"source": p, "target": subj, "relation": "tracks", "value": 0.3})
 
     # ── Paso 5: enriquecer módulos con failure_rate_pct ──────────────────────
 
