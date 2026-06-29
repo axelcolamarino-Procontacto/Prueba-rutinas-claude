@@ -334,33 +334,44 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None) -> 
     # subject→object (ambos nodos, con la relación real) y colgamos el subject del proyecto, para que
     # el cluster sea visible y conectado. Saltamos relaciones de PURA métrica (no son entidades).
     _STRUCT = {"contains_module", "has_submodule", "has_open_bug", "covers"}
-    _META = {"failure_rate", "tested_in_module", "has_failed_tc_count", "has_label", "confidence_score",
+    _META = {"failure_rate", "has_failed_tc_count", "has_label", "confidence_score",
              "validation_result", "execution_result", "verification_result", "has_test_result",
-             "execution_outcome", "retest_confirmed", "test_platform", "tested_in", "display_format"}
-    _proj_with_mods = {row["subject"] for row in kg_rows if row["relation"] == "contains_module"}
+             "execution_outcome", "retest_confirmed", "test_platform", "display_format"}
+    # tested_in / tested_in_module NO se dibujan como edge propio (son metadata de ubicación), pero SÍ se usan
+    # para ANCLAR cada subject a su módulo (issue_to_module). Así el tamaño del cluster de cada proyecto es
+    # proporcional a lo aprendido, y el conocimiento libre queda ANIDADO bajo el módulo (no un hairball).
+    _META_ANCHOR = {"tested_in_module", "tested_in"}
     _known = known_projects or set()
     _anchored = set()
+    def _ff_type(name):   # un subject/object de conocimiento LIBRE nunca debe tiparse como 'project' (ej "CMI")
+        t = infer_node_type(name, bug_ids, module_names)
+        return "generic" if t == "project" else t
     for row in kg_rows:
         rel = row["relation"]; p = row.get("project")
-        if rel in _STRUCT or rel in _META:
+        if rel in _STRUCT or rel in _META or rel in _META_ANCHOR:
             continue
-        if not p or p not in _known or p in _proj_with_mods:
-            continue   # solo proyectos conocidos que NO armaron jerarquía de módulos propia
+        if not p or p not in _known:
+            continue   # TODOS los proyectos conocidos (con o sin backbone propio)
         subj = row.get("subject"); obj = row.get("object")
         if not subj or _normalize(subj) == _normalize(p):
             continue
         is_new = bool(row.get("is_new", False))
-        upsert_node(subj, infer_node_type(subj, bug_ids, module_names), is_new, project=p)
+        upsert_node(subj, _ff_type(subj), is_new, project=p)
         # subject -> object (el conocimiento real), si el object parece una entidad (no un valor largo)
         if obj and len(str(obj)) <= 60 and _normalize(obj) not in (_normalize(subj), _normalize(p)):
-            upsert_node(obj, infer_node_type(obj, bug_ids, module_names), False, project=p)
+            upsert_node(obj, _ff_type(obj), False, project=p)
             links.append({"source": subj, "target": obj, "relation": rel,
                           "value": float(row.get("confidence_score") or 0.6)})
-        # anclar el subject al nodo proyecto (una sola vez) para que el cluster cuelgue del proyecto
+        # anclar el subject a su MÓDULO (si es un issue con módulo conocido) o, si no, al PROYECTO (una sola vez)
         if subj not in _anchored:
             _anchored.add(subj)
-            upsert_node(p, "project", False, project=p)
-            links.append({"source": p, "target": subj, "relation": "tracks", "value": 0.3})
+            mod = issue_to_module.get(subj)
+            if mod in canonical_modules:
+                upsert_node(mod, "module", False, project=p)
+                links.append({"source": mod, "target": subj, "relation": "tracks", "value": 0.3})
+            else:
+                upsert_node(p, "project", False, project=p)
+                links.append({"source": p, "target": subj, "relation": "tracks", "value": 0.3})
 
     # ── Paso 5: enriquecer módulos con failure_rate_pct ──────────────────────
 
