@@ -306,7 +306,7 @@ function radialLayout(nodes, links){
   const byId = new Map(nodes.map(n => [n.id, n]));
   const isSkill = n => String(n.id).startsWith('skill:');
   const skills = nodes.filter(isSkill);
-  const projects = nodes.filter(n => n.type === 'project');
+  const projects = nodes.filter(n => n.type === 'project' && n.id !== 'GLOBAL');   // GLOBAL = hub central, no va en el círculo
   nodes.forEach(n => { delete n.fx; delete n.fy; });
 
   // adyacencia padre -> hijos (excluye 'covers' de skills para no contaminar la jerarquía)
@@ -327,6 +327,10 @@ function radialLayout(nodes, links){
     const a = 2*Math.PI*i / Math.max(1, skills.length);
     s.fx = Math.round(Rs*Math.cos(a)); s.fy = Math.round(Rs*Math.sin(a)); visited.add(s.id);
   });
+
+  // hub GLOBAL en el CENTRO: las skills globales cuelgan de acá (spokes limpios), no de todos los proyectos
+  const _gh = byId.get('GLOBAL');
+  if (_gh) { _gh.fx = 0; _gh.fy = 0; visited.add('GLOBAL'); }
 
   // recursivo: ubica un nodo y reparte sus hijos.
   //  - level 0 (módulos alrededor del proyecto): CÍRCULO completo.

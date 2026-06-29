@@ -322,8 +322,11 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
             links.append({"source": skill_id, "target": mod, "relation": "covers", "value": sr})
         elif project != "GLOBAL" and project in project_keys:
             links.append({"source": skill_id, "target": project, "relation": "covers", "value": sr})
-        # Skill GLOBAL sin módulo claro -> NO se fanea a todos los proyectos (eso creaba la telaraña
-        # N×M en el centro). Queda como nodo en el anillo central de skills, sin líneas radiales.
+        else:
+            # Skill GLOBAL sin módulo: cuelga de UN hub central "GLOBAL" (NO de todos los proyectos -> evita
+            # la telaraña N×M, pero las skills quedan conectadas/marcadas como conjunto compartido).
+            upsert_node("GLOBAL", "project", False, project="GLOBAL", label="GLOBAL")
+            links.append({"source": "GLOBAL", "target": skill_id, "relation": "covers", "value": sr})
 
     # ── Paso 4.5: render del CONOCIMIENTO LIBRE de proyectos SIN backbone de módulos ──
     # Algunos proyectos (ej PDDARTEL) aprendieron MUCHO pero en relaciones libres
