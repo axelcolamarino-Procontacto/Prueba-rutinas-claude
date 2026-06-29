@@ -181,7 +181,7 @@ def infer_node_type(name: str, bug_ids: set = None, module_set: set = None) -> s
     return "generic"
 
 
-def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None) -> dict:
+def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, freeform: bool = True) -> dict:
     """
     Construye nodes + links con toda la inteligencia:
     - Tipos correctos (module, bug, sf_field, sf_profile...)
@@ -322,10 +322,8 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None) -> 
             links.append({"source": skill_id, "target": mod, "relation": "covers", "value": sr})
         elif project != "GLOBAL" and project in project_keys:
             links.append({"source": skill_id, "target": project, "relation": "covers", "value": sr})
-        else:
-            # Skill GLOBAL sin módulo claro → cuelga de todos los proyectos
-            for p in project_keys:
-                links.append({"source": skill_id, "target": p, "relation": "covers", "value": sr})
+        # Skill GLOBAL sin módulo claro -> NO se fanea a todos los proyectos (eso creaba la telaraña
+        # N×M en el centro). Queda como nodo en el anillo central de skills, sin líneas radiales.
 
     # ── Paso 4.5: render del CONOCIMIENTO LIBRE de proyectos SIN backbone de módulos ──
     # Algunos proyectos (ej PDDARTEL) aprendieron MUCHO pero en relaciones libres
@@ -346,7 +344,7 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None) -> 
     def _ff_type(name):   # un subject/object de conocimiento LIBRE nunca debe tiparse como 'project' (ej "CMI")
         t = infer_node_type(name, bug_ids, module_names)
         return "generic" if t == "project" else t
-    for row in kg_rows:
+    for row in (kg_rows if freeform else []):   # conocimiento libre SOLO al filtrar un proyecto (no en "Todos")
         rel = row["relation"]; p = row.get("project")
         if rel in _STRUCT or rel in _META or rel in _META_ANCHOR:
             continue
@@ -444,7 +442,7 @@ def get_graph(project: str = Query("ALL")):
         except Exception:
             known_projects = set()
         KNOWN_PROJECTS = {_normalize(p) for p in known_projects}
-        graph      = build_graph(kg_rows, skill_rows, known_projects)
+        graph      = build_graph(kg_rows, skill_rows, known_projects, freeform=(project != "ALL"))
 
         # Sembrar TODOS los proyectos conocidos desde config_canales (para que aparezcan aunque
         # todavía no tengan conocimiento aprendido en el KG — ej proyectos recién onboardeados).

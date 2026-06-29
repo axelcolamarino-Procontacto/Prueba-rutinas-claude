@@ -292,7 +292,7 @@ function computeFiltered() {
   const ids = new Set()
   links.forEach(l => { ids.add(l.source?.id||l.source); ids.add(l.target?.id||l.target) })
   // incluí también los nodos de PROYECTO aunque no tengan links (proyectos sin KG aún) cuando se ven todos
-  let nodes = gData.nodes.filter(n => ids.has(n.id) || (proj==='ALL' && n.type==='project'))
+  let nodes = gData.nodes.filter(n => ids.has(n.id) || (proj==='ALL' && (n.type==='project' || n.type==='skill')))
   if (proj !== 'ALL') nodes = nodes.filter(n => n.project === proj || n.type === 'project')
 
   return { nodes, links }
