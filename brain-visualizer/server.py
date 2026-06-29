@@ -323,10 +323,10 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
         elif project != "GLOBAL" and project in project_keys:
             links.append({"source": skill_id, "target": project, "relation": "covers", "value": sr})
         else:
-            # Skill GLOBAL sin módulo: cuelga de UN hub central "GLOBAL" (NO de todos los proyectos -> evita
-            # la telaraña N×M, pero las skills quedan conectadas/marcadas como conjunto compartido).
-            upsert_node("GLOBAL", "project", False, project="GLOBAL", label="GLOBAL")
-            links.append({"source": "GLOBAL", "target": skill_id, "relation": "covers", "value": sr})
+            # Skill GLOBAL sin módulo -> conectada a CADA proyecto = la "estrella" radial de skills compartidas
+            # (es lo que el usuario quiere ver). Con R1 amplio + alpha baja queda como estrella, no telaraña.
+            for p in project_keys:
+                links.append({"source": skill_id, "target": p, "relation": "covers", "value": sr})
 
     # ── Paso 4.5: render del CONOCIMIENTO LIBRE de proyectos SIN backbone de módulos ──
     # Algunos proyectos (ej PDDARTEL) aprendieron MUCHO pero en relaciones libres
@@ -445,7 +445,7 @@ def get_graph(project: str = Query("ALL")):
         except Exception:
             known_projects = set()
         KNOWN_PROJECTS = {_normalize(p) for p in known_projects}
-        graph      = build_graph(kg_rows, skill_rows, known_projects, freeform=True)   # conocimiento libre SIEMPRE (también en "Todos")
+        graph      = build_graph(kg_rows, skill_rows, known_projects, freeform=(project != "ALL"))   # panorama limpio (estrella); detalle al filtrar
 
         # Sembrar TODOS los proyectos conocidos desde config_canales (para que aparezcan aunque
         # todavía no tengan conocimiento aprendido en el KG — ej proyectos recién onboardeados).
