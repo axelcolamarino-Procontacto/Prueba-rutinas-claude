@@ -442,7 +442,7 @@ def get_graph(project: str = Query("ALL")):
         except Exception:
             known_projects = set()
         KNOWN_PROJECTS = {_normalize(p) for p in known_projects}
-        graph      = build_graph(kg_rows, skill_rows, known_projects, freeform=(project != "ALL"))
+        graph      = build_graph(kg_rows, skill_rows, known_projects, freeform=True)   # conocimiento libre SIEMPRE (también en "Todos")
 
         # Sembrar TODOS los proyectos conocidos desde config_canales (para que aparezcan aunque
         # todavía no tengan conocimiento aprendido en el KG — ej proyectos recién onboardeados).

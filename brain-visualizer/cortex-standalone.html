@@ -359,7 +359,7 @@ function radialLayout(nodes, links){
   }
 
   if (projects.length < 2){ if (projects.length) place(projects[0], 0, 0, 0, 0, 0); return nodes; }
-  const R1 = Math.max(1600, projects.length * 240);   // círculo externo de proyectos
+  const R1 = Math.max(3000, projects.length * 460);   // círculo externo de proyectos (amplio: con conocimiento libre los clusters son grandes y no deben solaparse)
   projects.forEach((p, i) => {
     const ang = 2*Math.PI*i/projects.length - Math.PI/2;
     place(p, R1*Math.cos(ang), R1*Math.sin(ang), 0, 0, 0);
