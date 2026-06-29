@@ -328,23 +328,41 @@ function radialLayout(nodes, links){
     s.fx = Math.round(Rs*Math.cos(a)); s.fy = Math.round(Rs*Math.sin(a)); visited.add(s.id);
   });
 
-  // recursivo: ubica un nodo y reparte sus hijos en un anillo (nivel 0=proyecto,1=submódulo,2=bug)
-  function place(node, x, y, level){
+  // recursivo: ubica un nodo y reparte sus hijos.
+  //  - level 0 (módulos alrededor del proyecto): CÍRCULO completo.
+  //  - level >=1 (submódulos/bugs): ABANICO hacia afuera (opuesto al padre-del-padre) -> el cluster
+  //    de cada módulo queda de su lado, sin pisar el centro ni a los módulos vecinos. El radio CRECE
+  //    con la cantidad de hijos para que no se amontonen los módulos con muchos submódulos.
+  function place(node, x, y, level, px, py){
     node.fx = Math.round(x); node.fy = Math.round(y); visited.add(node.id);
-    if (level >= 3) return;   // más profundo lo deja la física
+    if (level >= 4) return;   // techo alto: prácticamente todo queda fijado (nada flota al centro)
     const ch = [...new Set(kids.get(node.id) || [])].map(id => byId.get(id)).filter(c => c && !visited.has(c.id));
     if (!ch.length) return;
-    const r = level === 0 ? Math.min(620, Math.max(220, ch.length*26))
-                          : Math.min(130, Math.max(45, ch.length*11));
-    const base = level * 0.7;   // rota cada nivel para no alinear radialmente
-    ch.forEach((c, j) => { const a = 2*Math.PI*j/ch.length + base; place(c, x + r*Math.cos(a), y + r*Math.sin(a), level+1); });
+    if (level === 0){
+      // ordenar módulos para que los de MUCHOS submódulos queden SEPARADOS en el círculo
+      // (intercalado grande/chico) -> sus abanicos divergen en vez de superponerse.
+      const kc = id => (kids.get(id) || []).length;
+      const sorted = ch.slice().sort((a, b) => kc(b.id) - kc(a.id));
+      const arr = []; let lo = 0, hi = sorted.length - 1;
+      for (let i = 0; i < sorted.length; i++) arr.push(i % 2 === 0 ? sorted[lo++] : sorted[hi--]);
+      const r = Math.min(640, Math.max(240, arr.length*26));
+      arr.forEach((c, j) => { const a = 2*Math.PI*j/arr.length - Math.PI/2; place(c, x + r*Math.cos(a), y + r*Math.sin(a), 1, x, y); });
+    } else {
+      const outward = Math.atan2(y - py, x - px);              // dirección "hacia afuera" del módulo
+      const r = Math.max(level === 1 ? 160 : 85, ch.length*7); // crece con #hijos -> no se amontonan
+      const span = ch.length === 1 ? 0 : Math.min(Math.PI*1.5, ch.length*0.32);
+      ch.forEach((c, j) => {
+        const a = ch.length === 1 ? outward : (outward - span/2 + span*j/(ch.length-1));
+        place(c, x + r*Math.cos(a), y + r*Math.sin(a), level+1, x, y);
+      });
+    }
   }
 
-  if (projects.length < 2){ if (projects.length) place(projects[0], 0, 0, 0); return nodes; }
+  if (projects.length < 2){ if (projects.length) place(projects[0], 0, 0, 0, 0, 0); return nodes; }
   const R1 = Math.max(1600, projects.length * 240);   // círculo externo de proyectos
   projects.forEach((p, i) => {
     const ang = 2*Math.PI*i/projects.length - Math.PI/2;
-    place(p, R1*Math.cos(ang), R1*Math.sin(ang), 0);
+    place(p, R1*Math.cos(ang), R1*Math.sin(ang), 0, 0, 0);
   });
   return nodes;
 }
@@ -501,9 +519,9 @@ function initGraph3D() {
     .nodeOpacity(0.92)
     .nodeResolution(14)
     .nodeColor(n => node3DColor(n, 0.5))
-    .linkColor(l => `rgba(120,170,255,${Math.max(0.12,(l.value||0.5)*0.5)})`)
-    .linkWidth(l => Math.max(0.3,(l.value||0.5)*1.1))
-    .linkDirectionalParticles(l => l.value>0.85?2:0)
+    .linkColor(l => l.relation==='covers' ? 'rgba(224,64,251,0.06)' : `rgba(120,170,255,${Math.max(0.22,(l.value||0.5)*0.55)})`)
+    .linkWidth(l => l.relation==='covers' ? 0.25 : Math.max(0.5,(l.value||0.5)*1.2))
+    .linkDirectionalParticles(l => (l.relation!=='covers' && l.value>0.85)?2:0)
     .linkDirectionalParticleWidth(1.2)
     .linkDirectionalParticleColor(()=> 'rgba(79,195,247,0.85)')
     .linkLabel(l => l.relation||'')
@@ -592,9 +610,9 @@ function initGraph2D() {
         ctx.fillText(label, node.x, node.y+r+2)
       }
     })
-    .linkColor(l => `rgba(120,170,255,${Math.max(0.1,(l.value||0.5)*0.4)})`)
-    .linkWidth(l => Math.max(0.4,(l.value||0.5)*1.2))
-    .linkDirectionalParticles(l => l.value>0.85?2:0)
+    .linkColor(l => l.relation==='covers' ? 'rgba(224,64,251,0.05)' : `rgba(120,170,255,${Math.max(0.2,(l.value||0.5)*0.5)})`)
+    .linkWidth(l => l.relation==='covers' ? 0.3 : Math.max(0.5,(l.value||0.5)*1.3))
+    .linkDirectionalParticles(l => (l.relation!=='covers' && l.value>0.85)?2:0)
     .linkDirectionalParticleWidth(1.6)
     .linkDirectionalParticleColor(()=> 'rgba(79,195,247,0.9)')
     .linkLabel(l => l.relation||'')
