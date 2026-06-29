@@ -6,12 +6,31 @@ Toda la lógica de tipos, failure_rate, conexiones módulo→bug vive acá.
 Correr: python server.py  →  http://localhost:8001
 """
 
+import os
 import re
 import unicodedata
 from fastapi import FastAPI, Query
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
+
+# ── Auth BigQuery: usar la key del SA qa-agent si no hay credenciales explícitas ──────────────
+# El server consulta BQ con google.cloud.bigquery, que se autentica por ADC. El ADC global de la
+# máquina puede estar apuntando a otra cuenta (p.ej. la personal gmail) SIN acceso a
+# procontacto-claude → todas las queries dan 403 y los endpoints caen a demo/vacío. Para que el
+# cortex funcione SIEMPRE (sin depender del ADC global ni de un login interactivo), si no está
+# seteado GOOGLE_APPLICATION_CREDENTIALS buscamos la key del SA y la usamos solo en este proceso.
+if not os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"):
+    for _cand in (
+        Path(__file__).resolve().parent / "sa.json",
+        Path(__file__).resolve().parent.parent.parent / "qa-adk" / "sa.json",
+    ):
+        if _cand.exists():
+            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = str(_cand)
+            print(f"[cortex] usando SA key para BigQuery: {_cand}")
+            break
+    else:
+        print("[cortex] WARN: sin GOOGLE_APPLICATION_CREDENTIALS y sin sa.json — BQ usará el ADC global")
 
 app = FastAPI(title="QA Agent Brain Visualizer")
 
