@@ -305,7 +305,9 @@ function radialLayout(nodes, links){
   // anillo alrededor de cada submódulo. Lo que no entre en la jerarquía lo ubica la física.
   const byId = new Map(nodes.map(n => [n.id, n]));
   const isSkill = n => String(n.id).startsWith('skill:');
-  const skills = nodes.filter(isSkill);
+  const allSkills = nodes.filter(isSkill);
+  const skills     = allSkills.filter(s => !s.project || s.project === 'GLOBAL');     // GLOBALES -> anillo CENTRAL + estrella
+  const projSkills = allSkills.filter(s => s.project && s.project !== 'GLOBAL');      // ESPECÍFICAS -> orbitan SU proyecto (halo)
   const projects = nodes.filter(n => n.type === 'project' && n.id !== 'GLOBAL');   // GLOBAL = hub central, no va en el círculo
   nodes.forEach(n => { delete n.fx; delete n.fy; });
 
@@ -362,12 +364,27 @@ function radialLayout(nodes, links){
     }
   }
 
-  if (projects.length < 2){ if (projects.length) place(projects[0], 0, 0, 0, 0, 0); return nodes; }
-  const R1 = Math.max(3000, projects.length * 460);   // círculo externo de proyectos (amplio: con conocimiento libre los clusters son grandes y no deben solaparse)
-  projects.forEach((p, i) => {
-    const ang = 2*Math.PI*i/projects.length - Math.PI/2;
-    place(p, R1*Math.cos(ang), R1*Math.sin(ang), 0, 0, 0);
-  });
+  if (projects.length < 2){
+    if (projects.length) place(projects[0], 0, 0, 0, 0, 0);
+  } else {
+    const R1 = Math.max(3000, projects.length * 460);   // círculo externo (amplio: clusters grandes no se solapan)
+    projects.forEach((p, i) => {
+      const ang = 2*Math.PI*i/projects.length - Math.PI/2;
+      place(p, R1*Math.cos(ang), R1*Math.sin(ang), 0, 0, 0);
+    });
+  }
+  // skills ESPECÍFICAS de proyecto: orbitan el nodo de SU proyecto (halo interno), NO el anillo central
+  const _bp = {};
+  projSkills.forEach(s => { (_bp[s.project] = _bp[s.project] || []).push(s); });
+  for (const pid in _bp){
+    const pn = byId.get(pid);
+    if (!pn || pn.fx == null) continue;
+    const sks = _bp[pid], rr = 175;
+    sks.forEach((s, j) => {
+      const a = 2*Math.PI*j/sks.length + 0.4;
+      s.fx = Math.round(pn.fx + rr*Math.cos(a)); s.fy = Math.round(pn.fy + rr*Math.sin(a)); visited.add(s.id);
+    });
+  }
   return nodes;
 }
 
