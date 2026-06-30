@@ -200,14 +200,24 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
         if row["relation"] == "has_open_bug"
     }
 
-    # b) Nombres canónicos de módulos (objetos de contains_module) y proyectos (subjects)
-    canonical_modules: set = {
-        row["object"] for row in kg_rows if row["relation"] == "contains_module"
-    }
-    project_keys: set = {
-        row["subject"] for row in kg_rows if row["relation"] == "contains_module"
-    }
-    project_keys |= (known_projects or set())   # + proyectos de config_canales (aunque no tengan contains_module)
+    # Backbone VÁLIDO: excluye proyectos stray (no en config_canales, ej TQ/TEST) y el backfill en proyectos que YA
+    # tienen backbone real del learner (CMIV2/SOLO usan su mapa limpio; PDDARTEL/DENTAL sí usan el backfill porque no tenían).
+    _known = known_projects or set()
+    _real_bb = {row["subject"] for row in kg_rows
+                if row["relation"] == "contains_module" and row.get("source_issue_key") != "backfill_test_cases"}
+    def _cm_valido(row):
+        if row["relation"] != "contains_module":
+            return False
+        if _known and row["subject"] not in _known:
+            return False
+        if row.get("source_issue_key") == "backfill_test_cases" and row["subject"] in _real_bb:
+            return False
+        return True
+
+    # b) Nombres canónicos de módulos (objetos de contains_module VÁLIDO) y proyectos (subjects)
+    canonical_modules: set = { row["object"]  for row in kg_rows if _cm_valido(row) }
+    project_keys:      set = { row["subject"] for row in kg_rows if _cm_valido(row) }
+    project_keys |= _known   # + proyectos de config_canales (aunque no tengan contains_module)
     # Versión normalizada para type inference.
     # Módulos = objects de contains_module + subjects de has_submodule/failure_rate.
     # OJO: NO incluir subjects de contains_module → esos son PROYECTOS, no módulos.
@@ -297,7 +307,13 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
             continue
 
         # Estructura del cerebro: proyecto→módulo y módulo→submódulo
-        if relation in ("contains_module", "has_submodule"):
+        if relation == "contains_module":
+            if not _cm_valido(row):
+                continue   # proyecto stray (TQ/TEST) o backfill en proyecto con backbone real -> no renderizar
+            upsert_node(subject, subj_type, is_new, project=project)
+            upsert_node(obj,     obj_type,  is_new, project=project)
+            links.append({"source": subject, "target": obj, "relation": relation, "value": conf})
+        elif relation == "has_submodule":
             upsert_node(subject, subj_type, is_new, project=project)
             upsert_node(obj,     obj_type,  is_new, project=project)
             links.append({"source": subject, "target": obj, "relation": relation, "value": conf})
@@ -406,7 +422,7 @@ def get_graph(project: str = Query("ALL")):
     proj_filter = "" if project == "ALL" else "AND project = @project"
 
     kg_query = f"""
-        SELECT subject, relation, object, confidence_score, project,
+        SELECT subject, relation, object, confidence_score, project, source_issue_key,
                TIMESTAMP_DIFF(CURRENT_TIMESTAMP(), created_at, HOUR) < 24 AS is_new
         FROM `{PROJECT_ID}.{DATASET}.agent_knowledge_graph`
         WHERE 1=1 {proj_filter}
