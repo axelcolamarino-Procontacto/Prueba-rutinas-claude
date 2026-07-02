@@ -140,6 +140,8 @@
     <div class="cost-kpi total"><div class="v" id="cost-grand">$—</div><div class="l">GASTO TOTAL</div></div>
     <div class="cost-kpi"><div class="v" id="cost-runs">—</div><div class="l">EJECUCIONES</div></div>
     <div class="cost-kpi" id="ds-kpi" title="Saldo restante de la cuenta DeepSeek (API /user/balance)"><div class="v" id="ds-balance">$—</div><div class="l">DEEPSEEK RESTANTE</div></div>
+    <select id="cost-month" onchange="onMonthChange(this.value)" title="Mes de los consumos"
+            style="background:#141b29;color:#cfe2ff;border:1px solid #2b3654;border-radius:9px;padding:8px 11px;font-size:13px;cursor:pointer"></select>
     <input id="cost-search" placeholder="🔎 Buscar issue (ej: PDDARTEL-69)…" oninput="renderCosts()">
     <span class="cost-refresh" id="cost-refresh">—</span>
   </div>
@@ -272,7 +274,17 @@ let gFiltered = DEMO
 let Graph3    = null
 let Graph2    = null
 let activeTab = '3d'
-let costsData = null, costsExpanded = new Set(), _costsTimer = null
+let costsData = null, costsExpanded = new Set(), _costsTimer = null, costMonth = 'current'
+function onMonthChange(v){ costMonth = v; loadCosts() }
+function fillMonthSelect(months, selected){
+  const sel = document.getElementById('cost-month'); if(!sel) return
+  const monthLbl = m => { const [y,mm]=m.split('-'); const N=['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic']; return `${N[+mm]} ${y}` }
+  const opts = ['<option value="all">Todo (histórico)</option>']
+    .concat((months||[]).map(m => `<option value="${m}">${monthLbl(m)}</option>`))
+  sel.innerHTML = opts.join('')
+  // el backend resolvió 'current' al mes real -> reflejarlo en el <select>
+  sel.value = (selected && selected!=='all') ? selected : (costMonth==='all' ? 'all' : (months&&months[0]||'all'))
+}
 
 // Capas activas — cerebro completo. Mostramos TODO lo que curó el backend (estructura + skills +
 // conocimiento libre + tracks); solo ocultamos relaciones de PURA métrica (no son entidades del grafo).
@@ -447,8 +459,9 @@ async function loadCosts(){
     document.getElementById('cost-refresh').textContent='cargando…'
   }
   try {
-    const d = await tryFetch(`${BACKEND}/api/costs?limit=500`, 20000)
+    const d = await tryFetch(`${BACKEND}/api/costs?limit=500&month=${encodeURIComponent(costMonth)}`, 20000)
     costsData = d
+    if(d && d.ok) fillMonthSelect(d.months, d.selected_month)
     document.getElementById('cost-refresh').textContent = (d&&d.ok?'✓ ':'⚠ ') + new Date().toLocaleTimeString()
   } catch(e){
     document.getElementById('cost-refresh').textContent = '✗ sin backend'

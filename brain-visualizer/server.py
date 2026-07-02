@@ -533,17 +533,40 @@ def get_projects():
 
 
 @app.get("/api/costs")
-def get_costs(project: str = Query("ALL"), limit: int = Query(300)):
+def get_costs(project: str = Query("ALL"), limit: int = Query(300), month: str = Query("current")):
     """Ledger de costos (Capa 1). Devuelve agregados POR PROYECTO + ejecuciones recientes (expand/búsqueda).
-    Lee qa_agent.run_costs (estimación in-app). Si la tabla no existe / sin datos -> ok:false, listas vacías."""
+    Lee qa_agent.run_costs (estimación in-app). Filtra por MES: 'current' (mes actual, default), 'all' (histórico),
+    o 'YYYY-MM'. Devuelve 'months' (meses con datos) para poblar el selector. ok:false si la tabla no existe."""
     try:
         from google.cloud import bigquery
         from google.cloud.bigquery import QueryJobConfig, ScalarQueryParameter
         client = bigquery.Client(project=PROJECT_ID)
+        tbl = f"`{PROJECT_ID}.{DATASET}.run_costs`"
 
+        # meses disponibles (para el <select> del front)
+        months = [r["m"] for r in client.query(
+            f"SELECT DISTINCT FORMAT_TIMESTAMP('%Y-%m', ts) AS m FROM {tbl} WHERE ts IS NOT NULL ORDER BY m DESC"
+        ).result()]
+        cur_month = months[0] if months else None
+
+        # cláusula de mes reutilizable
+        params, month_clause, sel_month = [], "", month
+        if month == "all":
+            month_clause = ""
+        else:
+            if month == "current":
+                sel_month = cur_month   # el mes más reciente con datos
+            if sel_month:
+                month_clause = "FORMAT_TIMESTAMP('%Y-%m', ts) = @month"
+                params.append(ScalarQueryParameter("month", "STRING", sel_month))
+
+        def _where(extra=""):
+            conds = [c for c in (month_clause, extra) if c]
+            return ("WHERE " + " AND ".join(conds)) if conds else ""
+
+        cfg = QueryJobConfig(query_parameters=params) if params else None
         by_proj = [dict(r) for r in client.query(f"""
-            SELECT project,
-              COUNT(*) AS runs,
+            SELECT project, COUNT(*) AS runs,
               ROUND(SUM(total_usd), 4)     AS total_usd,
               ROUND(SUM(deepseek_usd), 4)  AS deepseek_usd,
               ROUND(SUM(cloudrun_usd), 4)  AS cloudrun_usd,
@@ -552,27 +575,30 @@ def get_costs(project: str = Query("ALL"), limit: int = Query(300)):
               ROUND(SUM(vm_usd), 4)        AS vm_usd,
               ROUND(AVG(total_usd), 4)     AS avg_usd,
               MAX(ts)                      AS last_run
-            FROM `{PROJECT_ID}.{DATASET}.run_costs`
+            FROM {tbl} {_where()}
             GROUP BY project ORDER BY total_usd DESC
-        """).result()]
+        """, job_config=cfg).result()]
 
-        proj_filter = "" if project == "ALL" else "WHERE project = @project"
-        cfg = None if project == "ALL" else QueryJobConfig(
-            query_parameters=[ScalarQueryParameter("project", "STRING", project)])
+        params2 = list(params)
+        proj_extra = ""
+        if project != "ALL":
+            proj_extra = "project = @project"
+            params2.append(ScalarQueryParameter("project", "STRING", project))
+        cfg2 = QueryJobConfig(query_parameters=params2) if params2 else None
         execs = [dict(r) for r in client.query(f"""
             SELECT run_id, ts, project, issue, platform, verdict, duration_s,
                    deepseek_calls, deepseek_usd, cloudrun_usd, total_usd
-            FROM `{PROJECT_ID}.{DATASET}.run_costs`
-            {proj_filter}
+            FROM {tbl} {_where(proj_extra)}
             ORDER BY ts DESC LIMIT {int(limit)}
-        """, job_config=cfg).result()]
+        """, job_config=cfg2).result()]
 
         grand = round(sum((p.get("total_usd") or 0) for p in by_proj), 4)
-        return {"by_project": by_proj, "executions": execs,
-                "grand_total_usd": grand, "total_runs": sum(p["runs"] for p in by_proj), "ok": True}
+        return {"by_project": by_proj, "executions": execs, "grand_total_usd": grand,
+                "total_runs": sum(p["runs"] for p in by_proj), "ok": True,
+                "months": months, "selected_month": (sel_month if month != "all" else "all")}
     except Exception as e:
-        return {"by_project": [], "executions": [], "grand_total_usd": 0,
-                "total_runs": 0, "ok": False, "error": str(e)}
+        return {"by_project": [], "executions": [], "grand_total_usd": 0, "total_runs": 0,
+                "months": [], "selected_month": None, "ok": False, "error": str(e)}
 
 
 @app.get("/api/deepseek-balance")
