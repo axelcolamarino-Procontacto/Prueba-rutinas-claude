@@ -304,6 +304,12 @@ function computeFiltered() {
   let nodes = gData.nodes.filter(n => ids.has(n.id) || (proj==='ALL' && (n.type==='project' || n.type==='skill')))
   if (proj !== 'ALL') nodes = nodes.filter(n => n.project === proj || n.type === 'project')
 
+  // Podar links huérfanos: al filtrar por proyecto, un link puede sobrevivir por UN extremo (línea 298)
+  // pero el nodo del OTRO extremo (ej. un módulo de otro proyecto) se descarta -> link colgado ->
+  // ForceGraph tira "node not found". Dejamos solo los links con AMBOS extremos en el set final.
+  const keep = new Set(nodes.map(n => n.id))
+  links = links.filter(l => keep.has(l.source?.id||l.source) && keep.has(l.target?.id||l.target))
+
   return { nodes, links }
 }
 
@@ -394,6 +400,32 @@ function radialLayout(nodes, links){
       s.fx = Math.round(pn.fx + rr*Math.cos(a)); s.fy = Math.round(pn.fy + rr*Math.sin(a)); visited.add(s.id);
     });
   }
+
+  // FALLBACK determinístico: los nodos que la jerarquía NO ubicó (p.ej. free-knowledge con anclaje débil,
+  // "Operador Logístico" y similares) hay que FIJARLOS igual — si quedan sin fx/fy la física los DISPARA
+  // lejos del cluster. Los anclamos junto a sus vecinos ya ubicados (promedio + offset áureo para no
+  // apilarlos); si no tienen ninguno ubicado, van a un anillo externo determinístico.
+  const adj = new Map();
+  for (const l of links){
+    const s = typeof l.source === 'object' ? l.source.id : l.source;
+    const t = typeof l.target === 'object' ? l.target.id : l.target;
+    if (!adj.has(s)) adj.set(s, []); adj.get(s).push(t);
+    if (!adj.has(t)) adj.set(t, []); adj.get(t).push(s);
+  }
+  const unplaced = nodes.filter(n => n.fx == null || n.fy == null);
+  unplaced.forEach((n, idx) => {
+    const nbrs = (adj.get(n.id) || []).map(id => byId.get(id)).filter(m => m && m.fx != null && !unplaced.includes(m));
+    const a = idx * 2.399963229;   // ángulo áureo -> reparto parejo, sin apilar
+    if (nbrs.length){
+      let sx = 0, sy = 0; nbrs.forEach(m => { sx += m.fx; sy += m.fy; });
+      n.fx = Math.round(sx/nbrs.length + 45*Math.cos(a));
+      n.fy = Math.round(sy/nbrs.length + 45*Math.sin(a));
+    } else {
+      const R = 900;
+      n.fx = Math.round(R*Math.cos(a)); n.fy = Math.round(R*Math.sin(a));
+    }
+    visited.add(n.id);
+  });
   return nodes;
 }
 
@@ -401,11 +433,9 @@ function render() {
   gFiltered = computeFiltered()
   const _nodes = gFiltered.nodes.map(n=>({...n}))
   const _links = gFiltered.links.map(l=>({...l}))
+  // radialLayout fija fx/fy de TODOS los nodos (jerarquía + fallback determinístico). Con posiciones
+  // fijas la simulación no mueve nada -> grafo determinista y estático: no deriva ni dispara nodos.
   radialLayout(_nodes, _links)
-  // Layout radial FIJO: fijamos fx/fy = posición radial. Con 386+ nodos la simulación de fuerzas se
-  // volvía inestable (explotaba a coordenadas enormes) y la cámara terminaba en un punto vacío. Con las
-  // posiciones fijas el grafo es determinista y estático -> no deriva, y el encuadre queda estable.
-  _nodes.forEach(n => { n.fx = n.x; n.fy = n.y })
   if (!Graph2) { initGraph2D(); }
   Graph2._fit = false                                  // datos nuevos -> permitir un encuadre
   Graph2.graphData({ nodes: _nodes, links: _links })
