@@ -275,6 +275,7 @@ let Graph3    = null
 let Graph2    = null
 let activeTab = '3d'
 let costsData = null, costsExpanded = new Set(), _costsTimer = null, costMonth = 'current'
+const _costsByMonth = {}   // caché mes -> payload; cambiar de mes ya visto = instantáneo
 function onMonthChange(v){ costMonth = v; loadCosts() }
 function fillMonthSelect(months, selected){
   const sel = document.getElementById('cost-month'); if(!sel) return
@@ -438,7 +439,7 @@ function switchTab(tab) {
   closeD()
   if (isCosts) {
     loadCosts()
-    if (!_costsTimer) _costsTimer = setInterval(()=>{ if(activeTab==='costos') loadCosts() }, 30000)  // auto-refresh
+    if (!_costsTimer) _costsTimer = setInterval(()=>{ if(activeTab==='costos') loadCosts(true) }, 30000)  // auto-refresh (fuerza red)
     return
   }
   if (_costsTimer) { clearInterval(_costsTimer); _costsTimer = null }
@@ -450,24 +451,38 @@ function switchTab(tab) {
 // ── Costos: carga + render de tabla dinámica (auto-refresh cada 30s) ──────────
 function fmtUSD(v){ return (v==null) ? '—' : '$'+Number(v).toFixed(Math.abs(v)<1?4:2) }
 
-async function loadCosts(){
+function _applyCosts(d){
+  costsData = d
+  if(d && d.ok) fillMonthSelect(d.months, d.selected_month)
+  renderCosts()
+}
+// force=true (auto-refresh) -> siempre pega a la red, sin spinner, deja la tabla visible.
+// force=false (cambio de mes / primer load) -> usa caché si existe (instantáneo); si no, spinner + red.
+async function loadCosts(force){
   const body=document.getElementById('cost-body')
-  if(!body.querySelector('table')){   // primer load (no en los auto-refresh) -> spinner, evita el estado vacío "$—"
+  const cached = _costsByMonth[costMonth]
+  if(cached && !force){                 // mes ya visto -> mostrarlo YA, sin esperar la red
+    _applyCosts(cached); loadDeepseekBalance(); return
+  }
+  if(!cached){                          // no hay datos para este mes -> spinner (también al cambiar de mes)
     body.innerHTML = `<div class="cost-empty"><div class="cost-spinner"></div>Cargando costos…</div>`
     document.getElementById('cost-grand').textContent='…'
     document.getElementById('cost-runs').textContent='…'
     document.getElementById('cost-refresh').textContent='cargando…'
   }
+  const reqMonth = costMonth            // capturamos: el usuario puede cambiar de mes mientras carga
   try {
-    const d = await tryFetch(`${BACKEND}/api/costs?limit=500&month=${encodeURIComponent(costMonth)}`, 20000)
-    costsData = d
-    if(d && d.ok) fillMonthSelect(d.months, d.selected_month)
+    const d = await tryFetch(`${BACKEND}/api/costs?limit=500&month=${encodeURIComponent(reqMonth)}`, 20000)
+    _costsByMonth[reqMonth] = d
+    if(d && d.ok && d.selected_month) _costsByMonth[d.selected_month] = d   // 'current' resuelve a 'YYYY-MM'
+    if(reqMonth !== costMonth) return   // ya cambió de mes -> no pisar la vista actual
+    _applyCosts(d)
     document.getElementById('cost-refresh').textContent = (d&&d.ok?'✓ ':'⚠ ') + new Date().toLocaleTimeString()
   } catch(e){
+    if(reqMonth !== costMonth) return
     document.getElementById('cost-refresh').textContent = '✗ sin backend'
-    if(!costsData) costsData = {ok:false}
+    if(!costsData){ costsData = {ok:false}; renderCosts() }
   }
-  renderCosts()
   loadDeepseekBalance()
 }
 
