@@ -414,14 +414,19 @@ function radialLayout(nodes, links){
   }
   const unplaced = nodes.filter(n => n.fx == null || n.fy == null);
   unplaced.forEach((n, idx) => {
-    const nbrs = (adj.get(n.id) || []).map(id => byId.get(id)).filter(m => m && m.fx != null && !unplaced.includes(m));
     const a = idx * 2.399963229;   // ángulo áureo -> reparto parejo, sin apilar
-    if (nbrs.length){
-      let sx = 0, sy = 0; nbrs.forEach(m => { sx += m.fx; sy += m.fy; });
-      n.fx = Math.round(sx/nbrs.length + 45*Math.cos(a));
-      n.fy = Math.round(sy/nbrs.length + 45*Math.sin(a));
+    // Anclar SOLO a vecinos ubicados que NO sean skills ni el hub GLOBAL: los skills forman un anillo
+    // SIMÉTRICO alrededor del centro, así que el promedio de varias skills cae en (0,0) -> un nodo
+    // cubierto (covers) por varias skills globales aterrizaría en el MEDIO del anillo. Ancla a
+    // módulos/proyectos reales; si no tiene ninguno (solo lo cubren skills), va al anillo externo.
+    const anchors = (adj.get(n.id) || []).map(id => byId.get(id))
+      .filter(m => m && m.fx != null && !unplaced.includes(m) && !isSkill(m) && m.id !== 'GLOBAL');
+    if (anchors.length){
+      let sx = 0, sy = 0; anchors.forEach(m => { sx += m.fx; sy += m.fy; });
+      n.fx = Math.round(sx/anchors.length + 45*Math.cos(a));
+      n.fy = Math.round(sy/anchors.length + 45*Math.sin(a));
     } else {
-      const R = 900;
+      const R = 900;   // sin ancla real -> anillo externo determinístico, NUNCA el centro
       n.fx = Math.round(R*Math.cos(a)); n.fy = Math.round(R*Math.sin(a));
     }
     visited.add(n.id);
