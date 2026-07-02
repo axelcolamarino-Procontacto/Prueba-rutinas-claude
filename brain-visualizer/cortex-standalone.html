@@ -7,8 +7,7 @@
 <style>
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   body { background:#060c1a; color:#c8d8f0; font-family:'Segoe UI',system-ui,sans-serif; overflow:hidden; height:100vh; }
-  #graph-3d, #graph-2d { position:absolute; inset:0; }
-  #graph-2d { display:none; }
+  #graph-2d { position:absolute; inset:0; }
   #graph-loading { position:absolute; inset:56px 0 0 0; z-index:80; background:#060c1a;
     display:flex; align-items:center; justify-content:center; flex-direction:column;
     color:#5a7a98; font-size:13px; letter-spacing:.5px; }
@@ -131,7 +130,6 @@
 </style>
 </head>
 <body>
-<div id="graph-3d"></div>
 <div id="graph-2d"></div>
 <div id="graph-loading"><div class="cost-spinner"></div>Cargando cerebro…</div>
 
@@ -151,8 +149,7 @@
 <div id="topbar">
   <div id="brain-title">🧠 <span>Cortex</span></div>
   <div class="tabs">
-    <button class="tab active" id="tab-3d" onclick="switchTab('3d')">3D</button>
-    <button class="tab"        id="tab-2d" onclick="switchTab('2d')">2D</button>
+    <button class="tab active" id="tab-2d" onclick="switchTab('2d')">2D</button>
     <button class="tab"        id="tab-costos" onclick="switchTab('costos')">Costos</button>
   </div>
   <div class="chip"><strong id="sn">—</strong>&nbsp;entidades</div>
@@ -271,9 +268,8 @@ const DEMO = {
 
 let gData     = DEMO
 let gFiltered = DEMO
-let Graph3    = null
 let Graph2    = null
-let activeTab = '3d'
+let activeTab = '2d'
 let costsData = null, costsExpanded = new Set(), _costsTimer = null, costMonth = 'current'
 const _costsByMonth = {}   // caché mes -> payload; cambiar de mes ya visto = instantáneo
 function onMonthChange(v){ costMonth = v; loadCosts() }
@@ -406,15 +402,15 @@ function render() {
   const _nodes = gFiltered.nodes.map(n=>({...n}))
   const _links = gFiltered.links.map(l=>({...l}))
   radialLayout(_nodes, _links)
-  if (activeTab === '3d') {
-    if (!Graph3) { initGraph3D(); }
-    Graph3.graphData({ nodes: _nodes, links: _links })
-    if (!Graph3._zoomed) { Graph3._zoomed = true; setTimeout(()=>Graph3.zoomToFit(700,60), 2500) }
-  } else {
-    if (!Graph2) { initGraph2D(); }
-    Graph2.graphData({ nodes: _nodes, links: _links })
-    // el encuadre 2D lo hace Graph2.onEngineStop (al estabilizarse la simulación), NO un setTimeout fijo
-  }
+  // Layout radial FIJO: fijamos fx/fy = posición radial. Con 386+ nodos la simulación de fuerzas se
+  // volvía inestable (explotaba a coordenadas enormes) y la cámara terminaba en un punto vacío. Con las
+  // posiciones fijas el grafo es determinista y estático -> no deriva, y el encuadre queda estable.
+  _nodes.forEach(n => { n.fx = n.x; n.fy = n.y })
+  if (!Graph2) { initGraph2D(); }
+  Graph2._fit = false                                  // datos nuevos -> permitir un encuadre
+  Graph2.graphData({ nodes: _nodes, links: _links })
+  // posiciones fijas => un setTimeout es seguro (los nodos NO se mueven); onEngineStop lo respalda
+  setTimeout(() => { if (!Graph2._fit) { Graph2._fit = true; Graph2.zoomToFit(600, 70) } }, 600)
   updateStats()
   startMinimap()
 }
@@ -428,10 +424,8 @@ function updateStats() {
 function switchTab(tab) {
   activeTab = tab
   const isCosts = tab==='costos'
-  document.getElementById('graph-3d').style.display = (tab==='3d')?'block':'none'
-  document.getElementById('graph-2d').style.display = (tab==='2d')?'block':'none'
+  document.getElementById('graph-2d').style.display = isCosts?'none':'block'
   document.getElementById('costs-view').classList.toggle('show', isCosts)
-  document.getElementById('tab-3d').classList.toggle('active', tab==='3d')
   document.getElementById('tab-2d').classList.toggle('active', tab==='2d')
   document.getElementById('tab-costos').classList.toggle('active', isCosts)
   // chrome del grafo (leyenda/minimap) molesta sobre la vista de costos → ocultar ahí
@@ -444,7 +438,7 @@ function switchTab(tab) {
   }
   if (_costsTimer) { clearInterval(_costsTimer); _costsTimer = null }
   // Si el grafo ya existe, solo mostrarlo (no re-renderizar para no perder posiciones)
-  if ((tab==='3d' && Graph3) || (tab==='2d' && Graph2)) { startMinimap(); return }
+  if (Graph2) { startMinimap(); return }
   render()
 }
 
@@ -558,34 +552,6 @@ function renderCosts(){
 
 function toggleProj(p){ costsExpanded.has(p)?costsExpanded.delete(p):costsExpanded.add(p); renderCosts() }
 
-// ── Init 3D ───────────────────────────────────────────────────────────────────
-function initGraph3D() {
-  Graph3 = ForceGraph3D({ controlType:'orbit' })(document.getElementById('graph-3d'))
-    .backgroundColor('#060c1a')
-    .showNavInfo(false)
-    .nodeLabel(n => n.name || n.id)
-    .nodeVal(n => val3D(n.type))
-    .nodeOpacity(0.92)
-    .nodeResolution(14)
-    .nodeColor(n => node3DColor(n, 0.5))
-    .linkColor(l => l.relation==='covers' ? 'rgba(224,64,251,0.18)' : `rgba(120,170,255,${Math.max(0.22,(l.value||0.5)*0.55)})`)
-    .linkWidth(l => l.relation==='covers' ? 0.45 : Math.max(0.5,(l.value||0.5)*1.2))
-    .linkDirectionalParticles(l => (l.relation!=='covers' && l.value>0.85)?2:0)
-    .linkDirectionalParticleWidth(1.2)
-    .linkDirectionalParticleColor(()=> 'rgba(79,195,247,0.85)')
-    .linkLabel(l => l.relation||'')
-    .onNodeClick(showDetail)
-    .onBackgroundClick(closeD)
-
-  Graph3.d3Force('charge').strength(n => n.type==='project' ? -900 : -200).distanceMax(900)
-  Graph3.d3Force('link').distance(l =>
-    l.relation==='covers'?150 : l.relation==='has_open_bug'?90 : l.relation==='has_submodule'?60 : 55)
-    .strength(l => l.relation==='covers' ? 0.02 : 0.5)
-  Graph3.d3VelocityDecay(0.4)
-  Graph3.cooldownTime(8000)
-  Graph3.onEngineStop(()=>{ if(!Graph3._stoppedOnce){Graph3._stoppedOnce=true; Graph3.zoomToFit(700,60)} })
-}
-
 // ── Init 2D ───────────────────────────────────────────────────────────────────
 function initGraph2D() {
   Graph2 = ForceGraph()(document.getElementById('graph-2d'))
@@ -673,10 +639,10 @@ function initGraph2D() {
     l.relation==='covers'?150 : l.relation==='has_open_bug'?85 : l.relation==='has_submodule'?55 : 50)
     .strength(l => l.relation==='covers' ? 0.02 : 0.5)
   Graph2.d3VelocityDecay(0.4)
-  Graph2.cooldownTime(8000)
-  // encuadrar SOLO cuando la simulación se estabiliza (espejo del 3D). Un setTimeout fijo encuadraba a mitad
-  // de la simulación -> la cámara quedaba en un punto vacío mientras los nodos seguían moviéndose.
-  Graph2.onEngineStop(()=>{ if(!Graph2._fit){ Graph2._fit=true; Graph2.zoomToFit(600,70) } })
+  Graph2.cooldownTime(4000)
+  // Encuadre de respaldo: las posiciones ya vienen FIJAS desde render() (fx/fy), así que la
+  // simulación se detiene enseguida sin mover nada -> el encuadre queda estable, no deriva.
+  Graph2.onEngineStop(()=>{ if (!Graph2._fit) { Graph2._fit = true; Graph2.zoomToFit(600, 70) } })
 }
 
 // ── Panel de detalle ──────────────────────────────────────────────────────────
@@ -709,10 +675,7 @@ function showDetail(node) {
          <span class="rlabel">${r.lbl}</span><span class="rtarget">${r.o}</span></div>`).join('')
     : '<h4>Relaciones</h4><div style="font-size:11px;color:#3a5060">Sin relaciones visibles</div>'
 
-  if (activeTab==='3d' && Graph3) {
-    const d=140, k=1+d/Math.hypot(node.x||1,node.y||1,node.z||1)
-    Graph3.cameraPosition({x:(node.x||0)*k,y:(node.y||0)*k,z:(node.z||0)*k}, node, 700)
-  } else if (activeTab==='2d' && Graph2) {
+  if (Graph2) {
     Graph2.centerAt(node.x,node.y,500); Graph2.zoom(3.5,500)
   }
 }
@@ -723,8 +686,7 @@ let _mmRaf = null
 function startMinimap(){ if(_mmRaf) cancelAnimationFrame(_mmRaf); drawMinimap() }
 
 function liveNodes() {
-  const g = activeTab==='3d' ? Graph3 : Graph2
-  const gn = g ? (g.graphData().nodes||[]) : []
+  const gn = Graph2 ? (Graph2.graphData().nodes||[]) : []
   const withPos = gn.filter(n=>n.x!=null)
   return withPos.length ? withPos : gFiltered.nodes.filter(n=>n.x!=null)
 }
@@ -768,26 +730,15 @@ document.addEventListener('DOMContentLoaded',()=>{
     const bb=bounds(); if(!bb) return
     const cx=bb.minX+((nx*W-PAD)/(W-PAD*2))*bb.rx
     const cy=bb.minY+((ny*H-PAD)/(H-PAD*2))*bb.ry
-    if(activeTab==='2d'&&Graph2){ Graph2.centerAt(cx,cy,500); Graph2.zoom(3,500) }
-    else if(activeTab==='3d'&&Graph3){
-      const z=Math.max(120,bb.rx*0.5)
-      Graph3.cameraPosition({x:cx,y:cy,z},{x:cx,y:cy,z:0},600)
-    }
+    if(Graph2){ Graph2.centerAt(cx,cy,500); Graph2.zoom(3,500) }
   })
 })
 
 // ── Keep-alive: anima rings 2D y pulso de color de módulos en 3D ──────────────
 let _kaLast = 0
 ;(function keepAlive(now){
-  if (activeTab==='2d' && Graph2) {
-    Graph2.refresh()
-  } else if (activeTab==='3d' && Graph3) {
-    // Throttle a ~12fps — reasignar nodeColor recrea materiales, no abusar
-    if (now - _kaLast > 80) {
-      _kaLast = now
-      const pulse = (Math.sin(now*0.0022)+1)/2
-      Graph3.nodeColor(n => node3DColor(n, pulse))
-    }
+  if (activeTab==='2d' && Graph2 && typeof Graph2.refresh==='function') {
+    Graph2.refresh()   // mantiene vivos los rings animados de skills (si la versión lo soporta)
   }
   requestAnimationFrame(keepAlive)
 })(0)
