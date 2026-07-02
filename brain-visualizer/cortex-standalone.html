@@ -412,7 +412,7 @@ function render() {
   } else {
     if (!Graph2) { initGraph2D(); }
     Graph2.graphData({ nodes: _nodes, links: _links })
-    if (!Graph2._zoomed) { Graph2._zoomed = true; setTimeout(()=>Graph2.zoomToFit(700,60), 2500) }
+    // el encuadre 2D lo hace Graph2.onEngineStop (al estabilizarse la simulación), NO un setTimeout fijo
   }
   updateStats()
   startMinimap()
@@ -659,6 +659,9 @@ function initGraph2D() {
     .strength(l => l.relation==='covers' ? 0.02 : 0.5)
   Graph2.d3VelocityDecay(0.4)
   Graph2.cooldownTime(8000)
+  // encuadrar SOLO cuando la simulación se estabiliza (espejo del 3D). Un setTimeout fijo encuadraba a mitad
+  // de la simulación -> la cámara quedaba en un punto vacío mientras los nodos seguían moviéndose.
+  Graph2.onEngineStop(()=>{ if(!Graph2._fit){ Graph2._fit=true; Graph2.zoomToFit(600,70) } })
 }
 
 // ── Panel de detalle ──────────────────────────────────────────────────────────
