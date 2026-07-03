@@ -138,11 +138,13 @@
     <div class="cost-kpi total"><div class="v" id="cost-grand">$—</div><div class="l">GASTO TOTAL</div></div>
     <div class="cost-kpi"><div class="v" id="cost-runs">—</div><div class="l">EJECUCIONES</div></div>
     <div class="cost-kpi" id="ds-kpi" title="Saldo restante de la cuenta DeepSeek (API /user/balance)"><div class="v" id="ds-balance">$—</div><div class="l">DEEPSEEK RESTANTE</div></div>
+    <div class="cost-kpi" id="gcp-kpi" title="Gasto REAL de GCP del mes (billing export, todos los proyectos de la cuenta). El agente = procontacto-claude."><div class="v" id="cost-gcp">$—</div><div class="l">GCP REAL (billing)</div></div>
     <select id="cost-month" onchange="onMonthChange(this.value)" title="Mes de los consumos"
             style="background:#141b29;color:#cfe2ff;border:1px solid #2b3654;border-radius:9px;padding:8px 11px;font-size:13px;cursor:pointer"></select>
     <input id="cost-search" placeholder="🔎 Buscar issue (ej: PDDARTEL-69)…" oninput="renderCosts()">
     <span class="cost-refresh" id="cost-refresh">—</span>
   </div>
+  <div id="gcp-billing-body"></div>
   <div id="cost-body"></div>
 </div>
 
@@ -163,6 +165,9 @@
 
   <label class="lbl-toggle" style="margin-left:8px;">
     <input type="checkbox" id="labels-toggle" onchange="render()" style="cursor:pointer;"> Etiquetas
+  </label>
+  <label class="lbl-toggle" style="margin-left:8px;" title="Mostrar los links 'cubre' (skill→módulo). Cruzan todo el grafo.">
+    <input type="checkbox" id="covers-toggle" onchange="toggleCovers(this.checked)" style="cursor:pointer;"> Cobertura
   </label>
 
   <div id="demo-tag">⚠ Demo — ejecutá el agente para datos reales</div>
@@ -270,8 +275,10 @@ let gData     = DEMO
 let gFiltered = DEMO
 let Graph2    = null
 let activeTab = '2d'
+let showCovers = false   // links 'covers' (skill→módulo) ocultos por defecto: cruzan todo el canvas
 let costsData = null, costsExpanded = new Set(), _costsTimer = null, costMonth = 'current'
 const _costsByMonth = {}   // caché mes -> payload; cambiar de mes ya visto = instantáneo
+let gcpBilling = null; const _gcpByMonth = {}   // gasto REAL de GCP (billing export) por mes
 function onMonthChange(v){ costMonth = v; loadCosts() }
 function fillMonthSelect(months, selected){
   const sel = document.getElementById('cost-month'); if(!sel) return
@@ -455,6 +462,13 @@ function radialLayout(nodes, links){
   return nodes;
 }
 
+// Toggle de los links 'covers' (skill→módulo). Re-setear el accessor fuerza a ForceGraph a re-evaluar
+// la visibilidad de los links y redibujar, sin re-correr el layout.
+function toggleCovers(on){
+  showCovers = !!on
+  if (Graph2) Graph2.linkVisibility(l => l.relation !== 'covers' || showCovers)
+}
+
 function render() {
   gFiltered = computeFiltered()
   const _nodes = gFiltered.nodes.map(n=>({...n}))
@@ -509,6 +523,7 @@ function _applyCosts(d){
 // force=true (auto-refresh) -> siempre pega a la red, sin spinner, deja la tabla visible.
 // force=false (cambio de mes / primer load) -> usa caché si existe (instantáneo); si no, spinner + red.
 async function loadCosts(force){
+  loadGcpBilling(force)   // gasto REAL de GCP (billing export) en paralelo
   const body=document.getElementById('cost-body')
   const cached = _costsByMonth[costMonth]
   if(cached && !force){                 // mes ya visto -> mostrarlo YA, sin esperar la red
@@ -608,6 +623,51 @@ function renderCosts(){
 
 function toggleProj(p){ costsExpanded.has(p)?costsExpanded.delete(p):costsExpanded.add(p); renderCosts() }
 
+// ── Gasto REAL de GCP (billing export) — MXN + USD, por servicio ──────────────
+async function loadGcpBilling(force){
+  const cached = _gcpByMonth[costMonth]
+  if(cached && !force){ gcpBilling = cached; renderGcpBilling(); return }
+  const reqMonth = costMonth
+  try {
+    const d = await tryFetch(`${BACKEND}/api/gcp-billing?month=${encodeURIComponent(reqMonth)}`, 20000)
+    _gcpByMonth[reqMonth] = d
+    if(d && d.ok && d.selected_month) _gcpByMonth[d.selected_month] = d
+    if(reqMonth !== costMonth) return
+    gcpBilling = d; renderGcpBilling()
+  } catch(e){ /* deja el último render */ }
+}
+
+function renderGcpBilling(){
+  const kpi=document.getElementById('cost-gcp'), box=document.getElementById('gcp-billing-body')
+  if(!kpi||!box) return
+  const d=gcpBilling
+  if(!d || !d.ok){
+    kpi.textContent='—'
+    document.getElementById('gcp-kpi').title = 'Gasto REAL de GCP no disponible: ' +
+      ((d&&d.error)||'sin backend') + '  — el SA qa-agent necesita bigquery.dataViewer sobre procontacto-bi.raw_gcp_billing.'
+    box.innerHTML = d && d.error ?
+      `<div class="cost-empty">Gasto real de GCP no disponible.<br><span style="color:#ffd166">El SA <code>qa-agent</code> necesita permiso de lectura (BigQuery Data Viewer) sobre <code>procontacto-bi.raw_gcp_billing</code>.</span><br><span style="font-size:11px;color:#6a8aa8">${(d.error||'').slice(0,160)}</span></div>` : ''
+    return
+  }
+  // KPI: USD grande + MXN en el título; el agente (procontacto-claude) aparte
+  kpi.textContent = fmtUSD(d.grand_usd)
+  document.getElementById('gcp-kpi').title =
+    `Gasto REAL GCP (billing) del mes: $${(d.grand_mxn||0).toLocaleString()} MXN ≈ $${d.grand_usd} USD (todos los proyectos).\n`
+    + `Solo el QA Agent (procontacto-claude): $${(d.agent_mxn||0).toLocaleString()} MXN ≈ $${d.agent_usd} USD.\n`
+    + `NO incluye DeepSeek (se factura fuera de GCP).`
+  const rows=(d.by_service||[])
+  let h = `<div style="font-size:11px;color:#6a8aa8;margin:2px 0 8px">💰 <b>Gasto REAL GCP</b> (billing export, todos los proyectos) — `
+        + `total $${(d.grand_mxn||0).toLocaleString()} MXN ≈ <b>$${d.grand_usd} USD</b> · `
+        + `QA Agent solo: $${(d.agent_mxn||0).toLocaleString()} MXN ≈ <b>$${d.agent_usd} USD</b>. NO incluye DeepSeek (externo).</div>`
+  h += `<table class="cost-tbl"><thead><tr><th class="l">Servicio</th><th>MXN</th><th>USD</th></tr></thead><tbody>`
+  for(const s of rows){
+    h += `<tr><td class="l" style="color:#cfe2ff">${s.service||'—'}</td>`
+       + `<td>$${(s.mxn||0).toLocaleString()}</td><td class="usd total">${fmtUSD(s.usd)}</td></tr>`
+  }
+  h += `</tbody></table>`
+  box.innerHTML = rows.length ? h : ''
+}
+
 // ── Init 2D ───────────────────────────────────────────────────────────────────
 function initGraph2D() {
   Graph2 = ForceGraph()(document.getElementById('graph-2d'))
@@ -687,6 +747,7 @@ function initGraph2D() {
     .linkDirectionalParticleWidth(1.6)
     .linkDirectionalParticleColor(()=> 'rgba(79,195,247,0.9)')
     .linkLabel(l => l.relation||'')
+    .linkVisibility(l => l.relation !== 'covers' || showCovers)   // 'covers' (skill→módulo) OFF por defecto: cruzan todo el canvas
     .onNodeClick(showDetail)
     .onBackgroundClick(closeD)
 
