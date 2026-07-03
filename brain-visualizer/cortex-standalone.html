@@ -401,6 +401,27 @@ function radialLayout(nodes, links){
     });
   }
 
+  // MÓDULOS HUÉRFANOS CON SUBMÓDULOS: p.ej. el KG tiene "Devoluciones has_submodule X" pero NO
+  // "SOLO contains_module Devoluciones" -> place() nunca alcanza a Devoluciones, así que él y sus
+  // submódulos caerían al fallback y se dispersarían en el anillo externo. Los tratamos como módulos
+  // de nivel-0 de su proyecto: los ubicamos en un anillo alrededor del proyecto (o del centro) y
+  // abanicamos su subárbol con place(), igual que a los módulos reales.
+  const orphanRoots = nodes.filter(n => !visited.has(n.id) && (kids.get(n.id) || []).some(id => byId.has(id) && !visited.has(id)));
+  if (orphanRoots.length){
+    const byProj = {};
+    orphanRoots.forEach(n => { const k = (n.project && byId.has(n.project)) ? n.project : '__center'; (byProj[k] = byProj[k] || []).push(n); });
+    for (const pid in byProj){
+      const pn = byId.get(pid);
+      const cx = (pn && pn.fx != null) ? pn.fx : 0, cy = (pn && pn.fy != null) ? pn.fy : 0;
+      const arr = byProj[pid];
+      const R = 760;   // un poco más afuera que el anillo de módulos reales, para no encimarse
+      arr.forEach((n, j) => {
+        const a = 2*Math.PI*j/arr.length + 0.7;
+        place(n, cx + R*Math.cos(a), cy + R*Math.sin(a), 1, cx, cy);   // level 1 -> abanica sus hijos hacia afuera
+      });
+    }
+  }
+
   // FALLBACK determinístico: los nodos que la jerarquía NO ubicó (p.ej. free-knowledge con anclaje débil,
   // "Operador Logístico" y similares) hay que FIJARLOS igual — si quedan sin fx/fy la física los DISPARA
   // lejos del cluster. Los anclamos junto a sus vecinos ya ubicados (promedio + offset áureo para no
