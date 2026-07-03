@@ -43,6 +43,10 @@ app.add_middleware(
 
 PROJECT_ID = "procontacto-claude"
 DATASET    = "qa_agent"
+# Export de facturación REAL de GCP (fuente de verdad; distinto de qa_agent.run_costs que es estimación in-app).
+# Vive en procontacto-bi -> el SA qa-agent necesita roles/bigquery.dataViewer sobre ese dataset (si no, /api/gcp-billing
+# devuelve ok:false con el error de permiso). La query se ejecuta/factura en PROJECT_ID (jobUser propio del SA).
+BILLING_TABLE = "procontacto-bi.raw_gcp_billing.gcp_billing_export_v1_01E617_7DB838_84F9C5"
 
 
 # ── Módulos canónicos ─────────────────────────────────────────────────────────
@@ -599,6 +603,63 @@ def get_costs(project: str = Query("ALL"), limit: int = Query(300), month: str =
     except Exception as e:
         return {"by_project": [], "executions": [], "grand_total_usd": 0, "total_runs": 0,
                 "months": [], "selected_month": None, "ok": False, "error": str(e)}
+
+
+@app.get("/api/gcp-billing")
+def get_gcp_billing(month: str = Query("current")):
+    """Gasto REAL de GCP (billing export, no estimación). Neto = cost + créditos. Por servicio y por proyecto,
+    en MXN y USD (usando la currency_conversion_rate real del export). Filtra por MES ('current'|'all'|'YYYY-MM').
+    OJO: la tabla vive en procontacto-bi -> requiere que el SA qa-agent tenga bigquery.dataViewer ahí; si no,
+    devuelve ok:false con el error. NO incluye DeepSeek (se factura fuera de GCP; eso está en /api/costs)."""
+    try:
+        from google.cloud import bigquery
+        from google.cloud.bigquery import QueryJobConfig, ScalarQueryParameter
+        client = bigquery.Client(project=PROJECT_ID)
+        tbl = f"`{BILLING_TABLE}`"
+
+        months = [r["m"] for r in client.query(
+            f"SELECT DISTINCT FORMAT_DATE('%Y-%m', DATE(usage_start_time)) AS m FROM {tbl} "
+            f"WHERE usage_start_time IS NOT NULL ORDER BY m DESC"
+        ).result()]
+        cur_month = months[0] if months else None
+
+        params, month_clause, sel_month = [], "", month
+        if month != "all":
+            if month == "current":
+                sel_month = cur_month
+            if sel_month:
+                month_clause = "WHERE FORMAT_DATE('%Y-%m', DATE(usage_start_time)) = @month"
+                params.append(ScalarQueryParameter("month", "STRING", sel_month))
+        cfg = QueryJobConfig(query_parameters=params) if params else None
+
+        # neto MXN + USD (usando la tasa real de conversión del propio export)
+        net_mxn = "SUM(cost) + SUM((SELECT IFNULL(SUM(c.amount),0) FROM UNNEST(credits) c))"
+        rate = "AVG(currency_conversion_rate)"
+        by_service = [dict(r) for r in client.query(f"""
+            SELECT service.description AS service,
+                   ROUND({net_mxn}, 2) AS mxn,
+                   ROUND(SAFE_DIVIDE({net_mxn}, {rate}), 2) AS usd
+            FROM {tbl} {month_clause}
+            GROUP BY service HAVING mxn > 0 ORDER BY mxn DESC
+        """, job_config=cfg).result()]
+        by_project = [dict(r) for r in client.query(f"""
+            SELECT project.id AS project,
+                   ROUND({net_mxn}, 2) AS mxn,
+                   ROUND(SAFE_DIVIDE({net_mxn}, {rate}), 2) AS usd
+            FROM {tbl} {month_clause}
+            GROUP BY project HAVING mxn > 0 ORDER BY mxn DESC
+        """, job_config=cfg).result()]
+
+        g_mxn = round(sum((s.get("mxn") or 0) for s in by_service), 2)
+        g_usd = round(sum((s.get("usd") or 0) for s in by_service), 2)
+        agent = next((p for p in by_project if p.get("project") == PROJECT_ID), None)
+        return {"ok": True, "currency": "MXN", "by_service": by_service, "by_project": by_project,
+                "grand_mxn": g_mxn, "grand_usd": g_usd,
+                "agent_mxn": (agent or {}).get("mxn", 0), "agent_usd": (agent or {}).get("usd", 0),
+                "months": months, "selected_month": (sel_month if month != "all" else "all")}
+    except Exception as e:
+        return {"ok": False, "by_service": [], "by_project": [], "grand_mxn": 0, "grand_usd": 0,
+                "months": [], "selected_month": None, "error": str(e)}
 
 
 @app.get("/api/deepseek-balance")
