@@ -273,6 +273,16 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
             if row["object"] not in module_project:
                 module_project[row["object"]] = row["subject"]
 
+    # b3) TODAS las entidades estructurales por proyecto (módulos + subjects/objects de has_submodule):
+    # para anclar bugs por NOMBRE en el texto (un bug de "LoteCuponDevolución" ancla en ese submódulo).
+    proj_entities: dict = {}
+    for row in kg_rows:
+        p = row.get("project") or "GLOBAL"
+        if row["relation"] == "contains_module" and _cm_valido(row):
+            proj_entities.setdefault(p, set()).add(row["object"])
+        elif row["relation"] == "has_submodule":
+            proj_entities.setdefault(p, set()).update({row["subject"], row["object"]})
+
     # IDs CANÓNICOS POR PROYECTO — arregla dos males vistos en el grafo real:
     # (a) MERGE de variantes que el learner escribe distinto para la misma entidad
     #     ('Operador Logístico'/'Operador Logistico'/'Operador_Logistico'/'Operador_Logistico__c'
@@ -343,6 +353,8 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
     # Links directos que vamos a reemplazar/omitir
     SKIP_AS_SOURCE = {"has_open_bug"}   # los reconstruimos con módulo como source
     bug_link_targets: set = set()       # bugs ya conectados a módulos
+    sub_sources: dict = {}              # id -> proyecto de los SUBJECTS de has_submodule (posibles huérfanos)
+    struct_targets: set = set()         # ids que YA reciben un link estructural entrante
 
     for row in kg_rows:
         relation = row["relation"]
@@ -372,6 +384,19 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
             # el módulo tiene que existir en ESTE proyecto; si no, el ancla es el proyecto.
             if module and (project, module) not in module_pairs:
                 module = None
+            anchor_kind = "module" if module else None
+            if not module:
+                # 3.5) matchear el TEXTO del bug contra TODAS las entidades estructurales del MISMO
+                # proyecto (módulos Y submódulos): "[TC-SOLO-2185-02] LoteCuponDevolución..." ancla en
+                # el submódulo 'LoteCuponDevolucion' (de Devoluciones) en vez de colgar del proyecto.
+                tnorm = _normalize(obj)
+                best = None
+                for name in proj_entities.get(project, ()):
+                    nn = _normalize(name)
+                    if len(nn) >= 5 and nn in tnorm and (best is None or len(nn) > len(_normalize(best))):
+                        best = name
+                if best:
+                    module, anchor_kind = best, "entity"
             anchor = module if module else project   # proyecto como último recurso
 
             anchor_id = _nid(anchor, project)
@@ -379,7 +404,9 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
             k = f"{anchor_id}||{bug_id}"
             if k not in bug_link_targets:
                 bug_link_targets.add(k)
-                upsert_node(anchor_id, "module" if module else "project", False, label=anchor, project=project)
+                # 'entity' = submódulo/nodo existente -> NO forzarle tipo module (prio generic no pisa)
+                a_type = "module" if anchor_kind == "module" else ("generic" if module else "project")
+                upsert_node(anchor_id, a_type, False, label=anchor, project=project)
                 upsert_node(bug_id, "bug", is_new, label=obj, project=project)
                 links.append({"source": anchor_id, "target": bug_id, "relation": "has_open_bug", "value": conf})
             continue
@@ -392,14 +419,27 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
             upsert_node(subject, subj_type, is_new, label=subject, project=project)
             upsert_node(oid,     obj_type,  is_new, label=obj, project=project)
             links.append({"source": subject, "target": oid, "relation": relation, "value": conf})
+            struct_targets.add(oid)
         elif relation == "has_submodule":
             sid = _nid(subject, project)   # todo queda dentro del proyecto de la fila
             oid = _nid(obj, project)
             upsert_node(sid, subj_type, is_new, label=subject, project=project)
             upsert_node(oid, obj_type,  is_new, label=obj, project=project)
             links.append({"source": sid, "target": oid, "relation": relation, "value": conf})
+            struct_targets.add(oid)
+            sub_sources.setdefault(sid, project)
         # Resto de relaciones (failure_rate, tested_in_module, has_label, failed_because,
         # signals, etc.) NO se renderizan como nodos sueltos — son metadata o ruido visual.
+
+    # ── Paso 3.9: módulos HUÉRFANOS -> contains_module SINTÉTICO ─────────────
+    # El learner a veces registra 'Devoluciones has_submodule X' pero NUNCA 'SOLO contains_module
+    # Devoluciones' -> el módulo quedaba SUELTO (sin link visible al proyecto) en ambas vistas.
+    # Lo enganchamos al proyecto de su fila con un contains_module sintético.
+    for oid, oproj in sub_sources.items():
+        if oid in struct_targets or oid in project_keys or not oproj or oproj == "GLOBAL":
+            continue
+        upsert_node(oproj, "project", False, label=oproj, project=oproj)
+        links.append({"source": oproj, "target": oid, "relation": "contains_module", "value": 0.4})
 
     # ── Paso 4: skills ───────────────────────────────────────────────────────
 
@@ -744,12 +784,18 @@ def get_gcp_billing(month: str = Query("current")):
         # Gasto REAL del AGENTE (procontacto-claude) mapeado a las MISMAS columnas de la tabla por-ejecución
         # (cloudrun/gemini/vm/bigquery/otros) -> se muestra como fila acumulada "GCP REAL" ahí, no separado.
         agent_where = (month_clause + " AND " if month_clause else "WHERE ") + f"project.id = '{PROJECT_ID}'"
-        agent_cols = {"cloudrun": 0.0, "gemini": 0.0, "vm": 0.0, "bigquery": 0.0, "otros": 0.0}
+        agent_cols = {k: 0.0 for k in ("cloudrun", "gemini", "vm", "bigquery",
+                                       "networking", "build", "artifact", "storage", "secret", "otros")}
         for r in client.query(f"""
             SELECT CASE WHEN service.description='Cloud Run' THEN 'cloudrun'
                         WHEN service.description='Vertex AI' THEN 'gemini'
                         WHEN service.description='Compute Engine' THEN 'vm'
                         WHEN service.description='BigQuery' THEN 'bigquery'
+                        WHEN service.description='Networking' THEN 'networking'
+                        WHEN service.description='Cloud Build' THEN 'build'
+                        WHEN service.description='Artifact Registry' THEN 'artifact'
+                        WHEN service.description='Cloud Storage' THEN 'storage'
+                        WHEN service.description='Secret Manager' THEN 'secret'
                         ELSE 'otros' END AS col,
                    ROUND(SAFE_DIVIDE({net_mxn}, {rate}), 4) AS usd
             FROM {tbl} {agent_where}
@@ -784,16 +830,33 @@ def deepseek_balance():
         # key: env -> Secret Manager (si está la lib) -> gcloud CLI (fallback sin dep)
         key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
         if not key:
-            try:
+            try:  # 1) lib secretmanager (si está instalada)
                 from google.cloud import secretmanager
                 sm = secretmanager.SecretManagerServiceClient()
                 key = sm.access_secret_version(
                     name=f"projects/{PROJECT_ID}/secrets/DEEPSEEK_API_KEY/versions/latest").payload.data.decode().strip()
             except Exception:
+                pass
+        if not key:
+            try:  # 2) REST de Secret Manager con el token del SA (google-cloud-secret-manager no está en system python)
+                import google.auth, google.auth.transport.requests, base64
+                creds, _ = google.auth.default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
+                creds.refresh(google.auth.transport.requests.Request())
+                r = urllib.request.Request(
+                    f"https://secretmanager.googleapis.com/v1/projects/{PROJECT_ID}/secrets/DEEPSEEK_API_KEY/versions/latest:access",
+                    headers={"Authorization": f"Bearer {creds.token}"})
+                with urllib.request.urlopen(r, timeout=15) as resp:
+                    key = base64.b64decode(json.loads(resp.read())["payload"]["data"]).decode().strip()
+            except Exception:
+                pass
+        if not key:
+            try:  # 3) fallback gcloud CLI (shell=True para ejecutar gcloud.CMD en Windows)
                 gc = shutil.which("gcloud") or "gcloud"
-                key = subprocess.run([gc, "secrets", "versions", "access", "latest",
-                                      "--secret", "DEEPSEEK_API_KEY", "--project", PROJECT_ID],
-                                     capture_output=True, text=True, timeout=25).stdout.strip()
+                key = subprocess.run(
+                    f'"{gc}" secrets versions access latest --secret DEEPSEEK_API_KEY --project {PROJECT_ID}',
+                    capture_output=True, text=True, timeout=25, shell=True).stdout.strip()
+            except Exception:
+                pass
         if not key:
             return {"ok": False, "error": "no pude obtener DEEPSEEK_API_KEY (env/secretmanager/gcloud)"}
         req = urllib.request.Request(
