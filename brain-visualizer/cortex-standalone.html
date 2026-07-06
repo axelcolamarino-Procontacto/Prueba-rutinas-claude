@@ -474,9 +474,52 @@ function render() {
   gFiltered = computeFiltered()
   const _nodes = gFiltered.nodes.map(n=>({...n}))
   const _links = gFiltered.links.map(l=>({...l}))
-  // radialLayout fija fx/fy de TODOS los nodos (jerarquía + fallback determinístico). Con posiciones
-  // fijas la simulación no mueve nada -> grafo determinista y estático: no deriva ni dispara nodos.
-  radialLayout(_nodes, _links)
+  const _proj = document.getElementById('project-filter')?.value || 'ALL'
+  if (!Graph2) { initGraph2D(); }
+  if (_proj !== 'ALL') {
+    // ── VISTA POR-PROYECTO: modo NATIVO de la librería (dagMode radialout) ──
+    // La investigación de force-graph 1.43.5 indica que este es el camino correcto para un árbol
+    // radial: anillos concéntricos por profundidad (proyecto→módulos→submódulos→bugs) y el abanico
+    // angular emerge de la fuerza 'link' — multi-padre y huérfanos se acomodan SOLOS (lo que el
+    // layout manual parchaba con casos especiales). Anclas fijas: el proyecto al centro y las
+    // skills en su halo (fuera del DAG vía dagNodeFilter).
+    _nodes.forEach(n => { delete n.fx; delete n.fy; delete n.x; delete n.y; delete n.vx; delete n.vy })
+    const pn = _nodes.find(n => n.type === 'project' && n.id !== 'GLOBAL')
+    if (pn) { pn.fx = 0; pn.fy = 0 }
+    const sks = _nodes.filter(n => String(n.id).startsWith('skill:'))
+    const _rSk = Math.min(140, Math.max(80, sks.length * 7))   // halo ADENTRO del anillo de módulos (depth1=170)
+    sks.forEach((s, i) => {
+      const a = 2*Math.PI*i/Math.max(1, sks.length) + 0.4
+      s.fx = Math.round(_rSk*Math.cos(a)); s.fy = Math.round(_rSk*Math.sin(a))
+    })
+    // Huérfanos (sin link entrante, ej "Devoluciones" con has_submodule pero sin contains_module):
+    // el DAG les daría depth 0 = ENCIMA del proyecto. Engancharlos con un link sintético al proyecto
+    // (semánticamente correcto: son módulos del proyecto) -> caen al anillo de módulos.
+    if (pn) {
+      const _hasIn = new Set(_links.filter(l => l.relation !== 'covers')
+        .map(l => (l.target && l.target.id) || l.target))
+      _nodes.forEach(n => {
+        if (n.type !== 'project' && !String(n.id).startsWith('skill:') && !_hasIn.has(n.id))
+          _links.push({ source: pn.id, target: n.id, relation: 'contains_module', value: 0.4 })
+      })
+    }
+    Graph2.dagMode('radialout').dagLevelDistance(280)         // anillos amplios: aire para las etiquetas
+      .dagNodeFilter(n => !String(n.id).startsWith('skill:'))
+      .onDagError(() => {})                                   // ciclos del KG: ignorar, no romper
+    Graph2.d3Force('charge').strength(-160).distanceMax(420)  // reparte angularmente los módulos del anillo
+    Graph2.d3Force('link')
+      .distance(l => l.relation === 'covers' ? 200 : 60)
+      .strength(l => l.relation === 'covers' ? 0.03 : 1)      // covers = hilo suave, no deforma el árbol
+  } else {
+    // ── VISTA "TODOS": layout PINNED deliberado (estrella + dandelions), sanción de la investigación:
+    // pinning de anclas es práctica estándar; acá el diseño es intencional y determinista.
+    Graph2.dagMode(null)
+    Graph2.d3Force('charge').strength(n => n.type==='project' ? -1000 : -220).distanceMax(900)
+    Graph2.d3Force('link')
+      .distance(l => l.relation==='covers'?150 : l.relation==='has_open_bug'?85 : l.relation==='has_submodule'?55 : 50)
+      .strength(l => l.relation==='covers' ? 0.02 : 0.5)
+    radialLayout(_nodes, _links)
+  }
   // Marcado para el render: __star = covers skill→PROYECTO (la "estrella", visible por defecto);
   // covers→módulo quedan para hover/toggle. __links por nodo (highlight en hover, patrón oficial).
   // __curve: curvar links jerárquicos LARGOS (multi-padre) y los covers→módulo para que no
@@ -492,16 +535,21 @@ function render() {
       sn.__links.push(l); tn.__links.push(l)
       const d = Math.hypot((sn.fx || 0) - (tn.fx || 0), (sn.fy || 0) - (tn.fy || 0))
       // 700px: por encima del radio del círculo de módulos (~624) -> curva SOLO los links
-      // anómalos (multi-padre cruzando el cluster), no los rayos normales proyecto→módulo
+      // anómalos (multi-padre cruzando el cluster), no los rayos normales proyecto→módulo.
+      // (En la vista dagMode no hay fx pre-simulación -> d≈0 -> sin curvas; el layout nativo
+      //  ya acomoda los multi-padre entre sus padres.)
       l.__curve = (l.relation === 'covers' && !l.__star) ? 0.3
                 : (l.relation !== 'covers' && d > 700) ? 0.25 : 0
     }
   })
-  if (!Graph2) { initGraph2D(); }
   Graph2._fit = false                                  // datos nuevos -> permitir un encuadre
   Graph2.graphData({ nodes: _nodes, links: _links })
-  // posiciones fijas => un setTimeout es seguro (los nodos NO se mueven); onEngineStop lo respalda
-  setTimeout(() => { if (!Graph2._fit) { Graph2._fit = true; Graph2.zoomToFit(600, 70) } }, 600)
+  if (_proj === 'ALL') {
+    // posiciones 100% fijas => un setTimeout es seguro (los nodos NO se mueven); onEngineStop respalda
+    setTimeout(() => { if (!Graph2._fit) { Graph2._fit = true; Graph2.zoomToFit(600, 70) } }, 600)
+  } else {
+    Graph2.d3ReheatSimulation()                        // la vista dag SÍ simula; encuadra onEngineStop
+  }
   updateStats()
   startMinimap()
 }
@@ -788,6 +836,7 @@ function initGraph2D() {
     l.relation==='covers'?150 : l.relation==='has_open_bug'?85 : l.relation==='has_submodule'?55 : 50)
     .strength(l => l.relation==='covers' ? 0.02 : 0.5)
   Graph2.d3VelocityDecay(0.4)
+  Graph2.warmupTicks(180)     // la vista dag resuelve el layout OFF-SCREEN antes de pintar (no se ve "hervir")
   Graph2.cooldownTime(4000)
   // Encuadre de respaldo: las posiciones ya vienen FIJAS desde render() (fx/fy), así que la
   // simulación se detiene enseguida sin mover nada -> el encuadre queda estable, no deriva.
