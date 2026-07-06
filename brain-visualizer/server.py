@@ -125,6 +125,17 @@ def guess_module(text: str, available_modules: set):
     return best
 
 
+def _canon_key(s: str) -> str:
+    """Clave de MERGE de variantes de nombre que el learner escribe distinto para la misma entidad:
+    'Operador Logístico' ≡ 'Operador Logistico' ≡ 'Operador_Logistico' ≡ 'Operador_Logistico__c',
+    'Templates_WhatsApp' ≡ 'WhatsApp Templates'. Sin acentos, lower, sin sufijo __c/__r, _ y
+    puntuación -> espacio, y palabras ORDENADAS (mata inversiones de orden)."""
+    t = unicodedata.normalize("NFKD", str(s)).encode("ascii", "ignore").decode().lower().strip()
+    t = re.sub(r"__[cr]\b", "", t)          # sufijos de API name de Salesforce
+    t = re.sub(r"[^a-z0-9]+", " ", t)       # _ , - , . , etc -> espacio
+    return " ".join(sorted(t.split()))
+
+
 def _normalize(s: str) -> str:
     """Minúsculas + sin tildes para comparación."""
     return unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().lower().strip()
@@ -230,6 +241,28 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
         if row["relation"] in ("has_submodule", "failure_rate")
     }
 
+    # b2) Dueño de cada módulo canónico (para namespacear ids cross-proyecto) + pares exactos
+    # (proyecto, módulo) para NUNCA anclar un bug/knowledge a un módulo homónimo de OTRO proyecto.
+    module_project: dict = {}
+    module_pairs: set = set()
+    for row in kg_rows:
+        if _cm_valido(row):
+            module_pairs.add((row["subject"], row["object"]))
+            if row["object"] not in module_project:
+                module_project[row["object"]] = row["subject"]
+
+    # IDs CANÓNICOS POR PROYECTO — arregla dos males vistos en el grafo real:
+    # (a) MERGE de variantes que el learner escribe distinto para la misma entidad
+    #     ('Operador Logístico'/'Operador Logistico'/'Operador_Logistico'/'Operador_Logistico__c'
+    #     eran 4 nodos regados con los hijos repartidos -> spaghetti de links de 1000+px);
+    # (b) SPLIT de nombres iguales de proyectos distintos ('Campos' de CMIV2 y el de PDDARTEL
+    #     compartían UN nodo -> línea cruzando ambos clusters).
+    def _nid(name, project):
+        s = str(name)
+        if s.startswith("skill:") or s in project_keys or s == "GLOBAL":
+            return s                      # proyectos y skills no se namespacean
+        return f"{project or 'GLOBAL'}::{_canon_key(s)}"
+
     # c) failure_rate max por módulo (de triples module → failure_rate → "alto (58.1%)")
     failure_rates: dict = {}
     for row in kg_rows:
@@ -249,9 +282,11 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
 
     # ── Paso 2: helper upsert ────────────────────────────────────────────────
 
+    _TYPE_PRIO = {"project": 5, "skill": 5, "module": 4, "bug": 3}   # resto = 1
+
     def upsert_node(node_id: str, node_type: str, is_new: bool = False, **extra):
+        label = extra.pop("label", node_id)
         if node_id not in nodes:
-            label = extra.pop("label", node_id)
             # Truncar labels largos (bugs tienen summaries de 120 chars)
             display = (label[:35] + "…") if len(label) > 38 else label
             # Tamaño base según jerarquía
@@ -259,16 +294,27 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
             nodes[node_id] = {
                 "id":      node_id,
                 "name":    display,
+                "_raw":    label,
                 "type":    node_type,
                 "val":     base_val,
                 "is_new":  is_new,
                 **extra
             }
         else:
+            nd = nodes[node_id]
+            # merge de VARIANTES (mismo id canónico): quedarse con el label más "humano"
+            # (con acentos y espacios gana a API-names tipo Operador_Logistico__c)
+            def _score(t): return (any(ord(c) > 127 for c in t), " " in t, len(t))
+            if label != node_id and _score(label) > _score(nd.get("_raw", nd["name"])):
+                nd["_raw"] = label
+                nd["name"] = (label[:35] + "…") if len(label) > 38 else label
+            # y con el TIPO más fuerte (module gana a generic/sf_field)
+            if _TYPE_PRIO.get(node_type, 1) > _TYPE_PRIO.get(nd["type"], 1):
+                nd["type"] = node_type
             if node_type not in ("project", "module", "bug"):
-                nodes[node_id]["val"] += 1  # solo aumentar val para nodos genéricos
+                nd["val"] += 1  # solo aumentar val para nodos genéricos
             if is_new:
-                nodes[node_id]["is_new"] = True
+                nd["is_new"] = True
 
     # ── Paso 3: procesar triples ─────────────────────────────────────────────
 
@@ -300,27 +346,36 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
                 module = issue_to_module.get(subject)
             else:
                 module = guess_module(obj, canonical_modules)
+            # NUNCA anclar a un módulo homónimo de OTRO proyecto (dibujaba una línea cross-cluster):
+            # el módulo tiene que existir en ESTE proyecto; si no, el ancla es el proyecto.
+            if module and (project, module) not in module_pairs:
+                module = None
             anchor = module if module else project   # proyecto como último recurso
 
-            k = f"{anchor}||{obj}"
+            anchor_id = _nid(anchor, project)
+            bug_id = _nid(obj, project)
+            k = f"{anchor_id}||{bug_id}"
             if k not in bug_link_targets:
                 bug_link_targets.add(k)
-                upsert_node(anchor, "module" if module else "project", False, project=project)
-                upsert_node(obj, "bug", is_new, project=project)
-                links.append({"source": anchor, "target": obj, "relation": "has_open_bug", "value": conf})
+                upsert_node(anchor_id, "module" if module else "project", False, label=anchor, project=project)
+                upsert_node(bug_id, "bug", is_new, label=obj, project=project)
+                links.append({"source": anchor_id, "target": bug_id, "relation": "has_open_bug", "value": conf})
             continue
 
         # Estructura del cerebro: proyecto→módulo y módulo→submódulo
         if relation == "contains_module":
             if not _cm_valido(row):
                 continue   # proyecto stray (TQ/TEST) o backfill en proyecto con backbone real -> no renderizar
-            upsert_node(subject, subj_type, is_new, project=project)
-            upsert_node(obj,     obj_type,  is_new, project=project)
-            links.append({"source": subject, "target": obj, "relation": relation, "value": conf})
+            oid = _nid(obj, subject)   # el dueño del módulo es el subject (el proyecto)
+            upsert_node(subject, subj_type, is_new, label=subject, project=project)
+            upsert_node(oid,     obj_type,  is_new, label=obj, project=project)
+            links.append({"source": subject, "target": oid, "relation": relation, "value": conf})
         elif relation == "has_submodule":
-            upsert_node(subject, subj_type, is_new, project=project)
-            upsert_node(obj,     obj_type,  is_new, project=project)
-            links.append({"source": subject, "target": obj, "relation": relation, "value": conf})
+            sid = _nid(subject, project)   # todo queda dentro del proyecto de la fila
+            oid = _nid(obj, project)
+            upsert_node(sid, subj_type, is_new, label=subject, project=project)
+            upsert_node(oid, obj_type,  is_new, label=obj, project=project)
+            links.append({"source": sid, "target": oid, "relation": relation, "value": conf})
         # Resto de relaciones (failure_rate, tested_in_module, has_label, failed_because,
         # signals, etc.) NO se renderizan como nodos sueltos — son metadata o ruido visual.
 
@@ -339,7 +394,8 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
         # Conectar la skill a su(s) ancla(s), sin crear nodos keyword sueltos:
         mod = guess_module(title + " " + keywords, canonical_modules)
         if mod:
-            links.append({"source": skill_id, "target": mod, "relation": "covers", "value": sr})
+            links.append({"source": skill_id, "target": _nid(mod, module_project.get(mod, project)),
+                          "relation": "covers", "value": sr})
         elif project != "GLOBAL" and project in project_keys:
             links.append({"source": skill_id, "target": project, "relation": "covers", "value": sr})
         else:
@@ -377,30 +433,33 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
         if not subj or _normalize(subj) == _normalize(p):
             continue
         is_new = bool(row.get("is_new", False))
-        upsert_node(subj, _ff_type(subj), is_new, project=p)
+        sid = _nid(subj, p)
+        upsert_node(sid, _ff_type(subj), is_new, label=subj, project=p)
         # subject -> object (el conocimiento real), si el object parece una entidad (no un valor largo)
         if obj and len(str(obj)) <= 60 and _normalize(obj) not in (_normalize(subj), _normalize(p)):
-            upsert_node(obj, _ff_type(obj), False, project=p)
-            links.append({"source": subj, "target": obj, "relation": rel,
+            oid = _nid(obj, p)
+            upsert_node(oid, _ff_type(obj), False, label=obj, project=p)
+            links.append({"source": sid, "target": oid, "relation": rel,
                           "value": float(row.get("confidence_score") or 0.6)})
         # anclar el subject a su MÓDULO (si es un issue con módulo conocido) o, si no, al PROYECTO (una sola vez)
-        if subj not in _anchored:
-            _anchored.add(subj)
+        if sid not in _anchored:
+            _anchored.add(sid)
             mod = issue_to_module.get(subj)
-            if mod in canonical_modules:
-                upsert_node(mod, "module", False, project=p)
-                links.append({"source": mod, "target": subj, "relation": "tracks", "value": 0.3})
+            if mod and (p, mod) in module_pairs:   # solo módulos de ESTE proyecto (no homónimos ajenos)
+                mid = _nid(mod, p)
+                upsert_node(mid, "module", False, label=mod, project=p)
+                links.append({"source": mid, "target": sid, "relation": "tracks", "value": 0.3})
             else:
-                upsert_node(p, "project", False, project=p)
-                links.append({"source": p, "target": subj, "relation": "tracks", "value": 0.3})
+                upsert_node(p, "project", False, label=p, project=p)
+                links.append({"source": p, "target": sid, "relation": "tracks", "value": 0.3})
 
     # ── Paso 5: enriquecer módulos con failure_rate_pct ──────────────────────
 
     for node_id, node in nodes.items():
         if node["type"] == "module":
-            n_norm = _normalize(node_id)
-            # Buscar por nombre normalizado
-            fr = next((v for k, v in failure_rates.items() if _normalize(k) == n_norm), -1.0)
+            # el id ahora es "PROYECTO::clave canonica" -> matchear failure_rates por clave canónica
+            n_ck = node_id.split("::", 1)[1] if "::" in node_id else _canon_key(node_id)
+            fr = next((v for k, v in failure_rates.items() if _canon_key(k) == n_ck), -1.0)
             node["failure_rate_pct"] = fr
 
     # ── Paso 6: asegurar nodos de proyecto ───────────────────────────────────
@@ -411,7 +470,18 @@ def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, fre
             nodes[proj] = {"id": proj, "name": proj, "type": "project",
                            "val": 80, "is_new": False}
 
-    return {"nodes": list(nodes.values()), "links": links}
+    # ── Paso 7: dedupe de links (el merge de variantes puede duplicar) + sin self-loops ──
+    _seen_l, uniq_links = set(), []
+    for l in links:
+        if l["source"] == l["target"]:
+            continue
+        k = (l["source"], l["target"], l["relation"])
+        if k in _seen_l:
+            continue
+        _seen_l.add(k)
+        uniq_links.append(l)
+
+    return {"nodes": list(nodes.values()), "links": uniq_links}
 
 
 # ── Endpoints ─────────────────────────────────────────────────────────────────
