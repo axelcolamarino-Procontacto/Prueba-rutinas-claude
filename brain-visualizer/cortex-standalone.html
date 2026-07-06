@@ -713,9 +713,9 @@ function renderGcpBilling(){
   if(!d || !d.ok){
     kpi.textContent='—'
     document.getElementById('gcp-kpi').title = 'Gasto REAL de GCP no disponible: ' +
-      ((d&&d.error)||'sin backend') + '  — el SA qa-agent necesita bigquery.dataViewer sobre procontacto-bi.raw_gcp_billing.'
+      ((d&&d.error)||'sin backend') + '  — corré una vez: gcloud auth application-default login (cuenta corp).'
     box.innerHTML = d && d.error ?
-      `<div class="cost-empty">Gasto real de GCP no disponible.<br><span style="color:#ffd166">El SA <code>qa-agent</code> necesita permiso de lectura (BigQuery Data Viewer) sobre <code>procontacto-bi.raw_gcp_billing</code>.</span><br><span style="font-size:11px;color:#6a8aa8">${(d.error||'').slice(0,160)}</span></div>` : ''
+      `<div class="cost-empty">Gasto real de GCP no disponible.<br><span style="color:#ffd166">Corré una vez en tu máquina: <code>gcloud auth application-default login</code> con tu cuenta <code>axel.colamarino@procontacto.com.mx</code> (Cortex usa tu ADC de usuario para leer el billing).</span><br><span style="font-size:11px;color:#6a8aa8">${(d.error||'').slice(0,180)}</span></div>` : ''
     return
   }
   // KPI: USD grande + MXN en el título; el agente (procontacto-claude) aparte

@@ -44,9 +44,31 @@ app.add_middleware(
 PROJECT_ID = "procontacto-claude"
 DATASET    = "qa_agent"
 # Export de facturación REAL de GCP (fuente de verdad; distinto de qa_agent.run_costs que es estimación in-app).
-# Vive en procontacto-bi -> el SA qa-agent necesita roles/bigquery.dataViewer sobre ese dataset (si no, /api/gcp-billing
-# devuelve ok:false con el error de permiso). La query se ejecuta/factura en PROJECT_ID (jobUser propio del SA).
+# Vive en procontacto-bi. El SA qa-agent NO tiene acceso ahí, pero el USUARIO (axel.colamarino) SÍ -> el billing
+# se consulta con el ADC de USUARIO (gcloud application-default), no con el SA. Ver _billing_client().
 BILLING_TABLE = "procontacto-bi.raw_gcp_billing.gcp_billing_export_v1_01E617_7DB838_84F9C5"
+
+
+def _billing_client():
+    """Cliente BQ para el billing REAL: usa el ADC de USUARIO (gcloud application-default), que SÍ tiene acceso a
+    procontacto-bi (el SA no). Como Cortex corre local en la máquina del usuario, puede usar sus credenciales sin
+    depender de ningún grant al SA. Si no hay ADC de usuario, cae al default (SA) -> fallará con 403 y el endpoint
+    lo reporta con el hint de correr `gcloud auth application-default login`."""
+    from google.cloud import bigquery
+    import google.auth
+    # ADC de usuario de gcloud (independiente del sa.json que server.py fuerza para el resto de queries).
+    adc = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS_USER")
+    if not (adc and os.path.exists(adc)):
+        base = os.environ.get("CLOUDSDK_CONFIG") or (
+            os.path.join(os.environ.get("APPDATA", ""), "gcloud") if os.name == "nt"
+            else os.path.join(os.path.expanduser("~"), ".config", "gcloud"))
+        cand = os.path.join(base, "application_default_credentials.json")
+        adc = cand if os.path.exists(cand) else None
+    if adc:
+        creds, _ = google.auth.load_credentials_from_file(
+            adc, scopes=["https://www.googleapis.com/auth/cloud-platform"])
+        return bigquery.Client(project=PROJECT_ID, credentials=creds)
+    return bigquery.Client(project=PROJECT_ID)   # fallback (SA); probablemente 403 en procontacto-bi
 
 
 # ── Módulos canónicos ─────────────────────────────────────────────────────────
@@ -679,12 +701,11 @@ def get_costs(project: str = Query("ALL"), limit: int = Query(300), month: str =
 def get_gcp_billing(month: str = Query("current")):
     """Gasto REAL de GCP (billing export, no estimación). Neto = cost + créditos. Por servicio y por proyecto,
     en MXN y USD (usando la currency_conversion_rate real del export). Filtra por MES ('current'|'all'|'YYYY-MM').
-    OJO: la tabla vive en procontacto-bi -> requiere que el SA qa-agent tenga bigquery.dataViewer ahí; si no,
-    devuelve ok:false con el error. NO incluye DeepSeek (se factura fuera de GCP; eso está en /api/costs)."""
+    Usa el ADC de USUARIO (gcloud application-default) porque el billing vive en procontacto-bi y el SA no llega ahí
+    (ver _billing_client). NO incluye DeepSeek (se factura fuera de GCP; eso está en /api/costs)."""
     try:
-        from google.cloud import bigquery
         from google.cloud.bigquery import QueryJobConfig, ScalarQueryParameter
-        client = bigquery.Client(project=PROJECT_ID)
+        client = _billing_client()   # ADC de usuario (tiene acceso a procontacto-bi), NO el SA
         tbl = f"`{BILLING_TABLE}`"
 
         months = [r["m"] for r in client.query(
@@ -728,8 +749,13 @@ def get_gcp_billing(month: str = Query("current")):
                 "agent_mxn": (agent or {}).get("mxn", 0), "agent_usd": (agent or {}).get("usd", 0),
                 "months": months, "selected_month": (sel_month if month != "all" else "all")}
     except Exception as e:
+        msg = str(e)
+        if "403" in msg or "does not have" in msg or "Access Denied" in msg or "default credentials" in msg.lower():
+            msg = ("Sin acceso al billing con las credenciales actuales. Corré una vez: "
+                   "`gcloud auth application-default login` con tu cuenta corp (axel.colamarino@procontacto.com.mx). "
+                   f"Detalle: {str(e)[:160]}")
         return {"ok": False, "by_service": [], "by_project": [], "grand_mxn": 0, "grand_usd": 0,
-                "months": [], "selected_month": None, "error": str(e)}
+                "months": [], "selected_month": None, "error": msg}
 
 
 @app.get("/api/deepseek-balance")
