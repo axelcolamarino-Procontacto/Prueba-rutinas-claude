@@ -2928,21 +2928,44 @@ PASO 4.C.5 — EVALUACIÓN DE NUEVO SKILL
 Después de cada ejecución completa del issue (no por TC individual), evaluar si
 el agente descubrió un patrón no trivial que merece guardarse como skill reutilizable.
 
-CRITERIO: es un nuevo skill si:
+REGLA DE ESCASEZ — LAS SKILLS SON RARAS POR DISEÑO:
+Una skill es conocimiento DESTILADO, no un log de lo que pasó en un run.
+- MÁXIMO 1 skill nueva por run. Si hay varios candidatos, elegir el mejor y descartar el resto.
+- Lo normal es que un run NO genere ninguna skill (0 es el resultado esperado).
+- Si la lección ya está capturada como triple en agent_knowledge_graph, NO duplicarla como skill.
+
+CRITERIO: es un nuevo skill SOLO si se cumplen TODAS:
 - Se descubrió una secuencia de pasos no obvia para resolver un tipo de escenario en SF
-- El mismo root_cause apareció en 2+ TCs del mismo issue (patrón confirmado, no aislado)
-- El skill NO existe ya en agent_skills (verificar por keywords + similarity)
+- El mismo root_cause apareció en 2+ ISSUES DISTINTOS (verificar contra el historial en
+  BigQuery, no solo el run actual — un patrón dentro de un único issue es un triple del
+  knowledge graph, NO una skill)
+- El skill NO existe ya en agent_skills (verificar por keywords + títulos, ver abajo)
 
 PROCESO:
 1. Revisar los root_causes de todos los TCs del issue actual
-2. Si 2+ TCs tienen el mismo root_cause → candidato a skill
-3. Verificar si existe en agent_skills:
+2. Verificar recurrencia CROSS-ISSUE del root_cause candidato:
 ```sql
+SELECT COUNT(DISTINCT issue_key) AS issues_con_patron
+FROM `procontacto-claude.qa_agent.test_cases`
+WHERE project = '{project_key}' AND root_cause = '{root_cause}'
+  AND issue_key != '{issue_key_actual}'
+```
+   → Si issues_con_patron = 0 → NO crear skill (guardar solo el triple del KG y seguir)
+3. Verificar si existe en agent_skills — DOBLE chequeo:
+```sql
+-- a) por keywords
 SELECT COUNT(*) FROM `procontacto-claude.qa_agent.agent_skills`
 WHERE project IN ('{project_key}', 'GLOBAL')
   AND LOWER(keywords) LIKE '%{root_cause}%'
   AND active = true
 ```
+```sql
+-- b) por similitud de título: leer TODOS los títulos activos y comparar semánticamente
+SELECT skill_id, title, keywords FROM `procontacto-claude.qa_agent.agent_skills`
+WHERE active = true
+```
+   → Si algún título existente describe el mismo patrón (aunque con otras palabras)
+   → NO crear duplicado: UPDATE use_count/last_used del existente y salir.
 4. Si no existe → crear el skill:
 ```sql
 INSERT INTO `procontacto-claude.qa_agent.agent_skills`

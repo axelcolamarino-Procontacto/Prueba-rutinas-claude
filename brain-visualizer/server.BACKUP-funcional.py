@@ -6,12 +6,31 @@ Toda la lógica de tipos, failure_rate, conexiones módulo→bug vive acá.
 Correr: python server.py  →  http://localhost:8001
 """
 
+import os
 import re
 import unicodedata
 from fastapi import FastAPI, Query
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
+
+# ── Auth BigQuery: usar la key del SA qa-agent si no hay credenciales explícitas ──────────────
+# El server consulta BQ con google.cloud.bigquery, que se autentica por ADC. El ADC global de la
+# máquina puede estar apuntando a otra cuenta (p.ej. la personal gmail) SIN acceso a
+# procontacto-claude → todas las queries dan 403 y los endpoints caen a demo/vacío. Para que el
+# cortex funcione SIEMPRE (sin depender del ADC global ni de un login interactivo), si no está
+# seteado GOOGLE_APPLICATION_CREDENTIALS buscamos la key del SA y la usamos solo en este proceso.
+if not os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"):
+    for _cand in (
+        Path(__file__).resolve().parent / "sa.json",
+        Path(__file__).resolve().parent.parent.parent / "qa-adk" / "sa.json",
+    ):
+        if _cand.exists():
+            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = str(_cand)
+            print(f"[cortex] usando SA key para BigQuery: {_cand}")
+            break
+    else:
+        print("[cortex] WARN: sin GOOGLE_APPLICATION_CREDENTIALS y sin sa.json — BQ usará el ADC global")
 
 app = FastAPI(title="QA Agent Brain Visualizer")
 
@@ -24,6 +43,32 @@ app.add_middleware(
 
 PROJECT_ID = "procontacto-claude"
 DATASET    = "qa_agent"
+# Export de facturación REAL de GCP (fuente de verdad; distinto de qa_agent.run_costs que es estimación in-app).
+# Vive en procontacto-bi. El SA qa-agent NO tiene acceso ahí, pero el USUARIO (axel.colamarino) SÍ -> el billing
+# se consulta con el ADC de USUARIO (gcloud application-default), no con el SA. Ver _billing_client().
+BILLING_TABLE = "procontacto-bi.raw_gcp_billing.gcp_billing_export_v1_01E617_7DB838_84F9C5"
+
+
+def _billing_client():
+    """Cliente BQ para el billing REAL: usa el ADC de USUARIO (gcloud application-default), que SÍ tiene acceso a
+    procontacto-bi (el SA no). Como Cortex corre local en la máquina del usuario, puede usar sus credenciales sin
+    depender de ningún grant al SA. Si no hay ADC de usuario, cae al default (SA) -> fallará con 403 y el endpoint
+    lo reporta con el hint de correr `gcloud auth application-default login`."""
+    from google.cloud import bigquery
+    import google.auth
+    # ADC de usuario de gcloud (independiente del sa.json que server.py fuerza para el resto de queries).
+    adc = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS_USER")
+    if not (adc and os.path.exists(adc)):
+        base = os.environ.get("CLOUDSDK_CONFIG") or (
+            os.path.join(os.environ.get("APPDATA", ""), "gcloud") if os.name == "nt"
+            else os.path.join(os.path.expanduser("~"), ".config", "gcloud"))
+        cand = os.path.join(base, "application_default_credentials.json")
+        adc = cand if os.path.exists(cand) else None
+    if adc:
+        creds, _ = google.auth.load_credentials_from_file(
+            adc, scopes=["https://www.googleapis.com/auth/cloud-platform"])
+        return bigquery.Client(project=PROJECT_ID, credentials=creds)
+    return bigquery.Client(project=PROJECT_ID)   # fallback (SA); probablemente 403 en procontacto-bi
 
 
 # ── Módulos canónicos ─────────────────────────────────────────────────────────
@@ -102,9 +147,23 @@ def guess_module(text: str, available_modules: set):
     return best
 
 
+def _canon_key(s: str) -> str:
+    """Clave de MERGE de variantes de nombre que el learner escribe distinto para la misma entidad:
+    'Operador Logístico' ≡ 'Operador Logistico' ≡ 'Operador_Logistico' ≡ 'Operador_Logistico__c',
+    'Templates_WhatsApp' ≡ 'WhatsApp Templates'. Sin acentos, lower, sin sufijo __c/__r, _ y
+    puntuación -> espacio, y palabras ORDENADAS (mata inversiones de orden)."""
+    t = unicodedata.normalize("NFKD", str(s)).encode("ascii", "ignore").decode().lower().strip()
+    t = re.sub(r"__[cr]\b", "", t)          # sufijos de API name de Salesforce
+    t = re.sub(r"[^a-z0-9]+", " ", t)       # _ , - , . , etc -> espacio
+    return " ".join(sorted(t.split()))
+
+
 def _normalize(s: str) -> str:
     """Minúsculas + sin tildes para comparación."""
     return unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().lower().strip()
+
+
+KNOWN_PROJECTS: set = set()   # claves de proyecto NORMALIZADAS (config_canales); lo puebla get_graph
 
 
 def infer_node_type(name: str, bug_ids: set = None, module_set: set = None) -> str:
@@ -113,7 +172,7 @@ def infer_node_type(name: str, bug_ids: set = None, module_set: set = None) -> s
     name_l = name.lower()
 
     # Proyecto SIEMPRE primero — un nombre de proyecto nunca es otra cosa
-    if re.match(r'^(cmiv2|solo|cmi|global)$', n):
+    if n in KNOWN_PROJECTS or re.match(r'^(cmiv2|solo|cmi|global)$', n):
         return "project"
 
     # Tipos explícitos
@@ -159,7 +218,7 @@ def infer_node_type(name: str, bug_ids: set = None, module_set: set = None) -> s
     return "generic"
 
 
-def build_graph(kg_rows: list, skill_rows: list) -> dict:
+def build_graph(kg_rows: list, skill_rows: list, known_projects: set = None, freeform: bool = True) -> dict:
     """
     Construye nodes + links con toda la inteligencia:
     - Tipos correctos (module, bug, sf_field, sf_profile...)
@@ -178,13 +237,24 @@ def build_graph(kg_rows: list, skill_rows: list) -> dict:
         if row["relation"] == "has_open_bug"
     }
 
-    # b) Nombres canónicos de módulos (objetos de contains_module) y proyectos (subjects)
-    canonical_modules: set = {
-        row["object"] for row in kg_rows if row["relation"] == "contains_module"
-    }
-    project_keys: set = {
-        row["subject"] for row in kg_rows if row["relation"] == "contains_module"
-    }
+    # Backbone VÁLIDO: excluye proyectos stray (no en config_canales, ej TQ/TEST) y el backfill en proyectos que YA
+    # tienen backbone real del learner (CMIV2/SOLO usan su mapa limpio; PDDARTEL/DENTAL sí usan el backfill porque no tenían).
+    _known = known_projects or set()
+    _real_bb = {row["subject"] for row in kg_rows
+                if row["relation"] == "contains_module" and row.get("source_issue_key") != "backfill_test_cases"}
+    def _cm_valido(row):
+        if row["relation"] != "contains_module":
+            return False
+        if _known and row["subject"] not in _known:
+            return False
+        if row.get("source_issue_key") == "backfill_test_cases" and row["subject"] in _real_bb:
+            return False
+        return True
+
+    # b) Nombres canónicos de módulos (objetos de contains_module VÁLIDO) y proyectos (subjects)
+    canonical_modules: set = { row["object"]  for row in kg_rows if _cm_valido(row) }
+    project_keys:      set = { row["subject"] for row in kg_rows if _cm_valido(row) }
+    project_keys |= _known   # + proyectos de config_canales (aunque no tengan contains_module)
     # Versión normalizada para type inference.
     # Módulos = objects de contains_module + subjects de has_submodule/failure_rate.
     # OJO: NO incluir subjects de contains_module → esos son PROYECTOS, no módulos.
@@ -192,6 +262,38 @@ def build_graph(kg_rows: list, skill_rows: list) -> dict:
         _normalize(row["subject"]) for row in kg_rows
         if row["relation"] in ("has_submodule", "failure_rate")
     }
+
+    # b2) Dueño de cada módulo canónico (para namespacear ids cross-proyecto) + pares exactos
+    # (proyecto, módulo) para NUNCA anclar un bug/knowledge a un módulo homónimo de OTRO proyecto.
+    module_project: dict = {}
+    module_pairs: set = set()
+    for row in kg_rows:
+        if _cm_valido(row):
+            module_pairs.add((row["subject"], row["object"]))
+            if row["object"] not in module_project:
+                module_project[row["object"]] = row["subject"]
+
+    # b3) TODAS las entidades estructurales por proyecto (módulos + subjects/objects de has_submodule):
+    # para anclar bugs por NOMBRE en el texto (un bug de "LoteCuponDevolución" ancla en ese submódulo).
+    proj_entities: dict = {}
+    for row in kg_rows:
+        p = row.get("project") or "GLOBAL"
+        if row["relation"] == "contains_module" and _cm_valido(row):
+            proj_entities.setdefault(p, set()).add(row["object"])
+        elif row["relation"] == "has_submodule":
+            proj_entities.setdefault(p, set()).update({row["subject"], row["object"]})
+
+    # IDs CANÓNICOS POR PROYECTO — arregla dos males vistos en el grafo real:
+    # (a) MERGE de variantes que el learner escribe distinto para la misma entidad
+    #     ('Operador Logístico'/'Operador Logistico'/'Operador_Logistico'/'Operador_Logistico__c'
+    #     eran 4 nodos regados con los hijos repartidos -> spaghetti de links de 1000+px);
+    # (b) SPLIT de nombres iguales de proyectos distintos ('Campos' de CMIV2 y el de PDDARTEL
+    #     compartían UN nodo -> línea cruzando ambos clusters).
+    def _nid(name, project):
+        s = str(name)
+        if s.startswith("skill:") or s in project_keys or s == "GLOBAL":
+            return s                      # proyectos y skills no se namespacean
+        return f"{project or 'GLOBAL'}::{_canon_key(s)}"
 
     # c) failure_rate max por módulo (de triples module → failure_rate → "alto (58.1%)")
     failure_rates: dict = {}
@@ -212,9 +314,11 @@ def build_graph(kg_rows: list, skill_rows: list) -> dict:
 
     # ── Paso 2: helper upsert ────────────────────────────────────────────────
 
+    _TYPE_PRIO = {"project": 5, "skill": 5, "module": 4, "bug": 3}   # resto = 1
+
     def upsert_node(node_id: str, node_type: str, is_new: bool = False, **extra):
+        label = extra.pop("label", node_id)
         if node_id not in nodes:
-            label = extra.pop("label", node_id)
             # Truncar labels largos (bugs tienen summaries de 120 chars)
             display = (label[:35] + "…") if len(label) > 38 else label
             # Tamaño base según jerarquía
@@ -222,22 +326,35 @@ def build_graph(kg_rows: list, skill_rows: list) -> dict:
             nodes[node_id] = {
                 "id":      node_id,
                 "name":    display,
+                "_raw":    label,
                 "type":    node_type,
                 "val":     base_val,
                 "is_new":  is_new,
                 **extra
             }
         else:
+            nd = nodes[node_id]
+            # merge de VARIANTES (mismo id canónico): quedarse con el label más "humano"
+            # (con acentos y espacios gana a API-names tipo Operador_Logistico__c)
+            def _score(t): return (any(ord(c) > 127 for c in t), " " in t, len(t))
+            if label != node_id and _score(label) > _score(nd.get("_raw", nd["name"])):
+                nd["_raw"] = label
+                nd["name"] = (label[:35] + "…") if len(label) > 38 else label
+            # y con el TIPO más fuerte (module gana a generic/sf_field)
+            if _TYPE_PRIO.get(node_type, 1) > _TYPE_PRIO.get(nd["type"], 1):
+                nd["type"] = node_type
             if node_type not in ("project", "module", "bug"):
-                nodes[node_id]["val"] += 1  # solo aumentar val para nodos genéricos
+                nd["val"] += 1  # solo aumentar val para nodos genéricos
             if is_new:
-                nodes[node_id]["is_new"] = True
+                nd["is_new"] = True
 
     # ── Paso 3: procesar triples ─────────────────────────────────────────────
 
     # Links directos que vamos a reemplazar/omitir
     SKIP_AS_SOURCE = {"has_open_bug"}   # los reconstruimos con módulo como source
     bug_link_targets: set = set()       # bugs ya conectados a módulos
+    sub_sources: dict = {}              # id -> proyecto de los SUBJECTS de has_submodule (posibles huérfanos)
+    struct_targets: set = set()         # ids que YA reciben un link estructural entrante
 
     for row in kg_rows:
         relation = row["relation"]
@@ -263,23 +380,66 @@ def build_graph(kg_rows: list, skill_rows: list) -> dict:
                 module = issue_to_module.get(subject)
             else:
                 module = guess_module(obj, canonical_modules)
+            # NUNCA anclar a un módulo homónimo de OTRO proyecto (dibujaba una línea cross-cluster):
+            # el módulo tiene que existir en ESTE proyecto; si no, el ancla es el proyecto.
+            if module and (project, module) not in module_pairs:
+                module = None
+            anchor_kind = "module" if module else None
+            if not module:
+                # 3.5) matchear el TEXTO del bug contra TODAS las entidades estructurales del MISMO
+                # proyecto (módulos Y submódulos): "[TC-SOLO-2185-02] LoteCuponDevolución..." ancla en
+                # el submódulo 'LoteCuponDevolucion' (de Devoluciones) en vez de colgar del proyecto.
+                tnorm = _normalize(obj)
+                best = None
+                for name in proj_entities.get(project, ()):
+                    nn = _normalize(name)
+                    if len(nn) >= 5 and nn in tnorm and (best is None or len(nn) > len(_normalize(best))):
+                        best = name
+                if best:
+                    module, anchor_kind = best, "entity"
             anchor = module if module else project   # proyecto como último recurso
 
-            k = f"{anchor}||{obj}"
+            anchor_id = _nid(anchor, project)
+            bug_id = _nid(obj, project)
+            k = f"{anchor_id}||{bug_id}"
             if k not in bug_link_targets:
                 bug_link_targets.add(k)
-                upsert_node(anchor, "module" if module else "project", False, project=project)
-                upsert_node(obj, "bug", is_new, project=project)
-                links.append({"source": anchor, "target": obj, "relation": "has_open_bug", "value": conf})
+                # 'entity' = submódulo/nodo existente -> NO forzarle tipo module (prio generic no pisa)
+                a_type = "module" if anchor_kind == "module" else ("generic" if module else "project")
+                upsert_node(anchor_id, a_type, False, label=anchor, project=project)
+                upsert_node(bug_id, "bug", is_new, label=obj, project=project)
+                links.append({"source": anchor_id, "target": bug_id, "relation": "has_open_bug", "value": conf})
             continue
 
         # Estructura del cerebro: proyecto→módulo y módulo→submódulo
-        if relation in ("contains_module", "has_submodule"):
-            upsert_node(subject, subj_type, is_new, project=project)
-            upsert_node(obj,     obj_type,  is_new, project=project)
-            links.append({"source": subject, "target": obj, "relation": relation, "value": conf})
+        if relation == "contains_module":
+            if not _cm_valido(row):
+                continue   # proyecto stray (TQ/TEST) o backfill en proyecto con backbone real -> no renderizar
+            oid = _nid(obj, subject)   # el dueño del módulo es el subject (el proyecto)
+            upsert_node(subject, subj_type, is_new, label=subject, project=project)
+            upsert_node(oid,     obj_type,  is_new, label=obj, project=project)
+            links.append({"source": subject, "target": oid, "relation": relation, "value": conf})
+            struct_targets.add(oid)
+        elif relation == "has_submodule":
+            sid = _nid(subject, project)   # todo queda dentro del proyecto de la fila
+            oid = _nid(obj, project)
+            upsert_node(sid, subj_type, is_new, label=subject, project=project)
+            upsert_node(oid, obj_type,  is_new, label=obj, project=project)
+            links.append({"source": sid, "target": oid, "relation": relation, "value": conf})
+            struct_targets.add(oid)
+            sub_sources.setdefault(sid, project)
         # Resto de relaciones (failure_rate, tested_in_module, has_label, failed_because,
         # signals, etc.) NO se renderizan como nodos sueltos — son metadata o ruido visual.
+
+    # ── Paso 3.9: módulos HUÉRFANOS -> contains_module SINTÉTICO ─────────────
+    # El learner a veces registra 'Devoluciones has_submodule X' pero NUNCA 'SOLO contains_module
+    # Devoluciones' -> el módulo quedaba SUELTO (sin link visible al proyecto) en ambas vistas.
+    # Lo enganchamos al proyecto de su fila con un contains_module sintético.
+    for oid, oproj in sub_sources.items():
+        if oid in struct_targets or oid in project_keys or not oproj or oproj == "GLOBAL":
+            continue
+        upsert_node(oproj, "project", False, label=oproj, project=oproj)
+        links.append({"source": oproj, "target": oid, "relation": "contains_module", "value": 0.4})
 
     # ── Paso 4: skills ───────────────────────────────────────────────────────
 
@@ -296,21 +456,72 @@ def build_graph(kg_rows: list, skill_rows: list) -> dict:
         # Conectar la skill a su(s) ancla(s), sin crear nodos keyword sueltos:
         mod = guess_module(title + " " + keywords, canonical_modules)
         if mod:
-            links.append({"source": skill_id, "target": mod, "relation": "covers", "value": sr})
+            links.append({"source": skill_id, "target": _nid(mod, module_project.get(mod, project)),
+                          "relation": "covers", "value": sr})
         elif project != "GLOBAL" and project in project_keys:
             links.append({"source": skill_id, "target": project, "relation": "covers", "value": sr})
         else:
-            # Skill GLOBAL sin módulo claro → cuelga de todos los proyectos
+            # Skill GLOBAL sin módulo -> conectada a CADA proyecto = la "estrella" radial de skills compartidas
+            # (es lo que el usuario quiere ver). Con R1 amplio + alpha baja queda como estrella, no telaraña.
             for p in project_keys:
                 links.append({"source": skill_id, "target": p, "relation": "covers", "value": sr})
+
+    # ── Paso 4.5: render del CONOCIMIENTO LIBRE de proyectos SIN backbone de módulos ──
+    # Algunos proyectos (ej PDDARTEL) aprendieron MUCHO pero en relaciones libres
+    # (blocked_by, depends_on, has_root_cause, missing_field…) y CERO contains_module -> sin esto
+    # el nodo proyecto se ve VACÍO aunque haya testeado un montón. Renderizamos esas triples como
+    # subject→object (ambos nodos, con la relación real) y colgamos el subject del proyecto, para que
+    # el cluster sea visible y conectado. Saltamos relaciones de PURA métrica (no son entidades).
+    _STRUCT = {"contains_module", "has_submodule", "has_open_bug", "covers"}
+    _META = {"failure_rate", "has_failed_tc_count", "has_label", "confidence_score",
+             "validation_result", "execution_result", "verification_result", "has_test_result",
+             "execution_outcome", "retest_confirmed", "test_platform", "display_format"}
+    # tested_in / tested_in_module NO se dibujan como edge propio (son metadata de ubicación), pero SÍ se usan
+    # para ANCLAR cada subject a su módulo (issue_to_module). Así el tamaño del cluster de cada proyecto es
+    # proporcional a lo aprendido, y el conocimiento libre queda ANIDADO bajo el módulo (no un hairball).
+    _META_ANCHOR = {"tested_in_module", "tested_in"}
+    _known = known_projects or set()
+    _anchored = set()
+    def _ff_type(name):   # un subject/object de conocimiento LIBRE nunca debe tiparse como 'project' (ej "CMI")
+        t = infer_node_type(name, bug_ids, module_names)
+        return "generic" if t == "project" else t
+    for row in (kg_rows if freeform else []):   # conocimiento libre SOLO al filtrar un proyecto (no en "Todos")
+        rel = row["relation"]; p = row.get("project")
+        if rel in _STRUCT or rel in _META or rel in _META_ANCHOR:
+            continue
+        if not p or p not in _known:
+            continue   # TODOS los proyectos conocidos (con o sin backbone propio)
+        subj = row.get("subject"); obj = row.get("object")
+        if not subj or _normalize(subj) == _normalize(p):
+            continue
+        is_new = bool(row.get("is_new", False))
+        sid = _nid(subj, p)
+        upsert_node(sid, _ff_type(subj), is_new, label=subj, project=p)
+        # subject -> object (el conocimiento real), si el object parece una entidad (no un valor largo)
+        if obj and len(str(obj)) <= 60 and _normalize(obj) not in (_normalize(subj), _normalize(p)):
+            oid = _nid(obj, p)
+            upsert_node(oid, _ff_type(obj), False, label=obj, project=p)
+            links.append({"source": sid, "target": oid, "relation": rel,
+                          "value": float(row.get("confidence_score") or 0.6)})
+        # anclar el subject a su MÓDULO (si es un issue con módulo conocido) o, si no, al PROYECTO (una sola vez)
+        if sid not in _anchored:
+            _anchored.add(sid)
+            mod = issue_to_module.get(subj)
+            if mod and (p, mod) in module_pairs:   # solo módulos de ESTE proyecto (no homónimos ajenos)
+                mid = _nid(mod, p)
+                upsert_node(mid, "module", False, label=mod, project=p)
+                links.append({"source": mid, "target": sid, "relation": "tracks", "value": 0.3})
+            else:
+                upsert_node(p, "project", False, label=p, project=p)
+                links.append({"source": p, "target": sid, "relation": "tracks", "value": 0.3})
 
     # ── Paso 5: enriquecer módulos con failure_rate_pct ──────────────────────
 
     for node_id, node in nodes.items():
         if node["type"] == "module":
-            n_norm = _normalize(node_id)
-            # Buscar por nombre normalizado
-            fr = next((v for k, v in failure_rates.items() if _normalize(k) == n_norm), -1.0)
+            # el id ahora es "PROYECTO::clave canonica" -> matchear failure_rates por clave canónica
+            n_ck = node_id.split("::", 1)[1] if "::" in node_id else _canon_key(node_id)
+            fr = next((v for k, v in failure_rates.items() if _canon_key(k) == n_ck), -1.0)
             node["failure_rate_pct"] = fr
 
     # ── Paso 6: asegurar nodos de proyecto ───────────────────────────────────
@@ -321,7 +532,18 @@ def build_graph(kg_rows: list, skill_rows: list) -> dict:
             nodes[proj] = {"id": proj, "name": proj, "type": "project",
                            "val": 80, "is_new": False}
 
-    return {"nodes": list(nodes.values()), "links": links}
+    # ── Paso 7: dedupe de links (el merge de variantes puede duplicar) + sin self-loops ──
+    _seen_l, uniq_links = set(), []
+    for l in links:
+        if l["source"] == l["target"]:
+            continue
+        k = (l["source"], l["target"], l["relation"])
+        if k in _seen_l:
+            continue
+        _seen_l.add(k)
+        uniq_links.append(l)
+
+    return {"nodes": list(nodes.values()), "links": uniq_links}
 
 
 # ── Endpoints ─────────────────────────────────────────────────────────────────
@@ -336,7 +558,7 @@ def get_graph(project: str = Query("ALL")):
     proj_filter = "" if project == "ALL" else "AND project = @project"
 
     kg_query = f"""
-        SELECT subject, relation, object, confidence_score, project,
+        SELECT subject, relation, object, confidence_score, project, source_issue_key,
                TIMESTAMP_DIFF(CURRENT_TIMESTAMP(), created_at, HOUR) < 24 AS is_new
         FROM `{PROJECT_ID}.{DATASET}.agent_knowledge_graph`
         WHERE 1=1 {proj_filter}
@@ -365,7 +587,38 @@ def get_graph(project: str = Query("ALL")):
 
         kg_rows    = run(kg_query)
         skill_rows = run(skills_query)
-        graph      = build_graph(kg_rows, skill_rows)
+        # Proyectos conocidos (config_canales) -> el grafo los reconoce como proyectos, ancla sus
+        # triples sueltos al nodo proyecto, y cuelga las skills GLOBAL de TODOS ellos.
+        global KNOWN_PROJECTS
+        try:
+            known_projects = {r["project"] for r in client.query(
+                f"SELECT DISTINCT project FROM `{PROJECT_ID}.{DATASET}.config_canales` "
+                f"WHERE project IS NOT NULL").result() if r["project"]}
+        except Exception:
+            known_projects = set()
+        KNOWN_PROJECTS = {_normalize(p) for p in known_projects}
+        graph      = build_graph(kg_rows, skill_rows, known_projects, freeform=(project != "ALL"))   # panorama limpio (estrella); detalle al filtrar
+
+        # Sembrar TODOS los proyectos conocidos desde config_canales (para que aparezcan aunque
+        # todavía no tengan conocimiento aprendido en el KG — ej proyectos recién onboardeados).
+        if project == "ALL":
+            try:
+                existing = {n["id"] for n in graph["nodes"]}
+                seeded = 0
+                for r in client.query(
+                    f"SELECT project, ANY_VALUE(project_name) AS pname FROM `{PROJECT_ID}.{DATASET}.config_canales` "
+                    f"WHERE project IS NOT NULL GROUP BY project"
+                ).result():
+                    p = r["project"]; pname = r["pname"]
+                    if p and p not in existing:
+                        label = f"{p} · {pname}" if (pname and pname != p) else p   # ej "IMPSLJ · SALJAMEX"
+                        graph["nodes"].append({"id": p, "name": label, "type": "project",
+                                               "val": 18, "is_new": False, "empty": True})
+                        seeded += 1
+                graph["seeded_projects"] = seeded
+            except Exception:
+                pass
+
         graph["meta"] = {
             "project": project, "kg_rows": len(kg_rows),
             "skill_rows": len(skill_rows), "demo": False
@@ -413,6 +666,218 @@ def get_projects():
         return [r["project"] for r in rows]
     except:
         return ["CMIV2", "SOLO"]
+
+
+@app.get("/api/costs")
+def get_costs(project: str = Query("ALL"), limit: int = Query(300), month: str = Query("current")):
+    """Ledger de costos (Capa 1). Devuelve agregados POR PROYECTO + ejecuciones recientes (expand/búsqueda).
+    Lee qa_agent.run_costs (estimación in-app). Filtra por MES: 'current' (mes actual, default), 'all' (histórico),
+    o 'YYYY-MM'. Devuelve 'months' (meses con datos) para poblar el selector. ok:false si la tabla no existe."""
+    try:
+        from google.cloud import bigquery
+        from google.cloud.bigquery import QueryJobConfig, ScalarQueryParameter
+        client = bigquery.Client(project=PROJECT_ID)
+        tbl = f"`{PROJECT_ID}.{DATASET}.run_costs`"
+
+        # meses disponibles (para el <select> del front)
+        months = [r["m"] for r in client.query(
+            f"SELECT DISTINCT FORMAT_TIMESTAMP('%Y-%m', ts) AS m FROM {tbl} WHERE ts IS NOT NULL ORDER BY m DESC"
+        ).result()]
+        cur_month = months[0] if months else None
+
+        # cláusula de mes reutilizable
+        params, month_clause, sel_month = [], "", month
+        if month == "all":
+            month_clause = ""
+        else:
+            if month == "current":
+                sel_month = cur_month   # el mes más reciente con datos
+            if sel_month:
+                month_clause = "FORMAT_TIMESTAMP('%Y-%m', ts) = @month"
+                params.append(ScalarQueryParameter("month", "STRING", sel_month))
+
+        def _where(extra=""):
+            conds = [c for c in (month_clause, extra) if c]
+            return ("WHERE " + " AND ".join(conds)) if conds else ""
+
+        cfg = QueryJobConfig(query_parameters=params) if params else None
+        by_proj = [dict(r) for r in client.query(f"""
+            SELECT project, COUNT(*) AS runs,
+              ROUND(SUM(total_usd), 4)     AS total_usd,
+              ROUND(SUM(deepseek_usd), 4)  AS deepseek_usd,
+              ROUND(SUM(cloudrun_usd), 4)  AS cloudrun_usd,
+              ROUND(SUM(gemini_usd), 4)    AS gemini_usd,
+              ROUND(SUM(bigquery_usd), 4)  AS bigquery_usd,
+              ROUND(SUM(vm_usd), 4)        AS vm_usd,
+              ROUND(AVG(total_usd), 4)     AS avg_usd,
+              MAX(ts)                      AS last_run
+            FROM {tbl} {_where()}
+            GROUP BY project ORDER BY total_usd DESC
+        """, job_config=cfg).result()]
+
+        params2 = list(params)
+        proj_extra = ""
+        if project != "ALL":
+            proj_extra = "project = @project"
+            params2.append(ScalarQueryParameter("project", "STRING", project))
+        cfg2 = QueryJobConfig(query_parameters=params2) if params2 else None
+        execs = [dict(r) for r in client.query(f"""
+            SELECT run_id, ts, project, issue, platform, verdict, duration_s,
+                   deepseek_calls, deepseek_usd, cloudrun_usd, total_usd
+            FROM {tbl} {_where(proj_extra)}
+            ORDER BY ts DESC LIMIT {int(limit)}
+        """, job_config=cfg2).result()]
+
+        grand = round(sum((p.get("total_usd") or 0) for p in by_proj), 4)
+        return {"by_project": by_proj, "executions": execs, "grand_total_usd": grand,
+                "total_runs": sum(p["runs"] for p in by_proj), "ok": True,
+                "months": months, "selected_month": (sel_month if month != "all" else "all")}
+    except Exception as e:
+        return {"by_project": [], "executions": [], "grand_total_usd": 0, "total_runs": 0,
+                "months": [], "selected_month": None, "ok": False, "error": str(e)}
+
+
+@app.get("/api/gcp-billing")
+def get_gcp_billing(month: str = Query("current")):
+    """Gasto REAL de GCP (billing export, no estimación). Neto = cost + créditos. Por servicio y por proyecto,
+    en MXN y USD (usando la currency_conversion_rate real del export). Filtra por MES ('current'|'all'|'YYYY-MM').
+    Usa el ADC de USUARIO (gcloud application-default) porque el billing vive en procontacto-bi y el SA no llega ahí
+    (ver _billing_client). NO incluye DeepSeek (se factura fuera de GCP; eso está en /api/costs)."""
+    try:
+        from google.cloud.bigquery import QueryJobConfig, ScalarQueryParameter
+        client = _billing_client()   # ADC de usuario (tiene acceso a procontacto-bi), NO el SA
+        tbl = f"`{BILLING_TABLE}`"
+
+        months = [r["m"] for r in client.query(
+            f"SELECT DISTINCT FORMAT_DATE('%Y-%m', DATE(usage_start_time)) AS m FROM {tbl} "
+            f"WHERE usage_start_time IS NOT NULL ORDER BY m DESC"
+        ).result()]
+        cur_month = months[0] if months else None
+
+        params, month_clause, sel_month = [], "", month
+        if month != "all":
+            if month == "current":
+                sel_month = cur_month
+            if sel_month:
+                month_clause = "WHERE FORMAT_DATE('%Y-%m', DATE(usage_start_time)) = @month"
+                params.append(ScalarQueryParameter("month", "STRING", sel_month))
+        cfg = QueryJobConfig(query_parameters=params) if params else None
+
+        # neto MXN + USD (usando la tasa real de conversión del propio export)
+        net_mxn = "SUM(cost) + SUM((SELECT IFNULL(SUM(c.amount),0) FROM UNNEST(credits) c))"
+        rate = "AVG(currency_conversion_rate)"
+        by_service = [dict(r) for r in client.query(f"""
+            SELECT service.description AS service,
+                   ROUND({net_mxn}, 2) AS mxn,
+                   ROUND(SAFE_DIVIDE({net_mxn}, {rate}), 2) AS usd
+            FROM {tbl} {month_clause}
+            GROUP BY service HAVING mxn > 0 ORDER BY mxn DESC
+        """, job_config=cfg).result()]
+        by_project = [dict(r) for r in client.query(f"""
+            SELECT project.id AS project,
+                   ROUND({net_mxn}, 2) AS mxn,
+                   ROUND(SAFE_DIVIDE({net_mxn}, {rate}), 2) AS usd
+            FROM {tbl} {month_clause}
+            GROUP BY project HAVING mxn > 0 ORDER BY mxn DESC
+        """, job_config=cfg).result()]
+
+        # Gasto REAL del AGENTE (procontacto-claude) mapeado a las MISMAS columnas de la tabla por-ejecución
+        # (cloudrun/gemini/vm/bigquery/otros) -> se muestra como fila acumulada "GCP REAL" ahí, no separado.
+        agent_where = (month_clause + " AND " if month_clause else "WHERE ") + f"project.id = '{PROJECT_ID}'"
+        agent_cols = {k: 0.0 for k in ("cloudrun", "gemini", "vm", "bigquery",
+                                       "networking", "build", "artifact", "storage", "secret", "otros")}
+        for r in client.query(f"""
+            SELECT CASE WHEN service.description='Cloud Run' THEN 'cloudrun'
+                        WHEN service.description='Vertex AI' THEN 'gemini'
+                        WHEN service.description='Compute Engine' THEN 'vm'
+                        WHEN service.description='BigQuery' THEN 'bigquery'
+                        WHEN service.description='Networking' THEN 'networking'
+                        WHEN service.description='Cloud Build' THEN 'build'
+                        WHEN service.description='Artifact Registry' THEN 'artifact'
+                        WHEN service.description='Cloud Storage' THEN 'storage'
+                        WHEN service.description='Secret Manager' THEN 'secret'
+                        ELSE 'otros' END AS col,
+                   ROUND(SAFE_DIVIDE({net_mxn}, {rate}), 4) AS usd
+            FROM {tbl} {agent_where}
+            GROUP BY col
+        """, job_config=cfg).result():
+            agent_cols[r["col"]] = round((agent_cols.get(r["col"], 0) or 0) + (r["usd"] or 0), 4)
+        agent_cols["total"] = round(sum(agent_cols.values()), 4)
+
+        g_mxn = round(sum((s.get("mxn") or 0) for s in by_service), 2)
+        g_usd = round(sum((s.get("usd") or 0) for s in by_service), 2)
+        agent = next((p for p in by_project if p.get("project") == PROJECT_ID), None)
+        return {"ok": True, "currency": "MXN", "by_service": by_service, "by_project": by_project,
+                "grand_mxn": g_mxn, "grand_usd": g_usd, "agent_cols": agent_cols,
+                "agent_mxn": (agent or {}).get("mxn", 0), "agent_usd": (agent or {}).get("usd", 0),
+                "months": months, "selected_month": (sel_month if month != "all" else "all")}
+    except Exception as e:
+        msg = str(e)
+        if "403" in msg or "does not have" in msg or "Access Denied" in msg or "default credentials" in msg.lower():
+            msg = ("Sin acceso al billing con las credenciales actuales. Corré una vez: "
+                   "`gcloud auth application-default login` con tu cuenta corp (axel.colamarino@procontacto.com.mx). "
+                   f"Detalle: {str(e)[:160]}")
+        return {"ok": False, "by_service": [], "by_project": [], "grand_mxn": 0, "grand_usd": 0,
+                "months": [], "selected_month": None, "error": msg}
+
+
+@app.get("/api/deepseek-balance")
+def deepseek_balance():
+    """Saldo restante de la cuenta DeepSeek (API GET /user/balance). El key se lee de
+    Secret Manager (DEEPSEEK_API_KEY) con las credenciales de gcloud locales."""
+    try:
+        import urllib.request, json, os, subprocess, shutil
+        # key: env -> Secret Manager (si está la lib) -> gcloud CLI (fallback sin dep)
+        key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+        if not key:
+            try:  # 1) lib secretmanager (si está instalada)
+                from google.cloud import secretmanager
+                sm = secretmanager.SecretManagerServiceClient()
+                key = sm.access_secret_version(
+                    name=f"projects/{PROJECT_ID}/secrets/DEEPSEEK_API_KEY/versions/latest").payload.data.decode().strip()
+            except Exception:
+                pass
+        if not key:
+            try:  # 2) REST de Secret Manager con el token del SA (google-cloud-secret-manager no está en system python)
+                import google.auth, google.auth.transport.requests, base64
+                creds, _ = google.auth.default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
+                creds.refresh(google.auth.transport.requests.Request())
+                r = urllib.request.Request(
+                    f"https://secretmanager.googleapis.com/v1/projects/{PROJECT_ID}/secrets/DEEPSEEK_API_KEY/versions/latest:access",
+                    headers={"Authorization": f"Bearer {creds.token}"})
+                with urllib.request.urlopen(r, timeout=15) as resp:
+                    key = base64.b64decode(json.loads(resp.read())["payload"]["data"]).decode().strip()
+            except Exception:
+                pass
+        if not key:
+            try:  # 3) fallback gcloud CLI (shell=True para ejecutar gcloud.CMD en Windows)
+                gc = shutil.which("gcloud") or "gcloud"
+                key = subprocess.run(
+                    f'"{gc}" secrets versions access latest --secret DEEPSEEK_API_KEY --project {PROJECT_ID}',
+                    capture_output=True, text=True, timeout=25, shell=True).stdout.strip()
+            except Exception:
+                pass
+        if not key:
+            return {"ok": False, "error": "no pude obtener DEEPSEEK_API_KEY (env/secretmanager/gcloud)"}
+        req = urllib.request.Request(
+            "https://api.deepseek.com/user/balance",
+            headers={"Authorization": f"Bearer {key}", "Accept": "application/json"})
+        with urllib.request.urlopen(req, timeout=15) as r:
+            data = json.loads(r.read())
+        infos = data.get("balance_infos") or []
+        usd = next((b for b in infos if (b.get("currency") or "").upper() == "USD"),
+                   (infos[0] if infos else {}))
+        def _f(v):
+            try: return round(float(v), 2)
+            except Exception: return 0.0
+        return {"ok": True,
+                "is_available": bool(data.get("is_available")),
+                "currency": usd.get("currency", "USD"),
+                "total_balance": _f(usd.get("total_balance", 0)),
+                "granted_balance": _f(usd.get("granted_balance", 0)),
+                "topped_up_balance": _f(usd.get("topped_up_balance", 0))}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
 
 
 # ── Demo data ─────────────────────────────────────────────────────────────────

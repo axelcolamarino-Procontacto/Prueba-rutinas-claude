@@ -7,8 +7,10 @@
 <style>
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   body { background:#060c1a; color:#c8d8f0; font-family:'Segoe UI',system-ui,sans-serif; overflow:hidden; height:100vh; }
-  #graph-3d, #graph-2d { position:absolute; inset:0; }
-  #graph-2d { display:none; }
+  #graph-2d { position:absolute; inset:0; }
+  #graph-loading { position:absolute; inset:56px 0 0 0; z-index:80; background:#060c1a;
+    display:flex; align-items:center; justify-content:center; flex-direction:column;
+    color:#5a7a98; font-size:13px; letter-spacing:.5px; }
 
   /* Topbar */
   #topbar {
@@ -88,17 +90,70 @@
   #dclose { position:absolute; top:10px; right:12px; background:none; border:none; color:#4a6070; font-size:16px; cursor:pointer; }
   #dclose:hover { color:#90b0c8; }
   ::-webkit-scrollbar { width:4px; } ::-webkit-scrollbar-thumb { background:rgba(100,150,255,0.2); border-radius:2px; }
+
+  /* ── Pestaña Costos ──────────────────────────────────────────────────────── */
+  #costs-view { position:absolute; top:56px; left:0; right:0; bottom:0; display:none;
+    overflow-y:auto; padding:22px 26px 40px; z-index:95; background:#060c1a; }
+  #costs-view.show { display:block; }
+  .cost-head { display:flex; align-items:center; gap:14px; margin-bottom:18px; flex-wrap:wrap; }
+  .cost-kpi { background:rgba(79,195,247,0.06); border:1px solid rgba(79,195,247,0.18);
+    border-radius:10px; padding:9px 16px; }
+  .cost-kpi .v { font-size:21px; font-weight:700; color:#dceeff; line-height:1.1; }
+  .cost-kpi .l { font-size:10px; color:#6a8aa8; letter-spacing:.6px; }
+  .cost-kpi.total .v { color:#66ffa6; }
+  #cost-search { flex:1; min-width:180px; max-width:340px; background:rgba(255,255,255,0.04);
+    border:1px solid rgba(100,150,255,0.2); border-radius:8px; color:#cfe2ff; font-size:13px; padding:9px 13px; }
+  #cost-search::placeholder { color:#4a6a90; }
+  .cost-refresh { font-size:11px; color:#4a6a90; margin-left:auto; white-space:nowrap; }
+  table.cost-tbl { width:100%; border-collapse:collapse; font-size:12.5px; }
+  table.cost-tbl th { text-align:right; color:#5a7a98; font-size:10px; text-transform:uppercase;
+    letter-spacing:.6px; padding:8px 11px; border-bottom:1px solid rgba(100,150,255,0.15);
+    position:sticky; top:0; background:#060c1a; z-index:1; }
+  table.cost-tbl th.l, table.cost-tbl td.l { text-align:left; }
+  table.cost-tbl td { padding:9px 11px; text-align:right; border-bottom:1px solid rgba(100,150,255,0.06); color:#9fc0dc; }
+  tr.proj-row { cursor:pointer; } tr.proj-row:hover { background:rgba(79,195,247,0.06); }
+  tr.proj-row td { font-weight:600; color:#dceeff; }
+  td.proj-name { color:#4fc3f7 !important; }
+  .caret { display:inline-block; width:11px; color:#4a6a90; transition:transform .15s; }
+  tr.exec-row > td { padding:0 0 0 18px; background:rgba(255,255,255,0.015); }
+  tr.exec-row table.cost-tbl td { font-size:11px; color:#80a0bc; border-bottom:1px solid rgba(100,150,255,0.04); }
+  .vt { padding:1px 7px; border-radius:10px; font-size:9.5px; font-weight:700; }
+  .vt.PASS { background:rgba(102,187,106,0.15); color:#88e0a0; }
+  .vt.FAIL { background:rgba(239,83,80,0.15); color:#ff8a86; }
+  .vt.REVIEW { background:rgba(255,179,0,0.15); color:#ffd166; }
+  .usd { color:#b8e0c8; } .usd.total { color:#66ffa6; font-weight:700; }
+  .cost-empty { color:#5a7a98; font-size:13px; padding:44px; text-align:center; line-height:1.8; }
+  .cost-empty code { color:#7aaac8; background:rgba(255,255,255,0.05); padding:1px 6px; border-radius:4px; }
+  .cost-spinner { width:34px; height:34px; margin:0 auto 14px; border:3px solid rgba(100,150,255,0.15);
+    border-top-color:#4fc3f7; border-radius:50%; animation:cost-spin .8s linear infinite; }
+  @keyframes cost-spin { to { transform:rotate(360deg); } }
 </style>
 </head>
 <body>
-<div id="graph-3d"></div>
 <div id="graph-2d"></div>
+<div id="graph-loading"><div class="cost-spinner"></div>Cargando cerebro…</div>
+
+<div id="costs-view">
+  <div class="cost-head">
+    <div class="cost-kpi total" title="Estimado DeepSeek (API externa, el mayor costo del agente) — suma de todos los runs del mes"><div class="v" id="cost-grand">$—</div><div class="l">GASTO TOTAL DEEPSEEK</div></div>
+    <div class="cost-kpi total" title="Estimado GCP del agente (Gemini + Cloud Run + VM + BQ) — suma de todos los runs. El número REAL facturado está en 'GCP REAL (billing)'."><div class="v" id="cost-gcp-est">$—</div><div class="l">GASTO TOTAL GCP</div></div>
+    <div class="cost-kpi"><div class="v" id="cost-runs">—</div><div class="l">EJECUCIONES</div></div>
+    <div class="cost-kpi" id="ds-kpi" title="Saldo restante de la cuenta DeepSeek (API /user/balance)"><div class="v" id="ds-balance">$—</div><div class="l">DEEPSEEK RESTANTE</div></div>
+    <div class="cost-kpi" id="gcp-kpi" title="Gasto REAL de GCP del mes (billing export, todos los proyectos de la cuenta). El agente = procontacto-claude."><div class="v" id="cost-gcp">$—</div><div class="l">GCP REAL (billing)</div></div>
+    <select id="cost-month" onchange="onMonthChange(this.value)" title="Mes de los consumos"
+            style="background:#141b29;color:#cfe2ff;border:1px solid #2b3654;border-radius:9px;padding:8px 11px;font-size:13px;cursor:pointer"></select>
+    <input id="cost-search" placeholder="🔎 Buscar issue (ej: PDDARTEL-69)…" oninput="renderCosts()">
+    <span class="cost-refresh" id="cost-refresh">—</span>
+  </div>
+  <div id="gcp-billing-body"></div>
+  <div id="cost-body"></div>
+</div>
 
 <div id="topbar">
   <div id="brain-title">🧠 <span>Cortex</span></div>
   <div class="tabs">
-    <button class="tab active" id="tab-3d" onclick="switchTab('3d')">3D</button>
-    <button class="tab"        id="tab-2d" onclick="switchTab('2d')">2D</button>
+    <button class="tab active" id="tab-2d" onclick="switchTab('2d')">2D</button>
+    <button class="tab"        id="tab-costos" onclick="switchTab('costos')">Costos</button>
   </div>
   <div class="chip"><strong id="sn">—</strong>&nbsp;entidades</div>
   <div class="chip"><strong id="sl">—</strong>&nbsp;relaciones</div>
@@ -111,6 +166,9 @@
 
   <label class="lbl-toggle" style="margin-left:8px;">
     <input type="checkbox" id="labels-toggle" onchange="render()" style="cursor:pointer;"> Etiquetas
+  </label>
+  <label class="lbl-toggle" style="margin-left:8px;" title="Mostrar los links 'cubre' (skill→módulo). Cruzan todo el grafo.">
+    <input type="checkbox" id="covers-toggle" onchange="toggleCovers(this.checked)" style="cursor:pointer;"> Cobertura
   </label>
 
   <div id="demo-tag">⚠ Demo — ejecutá el agente para datos reales</div>
@@ -216,19 +274,33 @@ const DEMO = {
 
 let gData     = DEMO
 let gFiltered = DEMO
-let Graph3    = null
 let Graph2    = null
-let activeTab = '3d'
+let activeTab = '2d'
+let showCovers = false        // toggle "Cobertura": muestra TODOS los covers (incl. skill→módulo)
+const _hlLinks = new Set()    // links del nodo bajo hover (patrón oficial highlight de force-graph)
+let costsData = null, costsExpanded = new Set(), _costsTimer = null, costMonth = 'current'
+const _costsByMonth = {}   // caché mes -> payload; cambiar de mes ya visto = instantáneo
+let gcpBilling = null; const _gcpByMonth = {}   // gasto REAL de GCP (billing export) por mes
+function onMonthChange(v){ costMonth = v; loadCosts() }
+function fillMonthSelect(months, selected){
+  const sel = document.getElementById('cost-month'); if(!sel) return
+  const monthLbl = m => { const [y,mm]=m.split('-'); const N=['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic']; return `${N[+mm]} ${y}` }
+  const opts = ['<option value="all">Todo (histórico)</option>']
+    .concat((months||[]).map(m => `<option value="${m}">${monthLbl(m)}</option>`))
+  sel.innerHTML = opts.join('')
+  // el backend resolvió 'current' al mes real -> reflejarlo en el <select>
+  sel.value = (selected && selected!=='all') ? selected : (costMonth==='all' ? 'all' : (months&&months[0]||'all'))
+}
 
-// Capas activas — cerebro completo.
-const VISIBLE_RELATIONS = ['contains_module', 'has_submodule', 'has_open_bug', 'covers']
+// Capas activas — cerebro completo. Mostramos TODO lo que curó el backend (estructura + skills +
+// conocimiento libre + tracks); solo ocultamos relaciones de PURA métrica (no son entidades del grafo).
+const HIDDEN_RELATIONS = new Set(['failure_rate','tested_in_module','has_failed_tc_count','has_label',
+  'confidence_score','validation_result','execution_result','verification_result'])
 
 // ── Filtrado por proyecto ──────────────────────────────────────────────────
 function computeFiltered() {
   const proj = document.getElementById('project-filter')?.value || 'ALL'
-  const relSet = new Set(VISIBLE_RELATIONS)
-
-  let links = gData.links.filter(l => relSet.has(l.relation))
+  let links = gData.links.filter(l => !HIDDEN_RELATIONS.has(l.relation))
 
   if (proj !== 'ALL') {
     const inProj = new Set(gData.nodes.filter(n => n.project === proj).map(n => n.id))
@@ -237,23 +309,255 @@ function computeFiltered() {
 
   const ids = new Set()
   links.forEach(l => { ids.add(l.source?.id||l.source); ids.add(l.target?.id||l.target) })
-  let nodes = gData.nodes.filter(n => ids.has(n.id))
+  // incluí también los nodos de PROYECTO aunque no tengan links (proyectos sin KG aún) cuando se ven todos
+  let nodes = gData.nodes.filter(n => ids.has(n.id) || (proj==='ALL' && (n.type==='project' || n.type==='skill')))
   if (proj !== 'ALL') nodes = nodes.filter(n => n.project === proj || n.type === 'project')
+
+  // Podar links huérfanos: al filtrar por proyecto, un link puede sobrevivir por UN extremo (línea 298)
+  // pero el nodo del OTRO extremo (ej. un módulo de otro proyecto) se descarta -> link colgado ->
+  // ForceGraph tira "node not found". Dejamos solo los links con AMBOS extremos en el set final.
+  const keep = new Set(nodes.map(n => n.id))
+  links = links.filter(l => keep.has(l.source?.id||l.source) && keep.has(l.target?.id||l.target))
 
   return { nodes, links }
 }
 
 // ── Render ──────────────────────────────────────────────────────────────────
+function radialLayout(nodes, links){
+  // Layout RADIAL JERÁRQUICO determinístico (fx/fy fijos): skills GLOBAL en círculo CENTRAL ->
+  // proyectos en círculo EXTERNO -> submódulos en anillo alrededor de cada proyecto -> bugs en
+  // anillo alrededor de cada submódulo. Lo que no entre en la jerarquía lo ubica la física.
+  const byId = new Map(nodes.map(n => [n.id, n]));
+  const isSkill = n => String(n.id).startsWith('skill:');
+  const allSkills = nodes.filter(isSkill);
+  const skills     = allSkills.filter(s => !s.project || s.project === 'GLOBAL');     // GLOBALES -> anillo CENTRAL + estrella
+  const projSkills = allSkills.filter(s => s.project && s.project !== 'GLOBAL');      // ESPECÍFICAS -> orbitan SU proyecto (halo)
+  const projects = nodes.filter(n => n.type === 'project' && n.id !== 'GLOBAL');   // GLOBAL = hub central, no va en el círculo
+  nodes.forEach(n => { delete n.fx; delete n.fy; });
+
+  // adyacencia padre -> hijos (excluye 'covers' de skills para no contaminar la jerarquía)
+  const kids = new Map();
+  const deepTargets = new Set();   // nodos que son SUBMÓDULO de otro módulo (multi-padre)
+  for (const l of links){
+    const s = typeof l.source === 'object' ? l.source.id : l.source;
+    const t = typeof l.target === 'object' ? l.target.id : l.target;
+    if (l.relation === 'covers') continue;
+    if (String(s).startsWith('skill:') || String(t).startsWith('skill:')) continue;
+    if (!kids.has(s)) kids.set(s, []);
+    kids.get(s).push(t);
+    if (l.relation === 'has_submodule') deepTargets.add(t);
+  }
+  const visited = new Set();
+
+  // 1) skills GLOBAL: círculo central (acceso ordenado de todos los proyectos)
+  const Rs = Math.max(140, skills.length * 11);
+  skills.forEach((s, i) => {
+    const a = 2*Math.PI*i / Math.max(1, skills.length);
+    s.fx = Math.round(Rs*Math.cos(a)); s.fy = Math.round(Rs*Math.sin(a)); visited.add(s.id);
+  });
+
+  // hub GLOBAL en el CENTRO: las skills globales cuelgan de acá (spokes limpios), no de todos los proyectos
+  const _gh = byId.get('GLOBAL');
+  if (_gh) { _gh.fx = 0; _gh.fy = 0; visited.add('GLOBAL'); }
+
+  // recursivo: ubica un nodo y reparte sus hijos.
+  //  - level 0 (módulos alrededor del proyecto): CÍRCULO completo.
+  //  - level >=1 (submódulos/bugs): ABANICO hacia afuera (opuesto al padre-del-padre) -> el cluster
+  //    de cada módulo queda de su lado, sin pisar el centro ni a los módulos vecinos. El radio CRECE
+  //    con la cantidad de hijos para que no se amontonen los módulos con muchos submódulos.
+  function place(node, x, y, level, px, py){
+    node.fx = Math.round(x); node.fy = Math.round(y); visited.add(node.id);
+    if (level >= 4) return;   // techo alto: prácticamente todo queda fijado (nada flota al centro)
+    const ch = [...new Set(kids.get(node.id) || [])].map(id => byId.get(id)).filter(c => c && !visited.has(c.id));
+    if (!ch.length) return;
+    if (level === 0){
+      // MULTI-PADRE: un hijo directo del proyecto que TAMBIÉN es submódulo de otro módulo
+      // (ej "Operador Logístico" hijo de SOLO y submódulo de "Expedición") NO va al círculo:
+      // lo coloca su módulo padre en el abanico -> el subárbol queda JUNTO (sin subnodos
+      // lejos del módulo ni arcos cruzando el cluster).
+      const circleCh = ch.filter(c => !deepTargets.has(c.id));
+      // ordenar módulos para que los de MUCHOS submódulos queden SEPARADOS en el círculo
+      // (intercalado grande/chico) -> sus abanicos divergen en vez de superponerse.
+      const kc = id => (kids.get(id) || []).length;
+      const sorted = circleCh.slice().sort((a, b) => kc(b.id) - kc(a.id));
+      const arr = []; let lo = 0, hi = sorted.length - 1;
+      for (let i = 0; i < sorted.length; i++) arr.push(i % 2 === 0 ? sorted[lo++] : sorted[hi--]);
+      const r = Math.min(640, Math.max(240, arr.length*26));
+      arr.forEach((c, j) => { const a = 2*Math.PI*j/arr.length - Math.PI/2; place(c, x + r*Math.cos(a), y + r*Math.sin(a), 1, x, y); });
+    } else {
+      const outward = Math.atan2(y - py, x - px);              // dirección "hacia afuera" del módulo
+      const r = Math.max(level === 1 ? 160 : 85, ch.length*7); // crece con #hijos -> no se amontonan
+      const span = ch.length === 1 ? 0 : Math.min(Math.PI*1.5, ch.length*0.32);
+      ch.forEach((c, j) => {
+        const a = ch.length === 1 ? outward : (outward - span/2 + span*j/(ch.length-1));
+        place(c, x + r*Math.cos(a), y + r*Math.sin(a), level+1, x, y);
+      });
+    }
+  }
+
+  if (projects.length < 2){
+    if (projects.length) place(projects[0], 0, 0, 0, 0, 0);
+  } else {
+    const R1 = Math.max(3000, projects.length * 460);   // círculo externo (amplio: clusters grandes no se solapan)
+    projects.forEach((p, i) => {
+      const ang = 2*Math.PI*i/projects.length - Math.PI/2;
+      place(p, R1*Math.cos(ang), R1*Math.sin(ang), 0, 0, 0);
+    });
+  }
+  // skills ESPECÍFICAS de proyecto: orbitan el nodo de SU proyecto (halo interno), NO el anillo central
+  const _bp = {};
+  projSkills.forEach(s => { (_bp[s.project] = _bp[s.project] || []).push(s); });
+  for (const pid in _bp){
+    const pn = byId.get(pid);
+    if (!pn || pn.fx == null) continue;
+    const sks = _bp[pid], rr = 175;
+    sks.forEach((s, j) => {
+      const a = 2*Math.PI*j/sks.length + 0.4;
+      s.fx = Math.round(pn.fx + rr*Math.cos(a)); s.fy = Math.round(pn.fy + rr*Math.sin(a)); visited.add(s.id);
+    });
+  }
+
+  // MÓDULOS HUÉRFANOS CON SUBMÓDULOS: p.ej. el KG tiene "Devoluciones has_submodule X" pero NO
+  // "SOLO contains_module Devoluciones" -> place() nunca alcanza a Devoluciones, así que él y sus
+  // submódulos caerían al fallback y se dispersarían en el anillo externo. Los tratamos como módulos
+  // de nivel-0 de su proyecto: los ubicamos en un anillo alrededor del proyecto (o del centro) y
+  // abanicamos su subárbol con place(), igual que a los módulos reales.
+  const orphanRoots = nodes.filter(n => !visited.has(n.id) && (kids.get(n.id) || []).some(id => byId.has(id) && !visited.has(id)));
+  if (orphanRoots.length){
+    const byProj = {};
+    orphanRoots.forEach(n => { const k = (n.project && byId.has(n.project)) ? n.project : '__center'; (byProj[k] = byProj[k] || []).push(n); });
+    for (const pid in byProj){
+      const pn = byId.get(pid);
+      const cx = (pn && pn.fx != null) ? pn.fx : 0, cy = (pn && pn.fy != null) ? pn.fy : 0;
+      const arr = byProj[pid];
+      const R = 760;   // un poco más afuera que el anillo de módulos reales, para no encimarse
+      arr.forEach((n, j) => {
+        const a = 2*Math.PI*j/arr.length + 0.7;
+        place(n, cx + R*Math.cos(a), cy + R*Math.sin(a), 1, cx, cy);   // level 1 -> abanica sus hijos hacia afuera
+      });
+    }
+  }
+
+  // FALLBACK determinístico: los nodos que la jerarquía NO ubicó (p.ej. free-knowledge con anclaje débil,
+  // "Operador Logístico" y similares) hay que FIJARLOS igual — si quedan sin fx/fy la física los DISPARA
+  // lejos del cluster. Los anclamos junto a sus vecinos ya ubicados (promedio + offset áureo para no
+  // apilarlos); si no tienen ninguno ubicado, van a un anillo externo determinístico.
+  const adj = new Map();
+  for (const l of links){
+    const s = typeof l.source === 'object' ? l.source.id : l.source;
+    const t = typeof l.target === 'object' ? l.target.id : l.target;
+    if (!adj.has(s)) adj.set(s, []); adj.get(s).push(t);
+    if (!adj.has(t)) adj.set(t, []); adj.get(t).push(s);
+  }
+  const unplaced = nodes.filter(n => n.fx == null || n.fy == null);
+  unplaced.forEach((n, idx) => {
+    const a = idx * 2.399963229;   // ángulo áureo -> reparto parejo, sin apilar
+    // Anclar SOLO a vecinos ubicados que NO sean skills ni el hub GLOBAL: los skills forman un anillo
+    // SIMÉTRICO alrededor del centro, así que el promedio de varias skills cae en (0,0) -> un nodo
+    // cubierto (covers) por varias skills globales aterrizaría en el MEDIO del anillo. Ancla a
+    // módulos/proyectos reales; si no tiene ninguno (solo lo cubren skills), va al anillo externo.
+    const anchors = (adj.get(n.id) || []).map(id => byId.get(id))
+      .filter(m => m && m.fx != null && !unplaced.includes(m) && !isSkill(m) && m.id !== 'GLOBAL');
+    if (anchors.length){
+      let sx = 0, sy = 0; anchors.forEach(m => { sx += m.fx; sy += m.fy; });
+      n.fx = Math.round(sx/anchors.length + 45*Math.cos(a));
+      n.fy = Math.round(sy/anchors.length + 45*Math.sin(a));
+    } else {
+      const R = 900;   // sin ancla real -> anillo externo determinístico, NUNCA el centro
+      n.fx = Math.round(R*Math.cos(a)); n.fy = Math.round(R*Math.sin(a));
+    }
+    visited.add(n.id);
+  });
+  return nodes;
+}
+
+// Toggle de los links 'covers' (skill→módulo). Re-setear el accessor fuerza a ForceGraph a re-evaluar
+// la visibilidad de los links y redibujar, sin re-correr el layout.
+function toggleCovers(on){
+  showCovers = !!on
+  if (Graph2) Graph2.linkVisibility(l => l.relation !== 'covers' || showCovers)
+}
+
 function render() {
   gFiltered = computeFiltered()
-  if (activeTab === '3d') {
-    if (!Graph3) { initGraph3D(); }
-    Graph3.graphData({ nodes: gFiltered.nodes.map(n=>({...n})), links: gFiltered.links.map(l=>({...l})) })
-    if (!Graph3._zoomed) { Graph3._zoomed = true; setTimeout(()=>Graph3.zoomToFit(700,60), 2500) }
+  const _nodes = gFiltered.nodes.map(n=>({...n}))
+  const _links = gFiltered.links.map(l=>({...l}))
+  const _proj = document.getElementById('project-filter')?.value || 'ALL'
+  if (!Graph2) { initGraph2D(); }
+  if (_proj !== 'ALL') {
+    // ── VISTA POR-PROYECTO: modo NATIVO de la librería (dagMode radialout) ──
+    // La investigación de force-graph 1.43.5 indica que este es el camino correcto para un árbol
+    // radial: anillos concéntricos por profundidad (proyecto→módulos→submódulos→bugs) y el abanico
+    // angular emerge de la fuerza 'link' — multi-padre y huérfanos se acomodan SOLOS (lo que el
+    // layout manual parchaba con casos especiales). Anclas fijas: el proyecto al centro y las
+    // skills en su halo (fuera del DAG vía dagNodeFilter).
+    _nodes.forEach(n => { delete n.fx; delete n.fy; delete n.x; delete n.y; delete n.vx; delete n.vy })
+    const pn = _nodes.find(n => n.type === 'project' && n.id !== 'GLOBAL')
+    if (pn) { pn.fx = 0; pn.fy = 0 }
+    const sks = _nodes.filter(n => String(n.id).startsWith('skill:'))
+    const _rSk = Math.min(140, Math.max(80, sks.length * 7))   // halo ADENTRO del anillo de módulos (depth1=170)
+    sks.forEach((s, i) => {
+      const a = 2*Math.PI*i/Math.max(1, sks.length) + 0.4
+      s.fx = Math.round(_rSk*Math.cos(a)); s.fy = Math.round(_rSk*Math.sin(a))
+    })
+    // Huérfanos (sin link entrante, ej "Devoluciones" con has_submodule pero sin contains_module):
+    // el DAG les daría depth 0 = ENCIMA del proyecto. Engancharlos con un link sintético al proyecto
+    // (semánticamente correcto: son módulos del proyecto) -> caen al anillo de módulos.
+    if (pn) {
+      const _hasIn = new Set(_links.filter(l => l.relation !== 'covers')
+        .map(l => (l.target && l.target.id) || l.target))
+      _nodes.forEach(n => {
+        if (n.type !== 'project' && !String(n.id).startsWith('skill:') && !_hasIn.has(n.id))
+          _links.push({ source: pn.id, target: n.id, relation: 'contains_module', value: 0.4 })
+      })
+    }
+    Graph2.dagMode('radialout').dagLevelDistance(280)         // anillos amplios: aire para las etiquetas
+      .dagNodeFilter(n => !String(n.id).startsWith('skill:'))
+      .onDagError(() => {})                                   // ciclos del KG: ignorar, no romper
+    Graph2.d3Force('charge').strength(-160).distanceMax(420)  // reparte angularmente los módulos del anillo
+    Graph2.d3Force('link')
+      .distance(l => l.relation === 'covers' ? 200 : 60)
+      .strength(l => l.relation === 'covers' ? 0.03 : 1)      // covers = hilo suave, no deforma el árbol
   } else {
-    if (!Graph2) { initGraph2D(); }
-    Graph2.graphData({ nodes: gFiltered.nodes.map(n=>({...n})), links: gFiltered.links.map(l=>({...l})) })
-    if (!Graph2._zoomed) { Graph2._zoomed = true; setTimeout(()=>Graph2.zoomToFit(700,60), 2500) }
+    // ── VISTA "TODOS": layout PINNED deliberado (estrella + dandelions), sanción de la investigación:
+    // pinning de anclas es práctica estándar; acá el diseño es intencional y determinista.
+    Graph2.dagMode(null)
+    Graph2.d3Force('charge').strength(n => n.type==='project' ? -1000 : -220).distanceMax(900)
+    Graph2.d3Force('link')
+      .distance(l => l.relation==='covers'?150 : l.relation==='has_open_bug'?85 : l.relation==='has_submodule'?55 : 50)
+      .strength(l => l.relation==='covers' ? 0.02 : 0.5)
+    radialLayout(_nodes, _links)
+  }
+  // Marcado para el render: __star = covers skill→PROYECTO (la "estrella", visible por defecto);
+  // covers→módulo quedan para hover/toggle. __links por nodo (highlight en hover, patrón oficial).
+  // __curve: curvar links jerárquicos LARGOS (multi-padre) y los covers→módulo para que no
+  // atraviesen los clusters en línea recta.
+  const _projIds = new Set(_nodes.filter(n => n.type === 'project').map(n => n.id))
+  const _byIdR = new Map(_nodes.map(n => [n.id, n]))
+  _nodes.forEach(n => { n.__links = [] })
+  _links.forEach(l => {
+    const s = (l.source && l.source.id) || l.source, t = (l.target && l.target.id) || l.target
+    l.__star = l.relation === 'covers' && _projIds.has(t)
+    const sn = _byIdR.get(s), tn = _byIdR.get(t)
+    if (sn && tn) {
+      sn.__links.push(l); tn.__links.push(l)
+      const d = Math.hypot((sn.fx || 0) - (tn.fx || 0), (sn.fy || 0) - (tn.fy || 0))
+      // Curvar SOLO los links anómalos largos (multi-padre cruzando el cluster). Los contains_module
+      // NUNCA se curvan: son rayos RADIALES por construcción (proyecto→módulo, aunque el módulo
+      // multi-padre quede lejos, el rayo apunta hacia afuera y recto se lee bien).
+      // (En la vista dagMode no hay fx pre-simulación -> d≈0 -> sin curvas; el layout nativo
+      //  ya acomoda los multi-padre entre sus padres.)
+      l.__curve = (l.relation === 'covers' && !l.__star) ? 0.3
+                : (l.relation !== 'covers' && l.relation !== 'contains_module' && d > 700) ? 0.25 : 0
+    }
+  })
+  Graph2._fit = false                                  // datos nuevos -> permitir un encuadre
+  Graph2.graphData({ nodes: _nodes, links: _links })
+  if (_proj === 'ALL') {
+    // posiciones 100% fijas => un setTimeout es seguro (los nodos NO se mueven); onEngineStop respalda
+    setTimeout(() => { if (!Graph2._fit) { Graph2._fit = true; Graph2.zoomToFit(600, 70) } }, 600)
+  } else {
+    Graph2.d3ReheatSimulation()                        // la vista dag SÍ simula; encuadra onEngineStop
   }
   updateStats()
   startMinimap()
@@ -267,41 +571,194 @@ function updateStats() {
 
 function switchTab(tab) {
   activeTab = tab
-  document.getElementById('graph-3d').style.display = tab==='3d'?'block':'none'
-  document.getElementById('graph-2d').style.display = tab==='2d'?'block':'none'
-  document.getElementById('tab-3d').classList.toggle('active', tab==='3d')
+  const isCosts = tab==='costos'
+  document.getElementById('graph-2d').style.display = isCosts?'none':'block'
+  document.getElementById('costs-view').classList.toggle('show', isCosts)
   document.getElementById('tab-2d').classList.toggle('active', tab==='2d')
+  document.getElementById('tab-costos').classList.toggle('active', isCosts)
+  // chrome del grafo (leyenda/minimap) molesta sobre la vista de costos → ocultar ahí
+  ;['legend','minimap'].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display = isCosts?'none':'' })
   closeD()
+  if (isCosts) {
+    loadCosts()
+    if (!_costsTimer) _costsTimer = setInterval(()=>{ if(activeTab==='costos') loadCosts(true) }, 30000)  // auto-refresh (fuerza red)
+    return
+  }
+  if (_costsTimer) { clearInterval(_costsTimer); _costsTimer = null }
   // Si el grafo ya existe, solo mostrarlo (no re-renderizar para no perder posiciones)
-  if ((tab==='3d' && Graph3) || (tab==='2d' && Graph2)) { startMinimap(); return }
+  if (Graph2) { startMinimap(); return }
   render()
 }
 
-// ── Init 3D ───────────────────────────────────────────────────────────────────
-function initGraph3D() {
-  Graph3 = ForceGraph3D({ controlType:'orbit' })(document.getElementById('graph-3d'))
-    .backgroundColor('#060c1a')
-    .showNavInfo(false)
-    .nodeLabel(n => n.name || n.id)
-    .nodeVal(n => val3D(n.type))
-    .nodeOpacity(0.92)
-    .nodeResolution(14)
-    .nodeColor(n => node3DColor(n, 0.5))
-    .linkColor(l => `rgba(120,170,255,${Math.max(0.12,(l.value||0.5)*0.5)})`)
-    .linkWidth(l => Math.max(0.3,(l.value||0.5)*1.1))
-    .linkDirectionalParticles(l => l.value>0.85?2:0)
-    .linkDirectionalParticleWidth(1.2)
-    .linkDirectionalParticleColor(()=> 'rgba(79,195,247,0.85)')
-    .linkLabel(l => l.relation||'')
-    .onNodeClick(showDetail)
-    .onBackgroundClick(closeD)
+// ── Costos: carga + render de tabla dinámica (auto-refresh cada 30s) ──────────
+function fmtUSD(v){ return (v==null) ? '—' : '$'+Number(v).toFixed(Math.abs(v)<1?4:2) }
 
-  Graph3.d3Force('charge').strength(-200).distanceMax(600)
-  Graph3.d3Force('link').distance(l =>
-    l.relation==='has_open_bug'?90 : l.relation==='has_submodule'?60 : l.relation==='covers'?45 : 55)
-  Graph3.d3VelocityDecay(0.4)
-  Graph3.cooldownTime(8000)
-  Graph3.onEngineStop(()=>{ if(!Graph3._stoppedOnce){Graph3._stoppedOnce=true; Graph3.zoomToFit(700,60)} })
+function _applyCosts(d){
+  costsData = d
+  if(d && d.ok) fillMonthSelect(d.months, d.selected_month)
+  renderCosts()
+}
+// force=true (auto-refresh) -> siempre pega a la red, sin spinner, deja la tabla visible.
+// force=false (cambio de mes / primer load) -> usa caché si existe (instantáneo); si no, spinner + red.
+async function loadCosts(force){
+  loadGcpBilling(force)   // gasto REAL de GCP (billing export) en paralelo
+  const body=document.getElementById('cost-body')
+  const cached = _costsByMonth[costMonth]
+  if(cached && !force){                 // mes ya visto -> mostrarlo YA, sin esperar la red
+    _applyCosts(cached); loadDeepseekBalance(); return
+  }
+  if(!cached){                          // no hay datos para este mes -> spinner (también al cambiar de mes)
+    body.innerHTML = `<div class="cost-empty"><div class="cost-spinner"></div>Cargando costos…</div>`
+    document.getElementById('cost-grand').textContent='…'
+    document.getElementById('cost-runs').textContent='…'
+    document.getElementById('cost-refresh').textContent='cargando…'
+  }
+  const reqMonth = costMonth            // capturamos: el usuario puede cambiar de mes mientras carga
+  try {
+    const d = await tryFetch(`${BACKEND}/api/costs?limit=500&month=${encodeURIComponent(reqMonth)}`, 20000)
+    _costsByMonth[reqMonth] = d
+    if(d && d.ok && d.selected_month) _costsByMonth[d.selected_month] = d   // 'current' resuelve a 'YYYY-MM'
+    if(reqMonth !== costMonth) return   // ya cambió de mes -> no pisar la vista actual
+    _applyCosts(d)
+    document.getElementById('cost-refresh').textContent = (d&&d.ok?'✓ ':'⚠ ') + new Date().toLocaleTimeString()
+  } catch(e){
+    if(reqMonth !== costMonth) return
+    document.getElementById('cost-refresh').textContent = '✗ sin backend'
+    if(!costsData){ costsData = {ok:false}; renderCosts() }
+  }
+  loadDeepseekBalance()
+}
+
+async function loadDeepseekBalance(){
+  const el=document.getElementById('ds-balance'), kpi=document.getElementById('ds-kpi')
+  if(!el) return
+  try {
+    const d = await tryFetch(`${BACKEND}/api/deepseek-balance`, 15000)
+    if(d && d.ok){
+      const bal = Number(d.total_balance)
+      el.textContent = '$'+bal.toFixed(2)
+      kpi.title = `DeepSeek restante: $${bal.toFixed(2)} ${d.currency} `
+        + `(otorgado $${Number(d.granted_balance).toFixed(2)} + recargado $${Number(d.topped_up_balance).toFixed(2)})`
+        + (d.is_available ? '' : ' — ⚠ CUENTA NO DISPONIBLE')
+      el.style.color = (!d.is_available || bal < 5) ? '#ff6b6b' : (bal < 20 ? '#ffd166' : '#34d399')
+    } else {
+      el.textContent='—'; el.style.color=''; kpi.title='No se pudo leer el balance: ' + ((d&&d.error)||'sin backend')
+    }
+  } catch(e){ el.textContent='—'; el.style.color=''; kpi.title='No se pudo leer el balance de DeepSeek' }
+}
+
+function execTable(rows, showProj){
+  if(!rows.length) return `<div class="cost-empty">Sin ejecuciones.</div>`
+  let h = `<table class="cost-tbl"><thead><tr><th class="l">Issue</th>${showProj?'<th class="l">Proy</th>':''}`
+        + `<th class="l">Plat</th><th class="l">Verdict</th><th>Dur</th><th>Calls</th><th>DeepSeek</th><th>Cloud Run</th><th>Total</th><th class="l">Fecha</th></tr></thead><tbody>`
+  for(const e of rows){
+    const v=(e.verdict||'').toUpperCase()
+    h += `<tr><td class="l" style="color:#cfe2ff">${e.issue||'—'}</td>${showProj?`<td class="l">${e.project||''}</td>`:''}`
+       + `<td class="l">${e.platform||''}</td><td class="l">${v?`<span class="vt ${v}">${v}</span>`:'—'}</td>`
+       + `<td>${e.duration_s?Math.round(e.duration_s)+'s':'—'}</td><td>${e.deepseek_calls??'—'}</td>`
+       + `<td class="usd">${fmtUSD(e.deepseek_usd)}</td><td class="usd">${fmtUSD(e.cloudrun_usd)}</td>`
+       + `<td class="usd total">${fmtUSD(e.total_usd)}</td><td class="l">${e.ts?new Date(e.ts).toLocaleString():'—'}</td></tr>`
+  }
+  return h+`</tbody></table>`
+}
+
+function renderCosts(){
+  const body=document.getElementById('cost-body'), grand=document.getElementById('cost-grand'), runs=document.getElementById('cost-runs')
+  if(!costsData || !costsData.ok){
+    grand.textContent='$0'; runs.textContent='0'
+    body.innerHTML = `<div class="cost-empty">Aún no hay datos de costos.<br>Se llenan a medida que el runner ejecuta issues — el agente escribe una fila por ejecución en <code>qa_agent.run_costs</code>.</div>`
+    return
+  }
+  // KPIs: separar el estimado en DeepSeek (externo) vs GCP (Gemini+CloudRun+VM+BQ)
+  const _bp = costsData.by_project||[]
+  const _sum = (k)=> _bp.reduce((s,p)=>s+(p[k]||0),0)
+  grand.textContent = fmtUSD(_sum('deepseek_usd'))                                   // GASTO TOTAL DEEPSEEK
+  const _gcpEst=document.getElementById('cost-gcp-est')
+  if(_gcpEst) _gcpEst.textContent = fmtUSD(_sum('gemini_usd')+_sum('cloudrun_usd')+_sum('vm_usd')+_sum('bigquery_usd'))  // GASTO TOTAL GCP (estimado)
+  runs.textContent  = costsData.total_runs||0
+  const q=(document.getElementById('cost-search').value||'').trim().toUpperCase()
+
+  if(q){   // modo búsqueda: ejecuciones cuyo issue matchea
+    const rows=(costsData.executions||[]).filter(e=>(e.issue||'').toUpperCase().includes(q))
+    body.innerHTML = `<div style="font-size:11px;color:#6a8aa8;margin-bottom:8px">${rows.length} ejecución(es) para "${q}"</div>` + execTable(rows,true)
+    return
+  }
+  // modo agregado por proyecto (comparación), expandible a ejecuciones. Columnas = TODOS los servicios GCP del agente.
+  const _COLS = 15
+  const _mt = '<td class="usd">—</td>'.repeat(5)   // Network/Build/Artifact/Storage/Secret: no se estiman por-run
+  let html = `<table class="cost-tbl"><thead><tr><th class="l">Proyecto</th><th>Runs</th>`
+    + `<th>DeepSeek</th><th>Cloud Run</th><th>Gemini</th><th>BQ</th><th>VM</th>`
+    + `<th>Network</th><th>Build</th><th>Artifact</th><th>Storage</th><th>Secret</th>`
+    + `<th>$/run</th><th>Total</th><th class="l">Último</th></tr></thead><tbody>`
+  for(const p of _bp){
+    const open=costsExpanded.has(p.project)
+    html += `<tr class="proj-row" onclick="toggleProj('${p.project}')"><td class="l proj-name">`
+      + `<span class="caret" style="transform:rotate(${open?90:0}deg)">▶</span> ${p.project}</td>`
+      + `<td>${p.runs}</td><td class="usd">${fmtUSD(p.deepseek_usd)}</td><td class="usd">${fmtUSD(p.cloudrun_usd)}</td>`
+      + `<td class="usd">${fmtUSD(p.gemini_usd)}</td><td class="usd">${fmtUSD(p.bigquery_usd)}</td><td class="usd">${fmtUSD(p.vm_usd)}</td>`
+      + _mt
+      + `<td class="usd">${fmtUSD(p.avg_usd)}</td><td class="usd total">${fmtUSD(p.total_usd)}</td>`
+      + `<td class="l">${p.last_run?new Date(p.last_run).toLocaleString():'—'}</td></tr>`
+    if(open){
+      const ex=(costsData.executions||[]).filter(e=>e.project===p.project)
+      html += `<tr class="exec-row"><td colspan="${_COLS}">${execTable(ex,false)}</td></tr>`
+    }
+  }
+  // Fila ACUMULADA: gasto REAL de GCP (billing) del agente, en las MISMAS columnas (cada servicio). El billing NO
+  // se puede partir por ejecución/proyecto-testeado (GCP factura por proyecto-GCP = todo el agente junto).
+  if(gcpBilling && gcpBilling.ok && gcpBilling.agent_cols){
+    const a = gcpBilling.agent_cols
+    html += `<tr class="proj-row" style="background:rgba(224,64,251,0.07)" title="Gasto REAL facturado por GCP (billing export) de procontacto-claude — TODO el agente junto, acumulado del mes (no por ejecución). NO incluye DeepSeek (API externa).">`
+      + `<td class="l proj-name" style="color:#ea80fc">🔵 GCP REAL (billing)</td><td>—</td>`
+      + `<td class="usd">—</td><td class="usd">${fmtUSD(a.cloudrun)}</td>`
+      + `<td class="usd">${fmtUSD(a.gemini)}</td><td class="usd">${fmtUSD(a.bigquery)}</td><td class="usd">${fmtUSD(a.vm)}</td>`
+      + `<td class="usd">${fmtUSD(a.networking)}</td><td class="usd">${fmtUSD(a.build)}</td><td class="usd">${fmtUSD(a.artifact)}</td><td class="usd">${fmtUSD(a.storage)}</td><td class="usd">${fmtUSD(a.secret)}</td>`
+      + `<td class="usd">—</td><td class="usd total" style="color:#ea80fc">${fmtUSD(a.total)}</td>`
+      + `<td class="l">real</td></tr>`
+  }
+  html += `</tbody></table>`
+  body.innerHTML = (costsData.by_project&&costsData.by_project.length) ? html
+    : `<div class="cost-empty">Aún no hay datos de costos. Se llenan a medida que el runner ejecuta issues.</div>`
+}
+
+function toggleProj(p){ costsExpanded.has(p)?costsExpanded.delete(p):costsExpanded.add(p); renderCosts() }
+
+// ── Gasto REAL de GCP (billing export) — MXN + USD, por servicio ──────────────
+async function loadGcpBilling(force){
+  const cached = _gcpByMonth[costMonth]
+  if(cached && !force){ gcpBilling = cached; renderGcpBilling(); return }
+  const reqMonth = costMonth
+  try {
+    const d = await tryFetch(`${BACKEND}/api/gcp-billing?month=${encodeURIComponent(reqMonth)}`, 20000)
+    _gcpByMonth[reqMonth] = d
+    if(d && d.ok && d.selected_month) _gcpByMonth[d.selected_month] = d
+    if(reqMonth !== costMonth) return
+    gcpBilling = d; renderGcpBilling()
+  } catch(e){ /* deja el último render */ }
+}
+
+function renderGcpBilling(){
+  const kpi=document.getElementById('cost-gcp'), box=document.getElementById('gcp-billing-body')
+  if(!kpi||!box) return
+  const d=gcpBilling
+  if(!d || !d.ok){
+    kpi.textContent='—'
+    document.getElementById('gcp-kpi').title = 'Gasto REAL de GCP no disponible: ' +
+      ((d&&d.error)||'sin backend') + '  — corré una vez: gcloud auth application-default login (cuenta corp).'
+    box.innerHTML = d && d.error ?
+      `<div class="cost-empty">Gasto real de GCP no disponible.<br><span style="color:#ffd166">Corré una vez en tu máquina: <code>gcloud auth application-default login</code> con tu cuenta <code>axel.colamarino@procontacto.com.mx</code> (Cortex usa tu ADC de usuario para leer el billing).</span><br><span style="font-size:11px;color:#6a8aa8">${(d.error||'').slice(0,180)}</span></div>` : ''
+    return
+  }
+  // KPI: USD grande + MXN en el título; el agente (procontacto-claude) aparte
+  kpi.textContent = fmtUSD(d.grand_usd)
+  document.getElementById('gcp-kpi').title =
+    `Gasto REAL GCP (billing) del mes: $${(d.grand_mxn||0).toLocaleString()} MXN ≈ $${d.grand_usd} USD (todos los proyectos).\n`
+    + `Solo el QA Agent (procontacto-claude): $${(d.agent_mxn||0).toLocaleString()} MXN ≈ $${d.agent_usd} USD.\n`
+    + `NO incluye DeepSeek (se factura fuera de GCP).`
+  // SIN texto ni tabla separada: el detalle real del AGENTE va como fila "🔵 GCP REAL" DENTRO de la tabla
+  // por-proyecto (en las mismas columnas, por servicio), vía renderCosts().
+  box.innerHTML = ''
+  renderCosts()   // re-render de la tabla por-proyecto para que aparezca la fila acumulada GCP REAL
 }
 
 // ── Init 2D ───────────────────────────────────────────────────────────────────
@@ -377,20 +834,37 @@ function initGraph2D() {
         ctx.fillText(label, node.x, node.y+r+2)
       }
     })
-    .linkColor(l => `rgba(120,170,255,${Math.max(0.1,(l.value||0.5)*0.4)})`)
-    .linkWidth(l => Math.max(0.4,(l.value||0.5)*1.2))
-    .linkDirectionalParticles(l => l.value>0.85?2:0)
-    .linkDirectionalParticleWidth(1.6)
+    .autoPauseRedraw(false)   // repinta continuo -> el hover-highlight y los rings animados funcionan (en 1.43.x NO hay refresh())
+    .linkColor(l => _hlLinks.has(l) ? 'rgba(79,195,247,0.9)'
+                  : l.relation==='covers' ? (l.__star ? 'rgba(224,64,251,0.10)' : 'rgba(224,64,251,0.30)')
+                  : `rgba(120,170,255,${Math.max(0.2,(l.value||0.5)*0.5)})`)
+    .linkWidth(l => _hlLinks.has(l) ? 1.8 : l.relation==='covers' ? 0.5 : Math.max(0.5,(l.value||0.5)*1.3))
+    .linkCurvature(l => l.__curve || 0)
+    .linkLineDash(l => (l.relation==='covers' && !l.__star) ? [2,3] : null)   // covers→módulo punteado = "referencia", no estructura
+    .linkDirectionalParticles(l => _hlLinks.has(l) ? 3 : 0)   // partículas SOLO en el highlight (permanentes en 800 links matan el frame budget)
+    .linkDirectionalParticleWidth(1.8)
     .linkDirectionalParticleColor(()=> 'rgba(79,195,247,0.9)')
     .linkLabel(l => l.relation||'')
+    // Visibles por defecto: toda la jerarquía + la ESTRELLA (covers skill→proyecto).
+    // covers→módulo: solo con el toggle Cobertura o al hacer HOVER sobre el nodo (focus+context).
+    .linkVisibility(l => l.relation !== 'covers' ? true : (showCovers || l.__star || _hlLinks.has(l)))
+    .onNodeHover(n => {
+      _hlLinks.clear()
+      if (n && n.__links) n.__links.forEach(l => _hlLinks.add(l))
+    })
     .onNodeClick(showDetail)
     .onBackgroundClick(closeD)
 
-  Graph2.d3Force('charge').strength(-220).distanceMax(500)
+  Graph2.d3Force('charge').strength(n => n.type==='project' ? -1000 : -220).distanceMax(900)
   Graph2.d3Force('link').distance(l =>
-    l.relation==='has_open_bug'?85 : l.relation==='has_submodule'?55 : l.relation==='covers'?42 : 50)
+    l.relation==='covers'?150 : l.relation==='has_open_bug'?85 : l.relation==='has_submodule'?55 : 50)
+    .strength(l => l.relation==='covers' ? 0.02 : 0.5)
   Graph2.d3VelocityDecay(0.4)
-  Graph2.cooldownTime(8000)
+  Graph2.warmupTicks(180)     // la vista dag resuelve el layout OFF-SCREEN antes de pintar (no se ve "hervir")
+  Graph2.cooldownTime(4000)
+  // Encuadre de respaldo: las posiciones ya vienen FIJAS desde render() (fx/fy), así que la
+  // simulación se detiene enseguida sin mover nada -> el encuadre queda estable, no deriva.
+  Graph2.onEngineStop(()=>{ if (!Graph2._fit) { Graph2._fit = true; Graph2.zoomToFit(600, 70) } })
 }
 
 // ── Panel de detalle ──────────────────────────────────────────────────────────
@@ -423,10 +897,7 @@ function showDetail(node) {
          <span class="rlabel">${r.lbl}</span><span class="rtarget">${r.o}</span></div>`).join('')
     : '<h4>Relaciones</h4><div style="font-size:11px;color:#3a5060">Sin relaciones visibles</div>'
 
-  if (activeTab==='3d' && Graph3) {
-    const d=140, k=1+d/Math.hypot(node.x||1,node.y||1,node.z||1)
-    Graph3.cameraPosition({x:(node.x||0)*k,y:(node.y||0)*k,z:(node.z||0)*k}, node, 700)
-  } else if (activeTab==='2d' && Graph2) {
+  if (Graph2) {
     Graph2.centerAt(node.x,node.y,500); Graph2.zoom(3.5,500)
   }
 }
@@ -437,8 +908,7 @@ let _mmRaf = null
 function startMinimap(){ if(_mmRaf) cancelAnimationFrame(_mmRaf); drawMinimap() }
 
 function liveNodes() {
-  const g = activeTab==='3d' ? Graph3 : Graph2
-  const gn = g ? (g.graphData().nodes||[]) : []
+  const gn = Graph2 ? (Graph2.graphData().nodes||[]) : []
   const withPos = gn.filter(n=>n.x!=null)
   return withPos.length ? withPos : gFiltered.nodes.filter(n=>n.x!=null)
 }
@@ -482,29 +952,12 @@ document.addEventListener('DOMContentLoaded',()=>{
     const bb=bounds(); if(!bb) return
     const cx=bb.minX+((nx*W-PAD)/(W-PAD*2))*bb.rx
     const cy=bb.minY+((ny*H-PAD)/(H-PAD*2))*bb.ry
-    if(activeTab==='2d'&&Graph2){ Graph2.centerAt(cx,cy,500); Graph2.zoom(3,500) }
-    else if(activeTab==='3d'&&Graph3){
-      const z=Math.max(120,bb.rx*0.5)
-      Graph3.cameraPosition({x:cx,y:cy,z},{x:cx,y:cy,z:0},600)
-    }
+    if(Graph2){ Graph2.centerAt(cx,cy,500); Graph2.zoom(3,500) }
   })
 })
 
-// ── Keep-alive: anima rings 2D y pulso de color de módulos en 3D ──────────────
-let _kaLast = 0
-;(function keepAlive(now){
-  if (activeTab==='2d' && Graph2) {
-    Graph2.refresh()
-  } else if (activeTab==='3d' && Graph3) {
-    // Throttle a ~12fps — reasignar nodeColor recrea materiales, no abusar
-    if (now - _kaLast > 80) {
-      _kaLast = now
-      const pulse = (Math.sin(now*0.0022)+1)/2
-      Graph3.nodeColor(n => node3DColor(n, pulse))
-    }
-  }
-  requestAnimationFrame(keepAlive)
-})(0)
+// (los rings animados de skills y el hover-highlight se repintan solos: autoPauseRedraw(false) en initGraph2D.
+//  En force-graph 2D 1.43.x NO existe Graph.refresh() — el keep-alive viejo era un no-op.)
 
 // ── Tooltips de leyenda ───────────────────────────────────────────────────────
 const LEGEND_DESC = {
@@ -561,6 +1014,7 @@ async function boot(){
     fillProjects([...new Set(DEMO.nodes.map(x=>x.project))])
   }
   render()
+  const gl=document.getElementById('graph-loading'); if(gl) gl.style.display='none'   // cargó -> sacar spinner del cerebro
 }
 boot()
 </script>
