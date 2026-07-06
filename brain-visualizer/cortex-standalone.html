@@ -336,6 +336,7 @@ function radialLayout(nodes, links){
 
   // adyacencia padre -> hijos (excluye 'covers' de skills para no contaminar la jerarquía)
   const kids = new Map();
+  const deepTargets = new Set();   // nodos que son SUBMÓDULO de otro módulo (multi-padre)
   for (const l of links){
     const s = typeof l.source === 'object' ? l.source.id : l.source;
     const t = typeof l.target === 'object' ? l.target.id : l.target;
@@ -343,6 +344,7 @@ function radialLayout(nodes, links){
     if (String(s).startsWith('skill:') || String(t).startsWith('skill:')) continue;
     if (!kids.has(s)) kids.set(s, []);
     kids.get(s).push(t);
+    if (l.relation === 'has_submodule') deepTargets.add(t);
   }
   const visited = new Set();
 
@@ -368,10 +370,15 @@ function radialLayout(nodes, links){
     const ch = [...new Set(kids.get(node.id) || [])].map(id => byId.get(id)).filter(c => c && !visited.has(c.id));
     if (!ch.length) return;
     if (level === 0){
+      // MULTI-PADRE: un hijo directo del proyecto que TAMBIÉN es submódulo de otro módulo
+      // (ej "Operador Logístico" hijo de SOLO y submódulo de "Expedición") NO va al círculo:
+      // lo coloca su módulo padre en el abanico -> el subárbol queda JUNTO (sin subnodos
+      // lejos del módulo ni arcos cruzando el cluster).
+      const circleCh = ch.filter(c => !deepTargets.has(c.id));
       // ordenar módulos para que los de MUCHOS submódulos queden SEPARADOS en el círculo
       // (intercalado grande/chico) -> sus abanicos divergen en vez de superponerse.
       const kc = id => (kids.get(id) || []).length;
-      const sorted = ch.slice().sort((a, b) => kc(b.id) - kc(a.id));
+      const sorted = circleCh.slice().sort((a, b) => kc(b.id) - kc(a.id));
       const arr = []; let lo = 0, hi = sorted.length - 1;
       for (let i = 0; i < sorted.length; i++) arr.push(i % 2 === 0 ? sorted[lo++] : sorted[hi--]);
       const r = Math.min(640, Math.max(240, arr.length*26));
@@ -534,12 +541,13 @@ function render() {
     if (sn && tn) {
       sn.__links.push(l); tn.__links.push(l)
       const d = Math.hypot((sn.fx || 0) - (tn.fx || 0), (sn.fy || 0) - (tn.fy || 0))
-      // 700px: por encima del radio del círculo de módulos (~624) -> curva SOLO los links
-      // anómalos (multi-padre cruzando el cluster), no los rayos normales proyecto→módulo.
+      // Curvar SOLO los links anómalos largos (multi-padre cruzando el cluster). Los contains_module
+      // NUNCA se curvan: son rayos RADIALES por construcción (proyecto→módulo, aunque el módulo
+      // multi-padre quede lejos, el rayo apunta hacia afuera y recto se lee bien).
       // (En la vista dagMode no hay fx pre-simulación -> d≈0 -> sin curvas; el layout nativo
       //  ya acomoda los multi-padre entre sus padres.)
       l.__curve = (l.relation === 'covers' && !l.__star) ? 0.3
-                : (l.relation !== 'covers' && d > 700) ? 0.25 : 0
+                : (l.relation !== 'covers' && l.relation !== 'contains_module' && d > 700) ? 0.25 : 0
     }
   })
   Graph2._fit = false                                  // datos nuevos -> permitir un encuadre
@@ -684,6 +692,17 @@ function renderCosts(){
       const ex=(costsData.executions||[]).filter(e=>e.project===p.project)
       html += `<tr class="exec-row"><td colspan="10">${execTable(ex,false)}</td></tr>`
     }
+  }
+  // Fila ACUMULADA: gasto REAL de GCP (billing) en las MISMAS columnas. El billing NO se puede partir por
+  // proyecto-testeado/ejecución (GCP factura por proyecto-GCP = todo el agente junto) -> va como total real.
+  if(gcpBilling && gcpBilling.ok && gcpBilling.agent_cols){
+    const a = gcpBilling.agent_cols
+    html += `<tr class="proj-row" style="background:rgba(224,64,251,0.07)" title="Gasto REAL facturado por GCP (billing export) del proyecto procontacto-claude — TODO el agente junto, no por ejecución. 'otros' (col $/run) = Networking/Cloud Build/Artifact/Storage. NO incluye DeepSeek (API externa).">`
+      + `<td class="l proj-name" style="color:#ea80fc">🔵 GCP REAL (billing)</td><td>—</td>`
+      + `<td class="usd">—</td><td class="usd">${fmtUSD(a.cloudrun)}</td>`
+      + `<td class="usd">${fmtUSD(a.gemini)}</td><td class="usd">${fmtUSD(a.bigquery)}</td><td class="usd">${fmtUSD(a.vm)}</td>`
+      + `<td class="usd" title="otros servicios GCP sin columna propia">+${fmtUSD(a.otros)}</td><td class="usd total" style="color:#ea80fc">${fmtUSD(a.total)}</td>`
+      + `<td class="l">real</td></tr>`
   }
   html += `</tbody></table>`
   body.innerHTML = (costsData.by_project&&costsData.by_project.length) ? html
