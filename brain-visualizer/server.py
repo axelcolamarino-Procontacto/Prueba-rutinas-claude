@@ -741,11 +741,28 @@ def get_gcp_billing(month: str = Query("current")):
             GROUP BY project HAVING mxn > 0 ORDER BY mxn DESC
         """, job_config=cfg).result()]
 
+        # Gasto REAL del AGENTE (procontacto-claude) mapeado a las MISMAS columnas de la tabla por-ejecución
+        # (cloudrun/gemini/vm/bigquery/otros) -> se muestra como fila acumulada "GCP REAL" ahí, no separado.
+        agent_where = (month_clause + " AND " if month_clause else "WHERE ") + f"project.id = '{PROJECT_ID}'"
+        agent_cols = {"cloudrun": 0.0, "gemini": 0.0, "vm": 0.0, "bigquery": 0.0, "otros": 0.0}
+        for r in client.query(f"""
+            SELECT CASE WHEN service.description='Cloud Run' THEN 'cloudrun'
+                        WHEN service.description='Vertex AI' THEN 'gemini'
+                        WHEN service.description='Compute Engine' THEN 'vm'
+                        WHEN service.description='BigQuery' THEN 'bigquery'
+                        ELSE 'otros' END AS col,
+                   ROUND(SAFE_DIVIDE({net_mxn}, {rate}), 4) AS usd
+            FROM {tbl} {agent_where}
+            GROUP BY col
+        """, job_config=cfg).result():
+            agent_cols[r["col"]] = round((agent_cols.get(r["col"], 0) or 0) + (r["usd"] or 0), 4)
+        agent_cols["total"] = round(sum(agent_cols.values()), 4)
+
         g_mxn = round(sum((s.get("mxn") or 0) for s in by_service), 2)
         g_usd = round(sum((s.get("usd") or 0) for s in by_service), 2)
         agent = next((p for p in by_project if p.get("project") == PROJECT_ID), None)
         return {"ok": True, "currency": "MXN", "by_service": by_service, "by_project": by_project,
-                "grand_mxn": g_mxn, "grand_usd": g_usd,
+                "grand_mxn": g_mxn, "grand_usd": g_usd, "agent_cols": agent_cols,
                 "agent_mxn": (agent or {}).get("mxn", 0), "agent_usd": (agent or {}).get("usd", 0),
                 "months": months, "selected_month": (sel_month if month != "all" else "all")}
     except Exception as e:

@@ -743,17 +743,13 @@ function renderGcpBilling(){
     `Gasto REAL GCP (billing) del mes: $${(d.grand_mxn||0).toLocaleString()} MXN ≈ $${d.grand_usd} USD (todos los proyectos).\n`
     + `Solo el QA Agent (procontacto-claude): $${(d.agent_mxn||0).toLocaleString()} MXN ≈ $${d.agent_usd} USD.\n`
     + `NO incluye DeepSeek (se factura fuera de GCP).`
-  const rows=(d.by_service||[])
-  let h = `<div style="font-size:11px;color:#6a8aa8;margin:2px 0 8px">💰 <b>Gasto REAL GCP</b> (billing export, todos los proyectos) — `
-        + `total $${(d.grand_mxn||0).toLocaleString()} MXN ≈ <b>$${d.grand_usd} USD</b> · `
-        + `QA Agent solo: $${(d.agent_mxn||0).toLocaleString()} MXN ≈ <b>$${d.agent_usd} USD</b>. NO incluye DeepSeek (externo).</div>`
-  h += `<table class="cost-tbl"><thead><tr><th class="l">Servicio</th><th>MXN</th><th>USD</th></tr></thead><tbody>`
-  for(const s of rows){
-    h += `<tr><td class="l" style="color:#cfe2ff">${s.service||'—'}</td>`
-       + `<td>$${(s.mxn||0).toLocaleString()}</td><td class="usd total">${fmtUSD(s.usd)}</td></tr>`
-  }
-  h += `</tbody></table>`
-  box.innerHTML = rows.length ? h : ''
+  // SIN tabla separada de servicios: solo una línea de contexto. El detalle real del AGENTE va como fila
+  // acumulada "🔵 GCP REAL" DENTRO de la tabla por-proyecto (en las mismas columnas), vía renderCosts().
+  box.innerHTML = `<div style="font-size:11.5px;color:#6a8aa8;margin:2px 0 10px">`
+    + `💰 <b>Gasto REAL GCP</b> (billing) del mes — todos los proyectos GCP: <b>$${d.grand_usd} USD</b> ($${(d.grand_mxn||0).toLocaleString()} MXN) · `
+    + `QA Agent (procontacto-claude): <b style="color:#ea80fc">$${d.agent_usd} USD</b> ($${(d.agent_mxn||0).toLocaleString()} MXN). `
+    + `Abajo la fila <b style="color:#ea80fc">🔵 GCP REAL</b> lo muestra en las mismas columnas (acumulado; el billing no se puede partir por ejecución). NO incluye DeepSeek (externo).</div>`
+  renderCosts()   // re-render de la tabla por-proyecto para que aparezca la fila acumulada GCP REAL
 }
 
 // ── Init 2D ───────────────────────────────────────────────────────────────────
