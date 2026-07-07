@@ -136,7 +136,6 @@
 <div id="costs-view">
   <div class="cost-head">
     <div class="cost-kpi total" title="Estimado DeepSeek (API externa, el mayor costo del agente) — suma de todos los runs del mes"><div class="v" id="cost-grand">$—</div><div class="l">GASTO TOTAL DEEPSEEK</div></div>
-    <div class="cost-kpi total" title="Estimado GCP del agente (Gemini + Cloud Run + VM + BQ) — suma de todos los runs. El número REAL facturado está en 'GCP REAL (billing)'."><div class="v" id="cost-gcp-est">$—</div><div class="l">GASTO TOTAL GCP</div></div>
     <div class="cost-kpi"><div class="v" id="cost-runs">—</div><div class="l">EJECUCIONES</div></div>
     <div class="cost-kpi" id="ds-kpi" title="Saldo restante de la cuenta DeepSeek (API /user/balance)"><div class="v" id="ds-balance">$—</div><div class="l">DEEPSEEK RESTANTE</div></div>
     <div class="cost-kpi" id="gcp-kpi" title="Gasto REAL de GCP del mes (billing export, todos los proyectos de la cuenta). El agente = procontacto-claude."><div class="v" id="cost-gcp">$—</div><div class="l">GCP REAL (billing)</div></div>
@@ -673,8 +672,6 @@ function renderCosts(){
   const _bp = costsData.by_project||[]
   const _sum = (k)=> _bp.reduce((s,p)=>s+(p[k]||0),0)
   grand.textContent = fmtUSD(_sum('deepseek_usd'))                                   // GASTO TOTAL DEEPSEEK
-  const _gcpEst=document.getElementById('cost-gcp-est')
-  if(_gcpEst) _gcpEst.textContent = fmtUSD(_sum('gemini_usd')+_sum('cloudrun_usd')+_sum('vm_usd')+_sum('bigquery_usd'))  // GASTO TOTAL GCP (estimado)
   runs.textContent  = costsData.total_runs||0
   const q=(document.getElementById('cost-search').value||'').trim().toUpperCase()
 
