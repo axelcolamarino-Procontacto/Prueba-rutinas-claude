@@ -182,6 +182,7 @@
   body.editing .nd{cursor:grab} body.editing .nd:active{cursor:grabbing}
   body.editing svg.wires{pointer-events:auto}
   body.editing svg.wires .hit{cursor:pointer}
+  body.editing svg.wires .hithalo{pointer-events:stroke;cursor:pointer}
   .nd.sel .chip,.nd.sel .box,.nd.sel .orb,.nd.sel .pill{outline:2px dashed rgba(94,234,212,.85);outline-offset:3px}
   .epanel{position:fixed;top:64px;right:12px;width:266px;max-height:calc(100vh - 84px);overflow:auto;z-index:55;background:linear-gradient(180deg,#131b2c,#0e1522);border:1px solid var(--hair);border-radius:14px;padding:14px;display:none;box-shadow:0 24px 50px -18px rgba(0,0,0,.9)}
   .epanel.open{display:block}
@@ -598,7 +599,11 @@
       fr+='<rect class="hit" data-fid="'+f.id+'" x="'+X.toFixed(1)+'" y="'+Y.toFixed(1)+'" width="'+W2.toFixed(1)+'" height="'+H2.toFixed(1)+'" rx="18" fill="none" stroke="'+hexA(cf,.45)+'" stroke-width="1.4" stroke-dasharray="'+(f.dash||'8 6')+'"/>';
       if(f.label) fr+='<text x="'+(X+16).toFixed(1)+'" y="'+(Y+20).toFixed(1)+'" fill="'+hexA(cf,.9)+'" font-size="11" font-weight="700" letter-spacing="1.2">'+esc(f.label)+'</text>';
     });
-    wires.setAttribute('viewBox','0 0 '+w+' '+totalH); wires.innerHTML=defs+'</defs>'+fr+svg;
+    // hit-halos: franja transparente ANCHA por cada línea/marco -> clickeables fácil en modo edición
+    var HAL='';
+    svg.replace(/data-eid="([^"]+)" d="([^"]+)"/g, function(m,id,d){ HAL+='<path class="hithalo" data-eid="'+id+'" d="'+d+'" fill="none" stroke="transparent" stroke-width="18"/>'; return m; });
+    fr.replace(/data-fid="([^"]+)" x="([^"]+)" y="([^"]+)" width="([^"]+)" height="([^"]+)" rx="([^"]+)"/g, function(m,id,x,y,W2,H2,rx){ HAL+='<rect class="hithalo" data-fid="'+id+'" x="'+x+'" y="'+y+'" width="'+W2+'" height="'+H2+'" rx="'+rx+'" fill="none" stroke="transparent" stroke-width="20"/>'; return m; });
+    wires.setAttribute('viewBox','0 0 '+w+' '+totalH); wires.innerHTML=defs+'</defs>'+HAL+fr+svg;
     if(typeof layoutFrameHandles==='function') layoutFrameHandles();
   }
 
