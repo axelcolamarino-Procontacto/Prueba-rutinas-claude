@@ -8,6 +8,16 @@
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   body { background:#060c1a; color:#c8d8f0; font-family:'Segoe UI',system-ui,sans-serif; overflow:hidden; height:100vh; }
   #graph-2d { position:absolute; inset:0; }
+  #cerebro-view { position:absolute; top:56px; left:0; right:0; bottom:0; display:none; background:#04060d; z-index:96; }
+  #cerebro-view.show { display:block; }
+  #cerebro-canvas { display:block; width:100%; height:100%; }
+  #cb-legend { position:absolute; bottom:0; left:0; right:0; display:flex; align-items:center; gap:14px;
+    padding:8px 18px; font-size:11px; color:#7a9ab8; background:rgba(4,6,13,.7); backdrop-filter:blur(6px);
+    border-top:1px solid rgba(100,150,255,.1); }
+  #cb-legend i { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:middle; box-shadow:0 0 6px currentColor; }
+  #cb-tip { position:fixed; display:none; background:rgba(4,9,20,.96); border:1px solid rgba(100,150,255,.35);
+    border-radius:9px; padding:8px 12px; font-size:12px; color:#dceeff; pointer-events:none; z-index:120;
+    max-width:280px; line-height:1.5; box-shadow:0 8px 28px rgba(0,0,0,.7); }
   #graph-loading { position:absolute; inset:56px 0 0 0; z-index:80; background:#060c1a;
     display:flex; align-items:center; justify-content:center; flex-direction:column;
     color:#5a7a98; font-size:13px; letter-spacing:.5px; }
@@ -131,6 +141,18 @@
 </head>
 <body>
 <div id="graph-2d"></div>
+<div id="cerebro-view">
+  <canvas id="cerebro-canvas"></canvas>
+  <div id="cb-legend">
+    <span><i style="color:#e040fb"></i>Skills</span>
+    <span><i style="color:#eef1f8"></i>Proyectos</span>
+    <span><i style="color:#4fc3f7"></i>Módulos</span>
+    <span><i style="color:#8891a8"></i>Submódulos</span>
+    <span><i style="color:#ef5350"></i>Bugs</span>
+    <span style="margin-left:auto;color:#4a6a90">pasá el mouse por una neurona para encender sus conexiones</span>
+  </div>
+</div>
+<div id="cb-tip"></div>
 <div id="graph-loading"><div class="cost-spinner"></div>Cargando cerebro…</div>
 
 <div id="costs-view">
@@ -153,7 +175,7 @@
   <div class="tabs">
     <button class="tab active" id="tab-2d" onclick="switchTab('2d')">2D</button>
     <button class="tab"        id="tab-costos" onclick="switchTab('costos')">Costos</button>
-    <a class="tab" href="/cerebro" style="text-decoration:none" title="Vista Cerebro (red neuronal en capas)">🧠 Cerebro</a>
+    <button class="tab" id="tab-cerebro" onclick="switchTab('cerebro')" title="Vista Cerebro (red neuronal en capas)">🧠 Cerebro</button>
   </div>
   <div class="chip"><strong id="sn">—</strong>&nbsp;entidades</div>
   <div class="chip"><strong id="sl">—</strong>&nbsp;relaciones</div>
@@ -571,20 +593,24 @@ function updateStats() {
 
 function switchTab(tab) {
   activeTab = tab
-  const isCosts = tab==='costos'
-  document.getElementById('graph-2d').style.display = isCosts?'none':'block'
+  const isCosts = tab==='costos', isCereb = tab==='cerebro', isGraph = tab==='2d'
+  document.getElementById('graph-2d').style.display = isGraph?'block':'none'
   document.getElementById('costs-view').classList.toggle('show', isCosts)
-  document.getElementById('tab-2d').classList.toggle('active', tab==='2d')
+  document.getElementById('cerebro-view').classList.toggle('show', isCereb)
+  document.getElementById('tab-2d').classList.toggle('active', isGraph)
   document.getElementById('tab-costos').classList.toggle('active', isCosts)
-  // chrome del grafo (leyenda/minimap) molesta sobre la vista de costos → ocultar ahí
-  ;['legend','minimap'].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display = isCosts?'none':'' })
+  document.getElementById('tab-cerebro').classList.toggle('active', isCereb)
+  // chrome del grafo (leyenda/minimap) molesta sobre costos/cerebro → ocultar ahí
+  const hideChrome = isCosts || isCereb
+  ;['legend','minimap'].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display = hideChrome?'none':'' })
   closeD()
+  if (_costsTimer && !isCosts) { clearInterval(_costsTimer); _costsTimer = null }
   if (isCosts) {
     loadCosts()
     if (!_costsTimer) _costsTimer = setInterval(()=>{ if(activeTab==='costos') loadCosts(true) }, 30000)  // auto-refresh (fuerza red)
     return
   }
-  if (_costsTimer) { clearInterval(_costsTimer); _costsTimer = null }
+  if (isCereb) { CB.start(); return }   // vista Cerebro: arranca el loop (usa gData ya cargado)
   // Si el grafo ya existe, solo mostrarlo (no re-renderizar para no perder posiciones)
   if (Graph2) { startMinimap(); return }
   render()
@@ -995,6 +1021,46 @@ function fillProjects(list){
     const o=document.createElement('option'); o.value=p; o.textContent=p; sel.appendChild(o)
   })
 }
+// ── Pestaña CEREBRO — red neuronal en capas (Skills→Proyectos→Módulos→Submódulos→Bugs). Usa gData. ──
+const CB = (function(){
+  let cv,ctx,W,H,DPR,cnodes=[],clinks=[],cols=[[],[],[],[],[]],pulses=[],hover=null,tG=0,running=false,started=false;
+  const COL={skill:[224,64,251],project:[238,241,248],module:[79,195,247],generic:[136,145,168],bug:[239,83,80]};
+  const LB=['SKILLS','PROYECTOS','MÓDULOS','SUBMÓDULOS','BUGS'], KEY=['skill','project','module','generic','bug'];
+  function layerOf(n){const id=String(n.id);if(id.startsWith('skill:'))return 0;if(n.type==='project')return 1;if(n.type==='module')return 2;if(n.type==='bug')return 4;return 3;}
+  function colX(c){const n=cols.length,padX=110;return padX+(W-2*padX)*(n===1?0.5:c/(n-1));}
+  function layout(){const padTop=64,padBot=44,uH=Math.max(120,H-padTop-padBot);for(let c=0;c<cols.length;c++){const x=colX(c),a=cols[c],m=a.length;a.forEach((nd,i)=>{nd._x=x;nd._y=padTop+(m<=1?uH/2:uH*i/(m-1));});}}
+  function bez(l){const s=l._s,t=l._t,mx=(s._x+t._x)/2,my=(s._y+t._y)/2,bow=(t._x-s._x)*0.13;return{sx:s._x,sy:s._y,tx:t._x,ty:t._y,cx:mx,cy:my-bow};}
+  function ptOn(b,tt){const u=1-tt;return{x:u*u*b.sx+2*u*tt*b.cx+tt*tt*b.tx,y:u*u*b.sy+2*u*tt*b.cy+tt*tt*b.ty};}
+  function build(){
+    cnodes=(gData.nodes||[]).map(n=>({id:n.id,name:n.name,type:n.type,project:n.project}));
+    const bid=new Map(cnodes.map(n=>[n.id,n]));
+    cnodes.forEach(n=>n._L=layerOf(n)); cols=[[],[],[],[],[]]; cnodes.forEach(n=>cols[n._L].push(n));
+    clinks=(gData.links||[]).map(l=>({source:(l.source&&l.source.id)||l.source,target:(l.target&&l.target.id)||l.target,relation:l.relation}));
+    clinks.forEach(l=>{l._s=bid.get(l.source);l._t=bid.get(l.target);});
+    clinks=clinks.filter(l=>l._s&&l._t&&l._s!==l._t);
+    pulses=[];const K=Math.min(110,clinks.length);for(let i=0;i<K;i++)pulses.push({l:clinks[(Math.random()*clinks.length)|0],t:Math.random(),spd:0.0025+Math.random()*0.006});
+  }
+  function resize(){const box=cv.parentElement;DPR=Math.min(2,window.devicePixelRatio||1);W=box.clientWidth;H=box.clientHeight;if(!W||!H)return;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);layout();}
+  function frame(){ if(activeTab!=='cerebro'){running=false;return;} tG+=0.016; ctx.setTransform(DPR,0,0,DPR,0,0);
+    ctx.globalCompositeOperation='source-over';
+    const bg=ctx.createRadialGradient(W*0.5,H*0.46,60,W*0.5,H*0.46,Math.max(W,H)*0.75);bg.addColorStop(0,'#0a1020');bg.addColorStop(1,'#04060d');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation='lighter';
+    for(const l of clinks){const isH=hover&&(l._s===hover||l._t===hover);const rgb=COL[KEY[l._t._L]]||COL.generic;const b=bez(l);ctx.lineWidth=isH?1.5:0.7;ctx.strokeStyle=isH?'rgba(255,255,255,0.92)':`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${hover?0.028:0.13})`;ctx.beginPath();ctx.moveTo(b.sx,b.sy);ctx.quadraticCurveTo(b.cx,b.cy,b.tx,b.ty);ctx.stroke();}
+    for(const p of pulses){p.t+=p.spd;if(p.t>1){p.t=0;p.l=clinks[(Math.random()*clinks.length)|0];}if(!p.l||!p.l._s||!p.l._t)continue;const b=bez(p.l),pt=ptOn(b,p.t),rgb=COL[KEY[p.l._t._L]]||[255,255,255];ctx.fillStyle=`rgba(${rgb[0]},${rgb[1]},${rgb[2]},0.95)`;ctx.beginPath();ctx.arc(pt.x,pt.y,1.7,0,7);ctx.fill();}
+    const br=0.82+0.18*Math.sin(tG*1.25);
+    for(const n of cnodes){const rgb=COL[KEY[n._L]]||COL.generic,big=n._L===1,isH=n===hover,dense=cols[n._L].length>70;const r=big?4.6:2.1,R=r*(dense?2.6:4.0);const g=ctx.createRadialGradient(n._x,n._y,0,n._x,n._y,R);g.addColorStop(0,`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${(isH?0.95:(dense?0.32:0.5))*br})`);g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(n._x,n._y,R,0,7);ctx.fill();ctx.fillStyle=`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${isH?1:0.92})`;ctx.beginPath();ctx.arc(n._x,n._y,isH?r*1.7:r,0,7);ctx.fill();}
+    ctx.globalCompositeOperation='source-over';ctx.textAlign='center';ctx.textBaseline='alphabetic';
+    for(let c=0;c<cols.length;c++){const x=colX(c);ctx.fillStyle='rgba(170,200,235,0.92)';ctx.font='bold 12.5px Segoe UI';ctx.fillText(LB[c],x,24);ctx.fillStyle='rgba(90,122,152,0.9)';ctx.font='10px Segoe UI';ctx.fillText('Neuronas: '+cols[c].length,x,40);}
+    ctx.textAlign='left';ctx.font='10.5px Segoe UI';ctx.fillStyle='rgba(210,220,240,0.85)';
+    for(const n of cols[1]){ctx.fillText((n.name||n.id).slice(0,20),n._x+9,n._y+3.5);}
+    requestAnimationFrame(frame);
+  }
+  function onMove(e){const rect=cv.getBoundingClientRect();const mx=e.clientX-rect.left,my=e.clientY-rect.top;let best=null,bd=17*17;for(const n of cnodes){const dx=n._x-mx,dy=n._y-my,d=dx*dx+dy*dy;if(d<bd){bd=d;best=n;}}hover=best;const tip=document.getElementById('cb-tip');if(best){tip.style.display='block';tip.style.left=Math.min(e.clientX+14,window.innerWidth-290)+'px';tip.style.top=(e.clientY+12)+'px';const deg=clinks.filter(l=>l._s===best||l._t===best).length;tip.innerHTML='<b>'+(best.name||best.id)+'</b><br><span style="color:#7a9ab8">'+LB[best._L]+(best.project?' · '+best.project:'')+' · '+deg+' conexiones</span>';}else tip.style.display='none';}
+  return { start(){ cv=document.getElementById('cerebro-canvas'); ctx=cv.getContext('2d');
+    if(!started){started=true;cv.addEventListener('mousemove',onMove);cv.addEventListener('mouseleave',()=>{hover=null;document.getElementById('cb-tip').style.display='none';});window.addEventListener('resize',()=>{if(activeTab==='cerebro')resize();});}
+    build();resize();if(!running){running=true;requestAnimationFrame(frame);} } };
+})();
+
 async function boot(){
   let data=null, live=false
   // 1. Backend FastAPI (BigQuery en vivo) — timeout amplio: la 1ª query es fría
