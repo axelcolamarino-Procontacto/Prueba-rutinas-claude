@@ -553,6 +553,12 @@ def index():
     return Path(__file__).parent.joinpath("cortex-standalone.html").read_text(encoding="utf-8")
 
 
+@app.get("/cerebro", response_class=HTMLResponse)
+def cerebro():
+    # Vista "Cerebro" (estilo red neuronal en capas) — APARTE del 2D/Costos, mismo /api/graph.
+    return Path(__file__).parent.joinpath("cerebro.html").read_text(encoding="utf-8")
+
+
 @app.get("/api/graph")
 def get_graph(project: str = Query("ALL")):
     proj_filter = "" if project == "ALL" else "AND project = @project"

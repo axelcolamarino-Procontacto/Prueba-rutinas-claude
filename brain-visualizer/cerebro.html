@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cortex — Cerebro (capas)</title>
+<style>
+  html,body{margin:0;height:100%;background:#05070f;overflow:hidden;font-family:'Segoe UI',system-ui,sans-serif;color:#c8d8f0}
+  #c{display:block;position:fixed;inset:0}
+  #top{position:fixed;top:0;left:0;right:0;height:46px;display:flex;align-items:center;gap:14px;padding:0 18px;
+       background:rgba(5,7,15,.72);backdrop-filter:blur(8px);border-bottom:1px solid rgba(100,150,255,.12);z-index:10}
+  #top b{color:#a0c4ff;font-weight:700;letter-spacing:.6px;white-space:nowrap}
+  #top .sub{font-size:11px;color:#5a7a98;white-space:nowrap}
+  .legend{display:flex;gap:13px;font-size:11px;color:#7a9ab8;flex-wrap:wrap}
+  .legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle;box-shadow:0 0 6px currentColor}
+  a.back{margin-left:auto;font-size:12px;color:#4fc3f7;text-decoration:none;border:1px solid rgba(79,195,247,.3);
+         padding:5px 12px;border-radius:8px;white-space:nowrap}
+  a.back:hover{background:rgba(79,195,247,.12)}
+  #hint{position:fixed;bottom:12px;left:18px;font-size:11px;color:#4a6a90;z-index:10}
+  #tip{position:fixed;display:none;background:rgba(4,9,20,.96);border:1px solid rgba(100,150,255,.35);border-radius:9px;
+       padding:8px 12px;font-size:12px;color:#dceeff;pointer-events:none;z-index:20;max-width:280px;line-height:1.5;
+       box-shadow:0 8px 28px rgba(0,0,0,.7)}
+</style></head>
+<body>
+<div id="top">
+  <b>🧠 Cortex · Cerebro</b>
+  <span class="sub" id="stat">cargando…</span>
+  <span class="legend">
+    <span><i style="color:#e040fb"></i>Skills</span>
+    <span><i style="color:#eef1f8"></i>Proyectos</span>
+    <span><i style="color:#4fc3f7"></i>Módulos</span>
+    <span><i style="color:#8891a8"></i>Submódulos</span>
+    <span><i style="color:#ef5350"></i>Bugs</span>
+  </span>
+  <a class="back" href="/">← volver al grafo</a>
+</div>
+<canvas id="c"></canvas>
+<div id="hint">las columnas son las capas del conocimiento · pasá el mouse por una neurona para encender sus conexiones</div>
+<div id="tip"></div>
+<script>
+const BACKEND = location.origin;
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+let W,H,DPR;
+const COL = { skill:[224,64,251], project:[238,241,248], module:[79,195,247], generic:[136,145,168], bug:[239,83,80] };
+const LAYER_LABEL = ['SKILLS','PROYECTOS','MÓDULOS','SUBMÓDULOS','BUGS'];
+const LAYER_KEY   = ['skill','project','module','generic','bug'];
+function layerOf(n){ const id=String(n.id); if(id.startsWith('skill:'))return 0; if(n.type==='project')return 1; if(n.type==='module')return 2; if(n.type==='bug')return 4; return 3; }
+
+let nodes=[], links=[], byId=new Map(), cols=[[],[],[],[],[]], pulses=[], hover=null, tGlobal=0;
+
+function resize(){ DPR=Math.min(2,window.devicePixelRatio||1); W=window.innerWidth; H=window.innerHeight;
+  cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0); layout(); }
+window.addEventListener('resize', resize);
+
+function colX(c){ const n=cols.length, padX=110; return padX + (W-2*padX)*(n===1?0.5:c/(n-1)); }
+function layout(){ const padTop=98, padBot=48, usableH=H-padTop-padBot;
+  for(let c=0;c<cols.length;c++){ const x=colX(c), arr=cols[c], m=arr.length;
+    arr.forEach((nd,i)=>{ nd._x=x; nd._y=padTop + (m<=1? usableH/2 : usableH*i/(m-1)); }); } }
+
+function bez(l){ const s=l._s,t=l._t, mx=(s._x+t._x)/2, my=(s._y+t._y)/2, bow=(t._x-s._x)*0.13;
+  return {sx:s._x,sy:s._y,tx:t._x,ty:t._y,cx:mx,cy:my-bow}; }
+function ptOn(b,tt){ const u=1-tt; return {x:u*u*b.sx+2*u*tt*b.cx+tt*tt*b.tx, y:u*u*b.sy+2*u*tt*b.cy+tt*tt*b.ty}; }
+
+async function boot(){
+  let d=null; try{ d=await (await fetch(BACKEND+'/api/graph')).json(); }catch(e){}
+  if(!d||!d.nodes||!d.nodes.length){ document.getElementById('stat').textContent='sin datos (¿backend en :8001?)'; return; }
+  nodes=d.nodes; links=d.links||[]; byId=new Map(nodes.map(n=>[n.id,n]));
+  nodes.forEach(n=>n._L=layerOf(n)); cols=[[],[],[],[],[]]; nodes.forEach(n=>cols[n._L].push(n));
+  links.forEach(l=>{ l._s=byId.get((l.source&&l.source.id)||l.source); l._t=byId.get((l.target&&l.target.id)||l.target); });
+  links=links.filter(l=>l._s&&l._t&&l._s!==l._t);
+  document.getElementById('stat').textContent = nodes.length+' neuronas · '+links.length+' sinapsis';
+  resize(); seedPulses(); requestAnimationFrame(frame);
+}
+function seedPulses(){ pulses=[]; const K=Math.min(110, links.length);
+  for(let i=0;i<K;i++) pulses.push({l:links[(Math.random()*links.length)|0], t:Math.random(), spd:0.0025+Math.random()*0.006}); }
+
+function frame(){ tGlobal+=0.016; ctx.setTransform(DPR,0,0,DPR,0,0);
+  // fondo profundo + vignette
+  ctx.globalCompositeOperation='source-over';
+  const bg=ctx.createRadialGradient(W*0.5,H*0.46,60,W*0.5,H*0.46,Math.max(W,H)*0.75);
+  bg.addColorStop(0,'#0a1020'); bg.addColorStop(1,'#04060d'); ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+
+  // sinapsis (tormenta) — aditivo
+  ctx.globalCompositeOperation='lighter';
+  for(const l of links){ const isH=hover&&(l._s===hover||l._t===hover); if(hover&&!isH){}
+    const rgb=COL[LAYER_KEY[l._t._L]]||COL.generic; const b=bez(l);
+    ctx.lineWidth=isH?1.5:0.7;
+    ctx.strokeStyle=isH?'rgba(255,255,255,0.92)':`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${hover?0.028:0.13})`;
+    ctx.beginPath(); ctx.moveTo(b.sx,b.sy); ctx.quadraticCurveTo(b.cx,b.cy,b.tx,b.ty); ctx.stroke(); }
+
+  // pulsos viajando (señal disparando)
+  for(const p of pulses){ p.t+=p.spd; if(p.t>1){ p.t=0; p.l=links[(Math.random()*links.length)|0]; }
+    if(!p.l||!p.l._s||!p.l._t) continue; const b=bez(p.l), pt=ptOn(b,p.t), rgb=COL[LAYER_KEY[p.l._t._L]]||[255,255,255];
+    ctx.fillStyle=`rgba(${rgb[0]},${rgb[1]},${rgb[2]},0.95)`; ctx.beginPath(); ctx.arc(pt.x,pt.y,1.7,0,7); ctx.fill(); }
+
+  // neuronas (glow + respiración)
+  const breathe=0.82+0.18*Math.sin(tGlobal*1.25);
+  for(const n of nodes){ const rgb=COL[LAYER_KEY[n._L]]||COL.generic, big=n._L===1, isH=n===hover;
+    const dense=cols[n._L].length>70;               // capas muy pobladas (skills/submódulos/bugs): menos glow para no saturar
+    const r=big?4.6:2.1, R=r*(dense?2.6:4.0);
+    const g=ctx.createRadialGradient(n._x,n._y,0,n._x,n._y,R);
+    g.addColorStop(0,`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${(isH?0.95:(dense?0.32:0.5))*breathe})`); g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(n._x,n._y,R,0,7); ctx.fill();
+    ctx.fillStyle=`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${isH?1:0.92})`; ctx.beginPath(); ctx.arc(n._x,n._y,isH?r*1.7:r,0,7); ctx.fill(); }
+
+  // etiquetas: cabecera de capa + nombre de proyectos
+  ctx.globalCompositeOperation='source-over';
+  ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+  for(let c=0;c<cols.length;c++){ const x=colX(c);
+    ctx.fillStyle='rgba(170,200,235,0.92)'; ctx.font='bold 12.5px Segoe UI'; ctx.fillText(LAYER_LABEL[c],x,64);
+    ctx.fillStyle='rgba(90,122,152,0.9)'; ctx.font='10px Segoe UI'; ctx.fillText('Neuronas: '+cols[c].length,x,80); }
+  ctx.textAlign='left'; ctx.font='10.5px Segoe UI'; ctx.fillStyle='rgba(210,220,240,0.85)';
+  for(const n of cols[1]){ ctx.fillText((n.name||n.id).slice(0,20), n._x+9, n._y+3.5); }
+
+  requestAnimationFrame(frame);
+}
+
+cv.addEventListener('mousemove', e=>{ const mx=e.clientX,my=e.clientY; let best=null,bd=17*17;
+  for(const n of nodes){ const dx=n._x-mx,dy=n._y-my,d=dx*dx+dy*dy; if(d<bd){bd=d;best=n;} } hover=best;
+  const tip=document.getElementById('tip');
+  if(best){ tip.style.display='block'; tip.style.left=Math.min(mx+14,W-290)+'px'; tip.style.top=(my+12)+'px';
+    const deg=links.filter(l=>l._s===best||l._t===best).length;
+    tip.innerHTML='<b>'+(best.name||best.id)+'</b><br><span style="color:#7a9ab8">'+LAYER_LABEL[best._L]+(best.project?' · '+best.project:'')+' · '+deg+' conexiones</span>'; }
+  else tip.style.display='none'; });
+boot();
+</script></body></html>
