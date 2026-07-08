@@ -225,6 +225,7 @@
      <div class="item"><span class="rk">🚀</span> Deploy Agent (recurre en cada pase)</div>
      <div class="hint">· clic en un agente para ver cómo funciona</div>
    </div>
+   <button class="ebtn" id="svgBtn" title="Descarga un .svg con vectores y texto editables — arrastralo a Figma">⬇ SVG (Figma)</button>
    <button class="ebtn" id="editBtn">✏️ Editar</button>
  </div>
  <div class="etb" id="etb">
@@ -688,6 +689,58 @@
     hidePopup(); commit();
   }
   editBtn.addEventListener('click',function(){ setEdit(!EDIT); });
+  // ===== Export SVG listo para Figma (vectores + texto editables, respeta las ediciones) =====
+  function _num(v){ var n=parseFloat(v); return isNaN(n)?0:n; }
+  function _solidBg(cs){
+    var bg=cs.backgroundColor;
+    if(bg && bg!=='rgba(0, 0, 0, 0)' && bg!=='transparent') return bg;
+    var img=cs.backgroundImage||'';
+    if(/gradient/.test(img)){ var cols=img.match(/rgba?\([^)]+\)|#[0-9a-fA-F]{3,8}/g); if(cols&&cols.length) return cols[cols.length-1]; }
+    return null;
+  }
+  function _borderVis(cs){ return _num(cs.borderTopWidth)>0.3 && cs.borderTopStyle!=='none' && cs.borderTopColor!=='rgba(0, 0, 0, 0)'; }
+  function _bDash(cs){ return cs.borderTopStyle==='dashed'?'5 4':(cs.borderTopStyle==='dotted'?'2 3':null); }
+  function _serializeNode(el, ox, oy, out){
+    var cs=getComputedStyle(el);
+    if(cs.display==='none'||cs.visibility==='hidden'||_num(cs.opacity)===0) return;
+    var r=el.getBoundingClientRect(); var tag=(el.tagName||'').toLowerCase();
+    var x=r.left-ox, y=r.top-oy, w=r.width, h=r.height;
+    if(tag==='svg'){
+      var ivb=(el.getAttribute('viewBox')||'0 0 24 24').split(/\s+/); var vbw=_num(ivb[2])||24, vbh=_num(ivb[3])||24;
+      var stroke=(cs.stroke&&cs.stroke!=='none')?cs.stroke:'none', fill=(cs.fill&&cs.fill!=='none')?cs.fill:'none';
+      out.push('<g transform="translate('+x.toFixed(1)+','+y.toFixed(1)+') scale('+(w/vbw).toFixed(3)+','+(h/vbh).toFixed(3)+')" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+(_num(cs.strokeWidth)||1.6)+'" stroke-linecap="round" stroke-linejoin="round">'+el.innerHTML+'</g>');
+      return;
+    }
+    var bg=_solidBg(cs), bv=_borderVis(cs);
+    if(bg||bv){
+      var rx=Math.min(_num(cs.borderTopLeftRadius), w/2, h/2);
+      out.push('<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="'+rx.toFixed(1)+'" fill="'+(bg||'none')+'"'+(bv?' stroke="'+cs.borderTopColor+'" stroke-width="'+_num(cs.borderTopWidth).toFixed(1)+'"'+(_bDash(cs)?' stroke-dasharray="'+_bDash(cs)+'"':''):'')+'/>');
+    }
+    var hasTxt=false; for(var i=0;i<el.childNodes.length;i++){ var cn=el.childNodes[i]; if(cn.nodeType===3 && cn.textContent.trim()){ hasTxt=true; break; } }
+    if(hasTxt && el.children.length===0){
+      var txt=el.textContent.trim(); if(cs.textTransform==='uppercase') txt=txt.toUpperCase();
+      var fs=_num(cs.fontSize)||12, anchor=cs.textAlign==='center'?'middle':(cs.textAlign==='right'?'end':'start');
+      var tx=anchor==='middle'?x+w/2:(anchor==='end'?x+w:x), ty=y+h/2+fs*0.35, ls=_num(cs.letterSpacing);
+      out.push('<text x="'+tx.toFixed(1)+'" y="'+ty.toFixed(1)+'" fill="'+cs.color+'" font-size="'+fs.toFixed(1)+'" font-weight="'+cs.fontWeight+'" text-anchor="'+anchor+'"'+(ls?' letter-spacing="'+ls.toFixed(2)+'"':'')+'>'+esc(txt)+'</text>');
+      return;
+    }
+    for(var j=0;j<el.children.length;j++) _serializeNode(el.children[j], ox, oy, out);
+  }
+  function exportSVG(){
+    var vb=(wires.getAttribute('viewBox')||'').split(/\s+/);
+    var W=_num(vb[2])||flow.clientWidth, H=_num(vb[3])||flow.clientHeight;
+    var fr=flow.getBoundingClientRect(), ox=fr.left, oy=fr.top, body=[];
+    body.push('<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#080b12"/>');
+    var wc=wires.innerHTML.replace(/<(path|rect)\b[^>]*hithalo[^>]*>(<\/\1>)?/g,'');
+    body.push('<g id="conectores-y-marcos">'+wc+'</g>');
+    var nd=[]; flow.querySelectorAll('.nd').forEach(function(n){ var g=['<g>']; _serializeNode(n, ox, oy, g); g.push('</g>'); nd.push(g.join('')); });
+    body.push('<g id="nodos">'+nd.join('')+'</g>');
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W.toFixed(0)+' '+H.toFixed(0)+'" width="'+W.toFixed(0)+'" height="'+H.toFixed(0)+'" font-family="Segoe UI, system-ui, sans-serif">'+body.join('')+'</svg>';
+    var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'})); a.download='diagrama-agentes.svg';
+    document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },600);
+    banner('SVG descargado — arrastralo a Figma (queda como vectores y texto editables). Se cierra solo…'); setTimeout(function(){ if(!EDIT) banner(null); },3200);
+  }
+  document.getElementById('svgBtn').addEventListener('click', exportSVG);
   function select(sel){ SEL=sel; epanel.classList.toggle('open', !!sel);
     flow.querySelectorAll('.nd.sel').forEach(function(n){ n.classList.remove('sel'); });
     if(sel&&sel.kind==='node'){ var el=flow.querySelector('.nd[data-id="'+sel.id+'"]'); if(el) el.classList.add('sel'); }
